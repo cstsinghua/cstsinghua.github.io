@@ -1,0 +1,737 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu_union_verify" content="d1952c66cf48912e21c18c7c581f382a">
+  <meta name="360-site-verification" content="67fbcc5a67f4c65c057315b28fa0b2c8" />
+<meta name="google-site-verification" content="2GzxQ0VtXwTSUdmGm6DzcmhTzM_I9QmzCb_pzpMzD88" />
+  
+    <title>推送方案 | Atypical programmer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Cstsinghua">
+    
+    <meta name="description" content="– Created by CoulsonChen，2016/4/13
+– updated by CoulsonChen，2016/5/6 14:20:17   
+推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJA">
+    
+    
+    
+    
+    <link rel="alternate" href="atom.xml" title="Atypical programmer" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            var _bdId ='391982416296a0d54221f59fe35250d4';
+             hm.src = "//hm.baidu.com/hm.js?" + _bdId;
+             var s = document.getElementsByTagName("script")[0]; 
+             s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+     
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Atypical programmer">Atypical programmer</a></h1>
+				<a class="blog-motto">写给典型的程序员</a>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+					
+                                            <form class="search" action=http://zhannei.baidu.com/cse/search target="_blank">
+                                            <label>Search</label>
+                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+					
+					</li>
+				</ul>
+                            </nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/06/08/推送方案/" title="推送方案" itemprop="url">推送方案</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Cstsinghua">Cstsinghua</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-06-08T09:05:20.832Z" itemprop="datePublished">2016-06-08</time>
+    更新日期:<time datetime="2016-06-08T09:06:36.542Z" itemprop="dateModified">2016-06-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#推送简介"><span class="toc-number">1.</span> <span class="toc-text">推送简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么实现推送及各种方式的比较"><span class="toc-number">2.</span> <span class="toc-text">怎么实现推送及各种方式的比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#当前主流的推送方案"><span class="toc-number">3.</span> <span class="toc-text">当前主流的推送方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我们的推送方案"><span class="toc-number">4.</span> <span class="toc-text">我们的推送方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#再论长连接"><span class="toc-number">4.1.</span> <span class="toc-text">再论长连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是长连接"><span class="toc-number">4.1.1.</span> <span class="toc-text">什么是长连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的作用"><span class="toc-number">4.1.2.</span> <span class="toc-text">心跳包的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的时间间隔"><span class="toc-number">4.1.3.</span> <span class="toc-text">心跳包的时间间隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎样发送心跳包"><span class="toc-number">4.1.4.</span> <span class="toc-text">怎样发送心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器如何处理心跳包"><span class="toc-number">4.1.5.</span> <span class="toc-text">服务器如何处理心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包和轮询的区别"><span class="toc-number">4.1.6.</span> <span class="toc-text">心跳包和轮询的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP唤醒Android"><span class="toc-number">4.2.</span> <span class="toc-text">TCP唤醒Android</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android手机的硬件架构"><span class="toc-number">4.2.1.</span> <span class="toc-text">Android手机的硬件架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的休眠-睡眠-机制和唤醒机制"><span class="toc-number">4.2.2.</span> <span class="toc-text">Android的休眠(睡眠)机制和唤醒机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的休眠-睡眠-机制"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">Android的休眠(睡眠)机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的WakeLock机制"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">Android的WakeLock机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Wakelock："><span class="toc-number">4.2.2.2.1.</span> <span class="toc-text">Wakelock：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-User-Wakelocks"><span class="toc-number">4.2.2.2.1.1.</span> <span class="toc-text">Android User Wakelocks</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-Kernel-Wakelocks"><span class="toc-number">4.2.2.2.1.2.</span> <span class="toc-text">Android Kernel Wakelocks</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的网络数据怎样唤醒CPU？"><span class="toc-number">4.2.3.</span> <span class="toc-text">Android的网络数据怎样唤醒CPU？</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<p>– Created by CoulsonChen，2016/4/13</p>
+<p>– updated by CoulsonChen，2016/5/6 14:20:17   </p>
+<h1 id="推送简介"><a href="#推送简介" class="headerlink" title="推送简介"></a>推送简介</h1><p>推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)</p>
+<p>在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于Email中，用来提示我们新的信息。由于时代的发展和移动互联网的热潮，推送功能更加地普及，已经不再仅仅用在推送邮件了，更多地用在我们的APP中了。</p>
+<p>当我们开发需要和服务器交互的应用程序时，基本上都需要获取服务器端的数据，比如《地震应急通》就需要及时获取服务器上最新的地震信息。要获取服务器上不定时更新的信息，一般来说有两种方法：第一种是客户端使用Pull（拉）的方式，就是隔一段时间就去服务器上获取一下信息，看是否有更新的信息出现。第二种就是 服务器使用Push（推送）的方式，当服务器端有新信息了，则把最新的信息Push到客户端上。这样，客户端就能自动的接收到消息。 </p>
+<p>虽然Pull和Push两种方式都能实现获取服务器端更新信息的功能，但是明显来说Push方式比Pull方式更优越。因为Pull方式更费客户端的网络流量，更主要的是费电量，还需要我们的程序不停地去监测服务端的变化。  </p>
+<p>在开发Android和iPhone应用程序时，我们往往需要从服务器不定的向手机客户端即时推送各种通知消息。我们只需要在Android或IPhone的通知栏处向下一拉，就展开了Notification Panel，可以集中一览各种各样通知消息。目前IOS平台上已经有了比较简单的和完美的推送通知解决方案(参见下文APNs)，可是Android平台上实现则是乱象丛生，当然也可以说是百家争鸣。下文会详细介绍。</p>
+<h1 id="怎么实现推送及各种方式的比较"><a href="#怎么实现推送及各种方式的比较" class="headerlink" title="怎么实现推送及各种方式的比较"></a>怎么实现推送及各种方式的比较</h1><p>从上面推送的介绍可知，要实现消息推送，肯定存在多种思路和方案。</p>
+<p>一些分析文章或链接：</p>
+<p><a href="http://tokudu.com/post/50024574938/how-to-implement-push-notifications-for-android" title="tokudu" target="_blank" rel="external">tokudu写的较全面分析推送机制的原创文章</a></p>
+<p><a href="http://www.cnblogs.com/hanyonglu/archive/2012/03/04/2378971.html" target="_blank" rel="external">http://www.cnblogs.com/hanyonglu/archive/2012/03/04/2378971.html</a></p>
+<p><a href="http://blog.csdn.net/shagoo/article/details/7899466" title="csdn博客" target="_blank" rel="external">http://blog.csdn.net/shagoo/article/details/7899466</a></p>
+<p><a href="http://my.oschina.net/nicsun/blog/98184?fromerr=P9V1ZUai" target="_blank" rel="external">http://my.oschina.net/nicsun/blog/98184?fromerr=P9V1ZUai</a></p>
+<p>这里罗列出目前收集到的推送实现机制：</p>
+<p><strong>1. Poll(轮询)：</strong>从名字很明显就告诉你，它甚至不是一种真正的推送。该方式基于从后台的本地或远程服务周期性地从服务器轮询获取消息。轮询越频繁，那么就获取更加实时的推送。实现轮询的方式很多种，比如可以采用HTTP协议。</p>
+<p><strong>优点:</strong> 实现简单，成本低。</p>
+<p><strong>缺点:</strong> 实时性差，更严重地是, 轮询较15-30次/分钟更频繁的话，将会很快耗尽电池电量。参见一些实验数据: <a href="https://labs.ericsson.com/apis/mobile-java-push/blog/save-device-battery-mobile-java-push" target="_blank" rel="external">https://labs.ericsson.com/apis/mobile-java-push/blog/save-device-battery-mobile-java-push</a></p>
+<p><strong>2. SMS(短信) ：</strong>Android系统运行应用拦截SMS短信息。当有新的事件时，服务器发送一掉经过特别加密处理的SMS到手机端。此时，APP可以拦截所有的短信，并从中找到来自自己服务器发出的消息，然后弹出一个通知。</p>
+<p><strong>优点:</strong> 实现简单，实时性非常好. </p>
+<p><strong>缺点:</strong> 对应应用开发者和用户来说代价高昂. 发送SMS需要成本，不同的运营商的策略都有差异，如果想实现基于SMS的全球性的推送，那么开发者很可能需要为此支付大笔金钱。站在用户的角度，保护隐私，以及不愿意因为使用APP而付出额外的SMS费用，都是必须考虑的事情。</p>
+<p><strong>3. Persistent TCP/IP(TCP长连接)：</strong>手机端与服务器之间建立一条TCP长连接(大部分时间处于idle空闲状态)，并且通过偶尔发送心跳包来使长连接保持存活。一旦服务端有新的事件，则可以通过这条长连接来发送消息到客户端。</p>
+<font color="red"><strong>术语解释：</strong><br><br>Client/Server通信方式建立后，下一步就需要考虑通信连接的方式，主要有两种方式的连接，即长连接通信与短连接通信。关于TCP/IP的相关知识和原理可以参见《TCP/IP详解》(W.Richard Stevens著)<br><br><strong>短连接：</strong>短连接通信是指 Client 方与 Server 方每进行一次通信报文收发交易时才进行通讯连接，交易完毕后立即断开连接。此种方式常用于多个 Client 连接一个 Server 情况，常用于机构与用户之间通信，比如 OLTP（联机事务处理）类应用。在短连接情况下，Client 端完成任务后，就关闭连接并退出。在 Server 端，可以通过循环 accept()，使 Server 不会退出，并连续处理 Client 的请求。<br><br><strong>长连接：</strong>长连接通信是指 Client 方与 Server 方先建立通讯连接，连接建立后不会断开，然后再进行报文发送和接收，报文发送与接收完毕后，原来连接不会断开而继续存在，因此可以连续进行交易报文的发送与接收。这种方式下由于通讯连接一直存在，其 TCP/IP 状态是 Established，可以用操作系统的命令 netstat 查看连接是否建立。由于在长连接情况下，Client 端和 Server 端一样可以固定使用一个端口，所以长连接下的 Client 也需要使用 bind() 来绑定 Client 的端口。在长连接方式下，需要循环读写通信数据。为了区分每一次交易的通信数据，每一次交易数据常常需要在数据头部指定该次交易的长度，接收 API 需要首先读出该长度，然后再按该长度读出指定长度的字节。长连接方式常用于一个 Client 端对一个 Server 端的通讯，一般常用于机构与机构之间的商业应用通信，以处理机构之间连续的大量的信息数据交换。或者说可用于两个系统之间持续的信息交流情况。通常为了加快两个系统之间的信息交流，通常还需要建立几条长连接的并行通信线路。<br></font>
+
+<p><strong>优点:</strong> 实时性好</p>
+<p><strong>缺点:</strong> 很难在客户端和服务端之间实现可靠的长连接(服务)。IOS系统不允许APP驻留在后台，而Android系统也会在系统可用内存很少的时候杀掉某些服务，所以推送通知服务很可能就被杀掉。另外，一旦手机进入睡眠状态，这个时候正常情况下也是无法接收和处理服务器发送的消息。而且在耗电方面，也需要谨慎对待。</p>
+<p>前面两种方式都有比较明显的缺点，而且对此我们无能为力。但是，第三种方式，即TCP长连接的缺点并非那么严重。只要我们进行良好的设计和付出努力，长连接方式可以较好地工作。毕竟，GMail, GTalk以及Google Voice都可以实现实时更新。事实上，非常多的开发者都认同TCP长连接可能是实现推送的最佳方式。而市场上主流的推送方案，包括IOS和Android官方的推送方案在本质上都是采用了TCP长连接的机制来实现。本质上，APNs 与GCM是类似的技术实现原理：即系统层有一个常驻的 TCP 长连接，一直保持的长连接，即使手机休眠的时候也在保持的长连接。</p>
+<h1 id="当前主流的推送方案"><a href="#当前主流的推送方案" class="headerlink" title="当前主流的推送方案"></a>当前主流的推送方案</h1><p>先看看主流平台官方的方案吧。当前移动端的两大平台IOS和Android均有自己官方的推送解决方案。</p>
+<ol>
+<li><p>IOS平台：</p>
+<p> APNs （Apple Push Notification service），官方链接：<a href="https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html" title="苹果推送APNs地址" target="_blank" rel="external">苹果推送APNs官网</a></p>
+</li>
+<li><p>Android平台：</p>
+<p> GCM (Google Cloud Messaging），官方链接：<a href="https://developers.google.com/cloud-messaging/" title="Google官方推送GCM" target="_blank" rel="external">Google官方推送GCM</a></p>
+<p> 值得一提的是，Google官方最初退出的推送方案是Android Cloud to Device Messaging (C2DM) ，已被废弃，于2015.10.20完全关闭。关于C2DM和GCM的差异，以及从C2DM迁移到GCM，可以参见<a href="https://developers.google.com/cloud-messaging/c2dm" title="C2DM迁移到GCM" target="_blank" rel="external">C2DM迁移到GCM</a></p>
+</li>
+</ol>
+<ol>
+<li>除了官方的方案，也存在很多第三方解决方案，这里只提国内的，原因你懂的。目前主要有：</li>
+</ol>
+<pre><code>- 较早的：JPush、个推
+- 后来的：腾讯的信鸽、小米推送、百度推送、华为推送、友盟推送等
+
+关于第三方推送方案的使用统计，可以参见GitHub上面的一个调查：[Android 第三方 Push 推送方案使用调查](https://github.com/android-cn/topics/issues/4 &quot;第三推送方案调查&quot;)
+</code></pre><p>正如前文提到，目前上述方案基本都是基于长连接的方式来实现。而平台自身提供的方案将实现长连接的服务内置在系统内部，这样就即使APP进程被kill了，那么仍然可以接受消息。而第三方的方案，一旦APP进程被kill(准确来说是实现长连接的service所在的进程)，那么就无法接受推送的消息了。</p>
+<p>大家在本质上都是采用长连接，但是基于长连接来实现推送，在上层实现方面存在很多的协议和具体方案：</p>
+<ol>
+<li><p>使用MQTT协议</p>
+<p> MQTT(MQ Telemetry Transport)是IBM开发的基于轻量级的、基于”发布/订阅”模式的消息传输协议,用于有限制的设备(比如嵌入式设备)和低带宽、高延迟或不可靠的网络。</p>
+<p> MQTT官网：<a href="http://mqtt.org/" target="_blank" rel="external">http://mqtt.org/</a></p>
+<p> 当前已有多个基于MQTT协议的推送开源项目：</p>
+</li>
+</ol>
+<pre><code>- tokudu达人的开源项目：[MQTT客户端项目](https://github.com/tokudu/AndroidPushNotificationsDemo &quot;MQTT客户端&quot;)、[MQTT服务端PHP实现](https://github.com/tokudu/PhpMQTTClient &quot;MQTT服务端PHP实现&quot;)
+- IBM官方的开源实现：[paho项目](http://www.eclipse.org/paho/ &quot;paho项目&quot;)、[MQTT broker](http://mosquitto.org/ &quot;MQTT broker&quot;)
+- 其他：[MQTT客户端实现](https://code.google.com/archive/p/mosquitto-mqtt-client-android/)
+
+优点：协议简洁、小巧、可扩展性强、省流量、省电，应用到企业领域，已有多个开源项目提供参考。
+
+缺点：不够成熟、实现较复杂，部署硬件成本较高。
+</code></pre><ol>
+<li><p>使用XMPP协议（Openfire + Spark + Smack）</p>
+<p> XMPP（Extensible Messageing and Presence Protocol：可扩展消息与存在协议）是目前主流的四种IM（IM：instant messaging,即时消息）协议之一，其他三种分别为：即时信息和空间协议(IMPP)、空间和即时信息协议(PRIM)、针对即时通讯和空间平衡扩充的进程开始协议SIP(SIMPLE)。其是基于XML协议的通讯协议，前身是Jabber，已由IETF国际标准化组织完成了标准化工作。</p>
+<p> Spark,smack和Openfire，这三个合起来就是一个完整的XMPP IM实现。包括服务器端——Openfire，客户端——Spark，XMPP 传输协议的实现——Smack（记住，XMPP是一个协议，协议是需要实现的，Smack起到的就是这样的一个作用）。三者都是基于Java 语言的实现。</p>
+<p> 当前已有基于XMPP开发Android推送的开源项目：<a href="https://github.com/dannytiehui/androidpn" title="androidpn实现Android推送" target="_blank" rel="external">androidpn项目</a></p>
+<p> 优点：协议成熟、强大、可扩展性强、主要应用于许多聊天系统中，且已有开源的Java版的开发实例androidpn。</p>
+<p> 缺点：协议较复杂、冗余（基于XML）、费流量、费电，部署硬件成本高。</p>
+</li>
+<li><p>自主开发协议<br> 自主开发相关协议，实现可靠长连接和服务端。比如各大互联网公司推出的推送方案(当然，这里面很多其实是在一些开源项目上进行二次开发而成)</p>
+<p> 优点：完全自主设计，可控，不用担心数据外泄。</p>
+<p> 缺点：实现难度大，开发成本很高</p>
+</li>
+</ol>
+<h1 id="我们的推送方案"><a href="#我们的推送方案" class="headerlink" title="我们的推送方案"></a>我们的推送方案</h1><p>基于上面的信息，对于一个普通公司，如果想在自己的APP里面实现推送，可以有如下一些方式：</p>
+<ol>
+<li><p>集成官方推送，比较靠谱，但是Android平台下，由于众所周知的原因，你懂的，GCM基本无法满足要求；</p>
+</li>
+<li><p>集成第三方推送，简单，也比较可靠，比如集成个推推送，但是存在一些问题：</p>
+<ul>
+<li>需要向第三方支付费用，可能费用不菲</li>
+<li>数据存在泄露的风险</li>
+</ul>
+</li>
+<li><p>自主开发</p>
+<p>   如果完全另起炉灶，那难度比较大，成本也很高。因此基于现有的MQTT或XMPP协议，及其相关的开源项目，是比较可行的方案。</p>
+</li>
+</ol>
+<p>那么到底选择哪一个协议呢？待续！个人倾向于MQTT协议，因为其更轻量级，对于流量和电量的消耗相对更少，而且现有的服务端实现Mosquitto的单机性能也非常不错，且可以实现集群部署。</p>
+<p>当然，自主设计存在以下一些问题需要解决：</p>
+<ol>
+<li><p>稳定保持长连接；</p>
+</li>
+<li><p>服务端的设计，怎么考虑跨多个平台(另外，富媒体消息等，不仅仅是服务端推送，业务端上行upstream，支持多种协议，以及后续其他扩展)，怎么支持2000K甚至更高并发量的长连接及其服务器集群设计；</p>
+</li>
+<li><p>推送ID策略的设计</p>
+</li>
+</ol>
+<h2 id="再论长连接"><a href="#再论长连接" class="headerlink" title="再论长连接"></a>再论长连接</h2><p>长连接方案乍一听怪怪的, 对网络通信或TCP/IP协议族不是很了解人难免会问：什么是长连接? 定时发送心跳, 这和轮询有什么区别? 心跳是干什么的? 同样是定期和服务器沟通, 为什么长连接就比轮询更加优秀? 手机休眠了TCP连接不会断掉吗?</p>
+<h3 id="什么是长连接"><a href="#什么是长连接" class="headerlink" title="什么是长连接"></a>什么是长连接</h3><p>与长连接相对的就是短连接。先说短连接, 短连接是通讯双方有数据交互时就建立一个连接, 数据发送完成后，则断开此连接.<br><img src="http://i.imgur.com/GJJJdm9.png" alt="短连接和长连接示意图"></p>
+<p>长连接就是大家建立连接之后, 不主动断开。 双方互相发送数据, 发完了也不主动断开连接, 之后有需要发送的数据就继续通过这个连接发送。</p>
+<p>TCP连接在默认的情况下就是所谓的长连接(前提是应用层没有设置keepalive，下文会做摘要介绍，详细内容关于keepalive请参见《TCP/IP详解 卷1 协议》第二版第17章), 也就是说连接双方都不主动关闭连接, 这个连接就应该一直存在。以下英文段落摘自《TCP/IP详解 卷1 协议》第二版第17章(p793)的引言部分。</p>
+<p>Many newcomers to TCP/IP are surprised to learn that no data whatsoever flows across an idle TCP/IP connection.This is，if neither process at the ends of a TCP connection is sending data to the other,nothing is exchanged between the two TCP endpoints.There is no polling,for example,as you might find with other networking protocols.<strong>This means that we can start a client process that establishes a TCP connection with a sever and walk away for hours,days,weeks,or months,and the connection should remain up.</strong>In theory, intermediate routers can crash and reboot,data lines may go down and back up,but as long as neither host at the ends of the connection reboots(or changes its IP address),the connection remainsestablished.<strong>This is how TCP/IP was designed.</strong></p>
+<p>Note: </p>
+<p>The previous statement assumes that neither application——neither the client nor the server——has <strong>application-level timers</strong> to detect inactivity,causing either application to terminate.It also assumes that no intermediate router is keeping state about the connection(such as a NAT box)that is required for proper operation that it might delete because of inactivity or lose because of system failure.In today’s Internet，these are big assumptions.</p>
+<p><strong>关于TCP keepalive：</strong></p>
+<p>TCP keepalive is a controversial feature.Either end of a TCP connection may request keepalives,which are turned off by default，for their respective direction of the connection.A keepalive can be set for one side,both sides,or neither side.There are several configurable parameters that control ths operation of keepalives.If there is no activity on the connection for some period of time(called the <em>keepalive</em> time),the side(s) with keepalive enabled sends a keepalive probe to its peer(s).If no response is received,the probe is repeated periodically with a period set by the<em> keepalive interval</em> until a number of probes equal to the number <em>keepalive probes</em> is reached.If this happens,the peer’s system is determined to be unreachable and the connection is terminated.</p>
+<p>The value <strong>KeepaliveTime</strong> defaults to 7,200,000ms(2 hours);<strong>KeepaliveInterval</strong> defaults to 1000ms(1s).If there is no response to ten keepalive probes,Windows terminates the connection.</p>
+<p>Note that [RFC1122] places certain restrictions on the use of keepalives.In particular,the <em>keepalive time</em> must be<br>configurable and must not default to less than 2 hours.In addition,keepalives must not be enabled unless an application requests one(although this behavior is violated if the net.inet.tcp.alwayskeepalive variable is set).Linux does not provide a native facility for adding keepalives to applications that do not request it,but a special library can be preloaded(i.e., loaded prior to ordinary shared libraries)to get this effect [LKA].</p>
+<p>但是网络中的情况是复杂的, 这个连接可能会被切断。比如客户端到服务器的链路因为故障断了, 或者服务器宕机了, 或者是你家网线被人剪了, 这些都是一些莫名其妙的导致连接被切断的因素, <strong>还有几种比较特殊的</strong>：</p>
+<ul>
+<li><p><strong>NAT条目老化或超时</strong></p>
+<pre><code>因为IPv4地址不足， 或者我们想通过无线路由器上网， 我们的设备可能会处在一个NAT设备的后面,用户终端或PC实际分配到的IP是私有IP。而NAT设备的出口则是公有IP，当然也存在多级NAT级联的情况。生活中最常见的NAT设备是家用路由器。关于NAT技术和原理请参见经典文章[http://www.bford.info/pub/net/p2pnat/](http://www.bford.info/pub/net/p2pnat/ &quot;NAT参考文献&quot;)
+</code></pre><p>  NAT设备会在IP封包通过设备时修改源/目的IP地址。对于家用路由器来说， 使用的是网络地址端口转换(NAPT，Network Address/Port Translation)， 它不仅改IP，还修改TCP和UDP协议的端口号, 这样就能让内网中的设备共用同一个外网IP。 举个例子， NAPT维护一个类似下表的NAT表。</p>
+<p>  |内网地址|    外网地址|<br>  |——-|   ——-|<br>  |192.168.0.2:5566|    120.132.92.21:9200|<br>  |192.168.0.3:7788|    120.132.92.21:9201|<br>  |192.168.0.3:8888|    120.132.92.21:9202|</p>
+<p>  NAT设备会根据NAT表对出去和进来的数据做修改， 比如将192.168.0.3:8888发出去的封包改成120.132.92.21:9202， 外部就认为他们是在和120.132.92.21:9202通信。 同时NAT设备会将120.132.92.21:9202收到的封包的IP和端口改成192.168.0.3:8888， 再发给内网的主机， 这样内部和外部就能双向通信了， 但如果其中192.168.0.3:8888 == 120.132.92.21:9202这一映射因为某些原因被NAT设备淘汰了， 那么外部设备就无法直接与192.168.0.3:8888通信了。</p>
+<p>  我们的设备经常是处在NAT设备的后面， 比如在公司的内部网络内， 查一下自己分配到的IP，其实是内网IP，表明我们在NAT设备后面。</p>
+<p>  一般情况下，在网络设备比如路由器上面，NAT条目(表)存在老化时间(参见《TCP/IP详解 卷1 协议》第二版第7章)，超过老化时间(一般SOHO级路由器如TP-LINK路由器UDP对应的NAT条目老化时间在5min左右，而TCP也相差不大)，则会清空对应的NAT条目。此外，大部分移动无线网络运营商在链路上一段时间内没有数据通讯后，会淘汰NAT表中的对应项， 造成链路中断。</p>
+</li>
+<li><p><strong>网络状态切换</strong></p>
+<p>  手机网络和WIFI网络切换， 网络断开和连上等情况， 也会使长连接断开。 这里原因可能比较多， 但结果无非就是IP变了， 或者被系统通知连接断了。</p>
+</li>
+<li><p><strong>DHCP的租期</strong></p>
+<p>  一般而言，PC端或手机终端获取IP地址的方式大多是动态获取，即通过DHCP协议从DHCP服务器(一般由路由器同时兼任)获取。目前测试发现安卓系统对DHCP的处理有Bug， DHCP租期到了不会主动续约并且会继续使用过期IP，这个问题会造成TCP长连接偶然的断连。</p>
+</li>
+</ul>
+<h3 id="心跳包的作用"><a href="#心跳包的作用" class="headerlink" title="心跳包的作用"></a>心跳包的作用</h3><p>从《TCP/IP详解 卷1 协议》可知，TCP长连接本质上不需要心跳包来维持。那为什么要有心跳包呢? 其实主要是为了防止上面提到的NAT超时，既然一些NAT设备判断是否淘汰NAT映射条目的依据是一定时间内没有数据，那么客户端就主动发一个数据。</p>
+<p>当然，如果仅仅是为了防止NAT超时，可以让服务器来发送心跳包给客户端，不过这样做有个弊病就是，万一连接断了，服务器就再也联系不上客户端了，所以心跳包必须由客户端发送，客户端发现连接断了，还可以尝试重连服务器。</p>
+<p>所以心跳包的主要作用是防止NAT超时，其次是探测连接是否断开。最终目的也就是判断长连接是否存活有效。</p>
+<p>链路断开，没有写操作的TCP连接是感知不到的，除非这个时候发送数据给服务器，造成写超时，否则TCP连接不会知道断开了。主动kill掉一方的进程。 另一方会关闭TCP连接。是系统代进程给服务器发的FIN。TCP连接就是这样。只有明确的收到对方发来的关闭连接的消息(收到RST也会关闭, 大家都懂)。或者自己意识到发生了写超时， 否则它认为连接还存在。</p>
+<h3 id="心跳包的时间间隔"><a href="#心跳包的时间间隔" class="headerlink" title="心跳包的时间间隔"></a>心跳包的时间间隔</h3><p>既然心跳包的主要作用是防止NAT超时， 那么这个间隔就大有文章了。</p>
+<p>发送心跳包势必要先唤醒设备， 然后才能发送， 如果唤醒设备过于频繁， 或者直接导致设备无法休眠， 会大量消耗电量， 而且移动网络下进行网络通信， 比在wifi下耗电得多。所以这个心跳包的时间间隔应该尽量的长， 最理想的情况就是根本没有NAT超时。</p>
+<p>现实是残酷的，根据网上的一些说法，中移动2/3G下，NAT超时时间为5分钟，中国电信3G则大于28分钟，理想的情况下，客户端应当以略小于NAT超时时间的间隔来发送心跳包。</p>
+<p>wifi下， NAT超时时间都会比较长， 据说宽带的网关一般没有空闲释放机制， GCM有些时候在wifi下的心跳比在移动网络下的心跳要快， 可能是因为wifi下联网通信耗费的电量比移动网络下小。</p>
+<p>关于如何让心跳间隔逼近NAT超时的间隔， 同时自动适应NAT超时间隔的变化， 可以参看<a href="http://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=207243549&amp;idx=1&amp;sn=4ebe4beb8123f1b5ab58810ac8bc5994&amp;scene=4#wechat_redirect" target="_blank" rel="external">Android微信智能心跳方案</a>。</p>
+<h3 id="怎样发送心跳包"><a href="#怎样发送心跳包" class="headerlink" title="怎样发送心跳包"></a>怎样发送心跳包</h3><p>Android手机可以进入休眠状态，为了不让NAT映射条目失效，我们需要定时的发心跳，以刷新NAT表项，避免被淘汰。</p>
+<p>Android 上定时运行任务常用的方法有2种，一种方法用Timer，另一种是AlarmManager。</p>
+<ul>
+<li><p>Timer</p>
+<p>  Android的Timer类可以用来计划需要循环执行的任务，Timer的问题是它需要用WakeLock让CPU保持唤醒状态(即Timer的时钟是依赖于CPU的)，这样会大量消耗手机电量，大大减短手机待机时间。这种方式不能满足我们的需求。</p>
+</li>
+</ul>
+<ul>
+<li><p>AlarmManager</p>
+<p>  AlarmManager是Android系统封装的用于管理RTC的模块，RTC(Real Time Clock)是一个独立的硬件时钟，可以在CPU休眠时正常运行，在预设的时间到达时，通过中断唤醒 CPU。</p>
+<p>  这意味着，如果我们用AlarmManager来定时执行任务，CPU可以正常的休眠，只有在需要运行任务时醒来一段很短的时间。</p>
+</li>
+</ul>
+<p>关于Android的休眠和AlarmManager定期执行发送心跳包，可以参见下文的详细阐述。</p>
+<h3 id="服务器如何处理心跳包"><a href="#服务器如何处理心跳包" class="headerlink" title="服务器如何处理心跳包"></a>服务器如何处理心跳包</h3><p>如果客户端心跳间隔是固定的， 那么服务器在连接闲置超过这个时间还没收到心跳时， 可以认为对方掉线， 关闭连接。 如果客户端心跳会动态改变，如上节提到的微信心跳方案， 应当设置一个最大值， 超过这个最大值才认为对方掉线。还有一种情况就是服务器通过TCP连接主动给客户端发消息出现写超时。 可以直接认为对方掉线。这个就需要具体业务具体分析了，也许还有更优的策略， 这里就不写了。</p>
+<h3 id="心跳包和轮询的区别"><a href="#心跳包和轮询的区别" class="headerlink" title="心跳包和轮询的区别"></a>心跳包和轮询的区别</h3><p>心跳包和轮询看起来类似， 都是客户端主动联系服务器， 但是区别很大。</p>
+<ul>
+<li>轮询是为了获取数据， 而心跳是为了保活TCP连接；</li>
+</ul>
+<ul>
+<li>轮询得越频繁， 获取数据就越及时，心跳的频繁与否和数据是否及时没有直接关系；</li>
+</ul>
+<ul>
+<li>轮询比心跳能耗更高， 因为一次轮询需要经过TCP三次握手， 四次挥手， 单次心跳不需要建立和拆除TCP连接。</li>
+</ul>
+<h2 id="TCP唤醒Android"><a href="#TCP唤醒Android" class="headerlink" title="TCP唤醒Android"></a>TCP唤醒Android</h2><p>至此，我们可以维护稳定的长连接了，但是要长连接只是推送的基础，要想服务端的推送消息实时达到客户端(通过长连接)，还有更多事情要做。</p>
+<p>首先，也是最棘手的问题，如果Android手机休眠了，这个时候服务端通过长连接发送的数据能被手机接收到吗？其次，即使手机能接收到数据，那么又是怎么唤醒手机CPU来显示通知消息以及执行相关APP逻辑呢？</p>
+<p>要回答以上的问题，我们必须了解Android系统的休眠原理，以及Android手机的硬件架构。</p>
+<h3 id="Android手机的硬件架构"><a href="#Android手机的硬件架构" class="headerlink" title="Android手机的硬件架构"></a>Android手机的硬件架构</h3><p><strong>引用1</strong>：以下英文部分摘自书籍《Developing Software for Symbian OS 2nd Edition: A Beginner’s Guide to Creating Symbian OS v9 Smartphone Applications in C++ 》，作者：Steve Babin。Google图书上的链接<a href="https://books.google.com.hk/books?id=thd5DSWn_F4C&amp;pg=PA80&amp;redir_esc=y&amp;hl=zh-CN#v=onepage&amp;q&amp;f=false" target="_blank" rel="external">Developing Software for Symbian OS 2nd Edition</a>。注：京东和亚马逊均有售。</p>
+<p><strong>Two-processor smartphone model</strong></p>
+<p>Typically,a smartphone contains two processors:a <em>baseband processor</em> and an <em>application processor</em>(sometimes known as the radio and PDA processors).Figure 3.5 shows a typical high-level view of a two-processor system.</p>
+<p>The baseband processor runs on the low-level radio telephony protocols,like the GSM signaling stack mentioned before.Baseband software is time-critical and requires a real-time operating system(RTOS).The RTOS can be proprietary,or a commercial one such as Nucleus,OSE,or VRTX.The application processor runs Symbian OS and its applications.An IPC(inter-processor communication)mechanism is supplied to communicate between the two processors when needed.</p>
+<p>Why the need for two processors?The main reason is because Symbian OS(EKA1) does not provide the real-time response needed for the baseband software,thus requiring a dedicated processor running an RTOS.With EKA2,however,this is no longer a restriction,as shown in the next section.</p>
+<p><img src="http://i.imgur.com/YVY49RN.png" alt=""></p>
+<p><img src="http://i.imgur.com/4qcYhiL.png" alt=""></p>
+<p><strong>引用2：</strong>另外，维基百科上面的描述如下(链接为<a href="https://en.wikipedia.org/wiki/Baseband_processor" title="维基百科对于Baseband processor的说明" target="_blank" rel="external">https://en.wikipedia.org/wiki/Baseband_processor</a>)：</p>
+<p>A <strong>baseband processor</strong> (also known as <strong>baseband radio processor</strong>, <strong>BP</strong>, or <strong>BBP</strong>) is a device (a chip or part of a chip) in a network interface that manages all the radio functions (all functions that require an antenna); however, this term is generally not used in reference to Wi-Fi and Bluetooth radios.  A baseband processor typically uses its own RAM and firmware.</p>
+<p>== Overview ==</p>
+<p>Baseband processors typically run a real-time operating system (RTOS) as their firmware, such as ENEA AB|ENEA’s Operating System Embedded|OSE, Nucleus RTOS (iPhone 3G/3GS/iPad), ThreadX (iPhone 4), and Versatile Real-Time Executive|VRTX.  There are more than a few significant manufacturers of baseband processors, including Broadcom, Icera, Intel Mobile Communications (former Infineon wireless division), MediaTek, Qualcomm,  Spreadtrum, and ST-Ericsson.</p>
+<p>The rationale of separating the baseband processor from the main processor (known as the AP or Application Processor) is threefold:</p>
+<ul>
+<li><p>Radio performance</p>
+<p>  Radio control functions (signal modulation, encoding, radio frequency shifting, etc.) are highly timing-dependent, and require a real-time operating system.</p>
+</li>
+<li><p>Legal</p>
+<p>  Some authorities (e.g. the U.S. [[Federal Communications Commission]] (FCC)) require that the entire software stack running on a device which communicates with the cellular network must be certified. Separating the BP into a different component allows reusing them without having to certify the full AP. </p>
+</li>
+<li><p>Radio reliability</p>
+<p>  Separating the BP into a different component ensures proper radio operation while allowing application and OS changes.</p>
+</li>
+</ul>
+<p><strong>引用3：</strong>此外，虽然在Android开发官网上面没有搜索到BP的介绍，但是在其中一个页面，出现了这个术语。<a href="http://developer.android.com/intl/zh-cn/reference/android/app/ActivityManager.MemoryInfo.html" title="Android开发官网上面对BP术语的引用" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/reference/android/app/ActivityManager.MemoryInfo.html</a></p>
+<p><img src="http://i.imgur.com/5pg4KkF.png" alt=""></p>
+<p><strong>引用4：</strong>在链接<a href="http://www.wisegeek.com/what-is-a-baseband-processor.htm" target="_blank" rel="external">http://www.wisegeek.com/what-is-a-baseband-processor.htm</a>上也有一段关于智能手机BP和CPU独立开来的背景方面比较详细的阐述。</p>
+<p>Mobile phones and other devices typically require considerable processing power to control their computational and communications functions. The Central Processing Unit (CPU) of such a device allows for many functions, and often includes several software applications and drivers. Most mobile communications devices also include a Baseband Processor (BP), separate from the CPU.<strong> Generally, it manages the radio control functions, such as signal generation, modulation, encoding, as well as frequency shifting. It can also manage the transmission of signals.</strong></p>
+<p>The baseband processor is typically located on the same circuit board as the CPU, but consists of a separate radio electronics component. It can therefore have a different programming interface and control software. The hardware function is often independent of the operations of other phone components as well. A benefit to this is usually that changes to software applications and operating systems do not affect the operation of the BP. Software bugs can affect other capabilities, but the baseband processor will usually function without a problem in such a case.</p>
+<p>An applications processor is often used to manage all of the software programs on a device. A separate baseband processor can also enable phone designers to create applications and user interfaces without having to worry about changes to the BP or the way radio signals are processed. Wireless communication capabilities have continued to increase through the early 21st century. Some baseband radio processor models can handle many channels at once, usually while processing all receive and transmit demands.</p>
+<p>This type of device sometimes includes multiple processing components. One kind has four, so it can combine parameter estimation, signal searching, transmission, and receiving functions and other capabilities. The BP can also search for mobile signals and track them, as well as select antennas automatically. In many cases, a baseband processor is contained in a common integrated circuit package, such as a ball grid array. Low power models are often available as well.</p>
+<p>As of 2011, baseband processor capabilities are often supportive of the fourth generation protocols for wireless communication. The processor is often part of the device’s modem, and can include other features such as Flash memory. A low power memory baseband processor often has connections to common interfaces, such as Universal Serial Bus (USB) found in most computers and mobile devices. <strong>The design of separate processors in a phone is not only efficient, but able to prevent malfunctions due to software bugs, which could cause widespread phone problems as well as network issues.</strong></p>
+<p>从上面的信息可知，我们可以认为Android手机有两个处理器(即使从物理形态上是一个CPU，但BP和CPU即AP在逻辑上应该是独立的)，一个叫Application Processor(AP)，一个叫Baseband Processor(BP)。AP是ARM(或x86等)架构的处理器，用于运行Android系统和应用程序；BP用于运行实时操作系统(RTOS)，通讯协议栈运行于BP的RTOS之上。非通话时间，BP的能耗基本上在5mA左右，而AP只要处于非休眠状态，能耗至少在50mA以上，执行图形运算时会更高。另外LCD工作时功耗在100mA左右，WIFI也在100mA左右。一般手机待机时，AP，LCD，WIFI均进入休眠状态，这时Android中应用程序的代码也会停止执行。</p>
+<h3 id="Android的休眠-睡眠-机制和唤醒机制"><a href="#Android的休眠-睡眠-机制和唤醒机制" class="headerlink" title="Android的休眠(睡眠)机制和唤醒机制"></a>Android的休眠(睡眠)机制和唤醒机制</h3><h4 id="Android的休眠-睡眠-机制"><a href="#Android的休眠-睡眠-机制" class="headerlink" title="Android的休眠(睡眠)机制"></a>Android的休眠(睡眠)机制</h4><p>要准确定义Android设备的电源状态，其实比较难，因为目前没有找到官方对此的规范定义。而网上的资料则众说纷纭，莫衷一是。不过综合各家意见来看，本人比较倾向于如下的状态划分：</p>
+<p><strong>sleep stages/levels</strong></p>
+<ol>
+<li>awake</li>
+<li>dim</li>
+<li>screen off</li>
+<li>CPU off (true “sleep” or “deep sleep”)</li>
+<li>power off</li>
+</ol>
+<p>其中2、3、4属于广义的sleep范畴。当然，如果将键盘等设备也纳入考虑的话，上面的划分还需要更细一些，这里未作考虑。</p>
+<p>When an Android device is left idle, it will first dim, then turn off the screen, and ultimately turn off the CPU. This prevents the device’s battery from quickly getting drained(参见<a href="http://developer.android.com/intl/zh-cn/training/scheduling/index.html" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/training/scheduling/index.html</a>)</p>
+<h4 id="Android的WakeLock机制"><a href="#Android的WakeLock机制" class="headerlink" title="Android的WakeLock机制"></a>Android的WakeLock机制</h4><p>Android系统是通过WakeLock来实现唤醒CPU、屏幕、键盘及其他相关硬件组件的。以下英文内容摘录自<a href="https://software.intel.com/en-us/android/articles/wakelocks-for-android" title="wakelocks-for-android" target="_blank" rel="external">wakelocks-for-android</a>和<a href="https://software.intel.com/en-us/android/articles/wakelocks-detect-no-sleep-issues-in-android-applications" target="_blank" rel="external">Wakelocks: Detect No-Sleep Issues in Android* Applications</a></p>
+<h5 id="Wakelock："><a href="#Wakelock：" class="headerlink" title="Wakelock："></a><strong>Wakelock：</strong></h5><p><strong>A wakelock is a software mechanism to control the power state of the host device</strong>. The OS exports explicit power management handles and APIs to specify when a particular component needs to stay on, or awake, until it is explicitly released from duty.</p>
+<p>The wakelock mechanism is implemented in two levels: user and kernel. The figure shows the internal design of Android wakelock implementation. The user wakelock can be utilized by either high-level OS services or applications and is provided by the power management service. It allows an application to control the power state of the device. A kernel wakelock is held by the OS kernel or a driver. A user wakelock is mapped to a kernel wakelock. Any active kernel-level wakelock prevents the system from being suspended to ACPI S3 (suspended to RAM) state, which is the highest power saving state for mobile devices.</p>
+<p><img src="http://i.imgur.com/kOGdghH.jpg" alt="Android WakeLock原理"></p>
+<h6 id="Android-User-Wakelocks"><a href="#Android-User-Wakelocks" class="headerlink" title="Android User Wakelocks"></a>Android User Wakelocks</h6><p>Android设备的电源状态可以通过android.os.PowerManager类来控制(参见<a href="http://developer.android.com/intl/zh-cn/reference/android/os/PowerManager.html" target="_blank" rel="external">Android开发官网的API介绍</a>)。这是比较细粒度控制电源状态的方式，如果是更便捷地控制，可以参见<a href="http://developer.android.com/intl/zh-cn/training/scheduling/index.html" target="_blank" rel="external">Managing Device Awake State</a></p>
+<p>示例代码：</p>
+<pre><code>PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, &quot;My Tag&quot;);
+wl.acquire();
+  ..screen will stay on during this section..
+wl.release();
+</code></pre><p>Android设备的休眠分为以下几个等级(最高等级的休眠是屏幕、键盘、CPU全部休眠)：</p>
+<table>
+<thead>
+<tr>
+<th>Flag Value</th>
+<th>CPU</th>
+<th>Screen</th>
+<th>Keyboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>睡眠状态</td>
+<td>Off</td>
+<td>Off</td>
+<td>Off</td>
+</tr>
+<tr>
+<td>PARTIAL_WAKE_LOCK</td>
+<td>On*</td>
+<td>Off</td>
+<td>Off</td>
+</tr>
+<tr>
+<td>SCREEN_DIM_WAKE_LOCK</td>
+<td>On</td>
+<td>Dim</td>
+<td>Off</td>
+</tr>
+<tr>
+<td>SCREEN_BRIGHT_WAKE_LOCK</td>
+<td>On</td>
+<td>Bright</td>
+<td>Off</td>
+</tr>
+<tr>
+<td>FULL_WAKE_LOCK</td>
+<td>On</td>
+<td>Bright</td>
+<td>Bright</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Note that since API level 17, FULL_WAKE_LOCK has been deprecated. Applications should use FLAG_KEEP_SCREEN_ON.</p>
+</blockquote>
+<p>上面表格中的*表示：如果你持有一个partial wake lock， 无论任何的显示超时或屏幕状态甚至即使用户按下电源键，CPU都将会保持运行。在其他的wake locks机制下，CPU将会保持运行，但是用户可以通过按下电源键使得设备进入睡眠。 </p>
+<p>此外， 我们可以添加两个额外的flag，flag仅仅会影响屏幕的行为。不过这两个flag与PARTIAL_WAKE_LOCK组合使用时将无任何效果。</p>
+<table>
+<thead>
+<tr>
+<th>Flag Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACQUIRE_CAUSES_WAKEUP</td>
+<td>Normal wake locks don’t actually turn on the illumination. Instead, they cause the illumination to remain on once it turns on (e.g. from user activity). This flag will force the screen and/or keyboard to turn on immediately, when the WakeLock is acquired. <strong>A typical use would be for notifications which are important for the user to see immediately</strong>.</td>
+</tr>
+<tr>
+<td>ON_AFTER_RELEASE</td>
+<td>If this flag is set, the user activity timer will be reset when the WakeLock is released, causing the illumination to remain on a bit longer. This can be used to reduce flicker if you are cycling between wake lock conditions.</td>
+</tr>
+</tbody>
+</table>
+<p>任何使用WakeLock的应用程序必须在清单文件manifest.xml中<uses-permission>标签下添加android.permission.WAKE_LOCK权限。</uses-permission></p>
+<h6 id="Android-Kernel-Wakelocks"><a href="#Android-Kernel-Wakelocks" class="headerlink" title="Android Kernel Wakelocks"></a>Android Kernel Wakelocks</h6><p>Kernel wakelocks are low-level wakelocks held by the kernel. They can be acquired/ released internally from the kernel. As such, application developers have less direct control on them, but an application’s behaviour can indirectly trigger these wakelocks and increase battery consumption inadvertently.</p>
+<p>Here are examples of <strong>kernel wakelocks</strong>.</p>
+<ul>
+<li><p><strong>Wlan_rx</strong>: Held by the kernel when data is sent or received over Wi-Fi*.</p>
+</li>
+<li><p><strong>PowerManagerService</strong>: Is the container for all partial wakelocks.</p>
+</li>
+<li><p><strong>Sync</strong>: Held while the sync process is running.</p>
+</li>
+<li><p><strong>Alarm_rtc</strong>: Handles the alarm (when an application or process checks periodically on something).</p>
+</li>
+<li><p><strong>Main</strong>: Keeps the kernel awake. This is the last one to be released when the system goes to suspend mode.</p>
+</li>
+</ul>
+<p>可以注意到，Wlan_rx内核wakelock，因此可以确认WIFI连接下数据接收可以唤醒CPU。</p>
+<h3 id="Android的网络数据怎样唤醒CPU？"><a href="#Android的网络数据怎样唤醒CPU？" class="headerlink" title="Android的网络数据怎样唤醒CPU？"></a>Android的网络数据怎样唤醒CPU？</h3><p>如上面所述，Android为了确保应用程序中关键代码的正确执行，提供了Wake Lock的API，使得应用程序有权限通过代码阻止AP进入休眠状态。但如果不领会Android设计者的意图而滥用Wake Lock API，为了自身程序在后台的正常工作而长时间阻止AP进入休眠状态，就会成为待机电池杀手。</p>
+<p>完全没必要担心AP休眠会导致收不到消息推送。通讯协议栈运行于BP，一旦收到数据包。BP会将AP唤醒。唤醒的时间足够AP执行代码完成对收到的数据包的处理过程。其它的如Connectivity事件触发时AP同样会被唤醒。那么唯一的问题就是程序如何执行向服务器发送心跳包的逻辑。你显然不能靠AP来做心跳计时。Android提供的Alarm Manager就是来解决这个问题的。RTC (Real Time Clock) 是一个独立的硬件时钟，可以在CPU休眠时正常运行，在预设的时间到达时，通过中断唤醒CPU。那么Wake Lock API有啥用呢？ 比如心跳包从请求到应答，比如断线重连重新登陆这些关键逻辑的执行过程，就需要Wake Lock来保护。而一旦一个关键逻辑执行成功，就应该立即释放掉Wake Lock了。两次心跳请求间隔5到10分钟，基本不会怎么耗电。除非网络不稳定，频繁断线重连，那种情况办法不多。</p>
+<ul>
+<li>移动网络下， 网络数据通过BP来完成，BP接收到网络数据，将唤醒CPU，然后CPU执行后续逻辑。</li>
+<li>Wifi连接下，目前了解到的情况是，WIFI可以休眠，即设备进入sleep状态时，WIFI也可以进入sleep，一旦WIFI进入sleep，则WIFI连接断开，无法接收到服务端下发的数据了。而且一旦WIFI断开，那么手机将会切换到蜂窝移动网络链接，此时也会造成IP地址更换，进而导致长连接断开。另外，据不可考证的信息，WIFI连接下数据传输消耗的电量较蜂窝移动网络少。当然有说法是WIFI待机状态的电量消耗反过来比蜂窝移动网络standby时消耗电量多。所以，一般是建议让WIFI一直不会进入休眠状态(Never)。而WIFI连接收到网络数据时，通过<strong>Wlan_rx内核WakeLock</strong>唤醒CPU，继而执行后续的APP逻辑(不过该部分的官方资料暂未找到)。那么，怎样设置WIFI的休眠策略呢，Android官方有相关的配置供参考<a href="http://developer.android.com/intl/zh-cn/reference/android/provider/Settings.System.html#WIFI_SLEEP_POLICY" target="_blank" rel="external">WIFI_SLEEP_POLICY</a>，API Level17以后则是<a href="http://developer.android.com/intl/zh-cn/reference/android/provider/Settings.Global.html#WIFI_SLEEP_POLICY" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/reference/android/provider/Settings.Global.html#WIFI_SLEEP_POLICY</a>。</li>
+</ul>
+<p>示例代码：</p>
+<pre><code>  那么我们在开启应用时，首先取出这个值，代码：
+   private void setWifiDormancy()
+   {
+      int value = Settings.System.getInt(getContentResolver(), Settings.System.WIFI_SLEEP_POLICY,  Settings.System.WIFI_SLEEP_POLICY_DEFAULT);
+      final SharedPreferences prefs = getSharedPreferences(getString(R.string.wifi_sleep_policy), Context.MODE_PRIVATE);
+      Editor editor = prefs.edit();
+      editor.putInt(getString(R.string.wifi_sleep_policy_default), value); 
+      editor.commit();
+      if(Settings.System.WIFI_SLEEP_POLICY_NEVER != value)
+      {
+     Settings.System.putInt(getContentResolver(), Settings.System.WIFI_SLEEP_POLICY, WIFI_SLEEP_POLICY_NEVER);
+      }
+   }
+
+  在应用退出我们需将这个设置的值还原：
+   private void restoreWifiDormancy()
+   {
+      final SharedPreferences prefs = getSharedPreferences(getString(R.string.wifi_sleep_policy), Context.MODE_PRIVATE);
+      int defaultPolicy = prefs.getInt(getString(R.string.wifi_sleep_policy_default), Settings.System.WIFI_SLEEP_POLICY_DEFAULT);
+      Settings.System.putInt(getContentResolver(), Settings.System.WIFI_SLEEP_POLICY, defaultPolicy);
+   }
+
+这样初始设置，退出还原我们可以让应用一直处于wifi模式下（不过前提是有wifi网络哦）。
+</code></pre><p>推送中最重要的部分就是让手机尽量休眠，只有在服务器需要它处理数据时才唤醒它，这正好符合我们的要求。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/06/08/推送方案/" data-title="推送方案 | Atypical programmer" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/06/08/Hello-Hexo/" title="Hello SunZong">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Hello SunZong</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/06/08/hello-world/"  title="Hello World">
+ <strong>NEXT:</strong><br/> 
+ <span>Hello World
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="推送方案" data-thread-key="推送方案" data-author-key="Cstsinghua" data-url="http://yoursite.com/post/推送方案"></div>
+	
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#推送简介"><span class="toc-number">1.</span> <span class="toc-text">推送简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么实现推送及各种方式的比较"><span class="toc-number">2.</span> <span class="toc-text">怎么实现推送及各种方式的比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#当前主流的推送方案"><span class="toc-number">3.</span> <span class="toc-text">当前主流的推送方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我们的推送方案"><span class="toc-number">4.</span> <span class="toc-text">我们的推送方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#再论长连接"><span class="toc-number">4.1.</span> <span class="toc-text">再论长连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是长连接"><span class="toc-number">4.1.1.</span> <span class="toc-text">什么是长连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的作用"><span class="toc-number">4.1.2.</span> <span class="toc-text">心跳包的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的时间间隔"><span class="toc-number">4.1.3.</span> <span class="toc-text">心跳包的时间间隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎样发送心跳包"><span class="toc-number">4.1.4.</span> <span class="toc-text">怎样发送心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器如何处理心跳包"><span class="toc-number">4.1.5.</span> <span class="toc-text">服务器如何处理心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包和轮询的区别"><span class="toc-number">4.1.6.</span> <span class="toc-text">心跳包和轮询的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP唤醒Android"><span class="toc-number">4.2.</span> <span class="toc-text">TCP唤醒Android</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android手机的硬件架构"><span class="toc-number">4.2.1.</span> <span class="toc-text">Android手机的硬件架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的休眠-睡眠-机制和唤醒机制"><span class="toc-number">4.2.2.</span> <span class="toc-text">Android的休眠(睡眠)机制和唤醒机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的休眠-睡眠-机制"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">Android的休眠(睡眠)机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的WakeLock机制"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">Android的WakeLock机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Wakelock："><span class="toc-number">4.2.2.2.1.</span> <span class="toc-text">Wakelock：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-User-Wakelocks"><span class="toc-number">4.2.2.2.1.1.</span> <span class="toc-text">Android User Wakelocks</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-Kernel-Wakelocks"><span class="toc-number">4.2.2.2.1.2.</span> <span class="toc-text">Android Kernel Wakelocks</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的网络数据怎样唤醒CPU？"><span class="toc-number">4.2.3.</span> <span class="toc-text">Android的网络数据怎样唤醒CPU？</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	<div class="social-list" class="clearfix">
+		
+		
+		
+		
+		
+	</div>
+</div>
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+      <li><a href="http://gengbiao.me" target="_blank" title="coney">coney's Blog</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+    
+            <p class="copyright"> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="Cstsinghua">Cstsinghua</a>
+		
+            && Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> && Theme by <a href="http://gengbiao.me" target="_blank" title="coney">coney</a>
+            </div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+<script>
+    
+        var _bdImg = '4';
+    
+    window._bd_share_config={
+        "common":{
+            "bdSnsKey":{
+
+            },
+            "bdText":"",
+            "bdMini":"2",
+            "bdMiniList":[
+                "qzone",
+                "tsina",
+                "weixin",
+                "renren",
+                "tqq",
+                "tieba",
+                "douban",
+                "sqq",
+                "diandian",
+                "huaban",
+                "youdao",
+                "mail",
+                "ty",
+                "fbook",
+                "twi",
+                "linkedin",
+                "copy",
+                "print"
+            ],
+            "bdPic":"",
+            "bdStyle":"0",
+            "bdSize":"16"
+        },
+        "slide":{
+            "type":"slide",
+            "bdImg":_bdImg,
+            "bdPos":"right",
+            "bdTop":"350"
+        },
+        "image":{
+            "viewList":[
+                "weixin",
+                "qzone",
+                "tsina",
+                "renren",
+                "douban",
+                "tqq"
+            ],
+            "viewText":"分享：",
+            "viewSize":"16"
+        },
+        "selectShare":{
+            "bdContainerClass":null,
+            "bdSelectMiniList":[
+                "weixin",
+                "qzone",
+                "tsina",
+                "renren",
+                "douban",
+                "tqq"
+            ]
+        }
+    };
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+
+
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'null', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>
+
