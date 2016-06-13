@@ -12,8 +12,7 @@
     
     <meta name="author" content="Cstsinghua">
     
-    <meta name="description" content="python安装某些第三方包报错vcvarsall.bat
- 原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，">
+    <meta name="description" content="1. python安装某些第三方包报错vcvarsall.bat原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事">
     
     
     
@@ -45,9 +44,9 @@
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Atypical programmer">Atypical programmer</a></h1>
-				<a class="blog-motto">写给典型的程序员</a>
+				<a class="blog-motto">做一个非典型程序员</a>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -69,7 +68,7 @@
 					
                                             <form class="search" action=http://zhannei.baidu.com/cse/search target="_blank">
                                             <label>Search</label>
-                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="Search"><br>
 					
 					</li>
 				</ul>
@@ -87,11 +86,11 @@
   </h1>
   <p class="article-author">By
     
-      <a href="http://yoursite.com" title="Cstsinghua">Cstsinghua</a>
+      <a href="https://github.com/cstsinghua" title="Cstsinghua">Cstsinghua</a>
     </p>
   <p class="article-time">
     <time datetime="2016-06-13T01:57:02.000Z" itemprop="datePublished">2016-06-13</time>
-    更新日期:<time datetime="2016-06-13T01:57:24.127Z" itemprop="dateModified">2016-06-13</time>
+    Updated:<time datetime="2016-06-13T06:05:35.743Z" itemprop="dateModified">2016-06-13</time>
     
   </p>
 </header>
@@ -99,67 +98,47 @@
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-python安装某些第三方包报错vcvarsall-bat"><span class="toc-number">1.</span> <span class="toc-text">1. python安装某些第三方包报错vcvarsall.bat</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，"><span class="toc-number">2.</span> <span class="toc-text">2.安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</span></a></li></ol>
 		</div>
 		
-		<ol>
-<li><p><strong>python安装某些第三方包报错vcvarsall.bat</strong></p>
-<p> 原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。</p>
-<p> Mingw官方链接：<a href="http://sourceforge.net/projects/mingw/" title="Mingw官网链接" target="_blank" rel="external">http://sourceforge.net/projects/mingw/</a></p>
-<p> 官方说明：python3的安装包的构建主要是通过内置的Distutils工具来完成(<a href="https://docs.python.org/3.4/install/" title="Building Extensions: Tips and Tricks" target="_blank" rel="external">https://docs.python.org/3.4/install/</a>)</p>
-</li>
+		<h1 id="1-python安装某些第三方包报错vcvarsall-bat"><a href="#1-python安装某些第三方包报错vcvarsall-bat" class="headerlink" title="1. python安装某些第三方包报错vcvarsall.bat"></a>1. <strong>python安装某些第三方包报错vcvarsall.bat</strong></h1><p>原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。</p>
+<p>Mingw官方链接：<a href="http://sourceforge.net/projects/mingw/" title="Mingw官网链接" target="_blank" rel="external">http://sourceforge.net/projects/mingw/</a></p>
+<p>官方说明：python3的安装包的构建主要是通过内置的Distutils工具来完成(<a href="https://docs.python.org/3.4/install/" title="Building Extensions: Tips and Tricks" target="_blank" rel="external">https://docs.python.org/3.4/install/</a>)</p>
+<pre><code>Whenever possible, the Distutils try to use the configuration information made available by the Python 
+interpreter used to run the setup.py script. For example, the same compiler and linker flags used to compile 
+Python will also be used for compiling extensions. Usually this will work well, but in complicated situations 
+this might be inappropriate. This section discusses how to override the usual Distutils behaviour.
+</code></pre><p>解决方案：</p>
+<ol>
+<li>安装python对应版本的VC编译器，可以直接安装整个visual studio；</li>
+<li><p>如果不想整个安装VC，则可以选择安装MinGW（并将其安装后的bin等目录加入到系统path），然后配置python分发包的默认编译工具，<br>即在python安装目录的Lib\distutils目录下(比如安装的python3.4版本，那么即似C:\Python34\Lib\distutils)，新建distutils.cfg文件(如果已有，则直接编辑之)。打开该文件，在前面添加如下内容。</p>
+<pre><code>[build]
+compiler=mingw32
+</code></pre><p> 上述设置之后python distutils构建带C扩展的库或者安装C扩展的库之时，全部都切换至设置的编译器，如果只是想修改某一次的构建或者安装时使用的编译器，则可以在构建或者安装的时候加上参数，如：</p>
+<pre><code>python setup.py build --compiler=mingw32 install
+</code></pre></li>
 </ol>
-<pre><code>    Whenever possible, the Distutils try to use the configuration information made available by the Python 
-    interpreter used to run the setup.py script. For example, the same compiler and linker flags used to compile 
-    Python will also be used for compiling extensions. Usually this will work well, but in complicated situations 
-    this might be inappropriate. This section discusses how to override the usual Distutils behaviour.
-
-解决方案：
-
-    1.安装python对应版本的VC编译器，可以直接安装整个visual studio；
-
-    2.如果不想整个安装VC，则可以选择安装MinGW（并将其安装后的bin等目录加入到系统path），然后配置python分发包的默认编译工具，
-    即在python安装目录的Lib\distutils目录下(比如安装的python3.4版本，那么即似C:\Python34\Lib\distutils)，新建distutils.cfg文件(如果已有，则直接编辑之)。打开该文件，在前面添加如下内容。
-        [build]
-        compiler=mingw32
-
-    上述设置之后python distutils构建带C扩展的库或者安装C扩展的库之时，全部都切换至设置的编译器，如果只是想修改某一次的构建或者安装时使用的编译器，则可以在构建或者安装的时候加上参数，如：
-        python setup.py build --compiler=mingw32 install
-</code></pre><ol>
-<li><p><strong>安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</strong></p>
-<pre><code>C:\Python27\libs/libpython27.a(dmmes01026.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+<h1 id="2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，"><a href="#2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，" class="headerlink" title="2.安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，"></a>2.<strong>安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</strong></h1><pre><code>C:\Python27\libs/libpython27.a(dmmes01026.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
 C:\Python27\libs/libpython27.a(dmmes00281.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
 C:\Python27\libs/libpython27.a(dmmes00105.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
 C:\Python27\libs/libpython27.a(dmmes00253.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
 C:\Python27\libs/libpython27.a(dmmes00227.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
 C:\Python27\libs/libpython27.a(dmmes00712.o):(.idata$7+0x0): more undefined references to `_head_C__build27_cpython_PCBuild_libpython27_a&apos; follow
 collect2.exe: error: ld returned 1 exit status
-</code></pre><p> 原因：和问题1本质一样，由于Windows平台下的python编译器本身由VC环境编译，其生成的pythonxx.dll(xx是版本号，比如27、34)和pythonxx.lib等可能与需要安装的第三方库（采用Cygwin、MinGW等编译器(环境)生成并发布）无法兼容.</p>
-<p> 解决方案：</p>
-<pre><code>To create Python extensions, you need to link against the Python library. Unfortunately, most Python distributions are provided with  Pythonxx.lib, a library in Microsoft Visual C++ format. GCC expects a.a file (libpythonxx.a to be precise.). Here&apos;s how to convert  pythonxx.lib to libpythonxx.a:
-
-a.Download pexport (from here or http://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/).
-
-b.Get  pythonxx.dll (it should be somewhere on your harddrive).
-
-c.Run : pexports pythonxx.dll &gt; pythonxx.def This will extract all symbols from pythonxx.dll and write them into pythonxx.def.
-
-d.Run : dlltool --dllname pythonxx.dll --def pythonxx.def --output-lib libpythonxx.a This will create libpythonxx.a (dlltool is part of MinGW utilities).
-Copy libpythonxx.a to c:\pythonxx\libs\ (in the same directory as  pythonxx.lib).
-This trick should work for all Python versions, including future releases of Python. You can also use this trick to convert other libraries.
-</code></pre></li>
-<li>next</li>
-<li>next</li>
-<li>next</li>
-</ol>
+</code></pre><p>原因：和问题1本质一样，由于Windows平台下的python编译器本身由VC环境编译，其生成的pythonxx.dll(xx是版本号，比如27、34)和pythonxx.lib等可能与需要安装的第三方库（采用Cygwin、MinGW等编译器(环境)生成并发布）无法兼容.</p>
+<p>解决方案：<br>    To create Python extensions, you need to link against the Python library. Unfortunately, most Python distributions are provided with  Pythonxx.lib, a library in Microsoft Visual C++ format. GCC expects a.a file (libpythonxx.a to be precise.). Here’s how to convert  pythonxx.lib to libpythonxx.a:</p>
+<p><strong>a.</strong>Download pexport (from here or <a href="http://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/" target="_blank" rel="external">http://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/</a>).</p>
+<p><strong>b.</strong>Get  pythonxx.dll (it should be somewhere on your harddrive).</p>
+<p><strong>c.</strong>Run : pexports pythonxx.dll &gt; pythonxx.def This will extract all symbols from pythonxx.dll and write them into pythonxx.def.</p>
+<p><strong>d.</strong>Run : dlltool –dllname pythonxx.dll –def pythonxx.def –output-lib libpythonxx.a This will create libpythonxx.a (dlltool is part of MinGW utilities).<br>Copy libpythonxx.a to c:\pythonxx\libs\ (in the same directory as  pythonxx.lib).<br>This trick should work for all Python versions, including future releases of Python. You can also use this trick to convert other libraries.</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/python、第三方包/">python、第三方包</a>
+  <span></span> <a href="/tags/Python-第三方包/">Python,第三方包</a>
   </div>
 
 
@@ -172,7 +151,7 @@ This trick should work for all Python versions, including future releases of Pyt
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2016/06/13/python安装第三方包错误解决/" data-title="python安装某些第三方包报错解决办法 | Atypical programmer" data-tsina="null" class="share clearfix">
+  <div data-url="https://github.com/cstsinghua/2016/06/13/python安装第三方包错误解决/" data-title="python安装某些第三方包报错解决办法 | Atypical programmer" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -195,21 +174,21 @@ This trick should work for all Python versions, including future releases of Pyt
 	
 <section class="comment">
 	
-	<div class="ds-thread" data-title="python安装某些第三方包报错解决办法" data-thread-key="python安装第三方包错误解决" data-author-key="Cstsinghua" data-url="http://yoursite.com/post/python安装第三方包错误解决"></div>
+	<div class="ds-thread" data-title="python安装某些第三方包报错解决办法" data-thread-key="python安装第三方包错误解决" data-author-key="Cstsinghua" data-url="https://github.com/cstsinghua/post/python安装第三方包错误解决"></div>
 	
 </section>
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
-  
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-python安装某些第三方包报错vcvarsall-bat"><span class="toc-number">1.</span> <span class="toc-text">1. python安装某些第三方包报错vcvarsall.bat</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，"><span class="toc-number">2.</span> <span class="toc-text">2.安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</span></a></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 <div id="authorInfo">
 	
@@ -228,7 +207,7 @@ This trick should work for all Python versions, including future releases of Pyt
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分类</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 			<li><a href="/categories/Android/" title="Android">Android<sup>1</sup></a></li>
@@ -243,14 +222,16 @@ This trick should work for all Python versions, including future releases of Pyt
 
   
 <div class="tagslist">
-	<p class="asidetitle">标签</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
 			<li><a href="/tags/Push/" title="Push">Push<sup>1</sup></a></li>
 		
+			<li><a href="/tags/Python-第三方包/" title="Python,第三方包">Python,第三方包<sup>1</sup></a></li>
+		
 			<li><a href="/tags/Test/" title="Test">Test<sup>1</sup></a></li>
 		
-			<li><a href="/tags/python、第三方包/" title="python、第三方包">python、第三方包<sup>1</sup></a></li>
+			<li><a href="/tags/python、第三方包/" title="python、第三方包">python、第三方包<sup>0</sup></a></li>
 		
 			<li><a href="/tags/杂项/" title="杂项">杂项<sup>1</sup></a></li>
 		
@@ -259,7 +240,7 @@ This trick should work for all Python versions, including future releases of Pyt
 
 
   <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
+  <p class="asidetitle">Links</p>
     <ul>
       <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
       <li><a href="http://gengbiao.me" target="_blank" title="coney">coney's Blog</a></li>
@@ -268,14 +249,14 @@ This trick should work for all Python versions, including future releases of Pyt
 
 
   <div class="rsspart">
-	<a href="atom.xml" target="_blank" title="rss">RSS 订阅</a>
+	<a href="atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
   
   <div class="tagcloudlist">
-    <p class="asidetitle">标签云</p>
+    <p class="asidetitle">Tag Cloud</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Push/" style="font-size: 10px;">Push</a> <a href="/tags/Test/" style="font-size: 10px;">Test</a> <a href="/tags/python、第三方包/" style="font-size: 10px;">python、第三方包</a> <a href="/tags/杂项/" style="font-size: 10px;">杂项</a>
+       <a href="/tags/Push/" style="font-size: 10px;">Push</a> <a href="/tags/Python-第三方包/" style="font-size: 10px;">Python,第三方包</a> <a href="/tags/Test/" style="font-size: 10px;">Test</a> <a href="/tags/杂项/" style="font-size: 10px;">杂项</a>
     </div>
   </div>
 
@@ -287,7 +268,7 @@ This trick should work for all Python versions, including future releases of Pyt
     
             <p class="copyright"> © 2016 
 		
-		<a href="http://yoursite.com" target="_blank" title="Cstsinghua">Cstsinghua</a>
+		<a href="https://github.com/cstsinghua" target="_blank" title="Cstsinghua">Cstsinghua</a>
 		
             && Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> && Theme by <a href="http://gengbiao.me" target="_blank" title="coney">coney</a>
             </div>
