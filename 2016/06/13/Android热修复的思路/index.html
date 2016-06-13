@@ -7,13 +7,14 @@
   <meta name="360-site-verification" content="67fbcc5a67f4c65c057315b28fa0b2c8" />
 <meta name="google-site-verification" content="2GzxQ0VtXwTSUdmGm6DzcmhTzM_I9QmzCb_pzpMzD88" />
   
-    <title>Github pages+Hexo+Nodejs搭建个人blog | Atypical programmer</title>
+    <title>Android热修复 | Atypical programmer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Cstsinghua">
     
-    <meta name="description" content="前言作为一个IT技术人员，自然离不开技术的积累，而技术的积累则通过文档或代码的形式呈现出来。好记性不如烂笔头，程序员应该乐于并擅于记录总结工作中遇到的各种问题、工作成果、奇思异想和感悟等。
-程序员的世界是孤独的，但也是充满激情和阳光的。正是开源精神点亮了这一切。生命中最美丽的报偿之一便是帮助他人的同">
+    <meta name="description" content="Android热修复的方式关于动态热修复，目前发现的思路集中在三点：
+
+方式1：既然是热修复，那么就是新的类替换掉旧的类，而java世界类的加载是通过类加载器来实现，而Android应用程序的默认类加载器PathClassLoader加载的时候其实是通过关联的DexFile来实现(动态加载的时候已经">
     
     
     
@@ -83,15 +84,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/06/13/Github pages+Hexo+Nodejs搭建个人blog/" title="Github pages+Hexo+Nodejs搭建个人blog" itemprop="url">Github pages+Hexo+Nodejs搭建个人blog</a>
+      <a href="/2016/06/13/Android热修复的思路/" title="Android热修复" itemprop="url">Android热修复</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://github.com/cstsinghua" title="Cstsinghua">Cstsinghua</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-06-13T06:58:49.000Z" itemprop="datePublished">2016-06-13</time>
-    Updated:<time datetime="2016-06-13T07:01:13.252Z" itemprop="dateModified">2016-06-13</time>
+    <time datetime="2016-06-13T07:38:15.000Z" itemprop="datePublished">2016-06-13</time>
+    Updated:<time datetime="2016-06-13T07:38:25.933Z" itemprop="dateModified">2016-06-13</time>
     
   </p>
 </header>
@@ -100,170 +101,52 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统的笔记或者blog平台"><span class="toc-number">2.</span> <span class="toc-text">传统的笔记或者blog平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Github-pages-Hexo-Nodejs搭建个人blog"><span class="toc-number">3.</span> <span class="toc-text">Github pages+Hexo+Nodejs搭建个人blog</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android热修复的方式"><span class="toc-number">1.</span> <span class="toc-text">Android热修复的方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#链接"><span class="toc-number">2.</span> <span class="toc-text">链接</span></a></li></ol>
 		</div>
 		
-		<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>作为一个IT技术人员，自然离不开技术的积累，而技术的积累则通过文档或代码的形式呈现出来。好记性不如烂笔头，程序员应该乐于并擅于记录总结工作中遇到的各种问题、工作成果、奇思异想和感悟等。</p>
-<p>程序员的世界是孤独的，但也是充满激情和阳光的。正是开源精神点亮了这一切。生命中最美丽的报偿之一便是帮助他人的同时，也帮助了自己 ─ 罗夫‧瓦尔多‧爱默生 </p>
-<p>因此，将个人的经验和感悟与他人分享，成就的不仅仅是个人，更可以帮助其他人少走弯路。那么就开始分享的旅程吧！</p>
-<h1 id="传统的笔记或者blog平台"><a href="#传统的笔记或者blog平台" class="headerlink" title="传统的笔记或者blog平台"></a>传统的笔记或者blog平台</h1><p>在本地可以用各种文档格式保存自己的技术积累，也可以采用一些市面上的blog平台作为载体来存储自己的技术文章，但这类方式存在一些弊端，这点你可以打开你的脑洞，想想有哪些，本人不是来挑起舌战的。</p>
-<h1 id="Github-pages-Hexo-Nodejs搭建个人blog"><a href="#Github-pages-Hexo-Nodejs搭建个人blog" class="headerlink" title="Github pages+Hexo+Nodejs搭建个人blog"></a>Github pages+Hexo+Nodejs搭建个人blog</h1><p>好处和缺点这里就暂不提了，请自行google。(本文仅仅是提供一种搭建Blog的方式，不牵涉任何利益方！！！)</p>
-<p>步骤如下：</p>
-<ol>
-<li>安装git：<a href="https://git-scm.com" title="git下载" target="_blank" rel="external">git下载</a>，注意：Windows平台需要下载对应的安装exe,安装之后后续的命令行操作需要在GitShell中打开而非Windows默认的命令行。</li>
-<li>安装nodejs：<a href="https://nodejs.org" title="nodejs官网" target="_blank" rel="external">node.js官网</a>，注意：请根据自己主机的平台下载对应版本。</li>
-<li>安装hexo及部署：<a href="https://hexo.io/" title="hexo官网" target="_blank" rel="external">hexo官网</a>，注意：安装 Hexo 相当简单。然而在安装前，您必须确保先完成步骤1和2。Hexo网站可以选择语言为简体中文，方便使用。查看其中的文档可以看到hexo的详细使用说明，so easy！</li>
-</ol>
-<p>重点阐述下步骤3的过程(hexo的详细信息可参加<a href="https://hexo.io/zh-cn/docs/index.html" title="hexo说明文档" target="_blank" rel="external">hexo说明文档</a>)：</p>
+		<h1 id="Android热修复的方式"><a href="#Android热修复的方式" class="headerlink" title="Android热修复的方式"></a>Android热修复的方式</h1><p>关于动态热修复，目前发现的思路集中在三点：</p>
 <ul>
-<li><p>安装hexo，在Gitshell输入：</p>
-<blockquote>
-<p>$ npm install -g hexo-cli</p>
-</blockquote>
+<li><p>方式1：既然是热修复，那么就是新的类替换掉旧的类，而java世界类的加载是通过类加载器来实现，而Android应用程序的默认类加载器PathClassLoader加载的时候其实是通过关联的DexFile来实现(动态加载的时候已经反复涉及，这里不再赘述)，当有多个Dex文件的时候，是按照dexElements中的顺序来执行，如果一旦加载到则返回该类，否则遍历查询dexElements中的所有元素，直到最终查询完，那么基于这个事实，则可以将新类的dex文件加载的时候对应的Element放置在最前面，这样PathClassLoader加载的时候就自然先加载到新类而不是旧的有问题的类，但是这种机制在多个mutildex时存在缺陷，具体请参见下面转发链接的阐述，另外一旦某个类已经被加载，则失效了，因为一旦被加载之后，PathClassLoader的loadClass已经直接返回class而不会去查询，这样使得往往下载修复包之后需要在下次启动才能加载。当然这个办法基于纯java实现，非侵入性，与平台无关；</p>
 </li>
-<li><p>建站</p>
-<p>  安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹(自行选定的文件夹folder)中新建所需要的文件。</p>
-<blockquote>
-<p>$ hexo init <folder><br>$ cd <folder><br>$ npm install</folder></folder></p>
-</blockquote>
-<p>  新建完成后，指定文件夹的目录如下：</p>
-<p>  .<br>  ├── _config.yml<br>  ├── package.json<br>  ├── scaffolds<br>  ├── source<br>  |   ├── _drafts<br>  |   └── _posts<br>  └── themes</p>
-<p>  <strong>_config.yml</strong><br>  网站的 配置 信息，您可以在此配置大部分的参数。</p>
-<p>  <strong>package.json</strong><br>  应用程序的信息。EJS, Stylus 和 Markdown renderer 已默认安装，您可以自由移除。</p>
-<pre><code>package.json
-{
-  &quot;name&quot;: &quot;hexo-site&quot;,
-  &quot;version&quot;: &quot;0.0.0&quot;,
-  &quot;private&quot;: true,
-  &quot;hexo&quot;: {
-    &quot;version&quot;: &quot;&quot;
-  },
-  &quot;dependencies&quot;: {
-    &quot;hexo&quot;: &quot;^3.0.0&quot;,
-    &quot;hexo-generator-archive&quot;: &quot;^0.1.0&quot;,
-    &quot;hexo-generator-category&quot;: &quot;^0.1.0&quot;,
-    &quot;hexo-generator-index&quot;: &quot;^0.1.0&quot;,
-    &quot;hexo-generator-tag&quot;: &quot;^0.1.0&quot;,
-    &quot;hexo-renderer-ejs&quot;: &quot;^0.1.0&quot;,
-    &quot;hexo-renderer-stylus&quot;: &quot;^0.2.0&quot;,
-    &quot;hexo-renderer-marked&quot;: &quot;^0.2.4&quot;,
-    &quot;hexo-server&quot;: &quot;^0.1.2&quot;
-  }
-}
-</code></pre><p>  <strong>scaffolds</strong><br>  模版 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
-<p>  <strong>source</strong><br>  资源文件夹是存放用户资源的地方。除 <em>posts 文件夹之外，开头命名为 </em> (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
-<p>  <strong>themes</strong><br>  <a href="https://hexo.io/docs/themes.html" title="hexo主题" target="_blank" rel="external">主题</a> 文件夹。Hexo 会根据主题来生成静态页面。</p>
-</li>
-<li><p>本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。</p>
-<p>  在Gitshell中进入前面指定的folder(建立的站点的根目录)，输入：</p>
+<li><p>方式2：基于阿里的AndFix开源项目，这个的出发点是另外一个角度，类被类加载器加载进来之后，那么其实本质还是虚拟机在管理，而根据java虚拟机包括Dalvik虚拟机的内存模型(可以查看我那本深入理解java虚拟机书籍相关章节)，类的class文件加载进来之后存放在方法区，那么既然已经认定这个类被加载了，怎么做到热修复，阿里的方式确实巧妙，因为java虚拟机本身是C++语言实现的，通过JNI的方式可以获取到方法区中方法的引用，修改方法内部的执行引用，具体的还需要更加深入研究，将方法的执行逻辑指向了新方法，这种情况下可以做到及时加载及时修复，不用重启应用，缺点是通过JNI方式，so的兼容性决定了适用性，不过阿里的做得已经不错，当然一旦Android平台的虚拟机内部实现改变，就需要重新修改so对应的C++代码，目前首选这个方式；</p>
+<p>  另外，生成新旧dex的patch也是一个关键点，阿里提供了这样一个工具：AppPatch。生成patch的过程，大概是基于smali和baksmali，先加载新的和旧的两个dex文件得到所有的class，然后通过getImplementation()方法可对比他们的方法实现是否一致，将对比结果分成添加的方法/字段和修改的方法/字段分别保存起来，在重新生成的差异化dex文件时，根据对比结果在相应的方法或者字段前添加注解标志。要深入理解的话需要熟悉一下smali/baksmali的源码以及dalvik虚拟机的文件结构。</p>
 </li>
 </ul>
-<blockquote>
-<p>$ hexo server</p>
-</blockquote>
-<pre><code>可以观察命令行的输出，然后通过浏览器打开[http://localhost:4000/](http://localhost:4000/)，成功的情况下则会看到默认的欢迎页面。
-</code></pre><ul>
-<li><p>部署到github pages(<a href="https://help.github.com/categories/github-pages-basics/" title="github pages介绍" target="_blank" rel="external">点击了解Github Pages</a>)</p>
-<p>  Hexo 提供了快速方便的一键部署功能，让您只需一条命令就能将网站部署到服务器上。</p>
-</li>
+<ul>
+<li>方式3：阿里的Dexposed开源项目，也是纯java实现，基于大名鼎鼎的 Xposed framework project开源项目，面向AOP切面编程的思想，目前还没有很深入研究，可能与方式1有些类似，也可能基于动态代理等方式来做到。不过目前这个项目只能适用于5.0以下系统，目前不建议使用。</li>
 </ul>
-<pre><code>&gt; $ hexo deploy
-
-在开始之前，您必须先在站点的配置文件_config.yml(前面建立的folder目录下)中修改参数，一个正确的部署配置中至少要有 type 参数，例如：
-
-    deploy:
-          type: git
-
-您可同时使用多个 deployer，Hexo 会依照顺序执行每个 deployer。
-
-    deploy:
-    - type: git
-      repo:
-    - type: heroku
-      repo:
-
-
-这里重点提及部署到Github pages的方法。
-**a.首先在Github上面创建一个新的Repository，命名格式为yourname.github.io，注意：格式一定需要符合这个样式。**
-**b.然后，配置文件_config.yml**
-
-    deploy:
-      type: git
-      repository: git@github.com:your_github_account/your_github_account.github.io.git
-      branch: master
-      message: [message]
-
-说明：
-
-|参数  |    描述|
-|--------------|   ----------------------------------|
-|repo|    库（Repository）地址|
-|branch|    分支名称。如果您使用的是 GitHub 或 GitCafe 的话，程序会尝试自动检测。|
-|message|    自定义提交信息 (默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})|
-
-
-
-eg:
-
-    deploy:
-      type: git
-      repository: git@github.com:cstsinghua/cstsinghua.github.io.git
-      branch: master
-
-注意：如果是建立项目网站，则branch需要修改为gh-pages，详细情况请参见[Github pages中User, Organization, and Project Pages的差异](https://help.github.com/articles/user-organization-and-project-pages/)
-
-**c.安装hexo的git插件[hexo-deployer-git](https://github.com/hexojs/hexo-deployer-git &quot;hexo的git插件&quot;)**
-</code></pre><blockquote>
-<p>$ npm install hexo-deployer-git –save</p>
-</blockquote>
-<pre><code>**d.部署前面建立的站点(folder下面的内容)：**
-
-执行完，开始部署，即先hexo generate，然后hexo deploy。也可以一步到位：hexo d -g
-
-
-&gt; $ hexo clean
-$ hexo generate
-$ hexo deploy
-
-或者：
-</code></pre><blockquote>
-<p>$ hexo d -g</p>
-</blockquote>
-<pre><code>注意：在这一步可能报错，已知的一些错误可以参见[hexo git部署常见问题](https://hexo.io/zh-cn/docs/troubleshooting.html#Git-部署问题)
-
-另外，可能遇到SSH publickey接入问题，可以参见[创建github SSH key](https://help.github.com/articles/generating-an-ssh-key/ &quot;创建github ssh key&quot;)和[github SSH key管理](https://github.com/settings/keys &quot;github SSH key管理&quot;)
-</code></pre><ul>
-<li><p>(optional)Custom domain redirects for GitHub Pages sites(将独立(个性)域名与GitHub Pages的空间域名绑定)</p>
-<p>  yourname.github.io的域名格式比较固定，那么是否可以设置一个个性化的域名呢，另外需要注意的是Github pages的容量受限于github的要求，目前是1GB(请参见<a href="https://help.github.com/articles/what-are-github-pages/" target="_blank" rel="external">https://help.github.com/articles/what-are-github-pages/</a>)。因此，建立一个独立的个性化(blog)网站(域名是个性化独立的，容量也可以调整)，在某些情况下还是有必要的(请参见<a href="https://help.github.com/articles/custom-domain-redirects-for-github-pages-sites/" title="github pages域名重定向" target="_blank" rel="external">github pages域名重定向</a>)。</p>
-<blockquote>
-<p>Github pages 设置：在Repository的根目录下面，新建一个名为CNAME的文本文件，里面写入你要绑定的域名，如cstsinghua.me。</p>
-<p>DNS设置：注册DNSpod，添加域名，不是必要的步骤，但是据说可以提高解析效率。本人没有测试。</p>
-<p>在域名服务商，如net.cn中修改增加两条A记录，指向github pages 提供的 ip</p>
-<pre><code>192.30.252.153
-192.30.252.154
-</code></pre></blockquote>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><ol>
+<li><p>关于方式1：</p>
+<p> <a href="http://blog.csdn.net/lzyzsd/article/details/49843581" target="_blank" rel="external">http://blog.csdn.net/lzyzsd/article/details/49843581</a>，</p>
+<p> <a href="https://github.com/jasonross/Nuwa">https://github.com/jasonross/Nuwa</a></p>
 </li>
-</ul>
+<li><p>关于方式2：</p>
+<p> <a href="https://github.com/alibaba/AndFix" title="阿里的AndFix开源项目">https://github.com/alibaba/AndFix</a></p>
+</li>
+<li><p>关于方式3：</p>
+<p> <a href="https://github.com/alibaba/dexposed" title="阿里的dexposed开源项目">https://github.com/alibaba/dexposed</a></p>
+</li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/搭建个人Blog/">搭建个人Blog</a>
+  <span></span> <a href="/tags/Android热修复/">Android热修复</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/杂项/">杂项</a>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
 </div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="https://github.com/cstsinghua/2016/06/13/Github pages+Hexo+Nodejs搭建个人blog/" data-title="Github pages+Hexo+Nodejs搭建个人blog | Atypical programmer" data-tsina="null" class="share clearfix">
+  <div data-url="https://github.com/cstsinghua/2016/06/13/Android热修复的思路/" data-title="Android热修复 | Atypical programmer" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -273,18 +156,18 @@ $ hexo deploy
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/06/13/Android studio动态调试指南/" title="Android studio动态调试">
+ <a href="/2016/06/13/apktool打包之后包体变大/" title="apktool打包之后apk包体变大">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  Android studio动态调试</span>
+  apktool打包之后apk包体变大</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/06/13/Android APK瘦身初探/"  title="Android APK瘦身策略">
+<a href="/2016/06/13/Android动态加载机制/"  title="Android动态加载机制">
  <strong>NEXT:</strong><br/> 
- <span>Android APK瘦身策略
+ <span>Android动态加载机制
 </span>
 </a>
 </div>
@@ -294,7 +177,7 @@ $ hexo deploy
 	
 <section class="comment">
 	
-	<div class="ds-thread" data-title="Github pages+Hexo+Nodejs搭建个人blog" data-thread-key="Github pages+Hexo+Nodejs搭建个人blog" data-author-key="Cstsinghua" data-url="https://github.com/cstsinghua/post/Github pages+Hexo+Nodejs搭建个人blog"></div>
+	<div class="ds-thread" data-title="Android热修复" data-thread-key="Android热修复的思路" data-author-key="Cstsinghua" data-url="https://github.com/cstsinghua/post/Android热修复的思路"></div>
 	
 </section>
 
@@ -304,7 +187,7 @@ $ hexo deploy
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统的笔记或者blog平台"><span class="toc-number">2.</span> <span class="toc-text">传统的笔记或者blog平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Github-pages-Hexo-Nodejs搭建个人blog"><span class="toc-number">3.</span> <span class="toc-text">Github pages+Hexo+Nodejs搭建个人blog</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android热修复的方式"><span class="toc-number">1.</span> <span class="toc-text">Android热修复的方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#链接"><span class="toc-number">2.</span> <span class="toc-text">链接</span></a></li></ol>
   </div>
 
 <div id="asidepart">

@@ -1,0 +1,1141 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu_union_verify" content="d1952c66cf48912e21c18c7c581f382a">
+  <meta name="360-site-verification" content="67fbcc5a67f4c65c057315b28fa0b2c8" />
+<meta name="google-site-verification" content="2GzxQ0VtXwTSUdmGm6DzcmhTzM_I9QmzCb_pzpMzD88" />
+  
+    <title>Zxing二维码开源库实战 | Atypical programmer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Cstsinghua">
+    
+    <meta name="description" content="Zxing二维码开源库学习和优化  本文对Google官方开源的二维码扫描库ZXing做一个总体概述，然后进行Android开发环境下的实战(二次)开发和优化，并用于生产项目。  ZXing开源项目官方地址:https://github.com/zxing/zxing
+
+前期学习和准备 各种百度和g">
+    
+    
+    
+    
+    <link rel="alternate" href="atom.xml" title="Atypical programmer" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            var _bdId ='391982416296a0d54221f59fe35250d4';
+             hm.src = "//hm.baidu.com/hm.js?" + _bdId;
+             var s = document.getElementsByTagName("script")[0]; 
+             s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+     
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Atypical programmer">Atypical programmer</a></h1>
+				<a class="blog-motto">做一个非典型程序员</a>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/categories/Android">Android</a></li>
+					
+						<li><a href="/categories/Java">Java</a></li>
+					
+						<li><a href="/categories/Python">Python</a></li>
+					
+						<li><a href="/categories/杂项/">杂项</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+					
+                                            <form class="search" action=http://zhannei.baidu.com/cse/search target="_blank">
+                                            <label>Search</label>
+                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="Search"><br>
+					
+					</li>
+				</ul>
+                            </nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/06/13/ZXing开源项目实战/" title="Zxing二维码开源库实战" itemprop="url">Zxing二维码开源库实战</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="https://github.com/cstsinghua" title="Cstsinghua">Cstsinghua</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-06-13T07:42:25.000Z" itemprop="datePublished">2016-06-13</time>
+    Updated:<time datetime="2016-06-13T07:42:31.872Z" itemprop="dateModified">2016-06-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zxing二维码开源库学习和优化"><span class="toc-number">1.</span> <span class="toc-text">Zxing二维码开源库学习和优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前期学习和准备"><span class="toc-number">1.1.</span> <span class="toc-text">前期学习和准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实战"><span class="toc-number">1.2.</span> <span class="toc-text">实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-下载ZXing并选择包"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 下载ZXing并选择包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-试用并厘清ZXing项目的源码"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.试用并厘清ZXing项目的源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-BS优化"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.BS优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-实战并整合"><span class="toc-number">1.2.4.</span> <span class="toc-text">4.实战并整合</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="Zxing二维码开源库学习和优化"><a href="#Zxing二维码开源库学习和优化" class="headerlink" title="Zxing二维码开源库学习和优化"></a>Zxing二维码开源库学习和优化</h1><p>  本文对Google官方开源的二维码扫描库ZXing做一个总体概述，然后进行Android开发环境下的实战(二次)开发和优化，并用于生产项目。<br>  ZXing开源项目官方地址:<a href="https://github.com/zxing/zxing" title="ZXing">https://github.com/zxing/zxing</a></p>
+<hr>
+<h2 id="前期学习和准备"><a href="#前期学习和准备" class="headerlink" title="前期学习和准备"></a>前期学习和准备</h2><p> 各种百度和google，先了解二维码的技术概念和原理，他人经验和文章等等。以下摘自百度百科：</p>
+<p> 国外对二维码技术的研究始于20世纪80年代末，在二维码符号表示技术研究方面已研制出多种码制，常见的有PDF417、QR Code、Code 49、Code 16K、Code One等。这些二维码的信息密度都比传统的一维码有了较大提高，如PDF417的信息密度是一维码CodeC39的20多倍。在二维码标准化研究方面，国际自动识别制造商协会（AIM）、美国标准化协会（ANSI）已完成了PDF417、QR Code、Code 49、Code 16K、Code One等码制的符号标准。国际标准技术委员会和国际电工委员会还成立了条码自动识别技术委员会（ISO/IEC/JTC1/SC31），已制定了QR Code的国际标准（ISO/IEC 18004：2000《自动识别与数据采集技术—条码符号技术规范—QR码》），起草了PDF417、Code 16K、Data Matrix、Maxi Code等二维码的ISO/IEC标准草案。在二维码设备开发研制、生产方面，美国、日本等国的设备制造商生产的识读设备、符号生成设备，已广泛应用于各类二维码应用系统。二维码作为一种全新的信息存储、传递和识别技术，自诞生之日起就得到了世界上许多国家的关注。美国、德国、日本等国家，不仅已将二维码技术应用于公安、外交、军事等部门对各类证件的管理，而且也将二维码应用于海关、税务等部门对各类报表和票据的管理，商业、交通运输等部门对商品及货物运输的管理、邮政部门对邮政包裹的管理、工业生产领域对工业生产线的自动化管理。</p>
+<p> 我国对二维码技术的研究开始于1993年。中国物品编码中心对几种常用的二维码PDF417、QRCCode、Data Matrix、Maxi Code、Code 49、Code 16K、Code One的技术规范进行了翻译和跟踪研究。随着我国市场经济的不断完善和信息技术的迅速发展，国内对二维码这一新技术的需求与日俱增。中国物品编码中心在原国家质量技术监督局和国家有关部门的大力支持下，对二维码技术的研究不断深入。在消化国外相关技术资料的基础上，制定了两个二维码的国家标准：二维码网格矩阵码（SJ/T 11349-2006）和二维码紧密矩阵码（SJ/T 11350-2006），从而大大促进了我国具有自主知识产权技术的二维码的研发。</p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="1-下载ZXing并选择包"><a href="#1-下载ZXing并选择包" class="headerlink" title="1. 下载ZXing并选择包"></a>1. 下载ZXing并选择包</h3><blockquote>
+<p>截止本文攥写之时，ZXing的最新版本为3.2.1，在Github网站上下载ZXing的主分支（zxing-master.zip），解压完成之后，目录树如下：<br><img src="http://172.20.154.39:8080/GodSDKBackground/ZXing-dirTree.png" alt="ZXing项目解压的目录层次"></p>
+<p>以下对解压的目录结构(包含模块)的主要部分做一个概述(此处以3.2.1版本基准，不同的版本包含的模块可能稍有差异，请留意)：</p>
+</blockquote>
+<ul>
+<li><p><strong>android</strong></p>
+<p>  Android client Barcode Scanner,中文意为“条形扫码器”，下文简称BS。可作为独立的扫码APP使用。</p>
+</li>
+<li><p><strong>android-core</strong></p>
+<p>   Android-related code shared among android, androidtest, glass，即android、androidtest和glass三个模块共享的android相关库，当前其实就是一个相机配置工具类(CameraConfigurationUtils.java).</p>
+</li>
+<li><p><strong>android-integration</strong></p>
+<p>   Supports integration with Barcode Scanner via Intent，即通过Intent的方式提供一种便捷的途径将BS整合到用户的APP中。</p>
+</li>
+<li><p><strong>androidtest</strong></p>
+<p>  Android test app, ZXing Test，即模拟调用方app(相当于用户APP的角色)，通过android-integration整合Barcode Scanner</p>
+</li>
+<li><p><strong>core</strong></p>
+<p>  The core image decoding library, and test code.即核心的图片编解码库，整个条形码的核心处理库，另外还包括测试代码。</p>
+</li>
+<li><p>glass    </p>
+<p>  Simple Google Glass application</p>
+</li>
+<li><p>zxingorg</p>
+<p>  The source behind zxing.org</p>
+</li>
+<li><p>zxing.appspot.com</p>
+<p>  The source behind web-based barcode generator at zxing.appspot.com</p>
+</li>
+<li><p>javase</p>
+<p>  JavaSE-specific client code</p>
+</li>
+</ul>
+<p>其中，与开发Android二维码扫码相关的模块有android、android-core、android-integration、androidtest和core模块。</p>
+<p>androidtest、android-integration、android三个模块的关系图如下：</p>
+<p><img src="http://172.20.154.39:8080/GodSDKBackground/Barcode_module_relationship.png" alt="模块关系图"></p>
+<h3 id="2-试用并厘清ZXing项目的源码"><a href="#2-试用并厘清ZXing项目的源码" class="headerlink" title="2.试用并厘清ZXing项目的源码"></a>2.试用并厘清ZXing项目的源码</h3><ul>
+<li><p>试用：</p>
+<p>  用Eclipse导入(按照导入现有Android工程的方式)上面所述的androidtest模块，导入之后，源代码部分会报错。主要有以下两种错误：</p>
+<ul>
+<li><p>由于ZXing项目编写者采用的java编译版本不低于1.7.0，因此如果你的Eclipse的java编译版本设置为1.6.0或者更低版本时，将会报错，比如new ArrayList&lt;&gt;(),在1.6.0版本则不能省略具体的泛型类型，应该为new ArrayList<yourclass>()；</yourclass></p>
+</li>
+<li><p>引用了大量core模块、android-integration和android-core的类，因此需要将core模块的jar包(当然也可以直接copy源码)添加到工程的构建路径(core包的下载地址:<a href="http://repo1.maven.org/maven2/com/google/zxing/core/" title="ZXing的core包" target="_blank" rel="external">http://repo1.maven.org/maven2/com/google/zxing/core/</a>)，另外需要将android-integration和android-core的源码复制到工程中(新建对应的package，copy类)；</p>
+<p>按照上面步骤处理完之后，则可以运行的测试APP诞生了。工程目录图如下：<br><img src="http://172.20.154.39:8080/GodSDKBackground/barcode_test_project.png" alt="ZXing试用工程目录"></p>
+<p>运行并安装APK至手机或模拟器，测试APP界面如下图：</p>
+<p><img src="http://172.20.154.39:8080/GodSDKBackground/barcode_test_app.png" alt="ZXing试用工程目录">    </p>
+<p>可以体验扫码和生成二维码的功能。</p>
+</li>
+</ul>
+</li>
+<li><p>源码分析</p>
+<p>  其实这里要关注的源码主要有四部分：core、android、android-integration和android-core，其中android-integration和android-core较为简单，这里不再赘述。而core涉及图片处理和二维码的理论技术，暂不做深入研究。</p>
+<p>  android模块即BS，可以作为单独APP使用，是一个功能强大的条码扫描器，不仅支持多种类型的条码，还支持多国语言，分享二维码，查看扫描历史，反向扫描等功能。</p>
+<p>  因此，这里主要就android模块进行分析阐述。导入Eclipse之后，android模块的包结构图如下：</p>
+<p>  <img src="http://172.20.154.39:8080/GodSDKBackground/barcode_BS_Hierarchy.png" alt="BS包结构"></p>
+<p>  如上图所示，BS主要包括下列组件：</p>
+<ul>
+<li><p>android：与CaptureActivity直接相关的核心组件。包含了发生震动管理器，闪光灯等等。</p>
+</li>
+<li><p>book：如果查询的结果是图书信息，用户可以选择查询该书的更进一步的详细信息，该包即包含了搜索与展示书籍的相关类。</p>
+</li>
+<li><p>camera/camera.open：摄像头相关组件，核心类是CameraManager</p>
+</li>
+<li><p>clipboard：剪贴板</p>
+</li>
+<li><p>encode：编码功能的各个组件集合。核心类为QRCodeEncoder，最终实施编码的是MultiFormatWriter类</p>
+</li>
+<li><p>history：扫描历史管理，核心类是HistoryManager</p>
+</li>
+<li><p>result：条码扫描的结果被分为不同的类型，所有的类型都定义在com.google.zxing.client.result.ParsedResultType中，对于不同的类型都有对应的处理方法：xxxResultHandler，所有的ResultHandler都包含在此包中。不同的xxxResultHandler还提供了扫描结果页面要展示几个button，每个button的文本以及需要绑定的事件等等。</p>
+</li>
+<li><p>result.supplement：对已经扫描并解码的结果做额外处理的工具集。比如扫描出来的是isbn号，如果在设置中选择了“检索更多信息”则会在扫描出isbn号之后自动去网上查询该书的信息，最后将书的信息展示出来，而如果没选中，则只会将isbn号码展示。</p>
+</li>
+<li><p>share：分享二维码功能，亦是编码功能的入口所在。</p>
+</li>
+<li><p>wifi：是WifiResultHandler的辅助类集合。如果扫描到的二维码是对wifi信息的编码，那么最终扫描结果页会展示一个“连接到网络”的按钮，点击此按钮就会自动尝试连接。该包中所包含的类则是链接网络所需的工具类。</p>
+<p>打开BS，即进入扫描界面时，BS大致做了如下的事情：配置Camera并启动Camera、构建preview与扫描窗口、捕捉画面并解码、将解码结果交给不同ResultHandler去处理。下面逐一进行分析。</p>
+</li>
+</ul>
+<ol>
+<li><p>配置Camera并启动Camera</p>
+<p> 启动Camera是在CaptureActivity.initCamera中进行的，最重要的几句代码是：</p>
+<pre><code>cameraManager.openDriver(surfaceHolder);
+// Creating the handler starts the preview, which can also throw a
+// RuntimeException.
+if (handler == null) {
+    handler = new CaptureActivityHandler(this, decodeFormats,
+            decodeHints, characterSet, cameraManager);
+}
+</code></pre><p> CameraManager是相机管理类，是BS中唯一与Camera打交道的类，CameraManager.openDriver主要做了三件事：</p>
+<pre><code>/**
+ * Opens the camera driver and initializes the hardware parameters.
+ * 
+ * @param holder
+ *            The surface object which the camera will draw preview frames
+ *            into.
+ * @throws IOException
+ *             Indicates the camera driver failed to open.
+ */
+public synchronized void openDriver(SurfaceHolder holder)
+        throws IOException {
+    Camera theCamera = camera;
+    if (theCamera == null) {
+        // 1. 获取手机背面的摄像头
+        theCamera = OpenCameraInterface.open(requestedCameraId);
+        if (theCamera == null) {
+            throw new IOException();
+        }
+        camera = theCamera;
+    }
+    // 2. 设置摄像头预览view
+    theCamera.setPreviewDisplay(holder);
+
+    if (!initialized) {
+        initialized = true;
+        configManager.initFromCameraParameters(theCamera);
+        if (requestedFramingRectWidth &gt; 0 &amp;&amp; requestedFramingRectHeight &gt; 0) {
+            setManualFramingRect(requestedFramingRectWidth,
+                    requestedFramingRectHeight);
+            requestedFramingRectWidth = 0;
+            requestedFramingRectHeight = 0;
+        }
+    }
+
+    Camera.Parameters parameters = theCamera.getParameters();
+    String parametersFlattened = parameters == null ? null : parameters
+            .flatten(); // Save these, temporarily
+    try {
+        // 3. 读取配置并设置相机参数
+        configManager.setDesiredCameraParameters(theCamera, false);
+    } catch (RuntimeException re) {
+        // Driver failed
+        Log.w(TAG,
+                &quot;Camera rejected parameters. Setting only minimal safe-mode parameters&quot;);
+        Log.i(TAG, &quot;Resetting to saved camera params: &quot;
+                + parametersFlattened);
+        // Reset:
+        if (parametersFlattened != null) {
+            parameters = theCamera.getParameters();
+            parameters.unflatten(parametersFlattened);
+            try {
+                theCamera.setParameters(parameters);
+                configManager.setDesiredCameraParameters(theCamera, true);
+            } catch (RuntimeException re2) {
+                // Well, darn. Give up
+                Log.w(TAG,
+                        &quot;Camera rejected even safe-mode parameters! No configuration&quot;);
+            }
+        }
+    }
+
+}
+</code></pre><p> CameraConfigurationManager是相机辅助类，主要用于设置相机的各类参数。核心方法有两个：</p>
+<ul>
+<li><p>initFromCameraParameters：计算了屏幕分辨率和当前最适合的相机像素</p>
+</li>
+<li><p>setDesiredCameraParameters：读取配置设置相机的对焦模式、闪光灯模式等等</p>
+<p>CaptureActivityHandler类是一个针对扫描任务的Handler，可接收的message有启动扫描（restart_preview）、扫描成功（decode_succeeded）、扫描失败（decode_failed）等等。</p>
+<p>在创建一个CaptureActivityHandler对象的时候也做了三件事：</p>
+<p>  CaptureActivityHandler(CaptureActivity activity,</p>
+<pre><code>           Collection&lt;BarcodeFormat&gt; decodeFormats,
+           Map&lt;DecodeHintType,?&gt; baseHints,
+           String characterSet,
+           CameraManager cameraManager) {
+  this.activity = activity;
+  // 1. 启动扫描线程
+  decodeThread = new DecodeThread(activity, decodeFormats, baseHints, characterSet,
+      new ViewfinderResultPointCallback(activity.getViewfinderView()));
+  decodeThread.start();
+  state = State.SUCCESS;
+
+  // Start ourselves capturing previews and decoding.
+  this.cameraManager = cameraManager;
+  // 2. 开启相机预览界面
+  cameraManager.startPreview();
+  // 3. 将preview回调函数与decodeHandler绑定、调用viewfinderView
+  restartPreviewAndDecode();
+}
+</code></pre><p>restartPreviewAndDecode方法又调用了CameraManager.requestPreviewFrame：</p>
+<p>  /**</p>
+<ul>
+<li>A single preview frame will be returned to the handler supplied. The data</li>
+<li>will arrive as byte[] in the message.obj field, with width and height</li>
+<li><p>encoded as message.arg1 and message.arg2, respectively.</p>
+</li>
+<li><p>1：将handler与preview回调函数绑定；<br></p>
+</li>
+<li>2：注册preview回调函数<br></li>
+<li>综上，该函数的作用是当相机的预览界面准备就绪后就会调用hander向其发送传入的message</li>
+<li>@param handler</li>
+<li>The handler to send the message to.</li>
+<li>@param message</li>
+<li>The what field of the message to be sent.<br>*/<br>public synchronized void requestPreviewFrame(Handler handler, int message) {<br>Camera theCamera = camera;<br>if (theCamera != null &amp;&amp; previewing) {<br>previewCallback.setHandler(handler, message);<br>/ 绑定相机回调函数，当预览界面准备就绪后会回调Camera.PreviewCallback.onPreviewFrame<br>theCamera.setOneShotPreviewCallback(previewCallback);<br>}<br>}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code>2. 构建preview与扫描窗口
+
+    首先相机有自己的preview界面，然后我们需要构造一个扫描窗口，引导用户将条码置于窗口中完成扫描。
+
+    构造扫描窗口是在CaptureActivityHandler.restartPreviewAndDecode中，通过调用activity.drawViewfinder()来实现的。这里有个画扫描窗口的类叫ViewfinderView，该类也是想要改变扫描窗口风格所必须重构的一个类。
+
+    重构ViewfinderView涉及Android的高级话题：自定义View及其属性，这里暂不赘述。
+
+    相机的preview界面显示出来后即可开始扫描，所以需要监听preview是否已经显示这个事件，这就是Camera.PreviewCallback的作用。PreviewCallback.onPreviewFrame做的事便是当preview界面展示出来的时候向DecodeHandler发送一个decode消息，DecodeHandler收到该消息后会执行decode方法来解码。
+
+    注意，检测并触发捕获画面动作的，是Camera.setOneShotPreviewCallback()这个方法。该函数被调用后，如果预览界面已经打开，就会将包含当前preview frame的byte数组传给回调函数，此时再向DecodeHandler发送decode消息。
+
+3. 捕捉画面并解码
+
+    具体参考DecodeHandler.decode方法。（本文只从宏观上对zxing进行分析，对于解码的原理暂不做介绍）
+
+4. 将解码结果交给不同ResultHandler去处理
+
+    当DecodeHandler.decode完成解码后会向CaptureActivityHandler发消息。如果编码成功则调用CaptureActivity.handleDecode方法对扫描到的结果进行分类处理。
+
+    该方法中首先获取ResultHandler：
+
+        ResultHandler resultHandler = ResultHandlerFactory.makeResultHandler(
+                this, rawResult);
+    然后调用handleDecodeInternally和handleDecodeExternally对ResultHandler进行处理。谈到这两个方法，就不得不再分析一下    IntentSource。
+
+        enum IntentSource {
+
+          /**
+           * 本地app向BS(Barcode Scanner)发起的启动指令
+           * 比如在androidtest项目中，利用整合的android-integration对BS发起调用指令：com.google.zxing.client.android.SCAN
+           * BS中该启动命令对应的Source类型便是NATIVE_APP_INTENT
+           */
+            NATIVE_APP_INTENT,
+
+          /**
+           * 打开BS的时候传入查询商品的url，与最终扫描到的product id结合进行查询
+           * 两种url的形式不同
+           */
+          PRODUCT_SEARCH_LINK,
+          ZXING_LINK,
+
+          /**
+           * 直接打开BS
+           */
+          NONE
+
+        }
+
+    结合CaptureActivity.onResume中的部分代码来理解：
+
+        else if (dataString != null
+                    &amp;&amp; dataString.contains(&quot;http://www.google&quot;)
+                    &amp;&amp; dataString.contains(&quot;/m/products/scan&quot;)) {
+
+                // Scan only products and send the result to mobile Product
+                // Search.
+                source = IntentSource.PRODUCT_SEARCH_LINK;
+                sourceUrl = dataString;
+                decodeFormats = DecodeFormatManager.PRODUCT_FORMATS;
+
+        } else if (isZXingURL(dataString)) {
+
+            // Scan formats requested in query string (all formats if none
+            // specified).
+            // If a return URL is specified, send the results there.
+            // Otherwise, handle it ourselves.
+            source = IntentSource.ZXING_LINK;
+            sourceUrl = dataString;
+            Uri inputUri = Uri.parse(dataString);
+            scanFromWebPageManager = new ScanFromWebPageManager(inputUri);
+            decodeFormats = DecodeFormatManager
+                    .parseDecodeFormats(inputUri);
+            // Allow a sub-set of the hints to be specified by the caller.
+            decodeHints = DecodeHintManager.parseDecodeHints(inputUri);
+
+        }
+
+    NATIVE_APP_INTENT和NONE很好理解，而PRODUCT_SEARCH_LINK和ZXING_LINK是指定查询商品的url（而不是交给zxing分析后再决定去哪里查询），将扫描出来的内容拼凑到url中，然后在浏览器中展示结果。
+
+    理解了IntentSource，就容易看懂handleDecodeInternally其实就是将结果展示到界面上。handleDecodeExternally稍复杂些，当source == IntentSource.NATIVE_APP_INTENT时，BS会将扫描分析的结果存到Intent中返回给调用方app，因此调用方app在启动BS的时候一定要使用startActivityForResult。这一点可以在androidtest的IntentIntegrator.initiateScan方法的最后看到。
+</code></pre><h3 id="3-BS优化"><a href="#3-BS优化" class="headerlink" title="3.BS优化"></a>3.BS优化</h3><p>BS可直接作为独立APP运行，但是项目中的很多功能我们并不需要，而且扫描的界面为横向，因此进行相关优化。接下来，我们在BS项目工程基础上，直接修改其中代码或者xml文件，达到修改扫码界面为竖屏且美化扫码界面的目的。</p>
+<ol>
+<li><p>修改BS默认的横屏为竖屏</p>
+<p>针对ZXing3.2.1版本，这里一共需要6步，需要提醒的是：不同的ZXing版本需要的步骤可能有差异，因为里面的源代码逻辑有修改。因此，有的时候尽信书不如无书，本文的步骤可能仅适合ZXing3.2.1，如果在ZXing其他版本上完成以下六步无法实现竖屏，或者修改之后会出错，请仔细排查(可以断点调试跟踪)。其实，要实现竖屏，从原理上应该是共通的，主要包括Activity本身的方向(属性)设置，同时关联到相机的参数(如预览窗口)调整等方面。</p>
+<ul>
+<li><p>第一步：调整CaptureActivity的方向为竖屏显示</p>
+<p>   修改工程的AndroidManifest.xml,CaptureActivity的android:screenOrientation属性，设置为portrait</p>
+   <!-- 调整扫描activity为竖屏,step1.调整activity的方向为竖屏 -->
+   <activity android:name=".CaptureActivity" android:cleartaskonlaunch="true" android:screenorientation="portrait" android:statenotneeded="true" android:theme="@style/CaptureTheme" android:windowsoftinputmode="stateAlwaysHidden">
+</activity></li>
+<li><p>第二步：调整相机预览界面方向</p>
+<p>   在 CameraConfigurationManager.setDesiredCameraParameters 的最后(或第一行也可)增加如下代码：<br>   //调整扫描activity为竖屏,step2.调整相机预览界面方向<br>   camera.setDisplayOrientation(90);<br>   注意：调整相机preview的时钟方向与手机竖屏的自然方向一致。该方法必须在相机的startPreview之前被调用，</p>
+<pre><code>在预览界面展示出来后设置是无效的。
+</code></pre></li>
+<li><p>第三步：调整扫描窗口尺寸</p>
+<p>   修改 CameraManager.getFramingRectInPreview()方法中的部分代码：<br>   原代码段为：</p>
+<pre><code>rect.left = rect.left * cameraResolution.x / screenResolution.x;
+rect.right = rect.right * cameraResolution.x / screenResolution.x;
+rect.top = rect.top * cameraResolution.y / screenResolution.y;
+rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
+framingRectInPreview = rect;
+</code></pre><p>   修改后代码段为：</p>
+<pre><code>/*
+ * 调整扫描activity为竖屏,step3.调整扫描窗口尺寸
+ * 由于修改了屏幕的初始方向，手机分辨率由原来的 width\*height 变为 height\*width
+ * 形式，但是相机的分辨率则是固定的，因此这里需做些调整以计算出正确的缩放比率。
+ */
+rect.left = rect.left * cameraResolution.y / screenResolution.x;
+rect.right = rect.right * cameraResolution.y / screenResolution.x;
+rect.top = rect.top * cameraResolution.x / screenResolution.y;
+rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
+framingRectInPreview = rect;
+</code></pre><p>   原因：由于修改了屏幕的初始方向，手机分辨率由原来的 width*height 变为 height*width 形式，</p>
+<pre><code>但是相机的分辨率则是固定的，因此这里需做些调整以计算出正确的缩放比率。
+</code></pre></li>
+<li><p>第四步：将扫描框设置为正方形</p>
+<p>   修改 CameraManager.getFramingRect()方法中的部分代码：<br>   原代码段为：</p>
+<pre><code>int width = findDesiredDimensionInRange(screenResolution.x,
+        MIN_FRAME_WIDTH, MAX_FRAME_WIDTH);
+
+int height = findDesiredDimensionInRange(screenResolution.y,
+        MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
+Log.d(TAG,&quot;screenResolution.x:&quot;+screenResolution.x+&quot;,screenResolution.y:&quot;+screenResolution.y);
+int leftOffset = (screenResolution.x - width) / 2;
+int topOffset = (screenResolution.y - height) / 2;
+framingRect = new Rect(leftOffset, topOffset, leftOffset + width,
+        topOffset + height);
+Log.d(TAG, &quot;Calculated framing rect: &quot; + framingRect);
+</code></pre><p>   修改后代码段为：</p>
+<pre><code>/*
+  * 调整扫描activity为竖屏,step4.将扫描框设置为正方形
+ */
+//后面设置height = width的前提下，如x&gt;y时可能会导致topOffset为负值，因此需要对此进行修正，加入下面这行代码
+int resolutionMin = Math.min(screenResolution.x, screenResolution.y);
+int width = findDesiredDimensionInRange(resolutionMin,
+MIN_FRAME_WIDTH, MAX_FRAME_WIDTH);
+
+int height = width;//宽度等于高度，即为正方形
+Log.d(TAG,&quot;screenResolution.x:&quot;+screenResolution.x+&quot;,screenResolution.y:&quot;+screenResolution.y);
+int leftOffset = (screenResolution.x - width) / 2;
+int topOffset = (screenResolution.y - height) / 2;
+framingRect = new Rect(leftOffset, topOffset, leftOffset + width,
+        topOffset + height);
+Log.d(TAG, &quot;Calculated framing rect: &quot; + framingRect);
+</code></pre></li>
+<li><p>第五步：反转扫描到的图形</p>
+<pre><code>修改 DecodeHandler.decode 方法，增加以下代码：
+</code></pre><p>   private void decode(byte[] data, int width, int height) {</p>
+<pre><code>long start = System.currentTimeMillis();
+Result rawResult = null;
+
+/*
+ * 调整扫描activity为竖屏,step5.反转扫描到的图形
+ */
+// 新增反转数据代码开始
+byte[] rotatedData = new byte[data.length];
+for (int y = 0; y &lt; height; y++) {
+    for (int x = 0; x &lt; width; x++)
+        rotatedData[x * height + height - y - 1] = data[x + y * width];
+}
+int tmp = width;
+width = height;
+height = tmp;
+// 新增代码结束
+
+PlanarYUVLuminanceSource source = activity.getCameraManager()
+        .buildLuminanceSource(rotatedData, width, height);
+//...后续代码
+</code></pre><p>   }</p>
+</li>
+<li><p>第六步：(关键)修改CaptureActivity的onresume方法</p>
+<pre><code>完成以上五步后，在ZXing的某些版本上应该是可以实现竖屏了，但是在3.2.1版本上，由于在CaptureActivity
+的onresume方法里面涉及到了修改activity的方向，因此需要针对性修改这部分代码。
+原代码段为：
+   if (prefs.getBoolean(PreferencesActivity.KEY_DISABLE_AUTO_ORIENTATION,
+   true)) {
+       setRequestedOrientation(getCurrentOrientation());
+   } else {
+       setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+   }
+</code></pre><p>   修改后代码段为：</p>
+<pre><code>if (prefs.getBoolean(PreferencesActivity.KEY_DISABLE_AUTO_ORIENTATION,
+true)) {
+    setRequestedOrientation(getCurrentOrientation());
+} else {
+    // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+}
+</code></pre><p>   同时，需要修改getCurrentOrientation方法：<br>   原方法为：</p>
+<pre><code>private int getCurrentOrientation() {
+    int rotation = getWindowManager().getDefaultDisplay().getRotation();
+    switch (rotation) {
+    case Surface.ROTATION_0:
+    case Surface.ROTATION_90:
+        return ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+    default:
+        return ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+    }
+}
+</code></pre><p>   修改后为：</p>
+<pre><code>private int getCurrentOrientation() {
+    int rotation = getWindowManager().getDefaultDisplay().getRotation();
+    switch (rotation) {
+    case Surface.ROTATION_0:
+    case Surface.ROTATION_90:
+        // return ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+    default:
+        // return ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+        return ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+    }
+}
+</code></pre></li>
+</ul>
+</li>
+<li><p>美化扫描界面</p>
+<p>原生的扫描界面比较朴素，如果需要做出更漂亮些的扫描界面，就必须重写ViewfinderView类(res/layout/capture.xml布局中使用该类作为扫描窗口界面)。这里，我们为了实现类微信或支付宝的扫描界面效果，在将扫码界面修改为竖屏的基础上，可以做如下修改：</p>
+<ul>
+<li><p>在ViewfinderView类添加变量：</p>
+<pre><code>/**
+ * 四个边角对应的宽度
+ */
+ private static final int CORNER_WIDTH = 8;
+
+/**
+ * 四个边角对应的长度
+ */
+private int ScreenRate;
+
+/**
+ * 手机的屏幕密度
+ */
+private static float density;
+
+/**
+ * 四个边角的颜色
+ */
+private final int cornerColor;
+
+/**
+ * 扫描框中的中间线的宽度
+ */
+private static final int MIDDLE_LINE_WIDTH = 2;
+
+/**
+ * 扫描框中的中间线的与扫描框左右的间隙
+ */
+private static final int MIDDLE_LINE_PADDING = 10;
+
+/**
+ * 中间那条线每次刷新移动的距离
+ */
+private static final int SPEEN_DISTANCE = 5;
+
+/**
+ * 中间滑动线的最顶端位置
+ */
+private int slideTop;
+
+/**
+ * 中间滑动线的最底端位置
+ */
+private int slideBottom;
+
+boolean isFirst;
+</code></pre></li>
+<li><p>修改ViewfinderView类的构造方法和onDraw方法。注：对于Android自定义View，绘制的核心就是onDraw方法。</p>
+<p> a.在构造方法中添加初始化或设置变量的值：</p>
+<p>   // This constructor is used when the class is built from an XML resource.<br>   public ViewfinderView(Context context, AttributeSet attrs) {</p>
+<pre><code>super(context, attrs);
+
+// Initialize these once for performance rather than calling them every
+// time in onDraw().
+paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+Resources resources = getResources();
+maskColor = resources.getColor(R.color.viewfinder_mask);
+resultColor = resources.getColor(R.color.result_view);
+laserColor = resources.getColor(R.color.viewfinder_laser);
+
+//设置添加的变量值--start
+cornerColor = Color.GREEN;
+density = context.getResources().getDisplayMetrics().density;  
+//将像素转换成dp  
+ScreenRate = (int)(20 * density);  
+//设置添加的变量值--end
+
+resultPointColor = resources.getColor(R.color.possible_result_points);
+scannerAlpha = 0;
+possibleResultPoints = new ArrayList&lt;&gt;(5);
+lastPossibleResultPoints = null;
+</code></pre><p>   }</p>
+<p>b.修改onDraw方法中部分代码：</p>
+<p>修改前代码段：</p>
+<p>   if (resultBitmap != null) {</p>
+<pre><code>// Draw the opaque result bitmap over the scanning rectangle
+paint.setAlpha(CURRENT_POINT_OPACITY);
+canvas.drawBitmap(resultBitmap, null, frame, paint);
+</code></pre><p>   } else {</p>
+<pre><code>// Draw a red &quot;laser scanner&quot; line through the middle to show
+// decoding is active
+paint.setColor(laserColor);
+paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);
+scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
+int middle = frame.height() / 2 + frame.top;
+canvas.drawRect(frame.left + 2, middle - 1, frame.right - 1,
+        middle + 2, paint);
+
+float scaleX = frame.width() / (float) previewFrame.width();
+float scaleY = frame.height() / (float) previewFrame.height();
+
+List&lt;ResultPoint&gt; currentPossible = possibleResultPoints;
+List&lt;ResultPoint&gt; currentLast = lastPossibleResultPoints;
+int frameLeft = frame.left;
+int frameTop = frame.top;
+if (currentPossible.isEmpty()) {
+    lastPossibleResultPoints = null;
+} else {
+    possibleResultPoints = new ArrayList&lt;&gt;(5);
+    lastPossibleResultPoints = currentPossible;
+    paint.setAlpha(CURRENT_POINT_OPACITY);
+    paint.setColor(resultPointColor);
+    synchronized (currentPossible) {
+        for (ResultPoint point : currentPossible) {
+            canvas.drawCircle(frameLeft
+                    + (int) (point.getX() * scaleX), frameTop
+                    + (int) (point.getY() * scaleY), POINT_SIZE,
+                    paint);
+        }
+    }
+}
+if (currentLast != null) {
+    paint.setAlpha(CURRENT_POINT_OPACITY / 2);
+    paint.setColor(resultPointColor);
+    synchronized (currentLast) {
+        float radius = POINT_SIZE / 2.0f;
+        for (ResultPoint point : currentLast) {
+            canvas.drawCircle(frameLeft
+                    + (int) (point.getX() * scaleX), frameTop
+                    + (int) (point.getY() * scaleY), radius, paint);
+        }
+    }
+}
+
+// Request another update at the animation interval, but only
+// repaint the laser line,
+// not the entire viewfinder mask.
+postInvalidateDelayed(ANIMATION_DELAY, frame.left - POINT_SIZE,
+        frame.top - POINT_SIZE, frame.right + POINT_SIZE,
+        frame.bottom + POINT_SIZE);
+</code></pre><p>   }</p>
+<p>修改后代码段：</p>
+<p>   if (resultBitmap != null) {<br>   // Draw the opaque result bitmap over the scanning rectangle<br>   paint.setAlpha(CURRENT_POINT_OPACITY);<br>   canvas.drawBitmap(resultBitmap, null, frame, paint);<br>   } else {</p>
+<pre><code>// Draw a red &quot;laser scanner&quot; line through the middle to show
+// decoding is active
+/*paint.setColor(laserColor);
+paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);
+scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
+int middle = frame.height() / 2 + frame.top;
+canvas.drawRect(frame.left + 2, middle - 1, frame.right - 1,
+        middle + 2, paint);*/
+
+float scaleX = frame.width() / (float) previewFrame.width();
+float scaleY = frame.height() / (float) previewFrame.height();
+
+List&lt;ResultPoint&gt; currentPossible = possibleResultPoints;
+List&lt;ResultPoint&gt; currentLast = lastPossibleResultPoints;
+int frameLeft = frame.left;
+int frameTop = frame.top;
+if (currentPossible.isEmpty()) {
+    lastPossibleResultPoints = null;
+} else {
+    possibleResultPoints = new ArrayList&lt;&gt;(5);
+    lastPossibleResultPoints = currentPossible;
+    paint.setAlpha(CURRENT_POINT_OPACITY);
+    paint.setColor(resultPointColor);
+    synchronized (currentPossible) {
+        for (ResultPoint point : currentPossible) {
+            canvas.drawCircle(frameLeft
+                    + (int) (point.getX() * scaleX), frameTop
+                    + (int) (point.getY() * scaleY), POINT_SIZE,
+                    paint);
+        }
+    }
+}
+if (currentLast != null) {
+    paint.setAlpha(CURRENT_POINT_OPACITY / 2);
+    paint.setColor(resultPointColor);
+    synchronized (currentLast) {
+        float radius = POINT_SIZE / 2.0f;
+        for (ResultPoint point : currentLast) {
+            canvas.drawCircle(frameLeft
+                    + (int) (point.getX() * scaleX), frameTop
+                    + (int) (point.getY() * scaleY), radius, paint);
+        }
+    }
+}
+
+/*
+ * 如下为了优化扫描框，绘制边角
+ */
+paint.setColor(cornerColor);
+canvas.drawRect(frame.left, frame.top, frame.left + ScreenRate,
+        frame.top + CORNER_WIDTH, paint);
+canvas.drawRect(frame.left, frame.top, frame.left + CORNER_WIDTH,
+        frame.top + ScreenRate, paint);
+canvas.drawRect(frame.right - ScreenRate, frame.top, frame.right,
+        frame.top + CORNER_WIDTH, paint);
+canvas.drawRect(frame.right - CORNER_WIDTH, frame.top, frame.right,
+        frame.top + ScreenRate, paint);
+canvas.drawRect(frame.left, frame.bottom - CORNER_WIDTH, frame.left
+        + ScreenRate, frame.bottom, paint);
+canvas.drawRect(frame.left, frame.bottom - ScreenRate, frame.left
+        + CORNER_WIDTH, frame.bottom, paint);
+canvas.drawRect(frame.right - ScreenRate, frame.bottom
+        - CORNER_WIDTH, frame.right, frame.bottom, paint);
+canvas.drawRect(frame.right - CORNER_WIDTH, frame.bottom
+        - ScreenRate, frame.right, frame.bottom, paint);
+
+/*
+ * 如下绘制中间上下滚动的横线
+ */
+//初始化中间线滑动的最上边和最下边
+if(!isFirst){
+    isFirst = true;
+    slideTop = frame.top;
+    slideBottom = frame.bottom;
+}
+
+//绘制中间的线,每次刷新界面，中间的线往下移动SPEEN_DISTANCE
+slideTop += SPEEN_DISTANCE;
+if(slideTop &gt;= frame.bottom){
+    slideTop = frame.top;
+}
+canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2,
+            frame.right - MIDDLE_LINE_PADDING,slideTop + MIDDLE_LINE_WIDTH/2, paint);
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<pre><code>            // Request another update at the animation interval, but only
+            // repaint the laser line,
+            // not the entire viewfinder mask.
+            postInvalidateDelayed(ANIMATION_DELAY, frame.left - POINT_SIZE,
+                    frame.top - POINT_SIZE, frame.right + POINT_SIZE,
+                    frame.bottom + POINT_SIZE);
+        }
+
+**注意**：上面的代码中，中间那根线微信是用的图片(图片可以自己制作，也可以反编译微信apk从中获取)，这里是画的线条，如果你想更加仿真点就将下面的代码：
+
+    canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2,
+                frame.right - MIDDLE_LINE_PADDING,slideTop + MIDDLE_LINE_WIDTH/2, paint);
+
+
+
+修改为：
+
+    Rect lineRect = new Rect();  
+    lineRect.left = frame.left;  
+    lineRect.right = frame.right;  
+    lineRect.top = slideTop;  
+    lineRect.bottom = slideTop + 18;  
+    canvas.drawBitmap(((BitmapDrawable)(getResources().getDrawable(R.drawable.qrcode_scan_line))).getBitmap(), null, lineRect, paint);  
+</code></pre><h3 id="4-实战并整合"><a href="#4-实战并整合" class="headerlink" title="4.实战并整合"></a>4.实战并整合</h3><p>待续(实际使用中，一般都是应用APP包括了扫描功能，而不是将扫码功能单独作为一个APP，因此需要对BS工程进行简化，使其可以作为其他应用工程的依赖lib，并去除那些不需要的功能，然后就直接整合进APP。)</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Zxing/">Zxing</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="https://github.com/cstsinghua/2016/06/13/ZXing开源项目实战/" data-title="Zxing二维码开源库实战 | Atypical programmer" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/06/13/Eclipse动态调试指南/"  title="Eclipse动态调试Android应用指南">
+ <strong>NEXT:</strong><br/> 
+ <span>Eclipse动态调试Android应用指南
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	
+	<div class="ds-thread" data-title="Zxing二维码开源库实战" data-thread-key="ZXing开源项目实战" data-author-key="Cstsinghua" data-url="https://github.com/cstsinghua/post/ZXing开源项目实战"></div>
+	
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zxing二维码开源库学习和优化"><span class="toc-number">1.</span> <span class="toc-text">Zxing二维码开源库学习和优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前期学习和准备"><span class="toc-number">1.1.</span> <span class="toc-text">前期学习和准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实战"><span class="toc-number">1.2.</span> <span class="toc-text">实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-下载ZXing并选择包"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 下载ZXing并选择包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-试用并厘清ZXing项目的源码"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.试用并厘清ZXing项目的源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-BS优化"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.BS优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-实战并整合"><span class="toc-number">1.2.4.</span> <span class="toc-text">4.实战并整合</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	<div class="social-list" class="clearfix">
+		
+		
+		
+		<a href="https://github.com/cstsinghua" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+</div>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/Android/" title="Android">Android<sup>9</sup></a></li>
+		
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		
+			<li><a href="/categories/杂项/" title="杂项">杂项<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/APK安装/" title="APK安装">APK安装<sup>1</sup></a></li>
+		
+			<li><a href="/tags/APK瘦身/" title="APK瘦身">APK瘦身<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Android热修复/" title="Android热修复">Android热修复<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Apktool打包/" title="Apktool打包">Apktool打包<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Push/" title="Push">Push<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Zxing/" title="Zxing">Zxing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/动态加载/" title="动态加载">动态加载<sup>1</sup></a></li>
+		
+			<li><a href="/tags/动态调试/" title="动态调试">动态调试<sup>2</sup></a></li>
+		
+			<li><a href="/tags/安装第三方包/" title="安装第三方包">安装第三方包<sup>1</sup></a></li>
+		
+			<li><a href="/tags/搭建个人Blog/" title="搭建个人Blog">搭建个人Blog<sup>1</sup></a></li>
+		
+			<li><a href="/tags/杂项/" title="杂项">杂项<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+      <li><a href="http://gengbiao.me" target="_blank" title="coney">coney's Blog</a></li>
+	  <li><a href="http://haiolv.github.io/" target="_blank" title="haiolv">haiolv's Blog</a></li>
+	  <li><a href="http://aso210.github.io/" target="_blank" title="aso210">aso210's Blog</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">Tag Cloud</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/APK安装/" style="font-size: 10px;">APK安装</a> <a href="/tags/APK瘦身/" style="font-size: 10px;">APK瘦身</a> <a href="/tags/Android热修复/" style="font-size: 10px;">Android热修复</a> <a href="/tags/Apktool打包/" style="font-size: 10px;">Apktool打包</a> <a href="/tags/Push/" style="font-size: 10px;">Push</a> <a href="/tags/Zxing/" style="font-size: 10px;">Zxing</a> <a href="/tags/动态加载/" style="font-size: 10px;">动态加载</a> <a href="/tags/动态调试/" style="font-size: 20px;">动态调试</a> <a href="/tags/安装第三方包/" style="font-size: 10px;">安装第三方包</a> <a href="/tags/搭建个人Blog/" style="font-size: 10px;">搭建个人Blog</a> <a href="/tags/杂项/" style="font-size: 10px;">杂项</a>
+    </div>
+  </div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+    
+            <p class="copyright"> © 2016 
+		
+		<a href="https://github.com/cstsinghua" target="_blank" title="Cstsinghua">Cstsinghua</a>
+		
+            && Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> && Theme by <a href="http://gengbiao.me" target="_blank" title="coney">coney</a>
+            </div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+<script>
+    
+        var _bdImg = '2';
+    
+    window._bd_share_config={
+        "common":{
+            "bdSnsKey":{
+
+            },
+            "bdText":"",
+            "bdMini":"2",
+            "bdMiniList":[
+                "qzone",
+                "tsina",
+                "weixin",
+                "renren",
+                "tqq",
+                "tieba",
+                "douban",
+                "sqq",
+                "diandian",
+                "huaban",
+                "youdao",
+                "mail",
+                "ty",
+                "fbook",
+                "twi",
+                "linkedin",
+                "copy",
+                "print"
+            ],
+            "bdPic":"",
+            "bdStyle":"0",
+            "bdSize":"16"
+        },
+        "slide":{
+            "type":"slide",
+            "bdImg":_bdImg,
+            "bdPos":"right",
+            "bdTop":"350"
+        },
+        "image":{
+            "viewList":[
+                "weixin",
+                "qzone",
+                "tsina",
+                "renren",
+                "douban",
+                "tqq"
+            ],
+            "viewText":"分享：",
+            "viewSize":"16"
+        },
+        "selectShare":{
+            "bdContainerClass":null,
+            "bdSelectMiniList":[
+                "weixin",
+                "qzone",
+                "tsina",
+                "renren",
+                "douban",
+                "tqq"
+            ]
+        }
+    };
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+
+
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'null', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>
+
