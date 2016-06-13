@@ -12,9 +12,8 @@
     
     <meta name="author" content="Cstsinghua">
     
-    <meta name="description" content="– Created by CoulsonChen，2016/4/13
-– updated by CoulsonChen，2016/5/6 14:20:17   
-推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJA">
+    <meta name="description" content="推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)
+在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将">
     
     
     
@@ -48,7 +47,7 @@
 				<h1 class="site-name"><a href="/" title="Atypical programmer">Atypical programmer</a></h1>
 				<a class="blog-motto">写给典型的程序员</a>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -56,13 +55,21 @@
 					 
 						<li><a href="/">首页</a></li>
 					
+						<li><a href="/categories/Android">Android</a></li>
+					
+						<li><a href="/categories/Java">Java</a></li>
+					
+						<li><a href="/categories/Python">Python</a></li>
+					
+						<li><a href="/categories/杂项/">杂项</a></li>
+					
 						<li><a href="/archives">归档</a></li>
 					
 					<li>
 					
                                             <form class="search" action=http://zhannei.baidu.com/cse/search target="_blank">
                                             <label>Search</label>
-                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="Search"><br>
 					
 					</li>
 				</ul>
@@ -83,8 +90,8 @@
       <a href="http://yoursite.com" title="Cstsinghua">Cstsinghua</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-06-08T09:05:20.832Z" itemprop="datePublished">2016-06-08</time>
-    更新日期:<time datetime="2016-06-08T09:06:36.542Z" itemprop="dateModified">2016-06-08</time>
+    <time datetime="2016-06-08T09:09:16.000Z" itemprop="datePublished">2016-06-08</time>
+    Updated:<time datetime="2016-06-12T11:41:30.482Z" itemprop="dateModified">2016-06-12</time>
     
   </p>
 </header>
@@ -92,13 +99,11 @@
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">Contents</strong>
 		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#推送简介"><span class="toc-number">1.</span> <span class="toc-text">推送简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么实现推送及各种方式的比较"><span class="toc-number">2.</span> <span class="toc-text">怎么实现推送及各种方式的比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#当前主流的推送方案"><span class="toc-number">3.</span> <span class="toc-text">当前主流的推送方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我们的推送方案"><span class="toc-number">4.</span> <span class="toc-text">我们的推送方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#再论长连接"><span class="toc-number">4.1.</span> <span class="toc-text">再论长连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是长连接"><span class="toc-number">4.1.1.</span> <span class="toc-text">什么是长连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的作用"><span class="toc-number">4.1.2.</span> <span class="toc-text">心跳包的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的时间间隔"><span class="toc-number">4.1.3.</span> <span class="toc-text">心跳包的时间间隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎样发送心跳包"><span class="toc-number">4.1.4.</span> <span class="toc-text">怎样发送心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器如何处理心跳包"><span class="toc-number">4.1.5.</span> <span class="toc-text">服务器如何处理心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包和轮询的区别"><span class="toc-number">4.1.6.</span> <span class="toc-text">心跳包和轮询的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP唤醒Android"><span class="toc-number">4.2.</span> <span class="toc-text">TCP唤醒Android</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android手机的硬件架构"><span class="toc-number">4.2.1.</span> <span class="toc-text">Android手机的硬件架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的休眠-睡眠-机制和唤醒机制"><span class="toc-number">4.2.2.</span> <span class="toc-text">Android的休眠(睡眠)机制和唤醒机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的休眠-睡眠-机制"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">Android的休眠(睡眠)机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的WakeLock机制"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">Android的WakeLock机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Wakelock："><span class="toc-number">4.2.2.2.1.</span> <span class="toc-text">Wakelock：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-User-Wakelocks"><span class="toc-number">4.2.2.2.1.1.</span> <span class="toc-text">Android User Wakelocks</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-Kernel-Wakelocks"><span class="toc-number">4.2.2.2.1.2.</span> <span class="toc-text">Android Kernel Wakelocks</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的网络数据怎样唤醒CPU？"><span class="toc-number">4.2.3.</span> <span class="toc-text">Android的网络数据怎样唤醒CPU？</span></a></li></ol></li></ol></li></ol>
 		</div>
 		
-		<p>– Created by CoulsonChen，2016/4/13</p>
-<p>– updated by CoulsonChen，2016/5/6 14:20:17   </p>
-<h1 id="推送简介"><a href="#推送简介" class="headerlink" title="推送简介"></a>推送简介</h1><p>推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)</p>
+		<h1 id="推送简介"><a href="#推送简介" class="headerlink" title="推送简介"></a>推送简介</h1><p>推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)</p>
 <p>在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于Email中，用来提示我们新的信息。由于时代的发展和移动互联网的热潮，推送功能更加地普及，已经不再仅仅用在推送邮件了，更多地用在我们的APP中了。</p>
 <p>当我们开发需要和服务器交互的应用程序时，基本上都需要获取服务器端的数据，比如《地震应急通》就需要及时获取服务器上最新的地震信息。要获取服务器上不定时更新的信息，一般来说有两种方法：第一种是客户端使用Pull（拉）的方式，就是隔一段时间就去服务器上获取一下信息，看是否有更新的信息出现。第二种就是 服务器使用Push（推送）的方式，当服务器端有新信息了，则把最新的信息Push到客户端上。这样，客户端就能自动的接收到消息。 </p>
 <p>虽然Pull和Push两种方式都能实现获取服务器端更新信息的功能，但是明显来说Push方式比Pull方式更优越。因为Pull方式更费客户端的网络流量，更主要的是费电量，还需要我们的程序不停地去监测服务端的变化。  </p>
@@ -428,6 +433,16 @@ wl.release();
 	</div>
 		<footer class="article-footer clearfix">
 
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Push/">Push</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
+</div>
 
 
 
@@ -470,15 +485,15 @@ wl.release();
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  <strong class="toc-title">Contents</strong>
   <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#推送简介"><span class="toc-number">1.</span> <span class="toc-text">推送简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么实现推送及各种方式的比较"><span class="toc-number">2.</span> <span class="toc-text">怎么实现推送及各种方式的比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#当前主流的推送方案"><span class="toc-number">3.</span> <span class="toc-text">当前主流的推送方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我们的推送方案"><span class="toc-number">4.</span> <span class="toc-text">我们的推送方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#再论长连接"><span class="toc-number">4.1.</span> <span class="toc-text">再论长连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是长连接"><span class="toc-number">4.1.1.</span> <span class="toc-text">什么是长连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的作用"><span class="toc-number">4.1.2.</span> <span class="toc-text">心跳包的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的时间间隔"><span class="toc-number">4.1.3.</span> <span class="toc-text">心跳包的时间间隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎样发送心跳包"><span class="toc-number">4.1.4.</span> <span class="toc-text">怎样发送心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器如何处理心跳包"><span class="toc-number">4.1.5.</span> <span class="toc-text">服务器如何处理心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包和轮询的区别"><span class="toc-number">4.1.6.</span> <span class="toc-text">心跳包和轮询的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP唤醒Android"><span class="toc-number">4.2.</span> <span class="toc-text">TCP唤醒Android</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android手机的硬件架构"><span class="toc-number">4.2.1.</span> <span class="toc-text">Android手机的硬件架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的休眠-睡眠-机制和唤醒机制"><span class="toc-number">4.2.2.</span> <span class="toc-text">Android的休眠(睡眠)机制和唤醒机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的休眠-睡眠-机制"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">Android的休眠(睡眠)机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的WakeLock机制"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">Android的WakeLock机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Wakelock："><span class="toc-number">4.2.2.2.1.</span> <span class="toc-text">Wakelock：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-User-Wakelocks"><span class="toc-number">4.2.2.2.1.1.</span> <span class="toc-text">Android User Wakelocks</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-Kernel-Wakelocks"><span class="toc-number">4.2.2.2.1.2.</span> <span class="toc-text">Android Kernel Wakelocks</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的网络数据怎样唤醒CPU？"><span class="toc-number">4.2.3.</span> <span class="toc-text">Android的网络数据怎样唤醒CPU？</span></a></li></ol></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 <div id="authorInfo">
 	
@@ -494,11 +509,39 @@ wl.release();
 </div>
 
   
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/Android/" title="Android">Android<sup>1</sup></a></li>
+		
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		
+			<li><a href="/categories/杂项/" title="杂项">杂项<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
 
   
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Push/" title="Push">Push<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Test/" title="Test">Test<sup>1</sup></a></li>
+		
+			<li><a href="/tags/python、第三方包/" title="python、第三方包">python、第三方包<sup>1</sup></a></li>
+		
+			<li><a href="/tags/杂项/" title="杂项">杂项<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
 
   <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
+  <p class="asidetitle">Links</p>
     <ul>
       <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
       <li><a href="http://gengbiao.me" target="_blank" title="coney">coney's Blog</a></li>
@@ -507,10 +550,17 @@ wl.release();
 
 
   <div class="rsspart">
-	<a href="atom.xml" target="_blank" title="rss">RSS 订阅</a>
+	<a href="atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
   
+  <div class="tagcloudlist">
+    <p class="asidetitle">Tag Cloud</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Push/" style="font-size: 10px;">Push</a> <a href="/tags/Test/" style="font-size: 10px;">Test</a> <a href="/tags/python、第三方包/" style="font-size: 10px;">python、第三方包</a> <a href="/tags/杂项/" style="font-size: 10px;">杂项</a>
+    </div>
+  </div>
+
 
 </aside>
 </div>
@@ -653,7 +703,7 @@ $(document).ready(function(){
 
 <script>
     
-        var _bdImg = '4';
+        var _bdImg = '2';
     
     window._bd_share_config={
         "common":{
