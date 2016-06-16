@@ -47,7 +47,7 @@
 				<h1 class="site-name"><a href="/" title="Atypical programmer">Atypical programmer</a></h1>
 				<a class="blog-motto">做一个非典型程序员</a>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -69,7 +69,7 @@
 					
                                             <form class="search" action=http://zhannei.baidu.com/cse/search target="_blank">
                                             <label>Search</label>
-                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="Search"><br>
 					
 					</li>
 				</ul>
@@ -91,7 +91,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-06-16T10:35:07.000Z" itemprop="datePublished">2016-06-16</time>
-    更新日期:<time datetime="2016-06-16T10:42:47.567Z" itemprop="dateModified">2016-06-16</time>
+    Updated:<time datetime="2016-06-16T10:52:34.085Z" itemprop="dateModified">2016-06-16</time>
     
   </p>
 </header>
@@ -99,8 +99,8 @@
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统的笔记或者blog平台"><span class="toc-number">2.</span> <span class="toc-text">传统的笔记或者blog平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Github-pages-Hexo-Nodejs搭建个人blog"><span class="toc-number">3.</span> <span class="toc-text">Github pages+Hexo+Nodejs搭建个人blog</span></a></li></ol>
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统的笔记或者blog平台"><span class="toc-number">2.</span> <span class="toc-text">传统的笔记或者blog平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Github-pages-Hexo-Nodejs搭建个人blog"><span class="toc-number">3.</span> <span class="toc-text">Github pages+Hexo+Nodejs搭建个人blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo，在Gitshell输入："><span class="toc-number">3.1.</span> <span class="toc-text">安装hexo，在Gitshell输入：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建站"><span class="toc-number">3.2.</span> <span class="toc-text">建站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。"><span class="toc-number">3.3.</span> <span class="toc-text">本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署到github-pages-点击了解Github-Pages"><span class="toc-number">3.4.</span> <span class="toc-text">部署到github pages(点击了解Github Pages)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#optional-Custom-domain-redirects-for-GitHub-Pages-sites-将独立-个性-域名与GitHub-Pages的空间域名绑定"><span class="toc-number">3.5.</span> <span class="toc-text">(optional)Custom domain redirects for GitHub Pages sites(将独立(个性)域名与GitHub Pages的空间域名绑定)</span></a></li></ol></li></ol>
 		</div>
 		
 		<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>作为一个IT技术人员，自然离不开技术的积累，而技术的积累则通过文档或代码的形式呈现出来。好记性不如烂笔头，程序员应该乐于并擅于记录总结工作中遇到的各种问题、工作成果、奇思异想和感悟等。</p>
@@ -115,40 +115,49 @@
 <li>安装hexo及部署：<a href="https://hexo.io/" title="hexo官网" target="_blank" rel="external">hexo官网</a>，注意：安装 Hexo 相当简单。然而在安装前，您必须确保先完成步骤1和2。Hexo网站可以选择语言为简体中文，方便使用。查看其中的文档可以看到hexo的详细使用说明，so easy！</li>
 </ol>
 <p>重点阐述下步骤3的过程(hexo的详细信息可参加<a href="https://hexo.io/zh-cn/docs/index.html" title="hexo说明文档" target="_blank" rel="external">hexo说明文档</a>)：</p>
-<ul>
-<li><p>安装hexo，在Gitshell输入：</p>
-<blockquote>
+<h2 id="安装hexo，在Gitshell输入："><a href="#安装hexo，在Gitshell输入：" class="headerlink" title="安装hexo，在Gitshell输入："></a>安装hexo，在Gitshell输入：</h2><blockquote>
 <p>$ npm install -g hexo-cli</p>
-</blockquote>
-</li>
-<li><p>建站</p>
-<p>  安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹(自行选定的文件夹folder)中新建所需要的文件。</p>
-<blockquote>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2></blockquote>
+<pre><code>安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹(自行选定的文件夹folder)中新建所需要的文件。
+</code></pre><blockquote>
 <p>$ hexo init folder<br>$ cd folder<br>$ npm install</p>
 </blockquote>
-<p>  新建完成后，指定文件夹的目录如下：</p>
-<p>  .<br>  ├── _config.yml<br>  ├── package.json<br>  ├── scaffolds<br>  ├── source<br>  |   ├── _drafts<br>  |   └── _posts<br>  └── themes</p>
-<p>  <strong>_config.yml</strong><br>  网站的 配置 信息，您可以在此配置大部分的参数。</p>
-<p>  <strong>package.json</strong><br>  应用程序的信息。EJS, Stylus 和 Markdown renderer 已默认安装，您可以自由移除。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;hexo-site&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;0.0.0&quot;,</span><br><span class="line">  &quot;private&quot;: true,</span><br><span class="line">  &quot;hexo&quot;: &#123;</span><br><span class="line">&quot;version&quot;: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">&quot;hexo&quot;: &quot;^3.0.0&quot;,</span><br><span class="line">&quot;hexo-generator-archive&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">&quot;hexo-generator-category&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">&quot;hexo-generator-index&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">&quot;hexo-generator-tag&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">&quot;hexo-renderer-ejs&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">&quot;hexo-renderer-stylus&quot;: &quot;^0.2.0&quot;,</span><br><span class="line">&quot;hexo-renderer-marked&quot;: &quot;^0.2.4&quot;,</span><br><span class="line">&quot;hexo-server&quot;: &quot;^0.1.2&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  <strong>scaffolds</strong><br>  模版 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
-<p>  <strong>source</strong><br>  资源文件夹是存放用户资源的地方。除 <em>posts 文件夹之外，开头命名为 </em> (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
-<p>  <strong>themes</strong><br>  <a href="https://hexo.io/docs/themes.html" title="hexo主题" target="_blank" rel="external">主题</a> 文件夹。Hexo 会根据主题来生成静态页面。</p>
-</li>
-<li><p>本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。</p>
-<p>  在Gitshell中进入前面指定的folder(建立的站点的根目录)，输入：</p>
-</li>
-</ul>
-<blockquote>
+<pre><code>新建完成后，指定文件夹的目录如下：
+
+.
+├── _config.yml
+├── package.json
+├── scaffolds
+├── source
+|   ├── _drafts
+|   └── _posts
+└── themes
+
+**_config.yml**
+网站的 配置 信息，您可以在此配置大部分的参数。
+
+**package.json**
+应用程序的信息。EJS, Stylus 和 Markdown renderer 已默认安装，您可以自由移除。
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package.json</span><br><span class="line">&#123;</span><br><span class="line"> &quot;name&quot;: &quot;hexo-site&quot;,</span><br><span class="line"> &quot;version&quot;: &quot;0.0.0&quot;,</span><br><span class="line"> &quot;private&quot;: true,</span><br><span class="line"> &quot;hexo&quot;: &#123;</span><br><span class="line">	&quot;version&quot;: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">	&quot;hexo&quot;: &quot;^3.0.0&quot;,</span><br><span class="line">	&quot;hexo-generator-archive&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">	&quot;hexo-generator-category&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">	&quot;hexo-generator-index&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">	&quot;hexo-generator-tag&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">	&quot;hexo-renderer-ejs&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">	&quot;hexo-renderer-stylus&quot;: &quot;^0.2.0&quot;,</span><br><span class="line">	&quot;hexo-renderer-marked&quot;: &quot;^0.2.4&quot;,</span><br><span class="line">	&quot;hexo-server&quot;: &quot;^0.1.2&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+**scaffolds**
+模版 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。
+
+**source**
+资源文件夹是存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。
+
+**themes**
+[主题](https://hexo.io/docs/themes.html &quot;hexo主题&quot;) 文件夹。Hexo 会根据主题来生成静态页面。
+</code></pre><h2 id="本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。"><a href="#本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。" class="headerlink" title="本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。"></a>本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。</h2><pre><code>在Gitshell中进入前面指定的folder(建立的站点的根目录)，输入：
+</code></pre><blockquote>
 <p>$ hexo server</p>
 </blockquote>
-<pre><code>可以观察命令行的输出，然后通过浏览器打开[http://localhost:4000/](http://localhost:4000/)，成功的情况下则会看到默认的欢迎页面。
-</code></pre><ul>
-<li><p>部署到github pages(<a href="https://help.github.com/categories/github-pages-basics/" title="github pages介绍" target="_blank" rel="external">点击了解Github Pages</a>)</p>
-<p>  Hexo 提供了快速方便的一键部署功能，让您只需一条命令就能将网站部署到服务器上。</p>
-</li>
-</ul>
-<pre><code>&gt; $ hexo deploy
+<p>  可以观察命令行的输出，然后通过浏览器打开<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>，成功的情况下则会看到默认的欢迎页面。</p>
+<h2 id="部署到github-pages-点击了解Github-Pages"><a href="#部署到github-pages-点击了解Github-Pages" class="headerlink" title="部署到github pages(点击了解Github Pages)"></a>部署到github pages(<a href="https://help.github.com/categories/github-pages-basics/" title="github pages介绍" target="_blank" rel="external">点击了解Github Pages</a>)</h2><pre><code>Hexo 提供了快速方便的一键部署功能，让您只需一条命令就能将网站部署到服务器上。
+
+
+&gt; $ hexo deploy
 
 在开始之前，您必须先在站点的配置文件_config.yml(前面建立的folder目录下)中修改参数，一个正确的部署配置中至少要有 type 参数，例如：
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br></pre></td></tr></table></figure>
@@ -173,9 +182,8 @@
 <blockquote>
 <p>$ npm install hexo-deployer-git –save</p>
 </blockquote>
-<pre><code>**d.部署前面建立的站点(folder下面的内容)：**
-
-执行完，开始部署，即先hexo generate，然后hexo deploy。也可以一步到位：hexo d -g
+<p> <strong>d.部署前面建立的站点(folder下面的内容)：</strong></p>
+<pre><code>执行完，开始部署，即先hexo generate，然后hexo deploy。也可以一步到位：hexo d -g
 
 &gt; $ hexo clean
 $ hexo generate
@@ -188,19 +196,16 @@ $ hexo deploy
 <pre><code>注意：在这一步可能报错，已知的一些错误可以参见[hexo git部署常见问题](https://hexo.io/zh-cn/docs/troubleshooting.html#Git-部署问题)
 
 另外，可能遇到SSH publickey接入问题，可以参见[创建github SSH key](https://help.github.com/articles/generating-an-ssh-key/ &quot;创建github ssh key&quot;)和[github SSH key管理](https://github.com/settings/keys &quot;github SSH key管理&quot;)
-</code></pre><ul>
-<li><p>(optional)Custom domain redirects for GitHub Pages sites(将独立(个性)域名与GitHub Pages的空间域名绑定)</p>
-<p>  yourname.github.io的域名格式比较固定，那么是否可以设置一个个性化的域名呢，另外需要注意的是Github pages的容量受限于github的要求，目前是1GB(请参见<a href="https://help.github.com/articles/what-are-github-pages/" target="_blank" rel="external">https://help.github.com/articles/what-are-github-pages/</a>)。因此，建立一个独立的个性化(blog)网站(域名是个性化独立的，容量也可以调整)，在某些情况下还是有必要的(请参见<a href="https://help.github.com/articles/custom-domain-redirects-for-github-pages-sites/" title="github pages域名重定向" target="_blank" rel="external">github pages域名重定向</a>)。</p>
-<blockquote>
-<p>Github pages 设置：在Repository的根目录下面，新建一个名为CNAME的文本文件，里面写入你要绑定的域名，如cstsinghua.me。</p>
-<p>DNS设置：注册DNSpod，添加域名，不是必要的步骤，但是据说可以提高解析效率。本人没有测试。</p>
-<p>在域名服务商，如net.cn中修改增加两条A记录，指向github pages 提供的 ip</p>
-<pre><code>192.30.252.153
-192.30.252.154
-</code></pre></blockquote>
-</li>
-</ul>
-  
+</code></pre><h2 id="optional-Custom-domain-redirects-for-GitHub-Pages-sites-将独立-个性-域名与GitHub-Pages的空间域名绑定"><a href="#optional-Custom-domain-redirects-for-GitHub-Pages-sites-将独立-个性-域名与GitHub-Pages的空间域名绑定" class="headerlink" title="(optional)Custom domain redirects for GitHub Pages sites(将独立(个性)域名与GitHub Pages的空间域名绑定)"></a>(optional)Custom domain redirects for GitHub Pages sites(将独立(个性)域名与GitHub Pages的空间域名绑定)</h2><pre><code>yourname.github.io的域名格式比较固定，那么是否可以设置一个个性化的域名呢，另外需要注意的是Github pages的容量受限于github的要求，目前是1GB(请参见[https://help.github.com/articles/what-are-github-pages/](https://help.github.com/articles/what-are-github-pages/))。因此，建立一个独立的个性化(blog)网站(域名是个性化独立的，容量也可以调整)，在某些情况下还是有必要的(请参见[github pages域名重定向](https://help.github.com/articles/custom-domain-redirects-for-github-pages-sites/ &quot;github pages域名重定向&quot;))。
+
+&gt; Github pages 设置：在Repository的根目录下面，新建一个名为CNAME的文本文件，里面写入你要绑定的域名，如cstsinghua.me。
+
+&gt; DNS设置：注册DNSpod，添加域名，不是必要的步骤，但是据说可以提高解析效率。本人没有测试。
+
+&gt; 在域名服务商，如net.cn中修改增加两条A记录，指向github pages 提供的 ip
+        192.30.252.153
+        192.30.252.154
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -248,15 +253,15 @@ $ hexo deploy
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统的笔记或者blog平台"><span class="toc-number">2.</span> <span class="toc-text">传统的笔记或者blog平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Github-pages-Hexo-Nodejs搭建个人blog"><span class="toc-number">3.</span> <span class="toc-text">Github pages+Hexo+Nodejs搭建个人blog</span></a></li></ol>
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统的笔记或者blog平台"><span class="toc-number">2.</span> <span class="toc-text">传统的笔记或者blog平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Github-pages-Hexo-Nodejs搭建个人blog"><span class="toc-number">3.</span> <span class="toc-text">Github pages+Hexo+Nodejs搭建个人blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo，在Gitshell输入："><span class="toc-number">3.1.</span> <span class="toc-text">安装hexo，在Gitshell输入：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建站"><span class="toc-number">3.2.</span> <span class="toc-text">建站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。"><span class="toc-number">3.3.</span> <span class="toc-text">本地启动server，可以检验安装是否ok。如果能成功，那么恭喜你离成功更近一步了。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署到github-pages-点击了解Github-Pages"><span class="toc-number">3.4.</span> <span class="toc-text">部署到github pages(点击了解Github Pages)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#optional-Custom-domain-redirects-for-GitHub-Pages-sites-将独立-个性-域名与GitHub-Pages的空间域名绑定"><span class="toc-number">3.5.</span> <span class="toc-text">(optional)Custom domain redirects for GitHub Pages sites(将独立(个性)域名与GitHub Pages的空间域名绑定)</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 <div id="authorInfo">
 	
@@ -275,7 +280,7 @@ $ hexo deploy
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分类</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 			<li><a href="/categories/Android/" title="Android">Android<sup>9</sup></a></li>
@@ -290,7 +295,7 @@ $ hexo deploy
 
   
 <div class="tagslist">
-	<p class="asidetitle">标签</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
 			<li><a href="/tags/APK安装/" title="APK安装">APK安装<sup>1</sup></a></li>
@@ -320,7 +325,7 @@ $ hexo deploy
 
 
   <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
+  <p class="asidetitle">Links</p>
     <ul>
       <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
       <li><a href="http://gengbiao.me" target="_blank" title="coney">coney's Blog</a></li>
@@ -332,12 +337,12 @@ $ hexo deploy
 
 
   <div class="rsspart">
-	<a href="atom.xml" target="_blank" title="rss">RSS 订阅</a>
+	<a href="atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
   
   <div class="tagcloudlist">
-    <p class="asidetitle">标签云</p>
+    <p class="asidetitle">Tag Cloud</p>
     <div class="tagcloudlist clearfix">
        <a href="/tags/APK安装/" style="font-size: 10px;">APK安装</a> <a href="/tags/APK瘦身/" style="font-size: 10px;">APK瘦身</a> <a href="/tags/Android热修复/" style="font-size: 10px;">Android热修复</a> <a href="/tags/Apktool打包/" style="font-size: 10px;">Apktool打包</a> <a href="/tags/Push/" style="font-size: 10px;">Push</a> <a href="/tags/Zxing/" style="font-size: 10px;">Zxing</a> <a href="/tags/动态加载/" style="font-size: 10px;">动态加载</a> <a href="/tags/动态调试/" style="font-size: 20px;">动态调试</a> <a href="/tags/安装第三方包/" style="font-size: 10px;">安装第三方包</a> <a href="/tags/搭建个人Blog/" style="font-size: 10px;">搭建个人Blog</a> <a href="/tags/杂项/" style="font-size: 10px;">杂项</a>
     </div>
