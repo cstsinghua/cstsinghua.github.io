@@ -1,109 +1,208 @@
-
- <!DOCTYPE HTML>
-<html >
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="baidu_union_verify" content="d1952c66cf48912e21c18c7c581f382a">
-  <meta name="360-site-verification" content="67fbcc5a67f4c65c057315b28fa0b2c8" />
-<meta name="google-site-verification" content="2GzxQ0VtXwTSUdmGm6DzcmhTzM_I9QmzCb_pzpMzD88" />
+  <meta charset="utf-8">
   
-    <title>推送方案 | Atypical programmer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="Cstsinghua">
-    
-    <meta name="description" content="推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)
-在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将">
-    
-    
-    
-    
-    <link rel="alternate" href="atom.xml" title="Atypical programmer" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="stylesheet" href="/css/style.css">
-    
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            var _bdId ='391982416296a0d54221f59fe35250d4';
-             hm.src = "//hm.baidu.com/hm.js?" + _bdId;
-             var s = document.getElementsByTagName("script")[0]; 
-             s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-     
+  <title>推送方案 | Atypical programmer | 做一个非典型程序员</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Push">
+  <meta name="description" content="推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)
+在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推送方案">
+<meta property="og:url" content="https://github.com/cstsinghua/2016/06/08/推送方案/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)
+在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于E">
+<meta property="og:image" content="http://i.imgur.com/GJJJdm9.png">
+<meta property="og:image" content="http://i.imgur.com/YVY49RN.png">
+<meta property="og:image" content="http://i.imgur.com/4qcYhiL.png">
+<meta property="og:image" content="http://i.imgur.com/5pg4KkF.png">
+<meta property="og:image" content="http://i.imgur.com/kOGdghH.jpg">
+<meta property="og:updated_time" content="2016-06-12T11:41:30.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推送方案">
+<meta name="twitter:description" content="推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)
+在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于E">
+<meta name="twitter:image" content="http://i.imgur.com/GJJJdm9.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+  
+  <meta name="summary" content="写给典型的程序员">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Atypical programmer">Atypical programmer</a></h1>
-				<a class="blog-motto">做一个非典型程序员</a>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/categories/Android">Android</a></li>
-					
-						<li><a href="/categories/Java">Java</a></li>
-					
-						<li><a href="/categories/Python">Python</a></li>
-					
-						<li><a href="/categories/杂项/">杂项</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-					<li>
-					
-                                            <form class="search" action=http://zhannei.baidu.com/cse/search target="_blank">
-                                            <label>Search</label>
-                                        <input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
-					
-					</li>
-				</ul>
-                            </nav>			
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Cstsinghua</h5>
+        <a href="mailto:undefined" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <ul class="nav flex-col">
+    
+        <li class="waves-block waves-effect">
+          <a href="/"  >
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/archives"  >
+            <i class="icon icon-lg icon-archives"></i>
+            Archives
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/tags"  >
+            <i class="icon icon-lg icon-tags"></i>
+            Tags
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="https://github.com/cstsinghua" target="_blank" >
+            <i class="icon icon-lg icon-github"></i>
+            Github
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="http://www.weibo.com/ysweb" target="_blank" >
+            <i class="icon icon-lg icon-weibo"></i>
+            Weibo
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
+          <a href="/"  >
+            <i class="icon icon-lg icon-link"></i>
+            测试
+          </a>
+        </li>
+    
+  </ul>
+
+  <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Atypical programmer &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
 </div>
 
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/06/08/推送方案/" title="推送方案" itemprop="url">推送方案</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="https://github.com/cstsinghua" title="Cstsinghua">Cstsinghua</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2016-06-08T09:09:16.000Z" itemprop="datePublished">2016-06-08</time>
-    更新日期:<time datetime="2016-06-12T11:41:30.482Z" itemprop="dateModified">2016-06-12</time>
-    
-  </p>
+  </nav>
+  <main id="main">
+    <header class="header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">推送方案</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
 </header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#推送简介"><span class="toc-number">1.</span> <span class="toc-text">推送简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么实现推送及各种方式的比较"><span class="toc-number">2.</span> <span class="toc-text">怎么实现推送及各种方式的比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#当前主流的推送方案"><span class="toc-number">3.</span> <span class="toc-text">当前主流的推送方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我们的推送方案"><span class="toc-number">4.</span> <span class="toc-text">我们的推送方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#再论长连接"><span class="toc-number">4.1.</span> <span class="toc-text">再论长连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是长连接"><span class="toc-number">4.1.1.</span> <span class="toc-text">什么是长连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的作用"><span class="toc-number">4.1.2.</span> <span class="toc-text">心跳包的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的时间间隔"><span class="toc-number">4.1.3.</span> <span class="toc-text">心跳包的时间间隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎样发送心跳包"><span class="toc-number">4.1.4.</span> <span class="toc-text">怎样发送心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器如何处理心跳包"><span class="toc-number">4.1.5.</span> <span class="toc-text">服务器如何处理心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包和轮询的区别"><span class="toc-number">4.1.6.</span> <span class="toc-text">心跳包和轮询的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP唤醒Android"><span class="toc-number">4.2.</span> <span class="toc-text">TCP唤醒Android</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android手机的硬件架构"><span class="toc-number">4.2.1.</span> <span class="toc-text">Android手机的硬件架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的休眠-睡眠-机制和唤醒机制"><span class="toc-number">4.2.2.</span> <span class="toc-text">Android的休眠(睡眠)机制和唤醒机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的休眠-睡眠-机制"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">Android的休眠(睡眠)机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的WakeLock机制"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">Android的WakeLock机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Wakelock："><span class="toc-number">4.2.2.2.1.</span> <span class="toc-text">Wakelock：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-User-Wakelocks"><span class="toc-number">4.2.2.2.1.1.</span> <span class="toc-text">Android User Wakelocks</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-Kernel-Wakelocks"><span class="toc-number">4.2.2.2.1.2.</span> <span class="toc-text">Android Kernel Wakelocks</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的网络数据怎样唤醒CPU？"><span class="toc-number">4.2.3.</span> <span class="toc-text">Android的网络数据怎样唤醒CPU？</span></a></li></ol></li></ol></li></ol>
-		</div>
-		
-		<h1 id="推送简介"><a href="#推送简介" class="headerlink" title="推送简介"></a>推送简介</h1><p>推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)</p>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">推送方案</h1>
+    <h5 class="subtitle">2016-06-08</h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      
+  <article id="post-推送方案" class="article article-type-post" itemprop="blogPost">
+    
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Push/">Push</a></li></ul>
+</div>
+      </div>
+      <div class="post-body">
+
+        <aside class="post-widget" id="post-widget">
+
+          
+          <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+          
+
+          
+          <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#推送简介"><span class="post-toc-text">推送简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#怎么实现推送及各种方式的比较"><span class="post-toc-text">怎么实现推送及各种方式的比较</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#当前主流的推送方案"><span class="post-toc-text">当前主流的推送方案</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#我们的推送方案"><span class="post-toc-text">我们的推送方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#再论长连接"><span class="post-toc-text">再论长连接</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是长连接"><span class="post-toc-text">什么是长连接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#心跳包的作用"><span class="post-toc-text">心跳包的作用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#心跳包的时间间隔"><span class="post-toc-text">心跳包的时间间隔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#怎样发送心跳包"><span class="post-toc-text">怎样发送心跳包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#服务器如何处理心跳包"><span class="post-toc-text">服务器如何处理心跳包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#心跳包和轮询的区别"><span class="post-toc-text">心跳包和轮询的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP唤醒Android"><span class="post-toc-text">TCP唤醒Android</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android手机的硬件架构"><span class="post-toc-text">Android手机的硬件架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android的休眠-睡眠-机制和唤醒机制"><span class="post-toc-text">Android的休眠(睡眠)机制和唤醒机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Android的休眠-睡眠-机制"><span class="post-toc-text">Android的休眠(睡眠)机制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Android的WakeLock机制"><span class="post-toc-text">Android的WakeLock机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Wakelock："><span class="post-toc-text">Wakelock：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Android-User-Wakelocks"><span class="post-toc-text">Android User Wakelocks</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Android-Kernel-Wakelocks"><span class="post-toc-text">Android Kernel Wakelocks</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android的网络数据怎样唤醒CPU？"><span class="post-toc-text">Android的网络数据怎样唤醒CPU？</span></a></li></ol></li></ol></li></ol>
+          </nav>
+          
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="推送简介"><a href="#推送简介" class="headerlink" title="推送简介"></a>推送简介</h1><p>推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)</p>
 <p>在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于Email中，用来提示我们新的信息。由于时代的发展和移动互联网的热潮，推送功能更加地普及，已经不再仅仅用在推送邮件了，更多地用在我们的APP中了。</p>
 <p>当我们开发需要和服务器交互的应用程序时，基本上都需要获取服务器端的数据，比如《地震应急通》就需要及时获取服务器上最新的地震信息。要获取服务器上不定时更新的信息，一般来说有两种方法：第一种是客户端使用Pull（拉）的方式，就是隔一段时间就去服务器上获取一下信息，看是否有更新的信息出现。第二种就是 服务器使用Push（推送）的方式，当服务器端有新信息了，则把最新的信息Push到客户端上。这样，客户端就能自动的接收到消息。 </p>
 <p>虽然Pull和Push两种方式都能实现获取服务器端更新信息的功能，但是明显来说Push方式比Pull方式更优越。因为Pull方式更费客户端的网络流量，更主要的是费电量，还需要我们的程序不停地去监测服务端的变化。  </p>
@@ -429,370 +528,149 @@ wl.release();
 
 这样初始设置，退出还原我们可以让应用一直处于wifi模式下（不过前提是有wifi网络哦）。
 </code></pre><p>推送中最重要的部分就是让手机尽量休眠，只有在服务器需要它处理数据时才唤醒它，这正好符合我们的要求。</p>
+
+            <blockquote>
+              <p>
+                本文地址：
+                <a href="https://github.com/cstsinghua/2016/06/08/推送方案/" target="_blank" rel="external">https://github.com/cstsinghua/2016/06/08/推送方案/</a>
+              </p>
+              <footer><cite><a href="https://github.com/cstsinghua">@Atypical programmer</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
   
-	</div>
-		<footer class="article-footer clearfix">
-
-  <div class="article-tags">
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/06/13/python安装第三方包错误解决/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">python安装某些第三方包报错解决办法</h4>
+      </a>
+    </div>
   
-  <span></span> <a href="/tags/Push/">Push</a>
-  </div>
 
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Android/">Android</a>
-</div>
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="https://github.com/cstsinghua/2016/06/08/推送方案/" data-title="推送方案 | Atypical programmer" data-tsina="null" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2016/06/13/python安装第三方包错误解决/" title="python安装某些第三方包报错解决办法">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  python安装某些第三方包报错解决办法</span>
-</a>
-</div>
-
-
+  
 </nav>
 
-	
-<section class="comment">
-	
-	<div class="ds-thread" data-title="推送方案" data-thread-key="推送方案" data-author-key="Cstsinghua" data-url="https://github.com/cstsinghua/post/推送方案"></div>
-	
-</section>
 
 
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#推送简介"><span class="toc-number">1.</span> <span class="toc-text">推送简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么实现推送及各种方式的比较"><span class="toc-number">2.</span> <span class="toc-text">怎么实现推送及各种方式的比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#当前主流的推送方案"><span class="toc-number">3.</span> <span class="toc-text">当前主流的推送方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我们的推送方案"><span class="toc-number">4.</span> <span class="toc-text">我们的推送方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#再论长连接"><span class="toc-number">4.1.</span> <span class="toc-text">再论长连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是长连接"><span class="toc-number">4.1.1.</span> <span class="toc-text">什么是长连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的作用"><span class="toc-number">4.1.2.</span> <span class="toc-text">心跳包的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包的时间间隔"><span class="toc-number">4.1.3.</span> <span class="toc-text">心跳包的时间间隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎样发送心跳包"><span class="toc-number">4.1.4.</span> <span class="toc-text">怎样发送心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器如何处理心跳包"><span class="toc-number">4.1.5.</span> <span class="toc-text">服务器如何处理心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#心跳包和轮询的区别"><span class="toc-number">4.1.6.</span> <span class="toc-text">心跳包和轮询的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP唤醒Android"><span class="toc-number">4.2.</span> <span class="toc-text">TCP唤醒Android</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android手机的硬件架构"><span class="toc-number">4.2.1.</span> <span class="toc-text">Android手机的硬件架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的休眠-睡眠-机制和唤醒机制"><span class="toc-number">4.2.2.</span> <span class="toc-text">Android的休眠(睡眠)机制和唤醒机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的休眠-睡眠-机制"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">Android的休眠(睡眠)机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android的WakeLock机制"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">Android的WakeLock机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Wakelock："><span class="toc-number">4.2.2.2.1.</span> <span class="toc-text">Wakelock：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-User-Wakelocks"><span class="toc-number">4.2.2.2.1.1.</span> <span class="toc-text">Android User Wakelocks</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Android-Kernel-Wakelocks"><span class="toc-number">4.2.2.2.1.2.</span> <span class="toc-text">Android Kernel Wakelocks</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android的网络数据怎样唤醒CPU？"><span class="toc-number">4.2.3.</span> <span class="toc-text">Android的网络数据怎样唤醒CPU？</span></a></li></ol></li></ol></li></ol>
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
-<aside class="clearfix">
-<div id="authorInfo">
-	
-		<div class="author-logo"></div>		
-	
-	<div class="social-list" class="clearfix">
-		
-		
-		
-		<a href="https://github.com/cstsinghua" target="_blank" title="github"></a>
-		
-		
-		
-	</div>
-</div>
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分類</p>
-		<ul>
-		
-			<li><a href="/categories/Android/" title="Android">Android<sup>9</sup></a></li>
-		
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
-		
-			<li><a href="/categories/杂项/" title="杂项">杂项<sup>2</sup></a></li>
-		
-		</ul>
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="推送方案" data-title="推送方案" data-url="https://github.com/cstsinghua/2016/06/08/推送方案/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ysblog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
 </div>
 
 
-  
-<div class="tagslist">
-	<p class="asidetitle">標簽</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/APK安装/" title="APK安装">APK安装<sup>1</sup></a></li>
-		
-			<li><a href="/tags/APK瘦身/" title="APK瘦身">APK瘦身<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Android热修复/" title="Android热修复">Android热修复<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Apktool打包/" title="Apktool打包">Apktool打包<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Push/" title="Push">Push<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Zxing/" title="Zxing">Zxing<sup>1</sup></a></li>
-		
-			<li><a href="/tags/动态加载/" title="动态加载">动态加载<sup>1</sup></a></li>
-		
-			<li><a href="/tags/动态调试/" title="动态调试">动态调试<sup>2</sup></a></li>
-		
-			<li><a href="/tags/安装第三方包/" title="安装第三方包">安装第三方包<sup>1</sup></a></li>
-		
-			<li><a href="/tags/搭建个人Blog/" title="搭建个人Blog">搭建个人Blog<sup>1</sup></a></li>
-		
-			<li><a href="/tags/杂项/" title="杂项">杂项<sup>1</sup></a></li>
-		
-		</ul>
-</div>
 
 
-  <div class="linkslist">
-  <p class="asidetitle">友情鏈接</p>
-    <ul>
-      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
-      <li><a href="http://gengbiao.me" target="_blank" title="coney">coney's Blog</a></li>
-	  <li><a href="http://haiolv.github.io/" target="_blank" title="haiolv">haiolv's Blog</a></li>
-	  <li><a href="http://aso210.github.io/" target="_blank" title="aso210">aso210's Blog</a></li>
-	  <li><a href="http://hellokugo.github.io/" target="_blank" title="hellokugo">hellokugo's Blog</a></li>
-    </ul>
-</div>
 
 
-  <div class="rsspart">
-	<a href="atom.xml" target="_blank" title="rss">RSS 訂閱</a>
-</div>
+        </div>
 
-  
-  <div class="tagcloudlist">
-    <p class="asidetitle">標簽雲</p>
-    <div class="tagcloudlist clearfix">
-       <a href="/tags/APK安装/" style="font-size: 10px;">APK安装</a> <a href="/tags/APK瘦身/" style="font-size: 10px;">APK瘦身</a> <a href="/tags/Android热修复/" style="font-size: 10px;">Android热修复</a> <a href="/tags/Apktool打包/" style="font-size: 10px;">Apktool打包</a> <a href="/tags/Push/" style="font-size: 10px;">Push</a> <a href="/tags/Zxing/" style="font-size: 10px;">Zxing</a> <a href="/tags/动态加载/" style="font-size: 10px;">动态加载</a> <a href="/tags/动态调试/" style="font-size: 20px;">动态调试</a> <a href="/tags/安装第三方包/" style="font-size: 10px;">安装第三方包</a> <a href="/tags/搭建个人Blog/" style="font-size: 10px;">搭建个人Blog</a> <a href="/tags/杂项/" style="font-size: 10px;">杂项</a>
-    </div>
-  </div>
+      </div>
 
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
     
-            <p class="copyright"> © 2016 
-		
-		<a href="https://github.com/cstsinghua" target="_blank" title="Cstsinghua">Cstsinghua</a>
-		
-            && Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> && Theme by <a href="http://gengbiao.me" target="_blank" title="coney">coney</a>
-            </div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
-</script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"null"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+  </article>
 
 
 
-
-
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 <script>
-    
-        var _bdImg = '2';
-    
-    window._bd_share_config={
-        "common":{
-            "bdSnsKey":{
+var BLOG_SHARE = {
+    title: "推送方案",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "https://github.com/cstsinghua/2016/06/08/推送方案/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
 
-            },
-            "bdText":"",
-            "bdMini":"2",
-            "bdMiniList":[
-                "qzone",
-                "tsina",
-                "weixin",
-                "renren",
-                "tqq",
-                "tieba",
-                "douban",
-                "sqq",
-                "diandian",
-                "huaban",
-                "youdao",
-                "mail",
-                "ty",
-                "fbook",
-                "twi",
-                "linkedin",
-                "copy",
-                "print"
-            ],
-            "bdPic":"",
-            "bdStyle":"0",
-            "bdSize":"16"
-        },
-        "slide":{
-            "type":"slide",
-            "bdImg":_bdImg,
-            "bdPos":"right",
-            "bdTop":"350"
-        },
-        "image":{
-            "viewList":[
-                "weixin",
-                "qzone",
-                "tsina",
-                "renren",
-                "douban",
-                "tqq"
-            ],
-            "viewText":"分享：",
-            "viewSize":"16"
-        },
-        "selectShare":{
-            "bdContainerClass":null,
-            "bdSelectMiniList":[
-                "weixin",
-                "qzone",
-                "tsina",
-                "renren",
-                "douban",
-                "tqq"
-            ]
-        }
-    };
-    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
 </script>
 
+<script src="/js/search.js"></script>
 
 
 
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'null', 'null');  
-ga('send', 'pageview');
-</script>
 
 
-  </body>
+
+
+
+
+</body>
 </html>
-
