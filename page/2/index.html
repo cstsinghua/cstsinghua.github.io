@@ -156,14 +156,14 @@
   <ul class="post-list">
   
     <li class="post-list-item">
-  <article id="post-hello-world" class="article article-type-post" itemprop="blogPost">
+  <article id="post-python安装第三方包错误解决" class="article article-type-post" itemprop="blogPost">
     
       
 
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/06/13/hello-world/">Hello World</a>
+      <a class="post-title-link" href="/2016/06/13/python安装第三方包错误解决/">python安装某些第三方包报错解决办法</a>
     </h3>
   
 
@@ -171,7 +171,7 @@
 
       <div class="post-meat flex-row">
         <div class="flex-col">
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/杂项/">杂项</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装第三方包/">安装第三方包</a></li></ul>
 </div>
         <time datetime="2016-06-13T01:57:02.000Z" itemprop="datePublished" class="post-tiem">
   2016-06-13
@@ -179,22 +179,41 @@
       </div>
       <div class="post-content" id="post-content" itemprop="postContent" >
         
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<p>For Test:</p>
-<p><a href="/boyaaCustomerService-release.aar">文件下载</a></p>
+          <h1 id="1-python安装某些第三方包报错vcvarsall-bat"><a href="#1-python安装某些第三方包报错vcvarsall-bat" class="headerlink" title="1. python安装某些第三方包报错vcvarsall.bat"></a>1. <strong>python安装某些第三方包报错vcvarsall.bat</strong></h1><p>原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。</p>
+<p>Mingw官方链接：<a href="http://sourceforge.net/projects/mingw/" title="Mingw官网链接" target="_blank" rel="external">http://sourceforge.net/projects/mingw/</a></p>
+<p>官方说明：python3的安装包的构建主要是通过内置的Distutils工具来完成(<a href="https://docs.python.org/3.4/install/" title="Building Extensions: Tips and Tricks" target="_blank" rel="external">https://docs.python.org/3.4/install/</a>)</p>
+<pre><code>Whenever possible, the Distutils try to use the configuration information made available by the Python 
+interpreter used to run the setup.py script. For example, the same compiler and linker flags used to compile 
+Python will also be used for compiling extensions. Usually this will work well, but in complicated situations 
+this might be inappropriate. This section discusses how to override the usual Distutils behaviour.
+</code></pre><p>解决方案：</p>
+<ol>
+<li>安装python对应版本的VC编译器，可以直接安装整个visual studio；</li>
+<li><p>如果不想整个安装VC，则可以选择安装MinGW（并将其安装后的bin等目录加入到系统path），然后配置python分发包的默认编译工具，<br>即在python安装目录的Lib\distutils目录下(比如安装的python3.4版本，那么即似C:\Python34\Lib\distutils)，新建distutils.cfg文件(如果已有，则直接编辑之)。打开该文件，在前面添加如下内容。</p>
+<pre><code>[build]
+compiler=mingw32
+</code></pre><p> 上述设置之后python distutils构建带C扩展的库或者安装C扩展的库之时，全部都切换至设置的编译器，如果只是想修改某一次的构建或者安装时使用的编译器，则可以在构建或者安装的时候加上参数，如：</p>
+<pre><code>python setup.py build --compiler=mingw32 install
+</code></pre></li>
+</ol>
+<h1 id="2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，"><a href="#2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，" class="headerlink" title="2.安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，"></a>2.<strong>安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</strong></h1><pre><code>C:\Python27\libs/libpython27.a(dmmes01026.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00281.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00105.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00253.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00227.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00712.o):(.idata$7+0x0): more undefined references to `_head_C__build27_cpython_PCBuild_libpython27_a&apos; follow
+collect2.exe: error: ld returned 1 exit status
+</code></pre><p>原因：和问题1本质一样，由于Windows平台下的python编译器本身由VC环境编译，其生成的pythonxx.dll(xx是版本号，比如27、34)和pythonxx.lib等可能与需要安装的第三方库（采用Cygwin、MinGW等编译器(环境)生成并发布）无法兼容.</p>
+<p>解决方案：<br>    To create Python extensions, you need to link against the Python library. Unfortunately, most Python distributions are provided with  Pythonxx.lib, a library in Microsoft Visual C++ format. GCC expects a.a file (libpythonxx.a to be precise.). Here’s how to convert  pythonxx.lib to libpythonxx.a:</p>
+<p><strong>a.</strong>Download pexport (from here or <a href="http://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/" target="_blank" rel="external">http://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/</a>).</p>
+<p><strong>b.</strong>Get  pythonxx.dll (it should be somewhere on your harddrive).</p>
+<p><strong>c.</strong>Run : pexports pythonxx.dll &gt; pythonxx.def This will extract all symbols from pythonxx.dll and write them into pythonxx.def.</p>
+<p><strong>d.</strong>Run : dlltool –dllname pythonxx.dll –def pythonxx.def –output-lib libpythonxx.a This will create libpythonxx.a (dlltool is part of MinGW utilities).<br>Copy libpythonxx.a to c:\pythonxx\libs\ (in the same directory as  pythonxx.lib).<br>This trick should work for all Python versions, including future releases of Python. You can also use this trick to convert other libraries.</p>
 
         
       </div>
       <div class="post-footer clearfix">
-        <a href="/2016/06/13/hello-world/" class="post-more waves-effect waves-button waves-light">MORE</a>
+        <a href="/2016/06/13/python安装第三方包错误解决/" class="post-more waves-effect waves-button waves-light">MORE</a>
       </div>
     
 
