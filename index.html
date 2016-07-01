@@ -10,7 +10,7 @@
   <meta name="description" content="写给典型的程序员">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Atypical programmer">
-<meta property="og:url" content="https://cstsinghua.github.io/cstsinghua/index.html">
+<meta property="og:url" content="https://cstsinghua.github.io/index.html">
 <meta property="og:site_name" content="Atypical programmer">
 <meta property="og:description" content="写给典型的程序员">
 <meta name="twitter:card" content="summary">
@@ -187,7 +187,7 @@
       <div class="post-content" id="post-content" itemprop="postContent" >
         
           <h1 id="Protocol-Buffers简介"><a href="#Protocol-Buffers简介" class="headerlink" title="Protocol Buffers简介"></a>Protocol Buffers简介</h1><p>Protocol Buffers是一种数据交换格式，用于结构化数据的读写，类似于序列化机制。在线客服系统里面Message的body部分其实就是具有结构化的数据，因此可以采用Protocol Buffers来实现各平台和语言之间的消息传输。Protocol Buffers特点以及与XML、各语言的序列化机制等的比较，可以后续展开，这里不赘述！此处重点说明其如何使用，特别是针对java(Android)平台。</p>
-<p>Github地址：<a href="https://github.com/google/protobuf">https://github.com/google/protobuf</a></p>
+<p>Github地址：<a href="https://github.com/google/protobuf" target="_blank" rel="external">https://github.com/google/protobuf</a></p>
 <p>官方地址：<a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="external"> https://developers.google.com/protocol-buffers/</a></p>
 <h1 id="Protocol-Buffers的使用"><a href="#Protocol-Buffers的使用" class="headerlink" title="Protocol Buffers的使用"></a>Protocol Buffers的使用</h1><p>Protocol Buffers分为如下几个步骤</p>
 <h2 id="1-Defining-Your-Protocol-Format-定义数据交换的协议格式"><a href="#1-Defining-Your-Protocol-Format-定义数据交换的协议格式" class="headerlink" title="1. Defining Your Protocol Format(定义数据交换的协议格式)"></a>1. <strong>Defining Your Protocol Format(定义数据交换的协议格式)</strong></h2><p>简单来说，就是类似于定义面向对象语言中的类，其相当于一个数据结构，对应用程序中要交换的数据做一个定义，包括各种字段的声明等等。其文件扩展名为.proto。对于.proto文件如何定义和其语法规范，请详细阅读<a href="https://developers.google.com/protocol-buffers/docs/proto3" title="Protocol Buffer Language Guide" target="_blank" rel="external">Protocol Buffer Language Guide</a>。这里是proto3版本(最新版本，建议采用)，proto2的也可以参阅<a href="https://developers.google.com/protocol-buffers/docs/proto" target="_blank" rel="external">proto2 Language Guide</a></p>
@@ -238,7 +238,7 @@ message AddressBook {
   repeated Person people = 1;
 }
 // [END messages]
-</code></pre><h2 id="2-Protocol-Compiler-Installation-获取protoc可执行二进制文件"><a href="#2-Protocol-Compiler-Installation-获取protoc可执行二进制文件" class="headerlink" title="2. Protocol Compiler Installation(获取protoc可执行二进制文件)"></a>2. <strong>Protocol Compiler Installation(获取protoc可执行二进制文件)</strong></h2><p>可以在Github和其官方地址上看到相关的说明，但是个人觉得其让人不觉明历，通俗来说，这一步就是要生成一个可执行的protoc二进制文件(在windows平台下即protoc.exe)。这里以Windows平台为例说明(后续如无特殊说明，均默认是Windows平台)。建议直接使用Google提供的已经编译好的二进制可执行文件(<a href="http://repo1.maven.org/maven2/com/google/protobuf/protoc/" title="protoc可执行二进制文件下载" target="_blank" rel="external">http://repo1.maven.org/maven2/com/google/protobuf/protoc/</a>)，建议选择最新版本下载(根据自己操作系统的平台选择对应版本)。想要自己编译生成也可以，不过会遇到各种坑，感兴趣的童鞋可以尝试之<a href="https://github.com/google/protobuf/releases" title="下载protocol buffer源码包">protocol buffer源码包</a>。</p>
+</code></pre><h2 id="2-Protocol-Compiler-Installation-获取protoc可执行二进制文件"><a href="#2-Protocol-Compiler-Installation-获取protoc可执行二进制文件" class="headerlink" title="2. Protocol Compiler Installation(获取protoc可执行二进制文件)"></a>2. <strong>Protocol Compiler Installation(获取protoc可执行二进制文件)</strong></h2><p>可以在Github和其官方地址上看到相关的说明，但是个人觉得其让人不觉明历，通俗来说，这一步就是要生成一个可执行的protoc二进制文件(在windows平台下即protoc.exe)。这里以Windows平台为例说明(后续如无特殊说明，均默认是Windows平台)。建议直接使用Google提供的已经编译好的二进制可执行文件(<a href="http://repo1.maven.org/maven2/com/google/protobuf/protoc/" title="protoc可执行二进制文件下载" target="_blank" rel="external">http://repo1.maven.org/maven2/com/google/protobuf/protoc/</a>)，建议选择最新版本下载(根据自己操作系统的平台选择对应版本)。想要自己编译生成也可以，不过会遇到各种坑，感兴趣的童鞋可以尝试之<a href="https://github.com/google/protobuf/releases" title="下载protocol buffer源码包" target="_blank" rel="external">protocol buffer源码包</a>。</p>
 <p>protoc.exe是干什么的呢？其用来编译用户定义的数据结构即步骤1中编写的.proto文件，详细参见步骤3.</p>
 <h2 id="3-Compiling-Your-Protocol-Buffers-编译Protocol-Buffers，即编译-proto文件"><a href="#3-Compiling-Your-Protocol-Buffers-编译Protocol-Buffers，即编译-proto文件" class="headerlink" title="3.  Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)"></a>3.  <strong>Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)</strong></h2><p>即用步骤2得到的protoc可执行二进制文件编译步骤1所得的.proto文件，最终生成语言相关的类(代码)。这里以java语言为例：其命令格式如下：</p>
 <pre><code>protoc -I=$SRC_DIR --java_out=$DST_DIR $SRC_DIR/addressbook.proto
@@ -248,10 +248,10 @@ uf-3.0.0-beta-2\src\boyim.proto
 </code></pre><p>如上，进入命令行，protoc即protoc可执行二进制文件，指定$SRC_DIR：源目录 (一般情况下即你的应用程序所在目录 – 如果不提供的话，则默认为当前工作目录即当前命令行的目录)；$DST_DIR：目标目录(你所期望生成的代码存放的目录; 通常情况下与源目录一致)；$SRC_DIR/addressbook.proto：即.proto文件的路径. </p>
 <p>因为这里是生成java类, 因此使用 –java_out 选项 ， 类似的选项可以用于其它支持的语言.<br>对于addressbook.proto示例，这会在目标目录下生成 com/example/tutorial/AddressBookProtos.java文件.可以查看该文件，与普通的javaBean相似，包含了很多setters/getters方法，另外有一个builder方法，用于方便构造类对象。</p>
 <h2 id="4-Protobuf-Runtime-Installation-生成Protocol-Buffer-API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中"><a href="#4-Protobuf-Runtime-Installation-生成Protocol-Buffer-API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中" class="headerlink" title="4. Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)"></a>4. <strong>Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)</strong></h2><p>对于java语言而言，就是生成一个Protocol Buffer API的jar包，应用里面导入该jar包即可，其他语言类似。那么如何生成这个API库呢？</p>
-<p>官方说明可以参见<a href="https://github.com/google/protobuf/tree/master/java">Protobuf Runtime Installation</a></p>
+<p>官方说明可以参见<a href="https://github.com/google/protobuf/tree/master/java" target="_blank" rel="external">Protobuf Runtime Installation</a></p>
 <p>这里简化说明(建议使用maven来完成安装)：</p>
 <h3 id="4-1-安装maven-注意需要安装JDK1-7及其以上版本"><a href="#4-1-安装maven-注意需要安装JDK1-7及其以上版本" class="headerlink" title="4.1 安装maven(注意需要安装JDK1.7及其以上版本)"></a>4.1 安装maven(注意需要安装JDK1.7及其以上版本)</h3><p>maven下载地址(目前最新版本3.3.9)，<a href="http://maven.apache.org/" title="maven下载地址" target="_blank" rel="external">http://maven.apache.org/</a>。下载之后解压，然后将解压后得到的目录路径添加到系统path中，这样使得可以直接在命令行使用mvn命令。</p>
-<h3 id="4-2-下载protocol-buffer源码包"><a href="#4-2-下载protocol-buffer源码包" class="headerlink" title="4.2 下载protocol buffer源码包"></a>4.2 下载protocol buffer源码包</h3><p><a href="https://github.com/google/protobuf/releases" title="下载protocol buffer源码包">protocol buffer源码包</a>。注意：这里下载的版本必须与步骤2中protoc可执行二进制文件的版本一致，要查看protoc可执行二进制文件的版本，可以在命令行输入protoc –version。下载之后，解压，找到对应语言目录(java)，如下图：</p>
+<h3 id="4-2-下载protocol-buffer源码包"><a href="#4-2-下载protocol-buffer源码包" class="headerlink" title="4.2 下载protocol buffer源码包"></a>4.2 下载protocol buffer源码包</h3><p><a href="https://github.com/google/protobuf/releases" title="下载protocol buffer源码包" target="_blank" rel="external">protocol buffer源码包</a>。注意：这里下载的版本必须与步骤2中protoc可执行二进制文件的版本一致，要查看protoc可执行二进制文件的版本，可以在命令行输入protoc –version。下载之后，解压，找到对应语言目录(java)，如下图：</p>
 <p><img src="http://i.imgur.com/hqbfZFn.png" alt=""></p>
 <p>从命令行进入java目录。</p>
 <p><strong>注意1：</strong>步骤2下载二进制可执行文件之后需要将二进制可执行文件改名为protoc.exe(Windows平台)，并且放置在如下目录(下载的protocol buffer源码包解压目录下的src子目录下)：</p>
@@ -396,7 +396,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
 </table>
 <p>eg(我的Github账号是cstsinghua，而我新建的仓库名称是cstsinghua.github.io):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:cstsinghua/cstsinghua.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
 <p>注意：如果是建立项目网站，则branch需要修改为gh-pages，详细情况请参见<a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="external">Github pages中User, Organization, and Project Pages的差异</a></p>
-<p><strong>c.安装hexo的git插件<a href="https://github.com/hexojs/hexo-deployer-git" title="hexo的git插件">hexo-deployer-git</a></strong></p>
+<p><strong>c.安装hexo的git插件<a href="https://github.com/hexojs/hexo-deployer-git" title="hexo的git插件" target="_blank" rel="external">hexo-deployer-git</a></strong></p>
 <blockquote>
 <p>$ npm install hexo-deployer-git –save</p>
 </blockquote>
@@ -410,7 +410,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
 <p>$ hexo d -g</p>
 </blockquote>
 <p>注意：在这一步可能报错，已知的一些错误可以参见<a href="https://hexo.io/zh-cn/docs/troubleshooting.html#Git-部署问题" target="_blank" rel="external">hexo git部署常见问题</a></p>
-<p>另外，可能遇到SSH publickey接入问题，可以参见<a href="https://help.github.com/articles/generating-an-ssh-key/" title="创建github ssh key" target="_blank" rel="external">创建github SSH key</a>和<a href="https://github.com/settings/keys" title="github SSH key管理">github SSH key管理</a></p>
+<p>另外，可能遇到SSH publickey接入问题，可以参见<a href="https://help.github.com/articles/generating-an-ssh-key/" title="创建github ssh key" target="_blank" rel="external">创建github SSH key</a>和<a href="https://github.com/settings/keys" title="github SSH key管理" target="_blank" rel="external">github SSH key管理</a></p>
 <h2 id="optional-重绑定域名"><a href="#optional-重绑定域名" class="headerlink" title="(optional)重绑定域名"></a>(optional)重绑定域名</h2><p>Custom domain redirects for GitHub Pages sites(将独立(个性)域名与GitHub Pages的空间域名绑定)</p>
 <p>yourname.github.io的域名格式比较固定，那么是否可以设置一个个性化的域名呢，另外需要注意的是Github pages的容量受限于github的要求，目前是1GB(请参见<a href="https://help.github.com/articles/what-are-github-pages/" target="_blank" rel="external">https://help.github.com/articles/what-are-github-pages/</a>)。因此，建立一个独立的个性化(blog)网站(域名是个性化独立的，容量也可以调整)，在某些情况下还是有必要的(请参见<a href="https://help.github.com/articles/custom-domain-redirects-for-github-pages-sites/" title="github pages域名重定向" target="_blank" rel="external">github pages域名重定向</a>)。</p>
 <ul>
@@ -458,7 +458,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
       </div>
       <div class="post-content" id="post-content" itemprop="postContent" >
         
-          <h1 id="Zxing二维码开源库学习和优化"><a href="#Zxing二维码开源库学习和优化" class="headerlink" title="Zxing二维码开源库学习和优化"></a>Zxing二维码开源库学习和优化</h1><p>  本文对Google官方开源的二维码扫描库ZXing做一个总体概述，然后进行Android开发环境下的实战(二次)开发和优化，并用于生产项目。<br>  ZXing开源项目官方地址:<a href="https://github.com/zxing/zxing" title="ZXing">https://github.com/zxing/zxing</a></p>
+          <h1 id="Zxing二维码开源库学习和优化"><a href="#Zxing二维码开源库学习和优化" class="headerlink" title="Zxing二维码开源库学习和优化"></a>Zxing二维码开源库学习和优化</h1><p>  本文对Google官方开源的二维码扫描库ZXing做一个总体概述，然后进行Android开发环境下的实战(二次)开发和优化，并用于生产项目。<br>  ZXing开源项目官方地址:<a href="https://github.com/zxing/zxing" title="ZXing" target="_blank" rel="external">https://github.com/zxing/zxing</a></p>
 <hr>
 <h2 id="前期学习和准备"><a href="#前期学习和准备" class="headerlink" title="前期学习和准备"></a>前期学习和准备</h2><p> 各种百度和google，先了解二维码的技术概念和原理，他人经验和文章等等。以下摘自百度百科：</p>
 <p> 国外对二维码技术的研究始于20世纪80年代末，在二维码符号表示技术研究方面已研制出多种码制，常见的有PDF417、QR Code、Code 49、Code 16K、Code One等。这些二维码的信息密度都比传统的一维码有了较大提高，如PDF417的信息密度是一维码CodeC39的20多倍。在二维码标准化研究方面，国际自动识别制造商协会（AIM）、美国标准化协会（ANSI）已完成了PDF417、QR Code、Code 49、Code 16K、Code One等码制的符号标准。国际标准技术委员会和国际电工委员会还成立了条码自动识别技术委员会（ISO/IEC/JTC1/SC31），已制定了QR Code的国际标准（ISO/IEC 18004：2000《自动识别与数据采集技术—条码符号技术规范—QR码》），起草了PDF417、Code 16K、Data Matrix、Maxi Code等二维码的ISO/IEC标准草案。在二维码设备开发研制、生产方面，美国、日本等国的设备制造商生产的识读设备、符号生成设备，已广泛应用于各类二维码应用系统。二维码作为一种全新的信息存储、传递和识别技术，自诞生之日起就得到了世界上许多国家的关注。美国、德国、日本等国家，不仅已将二维码技术应用于公安、外交、军事等部门对各类证件的管理，而且也将二维码应用于海关、税务等部门对各类报表和票据的管理，商业、交通运输等部门对商品及货物运输的管理、邮政部门对邮政包裹的管理、工业生产领域对工业生产线的自动化管理。</p>
@@ -1309,13 +1309,13 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
 <h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><ol>
 <li><p>关于方式1：</p>
 <p> <a href="http://blog.csdn.net/lzyzsd/article/details/49843581" target="_blank" rel="external">http://blog.csdn.net/lzyzsd/article/details/49843581</a>，</p>
-<p> <a href="https://github.com/jasonross/Nuwa">https://github.com/jasonross/Nuwa</a></p>
+<p> <a href="https://github.com/jasonross/Nuwa" target="_blank" rel="external">https://github.com/jasonross/Nuwa</a></p>
 </li>
 <li><p>关于方式2：</p>
-<p> <a href="https://github.com/alibaba/AndFix" title="阿里的AndFix开源项目">https://github.com/alibaba/AndFix</a></p>
+<p> <a href="https://github.com/alibaba/AndFix" title="阿里的AndFix开源项目" target="_blank" rel="external">https://github.com/alibaba/AndFix</a></p>
 </li>
 <li><p>关于方式3：</p>
-<p> <a href="https://github.com/alibaba/dexposed" title="阿里的dexposed开源项目">https://github.com/alibaba/dexposed</a></p>
+<p> <a href="https://github.com/alibaba/dexposed" title="阿里的dexposed开源项目" target="_blank" rel="external">https://github.com/alibaba/dexposed</a></p>
 </li>
 </ol>
 
@@ -1921,7 +1921,7 @@ for(int z=0; z&lt;as.length; z++) {
 <li>怎样管理加载的APK中的组件的生命周期？</li>
 <li>…等等…</li>
 </ul>
-<p>需求产生动力，有了动力就有才能的发挥。聪明的人们自然会想到各种办法解决这些问题。当前，BAT等公司都有自己成熟的动态加载机制，但是不是开源的。而开源的加载机制方面，比较有影响的有：<a href="https://github.com/singwhatiwanna/dynamic-load-apk" title="dynamic-load-apk地址">dynamic-load-apk</a>和360的<a href="https://github.com/Qihoo360/DroidPlugin" title="DroidPlugin开源项目">DroidPlugin</a>。</p>
+<p>需求产生动力，有了动力就有才能的发挥。聪明的人们自然会想到各种办法解决这些问题。当前，BAT等公司都有自己成熟的动态加载机制，但是不是开源的。而开源的加载机制方面，比较有影响的有：<a href="https://github.com/singwhatiwanna/dynamic-load-apk" title="dynamic-load-apk地址" target="_blank" rel="external">dynamic-load-apk</a>和360的<a href="https://github.com/Qihoo360/DroidPlugin" title="DroidPlugin开源项目" target="_blank" rel="external">DroidPlugin</a>。</p>
 <p>开发者如果对动态加载APK感兴趣，建议深入研究上述的开源项目，这里就不再赘述其中的原理了。里面很多思路值得借鉴，但同时还有很大的完善空间，发挥你的聪明才智，试试吧。</p>
 
         
@@ -3585,7 +3585,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 <li>Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.</li>
 </ol>
 <h2 id="Limitations-Issues-限制和已知问题"><a href="#Limitations-Issues-限制和已知问题" class="headerlink" title="Limitations/Issues(限制和已知问题)"></a>Limitations/Issues(限制和已知问题)</h2><p>Because IDE doesn’t have full sources, it doesn’t know about class members and such.<br>Variables watching works because most of data could be read from memory (objects in Java know about their types), but if for example, you watch an object and it has some nulled member, then you won’t see, what type this member is.</p>
-<h1 id="apktool-2-1-0之后版本动态调试-适用于Android-studio"><a href="#apktool-2-1-0之后版本动态调试-适用于Android-studio" class="headerlink" title="apktool 2.1.0之后版本动态调试(适用于Android studio)"></a>apktool 2.1.0之后版本动态调试(适用于Android studio)</h1><p>官方地址参见<a href="https://github.com/JesusFreke/smali/wiki/smalidea">https://github.com/JesusFreke/smali/wiki/smalidea</a></p>
+<h1 id="apktool-2-1-0之后版本动态调试-适用于Android-studio"><a href="#apktool-2-1-0之后版本动态调试-适用于Android-studio" class="headerlink" title="apktool 2.1.0之后版本动态调试(适用于Android studio)"></a>apktool 2.1.0之后版本动态调试(适用于Android studio)</h1><p>官方地址参见<a href="https://github.com/JesusFreke/smali/wiki/smalidea" target="_blank" rel="external">https://github.com/JesusFreke/smali/wiki/smalidea</a></p>
 
         
       </div>
@@ -3707,7 +3707,7 @@ var BLOG_SHARE = {
     title: "Atypical programmer",
     pic: "/img/logo.jpg",
     summary: document.getElementsByName('summary')[0].content,
-    url: "https://cstsinghua.github.io/cstsinghua/index.html"
+    url: "https://cstsinghua.github.io/index.html"
 };
 </script>
 <div class="global-share" id="global-share">

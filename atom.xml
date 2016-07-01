@@ -4,9 +4,9 @@
   <subtitle>做一个非典型程序员</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://cstsinghua.github.io/cstsinghua/"/>
+  <link href="https://cstsinghua.github.io/"/>
   <updated>2016-07-01T02:34:03.073Z</updated>
-  <id>https://cstsinghua.github.io/cstsinghua/</id>
+  <id>https://cstsinghua.github.io/</id>
   
   <author>
     <name>Cstsinghua</name>
@@ -17,13 +17,13 @@
   
   <entry>
     <title>Protocol Buffers使用说明</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/07/01/Protocol Buffers使用说明/</id>
+    <link href="https://cstsinghua.github.io/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
+    <id>https://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/</id>
     <published>2016-07-01T02:09:43.000Z</published>
     <updated>2016-07-01T02:34:03.073Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Protocol-Buffers简介&quot;&gt;&lt;a href=&quot;#Protocol-Buffers简介&quot; class=&quot;headerlink&quot; title=&quot;Protocol Buffers简介&quot;&gt;&lt;/a&gt;Protocol Buffers简介&lt;/h1&gt;&lt;p&gt;Protocol Buffers是一种数据交换格式，用于结构化数据的读写，类似于序列化机制。在线客服系统里面Message的body部分其实就是具有结构化的数据，因此可以采用Protocol Buffers来实现各平台和语言之间的消息传输。Protocol Buffers特点以及与XML、各语言的序列化机制等的比较，可以后续展开，这里不赘述！此处重点说明其如何使用，特别是针对java(Android)平台。&lt;/p&gt;
-&lt;p&gt;Github地址：&lt;a href=&quot;https://github.com/google/protobuf&quot;&gt;https://github.com/google/protobuf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Github地址：&lt;a href=&quot;https://github.com/google/protobuf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/google/protobuf&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;官方地址：&lt;a href=&quot;https://developers.google.com/protocol-buffers/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt; https://developers.google.com/protocol-buffers/&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;Protocol-Buffers的使用&quot;&gt;&lt;a href=&quot;#Protocol-Buffers的使用&quot; class=&quot;headerlink&quot; title=&quot;Protocol Buffers的使用&quot;&gt;&lt;/a&gt;Protocol Buffers的使用&lt;/h1&gt;&lt;p&gt;Protocol Buffers分为如下几个步骤&lt;/p&gt;
 &lt;h2 id=&quot;1-Defining-Your-Protocol-Format-定义数据交换的协议格式&quot;&gt;&lt;a href=&quot;#1-Defining-Your-Protocol-Format-定义数据交换的协议格式&quot; class=&quot;headerlink&quot; title=&quot;1. Defining Your Protocol Format(定义数据交换的协议格式)&quot;&gt;&lt;/a&gt;1. &lt;strong&gt;Defining Your Protocol Format(定义数据交换的协议格式)&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;简单来说，就是类似于定义面向对象语言中的类，其相当于一个数据结构，对应用程序中要交换的数据做一个定义，包括各种字段的声明等等。其文件扩展名为.proto。对于.proto文件如何定义和其语法规范，请详细阅读&lt;a href=&quot;https://developers.google.com/protocol-buffers/docs/proto3&quot; title=&quot;Protocol Buffer Language Guide&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Protocol Buffer Language Guide&lt;/a&gt;。这里是proto3版本(最新版本，建议采用)，proto2的也可以参阅&lt;a href=&quot;https://developers.google.com/protocol-buffers/docs/proto&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;proto2 Language Guide&lt;/a&gt;&lt;/p&gt;
@@ -74,7 +74,7 @@ message AddressBook {
   repeated Person people = 1;
 }
 // [END messages]
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;2-Protocol-Compiler-Installation-获取protoc可执行二进制文件&quot;&gt;&lt;a href=&quot;#2-Protocol-Compiler-Installation-获取protoc可执行二进制文件&quot; class=&quot;headerlink&quot; title=&quot;2. Protocol Compiler Installation(获取protoc可执行二进制文件)&quot;&gt;&lt;/a&gt;2. &lt;strong&gt;Protocol Compiler Installation(获取protoc可执行二进制文件)&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;可以在Github和其官方地址上看到相关的说明，但是个人觉得其让人不觉明历，通俗来说，这一步就是要生成一个可执行的protoc二进制文件(在windows平台下即protoc.exe)。这里以Windows平台为例说明(后续如无特殊说明，均默认是Windows平台)。建议直接使用Google提供的已经编译好的二进制可执行文件(&lt;a href=&quot;http://repo1.maven.org/maven2/com/google/protobuf/protoc/&quot; title=&quot;protoc可执行二进制文件下载&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://repo1.maven.org/maven2/com/google/protobuf/protoc/&lt;/a&gt;)，建议选择最新版本下载(根据自己操作系统的平台选择对应版本)。想要自己编译生成也可以，不过会遇到各种坑，感兴趣的童鞋可以尝试之&lt;a href=&quot;https://github.com/google/protobuf/releases&quot; title=&quot;下载protocol buffer源码包&quot;&gt;protocol buffer源码包&lt;/a&gt;。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;2-Protocol-Compiler-Installation-获取protoc可执行二进制文件&quot;&gt;&lt;a href=&quot;#2-Protocol-Compiler-Installation-获取protoc可执行二进制文件&quot; class=&quot;headerlink&quot; title=&quot;2. Protocol Compiler Installation(获取protoc可执行二进制文件)&quot;&gt;&lt;/a&gt;2. &lt;strong&gt;Protocol Compiler Installation(获取protoc可执行二进制文件)&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;可以在Github和其官方地址上看到相关的说明，但是个人觉得其让人不觉明历，通俗来说，这一步就是要生成一个可执行的protoc二进制文件(在windows平台下即protoc.exe)。这里以Windows平台为例说明(后续如无特殊说明，均默认是Windows平台)。建议直接使用Google提供的已经编译好的二进制可执行文件(&lt;a href=&quot;http://repo1.maven.org/maven2/com/google/protobuf/protoc/&quot; title=&quot;protoc可执行二进制文件下载&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://repo1.maven.org/maven2/com/google/protobuf/protoc/&lt;/a&gt;)，建议选择最新版本下载(根据自己操作系统的平台选择对应版本)。想要自己编译生成也可以，不过会遇到各种坑，感兴趣的童鞋可以尝试之&lt;a href=&quot;https://github.com/google/protobuf/releases&quot; title=&quot;下载protocol buffer源码包&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;protocol buffer源码包&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;protoc.exe是干什么的呢？其用来编译用户定义的数据结构即步骤1中编写的.proto文件，详细参见步骤3.&lt;/p&gt;
 &lt;h2 id=&quot;3-Compiling-Your-Protocol-Buffers-编译Protocol-Buffers，即编译-proto文件&quot;&gt;&lt;a href=&quot;#3-Compiling-Your-Protocol-Buffers-编译Protocol-Buffers，即编译-proto文件&quot; class=&quot;headerlink&quot; title=&quot;3.  Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)&quot;&gt;&lt;/a&gt;3.  &lt;strong&gt;Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;即用步骤2得到的protoc可执行二进制文件编译步骤1所得的.proto文件，最终生成语言相关的类(代码)。这里以java语言为例：其命令格式如下：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;protoc -I=$SRC_DIR --java_out=$DST_DIR $SRC_DIR/addressbook.proto
@@ -84,10 +84,10 @@ uf-3.0.0-beta-2\src\boyim.proto
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如上，进入命令行，protoc即protoc可执行二进制文件，指定$SRC_DIR：源目录 (一般情况下即你的应用程序所在目录 – 如果不提供的话，则默认为当前工作目录即当前命令行的目录)；$DST_DIR：目标目录(你所期望生成的代码存放的目录; 通常情况下与源目录一致)；$SRC_DIR/addressbook.proto：即.proto文件的路径. &lt;/p&gt;
 &lt;p&gt;因为这里是生成java类, 因此使用 –java_out 选项 ， 类似的选项可以用于其它支持的语言.&lt;br&gt;对于addressbook.proto示例，这会在目标目录下生成 com/example/tutorial/AddressBookProtos.java文件.可以查看该文件，与普通的javaBean相似，包含了很多setters/getters方法，另外有一个builder方法，用于方便构造类对象。&lt;/p&gt;
 &lt;h2 id=&quot;4-Protobuf-Runtime-Installation-生成Protocol-Buffer-API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中&quot;&gt;&lt;a href=&quot;#4-Protobuf-Runtime-Installation-生成Protocol-Buffer-API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中&quot; class=&quot;headerlink&quot; title=&quot;4. Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)&quot;&gt;&lt;/a&gt;4. &lt;strong&gt;Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;对于java语言而言，就是生成一个Protocol Buffer API的jar包，应用里面导入该jar包即可，其他语言类似。那么如何生成这个API库呢？&lt;/p&gt;
-&lt;p&gt;官方说明可以参见&lt;a href=&quot;https://github.com/google/protobuf/tree/master/java&quot;&gt;Protobuf Runtime Installation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;官方说明可以参见&lt;a href=&quot;https://github.com/google/protobuf/tree/master/java&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Protobuf Runtime Installation&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这里简化说明(建议使用maven来完成安装)：&lt;/p&gt;
 &lt;h3 id=&quot;4-1-安装maven-注意需要安装JDK1-7及其以上版本&quot;&gt;&lt;a href=&quot;#4-1-安装maven-注意需要安装JDK1-7及其以上版本&quot; class=&quot;headerlink&quot; title=&quot;4.1 安装maven(注意需要安装JDK1.7及其以上版本)&quot;&gt;&lt;/a&gt;4.1 安装maven(注意需要安装JDK1.7及其以上版本)&lt;/h3&gt;&lt;p&gt;maven下载地址(目前最新版本3.3.9)，&lt;a href=&quot;http://maven.apache.org/&quot; title=&quot;maven下载地址&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://maven.apache.org/&lt;/a&gt;。下载之后解压，然后将解压后得到的目录路径添加到系统path中，这样使得可以直接在命令行使用mvn命令。&lt;/p&gt;
-&lt;h3 id=&quot;4-2-下载protocol-buffer源码包&quot;&gt;&lt;a href=&quot;#4-2-下载protocol-buffer源码包&quot; class=&quot;headerlink&quot; title=&quot;4.2 下载protocol buffer源码包&quot;&gt;&lt;/a&gt;4.2 下载protocol buffer源码包&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/google/protobuf/releases&quot; title=&quot;下载protocol buffer源码包&quot;&gt;protocol buffer源码包&lt;/a&gt;。注意：这里下载的版本必须与步骤2中protoc可执行二进制文件的版本一致，要查看protoc可执行二进制文件的版本，可以在命令行输入protoc –version。下载之后，解压，找到对应语言目录(java)，如下图：&lt;/p&gt;
+&lt;h3 id=&quot;4-2-下载protocol-buffer源码包&quot;&gt;&lt;a href=&quot;#4-2-下载protocol-buffer源码包&quot; class=&quot;headerlink&quot; title=&quot;4.2 下载protocol buffer源码包&quot;&gt;&lt;/a&gt;4.2 下载protocol buffer源码包&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/google/protobuf/releases&quot; title=&quot;下载protocol buffer源码包&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;protocol buffer源码包&lt;/a&gt;。注意：这里下载的版本必须与步骤2中protoc可执行二进制文件的版本一致，要查看protoc可执行二进制文件的版本，可以在命令行输入protoc –version。下载之后，解压，找到对应语言目录(java)，如下图：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/hqbfZFn.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;从命令行进入java目录。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;注意1：&lt;/strong&gt;步骤2下载二进制可执行文件之后需要将二进制可执行文件改名为protoc.exe(Windows平台)，并且放置在如下目录(下载的protocol buffer源码包解压目录下的src子目录下)：&lt;/p&gt;
@@ -125,17 +125,17 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
     
     </summary>
     
-      <category term="Java" scheme="https://cstsinghua.github.io/cstsinghua/categories/Java/"/>
+      <category term="Java" scheme="https://cstsinghua.github.io/categories/Java/"/>
     
     
-      <category term="Protocol Buffers" scheme="https://cstsinghua.github.io/cstsinghua/tags/Protocol-Buffers/"/>
+      <category term="Protocol Buffers" scheme="https://cstsinghua.github.io/tags/Protocol-Buffers/"/>
     
   </entry>
   
   <entry>
     <title>Github pages+Hexo+Nodejs搭建个人blog</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/16/Github%20pages+Hexo+Nodejs%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/</id>
+    <link href="https://cstsinghua.github.io/2016/06/16/Github%20pages+Hexo+Nodejs%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/"/>
+    <id>https://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/</id>
     <published>2016-06-16T10:35:07.000Z</published>
     <updated>2016-06-23T04:05:40.265Z</updated>
     
@@ -217,7 +217,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
 &lt;/table&gt;
 &lt;p&gt;eg(我的Github账号是cstsinghua，而我新建的仓库名称是cstsinghua.github.io):&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;deploy:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  type: git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  repository: git@github.com:cstsinghua/cstsinghua.github.io.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  branch: master&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;注意：如果是建立项目网站，则branch需要修改为gh-pages，详细情况请参见&lt;a href=&quot;https://help.github.com/articles/user-organization-and-project-pages/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Github pages中User, Organization, and Project Pages的差异&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;c.安装hexo的git插件&lt;a href=&quot;https://github.com/hexojs/hexo-deployer-git&quot; title=&quot;hexo的git插件&quot;&gt;hexo-deployer-git&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;c.安装hexo的git插件&lt;a href=&quot;https://github.com/hexojs/hexo-deployer-git&quot; title=&quot;hexo的git插件&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;hexo-deployer-git&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;$ npm install hexo-deployer-git –save&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -231,7 +231,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
 &lt;p&gt;$ hexo d -g&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;注意：在这一步可能报错，已知的一些错误可以参见&lt;a href=&quot;https://hexo.io/zh-cn/docs/troubleshooting.html#Git-部署问题&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;hexo git部署常见问题&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;另外，可能遇到SSH publickey接入问题，可以参见&lt;a href=&quot;https://help.github.com/articles/generating-an-ssh-key/&quot; title=&quot;创建github ssh key&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;创建github SSH key&lt;/a&gt;和&lt;a href=&quot;https://github.com/settings/keys&quot; title=&quot;github SSH key管理&quot;&gt;github SSH key管理&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;另外，可能遇到SSH publickey接入问题，可以参见&lt;a href=&quot;https://help.github.com/articles/generating-an-ssh-key/&quot; title=&quot;创建github ssh key&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;创建github SSH key&lt;/a&gt;和&lt;a href=&quot;https://github.com/settings/keys&quot; title=&quot;github SSH key管理&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;github SSH key管理&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;optional-重绑定域名&quot;&gt;&lt;a href=&quot;#optional-重绑定域名&quot; class=&quot;headerlink&quot; title=&quot;(optional)重绑定域名&quot;&gt;&lt;/a&gt;(optional)重绑定域名&lt;/h2&gt;&lt;p&gt;Custom domain redirects for GitHub Pages sites(将独立(个性)域名与GitHub Pages的空间域名绑定)&lt;/p&gt;
 &lt;p&gt;yourname.github.io的域名格式比较固定，那么是否可以设置一个个性化的域名呢，另外需要注意的是Github pages的容量受限于github的要求，目前是1GB(请参见&lt;a href=&quot;https://help.github.com/articles/what-are-github-pages/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://help.github.com/articles/what-are-github-pages/&lt;/a&gt;)。因此，建立一个独立的个性化(blog)网站(域名是个性化独立的，容量也可以调整)，在某些情况下还是有必要的(请参见&lt;a href=&quot;https://help.github.com/articles/custom-domain-redirects-for-github-pages-sites/&quot; title=&quot;github pages域名重定向&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;github pages域名重定向&lt;/a&gt;)。&lt;/p&gt;
 &lt;ul&gt;
@@ -250,21 +250,21 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
     
     </summary>
     
-      <category term="杂项" scheme="https://cstsinghua.github.io/cstsinghua/categories/%E6%9D%82%E9%A1%B9/"/>
+      <category term="杂项" scheme="https://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
-      <category term="搭建个人Blog" scheme="https://cstsinghua.github.io/cstsinghua/tags/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BABlog/"/>
+      <category term="搭建个人Blog" scheme="https://cstsinghua.github.io/tags/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BABlog/"/>
     
   </entry>
   
   <entry>
     <title>Zxing二维码开源库实战</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/ZXing%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/ZXing开源项目实战/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/ZXing%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/ZXing开源项目实战/</id>
     <published>2016-06-13T07:42:25.000Z</published>
     <updated>2016-06-13T07:42:31.872Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;Zxing二维码开源库学习和优化&quot;&gt;&lt;a href=&quot;#Zxing二维码开源库学习和优化&quot; class=&quot;headerlink&quot; title=&quot;Zxing二维码开源库学习和优化&quot;&gt;&lt;/a&gt;Zxing二维码开源库学习和优化&lt;/h1&gt;&lt;p&gt;  本文对Google官方开源的二维码扫描库ZXing做一个总体概述，然后进行Android开发环境下的实战(二次)开发和优化，并用于生产项目。&lt;br&gt;  ZXing开源项目官方地址:&lt;a href=&quot;https://github.com/zxing/zxing&quot; title=&quot;ZXing&quot;&gt;https://github.com/zxing/zxing&lt;/a&gt;&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;Zxing二维码开源库学习和优化&quot;&gt;&lt;a href=&quot;#Zxing二维码开源库学习和优化&quot; class=&quot;headerlink&quot; title=&quot;Zxing二维码开源库学习和优化&quot;&gt;&lt;/a&gt;Zxing二维码开源库学习和优化&lt;/h1&gt;&lt;p&gt;  本文对Google官方开源的二维码扫描库ZXing做一个总体概述，然后进行Android开发环境下的实战(二次)开发和优化，并用于生产项目。&lt;br&gt;  ZXing开源项目官方地址:&lt;a href=&quot;https://github.com/zxing/zxing&quot; title=&quot;ZXing&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/zxing/zxing&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&quot;前期学习和准备&quot;&gt;&lt;a href=&quot;#前期学习和准备&quot; class=&quot;headerlink&quot; title=&quot;前期学习和准备&quot;&gt;&lt;/a&gt;前期学习和准备&lt;/h2&gt;&lt;p&gt; 各种百度和google，先了解二维码的技术概念和原理，他人经验和文章等等。以下摘自百度百科：&lt;/p&gt;
 &lt;p&gt; 国外对二维码技术的研究始于20世纪80年代末，在二维码符号表示技术研究方面已研制出多种码制，常见的有PDF417、QR Code、Code 49、Code 16K、Code One等。这些二维码的信息密度都比传统的一维码有了较大提高，如PDF417的信息密度是一维码CodeC39的20多倍。在二维码标准化研究方面，国际自动识别制造商协会（AIM）、美国标准化协会（ANSI）已完成了PDF417、QR Code、Code 49、Code 16K、Code One等码制的符号标准。国际标准技术委员会和国际电工委员会还成立了条码自动识别技术委员会（ISO/IEC/JTC1/SC31），已制定了QR Code的国际标准（ISO/IEC 18004：2000《自动识别与数据采集技术—条码符号技术规范—QR码》），起草了PDF417、Code 16K、Data Matrix、Maxi Code等二维码的ISO/IEC标准草案。在二维码设备开发研制、生产方面，美国、日本等国的设备制造商生产的识读设备、符号生成设备，已广泛应用于各类二维码应用系统。二维码作为一种全新的信息存储、传递和识别技术，自诞生之日起就得到了世界上许多国家的关注。美国、德国、日本等国家，不仅已将二维码技术应用于公安、外交、军事等部门对各类证件的管理，而且也将二维码应用于海关、税务等部门对各类报表和票据的管理，商业、交通运输等部门对商品及货物运输的管理、邮政部门对邮政包裹的管理、工业生产领域对工业生产线的自动化管理。&lt;/p&gt;
@@ -941,17 +941,17 @@ canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2
     
     </summary>
     
-      <category term="Android" scheme="https://cstsinghua.github.io/cstsinghua/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="Zxing" scheme="https://cstsinghua.github.io/cstsinghua/tags/Zxing/"/>
+      <category term="Zxing" scheme="https://cstsinghua.github.io/tags/Zxing/"/>
     
   </entry>
   
   <entry>
     <title>Eclipse动态调试Android应用指南</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/Eclipse动态调试指南/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/</id>
     <published>2016-06-13T07:41:13.000Z</published>
     <updated>2016-06-13T11:41:02.275Z</updated>
     
@@ -1000,17 +1000,17 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     
     </summary>
     
-      <category term="Android" scheme="https://cstsinghua.github.io/cstsinghua/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="动态调试" scheme="https://cstsinghua.github.io/cstsinghua/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
+      <category term="动态调试" scheme="https://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>apktool打包之后apk包体变大</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/apktool%E6%89%93%E5%8C%85%E4%B9%8B%E5%90%8E%E5%8C%85%E4%BD%93%E5%8F%98%E5%A4%A7/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/apktool打包之后包体变大/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/apktool%E6%89%93%E5%8C%85%E4%B9%8B%E5%90%8E%E5%8C%85%E4%BD%93%E5%8F%98%E5%A4%A7/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/</id>
     <published>2016-06-13T07:40:18.000Z</published>
     <updated>2016-06-13T07:40:33.442Z</updated>
     
@@ -1042,17 +1042,17 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     
     </summary>
     
-      <category term="Android" scheme="https://cstsinghua.github.io/cstsinghua/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="Apktool打包" scheme="https://cstsinghua.github.io/cstsinghua/tags/Apktool%E6%89%93%E5%8C%85/"/>
+      <category term="Apktool打包" scheme="https://cstsinghua.github.io/tags/Apktool%E6%89%93%E5%8C%85/"/>
     
   </entry>
   
   <entry>
     <title>Android热修复</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%80%9D%E8%B7%AF/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/Android热修复的思路/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%80%9D%E8%B7%AF/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android热修复的思路/</id>
     <published>2016-06-13T07:38:15.000Z</published>
     <updated>2016-06-13T07:38:25.933Z</updated>
     
@@ -1070,13 +1070,13 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
 &lt;h1 id=&quot;链接&quot;&gt;&lt;a href=&quot;#链接&quot; class=&quot;headerlink&quot; title=&quot;链接&quot;&gt;&lt;/a&gt;链接&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;关于方式1：&lt;/p&gt;
 &lt;p&gt; &lt;a href=&quot;http://blog.csdn.net/lzyzsd/article/details/49843581&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/lzyzsd/article/details/49843581&lt;/a&gt;，&lt;/p&gt;
-&lt;p&gt; &lt;a href=&quot;https://github.com/jasonross/Nuwa&quot;&gt;https://github.com/jasonross/Nuwa&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; &lt;a href=&quot;https://github.com/jasonross/Nuwa&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/jasonross/Nuwa&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;关于方式2：&lt;/p&gt;
-&lt;p&gt; &lt;a href=&quot;https://github.com/alibaba/AndFix&quot; title=&quot;阿里的AndFix开源项目&quot;&gt;https://github.com/alibaba/AndFix&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; &lt;a href=&quot;https://github.com/alibaba/AndFix&quot; title=&quot;阿里的AndFix开源项目&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/alibaba/AndFix&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;关于方式3：&lt;/p&gt;
-&lt;p&gt; &lt;a href=&quot;https://github.com/alibaba/dexposed&quot; title=&quot;阿里的dexposed开源项目&quot;&gt;https://github.com/alibaba/dexposed&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; &lt;a href=&quot;https://github.com/alibaba/dexposed&quot; title=&quot;阿里的dexposed开源项目&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/alibaba/dexposed&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 </content>
@@ -1088,17 +1088,17 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     
     </summary>
     
-      <category term="Android" scheme="https://cstsinghua.github.io/cstsinghua/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="Android热修复" scheme="https://cstsinghua.github.io/cstsinghua/tags/Android%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
+      <category term="Android热修复" scheme="https://cstsinghua.github.io/tags/Android%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
     
   </entry>
   
   <entry>
     <title>Android动态加载机制</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/Android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/Android动态加载机制/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android动态加载机制/</id>
     <published>2016-06-13T07:36:18.000Z</published>
     <updated>2016-06-13T07:36:19.502Z</updated>
     
@@ -1668,7 +1668,7 @@ for(int z=0; z&amp;lt;as.length; z++) {
 &lt;li&gt;怎样管理加载的APK中的组件的生命周期？&lt;/li&gt;
 &lt;li&gt;…等等…&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;需求产生动力，有了动力就有才能的发挥。聪明的人们自然会想到各种办法解决这些问题。当前，BAT等公司都有自己成熟的动态加载机制，但是不是开源的。而开源的加载机制方面，比较有影响的有：&lt;a href=&quot;https://github.com/singwhatiwanna/dynamic-load-apk&quot; title=&quot;dynamic-load-apk地址&quot;&gt;dynamic-load-apk&lt;/a&gt;和360的&lt;a href=&quot;https://github.com/Qihoo360/DroidPlugin&quot; title=&quot;DroidPlugin开源项目&quot;&gt;DroidPlugin&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;需求产生动力，有了动力就有才能的发挥。聪明的人们自然会想到各种办法解决这些问题。当前，BAT等公司都有自己成熟的动态加载机制，但是不是开源的。而开源的加载机制方面，比较有影响的有：&lt;a href=&quot;https://github.com/singwhatiwanna/dynamic-load-apk&quot; title=&quot;dynamic-load-apk地址&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;dynamic-load-apk&lt;/a&gt;和360的&lt;a href=&quot;https://github.com/Qihoo360/DroidPlugin&quot; title=&quot;DroidPlugin开源项目&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DroidPlugin&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;开发者如果对动态加载APK感兴趣，建议深入研究上述的开源项目，这里就不再赘述其中的原理了。里面很多思路值得借鉴，但同时还有很大的完善空间，发挥你的聪明才智，试试吧。&lt;/p&gt;
 </content>
     
@@ -1680,17 +1680,17 @@ for(int z=0; z&amp;lt;as.length; z++) {
     
     </summary>
     
-      <category term="Android" scheme="https://cstsinghua.github.io/cstsinghua/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="动态加载" scheme="https://cstsinghua.github.io/cstsinghua/tags/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/"/>
+      <category term="动态加载" scheme="https://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/"/>
     
   </entry>
   
   <entry>
     <title>Android安装APK详解</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/Android%E5%AE%89%E8%A3%85APK%E8%AF%A6%E8%A7%A3/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/Android安装APK详解/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%E5%AE%89%E8%A3%85APK%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android安装APK详解/</id>
     <published>2016-06-13T07:34:37.000Z</published>
     <updated>2016-06-13T07:35:45.278Z</updated>
     
@@ -3220,17 +3220,17 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     
     </summary>
     
-      <category term="Android" scheme="https://cstsinghua.github.io/cstsinghua/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="APK安装" scheme="https://cstsinghua.github.io/cstsinghua/tags/APK%E5%AE%89%E8%A3%85/"/>
+      <category term="APK安装" scheme="https://cstsinghua.github.io/tags/APK%E5%AE%89%E8%A3%85/"/>
     
   </entry>
   
   <entry>
     <title>Android studio动态调试</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/Android studio动态调试指南/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android studio动态调试指南/</id>
     <published>2016-06-13T07:25:56.000Z</published>
     <updated>2016-06-13T07:26:02.974Z</updated>
     
@@ -3304,7 +3304,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 &lt;li&gt;Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&quot;Limitations-Issues-限制和已知问题&quot;&gt;&lt;a href=&quot;#Limitations-Issues-限制和已知问题&quot; class=&quot;headerlink&quot; title=&quot;Limitations/Issues(限制和已知问题)&quot;&gt;&lt;/a&gt;Limitations/Issues(限制和已知问题)&lt;/h2&gt;&lt;p&gt;Because IDE doesn’t have full sources, it doesn’t know about class members and such.&lt;br&gt;Variables watching works because most of data could be read from memory (objects in Java know about their types), but if for example, you watch an object and it has some nulled member, then you won’t see, what type this member is.&lt;/p&gt;
-&lt;h1 id=&quot;apktool-2-1-0之后版本动态调试-适用于Android-studio&quot;&gt;&lt;a href=&quot;#apktool-2-1-0之后版本动态调试-适用于Android-studio&quot; class=&quot;headerlink&quot; title=&quot;apktool 2.1.0之后版本动态调试(适用于Android studio)&quot;&gt;&lt;/a&gt;apktool 2.1.0之后版本动态调试(适用于Android studio)&lt;/h1&gt;&lt;p&gt;官方地址参见&lt;a href=&quot;https://github.com/JesusFreke/smali/wiki/smalidea&quot;&gt;https://github.com/JesusFreke/smali/wiki/smalidea&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;apktool-2-1-0之后版本动态调试-适用于Android-studio&quot;&gt;&lt;a href=&quot;#apktool-2-1-0之后版本动态调试-适用于Android-studio&quot; class=&quot;headerlink&quot; title=&quot;apktool 2.1.0之后版本动态调试(适用于Android studio)&quot;&gt;&lt;/a&gt;apktool 2.1.0之后版本动态调试(适用于Android studio)&lt;/h1&gt;&lt;p&gt;官方地址参见&lt;a href=&quot;https://github.com/JesusFreke/smali/wiki/smalidea&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/JesusFreke/smali/wiki/smalidea&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -3313,17 +3313,17 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     
     </summary>
     
-      <category term="Android" scheme="https://cstsinghua.github.io/cstsinghua/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="动态调试" scheme="https://cstsinghua.github.io/cstsinghua/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
+      <category term="动态调试" scheme="https://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>Android APK瘦身策略</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/Android%20APK%E7%98%A6%E8%BA%AB%E5%88%9D%E6%8E%A2/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/Android APK瘦身初探/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%20APK%E7%98%A6%E8%BA%AB%E5%88%9D%E6%8E%A2/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android APK瘦身初探/</id>
     <published>2016-06-13T06:34:28.000Z</published>
     <updated>2016-06-13T06:34:35.834Z</updated>
     
@@ -3386,17 +3386,50 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     
     </summary>
     
-      <category term="Android" scheme="https://cstsinghua.github.io/cstsinghua/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="APK瘦身" scheme="https://cstsinghua.github.io/cstsinghua/tags/APK%E7%98%A6%E8%BA%AB/"/>
+      <category term="APK瘦身" scheme="https://cstsinghua.github.io/tags/APK%E7%98%A6%E8%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://cstsinghua.github.io/2016/06/13/hello-world/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/hello-world/</id>
+    <published>2016-06-13T01:57:02.000Z</published>
+    <updated>2016-06-30T10:24:26.335Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For Test:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="杂项" scheme="https://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="杂项" scheme="https://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
   <entry>
     <title>python安装某些第三方包报错解决办法</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/python安装第三方包错误解决/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
     <published>2016-06-13T01:57:02.000Z</published>
     <updated>2016-06-13T06:08:42.947Z</updated>
     
@@ -3438,50 +3471,17 @@ collect2.exe: error: ld returned 1 exit status
     
     </summary>
     
-      <category term="Python" scheme="https://cstsinghua.github.io/cstsinghua/categories/Python/"/>
+      <category term="Python" scheme="https://cstsinghua.github.io/categories/Python/"/>
     
     
-      <category term="安装第三方包" scheme="https://cstsinghua.github.io/cstsinghua/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/13/hello-world/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/13/hello-world/</id>
-    <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-30T10:24:26.335Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For Test:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="杂项" scheme="https://cstsinghua.github.io/cstsinghua/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-      <category term="杂项" scheme="https://cstsinghua.github.io/cstsinghua/tags/%E6%9D%82%E9%A1%B9/"/>
+      <category term="安装第三方包" scheme="https://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
     
   </entry>
   
   <entry>
     <title>推送方案</title>
-    <link href="https://cstsinghua.github.io/cstsinghua/2016/06/08/%E6%8E%A8%E9%80%81%E6%96%B9%E6%A1%88/"/>
-    <id>https://cstsinghua.github.io/cstsinghua/2016/06/08/推送方案/</id>
+    <link href="https://cstsinghua.github.io/2016/06/08/%E6%8E%A8%E9%80%81%E6%96%B9%E6%A1%88/"/>
+    <id>https://cstsinghua.github.io/2016/06/08/推送方案/</id>
     <published>2016-06-08T09:09:16.000Z</published>
     <updated>2016-06-12T11:41:30.482Z</updated>
     
@@ -3546,7 +3546,7 @@ collect2.exe: error: ld returned 1 exit status
 &lt;li&gt;&lt;p&gt;使用XMPP协议（Openfire + Spark + Smack）&lt;/p&gt;
 &lt;p&gt; XMPP（Extensible Messageing and Presence Protocol：可扩展消息与存在协议）是目前主流的四种IM（IM：instant messaging,即时消息）协议之一，其他三种分别为：即时信息和空间协议(IMPP)、空间和即时信息协议(PRIM)、针对即时通讯和空间平衡扩充的进程开始协议SIP(SIMPLE)。其是基于XML协议的通讯协议，前身是Jabber，已由IETF国际标准化组织完成了标准化工作。&lt;/p&gt;
 &lt;p&gt; Spark,smack和Openfire，这三个合起来就是一个完整的XMPP IM实现。包括服务器端——Openfire，客户端——Spark，XMPP 传输协议的实现——Smack（记住，XMPP是一个协议，协议是需要实现的，Smack起到的就是这样的一个作用）。三者都是基于Java 语言的实现。&lt;/p&gt;
-&lt;p&gt; 当前已有基于XMPP开发Android推送的开源项目：&lt;a href=&quot;https://github.com/dannytiehui/androidpn&quot; title=&quot;androidpn实现Android推送&quot;&gt;androidpn项目&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; 当前已有基于XMPP开发Android推送的开源项目：&lt;a href=&quot;https://github.com/dannytiehui/androidpn&quot; title=&quot;androidpn实现Android推送&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;androidpn项目&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt; 优点：协议成熟、强大、可扩展性强、主要应用于许多聊天系统中，且已有开源的Java版的开发实例androidpn。&lt;/p&gt;
 &lt;p&gt; 缺点：协议较复杂、冗余（基于XML）、费流量、费电，部署硬件成本高。&lt;/p&gt;
 &lt;/li&gt;
@@ -3819,10 +3819,10 @@ wl.release();
     
     </summary>
     
-      <category term="Android" scheme="https://cstsinghua.github.io/cstsinghua/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="Push" scheme="https://cstsinghua.github.io/cstsinghua/tags/Push/"/>
+      <category term="Push" scheme="https://cstsinghua.github.io/tags/Push/"/>
     
   </entry>
   
