@@ -163,15 +163,17 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/01/Protocol Buffers使用说明/">No title</a>
+      <a class="post-title-link" href="/2016/07/01/Protocol Buffers使用说明/">Protocol Buffers使用说明</a>
     </h3>
   
 
 
 
       <div class="post-meat flex-row">
-        <div class="flex-col"></div>
-        <time datetime="2016-07-01T02:08:59.108Z" itemprop="datePublished" class="post-tiem">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Protocol-Buffers/">Protocol Buffers</a></li></ul>
+</div>
+        <time datetime="2016-07-01T02:09:43.000Z" itemprop="datePublished" class="post-tiem">
   2016-07-01
 </time>
       </div>
@@ -181,12 +183,8 @@
 <p>Github地址：<a href="https://github.com/google/protobuf">https://github.com/google/protobuf</a></p>
 <p>官方地址：<a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="external"> https://developers.google.com/protocol-buffers/</a></p>
 <h1 id="Protocol-Buffers的使用"><a href="#Protocol-Buffers的使用" class="headerlink" title="Protocol Buffers的使用"></a>Protocol Buffers的使用</h1><p>Protocol Buffers分为如下几个步骤</p>
-<ol>
-<li><p><strong>Defining Your Protocol Format(定义数据交换的协议格式)</strong></p>
-<p> 简单来说，就是类似于定义面向对象语言中的类，其相当于一个数据结构，对应用程序中要交换的数据做一个定义，包括各种字段的声明等等。其文件扩展名为.proto。对于.proto文件如何定义和其语法规范，请详细阅读<a href="https://developers.google.com/protocol-buffers/docs/proto3" title="Protocol Buffer Language Guide" target="_blank" rel="external">Protocol Buffer Language Guide</a>。这里是proto3版本(最新版本，建议采用)，proto2的也可以参阅<a href="https://developers.google.com/protocol-buffers/docs/proto" target="_blank" rel="external">proto2 Language Guide</a></p>
-<p> .proto示例(addressbook.proto)：</p>
-</li>
-</ol>
+<h2 id="1-Defining-Your-Protocol-Format-定义数据交换的协议格式"><a href="#1-Defining-Your-Protocol-Format-定义数据交换的协议格式" class="headerlink" title="1. Defining Your Protocol Format(定义数据交换的协议格式)"></a>1. <strong>Defining Your Protocol Format(定义数据交换的协议格式)</strong></h2><p>简单来说，就是类似于定义面向对象语言中的类，其相当于一个数据结构，对应用程序中要交换的数据做一个定义，包括各种字段的声明等等。其文件扩展名为.proto。对于.proto文件如何定义和其语法规范，请详细阅读<a href="https://developers.google.com/protocol-buffers/docs/proto3" title="Protocol Buffer Language Guide" target="_blank" rel="external">Protocol Buffer Language Guide</a>。这里是proto3版本(最新版本，建议采用)，proto2的也可以参阅<a href="https://developers.google.com/protocol-buffers/docs/proto" target="_blank" rel="external">proto2 Language Guide</a></p>
+<p>.proto示例(addressbook.proto)：</p>
 <pre><code>//
 // Note: START and END tags are used in comments to define sections used in
 // tutorials.  They are not part of the syntax for Protocol Buffers.
@@ -233,81 +231,41 @@ message AddressBook {
   repeated Person people = 1;
 }
 // [END messages]
-</code></pre><ol>
-<li><p><strong>Protocol Compiler Installation(获取protoc可执行二进制文件)</strong></p>
-<p> 可以在Github和其官方地址上看到相关的说明，但是个人觉得其让人不觉明历，通俗来说，这一步就是要生成一个可执行的protoc二进制文件(在windows平台下即protoc.exe)。这里以Windows平台为例说明(后续如无特殊说明，均默认是Windows平台)。建议直接使用Google提供的已经编译好的二进制可执行文件(<a href="http://repo1.maven.org/maven2/com/google/protobuf/protoc/" title="protoc可执行二进制文件下载" target="_blank" rel="external">http://repo1.maven.org/maven2/com/google/protobuf/protoc/</a>)，建议选择最新版本下载(根据自己操作系统的平台选择对应版本)。想要自己编译生成也可以，不过会遇到各种坑，感兴趣的童鞋可以尝试之<a href="https://github.com/google/protobuf/releases" title="下载protocol buffer源码包">protocol buffer源码包</a>。</p>
-<p> protoc.exe是干什么的呢？其用来编译用户定义的数据结构即步骤1中编写的.proto文件，详细参见步骤3.</p>
-</li>
-<li><p><strong>Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)</strong></p>
-<p>即用步骤2得到的protoc可执行二进制文件编译步骤1所得的.proto文件，最终生成语言相关的类(代码)。这里以java语言为例：其命令格式如下：</p>
-<p>protoc -I=$SRC_DIR –java_out=$DST_DIR $SRC_DIR/addressbook.proto</p>
-<p>eg:</p>
+</code></pre><h2 id="2-Protocol-Compiler-Installation-获取protoc可执行二进制文件"><a href="#2-Protocol-Compiler-Installation-获取protoc可执行二进制文件" class="headerlink" title="2. Protocol Compiler Installation(获取protoc可执行二进制文件)"></a>2. <strong>Protocol Compiler Installation(获取protoc可执行二进制文件)</strong></h2><p>可以在Github和其官方地址上看到相关的说明，但是个人觉得其让人不觉明历，通俗来说，这一步就是要生成一个可执行的protoc二进制文件(在windows平台下即protoc.exe)。这里以Windows平台为例说明(后续如无特殊说明，均默认是Windows平台)。建议直接使用Google提供的已经编译好的二进制可执行文件(<a href="http://repo1.maven.org/maven2/com/google/protobuf/protoc/" title="protoc可执行二进制文件下载" target="_blank" rel="external">http://repo1.maven.org/maven2/com/google/protobuf/protoc/</a>)，建议选择最新版本下载(根据自己操作系统的平台选择对应版本)。想要自己编译生成也可以，不过会遇到各种坑，感兴趣的童鞋可以尝试之<a href="https://github.com/google/protobuf/releases" title="下载protocol buffer源码包">protocol buffer源码包</a>。</p>
+<p>protoc.exe是干什么的呢？其用来编译用户定义的数据结构即步骤1中编写的.proto文件，详细参见步骤3.</p>
+<h2 id="3-Compiling-Your-Protocol-Buffers-编译Protocol-Buffers，即编译-proto文件"><a href="#3-Compiling-Your-Protocol-Buffers-编译Protocol-Buffers，即编译-proto文件" class="headerlink" title="3.  Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)"></a>3.  <strong>Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)</strong></h2><p>即用步骤2得到的protoc可执行二进制文件编译步骤1所得的.proto文件，最终生成语言相关的类(代码)。这里以java语言为例：其命令格式如下：</p>
+<pre><code>protoc -I=$SRC_DIR --java_out=$DST_DIR $SRC_DIR/addressbook.proto
+</code></pre><p>eg:</p>
 <pre><code>D:\protobuf-3.0.0-beta-2\src&gt;protoc.exe -I=D:\protobuf-3.0.0-beta-2\src --java_out=D:\kefu D:\protob
 uf-3.0.0-beta-2\src\boyim.proto
 </code></pre><p>如上，进入命令行，protoc即protoc可执行二进制文件，指定$SRC_DIR：源目录 (一般情况下即你的应用程序所在目录 – 如果不提供的话，则默认为当前工作目录即当前命令行的目录)；$DST_DIR：目标目录(你所期望生成的代码存放的目录; 通常情况下与源目录一致)；$SRC_DIR/addressbook.proto：即.proto文件的路径. </p>
 <p>因为这里是生成java类, 因此使用 –java_out 选项 ， 类似的选项可以用于其它支持的语言.<br>对于addressbook.proto示例，这会在目标目录下生成 com/example/tutorial/AddressBookProtos.java文件.可以查看该文件，与普通的javaBean相似，包含了很多setters/getters方法，另外有一个builder方法，用于方便构造类对象。</p>
-</li>
-<li><p><strong>Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)</strong></p>
-</li>
-</ol>
-<pre><code>对于java语言而言，就是生成一个Protocol Buffer API的jar包，应用里面导入该jar包即可，其他语言类似。那么如何生成这个API库呢？
-
-
-官方说明可以参见[Protobuf Runtime Installation](https://github.com/google/protobuf/tree/master/java)
-
-这里简化说明(建议使用maven来完成安装)：
-
-
-- 安装maven(注意需要安装JDK1.7及其以上版本)
-
-    maven下载地址(目前最新版本3.3.9)，[http://maven.apache.org/](http://maven.apache.org/ &quot;maven下载地址&quot;)。下载之后解压，然后将解压后得到的目录路径添加到系统path中，这样使得可以直接在命令行使用mvn命令。
-
-- 下载protocol buffer源码包
-
-    [protocol buffer源码包](https://github.com/google/protobuf/releases &quot;下载protocol buffer源码包&quot;)。注意：这里下载的版本必须与步骤2中protoc可执行二进制文件的版本一致，要查看protoc可执行二进制文件的版本，可以在命令行输入protoc --version。下载之后，解压，找到对应语言目录(java)，如下图：
-
-    ![](http://i.imgur.com/hqbfZFn.png)
-
-    从命令行进入java目录。
-
-    **注意1：**步骤2下载二进制可执行文件之后需要将二进制可执行文件改名为protoc.exe(Windows平台)，并且放置在如下目录(下载的protocol buffer源码包解压目录下的src子目录下)：
-
-    ![](http://i.imgur.com/4Qdnw7s.png)
-
-    **注意2：**需要将java目录下的pom.xml(即maven执行所依据的文件，类似于ant构建时候的build.xml)中添加编码格式，否则构建会采用操作系统默认的编码，Windows平台中文的话是GBK，而我们在Android平台采用的是UTF_8。添加部分代码如下：
-
-        &lt;!-- pom.xml --&gt;
-        &lt;properties&gt;
-            &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-            &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
-        &lt;/properties&gt;
-
-    ![](http://i.imgur.com/q5WtQgd.png)
-
-
-- Run the tests(先测试运行，看看是否配置ok)
-
-    在命令输入：
-
-        mvn test
-
-    确保成功再进行下一步。
-
-
-- 生成jar包
-
-    在命令输入：
-
-        mvn package
-
-    生成的jar包放置在java目录的子目录target下面。
-
-    ![](http://i.imgur.com/dLL5Os3.png)
-</code></pre><ol>
-<li><p><strong>Parsing and Serialization(解析和序列化)</strong></p>
-<p> 这一步也就是最终我们在应用程序里面对数据进行解析读写等直观的操作，也是我们最关心的部分。</p>
-<p> 将步骤3生成的java类复制进工程中(注意必须在其定义的包名结构下)，同时将步骤4生成的jar导入到工程中。</p>
-<p> 对于步骤3生成的类，利用 protocol buffer的二进制格式，每个类均具有所选择类型的写和读消息功能。即可以进行解析和序列化操作。这里列举几个：</p>
+<h2 id="4-Protobuf-Runtime-Installation-生成Protocol-Buffer-API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中"><a href="#4-Protobuf-Runtime-Installation-生成Protocol-Buffer-API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中" class="headerlink" title="4. Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)"></a>4. <strong>Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)</strong></h2><p>对于java语言而言，就是生成一个Protocol Buffer API的jar包，应用里面导入该jar包即可，其他语言类似。那么如何生成这个API库呢？</p>
+<p>官方说明可以参见<a href="https://github.com/google/protobuf/tree/master/java">Protobuf Runtime Installation</a></p>
+<p>这里简化说明(建议使用maven来完成安装)：</p>
+<h3 id="4-1-安装maven-注意需要安装JDK1-7及其以上版本"><a href="#4-1-安装maven-注意需要安装JDK1-7及其以上版本" class="headerlink" title="4.1 安装maven(注意需要安装JDK1.7及其以上版本)"></a>4.1 安装maven(注意需要安装JDK1.7及其以上版本)</h3><p>maven下载地址(目前最新版本3.3.9)，<a href="http://maven.apache.org/" title="maven下载地址" target="_blank" rel="external">http://maven.apache.org/</a>。下载之后解压，然后将解压后得到的目录路径添加到系统path中，这样使得可以直接在命令行使用mvn命令。</p>
+<h3 id="4-2-下载protocol-buffer源码包"><a href="#4-2-下载protocol-buffer源码包" class="headerlink" title="4.2 下载protocol buffer源码包"></a>4.2 下载protocol buffer源码包</h3><p><a href="https://github.com/google/protobuf/releases" title="下载protocol buffer源码包">protocol buffer源码包</a>。注意：这里下载的版本必须与步骤2中protoc可执行二进制文件的版本一致，要查看protoc可执行二进制文件的版本，可以在命令行输入protoc –version。下载之后，解压，找到对应语言目录(java)，如下图：</p>
+<p><img src="http://i.imgur.com/hqbfZFn.png" alt=""></p>
+<p>从命令行进入java目录。</p>
+<p><strong>注意1：</strong>步骤2下载二进制可执行文件之后需要将二进制可执行文件改名为protoc.exe(Windows平台)，并且放置在如下目录(下载的protocol buffer源码包解压目录下的src子目录下)：</p>
+<p><img src="http://i.imgur.com/4Qdnw7s.png" alt=""></p>
+<p><strong>注意2：</strong>需要将java目录下的pom.xml(即maven执行所依据的文件，类似于ant构建时候的build.xml)中添加编码格式，否则构建会采用操作系统默认的编码，Windows平台中文的话是GBK，而我们在Android平台采用的是UTF_8。添加部分代码如下：</p>
+<pre><code>&lt;!-- pom.xml --&gt;
+&lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+&lt;/properties&gt;
+</code></pre><p><img src="http://i.imgur.com/q5WtQgd.png" alt=""></p>
+<h3 id="4-3-Run-the-tests-先测试运行，看看是否配置ok"><a href="#4-3-Run-the-tests-先测试运行，看看是否配置ok" class="headerlink" title="4.3 Run the tests(先测试运行，看看是否配置ok)"></a>4.3 Run the tests(先测试运行，看看是否配置ok)</h3><p>在命令输入：</p>
+<pre><code>mvn test
+</code></pre><p>确保成功再进行下一步。</p>
+<h3 id="4-4-生成jar包"><a href="#4-4-生成jar包" class="headerlink" title="4.4 生成jar包"></a>4.4 生成jar包</h3><p>在命令输入：</p>
+<pre><code>mvn package
+</code></pre><p>生成的jar包放置在java目录的子目录target下面。</p>
+<p><img src="http://i.imgur.com/dLL5Os3.png" alt=""></p>
+<h2 id="5-Parsing-and-Serialization-解析和序列化"><a href="#5-Parsing-and-Serialization-解析和序列化" class="headerlink" title="5. Parsing and Serialization(解析和序列化)"></a>5. <strong>Parsing and Serialization(解析和序列化)</strong></h2><p>这一步也就是最终我们在应用程序里面对数据进行解析读写等直观的操作，也是我们最关心的部分。</p>
+<p>将步骤3生成的java类复制进工程中(注意必须在其定义的包名结构下)，同时将步骤4生成的jar导入到工程中。</p>
+<p>对于步骤3生成的类，利用 protocol buffer的二进制格式，每个类均具有所选择类型的写和读消息功能。即可以进行解析和序列化操作。这里列举几个：</p>
 <pre><code>byte[] toByteArray();: serializes the message and returns a byte array containing its raw bytes.
 
 static Type(定义的类，比如步骤1中的Person) parseFrom(byte[] data);: parses a message from the given byte array.
@@ -315,9 +273,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(byte[] data);: p
 void writeTo(OutputStream output);: serializes the message and writes it to an OutputStream.
 
 static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream input);: reads and parses a message from an InputStream.
-</code></pre><p> 事实上，每个类包含有大量的解析和序列化的方法。 请参照<a href="https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/Message" target="_blank" rel="external"> Message API reference</a>进行详细查阅。</p>
-</li>
-</ol>
+</code></pre><p>事实上，每个类包含有大量的解析和序列化的方法。 请参照<a href="https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/Message" target="_blank" rel="external"> Message API reference</a>进行详细查阅。</p>
 
         
       </div>
