@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/cstsinghua/"/>
-  <updated>2016-06-23T04:05:40.265Z</updated>
+  <updated>2016-07-01T02:05:11.427Z</updated>
   <id>https://github.com/cstsinghua/</id>
   
   <author>
@@ -14,6 +14,165 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://github.com/cstsinghua/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
+    <id>https://github.com/cstsinghua/2016/07/01/Protocol Buffers使用说明/</id>
+    <published>2016-07-01T02:08:59.108Z</published>
+    <updated>2016-07-01T02:05:11.427Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Protocol-Buffers简介&quot;&gt;&lt;a href=&quot;#Protocol-Buffers简介&quot; class=&quot;headerlink&quot; title=&quot;Protocol Buffers简介&quot;&gt;&lt;/a&gt;Protocol Buffers简介&lt;/h1&gt;&lt;p&gt;Protocol Buffers是一种数据交换格式，用于结构化数据的读写，类似于序列化机制。在线客服系统里面Message的body部分其实就是具有结构化的数据，因此可以采用Protocol Buffers来实现各平台和语言之间的消息传输。Protocol Buffers特点以及与XML、各语言的序列化机制等的比较，可以后续展开，这里不赘述！此处重点说明其如何使用，特别是针对java(Android)平台。&lt;/p&gt;
+&lt;p&gt;Github地址：&lt;a href=&quot;https://github.com/google/protobuf&quot;&gt;https://github.com/google/protobuf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;官方地址：&lt;a href=&quot;https://developers.google.com/protocol-buffers/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt; https://developers.google.com/protocol-buffers/&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Protocol-Buffers的使用&quot;&gt;&lt;a href=&quot;#Protocol-Buffers的使用&quot; class=&quot;headerlink&quot; title=&quot;Protocol Buffers的使用&quot;&gt;&lt;/a&gt;Protocol Buffers的使用&lt;/h1&gt;&lt;p&gt;Protocol Buffers分为如下几个步骤&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Defining Your Protocol Format(定义数据交换的协议格式)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; 简单来说，就是类似于定义面向对象语言中的类，其相当于一个数据结构，对应用程序中要交换的数据做一个定义，包括各种字段的声明等等。其文件扩展名为.proto。对于.proto文件如何定义和其语法规范，请详细阅读&lt;a href=&quot;https://developers.google.com/protocol-buffers/docs/proto3&quot; title=&quot;Protocol Buffer Language Guide&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Protocol Buffer Language Guide&lt;/a&gt;。这里是proto3版本(最新版本，建议采用)，proto2的也可以参阅&lt;a href=&quot;https://developers.google.com/protocol-buffers/docs/proto&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;proto2 Language Guide&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; .proto示例(addressbook.proto)：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;//
+// Note: START and END tags are used in comments to define sections used in
+// tutorials.  They are not part of the syntax for Protocol Buffers.
+//
+// To get an in-depth walkthrough of this file and the related examples, see:
+// https://developers.google.com/protocol-buffers/docs/tutorials
+
+// [START declaration]
+syntax = &amp;quot;proto3&amp;quot;;
+package tutorial;
+// [END declaration]
+
+// [START java_declaration]
+option java_package = &amp;quot;com.example.tutorial&amp;quot;;
+option java_outer_classname = &amp;quot;AddressBookProtos&amp;quot;;
+// [END java_declaration]
+
+// [START csharp_declaration]
+option csharp_namespace = &amp;quot;Google.Protobuf.Examples.AddressBook&amp;quot;;
+// [END csharp_declaration]
+
+// [START messages]
+message Person {
+  string name = 1;
+  int32 id = 2;  // Unique ID number for this person.
+  string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+
+  repeated PhoneNumber phones = 4;
+}
+
+// Our address book file is just one of these.
+message AddressBook {
+  repeated Person people = 1;
+}
+// [END messages]
+&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Protocol Compiler Installation(获取protoc可执行二进制文件)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; 可以在Github和其官方地址上看到相关的说明，但是个人觉得其让人不觉明历，通俗来说，这一步就是要生成一个可执行的protoc二进制文件(在windows平台下即protoc.exe)。这里以Windows平台为例说明(后续如无特殊说明，均默认是Windows平台)。建议直接使用Google提供的已经编译好的二进制可执行文件(&lt;a href=&quot;http://repo1.maven.org/maven2/com/google/protobuf/protoc/&quot; title=&quot;protoc可执行二进制文件下载&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://repo1.maven.org/maven2/com/google/protobuf/protoc/&lt;/a&gt;)，建议选择最新版本下载(根据自己操作系统的平台选择对应版本)。想要自己编译生成也可以，不过会遇到各种坑，感兴趣的童鞋可以尝试之&lt;a href=&quot;https://github.com/google/protobuf/releases&quot; title=&quot;下载protocol buffer源码包&quot;&gt;protocol buffer源码包&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt; protoc.exe是干什么的呢？其用来编译用户定义的数据结构即步骤1中编写的.proto文件，详细参见步骤3.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;即用步骤2得到的protoc可执行二进制文件编译步骤1所得的.proto文件，最终生成语言相关的类(代码)。这里以java语言为例：其命令格式如下：&lt;/p&gt;
+&lt;p&gt;protoc -I=$SRC_DIR –java_out=$DST_DIR $SRC_DIR/addressbook.proto&lt;/p&gt;
+&lt;p&gt;eg:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;D:\protobuf-3.0.0-beta-2\src&amp;gt;protoc.exe -I=D:\protobuf-3.0.0-beta-2\src --java_out=D:\kefu D:\protob
+uf-3.0.0-beta-2\src\boyim.proto
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如上，进入命令行，protoc即protoc可执行二进制文件，指定$SRC_DIR：源目录 (一般情况下即你的应用程序所在目录 – 如果不提供的话，则默认为当前工作目录即当前命令行的目录)；$DST_DIR：目标目录(你所期望生成的代码存放的目录; 通常情况下与源目录一致)；$SRC_DIR/addressbook.proto：即.proto文件的路径. &lt;/p&gt;
+&lt;p&gt;因为这里是生成java类, 因此使用 –java_out 选项 ， 类似的选项可以用于其它支持的语言.&lt;br&gt;对于addressbook.proto示例，这会在目标目录下生成 com/example/tutorial/AddressBookProtos.java文件.可以查看该文件，与普通的javaBean相似，包含了很多setters/getters方法，另外有一个builder方法，用于方便构造类对象。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;对于java语言而言，就是生成一个Protocol Buffer API的jar包，应用里面导入该jar包即可，其他语言类似。那么如何生成这个API库呢？
+
+
+官方说明可以参见[Protobuf Runtime Installation](https://github.com/google/protobuf/tree/master/java)
+
+这里简化说明(建议使用maven来完成安装)：
+
+
+- 安装maven(注意需要安装JDK1.7及其以上版本)
+
+    maven下载地址(目前最新版本3.3.9)，[http://maven.apache.org/](http://maven.apache.org/ &amp;quot;maven下载地址&amp;quot;)。下载之后解压，然后将解压后得到的目录路径添加到系统path中，这样使得可以直接在命令行使用mvn命令。
+
+- 下载protocol buffer源码包
+
+    [protocol buffer源码包](https://github.com/google/protobuf/releases &amp;quot;下载protocol buffer源码包&amp;quot;)。注意：这里下载的版本必须与步骤2中protoc可执行二进制文件的版本一致，要查看protoc可执行二进制文件的版本，可以在命令行输入protoc --version。下载之后，解压，找到对应语言目录(java)，如下图：
+
+    ![](http://i.imgur.com/hqbfZFn.png)
+
+    从命令行进入java目录。
+
+    **注意1：**步骤2下载二进制可执行文件之后需要将二进制可执行文件改名为protoc.exe(Windows平台)，并且放置在如下目录(下载的protocol buffer源码包解压目录下的src子目录下)：
+
+    ![](http://i.imgur.com/4Qdnw7s.png)
+
+    **注意2：**需要将java目录下的pom.xml(即maven执行所依据的文件，类似于ant构建时候的build.xml)中添加编码格式，否则构建会采用操作系统默认的编码，Windows平台中文的话是GBK，而我们在Android平台采用的是UTF_8。添加部分代码如下：
+
+        &amp;lt;!-- pom.xml --&amp;gt;
+        &amp;lt;properties&amp;gt;
+            &amp;lt;project.build.sourceEncoding&amp;gt;UTF-8&amp;lt;/project.build.sourceEncoding&amp;gt;
+            &amp;lt;project.reporting.outputEncoding&amp;gt;UTF-8&amp;lt;/project.reporting.outputEncoding&amp;gt;
+        &amp;lt;/properties&amp;gt;
+
+    ![](http://i.imgur.com/q5WtQgd.png)
+
+
+- Run the tests(先测试运行，看看是否配置ok)
+
+    在命令输入：
+
+        mvn test
+
+    确保成功再进行下一步。
+
+
+- 生成jar包
+
+    在命令输入：
+
+        mvn package
+
+    生成的jar包放置在java目录的子目录target下面。
+
+    ![](http://i.imgur.com/dLL5Os3.png)
+&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Parsing and Serialization(解析和序列化)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; 这一步也就是最终我们在应用程序里面对数据进行解析读写等直观的操作，也是我们最关心的部分。&lt;/p&gt;
+&lt;p&gt; 将步骤3生成的java类复制进工程中(注意必须在其定义的包名结构下)，同时将步骤4生成的jar导入到工程中。&lt;/p&gt;
+&lt;p&gt; 对于步骤3生成的类，利用 protocol buffer的二进制格式，每个类均具有所选择类型的写和读消息功能。即可以进行解析和序列化操作。这里列举几个：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;byte[] toByteArray();: serializes the message and returns a byte array containing its raw bytes.
+
+static Type(定义的类，比如步骤1中的Person) parseFrom(byte[] data);: parses a message from the given byte array.
+
+void writeTo(OutputStream output);: serializes the message and writes it to an OutputStream.
+
+static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream input);: reads and parses a message from an InputStream.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; 事实上，每个类包含有大量的解析和序列化的方法。 请参照&lt;a href=&quot;https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/Message&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt; Message API reference&lt;/a&gt;进行详细查阅。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Protocol-Buffers简介&quot;&gt;&lt;a href=&quot;#Protocol-Buffers简介&quot; class=&quot;headerlink&quot; title=&quot;Protocol Buffers简介&quot;&gt;&lt;/a&gt;Protocol Buffers简介&lt;/h1&gt;&lt;p&gt;Protoc
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Github pages+Hexo+Nodejs搭建个人blog</title>
@@ -3277,39 +3436,6 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://github.com/cstsinghua/2016/06/13/hello-world/"/>
-    <id>https://github.com/cstsinghua/2016/06/13/hello-world/</id>
-    <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-30T10:24:26.335Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For Test:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="杂项" scheme="https://github.com/cstsinghua/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-      <category term="杂项" scheme="https://github.com/cstsinghua/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-  </entry>
-  
-  <entry>
     <title>python安装某些第三方包报错解决办法</title>
     <link href="https://github.com/cstsinghua/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
     <id>https://github.com/cstsinghua/2016/06/13/python安装第三方包错误解决/</id>
@@ -3358,6 +3484,39 @@ collect2.exe: error: ld returned 1 exit status
     
     
       <category term="安装第三方包" scheme="https://github.com/cstsinghua/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://github.com/cstsinghua/2016/06/13/hello-world/"/>
+    <id>https://github.com/cstsinghua/2016/06/13/hello-world/</id>
+    <published>2016-06-13T01:57:02.000Z</published>
+    <updated>2016-06-30T10:24:26.335Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For Test:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="杂项" scheme="https://github.com/cstsinghua/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="杂项" scheme="https://github.com/cstsinghua/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
