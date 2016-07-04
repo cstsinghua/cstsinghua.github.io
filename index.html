@@ -325,7 +325,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
 <h1 id="Github-pages-Hexo-Nodejs搭建个人blog"><a href="#Github-pages-Hexo-Nodejs搭建个人blog" class="headerlink" title="Github pages+Hexo+Nodejs搭建个人blog"></a>Github pages+Hexo+Nodejs搭建个人blog</h1><p>好处和缺点这里就暂不提了，请自行google。(本文仅仅是提供一种搭建Blog的方式，不牵涉任何利益方！！！)</p>
 <p>步骤如下：</p>
 <ol>
-<li>安装git：<a href="https://git-scm.com" title="git下载" target="_blank" rel="external">git下载</a>，注意：Windows平台需要下载对应的安装exe,安装之后后续的命令行操作需要在GitShell中打开而非Windows默认的命令行。</li>
+<li>安装git：<a href="https://git-scm.com" title="git下载" target="_blank" rel="external">git下载</a>，注意：Windows平台需要下载对应的安装exe,安装之后后续的命令行操作需要在GitShell中打开而非Windows默认的命令行。不过，建议直接下载<a href="https://desktop.github.com/" title="Github桌面版" target="_blank" rel="external">Github windows客户端</a>，安装的时候会创建GitShell(正是下文提及的GitShell)和GitHub GUI工具。</li>
 <li>安装nodejs：<a href="https://nodejs.org" title="nodejs官网" target="_blank" rel="external">node.js官网</a>，注意：请根据自己主机的平台下载对应版本。</li>
 <li>安装hexo及部署：<a href="https://hexo.io/" title="hexo官网" target="_blank" rel="external">hexo官网</a>，注意：安装 Hexo 相当简单。然而在安装前，您必须确保先完成步骤1和2。Hexo网站可以选择语言为简体中文，方便使用。查看其中的文档可以看到hexo的详细使用说明，so easy！</li>
 </ol>
@@ -419,6 +419,41 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
 <li><p>DNS设置：注册DNSpod，添加域名，不是必要的步骤，但是据说可以提高解析效率。本人没有测试。</p>
 </li>
 <li><p>在域名服务商，如net.cn中修改增加两条A记录，指向github pages 提供的 ip<br>  192.30.252.153<br>  192.30.252.154</p>
+</li>
+</ul>
+<h2 id="推广"><a href="#推广" class="headerlink" title="推广"></a>推广</h2><p>一旦成功创建属于自己的blog，当然是想与他人分享，让小伙伴们都可以搜索到或者浏览自己的成果。很不幸的是，采用本文方式创建的blog默认情况下只会静静躺在互联网的一个角落，google或者百度等搜索引擎是无法知晓它的存在。因此，我们必须采用一些方式来推广自己的blog，让其他人能够通过Google或者百度等搜索引擎搜索到我们blog。</p>
+<ul>
+<li><p>先验证博客是否被搜索引擎收录</p>
+<p>  在百度或者谷歌上面输入下面格式来判断，如果能搜索到就说明被收录，否则就没有，用你的域名替代我的cstsinghua.github.io</p>
+<blockquote>
+<p>site:cstsinghua.github.io</p>
+</blockquote>
+<p>  如下图：<br>  <img src="http://i.imgur.com/gVZSKWY.png" alt=""></p>
+<p>  如果已被搜索引擎收录，那恭喜你，可以不用看后面的内容了。你的blog已经在互联网上飘香四溢。</p>
+</li>
+<li><p>在google和百度的站长管理平台验证并添加blog地址</p>
+<p>  <a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="external">Google站长管理平台地址</a></p>
+<p>  <a href="http://zhanzhang.baidu.com/linksubmit/url" target="_blank" rel="external">百度站长管理平台地址</a></p>
+<p>  这里以Google为例(百度的类似)：</p>
+<p>  <strong>1.</strong>登录google站长管理平台，在首页中点击”添加属性”按钮，然后将你的blog地址填写并添加，如下图所示：<br>  <img src="http://i.imgur.com/7Xp2CIP.png" alt=""><br>  <strong>2.</strong>blog网址添加完成之后，会跳转到验证所有权页面，验证方式有很多种，可以根据自己的情况选择，这里选择推荐的方法，即上传HTML文件的方式，其步骤在跳转的页面写得很清楚，按部就班地操作就行了(<strong>注意：先点击下载页面提示的HTML文件，报错</strong>)。如下图所示：<br>  <img src="http://i.imgur.com/tz37dOJ.png" alt=""></p>
+<p>  <img src="http://i.imgur.com/UvrvykY.png" alt=""></p>
+<p>  <strong>3.</strong>生成并提交站点地图(sitemap.xml)<br>  站点地图是一种文件，您可以通过该文件列出您网站上的网页，从而将您网站内容的组织架构告知Google和其他搜索引擎。Googlebot等搜索引擎网页抓取工具会读取此文件，以便更加智能地抓取您的网站。</p>
+<p>  怎么生成blog网站的站点地图呢？方式有很多种，hexo本身也自带了生成站点地图的插件。我们要先安装插件，打开你的hexo博客根目录，分别用下面两个命令来安装针对谷歌和百度的插件：</p>
+<blockquote>
+<p>npm install hexo-generator-sitemap –save</p>
+<p>npm install hexo-generator-baidu-sitemap –save</p>
+</blockquote>
+<p>  在blog根目录的配置文件_config.yml中添加如下代码</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sitemap:</span><br><span class="line">path: sitemap.xml</span><br><span class="line">baidusitemap:</span><br><span class="line">path: baidusitemap.xml</span><br></pre></td></tr></table></figure>
+<p>  然后，修改blog根目录的配置文件_config.yml中url参数为你blog的地址，比如我的是这样：</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span><br><span class="line">url: https://cstsinghua.github.io/</span><br></pre></td></tr></table></figure>
+<p>  此时，可以重新生成你的blog</p>
+<blockquote>
+<p>hexo g</p>
+</blockquote>
+<p>  如果你在你的blog根目录的public下面发现生成了sitemap.xml以及baidusitemap.xml就表示成功了。当然可以采用其他很多方式来生成sitemap.xml，网上也有很多在线工具或者提供下载的本地GUI工具来生成，可以参见<a href="https://code.google.com/archive/p/sitemap-generators/wikis/SitemapGenerators.wiki" target="_blank" rel="external">https://code.google.com/archive/p/sitemap-generators/wikis/SitemapGenerators.wiki</a>，里面提供了非常多的链接地址，本人使用过<a href="https://xmlsitemapgenerator.org" target="_blank" rel="external">https://xmlsitemapgenerator.org</a>在线生成过。</p>
+<p>  最后，将生成的sitemap.xml提交到google站长管理平台，如下图所示：<br>  <img src="http://i.imgur.com/T0ur897.png" alt=""></p>
+<p>  蓝色表示sitem.xml里面上传的网页数，橙色表示已经被google加入索引(收录)的网页数，一旦被收录，这个时候就可以在google上面搜索到blog了！关于细节可以点击google站长页面上的帮助进行了解。</p>
 </li>
 </ul>
 
