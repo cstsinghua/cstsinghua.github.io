@@ -163,6 +163,54 @@
   <ul class="post-list">
   
     <li class="post-list-item">
+  <article id="post-删除Windows下的超长路径目录" class="article article-type-post" itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/08/删除Windows下的超长路径目录/">删除Windows下的超长路径目录</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/">Windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/删除/">删除</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/超长目录/">超长目录</a></li></ul>
+</div>
+        <time datetime="2016-07-08T02:28:12.000Z" itemprop="datePublished" class="post-tiem">
+  2016-07-08
+</time>
+      </div>
+      <div class="post-content" id="post-content" itemprop="postContent" >
+        
+          <h1 id="删除超长路径文件或者目录"><a href="#删除超长路径文件或者目录" class="headerlink" title="删除超长路径文件或者目录"></a>删除超长路径文件或者目录</h1><p>在Windows操作系统，由于使用目录工具不当或者在使用某些编程工具时生成目录时(比如反复在同一目录下导入同一个工程)常常会产生多层递归模式，导致产生多级超长目录结构，而无法用Windows可视化右键模式进行删除，市面上的很多文件删除工具，如360强力删除、unlocker删除都无济于事，真是一件恼人的事情。</p>
+<p>其实，windows系统自身便带有相关的命令行工具可以用来删除，操作过程如下：</p>
+<ol>
+<li>比如D盘下面如存在D:\blog\node_modules\a\b\c......多层嵌套的目录；</li>
+<li>通过cmd命令行输入cd命令进入上述目录；</li>
+<li>mkdir tempDir这个为空目录结构；</li>
+<li>robocopy /mir tempDir a；</li>
+<li>上面执行完毕之后，便可以删除目录了</li>
+</ol>
+<p>但是在某些情况下，执行robocopy命令在中途就可能停止，又不得不重新执行该命令，直到目录完全被删除为止。因此可以写批处理文件来循环操作，当然也可以采用简单的python脚本来执行。</p>
+<h1 id="采用python脚本循环删除超长目录"><a href="#采用python脚本循环删除超长目录" class="headerlink" title="采用python脚本循环删除超长目录"></a>采用python脚本循环删除超长目录</h1><p>示例代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="string">'''</span><br><span class="line">1.比如无法删除的超长目录为D:\blog\node_modules\a\b\c\...\...；</span><br><span class="line">2.执行完毕之后，目录变成D:\blog\node_modules，后面的a\b\c\...\...则会被删除；</span><br><span class="line">'''</span></span><br><span class="line">os.chdir(<span class="string">r"D:\blog\node_modules"</span>)</span><br><span class="line">os.mkdir(<span class="string">r"D:\blog\node_modules\tempDir"</span>)<span class="comment">#创建临时的空目录</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    result = os.system(<span class="string">"Robocopy.exe tempDir a /MIR"</span>)</span><br><span class="line">    <span class="keyword">if</span>(result != <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">os.rmdir(<span class="string">r"D:\blog\node_modules\tempDir"</span>)<span class="comment">#删除之前创建的临时目录</span></span><br></pre></td></tr></table></figure></p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/07/08/删除Windows下的超长路径目录/" class="post-more waves-effect waves-button waves-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
   <article id="post-Protocol Buffers使用说明" class="article article-type-post" itemprop="blogPost">
     
       
@@ -3626,94 +3674,6 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
       </div>
       <div class="post-footer clearfix">
         <a href="/2016/06/13/Android studio动态调试指南/" class="post-more waves-effect waves-button waves-light">MORE</a>
-      </div>
-    
-
-  </article>
-
-
-</li>
-  
-    <li class="post-list-item">
-  <article id="post-Android APK瘦身初探" class="article article-type-post" itemprop="blogPost">
-    
-      
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/06/13/Android APK瘦身初探/">Android APK瘦身策略</a>
-    </h3>
-  
-
-
-
-      <div class="post-meat flex-row">
-        <div class="flex-col">
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APK瘦身/">APK瘦身</a></li></ul>
-</div>
-        <time datetime="2016-06-13T06:34:28.000Z" itemprop="datePublished" class="post-tiem">
-  2016-06-13
-</time>
-      </div>
-      <div class="post-content" id="post-content" itemprop="postContent" >
-        
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>随着Android技术的发展，以及用户需求的井喷，Android应用的APK大小也随着越来越“胖”，APK在安装和更新之前都需要经过网络将其下载到手机，如果APK越大消耗的流量就会越多，特别是对于使用移动网络的用户来讲，消耗流量越多就代表需要花更多的钱去购买流量。同时一些第三方应用商城也会对上传的APK大小有限制，所以为了能够让产品能够更受商城和用户欢迎，APK瘦身是第一步，更小的APK标示着更多地用户愿意去下载和体验。因此，APK瘦身大有必要！</p>
-<h1 id="APK文件结构"><a href="#APK文件结构" class="headerlink" title="APK文件结构"></a>APK文件结构</h1><p>Android应用的APK文件其实就是一个压缩文件，可以用常规的压缩软件打开，查看其目录结构。为了能够减小APK的大小，首先需要知道APK由哪些部分构成，然后针对每个部分做相应的优化工作，下图是一个APK解压后的文件结构（各APK的结构核心内容是一致的，差异化的文件暂不关注）:</p>
-<p><img src="http://i.imgur.com/nfreQFu.png" alt="APK目录结构"></p>
-<p>各文件的介绍如下：</p>
-<ul>
-<li><p>classes.dex：classes.dex是java源码编译后生成的java字节码文件。但由于Android使用的dalvik虚拟机与标准的java虚拟机是不兼容的，dex文件与class文件相比，不论是文件结构还是opcode都不一样。Android模拟器中提供了一个dex文件的反编译工具，dexdump。用法为首先启动Android模拟器，把要查看的dex文件用adb push上传的模拟器中，然后通过adb shell登录，找到要查看的dex文件，执行dexdump xxx.dex（或者从压缩文件取出dex文件，直接在PC上面找到dexdump.exe的路径，然后执行命令）。另外Dedexer是一个反编译dex文件的开源工具，需要自己编译源代码。而当前，还有比如dex2jar甚至封装好的GUI的工具(比如安卓逆向助手等等)可以反编译dex文件为jar文件，再利用jd-gui工具打开jar文件，就可以阅读java源代码了。</p>
-</li>
-<li><p>resources.arsc：编译后的二进制资源文件</p>
-</li>
-<li><p>AndroidManifest.xml：清单文件，该文件是每个应用都必须定义和包含的，它描述了应用的名字、版本、权限、引用的库文件等等信息，如要把apk上传到Google Market上，也要对这个xml做一些配置。在apk中的AndroidManifest.xml是经过压缩的，可以通过AXMLPrinter2工具解开，具体命令为：java -jar AXMLPrinter2.jar AndroidManifest.xml</p>
-</li>
-<li><p>proguard.cfg：代码混淆配置文件(上图中暂无包括混淆配置)；</p>
-</li>
-<li><p>project.properties：标示APK的target sdk和依赖关系，这里的依赖关系指示的是该APK依赖到了哪些工程(上图中暂无包括依赖配置)；</p>
-</li>
-<li><p>assets：assets目录可以存放一些配置文件（比如webview本地资源、图片资源、音视频等等），这些文件的内容在程序运行过程中可以通过相关的API（android.content.res.AssetManager）获得。</p>
-</li>
-<li><p>lib：lib目录下的子目录armeabi存放的是一些so文件。这个地方多讲几句，都是在开发过程中摸索出来的。eclipse在打包的时候会根据文件名的命名规则（lib**.so）去打包so文件，开头和结尾必须分别为“lib”和“.so”，否则是不会打包到apk文件中的。其他非eclipse开发环境没有测试过。如果你是用SDK和NDK开发的话，这部分很重要，甚至可以通过把一些不是so文件的文件通过改名打包到apk中，具体能干些什么那就看你想干什么了，呵呵呵！</p>
-</li>
-<li><p>META-INF：META-INF目录下存放的是签名信息，用来保证apk包的完整性和系统的安全。在eclipse编译生成一个apk包时，会对所有要打包的文件做一个校验计算，并把计算结果放在META-INF目录下。这就保证了apk包里的文件不能被随意替换。比如拿到一个apk包后，如果想要替换里面的一幅图片，一段代码， 或一段版权信息，想直接解压缩、替换再重新打包，基本是不可能的。如此一来就给病毒感染和恶意修改增加了难度，有助于保护系统的安全。</p>
-</li>
-<li><p>res：res目录存放资源文件。包括图片、字符串、raw文件夹下面的音频文件、各种xml文件等等。</p>
-</li>
-</ul>
-<h1 id="优化探讨"><a href="#优化探讨" class="headerlink" title="优化探讨"></a>优化探讨</h1><p>从前面的目录结构图分析可知，<strong>APK中classes.dex、lib、资源文件是大头，APK瘦身主要就是优化这三类</strong>，关于这三种类型的文件比较成熟的优化方法有：</p>
-<ul>
-<li><p><strong>classes.dex:</strong>这是减少apk文件至关重要的第一步。你要对自己的代码了如子掌。你要移除掉所有无用处的dependency libraries，让你的代码一天比一天优秀，持续地优化你的代码。总而言之，保持一个简洁，最新的代码基础是减少apk文件至关重要的一环。当然，从零开始一个项目并为这个项目保持一份简洁的代码基础很容易。项目越老，这个工作就越困难。事实上，拥有一大段历史背景的项目必须要去处理各种死代码和无用代码。还好有许多的开发工具可以帮我们来做这些事情……Proguard 是一个很强悍的工具，它可以帮你在代码编译时对代码进行混淆，优化和压缩。它有一个专门用来减少apk文件大小的功能叫做 tree-shaking。Proguard 会遍历你的所有代码然后找出无用处的代码。所有这些不可达（或者不需要）的代码都会在生成最终的apk文件之前被清除掉。Proguard 也会重命名你的类属性，类和接口，然整个代码尽可能地保持轻量级水平。也许现在你会认为 Proguard 是一个相当有效地工具。但是能力越大，责任也就越大。现在许多开发这认为Proguard有点让人不省心，因为它会重度依赖反射。哪些类或者属性需要被处理或者不能处理都要开发者对Proguard进行配置。但通过代码混淆，删掉不必要的jar包和代码可实现dex文件的优化；</p>
-</li>
-<li><p><strong>lib:</strong>一个硬件设备对应一个架构（mips、arm或者x86），只保留与设备架构相关的库文件夹（主流的架构都是arm的，mips属于小众，默认也是支持arm的so的，但x86的不支持），这样可以大大降低lib文件夹的大小；</p>
-</li>
-<li><p><strong>资源文件：</strong>Proguard 只会对 Java 代码起作用，那么对哪些资源文件呢？比如一张图片 my_image 在 res/drawable 文件夹中，没有被使用，Proguard 只会移除掉 R 类中的引用，但是图片依然还在文件夹中。Lint 一个静态的代码分析器，你只需通过调用 ./gradlew lint这个简单地命令它就能帮你检查所有无用的资源文件。它在检测完之后会提供一份详细的资源文件清单，并将无用的资源列在“UnusedResources: Unused resources” 区域之下。只要你不通过反射来反问这些无用资源，你就可以放心地移除这些文件了。Lint 会分析资源文件(比如 /res 文件夹下面的文件) ，但是会跳过 assets 文件 ( /assets 文件夹下面的文件)。事实上assets 文件是可以通过它们的文件名直接访问的，而不需要通过Java引用或者XML引用。因此，Lint 也不能判定某个 asset 文件在项目中是否有用。这全取决于开发者对这个文件夹的维护了。如果你没有使用某个asset 文件，那么你就可以直接清除这个文件。通过Lint工具扫描代码中没有使用到的静态资源。</p>
-</li>
-</ul>
-<p>上面介绍的三种类型文件的优化方案的确能够在一定程度上减小APK的大小，但在最近做项目的过程中经过研究发现还可以更进一步优化APK的大小，具体方案如下：</p>
-<ul>
-<li><p>多分辨率适配：这里的水很深，网上也有很多文章介绍经验（比如一套图、一套布局，多套dimens.xml文件，在使用最小资源的情况下搞定多分辨率适配），Android官网也有专门的篇章介绍，详细研究可以参看；</p>
-</li>
-<li><p>预置数据：和游戏一样，程序和数据分离，进入模块时下载预置数据（下载的策略需要注重用户体验，在需要使用数据的地方下载）；</p>
-</li>
-<li><p>图片资源：压缩优化图片资源（<strong>图片资源的优化原则是：在不降低图片效果、保证APK显示效果的前提下缩小图片文件的大小。</strong>），或者使用新的图片格式，Aapt（Android Asset Packaging Tool）就内置了 保真图像压缩算法。例如，一个只需 256 色的真彩PNG图片会被aapt 通过一个颜色调色板转化成一个 8-bit PNG 文件。这可以帮助你减少图片文件的大小。当然你还可以通过Google查找相应的优化工具，比如 压缩png图片的常用工具有tinypng（<a href="https://tinypng.com" title="tinypng官网" target="_blank" rel="external">https://tinypng.com</a>）、pngquant（<a href="https://pngquant.org/" title="pngquant官网" target="_blank" rel="external">https://pngquant.org/</a>）、ImageAlpha 和 ImageOptim 等。还有一种只在Android平台上存在的图片文件也可以优化，它就是 9-patches。就目前所了解的情况，还没发现针对这类图片文件的高效优化工具。然而你只需要求你的设计师将它的可扩展区域和内容区域尽可能地减少即可。这不但可以减少资源文件的大小，还能使得以后资源文件的维护变得更加简单。你可以从中选择一个适合你的工具。而<strong>Android支持的新式的图片格式webP</strong>，下面详细介绍图片资源优化(压缩)的方案。</p>
-</li>
-</ul>
-<h2 id="图片压缩工具介绍"><a href="#图片压缩工具介绍" class="headerlink" title="图片压缩工具介绍"></a>图片压缩工具介绍</h2><p><strong>1.tinypng：</strong></p>
-<p>tinypng是一个支持压缩png和jpg图片格式的网站（<a href="https://tinypng.com" title="tinypng官网" target="_blank" rel="external">https://tinypng.com</a>），通过其独特的算法（通过一种叫“量化”的技术，把原本png文件的24位真彩色压缩为8位的索引演示，是一种矢量压缩方法，把颜色值用数值123等代替。）可以实现在无损压缩的情况下图片文件大小缩小到原来的30%-50%甚至更多。</p>
-<p>tinypng的缺点是在压缩某些带有过渡效果（带alpha值）的图片时，图片会失真，这种图片可以将png图片转换为下面介绍的webP格式，可以在保证图片质量的前提下大幅缩小图片的大小。需要说明的是：tinypng支持png和jpg图片的压缩，并且也支持9图的压缩。</p>
-<p>tinypng提供了开放接口供开发者开发属于自己的压缩工具，不过这是付费服务，对于普通用户来说，tinypng为每个用户提供的每月图片免费压缩数量（目前是500张/月）已经足够了。</p>
-<p><strong>2.使用webP图片格式：</strong></p>
-<p>WebP是谷歌研发出来的一种图片数据格式，它是一种支持有损压缩和无损压缩的图片文件格式，派生自图像编码格式 VP8。根据 Google 的测试，无损压缩后的 WebP 比 PNG 文件少了 45％ 的文件大小，即使这些 PNG 文件经过其他压缩工具压缩之后，WebP 还是可以减少 28％ 的文件大小。目前很多公司已经将webP技术运用到Android APP中，比如FaceBook、腾讯、淘宝。webP相比于png最明显的问题是加载稍慢，不过现在的智能设备硬件配置越来越高，这都不是事儿。</p>
-<p> 假如你打算在 App 中使用 WebP，除了 Android4.0 以上提供的原生支持外，其他版本以可以使用官方提供的解析库webp-android-backport编译成so使用。</p>
-<p> 通常UI提供的图片都是png或者jpg格式，我们可以通过智图或者isparta将其它格式的图片转换成webP格式，isparta可实现批量转换，墙裂推荐！</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>APK瘦身是一个系统工程，不可能一蹴而就，而且与APK的体验及功能等密切相关，不能顾此失彼，既要保证APK和画面的质量，又要尽量减少APK的体积，因此，需要综合考虑各个因素，做出更优的策略。</p>
-
-        
-      </div>
-      <div class="post-footer clearfix">
-        <a href="/2016/06/13/Android APK瘦身初探/" class="post-more waves-effect waves-button waves-light">MORE</a>
       </div>
     
 
