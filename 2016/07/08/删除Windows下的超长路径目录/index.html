@@ -227,11 +227,12 @@
 <li>比如D盘下面如存在D:\blog\node_modules\a\b\c......多层嵌套的目录；</li>
 <li>通过cmd命令行输入cd命令进入上述目录；</li>
 <li>mkdir tempDir这个为空目录结构；</li>
-<li>robocopy /mir tempDir a；</li>
+<li>robocopy /mir tempDir a；//<strong>tempDir是步骤3创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a</strong></li>
 <li>上面执行完毕之后，便可以删除目录了</li>
 </ol>
 <p>但是在某些情况下，执行robocopy命令在中途就可能停止，又不得不重新执行该命令，直到目录完全被删除为止。因此可以写批处理文件来循环操作，当然也可以采用简单的python脚本来执行。</p>
 <h1 id="采用python脚本循环删除超长目录"><a href="#采用python脚本循环删除超长目录" class="headerlink" title="采用python脚本循环删除超长目录"></a>采用python脚本循环删除超长目录</h1><p>示例代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="string">'''</span><br><span class="line">1.比如无法删除的超长目录为D:\blog\node_modules\a\b\c\...\...；</span><br><span class="line">2.执行完毕之后，目录变成D:\blog\node_modules，后面的a\b\c\...\...则会被删除；</span><br><span class="line">'''</span></span><br><span class="line">os.chdir(<span class="string">r"D:\blog\node_modules"</span>)</span><br><span class="line">os.mkdir(<span class="string">r"D:\blog\node_modules\tempDir"</span>)<span class="comment">#创建临时的空目录</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    result = os.system(<span class="string">"Robocopy.exe tempDir a /MIR"</span>)</span><br><span class="line">    <span class="keyword">if</span>(result != <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">os.rmdir(<span class="string">r"D:\blog\node_modules\tempDir"</span>)<span class="comment">#删除之前创建的临时目录</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>note：os.system(“Robocopy.exe tempDir a /MIR”)中tempDir是步骤创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a，实际使用时需要修改成你自己的目录</strong></p>
 
             <blockquote>
               <p>
