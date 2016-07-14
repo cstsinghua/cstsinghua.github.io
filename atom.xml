@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://cstsinghua.github.io/"/>
-  <updated>2016-07-08T03:44:08.000Z</updated>
+  <updated>2016-07-14T09:31:04.000Z</updated>
   <id>https://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,96 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Eclipse常用快捷键</title>
+    <link href="https://cstsinghua.github.io/2016/07/14/Eclipse%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>https://cstsinghua.github.io/2016/07/14/Eclipse常用快捷键/</id>
+    <published>2016-07-14T09:30:18.000Z</published>
+    <updated>2016-07-14T09:31:04.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Eclipse常用的快捷键总结&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Eclipse常用快捷键&quot;&gt;&lt;a href=&quot;#Eclipse常用快捷键&quot; class=&quot;headerlink&quot; title=&quot;Eclipse常用快捷键&quot;&gt;&lt;/a&gt;Eclipse常用快捷键&lt;/h1&gt;&lt;p&gt;纸上得来终觉浅，绝知此事要躬行！！！&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ctrl+D 删除本行；&lt;/li&gt;
+&lt;li&gt;Alt+/ 代码提示；&lt;/li&gt;
+&lt;li&gt;shift+enter在当前行下面添加空行；&lt;/li&gt;
+&lt;li&gt;ctrl+shift+enter在当前行上面添加空行；&lt;/li&gt;
+&lt;li&gt;alt+up（down）上移或下移选定行；&lt;/li&gt;
+&lt;li&gt;Ctrl+/ 注释或取消注释；&lt;/li&gt;
+&lt;li&gt;Ctrl+1 提示和建议；&lt;/li&gt;
+&lt;li&gt;Ctrl+alt+up(down) 向上或向下复制选定行；&lt;/li&gt;
+&lt;li&gt;End 来到行尾；Home来到行首；&lt;/li&gt;
+&lt;li&gt;Ctrl+m 最大化窗口或还原窗口；&lt;/li&gt;
+&lt;li&gt;Ctrl+o 方法大纲和搜索方法；&lt;/li&gt;
+&lt;li&gt;Ctrl+l 来到指定行号&lt;/li&gt;
+&lt;li&gt;Ctrl+e 在多个编辑窗口切换&lt;/li&gt;
+&lt;li&gt;Ctrl+shift+o 导入包&lt;/li&gt;
+&lt;li&gt;Ctrl+shift+/ 添加块注释&lt;/li&gt;
+&lt;li&gt;Ctrl+shift+\ 去除块注释&lt;/li&gt;
+&lt;li&gt;Ctrl+Q 定位到最后编辑的地方&lt;/li&gt;
+&lt;li&gt;Ctrl+K 参照选中的Word快速定位到下一个&lt;/li&gt;
+&lt;li&gt;Ctrl+Shift+P 定位到对于的匹配符(譬如{}) (从前面定位后面时,光标要在匹配符里面,后面到前面,则反之)&lt;/li&gt;
+&lt;li&gt;Ctrl+Shift+X 把当前选中的文本全部变为小写&lt;/li&gt;
+&lt;li&gt;Ctrl+Shift+Y 把当前选中的文本全部变为小写&lt;/li&gt;
+&lt;li&gt;当光标在一行的两端时，按住shift+home/end可以选择当前行&lt;/li&gt;
+&lt;li&gt;ctrl+左右箭头 跳过一个单词&lt;/li&gt;
+&lt;li&gt;ctrl+shift+左右是选择一个单词，可以连点左右以选择多个&lt;/li&gt;
+&lt;li&gt;shift+上下键！选中光标到上下行！&lt;/li&gt;
+&lt;li&gt;列编辑模式 Alt+Shift+A，一般情况下可能与系统其他快捷键冲突，可以修改为其他组合方式；&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      Eclipse常用的快捷键总结
+    
+    </summary>
+    
+      <category term="Java" scheme="https://cstsinghua.github.io/categories/Java/"/>
+    
+    
+      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    
+      <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
+    
+      <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android studio常用快捷键</title>
+    <link href="https://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>https://cstsinghua.github.io/2016/07/13/Android-studio常用快捷键/</id>
+    <published>2016-07-13T10:07:19.000Z</published>
+    <updated>2016-07-13T10:08:32.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Android studio常用的快捷键&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Android-studio常用快捷键总结&quot;&gt;&lt;a href=&quot;#Android-studio常用快捷键总结&quot; class=&quot;headerlink&quot; title=&quot;Android studio常用快捷键总结&quot;&gt;&lt;/a&gt;Android studio常用快捷键总结&lt;/h1&gt;&lt;p&gt;书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。&lt;/p&gt;
+&lt;h2 id=&quot;搜索快捷键&quot;&gt;&lt;a href=&quot;#搜索快捷键&quot; class=&quot;headerlink&quot; title=&quot;搜索快捷键&quot;&gt;&lt;/a&gt;搜索快捷键&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;删除当前行:Ctrl+Y；&lt;/li&gt;
+&lt;li&gt;复制当前行或语句块:Ctrl+D；&lt;/li&gt;
+&lt;li&gt;全局查找：Ctrl+shift+F；&lt;/li&gt;
+&lt;li&gt;全局查找替换：Ctrl+shift+R；&lt;/li&gt;
+&lt;li&gt;局部查找：Ctrl+F；&lt;/li&gt;
+&lt;li&gt;局部查找替换：Ctrl+R；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;编辑&quot;&gt;&lt;a href=&quot;#编辑&quot; class=&quot;headerlink&quot; title=&quot;编辑&quot;&gt;&lt;/a&gt;编辑&lt;/h2&gt;</content>
+    
+    <summary type="html">
+    
+      Android studio常用的快捷键
+    
+    </summary>
+    
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
+    
+    
+      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    
+      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
+    
+  </entry>
   
   <entry>
     <title>删除Windows下的超长路径目录</title>

@@ -6,6 +6,7 @@
   <title>python安装某些第三方包报错解决办法 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  
   <meta name="keywords" content="安装第三方包">
   <meta name="description" content="1. python安装某些第三方包报错vcvarsall.bat原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。
 Mi">
@@ -158,25 +159,33 @@ Mi">
 <header class="content-header">
   <div class="container">
     <h1 class="author">python安装某些第三方包报错解决办法</h1>
-    <h5 class="subtitle">2016-06-13</h5>
+    <h5 class="subtitle">
+          
+            <time datetime="2016-06-13T01:57:02.000Z" itemprop="datePublished" class="page-time">
+  2016-06-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+ 
+        
+    </h5>
   </div>
 </header>
 
     <div class="container body-wrap">
-      
-  <article id="post-python安装第三方包错误解决" class="article article-type-post" itemprop="blogPost">
-    
-      <div class="post-meat flex-row">
-        <div class="flex-col">
+      <article id="post-python安装第三方包错误解决" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meat flex-row">
+        
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装第三方包/">安装第三方包</a></li></ul>
-</div>
-      </div>
-      <div class="post-body">
 
+    </div>
+    <div class="post-body">
         <aside class="post-widget" id="post-widget">
 
-          
-          <div class="post-share" id="post-share">
+            
+            <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -212,13 +221,13 @@ Mi">
     </ul>
  </div>
 
-          
+            
 
-          
-          <nav class="post-toc-wrap" id="post-toc">
+            
+            <nav class="post-toc-wrap" id="post-toc">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-python安装某些第三方包报错vcvarsall-bat"><span class="post-toc-text">1. python安装某些第三方包报错vcvarsall.bat</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，"><span class="post-toc-text">2.安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</span></a></li></ol>
-          </nav>
-          
+            </nav>
+            
         </aside>
 
         <div class="post-main">
@@ -256,11 +265,11 @@ collect2.exe: error: ld returned 1 exit status
 <p><strong>d.</strong>Run : dlltool –dllname pythonxx.dll –def pythonxx.def –output-lib libpythonxx.a This will create libpythonxx.a (dlltool is part of MinGW utilities).<br>Copy libpythonxx.a to c:\pythonxx\libs\ (in the same directory as  pythonxx.lib).<br>This trick should work for all Python versions, including future releases of Python. You can also use this trick to convert other libraries.</p>
 
             <blockquote>
-              <p>
+                <p>
                 本文地址：
                 <a href="https://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/" target="_blank" rel="external">https://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</a>
-              </p>
-              <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
+                </p>
+                <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
             </blockquote>
             </div>
             
@@ -285,7 +294,7 @@ collect2.exe: error: ld returned 1 exit status
 </nav>
 
 
-
+            
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
@@ -310,17 +319,9 @@ collect2.exe: error: ld returned 1 exit status
 
 
 
-
         </div>
-
-      </div>
-
-    
-
-  </article>
-
-
-
+    </div>
+</article>
     </div>
   </main>
 <div class="mask" id="mask"></div>

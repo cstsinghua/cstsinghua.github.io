@@ -6,6 +6,7 @@
   <title>推送方案 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  
   <meta name="keywords" content="Push">
   <meta name="description" content="推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)
 在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于E">
@@ -164,25 +165,33 @@
 <header class="content-header">
   <div class="container">
     <h1 class="author">推送方案</h1>
-    <h5 class="subtitle">2016-06-08</h5>
+    <h5 class="subtitle">
+          
+            <time datetime="2016-06-08T09:09:16.000Z" itemprop="datePublished" class="page-time">
+  2016-06-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+ 
+        
+    </h5>
   </div>
 </header>
 
     <div class="container body-wrap">
-      
-  <article id="post-推送方案" class="article article-type-post" itemprop="blogPost">
-    
-      <div class="post-meat flex-row">
-        <div class="flex-col">
+      <article id="post-推送方案" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meat flex-row">
+        
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Push/">Push</a></li></ul>
-</div>
-      </div>
-      <div class="post-body">
 
+    </div>
+    <div class="post-body">
         <aside class="post-widget" id="post-widget">
 
-          
-          <div class="post-share" id="post-share">
+            
+            <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -218,13 +227,13 @@
     </ul>
  </div>
 
-          
+            
 
-          
-          <nav class="post-toc-wrap" id="post-toc">
+            
+            <nav class="post-toc-wrap" id="post-toc">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#推送简介"><span class="post-toc-text">推送简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#怎么实现推送及各种方式的比较"><span class="post-toc-text">怎么实现推送及各种方式的比较</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#当前主流的推送方案"><span class="post-toc-text">当前主流的推送方案</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#我们的推送方案"><span class="post-toc-text">我们的推送方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#再论长连接"><span class="post-toc-text">再论长连接</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是长连接"><span class="post-toc-text">什么是长连接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#心跳包的作用"><span class="post-toc-text">心跳包的作用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#心跳包的时间间隔"><span class="post-toc-text">心跳包的时间间隔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#怎样发送心跳包"><span class="post-toc-text">怎样发送心跳包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#服务器如何处理心跳包"><span class="post-toc-text">服务器如何处理心跳包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#心跳包和轮询的区别"><span class="post-toc-text">心跳包和轮询的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP唤醒Android"><span class="post-toc-text">TCP唤醒Android</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android手机的硬件架构"><span class="post-toc-text">Android手机的硬件架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android的休眠-睡眠-机制和唤醒机制"><span class="post-toc-text">Android的休眠(睡眠)机制和唤醒机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Android的休眠-睡眠-机制"><span class="post-toc-text">Android的休眠(睡眠)机制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Android的WakeLock机制"><span class="post-toc-text">Android的WakeLock机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Wakelock："><span class="post-toc-text">Wakelock：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Android-User-Wakelocks"><span class="post-toc-text">Android User Wakelocks</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Android-Kernel-Wakelocks"><span class="post-toc-text">Android Kernel Wakelocks</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android的网络数据怎样唤醒CPU？"><span class="post-toc-text">Android的网络数据怎样唤醒CPU？</span></a></li></ol></li></ol></li></ol>
-          </nav>
-          
+            </nav>
+            
         </aside>
 
         <div class="post-main">
@@ -558,11 +567,11 @@ wl.release();
 </code></pre><p>推送中最重要的部分就是让手机尽量休眠，只有在服务器需要它处理数据时才唤醒它，这正好符合我们的要求。</p>
 
             <blockquote>
-              <p>
+                <p>
                 本文地址：
                 <a href="https://cstsinghua.github.io/2016/06/08/推送方案/" target="_blank" rel="external">https://cstsinghua.github.io/2016/06/08/推送方案/</a>
-              </p>
-              <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
+                </p>
+                <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
             </blockquote>
             </div>
             
@@ -580,7 +589,7 @@ wl.release();
 </nav>
 
 
-
+            
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
@@ -605,17 +614,9 @@ wl.release();
 
 
 
-
         </div>
-
-      </div>
-
-    
-
-  </article>
-
-
-
+    </div>
+</article>
     </div>
   </main>
 <div class="mask" id="mask"></div>

@@ -6,6 +6,7 @@
   <title>Android动态加载机制 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  
   <meta name="keywords" content="动态加载">
   <meta name="description" content="1.引言在Android开发中，存在一些场景：
 
@@ -165,25 +166,33 @@
 <header class="content-header">
   <div class="container">
     <h1 class="author">Android动态加载机制</h1>
-    <h5 class="subtitle">2016-06-13</h5>
+    <h5 class="subtitle">
+          
+            <time datetime="2016-06-13T07:36:18.000Z" itemprop="datePublished" class="page-time">
+  2016-06-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+ 
+        
+    </h5>
   </div>
 </header>
 
     <div class="container body-wrap">
-      
-  <article id="post-Android动态加载机制" class="article article-type-post" itemprop="blogPost">
-    
-      <div class="post-meat flex-row">
-        <div class="flex-col">
+      <article id="post-Android动态加载机制" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meat flex-row">
+        
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态加载/">动态加载</a></li></ul>
-</div>
-      </div>
-      <div class="post-body">
 
+    </div>
+    <div class="post-body">
         <aside class="post-widget" id="post-widget">
 
-          
-          <div class="post-share" id="post-share">
+            
+            <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -219,13 +228,13 @@
     </ul>
  </div>
 
-          
+            
 
-          
-          <nav class="post-toc-wrap" id="post-toc">
+            
+            <nav class="post-toc-wrap" id="post-toc">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-引言"><span class="post-toc-text">1.引言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-JVM的类加载机制"><span class="post-toc-text">2.JVM的类加载机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-双亲委派模型"><span class="post-toc-text">2.1 双亲委派模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-类加载过程"><span class="post-toc-text">2.2 类加载过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-Android中的类加载机制"><span class="post-toc-text">3.Android中的类加载机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-Android中的主要类加载器介绍"><span class="post-toc-text">3.1 Android中的主要类加载器介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-DexClassLoader加载类示例"><span class="post-toc-text">3.2 DexClassLoader加载类示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-1-DexClassLoader加载示例1"><span class="post-toc-text">3.2.1 DexClassLoader加载示例1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-2-DexClassLoader加载示例2"><span class="post-toc-text">3.2.2 DexClassLoader加载示例2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-DexClassLoader加载的缺点，类加载的进一步探索"><span class="post-toc-text">3.3 DexClassLoader加载的缺点，类加载的进一步探索</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3-1-DexClassLoader进阶，自定义DexClassLoader方式1"><span class="post-toc-text">3.3.1 DexClassLoader进阶，自定义DexClassLoader方式1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3-2-DexClassLoader进阶，自定义DexClassLoader方式2"><span class="post-toc-text">3.3.2 DexClassLoader进阶，自定义DexClassLoader方式2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3-3-DexClassLoader进阶，自定义DexClassLoader方式3"><span class="post-toc-text">3.3.3 DexClassLoader进阶，自定义DexClassLoader方式3</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-Android动态加载引申"><span class="post-toc-text">4.Android动态加载引申</span></a></li></ol>
-          </nav>
-          
+            </nav>
+            
         </aside>
 
         <div class="post-main">
@@ -801,11 +810,11 @@ for(int z=0; z&lt;as.length; z++) {
 <p>开发者如果对动态加载APK感兴趣，建议深入研究上述的开源项目，这里就不再赘述其中的原理了。里面很多思路值得借鉴，但同时还有很大的完善空间，发挥你的聪明才智，试试吧。</p>
 
             <blockquote>
-              <p>
+                <p>
                 本文地址：
                 <a href="https://cstsinghua.github.io/2016/06/13/Android动态加载机制/" target="_blank" rel="external">https://cstsinghua.github.io/2016/06/13/Android动态加载机制/</a>
-              </p>
-              <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
+                </p>
+                <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
             </blockquote>
             </div>
             
@@ -830,7 +839,7 @@ for(int z=0; z&lt;as.length; z++) {
 </nav>
 
 
-
+            
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
@@ -855,17 +864,9 @@ for(int z=0; z&lt;as.length; z++) {
 
 
 
-
         </div>
-
-      </div>
-
-    
-
-  </article>
-
-
-
+    </div>
+</article>
     </div>
   </main>
 <div class="mask" id="mask"></div>

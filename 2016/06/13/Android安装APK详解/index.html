@@ -6,6 +6,7 @@
   <title>Android安装APK详解 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  
   <meta name="keywords" content="APK安装">
   <meta name="description" content="引言众所周知，Android应用最终是打包成.apk格式（其实就是一个压缩包），然后安装至手机并运行的。APK即Android Package的缩写，那么，Android安装应用APK的具体方式及其详细过程是怎样的呢？下面，我们逐一揭开里面的层层面纱。
 Android应用APK安装的方式一般而言，Android应用安装有如下四种方式：
@@ -167,25 +168,33 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
 <header class="content-header">
   <div class="container">
     <h1 class="author">Android安装APK详解</h1>
-    <h5 class="subtitle">2016-06-13</h5>
+    <h5 class="subtitle">
+          
+            <time datetime="2016-06-13T07:34:37.000Z" itemprop="datePublished" class="page-time">
+  2016-06-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+ 
+        
+    </h5>
   </div>
 </header>
 
     <div class="container body-wrap">
-      
-  <article id="post-Android安装APK详解" class="article article-type-post" itemprop="blogPost">
-    
-      <div class="post-meat flex-row">
-        <div class="flex-col">
+      <article id="post-Android安装APK详解" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meat flex-row">
+        
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APK安装/">APK安装</a></li></ul>
-</div>
-      </div>
-      <div class="post-body">
 
+    </div>
+    <div class="post-body">
         <aside class="post-widget" id="post-widget">
 
-          
-          <div class="post-share" id="post-share">
+            
+            <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -221,13 +230,13 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
     </ul>
  </div>
 
-          
+            
 
-          
-          <nav class="post-toc-wrap" id="post-toc">
+            
+            <nav class="post-toc-wrap" id="post-toc">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引言"><span class="post-toc-text">引言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android应用APK安装的方式"><span class="post-toc-text">Android应用APK安装的方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android-APK安装概述"><span class="post-toc-text">Android APK安装概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用安装涉及到的目录"><span class="post-toc-text">应用安装涉及到的目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装过程总述"><span class="post-toc-text">安装过程总述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#卸载过程概述"><span class="post-toc-text">卸载过程概述</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装应用的过程代码解析"><span class="post-toc-text">安装应用的过程代码解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装过程代码解析的前奏"><span class="post-toc-text">安装过程代码解析的前奏</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开机安装过程代码解析"><span class="post-toc-text">开机安装过程代码解析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络下载应用安装过程代码解析"><span class="post-toc-text">网络下载应用安装过程代码解析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#从ADB工具安装过程代码解析"><span class="post-toc-text">从ADB工具安装过程代码解析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通过第三方应用从SD卡安装的过程代码分析"><span class="post-toc-text">通过第三方应用从SD卡安装的过程代码分析</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol></li></ol>
-          </nav>
-          
+            </nav>
+            
         </aside>
 
         <div class="post-main">
@@ -1753,11 +1762,11 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 </ol>
 
             <blockquote>
-              <p>
+                <p>
                 本文地址：
                 <a href="https://cstsinghua.github.io/2016/06/13/Android安装APK详解/" target="_blank" rel="external">https://cstsinghua.github.io/2016/06/13/Android安装APK详解/</a>
-              </p>
-              <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
+                </p>
+                <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
             </blockquote>
             </div>
             
@@ -1782,7 +1791,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 </nav>
 
 
-
+            
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
@@ -1807,17 +1816,9 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 
 
 
-
         </div>
-
-      </div>
-
-    
-
-  </article>
-
-
-
+    </div>
+</article>
     </div>
   </main>
 <div class="mask" id="mask"></div>

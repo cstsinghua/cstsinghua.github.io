@@ -6,6 +6,7 @@
   <title>Eclipse动态调试Android应用指南 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  
   <meta name="keywords" content="动态调试">
   <meta name="description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
 操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。
@@ -166,25 +167,33 @@ e.g. java -jar apktool_2.0.1.jar">
 <header class="content-header">
   <div class="container">
     <h1 class="author">Eclipse动态调试Android应用指南</h1>
-    <h5 class="subtitle">2016-06-13</h5>
+    <h5 class="subtitle">
+          
+            <time datetime="2016-06-13T07:41:13.000Z" itemprop="datePublished" class="page-time">
+  2016-06-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+ 
+        
+    </h5>
   </div>
 </header>
 
     <div class="container body-wrap">
-      
-  <article id="post-Eclipse动态调试指南" class="article article-type-post" itemprop="blogPost">
-    
-      <div class="post-meat flex-row">
-        <div class="flex-col">
+      <article id="post-Eclipse动态调试指南" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meat flex-row">
+        
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态调试/">动态调试</a></li></ul>
-</div>
-      </div>
-      <div class="post-body">
 
+    </div>
+    <div class="post-body">
         <aside class="post-widget" id="post-widget">
 
-          
-          <div class="post-share" id="post-share">
+            
+            <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -220,13 +229,13 @@ e.g. java -jar apktool_2.0.1.jar">
     </ul>
  </div>
 
-          
+            
 
-          
-          <nav class="post-toc-wrap" id="post-toc">
+            
+            <nav class="post-toc-wrap" id="post-toc">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Eclipse动态调试指南"><span class="post-toc-text">Eclipse动态调试指南</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#操作步骤"><span class="post-toc-text">操作步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-反编译"><span class="post-toc-text">1.反编译</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-设置调试标记"><span class="post-toc-text">2.设置调试标记</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-在主Activity的onCreate事件中添加调试等待-可选"><span class="post-toc-text">3.在主Activity的onCreate事件中添加调试等待(可选)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-保存文件，用apktool重新编译打包为debug-apk"><span class="post-toc-text">4.保存文件，用apktool重新编译打包为debug.apk</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-对debug-apk签名-建议采用安卓逆向助手-，生成debug-sign-apk"><span class="post-toc-text">5.对debug.apk签名(建议采用安卓逆向助手)，生成debug_sign.apk</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-上传debug-sign-apk至手机或模拟器，然后安装并运行。"><span class="post-toc-text">6.上传debug_sign.apk至手机或模拟器，然后安装并运行。</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-启动eclipse，构建java项目"><span class="post-toc-text">7.启动eclipse，构建java项目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-在eclipse中，在需要关注的地方添加断点"><span class="post-toc-text">8.在eclipse中，在需要关注的地方添加断点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-现在要做的就是把代码与调试程序关联即可"><span class="post-toc-text">9.现在要做的就是把代码与调试程序关联即可</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-切换至debug视图"><span class="post-toc-text">10.切换至debug视图</span></a></li></ol></li></ol>
-          </nav>
-          
+            </nav>
+            
         </aside>
 
         <div class="post-main">
@@ -271,11 +280,11 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
 <h2 id="10-切换至debug视图"><a href="#10-切换至debug视图" class="headerlink" title="10.切换至debug视图"></a>10.切换至debug视图</h2><p>看到程序已经运行并中断在下一行可执行的代码了，相关的变量可以直接查看了。示意图：<br><img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-debug.png" alt="最终调试"></p>
 
             <blockquote>
-              <p>
+                <p>
                 本文地址：
                 <a href="https://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/" target="_blank" rel="external">https://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/</a>
-              </p>
-              <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
+                </p>
+                <footer><cite><a href="https://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
             </blockquote>
             </div>
             
@@ -300,7 +309,7 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
 </nav>
 
 
-
+            
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
@@ -325,17 +334,9 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
 
 
 
-
         </div>
-
-      </div>
-
-    
-
-  </article>
-
-
-
+    </div>
+</article>
     </div>
   </main>
 <div class="mask" id="mask"></div>
