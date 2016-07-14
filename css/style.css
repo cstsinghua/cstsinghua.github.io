@@ -2562,10 +2562,9 @@ a.waves-effect .waves-ripple {
   width: 240px;
   min-height: 100%;
   background: #fff;
-  will-change: left;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  -webkit-transition: 0.4s ease-in-out;
-  transition: 0.4s ease-in-out;
+  -webkit-transition: 0.4s cubic-bezier(0.18, 0.81, 0.3, 0.89);
+  transition: 0.4s cubic-bezier(0.18, 0.81, 0.3, 0.89);
 }
 #menu.hide {
   -webkit-transform: translateX(-100%);
@@ -2609,24 +2608,6 @@ a.waves-effect .waves-ripple {
   color: #c5cae9;
   font-size: 13px;
 }
-#menu .social {
-  margin: 2em 0 0;
-}
-#menu .social a {
-  opacity: .8;
-}
-#menu .social a.weibo {
-  color: #DC5442;
-}
-#menu .social a.github {
-  color: #363F45;
-}
-#menu .social a.rss {
-  color: #FF9800;
-}
-#menu .social a:hover {
-  opacity: 1;
-}
 #menu .nav {
   margin: 0;
   padding: 12px 0;
@@ -2638,7 +2619,10 @@ a.waves-effect .waves-ripple {
   padding: 0 20px;
 }
 #menu .nav li .icon {
-  padding-right: 30px;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  line-height: 44px;
 }
 #menu .nav li:hover,
 #menu .nav li.active {
@@ -2652,6 +2636,7 @@ a.waves-effect .waves-ripple {
 }
 #menu .nav a {
   display: block;
+  padding-left: 48px;
   height: 44px;
   font-weight: 500;
   color: #727272;
@@ -2717,9 +2702,8 @@ a[title="站长统计"] {
     transform: translateX(-100%);
   }
   #menu.show {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    -webkit-transform: none;
-    transform: none;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
   }
   #main {
     padding-left: 0;
@@ -2778,13 +2762,17 @@ a[title="站长统计"] {
   white-space: nowrap;
 }
 .content-header {
-  padding: 104px 16px 48px;
+  margin-left: -240px;
+  padding: 104px 16px 48px 256px;
   color: #ffffff;
   background: #3f51b5;
 }
 .content-header .subtitle {
   padding-top: 6px;
   color: #c5cae9;
+}
+.content-header .article-category-list-link {
+  color: #ff73a3;
 }
 @media screen and (max-width: 1240px) {
   .header-title {
@@ -2793,6 +2781,7 @@ a[title="站长统计"] {
 }
 @media screen and (max-width: 760px) {
   .content-header {
+    margin: 0;
     padding: 72px 16px 20px;
   }
   .content-header .author {
@@ -2810,11 +2799,15 @@ a[title="站长统计"] {
   list-style: none;
 }
 .post-list-item {
-  padding: 1em 0 2em;
+  padding: 20px 0;
   border-bottom: 1px solid #dadada;
 }
+.post-time {
+  font-size: 13px;
+  color: #727272;
+}
 .post-title {
-  margin: .65em 0;
+  margin: 0 0 16px;
 }
 .post-title-link {
   color: #3f51b5;
@@ -2841,30 +2834,59 @@ a[title="站长统计"] {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
-.post-meat {
-  margin: 1.2em 0;
+.post-meta {
+  margin: 1.2em 0 2em;
+  height: 14px;
+  line-height: 14px;
   font-size: 13px;
-  color: #727272;
+  overflow: hidden;
+  color: #dadada;
+}
+.article-category-list {
+  position: relative;
+  display: inline;
+  list-style: none;
+  padding: 0 0 0 10px;
+}
+.article-category-list:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 10px;
+  width: 1px;
+  background: #dadada;
+}
+.article-category-list li {
+  display: inline;
+}
+.article-category-list a {
+  color: #ff4081;
+}
+.article-category-list a:hover {
+  color: #ff4081;
 }
 .article-tag-list {
-  padding: 0;
-  list-style: none;
   overflow: hidden;
+  margin: 0 5px 0 0;
+  padding: 0;
 }
-.article-tag-list-item {
+.article-tag-list li {
   display: inline-block;
-  margin: 0 1em 5px 0;
+  margin: 0 8px 5px 0;
 }
 .article-tag-list-link {
   display: inline-block;
-  padding: 0 12px;
-  line-height: 1.6em;
-  color: #ff4081;
-  background: #ffd9e6;
-  border-radius: 2px;
+  padding: 0px 16px;
+  line-height: 30px;
+  font-size: 13px;
+  color: #727272;
+  background: #e8e8e8;
+  border-radius: 20px;
 }
 .article-tag-list-link:hover,
 .article-tag-list-link:active {
+  font-size: 13px;
   color: #fff;
   background: #ff4081;
 }
@@ -3139,7 +3161,7 @@ a[title="站长统计"] {
   text-decoration: underline;
 }
 .post-body {
-  padding: 0 0 20px;
+  padding: 30px 0 20px;
 }
 .post-main {
   overflow: hidden;
@@ -3214,7 +3236,7 @@ a[title="站长统计"] {
   border-color: #ff4081;
 }
 .post-content strong {
-  font-weight: 700;
+  font-weight: 600;
   border-bottom: 1px solid #ff4081;
 }
 .post-content strong a {
@@ -3385,53 +3407,61 @@ a[title="站长统计"] {
 .duoshuo {
   padding-top: 40px;
 }
-.archive-year-wrap {
-  width: 80px;
-  font-size: 18px;
-}
-.archive-year {
-  display: block;
-  width: 56px;
-  height: 56px;
-  line-height: 56px;
-  text-align: center;
-  border-radius: 50%;
-  color: #fff !important;
-  background: #3f51b5;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-.archives {
-  padding-left: 30px;
-  border-left: 3px solid #dadada;
+.archive-separator {
+  margin: 35px 0 13px;
+  color: #3f51b5;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 .archive-article {
   position: relative;
-  margin: 20px 0;
-  padding: 16px 20px;
+  padding: 25px 25px 25px 140px;
   background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-.archive-article:before {
-  position: absolute;
-  top: 0;
-  left: -2.5em;
-  content: '';
-  width: 12px;
-  height: 12px;
-  border: 2px solid #dadada;
-  background: #c5cae9;
-  border-radius: 50%;
-}
-.archive-article .archive-article-header {
-  margin: 0 0 16px;
-}
-.archive-article .post-tiem {
-  color: #727272;
+  border-bottom: 1px solid #dadada;
+  box-shadow: 0 1px 2px rgba(151, 151, 151, 0.58);
 }
 .archive-article .post-title,
 .archive-article .article-tag-list {
   margin: 0;
+  display: inline;
+  vertical-align: middle;
+}
+.archive-article .post-title {
+  margin: 0 5px 0 0;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.archive-article .post-time {
+  line-height: 24px;
+  font-weight: bold;
+}
+.archive-article .article-tag-list-item {
+  margin: 5px 5px 0 0;
+  padding: 0 6px;
+  font-size: 12px;
+}
+.archive-article-inner {
+  display: inline;
+}
+.archive-article-date {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}
+@media screen and (max-width: 760px) {
+  .archive-article {
+    margin: 0 -16px;
+    padding: 20px 20px 20px 80px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .archive-article {
+    padding: 20px;
+  }
+  .archive-article-date {
+    position: static;
+  }
 }
 .tags-title {
   text-align: center;
