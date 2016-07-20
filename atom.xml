@@ -81,16 +81,128 @@
     <updated>2016-07-13T10:08:32.000Z</updated>
     
     <content type="html">&lt;p&gt;Android studio常用的快捷键&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Android-studio常用快捷键总结&quot;&gt;&lt;a href=&quot;#Android-studio常用快捷键总结&quot; class=&quot;headerlink&quot; title=&quot;Android studio常用快捷键总结&quot;&gt;&lt;/a&gt;Android studio常用快捷键总结&lt;/h1&gt;&lt;p&gt;书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。&lt;/p&gt;
-&lt;h2 id=&quot;搜索快捷键&quot;&gt;&lt;a href=&quot;#搜索快捷键&quot; class=&quot;headerlink&quot; title=&quot;搜索快捷键&quot;&gt;&lt;/a&gt;搜索快捷键&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;删除当前行:Ctrl+Y；&lt;/li&gt;
-&lt;li&gt;复制当前行或语句块:Ctrl+D；&lt;/li&gt;
-&lt;li&gt;全局查找：Ctrl+shift+F；&lt;/li&gt;
-&lt;li&gt;全局查找替换：Ctrl+shift+R；&lt;/li&gt;
-&lt;li&gt;局部查找：Ctrl+F；&lt;/li&gt;
-&lt;li&gt;局部查找替换：Ctrl+R；&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;编辑&quot;&gt;&lt;a href=&quot;#编辑&quot; class=&quot;headerlink&quot; title=&quot;编辑&quot;&gt;&lt;/a&gt;编辑&lt;/h2&gt;</content>
+&lt;h1 id=&quot;Android-studio常用快捷键总结&quot;&gt;&lt;a href=&quot;#Android-studio常用快捷键总结&quot; class=&quot;headerlink&quot; title=&quot;Android studio常用快捷键总结&quot;&gt;&lt;/a&gt;Android studio常用快捷键总结&lt;/h1&gt;&lt;p&gt;书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。其实Android studio的的settings里面Keymap可以查看所有的快捷键，另外在Android studio的菜单栏，菜单项里面也注明了每项操作的快捷键(如果有)，经常查看和练习，根本也用不着在网上找说明。当然，对于新人或者英文不是太好的初学者，借鉴别人的经验是最快的学习方式。本文暂只适用于Windows平台，Mac环境后续补充。&lt;/p&gt;
+&lt;h2 id=&quot;搜索快捷键&quot;&gt;&lt;a href=&quot;#搜索快捷键&quot; class=&quot;headerlink&quot; title=&quot;搜索快捷键&quot;&gt;&lt;/a&gt;搜索快捷键&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;th&gt;Eclipse对应的快捷键&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+F&lt;/td&gt;
+&lt;td&gt;局部查找&lt;/td&gt;
+&lt;td&gt;Ctrl+F&lt;/td&gt;
+&lt;td&gt;在当前打开的文件中查找&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+R&lt;/td&gt;
+&lt;td&gt;局部查找替换&lt;/td&gt;
+&lt;td&gt;Ctrl+F&lt;/td&gt;
+&lt;td&gt;在当前打开的文件中查找替换&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+shift+F&lt;/td&gt;
+&lt;td&gt;全局查找&lt;/td&gt;
+&lt;td&gt;Ctrl+H&lt;/td&gt;
+&lt;td&gt;在整个工作空间查找&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+shift+R&lt;/td&gt;
+&lt;td&gt;全局查找替换&lt;/td&gt;
+&lt;td&gt;Ctrl+H&lt;/td&gt;
+&lt;td&gt;在整个工作空间查找替换&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alt+F7&lt;/td&gt;
+&lt;td&gt;全局搜索被引用的地方&lt;/td&gt;
+&lt;td&gt;Ctrl+Alt+H&lt;/td&gt;
+&lt;td&gt;将光标放在任何地方按下alt+f7即可在全局搜索被引用的地方，强大之处不管是文件、字符串、字段、方法、类皆可，AS会智能识别到底是什么东西&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+H&lt;/td&gt;
+&lt;td&gt;查看所选择类的继承层级关系&lt;/td&gt;
+&lt;td&gt;F4或Ctrl+T&lt;/td&gt;
+&lt;td&gt;选择某个类或者类名时按下则会显示出该类的继承层级，从Object到最终子类&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+F3&lt;/td&gt;
+&lt;td&gt;在当前文件查找所选择的字符出现的地方&lt;/td&gt;
+&lt;td&gt;Ctrl+K&lt;/td&gt;
+&lt;td&gt;结合F3键使用，先选择某个字符串，然后按下不断Ctrl+F3，则会在文档中该字符串出现的地方来回切换，当到达最后一个出现的地方时，按F3键从头开始搜索，F3键是在已选择字符串后，在出现的地方循环来回切换&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&quot;编辑代码的快捷键&quot;&gt;&lt;a href=&quot;#编辑代码的快捷键&quot; class=&quot;headerlink&quot; title=&quot;编辑代码的快捷键&quot;&gt;&lt;/a&gt;编辑代码的快捷键&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;th&gt;Eclipse对应的快捷键&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Y&lt;/td&gt;
+&lt;td&gt;删除当前行&lt;/td&gt;
+&lt;td&gt;Ctrl+D&lt;/td&gt;
+&lt;td&gt;删除当前行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+D&lt;/td&gt;
+&lt;td&gt;复制当前行或语句块&lt;/td&gt;
+&lt;td&gt;Ctrl+Alt+down&lt;/td&gt;
+&lt;td&gt;复制当前选择行或语句块&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+J&lt;/td&gt;
+&lt;td&gt;调出IDEA的神器live template&lt;/td&gt;
+&lt;td&gt;暂无&lt;/td&gt;
+&lt;td&gt;调出IDEA的神器live template&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+/&lt;/td&gt;
+&lt;td&gt;注释/取消注释&lt;/td&gt;
+&lt;td&gt;Ctrl+/&lt;/td&gt;
+&lt;td&gt;适用于生成//单行注释&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alt+Enter&lt;/td&gt;
+&lt;td&gt;调出IDEA对出错点的提示处理方法&lt;/td&gt;
+&lt;td&gt;Ctrl+1&lt;/td&gt;
+&lt;td&gt;快速找出解决问题的提示或者建议办法&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alt+Insert&lt;/td&gt;
+&lt;td&gt;生成构造器方法、setter/getter等模板方法&lt;/td&gt;
+&lt;td&gt;暂无&lt;/td&gt;
+&lt;td&gt;generate setter/getter等等模板方法&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&quot;查看代码快捷键&quot;&gt;&lt;a href=&quot;#查看代码快捷键&quot; class=&quot;headerlink&quot; title=&quot;查看代码快捷键&quot;&gt;&lt;/a&gt;查看代码快捷键&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;th&gt;Eclipse对应的快捷键&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Alt+H&lt;/td&gt;
+&lt;td&gt;查看方法的调用层级结构&lt;/td&gt;
+&lt;td&gt;Ctrl+Alt+H&lt;/td&gt;
+&lt;td&gt;查看方法的调用层级结构&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
     
     <summary type="html">
     
@@ -99,6 +211,8 @@
     </summary>
     
       <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="Tools" scheme="http://cstsinghua.github.io/categories/Android/Tools/"/>
     
     
       <category term="快捷键" scheme="http://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>

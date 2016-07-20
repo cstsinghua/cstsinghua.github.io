@@ -47,6 +47,9 @@
              
               <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
           
+             
+              <breadCrumb title="Tools" url="http://cstsinghua.github.io/categories/Android/Tools/"/>
+          
         </display>
     </data>
     </url>

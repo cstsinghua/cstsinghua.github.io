@@ -163,7 +163,7 @@
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/Tools/">Tools</a></li></ul></li></ul>
  
         
     </h5>
@@ -222,7 +222,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-studio常用快捷键总结"><span class="post-toc-text">Android studio常用快捷键总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#搜索快捷键"><span class="post-toc-text">搜索快捷键</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编辑"><span class="post-toc-text">编辑</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-studio常用快捷键总结"><span class="post-toc-text">Android studio常用快捷键总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#搜索快捷键"><span class="post-toc-text">搜索快捷键</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编辑代码的快捷键"><span class="post-toc-text">编辑代码的快捷键</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查看代码快捷键"><span class="post-toc-text">查看代码快捷键</span></a></li></ol></li></ol>
             </nav>
             
         </aside>
@@ -231,16 +231,128 @@
 
             <div class="post-content" id="post-content" itemprop="postContent">
             <p>Android studio常用的快捷键<br><a id="more"></a></p>
-<h1 id="Android-studio常用快捷键总结"><a href="#Android-studio常用快捷键总结" class="headerlink" title="Android studio常用快捷键总结"></a>Android studio常用快捷键总结</h1><p>书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。</p>
-<h2 id="搜索快捷键"><a href="#搜索快捷键" class="headerlink" title="搜索快捷键"></a>搜索快捷键</h2><ol>
-<li>删除当前行:Ctrl+Y；</li>
-<li>复制当前行或语句块:Ctrl+D；</li>
-<li>全局查找：Ctrl+shift+F；</li>
-<li>全局查找替换：Ctrl+shift+R；</li>
-<li>局部查找：Ctrl+F；</li>
-<li>局部查找替换：Ctrl+R；</li>
-</ol>
-<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2>
+<h1 id="Android-studio常用快捷键总结"><a href="#Android-studio常用快捷键总结" class="headerlink" title="Android studio常用快捷键总结"></a>Android studio常用快捷键总结</h1><p>书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。其实Android studio的的settings里面Keymap可以查看所有的快捷键，另外在Android studio的菜单栏，菜单项里面也注明了每项操作的快捷键(如果有)，经常查看和练习，根本也用不着在网上找说明。当然，对于新人或者英文不是太好的初学者，借鉴别人的经验是最快的学习方式。本文暂只适用于Windows平台，Mac环境后续补充。</p>
+<h2 id="搜索快捷键"><a href="#搜索快捷键" class="headerlink" title="搜索快捷键"></a>搜索快捷键</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+<th>Eclipse对应的快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+F</td>
+<td>局部查找</td>
+<td>Ctrl+F</td>
+<td>在当前打开的文件中查找</td>
+</tr>
+<tr>
+<td>Ctrl+R</td>
+<td>局部查找替换</td>
+<td>Ctrl+F</td>
+<td>在当前打开的文件中查找替换</td>
+</tr>
+<tr>
+<td>Ctrl+shift+F</td>
+<td>全局查找</td>
+<td>Ctrl+H</td>
+<td>在整个工作空间查找</td>
+</tr>
+<tr>
+<td>Ctrl+shift+R</td>
+<td>全局查找替换</td>
+<td>Ctrl+H</td>
+<td>在整个工作空间查找替换</td>
+</tr>
+<tr>
+<td>Alt+F7</td>
+<td>全局搜索被引用的地方</td>
+<td>Ctrl+Alt+H</td>
+<td>将光标放在任何地方按下alt+f7即可在全局搜索被引用的地方，强大之处不管是文件、字符串、字段、方法、类皆可，AS会智能识别到底是什么东西</td>
+</tr>
+<tr>
+<td>Ctrl+H</td>
+<td>查看所选择类的继承层级关系</td>
+<td>F4或Ctrl+T</td>
+<td>选择某个类或者类名时按下则会显示出该类的继承层级，从Object到最终子类</td>
+</tr>
+<tr>
+<td>Ctrl+F3</td>
+<td>在当前文件查找所选择的字符出现的地方</td>
+<td>Ctrl+K</td>
+<td>结合F3键使用，先选择某个字符串，然后按下不断Ctrl+F3，则会在文档中该字符串出现的地方来回切换，当到达最后一个出现的地方时，按F3键从头开始搜索，F3键是在已选择字符串后，在出现的地方循环来回切换</td>
+</tr>
+</tbody>
+</table>
+<h2 id="编辑代码的快捷键"><a href="#编辑代码的快捷键" class="headerlink" title="编辑代码的快捷键"></a>编辑代码的快捷键</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+<th>Eclipse对应的快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+Y</td>
+<td>删除当前行</td>
+<td>Ctrl+D</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>Ctrl+D</td>
+<td>复制当前行或语句块</td>
+<td>Ctrl+Alt+down</td>
+<td>复制当前选择行或语句块</td>
+</tr>
+<tr>
+<td>Ctrl+J</td>
+<td>调出IDEA的神器live template</td>
+<td>暂无</td>
+<td>调出IDEA的神器live template</td>
+</tr>
+<tr>
+<td>Ctrl+/</td>
+<td>注释/取消注释</td>
+<td>Ctrl+/</td>
+<td>适用于生成//单行注释</td>
+</tr>
+<tr>
+<td>Alt+Enter</td>
+<td>调出IDEA对出错点的提示处理方法</td>
+<td>Ctrl+1</td>
+<td>快速找出解决问题的提示或者建议办法</td>
+</tr>
+<tr>
+<td>Alt+Insert</td>
+<td>生成构造器方法、setter/getter等模板方法</td>
+<td>暂无</td>
+<td>generate setter/getter等等模板方法</td>
+</tr>
+</tbody>
+</table>
+<h2 id="查看代码快捷键"><a href="#查看代码快捷键" class="headerlink" title="查看代码快捷键"></a>查看代码快捷键</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+<th>Eclipse对应的快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+Alt+H</td>
+<td>查看方法的调用层级结构</td>
+<td>Ctrl+Alt+H</td>
+<td>查看方法的调用层级结构</td>
+</tr>
+</tbody>
+</table>
+
             <blockquote>
                 <p>
                 本文地址：
