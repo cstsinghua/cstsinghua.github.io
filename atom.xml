@@ -134,6 +134,18 @@
 &lt;td&gt;Ctrl+K&lt;/td&gt;
 &lt;td&gt;结合F3键使用，先选择某个字符串，然后按下不断Ctrl+F3，则会在文档中该字符串出现的地方来回切换，当到达最后一个出现的地方时，按F3键从头开始搜索，F3键是在已选择字符串后，在出现的地方循环来回切换&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+A&lt;/td&gt;
+&lt;td&gt;可以进到任何你要去的地方(包括配置)&lt;/td&gt;
+&lt;td&gt;暂无&lt;/td&gt;
+&lt;td&gt;可以进到任何你要去的地方(包括配置)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2次点击Shift&lt;/td&gt;
+&lt;td&gt;跳转到相关的文件&lt;/td&gt;
+&lt;td&gt;暂无&lt;/td&gt;
+&lt;td&gt;跳转到相关的文件&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&quot;编辑代码的快捷键&quot;&gt;&lt;a href=&quot;#编辑代码的快捷键&quot; class=&quot;headerlink&quot; title=&quot;编辑代码的快捷键&quot;&gt;&lt;/a&gt;编辑代码的快捷键&lt;/h2&gt;&lt;table&gt;
