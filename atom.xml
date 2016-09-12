@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2016-07-14T09:31:04.000Z</updated>
+  <updated>2016-09-12T06:25:38.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,70 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android知识体系及新手如何快速入门</title>
+    <link href="http://cstsinghua.github.io/2016/09/12/Android%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E5%8F%8A%E6%96%B0%E6%89%8B%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
+    <id>http://cstsinghua.github.io/2016/09/12/Android知识体系及新手如何快速入门/</id>
+    <published>2016-09-12T06:25:13.000Z</published>
+    <updated>2016-09-12T06:25:38.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Android知识体系及新手如何快速入门&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;strong&gt;Note：本文摘录自网易梁建 | 网易云音乐安卓主程的一篇文章，稍做修改，仅供参考，其实很多还是比较粗略，后续会在此基础上进一步完善&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Android知识体系框架&quot;&gt;&lt;a href=&quot;#Android知识体系框架&quot; class=&quot;headerlink&quot; title=&quot;Android知识体系框架&quot;&gt;&lt;/a&gt;Android知识体系框架&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/rilxPPX.jpg&quot; alt=&quot;Android只是体系框架&quot;&gt;&lt;/p&gt;
+&lt;p&gt;接下来，我们具体讲一讲各个部分的内容。&lt;/p&gt;
+&lt;h2 id=&quot;四大组件&quot;&gt;&lt;a href=&quot;#四大组件&quot; class=&quot;headerlink&quot; title=&quot;四大组件&quot;&gt;&lt;/a&gt;四大组件&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/87qBiad.jpg&quot; alt=&quot;Android四大组件&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;UI设计&quot;&gt;&lt;a href=&quot;#UI设计&quot; class=&quot;headerlink&quot; title=&quot;UI设计&quot;&gt;&lt;/a&gt;UI设计&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/UAuLZ5w.png&quot; alt=&quot;UI设计&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;常见View的使用&quot;&gt;&lt;a href=&quot;#常见View的使用&quot; class=&quot;headerlink&quot; title=&quot;常见View的使用&quot;&gt;&lt;/a&gt;常见View的使用&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/mKIyZXs.png&quot; alt=&quot;常见View的使用&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;网络&quot;&gt;&lt;a href=&quot;#网络&quot; class=&quot;headerlink&quot; title=&quot;网络&quot;&gt;&lt;/a&gt;网络&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/GSWbAna.jpg&quot; alt=&quot;网络&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;线程和进程&quot;&gt;&lt;a href=&quot;#线程和进程&quot; class=&quot;headerlink&quot; title=&quot;线程和进程&quot;&gt;&lt;/a&gt;线程和进程&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/PZD9chB.png&quot; alt=&quot;线程和进程&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;数据存储&quot;&gt;&lt;a href=&quot;#数据存储&quot; class=&quot;headerlink&quot; title=&quot;数据存储&quot;&gt;&lt;/a&gt;数据存储&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/mh9BKOz.png&quot; alt=&quot;数据存储&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;进阶学习&quot;&gt;&lt;a href=&quot;#进阶学习&quot; class=&quot;headerlink&quot; title=&quot;进阶学习&quot;&gt;&lt;/a&gt;进阶学习&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/LZe5RSe.jpg&quot; alt=&quot;进阶学习&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;编程基础&quot;&gt;&lt;a href=&quot;#编程基础&quot; class=&quot;headerlink&quot; title=&quot;编程基础&quot;&gt;&lt;/a&gt;编程基础&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/HNM83Yb.png&quot; alt=&quot;编程基础&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;网络协议&quot;&gt;&lt;a href=&quot;#网络协议&quot; class=&quot;headerlink&quot; title=&quot;网络协议&quot;&gt;&lt;/a&gt;网络协议&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/DIDHddu.png&quot; alt=&quot;网络协议&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;数据库&quot;&gt;&lt;a href=&quot;#数据库&quot; class=&quot;headerlink&quot; title=&quot;数据库&quot;&gt;&lt;/a&gt;数据库&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/6iwxXc6.png&quot; alt=&quot;数据库&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;开源框架&quot;&gt;&lt;a href=&quot;#开源框架&quot; class=&quot;headerlink&quot; title=&quot;开源框架&quot;&gt;&lt;/a&gt;开源框架&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/SGi3c7x.png&quot; alt=&quot;开源框架&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;测试基础&quot;&gt;&lt;a href=&quot;#测试基础&quot; class=&quot;headerlink&quot; title=&quot;测试基础&quot;&gt;&lt;/a&gt;测试基础&lt;/h2&gt;&lt;p&gt;任何一个开发都不能把产品的质量完全依赖于专业的测试人员，相反，应该直接把上行质量作为自测目标。所以，开发人员需要学习必要的测试方法，常见的测试方法包括：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/PJyJh1X.png&quot; alt=&quot;测试基础&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;其他补充学习&quot;&gt;&lt;a href=&quot;#其他补充学习&quot; class=&quot;headerlink&quot; title=&quot;其他补充学习&quot;&gt;&lt;/a&gt;其他补充学习&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wLazCDp.png&quot; alt=&quot;其他补充学习&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h1&gt;&lt;p&gt;讲完知识体系，下面讲讲作为一个新人如何快速入门和进阶的一些经验。想要快速入门，可以尝试以下的方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;买一本通俗易懂的书籍，快速看完；&lt;/li&gt;
+&lt;li&gt;查看并模仿官方samples，这可以让你了解安卓的样子；&lt;/li&gt;
+&lt;li&gt;实践一个感兴趣功能&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;入门之后，进阶可以分为三步：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一步进阶：系统学习官方training和guide部分，仔细看完获益匪浅&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;第二步进阶：引入开源项目简化开发，并查看源码了解实现；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;第三步进阶：当你慢慢熟悉开发之后，这个时候你就需要对view的内部世界更加了解，查看常见组件view等内部实现，查看Activity ManagerService, Android进程启动，低内存杀进程等运行机制，学习安卓运行环境，学习各种调优工具进行优化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;推荐资料&quot;&gt;&lt;a href=&quot;#推荐资料&quot; class=&quot;headerlink&quot; title=&quot;推荐资料&quot;&gt;&lt;/a&gt;推荐资料&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;历年Google I/O大会视频&lt;br&gt;微信公众号：Google开发者&lt;br&gt;国人整理的学习列表&lt;br&gt;    &lt;a href=&quot;https://github.com/Trinea/android-open-project&quot; title=&quot;主流的Android开源项目&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/Trinea/android-open-project&lt;/a&gt;&lt;br&gt;    &lt;a href=&quot;https://github.com/Freelander/Android_Data&quot; title=&quot;Android学习资料&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/Freelander/Android_Data&lt;/a&gt; &lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      Android知识体系及新手如何快速入门
+    
+    </summary>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="学习" scheme="http://cstsinghua.github.io/categories/Android/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="路线图" scheme="http://cstsinghua.github.io/tags/%E8%B7%AF%E7%BA%BF%E5%9B%BE/"/>
+    
+      <category term="入门" scheme="http://cstsinghua.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="新手" scheme="http://cstsinghua.github.io/tags/%E6%96%B0%E6%89%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>Eclipse常用快捷键</title>
@@ -3685,39 +3749,6 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
-    <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-30T10:24:26.335Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For Test:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-  </entry>
-  
-  <entry>
     <title>python安装某些第三方包报错解决办法</title>
     <link href="http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
     <id>http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
@@ -3766,6 +3797,39 @@ collect2.exe: error: ld returned 1 exit status
     
     
       <category term="安装第三方包" scheme="http://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
+    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
+    <published>2016-06-13T01:57:02.000Z</published>
+    <updated>2016-06-30T10:24:26.335Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For Test:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
