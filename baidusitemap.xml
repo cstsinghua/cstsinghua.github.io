@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    <lastmod>2016-11-01T02:04:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android studio常用快捷键</title>
+        <pubTime>2016-07-13T10:07:19.000Z</pubTime>
+        
+        <tag>快捷键</tag>
+         
+        <tag>Android studio</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="Tools" url="http://cstsinghua.github.io/categories/Android/Tools/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cstsinghua.github.io/2016/09/12/Android%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E5%8F%8A%E6%96%B0%E6%89%8B%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2016-09-12T06:25:38.000Z</lastmod>
     <data>
@@ -51,31 +76,6 @@
           
              
               <breadCrumb title="Tools使用" url="http://cstsinghua.github.io/categories/Java/Tools%E4%BD%BF%E7%94%A8/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
-    <lastmod>2016-07-13T10:08:32.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android studio常用快捷键</title>
-        <pubTime>2016-07-13T10:07:19.000Z</pubTime>
-        
-        <tag>快捷键</tag>
-         
-        <tag>Android studio</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
-          
-             
-              <breadCrumb title="Tools" url="http://cstsinghua.github.io/categories/Android/Tools/"/>
           
         </display>
     </data>

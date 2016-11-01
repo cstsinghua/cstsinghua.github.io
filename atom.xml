@@ -142,7 +142,7 @@
     <link href="http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://cstsinghua.github.io/2016/07/13/Android-studio常用快捷键/</id>
     <published>2016-07-13T10:07:19.000Z</published>
-    <updated>2016-07-13T10:08:32.000Z</updated>
+    <updated>2016-11-01T02:04:02.000Z</updated>
     
     <content type="html">&lt;p&gt;Android studio常用的快捷键&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;Android-studio常用快捷键总结&quot;&gt;&lt;a href=&quot;#Android-studio常用快捷键总结&quot; class=&quot;headerlink&quot; title=&quot;Android studio常用快捷键总结&quot;&gt;&lt;/a&gt;Android studio常用快捷键总结&lt;/h1&gt;&lt;p&gt;书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。其实Android studio的的settings里面Keymap可以查看所有的快捷键，另外在Android studio的菜单栏，菜单项里面也注明了每项操作的快捷键(如果有)，经常查看和练习，根本也用不着在网上找说明。当然，对于新人或者英文不是太好的初学者，借鉴别人的经验是最快的学习方式。本文暂只适用于Windows平台，Mac环境后续补充。&lt;/p&gt;
@@ -209,6 +209,12 @@
 &lt;td&gt;跳转到相关的文件&lt;/td&gt;
 &lt;td&gt;暂无&lt;/td&gt;
 &lt;td&gt;跳转到相关的文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+E&lt;/td&gt;
+&lt;td&gt;打开最近操作的文件列表&lt;/td&gt;
+&lt;td&gt;未知&lt;/td&gt;
+&lt;td&gt;打开最近操作的文件列表，从中可以选择想打开的文件&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
