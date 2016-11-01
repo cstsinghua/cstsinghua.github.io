@@ -264,6 +264,18 @@
 &lt;td&gt;暂无&lt;/td&gt;
 &lt;td&gt;generate setter/getter等等模板方法&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Alt+L&lt;/td&gt;
+&lt;td&gt;格式化代码&lt;/td&gt;
+&lt;td&gt;Ctrl+Shift+F&lt;/td&gt;
+&lt;td&gt;格式化代码，用于美化代码排版&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Alt+O&lt;/td&gt;
+&lt;td&gt;优化导入包&lt;/td&gt;
+&lt;td&gt;Ctrl+Shift+O&lt;/td&gt;
+&lt;td&gt;优化导入包，即没有导入的包可以自动补上，没有使用到的导入包则会删除&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&quot;查看代码快捷键&quot;&gt;&lt;a href=&quot;#查看代码快捷键&quot; class=&quot;headerlink&quot; title=&quot;查看代码快捷键&quot;&gt;&lt;/a&gt;查看代码快捷键&lt;/h2&gt;&lt;table&gt;
