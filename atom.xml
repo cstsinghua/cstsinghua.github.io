@@ -37,7 +37,20 @@
 &lt;p&gt;npm list package_name [-g]&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
-&lt;p&gt;## &lt;/p&gt;
+&lt;h2 id=&quot;安装包&quot;&gt;&lt;a href=&quot;#安装包&quot; class=&quot;headerlink&quot; title=&quot;安装包&quot;&gt;&lt;/a&gt;安装包&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;npm install [-g] [package_name[@next] [–save]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;1.后面没有所有参数，即只输入npm install，表示在当前目录下安装当前目录工程)下的package.json的dependencies中指定的包；
+1.加上-g代表全局安装，不加则表示在当前目录下安装
+
+2.加上@next表示安装最新版本
+
+3.加上--save表示安装的同时也将包加入到当前路径(工程)下的package.json的dependencies中去，这样以后迁移的时候就可以采用1来安装，比较便捷，可以记录依赖关系。
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;npm install [-g] [package_name[@version] [–save]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;1.其他如上，只是这里如果是@version，则表示安装指定版本的包。比如安装TypeScript 2.0,可以使用npm install typescript@2.0.0.
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 </content>
     
     <summary type="html">
