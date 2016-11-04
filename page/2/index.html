@@ -80,6 +80,13 @@
         </li>
     
         <li class="waves-block waves-effect">
+          <a href="/categories/NodeJS"  >
+            <i class="icon icon-lg icon-shield"></i>
+            NodeJS
+          </a>
+        </li>
+    
+        <li class="waves-block waves-effect">
           <a href="/categories/杂项/"  >
             <i class="icon icon-lg icon-book"></i>
             杂项
@@ -165,6 +172,66 @@
 
     <div class="container body-wrap">
       <ul class="post-list">
+  
+    <li class="post-list-item">
+        <article id="post-Android热修复的思路" 
+  class="article article-type-post" itemprop="blogPost">
+     
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/06/13/Android热修复的思路/">Android热修复</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2016-06-13T07:38:15.000Z" itemprop="datePublished" class="post-time">
+  2016-06-13
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+ 
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent" >
+    
+        <h1 id="Android热修复的方式"><a href="#Android热修复的方式" class="headerlink" title="Android热修复的方式"></a>Android热修复的方式</h1><p>关于动态热修复，目前发现的思路集中在三点：</p>
+<ul>
+<li><p>方式1：既然是热修复，那么就是新的类替换掉旧的类，而java世界类的加载是通过类加载器来实现，而Android应用程序的默认类加载器PathClassLoader加载的时候其实是通过关联的DexFile来实现(动态加载的时候已经反复涉及，这里不再赘述)，当有多个Dex文件的时候，是按照dexElements中的顺序来执行，如果一旦加载到则返回该类，否则遍历查询dexElements中的所有元素，直到最终查询完，那么基于这个事实，则可以将新类的dex文件加载的时候对应的Element放置在最前面，这样PathClassLoader加载的时候就自然先加载到新类而不是旧的有问题的类，但是这种机制在多个mutildex时存在缺陷，具体请参见下面转发链接的阐述，另外一旦某个类已经被加载，则失效了，因为一旦被加载之后，PathClassLoader的loadClass已经直接返回class而不会去查询，这样使得往往下载修复包之后需要在下次启动才能加载。当然这个办法基于纯java实现，非侵入性，与平台无关；</p>
+</li>
+<li><p>方式2：基于阿里的AndFix开源项目，这个的出发点是另外一个角度，类被类加载器加载进来之后，那么其实本质还是虚拟机在管理，而根据java虚拟机包括Dalvik虚拟机的内存模型(可以查看我那本深入理解java虚拟机书籍相关章节)，类的class文件加载进来之后存放在方法区，那么既然已经认定这个类被加载了，怎么做到热修复，阿里的方式确实巧妙，因为java虚拟机本身是C++语言实现的，通过JNI的方式可以获取到方法区中方法的引用，修改方法内部的执行引用，具体的还需要更加深入研究，将方法的执行逻辑指向了新方法，这种情况下可以做到及时加载及时修复，不用重启应用，缺点是通过JNI方式，so的兼容性决定了适用性，不过阿里的做得已经不错，当然一旦Android平台的虚拟机内部实现改变，就需要重新修改so对应的C++代码，目前首选这个方式；</p>
+<p>  另外，生成新旧dex的patch也是一个关键点，阿里提供了这样一个工具：AppPatch。生成patch的过程，大概是基于smali和baksmali，先加载新的和旧的两个dex文件得到所有的class，然后通过getImplementation()方法可对比他们的方法实现是否一致，将对比结果分成添加的方法/字段和修改的方法/字段分别保存起来，在重新生成的差异化dex文件时，根据对比结果在相应的方法或者字段前添加注解标志。要深入理解的话需要熟悉一下smali/baksmali的源码以及dalvik虚拟机的文件结构。</p>
+</li>
+</ul>
+<ul>
+<li>方式3：阿里的Dexposed开源项目，也是纯java实现，基于大名鼎鼎的 Xposed framework project开源项目，面向AOP切面编程的思想，目前还没有很深入研究，可能与方式1有些类似，也可能基于动态代理等方式来做到。不过目前这个项目只能适用于5.0以下系统，目前不建议使用。</li>
+</ul>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><ol>
+<li><p>关于方式1：</p>
+<p> <a href="http://blog.csdn.net/lzyzsd/article/details/49843581" target="_blank" rel="external">http://blog.csdn.net/lzyzsd/article/details/49843581</a>，</p>
+<p> <a href="https://github.com/jasonross/Nuwa" target="_blank" rel="external">https://github.com/jasonross/Nuwa</a></p>
+</li>
+<li><p>关于方式2：</p>
+<p> <a href="https://github.com/alibaba/AndFix" title="阿里的AndFix开源项目" target="_blank" rel="external">https://github.com/alibaba/AndFix</a></p>
+</li>
+<li><p>关于方式3：</p>
+<p> <a href="https://github.com/alibaba/dexposed" title="阿里的dexposed开源项目" target="_blank" rel="external">https://github.com/alibaba/dexposed</a></p>
+</li>
+</ol>
+
+    
+    </div>
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android热修复/">Android热修复</a></li></ul>
+
+</article>
+    </li>
   
     <li class="post-list-item">
         <article id="post-Android动态加载机制" 

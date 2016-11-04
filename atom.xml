@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2016-09-12T06:25:38.000Z</updated>
+  <updated>2016-11-04T03:53:52.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>npm常用命令</title>
+    <link href="http://cstsinghua.github.io/2016/11/04/npm%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://cstsinghua.github.io/2016/11/04/npm常用命令/</id>
+    <published>2016-11-04T03:53:47.000Z</published>
+    <updated>2016-11-04T03:53:52.000Z</updated>
+    
+    <content type="html">&lt;p&gt;npm常用命令介绍&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;npm常用命令&quot;&gt;&lt;a href=&quot;#npm常用命令&quot; class=&quot;headerlink&quot; title=&quot;npm常用命令&quot;&gt;&lt;/a&gt;npm常用命令&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;查看已安装的包&quot;&gt;&lt;a href=&quot;#查看已安装的包&quot; class=&quot;headerlink&quot; title=&quot;查看已安装的包&quot;&gt;&lt;/a&gt;查看已安装的包&lt;/h2&gt;&lt;p&gt;查看当前目录下安装的所有的包：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; npm list&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;查看全局安装的所有的包（-g参数代表全局的意思）：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm list -g&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;查看已经安装的某个包的信息：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm list package_name [-g]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;## &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      npm常用命令介绍
+    
+    </summary>
+    
+      <category term="NodeJS" scheme="http://cstsinghua.github.io/categories/NodeJS/"/>
+    
+      <category term="npm" scheme="http://cstsinghua.github.io/categories/NodeJS/npm/"/>
+    
+    
+      <category term="常用" scheme="http://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
+    
+      <category term="NodeJS" scheme="http://cstsinghua.github.io/tags/NodeJS/"/>
+    
+      <category term="npm" scheme="http://cstsinghua.github.io/tags/npm/"/>
+    
+  </entry>
   
   <entry>
     <title>Android知识体系及新手如何快速入门</title>
