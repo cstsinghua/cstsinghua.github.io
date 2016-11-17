@@ -1,23 +1,28 @@
 (function() {
 
-    var searchIco = document.getElementById('search'),
-        searchWrap = document.getElementById('search-wrap'),
-        keyInput = document.getElementById('key'),
-        back = document.getElementById('back'),
-        searchPanel = document.getElementById('search-panel'),
-        searchResult = document.getElementById('search-result'),
-        searchTpl = document.getElementById('search-tpl').innerHTML,
+    var G = window || this,
+        even = G.BLOG.even,
+        $ = G.BLOG.$,
+        searchIco = $('#search'),
+        searchWrap = $('#search-wrap'),
+        keyInput = $('#key'),
+        back = $('#back'),
+        searchPanel = $('#search-panel'),
+        searchResult = $('#search-result'),
+        searchTpl = $('#search-tpl').innerHTML,
+        JSON_DATA = (G.BLOG.ROOT + '/content.json').replace(/\/{2}/g, '/'),
         searchData;
 
     function loadData(success) {
 
         if (!searchData) {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/content.json', true);
+            xhr.open('GET', JSON_DATA, true);
 
             xhr.onload = function() {
                 if (this.status >= 200 && this.status < 300) {
-                    searchData = JSON.parse(this.response);
+                    var res = JSON.parse(this.response);
+                    searchData = res instanceof Array ? res : res.posts;
                     success(searchData);
                 } else {
                     console.error(this.statusText);
@@ -42,8 +47,8 @@
         });
     }
 
-    var docEl = document[navigator.userAgent.indexOf('Firefox') !== -1 ? 'documentElement' : 'body'],
-        noop = function() {};
+    var docEl = G.BLOG.docEl,
+        noop = G.BLOG.noop;
 
     var Control = {
         show: function() {
@@ -64,7 +69,7 @@
 
                 return tpl(searchTpl, {
                     title: post.title,
-                    path: post.path,
+                    path: (G.BLOG.ROOT + '/' + post.path).replace(/\/{2}/g, '/'),
                     date: new Date(post.date).toLocaleDateString(),
                     tags: post.tags.map(function(tag) {
                         return '<span>#' + tag.name + '</span>';
@@ -79,10 +84,12 @@
 
         searchResult.innerHTML = html;
     }
+
     function regtest(raw, regExp) {
         regExp.lastIndex = 0;
         return regExp.test(raw);
     }
+
     function matcher(post, regExp) {
         return regtest(post.title, regExp) || post.tags.some(function(tag) {
             return regtest(tag.name, regExp);
@@ -111,23 +118,24 @@
     }
 
 
-    searchIco.addEventListener('click', function() {
+    searchIco.addEventListener(even, function() {
         searchWrap.classList.toggle('in');
         keyInput.value = '';
+        searchWrap.classList.contains('in') ? keyInput.focus() : keyInput.blur();
     });
 
-    back.addEventListener('click', function() {
+    back.addEventListener(even, function() {
         searchWrap.classList.remove('in');
         Control.hide();
     });
 
-    document.addEventListener('click', function(e) {
+    document.addEventListener(even, function(e) {
         if (e.target.id !== 'key') {
             Control.hide();
         }
     });
 
     keyInput.addEventListener('input', search);
-    keyInput.addEventListener('click', search);
+    keyInput.addEventListener(even, search);
 
-})();
+}).call(this);
