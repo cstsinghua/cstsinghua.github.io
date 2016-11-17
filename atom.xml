@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2016-11-04T03:53:52.000Z</updated>
+  <updated>2016-11-17T03:41:21.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git命令使用遇到的那些坑</title>
+    <link href="http://cstsinghua.github.io/2016/11/17/Git%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
+    <id>http://cstsinghua.github.io/2016/11/17/Git命令使用遇到的那些坑/</id>
+    <published>2016-11-17T03:40:58.000Z</published>
+    <updated>2016-11-17T03:41:21.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Git命令使用遇到的那些坑收集&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Git命令使用遇到的那些坑&quot;&gt;&lt;a href=&quot;#Git命令使用遇到的那些坑&quot; class=&quot;headerlink&quot; title=&quot;Git命令使用遇到的那些坑&quot;&gt;&lt;/a&gt;Git命令使用遇到的那些坑&lt;/h1&gt;&lt;p&gt;Git是一款强大的版本管理工具，网上有很多Git教程，但是很多资料让人一知半解，不得要领。所以，还是阅读Git官方使用教程&lt;a href=&quot;https://git-scm.com/book/zh/v2&quot; title=&quot;Git官方教程&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://git-scm.com/book/zh/v2&lt;/a&gt;，或者通过终端git help命令来仔细研究各个命令，然后积累经验,熟能生巧。记住，踩坑是成长的必由之路！&lt;/p&gt;
+&lt;h2 id=&quot;配置Git&quot;&gt;&lt;a href=&quot;#配置Git&quot; class=&quot;headerlink&quot; title=&quot;配置Git&quot;&gt;&lt;/a&gt;配置Git&lt;/h2&gt;&lt;p&gt;Git使用一系列配置文件来保存你自定义的行为。 它首先会查找/etc/gitconfig 文件，该文件含有系统里每位用户及他们所拥有的仓库的配置值。 如果你传递–system选项给git config，它就会读写该文件。&lt;/p&gt;
+&lt;p&gt;接下来Git会查找每个用户的~/.gitconfig文件（或者~/.config/git/config文件）。 你可以传递–global选项让Git读写该文件。&lt;/p&gt;
+&lt;p&gt;最后 Git 会查找你正在操作的版本库所对应的 Git 目录下的配置文件（.git/config）。 这个文件中的值只对该版本库有效。&lt;/p&gt;
+&lt;p&gt;以上三个层次中每层的配置（&lt;strong&gt;系统、全局、本地&lt;/strong&gt;）都会覆盖掉上一层次的配置，所以.git/config 中的值会覆盖掉/etc/gitconfig中所对应的值。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br&gt;   Git的配置文件是纯文本的，所以你可以直接手动编辑这些配置文件，输入合乎语法的值。 但是运行&lt;strong&gt;git config&lt;/strong&gt;命令会更简单些。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;客户端配置&quot;&gt;&lt;a href=&quot;#客户端配置&quot; class=&quot;headerlink&quot; title=&quot;客户端配置&quot;&gt;&lt;/a&gt;客户端配置&lt;/h3&gt;&lt;p&gt;Git 能够识别的配置项分为两大类：客户端和服务器端。 其中大部分属于客户端配置——可以依你个人的工作偏好进行配置。尽管Git支持的选项 繁多，但其中大部分仅仅在某些罕见的情况下有意义。 我们只讲述最平常和最有用的选项。 如果想得到你当前版本的 Git 支持的选项列表，请运行&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;$ man git-config&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个命令列出了所有可用的选项，以及与之相关的介绍。 你也可以在 &lt;a href=&quot;http://git-scm.com/docs/git-config.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://git-scm.com/docs/git-config.html&lt;/a&gt; 找到同样的内容。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;core.editor&lt;br&gt;默认情况下，Git 会调用环境变量（$VISUAL 或 $EDITOR）设置的任意文本编辑器，如果没有设置，会调用vi来创建和编辑你的提交以及标签信息。 你可以使用core.editor选项来修改默认的编辑器：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;$ git config –global core.editor emacs&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;现在，无论你定义了什么终端编辑器，Git都会调用Emacs编辑信息。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br&gt;  如果是在windows系统下，比如设置编辑器为VS code，可能会遇到各种坑。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;坑1：&lt;/strong&gt; &lt;code&gt;git config --global core.editor D:\Program Files (x86)\Microsoft VS Code\Code.exe&lt;/code&gt;，此时会报错bash: syntax error near unexpected token `(‘，表明git bash里面不支持(符号，因此得想办法回避这个问题；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;坑2：&lt;/strong&gt;在踩过坑1，可能会&lt;code&gt;git config --global core.editor &amp;quot;D:\Program Files (x86)\Microsoft VS Code\Code.exe&amp;quot;&lt;/code&gt;，即用英文的引号将VS code的路径包裹起来，这样不会确实不会报错了。但是当git commit或其他编辑的时候，报错如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git config --global --edit
+D:\Program Files (x86)\Microsoft VS Code\Code.exe: -c: line 0: syntax error near unexpected token `(&amp;apos;
+D:\Program Files (x86)\Microsoft VS Code\Code.exe: -c: line 0: `D:\Program Files (x86)\Microsoft VS Code\Code.exe &amp;quot;$@&amp;quot;&amp;apos;
+error: There was a problem with the editor &amp;apos;D:\Program Files (x86)\Microsoft VS Code\Code.exe&amp;apos;.
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;表明，其实真正在执行的时候还是无法绕过(符号。因此不能直接使用这样的路径。得想其他办法，比如设置上面提到的$VISUAL 或 $EDITOR，将VS Code的路径赋值进去；或者将VS Code的路径添加到PATH环境变量里面。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;坑3：&lt;/strong&gt;在坑2的基础上，改用&lt;code&gt;git config --global core.editor code&lt;/code&gt;,然后git commit或其他编辑的时候，VS Code编辑器确实被自动打开了，但是commit的时候却提示：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git commit
+Aborting commit due to empty commit message.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这是因为git commit的工作原理如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.创建新的编辑器进程；&lt;br&gt;2.将COMMIT_EDITMSG文件传递给这个进程(可阻塞等待进程结束，也可直接返回，这里取决于配置时的参数)；&lt;br&gt;3.读取COMMIT_EDITMSG文件。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;关键在第二步，这种情况下，默认是没有等待VS Code进程结束就直接返回，而此时COMMIT_EDITMSG还并没有编辑，所以才是empty commit message，从而导致退出commit操作。&lt;br&gt;此时，我们可以使用&lt;code&gt;git config --global core.editor &amp;quot;code -w&amp;quot;&lt;/code&gt;，-w参数表示阻塞commit并等待VS Code进程结束。这样就成功解决了问题。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br&gt;最后发现，其实也可以直接在全局的.gitconfig文件(可以搜索找到它，一般情况下路径是%HOME%.gitconfig)里面直接编辑如下格式来解决上述问题。请注意必须在路径前后加上转义的引号，即&lt;code&gt;&amp;quot;D:/Program Files (x86)/Microsoft VS Code/Code.exe&amp;quot;&lt;/code&gt;是不行的。&lt;br&gt;     [core]&lt;br&gt;        editor = “\”D:/Program Files (x86)/Microsoft VS Code/Code.exe\””&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      Git命令使用遇到的那些坑
+    
+    </summary>
+    
+      <category term="版本控制" scheme="http://cstsinghua.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    
+      <category term="Git" scheme="http://cstsinghua.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/Git/"/>
+    
+    
+      <category term="Git" scheme="http://cstsinghua.github.io/tags/Git/"/>
+    
+      <category term="命令" scheme="http://cstsinghua.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="坑" scheme="http://cstsinghua.github.io/tags/%E5%9D%91/"/>
+    
+  </entry>
   
   <entry>
     <title>npm常用命令</title>
@@ -3824,6 +3896,39 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
   </entry>
   
   <entry>
+    <title>Hello World</title>
+    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
+    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
+    <published>2016-06-13T01:57:02.000Z</published>
+    <updated>2016-06-30T10:24:26.335Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For Test:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+  </entry>
+  
+  <entry>
     <title>python安装某些第三方包报错解决办法</title>
     <link href="http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
     <id>http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
@@ -3872,39 +3977,6 @@ collect2.exe: error: ld returned 1 exit status
     
     
       <category term="安装第三方包" scheme="http://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
-    <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-30T10:24:26.335Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For Test:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
