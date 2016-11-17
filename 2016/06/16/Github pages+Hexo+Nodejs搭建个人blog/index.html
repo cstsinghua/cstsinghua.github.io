@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8">
   
+  
+  
   <title>Github pages+Hexo+Nodejs搭建个人blog | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
   
   
   <meta name="keywords" content="搭建个人Blog">
@@ -35,127 +39,128 @@
   
   <meta name="summary" content="写给典型的程序员">
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.10">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">Cstsinghua</h5>
-        <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
-      </hgroup>
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
     </div>
-  </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Android"  >
-            <i class="icon icon-lg icon-android"></i>
-            Android
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Java"  >
-            <i class="icon icon-lg icon-coffee"></i>
-            Java
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Python"  >
-            <i class="icon icon-lg icon-product-hunt"></i>
-            Python
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/NodeJS"  >
-            <i class="icon icon-lg icon-shield"></i>
-            NodeJS
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/版本控制"  >
-            <i class="icon icon-lg icon-git"></i>
-            版本控制
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/杂项/"  >
-            <i class="icon icon-lg icon-book"></i>
-            杂项
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags/"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/sitemap.xml"  >
-            <i class="icon icon-lg icon-sitemap"></i>
-            Sitemap
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/cstsinghua" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://developer.android.com"  >
-            <i class="icon icon-lg icon-link"></i>
-            Android官网
-          </a>
-        </li>
-    
-  </ul>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
 
-  <footer class="footer">
+      <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>Atypical programmer &copy; 2016</p>
+  <p>Atypical programmer &copy; 2006 - 2016</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
-</div>
-
-  </nav>
+    </div>
+  </div>
+</aside>
   <main id="main">
-    <header class="header" id="header">
+    <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -166,7 +171,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -179,83 +184,54 @@
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">Github pages+Hexo+Nodejs搭建个人blog</h1>
-    <h5 class="subtitle">
-          
-            <time datetime="2016-06-16T10:35:07.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">Github pages+Hexo+Nodejs搭建个人blog</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-06-16T10:35:07.000Z" itemprop="datePublished" class="page-time">
   2016-06-16
 </time>
 
 
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/杂项/">杂项</a></li></ul>
- 
-        
-    </h5>
-  </div>
+
+            
+        </h5>
+    </div>
+
+    
+
 </header>
 
-    <div class="container body-wrap">
-      <article id="post-Github pages+Hexo+Nodejs搭建个人blog" 
-  class="article article-type-post" itemprop="blogPost">
-    <div class="post-meat flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搭建个人Blog/">搭建个人Blog</a></li></ul>
 
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#传统的笔记或者blog平台"><span class="post-toc-number">2.</span> <span class="post-toc-text">传统的笔记或者blog平台</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Github-pages-Hexo-Nodejs搭建个人blog"><span class="post-toc-number">3.</span> <span class="post-toc-text">Github pages+Hexo+Nodejs搭建个人blog</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装hexo"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">安装hexo</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#建站"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">建站</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本地启动server"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">本地启动server</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#部署到github-pages"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">部署到github pages</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#optional-重绑定域名"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">(optional)重绑定域名</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#推广"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">推广</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Github pages+Hexo+Nodejs搭建个人blog" 
+  class="post-article article-type-post" itemprop="blogPost">
 
-            
-            <div class="post-share" id="post-share">
-    <div class="tit">分享到：</div>
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
-        </a>
-      </li>
-    </ul>
- </div>
+    <div class="post-card">
+        <h1 class="post-card-title">Github pages+Hexo+Nodejs搭建个人blog</h1>
+        <div class="post-meta">
+            <time datetime="2016-06-16T10:35:07.000Z" itemprop="datePublished" class="post-time">
+  2016-06-16
+</time>
 
             
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/杂项/">杂项</a></li></ul>
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#传统的笔记或者blog平台"><span class="post-toc-text">传统的笔记或者blog平台</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Github-pages-Hexo-Nodejs搭建个人blog"><span class="post-toc-text">Github pages+Hexo+Nodejs搭建个人blog</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装hexo"><span class="post-toc-text">安装hexo</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#建站"><span class="post-toc-text">建站</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本地启动server"><span class="post-toc-text">本地启动server</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#部署到github-pages"><span class="post-toc-text">部署到github pages</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#optional-重绑定域名"><span class="post-toc-text">(optional)重绑定域名</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#推广"><span class="post-toc-text">推广</span></a></li></ol></li></ol>
-            </nav>
-            
-        </aside>
 
-        <div class="post-main">
 
-            <div class="post-content" id="post-content" itemprop="postContent">
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>作为一个IT技术人员，自然离不开技术的积累，而技术的积累则通过文档或代码的形式呈现出来。好记性不如烂笔头，程序员应该乐于并擅于记录总结工作中遇到的各种问题、工作成果、奇思异想和感悟等。</p>
 <p>程序员的世界是孤独的，但也是充满激情和阳光的。正是开源精神点亮了这一切。生命中最美丽的报偿之一便是帮助他人的同时，也帮助了自己 ─ 罗夫‧瓦尔多‧爱默生 </p>
 <p>因此，将个人的经验和感悟与他人分享，成就的不仅仅是个人，更可以帮助其他人少走弯路。那么就开始分享的旅程吧！</p>
@@ -395,18 +371,81 @@
 </li>
 </ul>
 
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/</a>
-                </p>
-                <footer><cite><a href="http://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
-            </blockquote>
-            </div>
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        这里写留言或版权声明：<a href="/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/</a>
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+        
+<div class="post-reward">
+    <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+        <div class="post-footer">
             
-<nav class="post-nav">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搭建个人Blog/">搭建个人Blog</a></li></ul>
+
+
+            
+<div class="post-share-wrap">
+    <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+    <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2016/07/01/Protocol Buffers使用说明/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">Protocol Buffers使用说明</h4>
@@ -415,7 +454,7 @@
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2016/06/13/ZXing开源项目实战/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">Zxing二维码开源库实战</h4>
@@ -426,45 +465,57 @@
 
 
             
-            
+    
 <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Github pages+Hexo+Nodejs搭建个人blog" data-title="Github pages+Hexo+Nodejs搭建个人blog" data-url="http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"cstsinghua"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
+	<div class="ds-thread" data-thread-key="Github pages+Hexo+Nodejs搭建个人blog" data-title="Github pages+Hexo+Nodejs搭建个人blog" data-url="http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.10"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
 </div>
 
 
-
-
-
-        </div>
-    </div>
-</article>
-    </div>
+</div>
   </main>
-<div class="mask" id="mask"></div>
+  <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "Github pages+Hexo+Nodejs搭建个人blog",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/index.html"
-};
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "Github pages+Hexo+Nodejs搭建个人blog",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/" }
 </script>
 <div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
@@ -503,19 +554,17 @@ var BLOG_SHARE = {
  </div>
 
 
-
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script src="/js/main.js"></script>
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.10"></script>
 
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -525,15 +574,15 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
-</script>
+</template>
 
-<script src="/js/search.js"></script>
-
-
+<script src="/js/search.min.js?v=1.1.10"></script>
 
 
 
-<script src="http://s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
 
 
 

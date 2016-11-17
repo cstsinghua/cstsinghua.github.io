@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8">
   
+  
+  
   <title>apktool打包之后apk包体变大 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
   
   
   <meta name="keywords" content="Apktool打包">
@@ -65,127 +69,128 @@ doNotCompress:
   
   <meta name="summary" content="写给典型的程序员">
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.10">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">Cstsinghua</h5>
-        <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
-      </hgroup>
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
     </div>
-  </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Android"  >
-            <i class="icon icon-lg icon-android"></i>
-            Android
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Java"  >
-            <i class="icon icon-lg icon-coffee"></i>
-            Java
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Python"  >
-            <i class="icon icon-lg icon-product-hunt"></i>
-            Python
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/NodeJS"  >
-            <i class="icon icon-lg icon-shield"></i>
-            NodeJS
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/版本控制"  >
-            <i class="icon icon-lg icon-git"></i>
-            版本控制
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/杂项/"  >
-            <i class="icon icon-lg icon-book"></i>
-            杂项
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags/"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/sitemap.xml"  >
-            <i class="icon icon-lg icon-sitemap"></i>
-            Sitemap
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/cstsinghua" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://developer.android.com"  >
-            <i class="icon icon-lg icon-link"></i>
-            Android官网
-          </a>
-        </li>
-    
-  </ul>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
 
-  <footer class="footer">
+      <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>Atypical programmer &copy; 2016</p>
+  <p>Atypical programmer &copy; 2006 - 2016</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
-</div>
-
-  </nav>
+    </div>
+  </div>
+</aside>
   <main id="main">
-    <header class="header" id="header">
+    <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -196,7 +201,7 @@ doNotCompress:
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -209,36 +214,102 @@ doNotCompress:
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">apktool打包之后apk包体变大</h1>
-    <h5 class="subtitle">
-          
-            <time datetime="2016-06-13T07:40:18.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">apktool打包之后apk包体变大</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-06-13T07:40:18.000Z" itemprop="datePublished" class="page-time">
   2016-06-13
 </time>
 
 
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
- 
-        
-    </h5>
-  </div>
-</header>
-
-    <div class="container body-wrap">
-      <article id="post-apktool打包之后包体变大" 
-  class="article article-type-post" itemprop="blogPost">
-    <div class="post-meat flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apktool打包/">Apktool打包</a></li></ul>
-
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
 
             
-            <div class="post-share" id="post-share">
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#apktool打包之后apk包体变大"><span class="post-toc-number">1.</span> <span class="post-toc-text">apktool打包之后apk包体变大</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-apktool打包之后包体变大" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">apktool打包之后apk包体变大</h1>
+        <div class="post-meta">
+            <time datetime="2016-06-13T07:40:18.000Z" itemprop="datePublished" class="post-time">
+  2016-06-13
+</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="apktool打包之后apk包体变大"><a href="#apktool打包之后apk包体变大" class="headerlink" title="apktool打包之后apk包体变大"></a>apktool打包之后apk包体变大</h1><p>原因：应该是apktool 2.0.3版本之后引入了两个字段</p>
+<ul>
+<li><p>compressionType: </p>
+</li>
+<li><p>doNotCompress:</p>
+</li>
+</ul>
+<p>这两个字段会决定重新编译apk时哪些类型的文件不会压缩，从而影响最终生成的apk的包体大小。</p>
+<ol>
+<li>解决办法一：</li>
+</ol>
+<p>请对比apktool 2.0.1和2.1.1版本反编译之后目录下的apktool.yml文件：</p>
+<p><strong>2.0.1：</strong><br><img src="http://i.imgur.com/IO5RRBr.png" alt=""></p>
+<p><strong>2.1.1：</strong><br><img src="http://i.imgur.com/SOVelmB.png" alt=""></p>
+<p>因此，可以动态调整doNotCompress字段中不压缩的文件类型(比如删除图中的- lua行)，来达到压缩的效果，从而使得包体大小保持与原有大小基本一致。</p>
+<ol>
+<li><p>解决办法二：<br> 既然apktool 2.0.1及其之下版本未引入doNotCompress字段，那么可以采用高版本的apktool释放的1.apk(framework)来作为apktool 2.0.1及其之下版本重编译时的框架依赖。这样可以解决2.0.1重编译依赖Android6.0系统特性的apk失败的问题。</p>
+<p> 举例：首先用apktool 2.0.1反编译target.apk，然后将更高版本的apktool释放(反编译操作时候就会自动释放出来)的1.apk覆盖掉apktool 2.0.1的1.apk，1.apk文件一般放在Home_dir\apktool\framework\1.apk,其中Home_dir是操作系统的默认Home目录，windows平台可以打开cmd，提示的目录即为Home_dir。当然也可以采用Everything搜索等工具全局搜索下就知道其路径了。最后，用apktool 2.0.1版本重新编译target.apk反编译时生成的目录，即可编译成功。</p>
+</li>
+</ol>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        这里写留言或版权声明：<a href="/2016/06/13/apktool打包之后包体变大/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/</a>
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+        
+<div class="post-reward">
+    <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apktool打包/">Apktool打包</a></li></ul>
+
+
+            
+<div class="post-share-wrap">
+    <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -274,51 +345,19 @@ doNotCompress:
     </ul>
  </div>
 
-            
+    <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#apktool打包之后apk包体变大"><span class="post-toc-text">apktool打包之后apk包体变大</span></a></li></ol>
-            </nav>
-            
-        </aside>
 
-        <div class="post-main">
+        </div>
+    </div>   
 
-            <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="apktool打包之后apk包体变大"><a href="#apktool打包之后apk包体变大" class="headerlink" title="apktool打包之后apk包体变大"></a>apktool打包之后apk包体变大</h1><p>原因：应该是apktool 2.0.3版本之后引入了两个字段</p>
-<ul>
-<li><p>compressionType: </p>
-</li>
-<li><p>doNotCompress:</p>
-</li>
-</ul>
-<p>这两个字段会决定重新编译apk时哪些类型的文件不会压缩，从而影响最终生成的apk的包体大小。</p>
-<ol>
-<li>解决办法一：</li>
-</ol>
-<p>请对比apktool 2.0.1和2.1.1版本反编译之后目录下的apktool.yml文件：</p>
-<p><strong>2.0.1：</strong><br><img src="http://i.imgur.com/IO5RRBr.png" alt=""></p>
-<p><strong>2.1.1：</strong><br><img src="http://i.imgur.com/SOVelmB.png" alt=""></p>
-<p>因此，可以动态调整doNotCompress字段中不压缩的文件类型(比如删除图中的- lua行)，来达到压缩的效果，从而使得包体大小保持与原有大小基本一致。</p>
-<ol>
-<li><p>解决办法二：<br> 既然apktool 2.0.1及其之下版本未引入doNotCompress字段，那么可以采用高版本的apktool释放的1.apk(framework)来作为apktool 2.0.1及其之下版本重编译时的框架依赖。这样可以解决2.0.1重编译依赖Android6.0系统特性的apk失败的问题。</p>
-<p> 举例：首先用apktool 2.0.1反编译target.apk，然后将更高版本的apktool释放(反编译操作时候就会自动释放出来)的1.apk覆盖掉apktool 2.0.1的1.apk，1.apk文件一般放在Home_dir\apktool\framework\1.apk,其中Home_dir是操作系统的默认Home目录，windows平台可以打开cmd，提示的目录即为Home_dir。当然也可以采用Everything搜索等工具全局搜索下就知道其路径了。最后，用apktool 2.0.1版本重新编译target.apk反编译时生成的目录，即可编译成功。</p>
-</li>
-</ol>
-
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/</a>
-                </p>
-                <footer><cite><a href="http://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
-            </blockquote>
-            </div>
-            
-<nav class="post-nav">
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2016/06/13/Eclipse动态调试指南/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">Eclipse动态调试Android应用指南</h4>
@@ -327,7 +366,7 @@ doNotCompress:
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2016/06/13/Android热修复的思路/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">Android热修复</h4>
@@ -338,45 +377,57 @@ doNotCompress:
 
 
             
-            
+    
 <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="apktool打包之后包体变大" data-title="apktool打包之后apk包体变大" data-url="http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"cstsinghua"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
+	<div class="ds-thread" data-thread-key="apktool打包之后包体变大" data-title="apktool打包之后apk包体变大" data-url="http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.10"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
 </div>
 
 
-
-
-
-        </div>
-    </div>
-</article>
-    </div>
+</div>
   </main>
-<div class="mask" id="mask"></div>
+  <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "apktool打包之后apk包体变大",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/index.html"
-};
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "apktool打包之后apk包体变大",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/" }
 </script>
 <div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
@@ -415,19 +466,17 @@ var BLOG_SHARE = {
  </div>
 
 
-
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script src="/js/main.js"></script>
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.10"></script>
 
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -437,15 +486,15 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
-</script>
+</template>
 
-<script src="/js/search.js"></script>
-
-
+<script src="/js/search.min.js?v=1.1.10"></script>
 
 
 
-<script src="http://s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
 
 
 

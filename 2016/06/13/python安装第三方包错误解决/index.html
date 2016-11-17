@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8">
   
+  
+  
   <title>python安装某些第三方包报错解决办法 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
   
   
   <meta name="keywords" content="安装第三方包">
@@ -26,127 +30,128 @@ Mi">
   
   <meta name="summary" content="写给典型的程序员">
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.10">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">Cstsinghua</h5>
-        <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
-      </hgroup>
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
     </div>
-  </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Android"  >
-            <i class="icon icon-lg icon-android"></i>
-            Android
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Java"  >
-            <i class="icon icon-lg icon-coffee"></i>
-            Java
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Python"  >
-            <i class="icon icon-lg icon-product-hunt"></i>
-            Python
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/NodeJS"  >
-            <i class="icon icon-lg icon-shield"></i>
-            NodeJS
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/版本控制"  >
-            <i class="icon icon-lg icon-git"></i>
-            版本控制
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/杂项/"  >
-            <i class="icon icon-lg icon-book"></i>
-            杂项
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags/"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/sitemap.xml"  >
-            <i class="icon icon-lg icon-sitemap"></i>
-            Sitemap
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/cstsinghua" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://developer.android.com"  >
-            <i class="icon icon-lg icon-link"></i>
-            Android官网
-          </a>
-        </li>
-    
-  </ul>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
 
-  <footer class="footer">
+      <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>Atypical programmer &copy; 2016</p>
+  <p>Atypical programmer &copy; 2006 - 2016</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
-</div>
-
-  </nav>
+    </div>
+  </div>
+</aside>
   <main id="main">
-    <header class="header" id="header">
+    <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -157,7 +162,7 @@ Mi">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -170,36 +175,112 @@ Mi">
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">python安装某些第三方包报错解决办法</h1>
-    <h5 class="subtitle">
-          
-            <time datetime="2016-06-13T01:57:02.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">python安装某些第三方包报错解决办法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-06-13T01:57:02.000Z" itemprop="datePublished" class="page-time">
   2016-06-13
 </time>
 
 
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
- 
-        
-    </h5>
-  </div>
-</header>
-
-    <div class="container body-wrap">
-      <article id="post-python安装第三方包错误解决" 
-  class="article article-type-post" itemprop="blogPost">
-    <div class="post-meat flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装第三方包/">安装第三方包</a></li></ul>
-
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
 
             
-            <div class="post-share" id="post-share">
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-python安装某些第三方包报错vcvarsall-bat"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. python安装某些第三方包报错vcvarsall.bat</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-python安装第三方包错误解决" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">python安装某些第三方包报错解决办法</h1>
+        <div class="post-meta">
+            <time datetime="2016-06-13T01:57:02.000Z" itemprop="datePublished" class="post-time">
+  2016-06-13
+</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="1-python安装某些第三方包报错vcvarsall-bat"><a href="#1-python安装某些第三方包报错vcvarsall-bat" class="headerlink" title="1. python安装某些第三方包报错vcvarsall.bat"></a>1. <strong>python安装某些第三方包报错vcvarsall.bat</strong></h1><p>原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。</p>
+<p>Mingw官方链接：<a href="http://sourceforge.net/projects/mingw/" title="Mingw官网链接" target="_blank" rel="external">http://sourceforge.net/projects/mingw/</a></p>
+<p>官方说明：python3的安装包的构建主要是通过内置的Distutils工具来完成(<a href="https://docs.python.org/3.4/install/" title="Building Extensions: Tips and Tricks" target="_blank" rel="external">https://docs.python.org/3.4/install/</a>)</p>
+<pre><code>Whenever possible, the Distutils try to use the configuration information made available by the Python 
+interpreter used to run the setup.py script. For example, the same compiler and linker flags used to compile 
+Python will also be used for compiling extensions. Usually this will work well, but in complicated situations 
+this might be inappropriate. This section discusses how to override the usual Distutils behaviour.
+</code></pre><p>解决方案：</p>
+<ol>
+<li>安装python对应版本的VC编译器，可以直接安装整个visual studio；</li>
+<li><p>如果不想整个安装VC，则可以选择安装MinGW（并将其安装后的bin等目录加入到系统path），然后配置python分发包的默认编译工具，<br>即在python安装目录的Lib\distutils目录下(比如安装的python3.4版本，那么即似C:\Python34\Lib\distutils)，新建distutils.cfg文件(如果已有，则直接编辑之)。打开该文件，在前面添加如下内容。</p>
+<pre><code>[build]
+compiler=mingw32
+</code></pre><p> 上述设置之后python distutils构建带C扩展的库或者安装C扩展的库之时，全部都切换至设置的编译器，如果只是想修改某一次的构建或者安装时使用的编译器，则可以在构建或者安装的时候加上参数，如：</p>
+<pre><code>python setup.py build --compiler=mingw32 install
+</code></pre></li>
+</ol>
+<h1 id="2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，"><a href="#2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，" class="headerlink" title="2.安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，"></a>2.<strong>安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</strong></h1><pre><code>C:\Python27\libs/libpython27.a(dmmes01026.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00281.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00105.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00253.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00227.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
+C:\Python27\libs/libpython27.a(dmmes00712.o):(.idata$7+0x0): more undefined references to `_head_C__build27_cpython_PCBuild_libpython27_a&apos; follow
+collect2.exe: error: ld returned 1 exit status
+</code></pre><p>原因：和问题1本质一样，由于Windows平台下的python编译器本身由VC环境编译，其生成的pythonxx.dll(xx是版本号，比如27、34)和pythonxx.lib等可能与需要安装的第三方库（采用Cygwin、MinGW等编译器(环境)生成并发布）无法兼容.</p>
+<p>解决方案：<br>    To create Python extensions, you need to link against the Python library. Unfortunately, most Python distributions are provided with  Pythonxx.lib, a library in Microsoft Visual C++ format. GCC expects a.a file (libpythonxx.a to be precise.). Here’s how to convert  pythonxx.lib to libpythonxx.a:</p>
+<p><strong>a.</strong>Download pexport (from here or <a href="http://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/" target="_blank" rel="external">http://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/</a>).</p>
+<p><strong>b.</strong>Get  pythonxx.dll (it should be somewhere on your harddrive).</p>
+<p><strong>c.</strong>Run : pexports pythonxx.dll &gt; pythonxx.def This will extract all symbols from pythonxx.dll and write them into pythonxx.def.</p>
+<p><strong>d.</strong>Run : dlltool –dllname pythonxx.dll –def pythonxx.def –output-lib libpythonxx.a This will create libpythonxx.a (dlltool is part of MinGW utilities).<br>Copy libpythonxx.a to c:\pythonxx\libs\ (in the same directory as  pythonxx.lib).<br>This trick should work for all Python versions, including future releases of Python. You can also use this trick to convert other libraries.</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        这里写留言或版权声明：<a href="/2016/06/13/python安装第三方包错误解决/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</a>
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+        
+<div class="post-reward">
+    <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装第三方包/">安装第三方包</a></li></ul>
+
+
+            
+<div class="post-share-wrap">
+    <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -235,61 +316,19 @@ Mi">
     </ul>
  </div>
 
-            
+    <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-python安装某些第三方包报错vcvarsall-bat"><span class="post-toc-text">1. python安装某些第三方包报错vcvarsall.bat</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，"><span class="post-toc-text">2.安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</span></a></li></ol>
-            </nav>
-            
-        </aside>
 
-        <div class="post-main">
+        </div>
+    </div>   
 
-            <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="1-python安装某些第三方包报错vcvarsall-bat"><a href="#1-python安装某些第三方包报错vcvarsall-bat" class="headerlink" title="1. python安装某些第三方包报错vcvarsall.bat"></a>1. <strong>python安装某些第三方包报错vcvarsall.bat</strong></h1><p>原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。</p>
-<p>Mingw官方链接：<a href="http://sourceforge.net/projects/mingw/" title="Mingw官网链接" target="_blank" rel="external">http://sourceforge.net/projects/mingw/</a></p>
-<p>官方说明：python3的安装包的构建主要是通过内置的Distutils工具来完成(<a href="https://docs.python.org/3.4/install/" title="Building Extensions: Tips and Tricks" target="_blank" rel="external">https://docs.python.org/3.4/install/</a>)</p>
-<pre><code>Whenever possible, the Distutils try to use the configuration information made available by the Python 
-interpreter used to run the setup.py script. For example, the same compiler and linker flags used to compile 
-Python will also be used for compiling extensions. Usually this will work well, but in complicated situations 
-this might be inappropriate. This section discusses how to override the usual Distutils behaviour.
-</code></pre><p>解决方案：</p>
-<ol>
-<li>安装python对应版本的VC编译器，可以直接安装整个visual studio；</li>
-<li><p>如果不想整个安装VC，则可以选择安装MinGW（并将其安装后的bin等目录加入到系统path），然后配置python分发包的默认编译工具，<br>即在python安装目录的Lib\distutils目录下(比如安装的python3.4版本，那么即似C:\Python34\Lib\distutils)，新建distutils.cfg文件(如果已有，则直接编辑之)。打开该文件，在前面添加如下内容。</p>
-<pre><code>[build]
-compiler=mingw32
-</code></pre><p> 上述设置之后python distutils构建带C扩展的库或者安装C扩展的库之时，全部都切换至设置的编译器，如果只是想修改某一次的构建或者安装时使用的编译器，则可以在构建或者安装的时候加上参数，如：</p>
-<pre><code>python setup.py build --compiler=mingw32 install
-</code></pre></li>
-</ol>
-<h1 id="2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，"><a href="#2-安装某些包时报错，类似”collect2-exe-error-ld-returned-1-exit-status”，" class="headerlink" title="2.安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，"></a>2.<strong>安装某些包时报错，类似”collect2.exe: error: ld returned 1 exit status”，</strong></h1><pre><code>C:\Python27\libs/libpython27.a(dmmes01026.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
-C:\Python27\libs/libpython27.a(dmmes00281.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
-C:\Python27\libs/libpython27.a(dmmes00105.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
-C:\Python27\libs/libpython27.a(dmmes00253.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
-C:\Python27\libs/libpython27.a(dmmes00227.o):(.idata$7+0x0): undefined reference to `_head_C__build27_cpython_PCBuild_libpython27_a&apos;
-C:\Python27\libs/libpython27.a(dmmes00712.o):(.idata$7+0x0): more undefined references to `_head_C__build27_cpython_PCBuild_libpython27_a&apos; follow
-collect2.exe: error: ld returned 1 exit status
-</code></pre><p>原因：和问题1本质一样，由于Windows平台下的python编译器本身由VC环境编译，其生成的pythonxx.dll(xx是版本号，比如27、34)和pythonxx.lib等可能与需要安装的第三方库（采用Cygwin、MinGW等编译器(环境)生成并发布）无法兼容.</p>
-<p>解决方案：<br>    To create Python extensions, you need to link against the Python library. Unfortunately, most Python distributions are provided with  Pythonxx.lib, a library in Microsoft Visual C++ format. GCC expects a.a file (libpythonxx.a to be precise.). Here’s how to convert  pythonxx.lib to libpythonxx.a:</p>
-<p><strong>a.</strong>Download pexport (from here or <a href="http://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/" target="_blank" rel="external">http://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/</a>).</p>
-<p><strong>b.</strong>Get  pythonxx.dll (it should be somewhere on your harddrive).</p>
-<p><strong>c.</strong>Run : pexports pythonxx.dll &gt; pythonxx.def This will extract all symbols from pythonxx.dll and write them into pythonxx.def.</p>
-<p><strong>d.</strong>Run : dlltool –dllname pythonxx.dll –def pythonxx.def –output-lib libpythonxx.a This will create libpythonxx.a (dlltool is part of MinGW utilities).<br>Copy libpythonxx.a to c:\pythonxx\libs\ (in the same directory as  pythonxx.lib).<br>This trick should work for all Python versions, including future releases of Python. You can also use this trick to convert other libraries.</p>
-
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</a>
-                </p>
-                <footer><cite><a href="http://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
-            </blockquote>
-            </div>
-            
-<nav class="post-nav">
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2016/06/13/hello-world/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">Hello World</h4>
@@ -298,7 +337,7 @@ collect2.exe: error: ld returned 1 exit status
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2016/06/08/推送方案/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">推送方案</h4>
@@ -309,45 +348,57 @@ collect2.exe: error: ld returned 1 exit status
 
 
             
-            
+    
 <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="python安装第三方包错误解决" data-title="python安装某些第三方包报错解决办法" data-url="http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"cstsinghua"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
+	<div class="ds-thread" data-thread-key="python安装第三方包错误解决" data-title="python安装某些第三方包报错解决办法" data-url="http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.10"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
 </div>
 
 
-
-
-
-        </div>
-    </div>
-</article>
-    </div>
+</div>
   </main>
-<div class="mask" id="mask"></div>
+  <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "python安装某些第三方包报错解决办法",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/index.html"
-};
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "python安装某些第三方包报错解决办法",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/" }
 </script>
 <div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
@@ -386,19 +437,17 @@ var BLOG_SHARE = {
  </div>
 
 
-
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script src="/js/main.js"></script>
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.10"></script>
 
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -408,15 +457,15 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
-</script>
+</template>
 
-<script src="/js/search.js"></script>
-
-
+<script src="/js/search.min.js?v=1.1.10"></script>
 
 
 
-<script src="http://s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
 
 
 

@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8">
   
+  
+  
   <title>npm常用命令 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
   
   
   <meta name="keywords" content="常用,NodeJS,npm">
@@ -21,129 +25,130 @@
   
     <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
   
-  <meta name="summary" content="&lt;p&gt;npm常用命令介绍&lt;br&gt;">
+  <meta name="summary" content="npm常用命令介绍">
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.10">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">Cstsinghua</h5>
-        <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
-      </hgroup>
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
     </div>
-  </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Android"  >
-            <i class="icon icon-lg icon-android"></i>
-            Android
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Java"  >
-            <i class="icon icon-lg icon-coffee"></i>
-            Java
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Python"  >
-            <i class="icon icon-lg icon-product-hunt"></i>
-            Python
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/NodeJS"  >
-            <i class="icon icon-lg icon-shield"></i>
-            NodeJS
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/版本控制"  >
-            <i class="icon icon-lg icon-git"></i>
-            版本控制
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/杂项/"  >
-            <i class="icon icon-lg icon-book"></i>
-            杂项
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags/"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/sitemap.xml"  >
-            <i class="icon icon-lg icon-sitemap"></i>
-            Sitemap
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/cstsinghua" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://developer.android.com"  >
-            <i class="icon icon-lg icon-link"></i>
-            Android官网
-          </a>
-        </li>
-    
-  </ul>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
 
-  <footer class="footer">
+      <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>Atypical programmer &copy; 2016</p>
+  <p>Atypical programmer &copy; 2006 - 2016</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
-</div>
-
-  </nav>
+    </div>
+  </div>
+</aside>
   <main id="main">
-    <header class="header" id="header">
+    <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -154,7 +159,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -167,36 +172,111 @@
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">npm常用命令</h1>
-    <h5 class="subtitle">
-          
-            <time datetime="2016-11-04T03:53:47.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">npm常用命令</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-11-04T03:53:47.000Z" itemprop="datePublished" class="page-time">
   2016-11-04
 </time>
 
 
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/npm/">npm</a></li></ul></li></ul>
- 
-        
-    </h5>
-  </div>
-</header>
-
-    <div class="container body-wrap">
-      <article id="post-npm常用命令" 
-  class="article article-type-post" itemprop="blogPost">
-    <div class="post-meat flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li></ul>
-
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
 
             
-            <div class="post-share" id="post-share">
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#npm常用命令"><span class="post-toc-number">1.</span> <span class="post-toc-text">npm常用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查看已安装的包"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">查看已安装的包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装包"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">安装包</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-npm常用命令" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">npm常用命令</h1>
+        <div class="post-meta">
+            <time datetime="2016-11-04T03:53:47.000Z" itemprop="datePublished" class="post-time">
+  2016-11-04
+</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/npm/">npm</a></li></ul></li></ul>
+
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>npm常用命令介绍<br><a id="more"></a></p>
+<h1 id="npm常用命令"><a href="#npm常用命令" class="headerlink" title="npm常用命令"></a>npm常用命令</h1><hr>
+<h2 id="查看已安装的包"><a href="#查看已安装的包" class="headerlink" title="查看已安装的包"></a>查看已安装的包</h2><p>查看当前目录下安装的所有的包：</p>
+<blockquote>
+<p> npm list</p>
+</blockquote>
+<p>查看全局安装的所有的包（-g参数代表全局的意思）：</p>
+<blockquote>
+<p>npm list -g</p>
+</blockquote>
+<p>查看已经安装的某个包的信息：</p>
+<blockquote>
+<p>npm list package_name [-g]</p>
+</blockquote>
+<hr>
+<h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2><blockquote>
+<p>npm install [-g] [package_name[@next] [–save]</p>
+</blockquote>
+<pre><code>1.后面没有所有参数，即只输入npm install，表示在当前目录下安装当前目录工程)下的package.json的dependencies中指定的包；
+1.加上-g代表全局安装，不加则表示在当前目录下安装
+
+2.加上@next表示安装最新版本
+
+3.加上--save表示安装的同时也将包加入到当前路径(工程)下的package.json的dependencies中去，这样以后迁移的时候就可以采用1来安装，比较便捷，可以记录依赖关系。
+</code></pre><blockquote>
+<p>npm install [-g] [package_name[@version] [–save]</p>
+</blockquote>
+<pre><code>1.其他如上，只是这里如果是@version，则表示安装指定版本的包。比如安装TypeScript 2.0,可以使用npm install typescript@2.0.0.
+</code></pre><hr>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        这里写留言或版权声明：<a href="/2016/11/04/npm常用命令/" target="_blank" rel="external">http://cstsinghua.github.io/2016/11/04/npm常用命令/</a>
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+        
+<div class="post-reward">
+    <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li></ul>
+
+
+            
+<div class="post-share-wrap">
+    <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -232,60 +312,19 @@
     </ul>
  </div>
 
-            
+    <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#npm常用命令"><span class="post-toc-text">npm常用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查看已安装的包"><span class="post-toc-text">查看已安装的包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装包"><span class="post-toc-text">安装包</span></a></li></ol></li></ol>
-            </nav>
-            
-        </aside>
 
-        <div class="post-main">
+        </div>
+    </div>   
 
-            <div class="post-content" id="post-content" itemprop="postContent">
-            <p>npm常用命令介绍<br><a id="more"></a></p>
-<h1 id="npm常用命令"><a href="#npm常用命令" class="headerlink" title="npm常用命令"></a>npm常用命令</h1><hr>
-<h2 id="查看已安装的包"><a href="#查看已安装的包" class="headerlink" title="查看已安装的包"></a>查看已安装的包</h2><p>查看当前目录下安装的所有的包：</p>
-<blockquote>
-<p> npm list</p>
-</blockquote>
-<p>查看全局安装的所有的包（-g参数代表全局的意思）：</p>
-<blockquote>
-<p>npm list -g</p>
-</blockquote>
-<p>查看已经安装的某个包的信息：</p>
-<blockquote>
-<p>npm list package_name [-g]</p>
-</blockquote>
-<hr>
-<h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2><blockquote>
-<p>npm install [-g] [package_name[@next] [–save]</p>
-</blockquote>
-<pre><code>1.后面没有所有参数，即只输入npm install，表示在当前目录下安装当前目录工程)下的package.json的dependencies中指定的包；
-1.加上-g代表全局安装，不加则表示在当前目录下安装
-
-2.加上@next表示安装最新版本
-
-3.加上--save表示安装的同时也将包加入到当前路径(工程)下的package.json的dependencies中去，这样以后迁移的时候就可以采用1来安装，比较便捷，可以记录依赖关系。
-</code></pre><blockquote>
-<p>npm install [-g] [package_name[@version] [–save]</p>
-</blockquote>
-<pre><code>1.其他如上，只是这里如果是@version，则表示安装指定版本的包。比如安装TypeScript 2.0,可以使用npm install typescript@2.0.0.
-</code></pre><hr>
-
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="http://cstsinghua.github.io/2016/11/04/npm常用命令/" target="_blank" rel="external">http://cstsinghua.github.io/2016/11/04/npm常用命令/</a>
-                </p>
-                <footer><cite><a href="http://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
-            </blockquote>
-            </div>
-            
-<nav class="post-nav">
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2016/11/17/Git命令使用遇到的那些坑/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">Git命令使用遇到的那些坑</h4>
@@ -294,7 +333,7 @@
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2016/09/12/Android知识体系及新手如何快速入门/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">Android知识体系及新手如何快速入门</h4>
@@ -305,45 +344,57 @@
 
 
             
-            
+    
 <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="npm常用命令" data-title="npm常用命令" data-url="http://cstsinghua.github.io/2016/11/04/npm常用命令/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"cstsinghua"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
+	<div class="ds-thread" data-thread-key="npm常用命令" data-title="npm常用命令" data-url="http://cstsinghua.github.io/2016/11/04/npm常用命令/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.10"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
 </div>
 
 
-
-
-
-        </div>
-    </div>
-</article>
-    </div>
+</div>
   </main>
-<div class="mask" id="mask"></div>
+  <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "npm常用命令",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "http://cstsinghua.github.io/2016/11/04/npm常用命令/index.html"
-};
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "npm常用命令",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://cstsinghua.github.io/2016/11/04/npm常用命令/" }
 </script>
 <div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
@@ -382,19 +433,17 @@ var BLOG_SHARE = {
  </div>
 
 
-
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script src="/js/main.js"></script>
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.10"></script>
 
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -404,15 +453,15 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
-</script>
+</template>
 
-<script src="/js/search.js"></script>
-
-
+<script src="/js/search.min.js?v=1.1.10"></script>
 
 
 
-<script src="http://s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
 
 
 

@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8">
   
+  
+  
   <title>Protocol Buffers使用说明 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
   
   
   <meta name="keywords" content="Protocol Buffers">
@@ -28,127 +32,128 @@
   
   <meta name="summary" content="写给典型的程序员">
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.10">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">Cstsinghua</h5>
-        <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
-      </hgroup>
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
     </div>
-  </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Android"  >
-            <i class="icon icon-lg icon-android"></i>
-            Android
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Java"  >
-            <i class="icon icon-lg icon-coffee"></i>
-            Java
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Python"  >
-            <i class="icon icon-lg icon-product-hunt"></i>
-            Python
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/NodeJS"  >
-            <i class="icon icon-lg icon-shield"></i>
-            NodeJS
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/版本控制"  >
-            <i class="icon icon-lg icon-git"></i>
-            版本控制
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/杂项/"  >
-            <i class="icon icon-lg icon-book"></i>
-            杂项
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags/"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/sitemap.xml"  >
-            <i class="icon icon-lg icon-sitemap"></i>
-            Sitemap
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/cstsinghua" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://developer.android.com"  >
-            <i class="icon icon-lg icon-link"></i>
-            Android官网
-          </a>
-        </li>
-    
-  </ul>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
 
-  <footer class="footer">
+      <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>Atypical programmer &copy; 2016</p>
+  <p>Atypical programmer &copy; 2006 - 2016</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
-</div>
-
-  </nav>
+    </div>
+  </div>
+</aside>
   <main id="main">
-    <header class="header" id="header">
+    <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -159,7 +164,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -172,83 +177,54 @@
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">Protocol Buffers使用说明</h1>
-    <h5 class="subtitle">
-          
-            <time datetime="2016-07-01T02:09:43.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">Protocol Buffers使用说明</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-01T02:09:43.000Z" itemprop="datePublished" class="page-time">
   2016-07-01
 </time>
 
 
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
- 
-        
-    </h5>
-  </div>
+
+            
+        </h5>
+    </div>
+
+    
+
 </header>
 
-    <div class="container body-wrap">
-      <article id="post-Protocol Buffers使用说明" 
-  class="article article-type-post" itemprop="blogPost">
-    <div class="post-meat flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Protocol-Buffers/">Protocol Buffers</a></li></ul>
 
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Protocol-Buffers简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">Protocol Buffers简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Protocol-Buffers的使用"><span class="post-toc-number">2.</span> <span class="post-toc-text">Protocol Buffers的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Defining-Your-Protocol-Format-定义数据交换的协议格式"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. Defining Your Protocol Format(定义数据交换的协议格式)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Protocol-Compiler-Installation-获取protoc可执行二进制文件"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. Protocol Compiler Installation(获取protoc可执行二进制文件)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-Compiling-Your-Protocol-Buffers-编译Protocol-Buffers，即编译-proto文件"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3.  Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-Protobuf-Runtime-Installation-生成Protocol-Buffer-API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4. Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-安装maven-注意需要安装JDK1-7及其以上版本"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">4.1 安装maven(注意需要安装JDK1.7及其以上版本)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-下载protocol-buffer源码包"><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">4.2 下载protocol buffer源码包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-Run-the-tests-先测试运行，看看是否配置ok"><span class="post-toc-number">2.4.3.</span> <span class="post-toc-text">4.3 Run the tests(先测试运行，看看是否配置ok)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-生成jar包"><span class="post-toc-number">2.4.4.</span> <span class="post-toc-text">4.4 生成jar包</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-Parsing-and-Serialization-解析和序列化"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">5. Parsing and Serialization(解析和序列化)</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Protocol Buffers使用说明" 
+  class="post-article article-type-post" itemprop="blogPost">
 
-            
-            <div class="post-share" id="post-share">
-    <div class="tit">分享到：</div>
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
-        </a>
-      </li>
-    </ul>
- </div>
+    <div class="post-card">
+        <h1 class="post-card-title">Protocol Buffers使用说明</h1>
+        <div class="post-meta">
+            <time datetime="2016-07-01T02:09:43.000Z" itemprop="datePublished" class="post-time">
+  2016-07-01
+</time>
 
             
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Protocol-Buffers简介"><span class="post-toc-text">Protocol Buffers简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Protocol-Buffers的使用"><span class="post-toc-text">Protocol Buffers的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Defining-Your-Protocol-Format-定义数据交换的协议格式"><span class="post-toc-text">1. Defining Your Protocol Format(定义数据交换的协议格式)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Protocol-Compiler-Installation-获取protoc可执行二进制文件"><span class="post-toc-text">2. Protocol Compiler Installation(获取protoc可执行二进制文件)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-Compiling-Your-Protocol-Buffers-编译Protocol-Buffers，即编译-proto文件"><span class="post-toc-text">3.  Compiling Your Protocol Buffers(编译Protocol Buffers，即编译.proto文件)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-Protobuf-Runtime-Installation-生成Protocol-Buffer-API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中"><span class="post-toc-text">4. Protobuf Runtime Installation(生成Protocol Buffer API接口，用于支持操作步骤三生成的类，即核心的数据序列化和反序列化机制等包含在此API中)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-安装maven-注意需要安装JDK1-7及其以上版本"><span class="post-toc-text">4.1 安装maven(注意需要安装JDK1.7及其以上版本)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-下载protocol-buffer源码包"><span class="post-toc-text">4.2 下载protocol buffer源码包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-Run-the-tests-先测试运行，看看是否配置ok"><span class="post-toc-text">4.3 Run the tests(先测试运行，看看是否配置ok)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-生成jar包"><span class="post-toc-text">4.4 生成jar包</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-Parsing-and-Serialization-解析和序列化"><span class="post-toc-text">5. Parsing and Serialization(解析和序列化)</span></a></li></ol></li></ol>
-            </nav>
-            
-        </aside>
 
-        <div class="post-main">
 
-            <div class="post-content" id="post-content" itemprop="postContent">
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="Protocol-Buffers简介"><a href="#Protocol-Buffers简介" class="headerlink" title="Protocol Buffers简介"></a>Protocol Buffers简介</h1><p>Protocol Buffers是一种数据交换格式，用于结构化数据的读写，类似于序列化机制。在线客服系统里面Message的body部分其实就是具有结构化的数据，因此可以采用Protocol Buffers来实现各平台和语言之间的消息传输。Protocol Buffers特点以及与XML、各语言的序列化机制等的比较，可以后续展开，这里不赘述！此处重点说明其如何使用，特别是针对java(Android)平台。</p>
 <p>Github地址：<a href="https://github.com/google/protobuf" target="_blank" rel="external">https://github.com/google/protobuf</a></p>
 <p>官方地址：<a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="external"> https://developers.google.com/protocol-buffers/</a></p>
@@ -345,18 +321,81 @@ void writeTo(OutputStream output);: serializes the message and writes it to an O
 static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream input);: reads and parses a message from an InputStream.
 </code></pre><p>事实上，每个类包含有大量的解析和序列化的方法。 请参照<a href="https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/Message" target="_blank" rel="external"> Message API reference</a>进行详细查阅。</p>
 
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="http://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/" target="_blank" rel="external">http://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/</a>
-                </p>
-                <footer><cite><a href="http://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
-            </blockquote>
-            </div>
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        这里写留言或版权声明：<a href="/2016/07/01/Protocol Buffers使用说明/" target="_blank" rel="external">http://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/</a>
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+        
+<div class="post-reward">
+    <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+        <div class="post-footer">
             
-<nav class="post-nav">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Protocol-Buffers/">Protocol Buffers</a></li></ul>
+
+
+            
+<div class="post-share-wrap">
+    <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+    <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2016/07/08/删除Windows下的超长路径目录/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">删除Windows下的超长路径目录</h4>
@@ -365,7 +404,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">Github pages+Hexo+Nodejs搭建个人blog</h4>
@@ -376,45 +415,57 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
 
 
             
-            
+    
 <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Protocol Buffers使用说明" data-title="Protocol Buffers使用说明" data-url="http://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"cstsinghua"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
+	<div class="ds-thread" data-thread-key="Protocol Buffers使用说明" data-title="Protocol Buffers使用说明" data-url="http://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.10"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
 </div>
 
 
-
-
-
-        </div>
-    </div>
-</article>
-    </div>
+</div>
   </main>
-<div class="mask" id="mask"></div>
+  <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "Protocol Buffers使用说明",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "http://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/index.html"
-};
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "Protocol Buffers使用说明",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/" }
 </script>
 <div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
@@ -453,19 +504,17 @@ var BLOG_SHARE = {
  </div>
 
 
-
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script src="/js/main.js"></script>
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.10"></script>
 
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -475,15 +524,15 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
-</script>
+</template>
 
-<script src="/js/search.js"></script>
-
-
+<script src="/js/search.min.js?v=1.1.10"></script>
 
 
 
-<script src="http://s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
 
 
 

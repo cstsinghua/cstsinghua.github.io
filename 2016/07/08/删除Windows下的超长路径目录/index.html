@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8">
   
+  
+  
   <title>删除Windows下的超长路径目录 | Atypical programmer | 做一个非典型程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
   
   
   <meta name="keywords" content="Windows,超长目录,删除">
@@ -23,127 +27,128 @@
   
   <meta name="summary" content="写给典型的程序员">
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.10">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
-   <div class="inner flex-row-vertical">
-  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-      <i class="icon icon-lg icon-close"></i>
-  </a>
-  <div class="brand-wrap">
-    <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
-      <hgroup class="introduce">
-        <h5 class="nickname">Cstsinghua</h5>
-        <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
-      </hgroup>
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
     </div>
-  </div>
-  <ul class="nav flex-col">
-    
-        <li class="waves-block waves-effect">
-          <a href="/"  >
-            <i class="icon icon-lg icon-home"></i>
-            主页
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/archives"  >
-            <i class="icon icon-lg icon-archives"></i>
-            Archives
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Android"  >
-            <i class="icon icon-lg icon-android"></i>
-            Android
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Java"  >
-            <i class="icon icon-lg icon-coffee"></i>
-            Java
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/Python"  >
-            <i class="icon icon-lg icon-product-hunt"></i>
-            Python
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/NodeJS"  >
-            <i class="icon icon-lg icon-shield"></i>
-            NodeJS
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/版本控制"  >
-            <i class="icon icon-lg icon-git"></i>
-            版本控制
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/categories/杂项/"  >
-            <i class="icon icon-lg icon-book"></i>
-            杂项
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/tags/"  >
-            <i class="icon icon-lg icon-tags"></i>
-            Tags
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="/sitemap.xml"  >
-            <i class="icon icon-lg icon-sitemap"></i>
-            Sitemap
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://github.com/cstsinghua" target="_blank" >
-            <i class="icon icon-lg icon-github"></i>
-            Github
-          </a>
-        </li>
-    
-        <li class="waves-block waves-effect">
-          <a href="https://developer.android.com"  >
-            <i class="icon icon-lg icon-link"></i>
-            Android官网
-          </a>
-        </li>
-    
-  </ul>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
 
-  <footer class="footer">
+      <footer class="footer">
   <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>Atypical programmer &copy; 2016</p>
+  <p>Atypical programmer &copy; 2006 - 2016</p>
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
 </footer>
 
-</div>
-
-  </nav>
+    </div>
+  </div>
+</aside>
   <main id="main">
-    <header class="header" id="header">
+    <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -154,7 +159,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -167,36 +172,94 @@
         
     </div>
 </header>
-<header class="content-header">
-  <div class="container">
-    <h1 class="author">删除Windows下的超长路径目录</h1>
-    <h5 class="subtitle">
-          
-            <time datetime="2016-07-08T02:28:12.000Z" itemprop="datePublished" class="page-time">
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">删除Windows下的超长路径目录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-08T02:28:12.000Z" itemprop="datePublished" class="page-time">
   2016-07-08
 </time>
 
 
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
- 
-        
-    </h5>
-  </div>
-</header>
-
-    <div class="container body-wrap">
-      <article id="post-删除Windows下的超长路径目录" 
-  class="article article-type-post" itemprop="blogPost">
-    <div class="post-meat flex-row">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/">Windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/删除/">删除</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/超长目录/">超长目录</a></li></ul>
-
-    </div>
-    <div class="post-body">
-        <aside class="post-widget" id="post-widget">
 
             
-            <div class="post-share" id="post-share">
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#删除超长路径文件或者目录"><span class="post-toc-number">1.</span> <span class="post-toc-text">删除超长路径文件或者目录</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#采用python脚本循环删除超长目录"><span class="post-toc-number">2.</span> <span class="post-toc-text">采用python脚本循环删除超长目录</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-删除Windows下的超长路径目录" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">删除Windows下的超长路径目录</h1>
+        <div class="post-meta">
+            <time datetime="2016-07-08T02:28:12.000Z" itemprop="datePublished" class="post-time">
+  2016-07-08
+</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="删除超长路径文件或者目录"><a href="#删除超长路径文件或者目录" class="headerlink" title="删除超长路径文件或者目录"></a>删除超长路径文件或者目录</h1><p>在Windows操作系统，由于使用目录工具不当或者在使用某些编程工具时生成目录时(比如反复在同一目录下导入同一个工程)常常会产生多层递归模式，导致产生多级超长目录结构，而无法用Windows可视化右键模式进行删除，市面上的很多文件删除工具，如360强力删除、unlocker删除都无济于事，真是一件恼人的事情。</p>
+<p>其实，windows系统自身便带有相关的命令行工具可以用来删除，操作过程如下：</p>
+<ol>
+<li>比如D盘下面如存在D:\blog\node_modules\a\b\c......多层嵌套的目录；</li>
+<li>通过cmd命令行输入cd命令进入上述目录；</li>
+<li>mkdir tempDir这个为空目录结构；</li>
+<li>robocopy /mir tempDir a；//<strong>tempDir是步骤3创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a</strong></li>
+<li>上面执行完毕之后，便可以删除目录了</li>
+</ol>
+<p>但是在某些情况下，执行robocopy命令在中途就可能停止，又不得不重新执行该命令，直到目录完全被删除为止。因此可以写批处理文件来循环操作，当然也可以采用简单的python脚本来执行。</p>
+<h1 id="采用python脚本循环删除超长目录"><a href="#采用python脚本循环删除超长目录" class="headerlink" title="采用python脚本循环删除超长目录"></a>采用python脚本循环删除超长目录</h1><p>示例代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="string">'''</span><br><span class="line">1.比如无法删除的超长目录为D:\blog\node_modules\a\b\c\...\...；</span><br><span class="line">2.执行完毕之后，目录变成D:\blog\node_modules，后面的a\b\c\...\...则会被删除；</span><br><span class="line">'''</span></span><br><span class="line">os.chdir(<span class="string">r"D:\blog\node_modules"</span>)</span><br><span class="line">os.mkdir(<span class="string">r"D:\blog\node_modules\tempDir"</span>)<span class="comment">#创建临时的空目录</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    result = os.system(<span class="string">"Robocopy.exe tempDir a /MIR"</span>)</span><br><span class="line">    <span class="keyword">if</span>(result != <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">os.rmdir(<span class="string">r"D:\blog\node_modules\tempDir"</span>)<span class="comment">#删除之前创建的临时目录</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>note：os.system(“Robocopy.exe tempDir a /MIR”)中tempDir是步骤创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a，实际使用时需要修改成你自己的目录</strong></p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        这里写留言或版权声明：<a href="/2016/07/08/删除Windows下的超长路径目录/" target="_blank" rel="external">http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/</a>
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+        
+<div class="post-reward">
+    <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/">Windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/删除/">删除</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/超长目录/">超长目录</a></li></ul>
+
+
+            
+<div class="post-share-wrap">
+    <div class="post-share" id="post-share">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -232,43 +295,19 @@
     </ul>
  </div>
 
-            
+    <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#删除超长路径文件或者目录"><span class="post-toc-text">删除超长路径文件或者目录</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#采用python脚本循环删除超长目录"><span class="post-toc-text">采用python脚本循环删除超长目录</span></a></li></ol>
-            </nav>
-            
-        </aside>
 
-        <div class="post-main">
+        </div>
+    </div>   
 
-            <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="删除超长路径文件或者目录"><a href="#删除超长路径文件或者目录" class="headerlink" title="删除超长路径文件或者目录"></a>删除超长路径文件或者目录</h1><p>在Windows操作系统，由于使用目录工具不当或者在使用某些编程工具时生成目录时(比如反复在同一目录下导入同一个工程)常常会产生多层递归模式，导致产生多级超长目录结构，而无法用Windows可视化右键模式进行删除，市面上的很多文件删除工具，如360强力删除、unlocker删除都无济于事，真是一件恼人的事情。</p>
-<p>其实，windows系统自身便带有相关的命令行工具可以用来删除，操作过程如下：</p>
-<ol>
-<li>比如D盘下面如存在D:\blog\node_modules\a\b\c......多层嵌套的目录；</li>
-<li>通过cmd命令行输入cd命令进入上述目录；</li>
-<li>mkdir tempDir这个为空目录结构；</li>
-<li>robocopy /mir tempDir a；//<strong>tempDir是步骤3创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a</strong></li>
-<li>上面执行完毕之后，便可以删除目录了</li>
-</ol>
-<p>但是在某些情况下，执行robocopy命令在中途就可能停止，又不得不重新执行该命令，直到目录完全被删除为止。因此可以写批处理文件来循环操作，当然也可以采用简单的python脚本来执行。</p>
-<h1 id="采用python脚本循环删除超长目录"><a href="#采用python脚本循环删除超长目录" class="headerlink" title="采用python脚本循环删除超长目录"></a>采用python脚本循环删除超长目录</h1><p>示例代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="string">'''</span><br><span class="line">1.比如无法删除的超长目录为D:\blog\node_modules\a\b\c\...\...；</span><br><span class="line">2.执行完毕之后，目录变成D:\blog\node_modules，后面的a\b\c\...\...则会被删除；</span><br><span class="line">'''</span></span><br><span class="line">os.chdir(<span class="string">r"D:\blog\node_modules"</span>)</span><br><span class="line">os.mkdir(<span class="string">r"D:\blog\node_modules\tempDir"</span>)<span class="comment">#创建临时的空目录</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    result = os.system(<span class="string">"Robocopy.exe tempDir a /MIR"</span>)</span><br><span class="line">    <span class="keyword">if</span>(result != <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">os.rmdir(<span class="string">r"D:\blog\node_modules\tempDir"</span>)<span class="comment">#删除之前创建的临时目录</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>note：os.system(“Robocopy.exe tempDir a /MIR”)中tempDir是步骤创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a，实际使用时需要修改成你自己的目录</strong></p>
-
-            <blockquote>
-                <p>
-                本文地址：
-                <a href="http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/" target="_blank" rel="external">http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/</a>
-                </p>
-                <footer><cite><a href="http://cstsinghua.github.io">@Atypical programmer</a></cite></footer>
-            </blockquote>
-            </div>
-            
-<nav class="post-nav">
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev fl">
+    <div class="waves-block waves-effect prev">
       <a href="/2016/07/13/Android-studio常用快捷键/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">Android studio常用快捷键</h4>
@@ -277,7 +316,7 @@
   
 
   
-    <div class="waves-block waves-effect next fr">
+    <div class="waves-block waves-effect next">
       <a href="/2016/07/01/Protocol Buffers使用说明/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">Protocol Buffers使用说明</h4>
@@ -288,45 +327,57 @@
 
 
             
-            
+    
 <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="删除Windows下的超长路径目录" data-title="删除Windows下的超长路径目录" data-url="http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"cstsinghua"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
+	<div class="ds-thread" data-thread-key="删除Windows下的超长路径目录" data-title="删除Windows下的超长路径目录" data-url="http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.10"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
 </div>
 
 
-
-
-
-        </div>
-    </div>
-</article>
-    </div>
+</div>
   </main>
-<div class="mask" id="mask"></div>
+  <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>
-var BLOG_SHARE = {
-    title: "删除Windows下的超长路径目录",
-    pic: "/img/logo.jpg",
-    summary: document.getElementsByName('summary')[0].content,
-    url: "http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/index.html"
-};
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "删除Windows下的超长路径目录",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/" }
 </script>
 <div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
@@ -365,19 +416,17 @@ var BLOG_SHARE = {
  </div>
 
 
-
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script src="/js/main.js"></script>
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.10"></script>
 
 
 
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
-<script type="text/template" id="search-tpl">
+<template id="search-tpl">
 <li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
@@ -387,15 +436,15 @@ var BLOG_SHARE = {
         </div>
     </a>
 </li>
-</script>
+</template>
 
-<script src="/js/search.js"></script>
-
-
+<script src="/js/search.min.js?v=1.1.10"></script>
 
 
 
-<script src="http://s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
 
 
 
