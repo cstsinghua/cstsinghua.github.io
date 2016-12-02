@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://cstsinghua.github.io/2016/06/13/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%80%9D%E8%B7%AF/</loc>
+    <lastmod>2016-12-02T10:43:17.750Z</lastmod>
+    <data>
+        <display>
+        <title>Android热修复</title>
+        <pubTime>2016-06-13T07:38:15.000Z</pubTime>
+        
+        <tag>Android热修复</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="插件化和热修复" url="http://cstsinghua.github.io/categories/Android/%E6%8F%92%E4%BB%B6%E5%8C%96%E5%92%8C%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cstsinghua.github.io/2016/12/02/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E2%80%94%E2%80%94%E4%B8%89%E5%A4%A7%E6%B5%81%E6%B4%BE%E8%A7%A3%E6%9E%90/</loc>
     <lastmod>2016-12-02T09:16:52.000Z</lastmod>
     <data>
@@ -310,26 +333,6 @@
         <pubTime>2016-06-13T07:40:18.000Z</pubTime>
         
         <tag>Apktool打包</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cstsinghua.github.io/2016/06/13/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%80%9D%E8%B7%AF/</loc>
-    <lastmod>2016-06-13T07:38:25.933Z</lastmod>
-    <data>
-        <display>
-        <title>Android热修复</title>
-        <pubTime>2016-06-13T07:38:15.000Z</pubTime>
-        
-        <tag>Android热修复</tag>
          
          
            

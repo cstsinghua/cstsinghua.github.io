@@ -1715,7 +1715,7 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     <link href="http://cstsinghua.github.io/2016/06/13/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%80%9D%E8%B7%AF/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android热修复的思路/</id>
     <published>2016-06-13T07:38:15.000Z</published>
-    <updated>2016-06-13T07:38:25.933Z</updated>
+    <updated>2016-12-02T10:43:17.750Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Android热修复的方式&quot;&gt;&lt;a href=&quot;#Android热修复的方式&quot; class=&quot;headerlink&quot; title=&quot;Android热修复的方式&quot;&gt;&lt;/a&gt;Android热修复的方式&lt;/h1&gt;&lt;p&gt;关于动态热修复，目前发现的思路集中在三点：&lt;/p&gt;
 &lt;ul&gt;
@@ -1750,6 +1750,8 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     </summary>
     
       <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="插件化和热修复" scheme="http://cstsinghua.github.io/categories/Android/%E6%8F%92%E4%BB%B6%E5%8C%96%E5%92%8C%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
     
     
       <category term="Android热修复" scheme="http://cstsinghua.github.io/tags/Android%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
