@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <title>Tags: Android | Atypical programmer | 做一个非典型程序员</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="undefined">
+  <meta name="description" content="写给典型的程序员">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Atypical programmer">
+<meta property="og:url" content="http://cstsinghua.github.io/tags/Android/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="写给典型的程序员">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Atypical programmer">
+<meta name="twitter:description" content="写给典型的程序员">
+  
+    <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+  
+  <meta name="summary" content="写给典型的程序员">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.10">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Atypical programmer &copy; 2006 - 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Tags: Android</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header tags-header">
+
+    <div class="container">
+        <h1 class="title">Tags: Android</h1>
+        <h5 class="subtitle">
+            
+        </h5>
+    </div>
+
+     
+<div class="tabs-bar container">
+    <nav class="tags-list">
+        <a href="/tags" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
+            ">全部</a>
+         
+
+            <a href="/tags/动态调试/" style="-webkit-order:32;order:32" class="tags-list-item waves-effect waves-button waves-light">动态调试</a>
+
+         
+
+            <a href="/tags/动态加载/" style="-webkit-order:33;order:33" class="tags-list-item waves-effect waves-button waves-light">动态加载</a>
+
+         
+
+            <a href="/tags/热修复/" style="-webkit-order:34;order:34" class="tags-list-item waves-effect waves-button waves-light">热修复</a>
+
+         
+
+            <a href="/tags/插件化/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">插件化</a>
+
+         
+
+            <a href="/tags/Android/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light active">Android</a>
+
+         
+
+            <a href="/tags/HotFix/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">HotFix</a>
+
+         
+
+            <a href="/tags/Tinker/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">Tinker</a>
+
+         
+
+            <a href="/tags/手Qzone/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">手Qzone</a>
+
+         
+
+            <a href="/tags/Andfix/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">Andfix</a>
+
+         
+
+            <a href="/tags/阿里百川/" style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">阿里百川</a>
+
+         
+
+            <a href="/tags/Android热修复/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">Android热修复</a>
+
+         
+
+            <a href="/tags/APK瘦身/" style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">APK瘦身</a>
+
+         
+
+            <a href="/tags/Eclipse/" style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">Eclipse</a>
+
+         
+
+            <a href="/tags/快捷键/" style="-webkit-order:10;order:10" class="tags-list-item waves-effect waves-button waves-light">快捷键</a>
+
+         
+
+            <a href="/tags/常用/" style="-webkit-order:11;order:11" class="tags-list-item waves-effect waves-button waves-light">常用</a>
+
+         
+
+            <a href="/tags/Git/" style="-webkit-order:12;order:12" class="tags-list-item waves-effect waves-button waves-light">Git</a>
+
+         
+
+            <a href="/tags/命令/" style="-webkit-order:13;order:13" class="tags-list-item waves-effect waves-button waves-light">命令</a>
+
+         
+
+            <a href="/tags/坑/" style="-webkit-order:14;order:14" class="tags-list-item waves-effect waves-button waves-light">坑</a>
+
+         
+
+            <a href="/tags/Apktool打包/" style="-webkit-order:15;order:15" class="tags-list-item waves-effect waves-button waves-light">Apktool打包</a>
+
+         
+
+            <a href="/tags/Zxing/" style="-webkit-order:16;order:16" class="tags-list-item waves-effect waves-button waves-light">Zxing</a>
+
+         
+
+            <a href="/tags/Protocol-Buffers/" style="-webkit-order:17;order:17" class="tags-list-item waves-effect waves-button waves-light">Protocol Buffers</a>
+
+         
+
+            <a href="/tags/安装第三方包/" style="-webkit-order:18;order:18" class="tags-list-item waves-effect waves-button waves-light">安装第三方包</a>
+
+         
+
+            <a href="/tags/Windows/" style="-webkit-order:19;order:19" class="tags-list-item waves-effect waves-button waves-light">Windows</a>
+
+         
+
+            <a href="/tags/超长目录/" style="-webkit-order:20;order:20" class="tags-list-item waves-effect waves-button waves-light">超长目录</a>
+
+         
+
+            <a href="/tags/删除/" style="-webkit-order:21;order:21" class="tags-list-item waves-effect waves-button waves-light">删除</a>
+
+         
+
+            <a href="/tags/Push/" style="-webkit-order:22;order:22" class="tags-list-item waves-effect waves-button waves-light">Push</a>
+
+         
+
+            <a href="/tags/杂项/" style="-webkit-order:23;order:23" class="tags-list-item waves-effect waves-button waves-light">杂项</a>
+
+         
+
+            <a href="/tags/Android-studio/" style="-webkit-order:24;order:24" class="tags-list-item waves-effect waves-button waves-light">Android studio</a>
+
+         
+
+            <a href="/tags/搭建个人Blog/" style="-webkit-order:25;order:25" class="tags-list-item waves-effect waves-button waves-light">搭建个人Blog</a>
+
+         
+
+            <a href="/tags/路线图/" style="-webkit-order:26;order:26" class="tags-list-item waves-effect waves-button waves-light">路线图</a>
+
+         
+
+            <a href="/tags/入门/" style="-webkit-order:27;order:27" class="tags-list-item waves-effect waves-button waves-light">入门</a>
+
+         
+
+            <a href="/tags/新手/" style="-webkit-order:28;order:28" class="tags-list-item waves-effect waves-button waves-light">新手</a>
+
+         
+
+            <a href="/tags/APK安装/" style="-webkit-order:29;order:29" class="tags-list-item waves-effect waves-button waves-light">APK安装</a>
+
+         
+
+            <a href="/tags/NodeJS/" style="-webkit-order:30;order:30" class="tags-list-item waves-effect waves-button waves-light">NodeJS</a>
+
+         
+
+            <a href="/tags/npm/" style="-webkit-order:31;order:31" class="tags-list-item waves-effect waves-button waves-light">npm</a>
+
+        
+    </nav>
+    <!-- PC show more-->
+    <div class="tags-list-more">
+        <a href="javascript:;" onclick="BLOG.tabBar(this)" class="action tags-list-item waves-effect waves-circle waves-light"><i class="icon icon-ellipsis-h"></i></a>
+    </div>
+</div>
+
+
+</header>
+
+<div class="container body-wrap">
+    
+            <div class="waterfall">
+          
+
+            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time datetime="2016-12-02T09:15:32.000Z" itemprop="datePublished" class="post-time">
+  Dec 2, 2016
+</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/插件化和热修复/">插件化和热修复</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/12/02/Android热修复技术选型——三大流派解析/">Android热修复技术选型——三大流派解析</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andfix/">Andfix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HotFix/">HotFix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tinker/">Tinker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/手Qzone/">手Qzone</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/插件化/">插件化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热修复/">热修复</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里百川/">阿里百川</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+        
+            </div>
+        
+    
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "Atypical programmer",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://cstsinghua.github.io/tags/Android/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.10"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.10"></script>
+
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
+
+
+
+
+
+</body>
+</html>

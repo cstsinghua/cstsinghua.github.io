@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2016-11-17T03:41:21.000Z</updated>
+  <updated>2016-12-02T09:16:52.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,165 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android热修复技术选型——三大流派解析</title>
+    <link href="http://cstsinghua.github.io/2016/12/02/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E2%80%94%E2%80%94%E4%B8%89%E5%A4%A7%E6%B5%81%E6%B4%BE%E8%A7%A3%E6%9E%90/"/>
+    <id>http://cstsinghua.github.io/2016/12/02/Android热修复技术选型——三大流派解析/</id>
+    <published>2016-12-02T09:15:32.000Z</published>
+    <updated>2016-12-02T09:16:52.000Z</updated>
+    
+    <content type="html">&lt;p&gt;本文是引用引用自淘宝无线开发专家 所为 的文章；原文地址&lt;a href=&quot;https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;amp;postId=6571722&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;amp;postId=6571722&lt;/a&gt;&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;技术背景&quot;&gt;&lt;a href=&quot;#技术背景&quot; class=&quot;headerlink&quot; title=&quot;技术背景&quot;&gt;&lt;/a&gt;技术背景&lt;/h1&gt;&lt;h2 id=&quot;一、正常开发流程&quot;&gt;&lt;a href=&quot;#一、正常开发流程&quot; class=&quot;headerlink&quot; title=&quot;一、正常开发流程&quot;&gt;&lt;/a&gt;一、正常开发流程&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/TFaUUWJ.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;从流程来看，传统的开发流程存在很多弊端：&lt;br&gt;重新发布版本代价太大&lt;br&gt;用户下载安装成本太高&lt;br&gt;BUG修复不及时，用户体验太差&lt;/p&gt;
+&lt;h2 id=&quot;二、热修复开发流程&quot;&gt;&lt;a href=&quot;#二、热修复开发流程&quot; class=&quot;headerlink&quot; title=&quot;二、热修复开发流程&quot;&gt;&lt;/a&gt;二、热修复开发流程&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/xdzxdsf.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;而热修复的开发流程显得更加灵活，优势很多：&lt;br&gt;无需重新发版，实时高效热修复&lt;br&gt;用户无感知修复，无需下载新的应用，代价小&lt;br&gt;修复成功率高，把损失降到最低&lt;/p&gt;
+&lt;h1 id=&quot;业界热门的热修复技术&quot;&gt;&lt;a href=&quot;#业界热门的热修复技术&quot; class=&quot;headerlink&quot; title=&quot;业界热门的热修复技术&quot;&gt;&lt;/a&gt;业界热门的热修复技术&lt;/h1&gt;&lt;p&gt;热修复作为当下热门的技术，在业界内比较著名的有阿里巴巴的AndFix、Dexposed，腾讯QQ空间的超级补丁技术和微信的Tinker。最近阿里百川推出的HotFix热修复服务就基于AndFix技术，定位于线上紧急BUG的即时修复，所以AndFix技术这块我们重点分析阿里百川HotFix。下面，我们就分别介绍QQ空间超级热补丁技术和微信的Tinker以及阿里百川HotFix技术。&lt;/p&gt;
+&lt;h2 id=&quot;一、QQ空间超级补丁技术&quot;&gt;&lt;a href=&quot;#一、QQ空间超级补丁技术&quot; class=&quot;headerlink&quot; title=&quot;一、QQ空间超级补丁技术&quot;&gt;&lt;/a&gt;一、QQ空间超级补丁技术&lt;/h2&gt;&lt;p&gt;超级补丁技术基于DEX分包方案，使用了多DEX加载的原理，大致的过程就是：把BUG方法修复以后，放到一个单独的DEX里，插入到dexElements数组的最前面，让虚拟机去加载修复完后的方法。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/IdVuVD4.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;当patch.dex中包含Test.class时就会优先加载，在后续的DEX中遇到Test.class的话就会直接返回而不去加载，这样就达到了修复的目的。&lt;/p&gt;
+&lt;p&gt;但是有一个问题是，当两个调用关系的类不在同一个DEX时，就会产生异常报错。我们知道，在APK安装时，虚拟机需要将classes.dex优化成odex文件，然后才会执行。在这个过程中，会进行类的verify操作，如果调用关系的类都在同一个DEX中的话就会被打上CLASS_ISPREVERIFIED的标志，然后才会写入odex文件。&lt;/p&gt;
+&lt;p&gt;所以，为了可以正常的进行打补丁修复，必须避免类被打上CLASS_ISPREVERIFIED标志，具体的做法就是单独放一个类在另外DEX中，让其他类调用。&lt;/p&gt;
+&lt;p&gt;我们来逆向手机QQ空间APK看一下具体的实现：&lt;br&gt;先进入程序入口QZoneRealApplication，在attachBaseContext中进行了两步操作：修复CLASS_ISPREVERIFIED标志导致的unexpected DEX problem异常、加载修复的DEX。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i1/2554813229/TB2i5fbaqi5V1BjSspeXXcWPFXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;1.修复unexpectedDEX problem异常&lt;/p&gt;
+&lt;p&gt;  先看代码：&lt;/p&gt;
+&lt;p&gt;  &lt;img src=&quot;http://i.imgur.com/Tb46ClC.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;  可以看到，这里是要加载一个libs目录下的dalvikhack.jar。在项目的assets/libs找到该文件，解压得到classes.dex文件，逆向打开该DEX文件，&lt;/p&gt;
+&lt;p&gt;  &lt;img src=&quot;http://i.imgur.com/mbZ8TEL.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;  通过不同的DEX加载进来，然后在每一个类的构造方法中引用其他DEX中的唯一类AnitLazyLoad，避免类被打上CLASS_ISPREVERIFIED标志。&lt;/p&gt;
+&lt;p&gt;  &lt;img src=&quot;http://i.imgur.com/CIbsTKJ.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;  在无修复的情况下，将DO_VERIFY_CLASSES设置为false，提高性能。只有在需要修复的时候，才设置为true。&lt;/p&gt;
+&lt;p&gt;  &lt;img src=&quot;http://i.imgur.com/eQYKz2a.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;  至于如何加载进来，与接下来第二个步骤基本相同。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2.加载修复的DEX&lt;/p&gt;
+&lt;p&gt;  从loadPatchDex()方法进入，经过几次跳转，到达核心的代码段，SystemClassLoaderInjector.c()。由于进行了混淆和多次方法的跳转，于是将核心代码段做了如下整理：&lt;/p&gt;
+&lt;p&gt;  &lt;img src=&quot;https://img.alicdn.com/imgextra/i1/2554813229/TB2W0i_aqi5V1BjSszgXXbHLpXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;  修复的步骤为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可以看出是通过获取到当前应用的Classloader，即为BaseDexClassloader&lt;/li&gt;
+&lt;li&gt;通过反射获取到他的DexPathList属性对象pathList&lt;/li&gt;
+&lt;li&gt;通过反射调用pathList的dexElements方法把patch.dex转化为Element[]&lt;/li&gt;
+&lt;li&gt;两个Element[]进行合并，把patch.dex放到最前面去&lt;/li&gt;
+&lt;li&gt;加载Element[]，达到修复目的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;整体的流程图如下：&lt;/p&gt;
+&lt;p&gt;  &lt;img src=&quot;https://img.alicdn.com/imgextra/i2/2554813229/TB2qQfaaxvzQeBjSZFxXXXLBpXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;  从流程图来看，可以很明显的找到这种方式的特点：&lt;/p&gt;
+&lt;p&gt;  &lt;strong&gt;优势：&lt;/strong&gt;&lt;br&gt;  没有合成整包（和微信Tinker比起来），产物比较小，比较灵活&lt;br&gt;  可以实现类替换，兼容性高。（某些三星手机不起作用）&lt;/p&gt;
+&lt;p&gt;  &lt;strong&gt;不足：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不支持即时生效，必须通过重启才能生效。&lt;/li&gt;
+&lt;li&gt;为了实现修复这个过程，必须在应用中加入两个DEX！dalvikhack.dex中只有一个类，对性能影响不大，但是对于patch.dex来说，修复的类到了一定数量，就需要花不少的时间加载。对手淘这种航母级应用来说，启动耗时增加2s以上是不能够接受的事。&lt;/li&gt;
+&lt;li&gt;在ART模式下，如果类修改了结构，就会出现内存错乱的问题。为了解决这个问题，就必须把所有相关的调用类、父类子类等等全部加载到patch.dex中，导致补丁包异常的大，进一步增加应用启动加载的时候，耗时更加严重。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;二、微信Tinker&quot;&gt;&lt;a href=&quot;#二、微信Tinker&quot; class=&quot;headerlink&quot; title=&quot;二、微信Tinker&quot;&gt;&lt;/a&gt;二、微信Tinker&lt;/h2&gt;&lt;p&gt;微信针对QQ空间超级补丁技术的不足提出了一个提供DEX差量包，整体替换DEX的方案。主要的原理是与QQ空间超级补丁技术基本相同，区别在于不再将patch.dex增加到elements数组中，而是差量的方式给出patch.dex，然后将patch.dex与应用的classes.dex合并，然后整体替换掉旧的DEX，达到修复的目的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i1/2554813229/TB2Q3S8ap95V1Bjy0FeXXXyfpXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我们来逆向微信APK看一下具体的实现：&lt;br&gt;先找到应用入口TinkerApplication，在onBaseContextAttached()调用了loadTinker(),&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i4/2554813229/TB29BS_aqi5V1BjSsphXXaEpXXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;进入TinkerLoader的tryLoad()方法中，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i4/2554813229/TB2h5Taaqm5V1Bjy1zbXXXsBFXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;从方法名可以预见，在tryLoadPatchFilesInternal()中尝试加载本地的补丁，再经过跳转进入核心修复功能类SystemClassLoaderAdder.class中。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i2/2554813229/TB2dIPaap_AQeBjSZFvXXbnKXXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;代码中可以看出，根据Android版本的不同，分别采取具体的修复操作，不过原理都是一样的。我们以V19为例：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i1/2554813229/TB2tHbXaqe5V1Bjy1zjXXa08VXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;从代码中可以看到，通过反射操作得到PathClassLoader的DexPatchList,反射调用patchlist的makeDexElements()方法吧本地的DEX文件直接替换到Element[]数组中去，达到修复的目的。&lt;br&gt;对于如何进行patch.dex与classes.dex的合并操作，这里微信开启了一个新的进程，开启新进程的服务TinkerPatchService进行合并。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i1/2554813229/TB24Vjbap_AQeBjSZFBXXX22XXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;整体的流程如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i3/2554813229/TB2ydjbap95V1Bjy0FlXXaBbXXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;从流程图来看，同样可以很明显的找到这种方式的特点：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优势：&lt;/strong&gt;&lt;br&gt;合成整包，不用在构造函数插入代码，防止verify，verify和opt在编译期间就已经完成，不会在运行期间进行&lt;br&gt;性能提高。兼容性和稳定性比较高。&lt;br&gt;开发者透明，不需要对包进行额外处理。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;不足：&lt;/strong&gt;&lt;br&gt;与超级补丁技术一样，不支持即时生效，必须通过重启应用的方式才能生效。&lt;br&gt;需要给应用开启新的进程才能进行合并，并且很容易因为内存消耗等原因合并失败。&lt;br&gt;合并时占用额外磁盘空间，对于多DEX的应用来说，如果修改了多个DEX文件，就需要下发多个patch.dex与对应的classes.dex进行合并操作时这种情况会更严重，因此合并过程的失败率也会更高。&lt;/p&gt;
+&lt;h2 id=&quot;三、阿里百川HotFix&quot;&gt;&lt;a href=&quot;#三、阿里百川HotFix&quot; class=&quot;headerlink&quot; title=&quot;三、阿里百川HotFix&quot;&gt;&lt;/a&gt;三、阿里百川HotFix&lt;/h2&gt;&lt;p&gt;阿里百川推出的热修复HotFix服务，相对于QQ空间超级补丁技术和微信Tinker来说，定位于紧急bug修复的场景下，能够最及时的修复bug，下拉补丁立即生效无需等待。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i3/2554813229/TB2ZzS_aqi5V1BjSszdXXXUJXXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1、AndFix实现原理&lt;br&gt;AndFix不同于QQ空间超级补丁技术和微信Tinker通过增加或替换整个DEX的方案，提供了一种运行时在Native修改Filed指针的方式，实现方法的替换，达到即时生效无需重启，对应用无性能消耗的目的。&lt;br&gt;原理图如下：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i4/2554813229/TB2rHm7aqi5V1BjSspdXXXyFFXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2、AndFix实现过程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于实现方法的替换，需要在Native层操作，经过三个步骤：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i3/2554813229/TB2td2aaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;接下来以Dalvik设备为例，来分析具体的实现过程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2.1 setup()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i4/2554813229/TB2pqjaap_AQeBjSZPhXXXt5pXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;对于Dalvik来说，遵循JIT即时编译机制，需要在运行时装载libdvm.so动态库，获取以下内部函数：&lt;br&gt;1） dvmThreadSelf( )：查询当前的线程；&lt;br&gt;2）dvmDecodeIndirectRef()：根据当前线程获得ClassObject对象。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2.2 setFieldFlag&lt;br&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i3/2554813229/TB2pzLaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;该操作的目的：让private、protected的方法和字段可被动态库看见并识别。原因在于动态库会忽略非public属性的字段和方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2.3 replaceMethod&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i2/2554813229/TB2fQjaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;该步骤是方法替换的核心，替换的流程如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i1/2554813229/TB239Dbaqi5V1BjSspiXXXGBFXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;AndFix对ART设备同样支持，具体的过程与Dalvik相似，这里不再赘述。&lt;br&gt;从技术原理，不难看出阿里百川HotFix的几个特点：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最大的优势在于&lt;/strong&gt;&lt;br&gt;BUG修复的即时性&lt;br&gt;补丁包同样采用差量技术，生成的PATCH体积小&lt;br&gt;对应用无侵入，几乎无性能损耗&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;不足：&lt;/strong&gt;&lt;br&gt;不支持新增字段，以及修改方法，也不支持对资源的替换。&lt;br&gt;由于厂商的自定义ROM，对少数机型暂不支持。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;综合分析如下：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.alicdn.com/imgextra/i3/2554813229/TB293jhap55V1Bjy0FoXXbVjFXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;热修复的坑和解&quot;&gt;&lt;a href=&quot;#热修复的坑和解&quot; class=&quot;headerlink&quot; title=&quot;热修复的坑和解&quot;&gt;&lt;/a&gt;热修复的坑和解&lt;/h1&gt;&lt;p&gt;我们可以看到，QQ空间超级补丁技术和微信Tinker的修复原理都基于类加载，在功能上已经支持类、资源的替换和新增，功能非常强大。既然已经有了这么强大的热修复技术，为什么阿里百川还要推出自己的热修复方案HotFix呢？&lt;/p&gt;
+&lt;h2 id=&quot;一、多DEX带来的性能问题和影响&quot;&gt;&lt;a href=&quot;#一、多DEX带来的性能问题和影响&quot; class=&quot;headerlink&quot; title=&quot;一、多DEX带来的性能问题和影响&quot;&gt;&lt;/a&gt;一、多DEX带来的性能问题和影响&lt;/h2&gt;&lt;p&gt;我们知道，多DEX方案用来解决应用方法数65k的问题，现在Google也官方支持了MultiDex的实现方案。但是，这实在是应用因方法数超出而作出的不得已的下策，但是超级补丁技术和Tinker作为一种热修复的方案，平生给应用增加了多个DEX，而多DEX技术最大的问题在于性能上的坑，因此基于这种方案的补丁技术影响应用的性能是无疑的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;1.启动加载时间过长&lt;/p&gt;
+&lt;p&gt;  我们可以看到，超级补丁技术和Tinker都选择在Application的attachBaseContext()进行补丁DEX的加载，即使这是加载dex的最佳时机，但是依然会带来很大的性能问题，首当其冲的就是启动时间太长。&lt;/p&gt;
+&lt;p&gt;  对于补丁DEX来说，应用启动时虚拟机会进行dexopt操作，将patch.dex文件转换成odex文件，这个过程非常耗时。而这个过程，又要求需要在主线程中，以同步的方式执行，否则无法成功进行修复。就DEX的加载时间，大概做了以下的时间测试。&lt;/p&gt;
+&lt;p&gt;  &lt;img src=&quot;https://img.alicdn.com/imgextra/i1/2554813229/TB2EBDcap15V1Bjy1XbXXaNcVXa_!!2-martrix_bbs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;  随着patch.dex的增加，在不做任何优化的情况下，启动时间也直线增长。对于一个应用来说，这简直是灾难性的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2.易造成应用的ANR和Crash&lt;/p&gt;
+&lt;p&gt;  正是尤其多DEX加载导致了启动时间过长，很容易就会引发应用的ANR。我们知道当应用在主线程等待超过5s以后，就会直接导致长时间无响应而退出。超级补丁技术为保证ART不出现地址错乱问题，需要将所有关联的类全部加入到补丁中，而微信Tinker采取一种差量包合并加载的方式，都会使要加载的DEX体积变得很大。这也很大程度上容易导致ANR情况的出现。&lt;/p&gt;
+&lt;p&gt;  除了应用ANR以外，多DEX模式也同样很容易导致Crash情况的出现。我们知道，超级补丁技术为了保证ART设备下不出现地址错乱问题，需要把修改类的所有相关类全部加入到补丁中，这里会出现一个问题，为了保证补丁包的体积最小，能否保证引入全部的关联类而不引入无关的类呢？一旦没有引入关联的类，就会出现以下的异常：&lt;br&gt;  NoClassDefFoundError&lt;br&gt;  Could not find class&lt;br&gt;  Could not find method&lt;br&gt;  出现这些异常，就会直接导致应用的Crash退出。&lt;/p&gt;
+&lt;p&gt;  所以，不难看出如果我们需要修复一个不是Crash的BUG，但是因为未加入相关类而导致了更严重的Crash，就更加的得不偿失。&lt;/p&gt;
+&lt;p&gt;  总的来说，热修复本质的目的是为了保证应用更加稳定，而不是为了更强大的功能引入更大的风险和不稳定性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;二、热修复-or-插件化？&quot;&gt;&lt;a href=&quot;#二、热修复-or-插件化？&quot; class=&quot;headerlink&quot; title=&quot;二、热修复 or 插件化？&quot;&gt;&lt;/a&gt;二、热修复 or 插件化？&lt;/h2&gt;&lt;p&gt;我们经常提到热修复和插件化，这都是当下热门的新兴技术。在讲述之前，需要对这两个概念进行一下解释。&lt;br&gt;插件化：一个程序划分为不同的部分，以插件的形式加载到应用中去，本质上它使用的技术还是热修复技术，只是加入了更多工程实践，让它支持大规模的代码更新以及资源和SO包的更新。&lt;br&gt;热修复：当线上应用出现紧急BUG，为了避免重新发版，并且保证修复的及时性而进行的一项在线推送补丁的修复方案。&lt;/p&gt;
+&lt;p&gt;显然，从概念上我们可以看到，插件化使用场景更多是功能，热修复使用常见在于修复。从这个层面来说，插件化必然功能更加强大，能做的事情也更多。QQ空间超级补丁技术和微信Tinker从类、资源的替换和更新上来看，与其说是热修复，不如说是插件化。&lt;/p&gt;
+&lt;p&gt;当然，强大的功能也就增加了不稳定的因素。比如上文提到的增加启动时间，导致ANR、Crash的问题。&lt;/p&gt;
+&lt;p&gt;QQ空间超级补丁技术和微信Tinker提供了更加强大的功能，但是对应用的性能和稳定有较大的影响，就BUG修复的这个使用场景上还不够明确，并且显得过重。&lt;/p&gt;
+&lt;p&gt;针对应用的性能损耗，我们可以举例做一个对比。某APP的启动载入时间为3s左右，本身就是基于多DEX模式的实现。&lt;br&gt;分别接入三种热修复服务，根据腾讯提供超级补丁技术和Tinker的数据，那么会变成以下的场景：&lt;br&gt;阿里百川HotFix:启动时间几乎无增加，不增加运行期额外的磁盘消耗。&lt;br&gt;QQ空间超级补丁技术：如果应用有700个类，启动耗时增加超过2.5s，达到5.5s以上。&lt;br&gt;微信Tinker：假设应用有5个DEX文件，分别修改了这5个DEX，产生5个patch.dex文件，就要进行5次的patch合并动作，假设每个补丁1M，那么就要多占用7.5M的磁盘空间。&lt;/p&gt;
+&lt;p&gt;显然对于修复紧急BUG这个场景，阿里百川HotFix的更为合适，它更加轻量，可以在不重启的情况下生效，且对性能几乎没有影响。微信Tinker、QQ空间超级补丁技术更多地把场景定位在发布小的新功能上，采用ClassLoader的模式，牺牲较高的性能代价去实现类、资源新增或替换的功能。阿里百川HotFix对应用本身做到无侵入，无性能损耗。&lt;/p&gt;
+&lt;h1 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h1&gt;&lt;p&gt;QQ空间超级补丁技术和微信Tinker 支持新增类和资源的替换，在一些功能化的更新上更为强大，但对应用的性能和稳定会有的一定的影响；阿里百川HotFix虽然暂时不支持新增类和资源的替换，对新功能的发布也有所限制，但是作为一项定位为线上紧急BUG的热修复的服务来说，能够真正做到BUG即时修复用户无感知，同时保证对应用性能不产生不必要的损耗，在热修复方面不失为一个好的选择。&lt;/p&gt;
+&lt;p&gt;目前阿里百川HotFix已经开始公测，点击立即使用，即可开始你的热修复之旅。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      引用自淘宝无线开发专家 所为 的文章；原文地址https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;postId=6571722
+    
+    </summary>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="插件化和热修复" scheme="http://cstsinghua.github.io/categories/Android/%E6%8F%92%E4%BB%B6%E5%8C%96%E5%92%8C%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
+    
+    
+      <category term="热修复" scheme="http://cstsinghua.github.io/tags/%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
+    
+      <category term="插件化" scheme="http://cstsinghua.github.io/tags/%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
+    
+      <category term="HotFix" scheme="http://cstsinghua.github.io/tags/HotFix/"/>
+    
+      <category term="Tinker" scheme="http://cstsinghua.github.io/tags/Tinker/"/>
+    
+      <category term="手Qzone" scheme="http://cstsinghua.github.io/tags/%E6%89%8BQzone/"/>
+    
+      <category term="Andfix" scheme="http://cstsinghua.github.io/tags/Andfix/"/>
+    
+      <category term="阿里百川" scheme="http://cstsinghua.github.io/tags/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D/"/>
+    
+  </entry>
   
   <entry>
     <title>Git命令使用遇到的那些坑</title>
@@ -258,9 +417,9 @@ Aborting commit due to empty commit message.
       <category term="Tools使用" scheme="http://cstsinghua.github.io/categories/Java/Tools%E4%BD%BF%E7%94%A8/"/>
     
     
-      <category term="快捷键" scheme="http://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
-    
       <category term="Eclipse" scheme="http://cstsinghua.github.io/tags/Eclipse/"/>
+    
+      <category term="快捷键" scheme="http://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
       <category term="常用" scheme="http://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
     

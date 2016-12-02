@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <title>Android热修复技术选型——三大流派解析 | Atypical programmer | 做一个非典型程序员</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="热修复,插件化,Android,HotFix,Tinker,手Qzone,Andfix,阿里百川">
+  <meta name="description" content="引用自淘宝无线开发专家 所为 的文章；原文地址https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;postId=6571722">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android热修复技术选型——三大流派解析">
+<meta property="og:url" content="http://cstsinghua.github.io/2016/12/02/Android热修复技术选型——三大流派解析/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="引用自淘宝无线开发专家 所为 的文章；原文地址https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;postId=6571722">
+<meta property="og:image" content="http://i.imgur.com/TFaUUWJ.png">
+<meta property="og:image" content="http://i.imgur.com/xdzxdsf.png">
+<meta property="og:image" content="http://i.imgur.com/IdVuVD4.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i1/2554813229/TB2i5fbaqi5V1BjSspeXXcWPFXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="http://i.imgur.com/Tb46ClC.png">
+<meta property="og:image" content="http://i.imgur.com/mbZ8TEL.png">
+<meta property="og:image" content="http://i.imgur.com/CIbsTKJ.png">
+<meta property="og:image" content="http://i.imgur.com/eQYKz2a.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i1/2554813229/TB2W0i_aqi5V1BjSszgXXbHLpXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i2/2554813229/TB2qQfaaxvzQeBjSZFxXXXLBpXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i1/2554813229/TB2Q3S8ap95V1Bjy0FeXXXyfpXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i4/2554813229/TB29BS_aqi5V1BjSsphXXaEpXXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i4/2554813229/TB2h5Taaqm5V1Bjy1zbXXXsBFXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i2/2554813229/TB2dIPaap_AQeBjSZFvXXbnKXXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i1/2554813229/TB2tHbXaqe5V1Bjy1zjXXa08VXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i1/2554813229/TB24Vjbap_AQeBjSZFBXXX22XXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i3/2554813229/TB2ydjbap95V1Bjy0FlXXaBbXXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i3/2554813229/TB2ZzS_aqi5V1BjSszdXXXUJXXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i4/2554813229/TB2rHm7aqi5V1BjSspdXXXyFFXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i3/2554813229/TB2td2aaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i4/2554813229/TB2pqjaap_AQeBjSZPhXXXt5pXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i3/2554813229/TB2pzLaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i2/2554813229/TB2fQjaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i1/2554813229/TB239Dbaqi5V1BjSspiXXXGBFXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i3/2554813229/TB293jhap55V1Bjy0FoXXbVjFXa_!!2-martrix_bbs.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i1/2554813229/TB2EBDcap15V1Bjy1XbXXaNcVXa_!!2-martrix_bbs.png">
+<meta property="og:updated_time" content="2016-12-02T09:16:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android热修复技术选型——三大流派解析">
+<meta name="twitter:description" content="引用自淘宝无线开发专家 所为 的文章；原文地址https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;postId=6571722">
+<meta name="twitter:image" content="http://i.imgur.com/TFaUUWJ.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+  
+  <meta name="summary" content="本文是引用引用自淘宝无线开发专家 所为 的文章；原文地址https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;amp;postId=6571722">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.10">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Atypical programmer &copy; 2006 - 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android热修复技术选型——三大流派解析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">Android热修复技术选型——三大流派解析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-02T09:15:32.000Z" itemprop="datePublished" class="page-time">
+  2016-12-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/插件化和热修复/">插件化和热修复</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#技术背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">技术背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、正常开发流程"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">一、正常开发流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、热修复开发流程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">二、热修复开发流程</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#业界热门的热修复技术"><span class="post-toc-number">2.</span> <span class="post-toc-text">业界热门的热修复技术</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、QQ空间超级补丁技术"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">一、QQ空间超级补丁技术</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、微信Tinker"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">二、微信Tinker</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、阿里百川HotFix"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">三、阿里百川HotFix</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#热修复的坑和解"><span class="post-toc-number">3.</span> <span class="post-toc-text">热修复的坑和解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、多DEX带来的性能问题和影响"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">一、多DEX带来的性能问题和影响</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、热修复-or-插件化？"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">二、热修复 or 插件化？</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android热修复技术选型——三大流派解析" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android热修复技术选型——三大流派解析</h1>
+        <div class="post-meta">
+            <time datetime="2016-12-02T09:15:32.000Z" itemprop="datePublished" class="post-time">
+  2016-12-02
+</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/插件化和热修复/">插件化和热修复</a></li></ul></li></ul>
+
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文是引用引用自淘宝无线开发专家 所为 的文章；原文地址<a href="https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;postId=6571722" target="_blank" rel="external">https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;postId=6571722</a><br><a id="more"></a></p>
+<h1 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h1><h2 id="一、正常开发流程"><a href="#一、正常开发流程" class="headerlink" title="一、正常开发流程"></a>一、正常开发流程</h2><p><img src="http://i.imgur.com/TFaUUWJ.png" alt=""></p>
+<p>从流程来看，传统的开发流程存在很多弊端：<br>重新发布版本代价太大<br>用户下载安装成本太高<br>BUG修复不及时，用户体验太差</p>
+<h2 id="二、热修复开发流程"><a href="#二、热修复开发流程" class="headerlink" title="二、热修复开发流程"></a>二、热修复开发流程</h2><p><img src="http://i.imgur.com/xdzxdsf.png" alt=""></p>
+<p>而热修复的开发流程显得更加灵活，优势很多：<br>无需重新发版，实时高效热修复<br>用户无感知修复，无需下载新的应用，代价小<br>修复成功率高，把损失降到最低</p>
+<h1 id="业界热门的热修复技术"><a href="#业界热门的热修复技术" class="headerlink" title="业界热门的热修复技术"></a>业界热门的热修复技术</h1><p>热修复作为当下热门的技术，在业界内比较著名的有阿里巴巴的AndFix、Dexposed，腾讯QQ空间的超级补丁技术和微信的Tinker。最近阿里百川推出的HotFix热修复服务就基于AndFix技术，定位于线上紧急BUG的即时修复，所以AndFix技术这块我们重点分析阿里百川HotFix。下面，我们就分别介绍QQ空间超级热补丁技术和微信的Tinker以及阿里百川HotFix技术。</p>
+<h2 id="一、QQ空间超级补丁技术"><a href="#一、QQ空间超级补丁技术" class="headerlink" title="一、QQ空间超级补丁技术"></a>一、QQ空间超级补丁技术</h2><p>超级补丁技术基于DEX分包方案，使用了多DEX加载的原理，大致的过程就是：把BUG方法修复以后，放到一个单独的DEX里，插入到dexElements数组的最前面，让虚拟机去加载修复完后的方法。</p>
+<p><img src="http://i.imgur.com/IdVuVD4.png" alt=""></p>
+<p>当patch.dex中包含Test.class时就会优先加载，在后续的DEX中遇到Test.class的话就会直接返回而不去加载，这样就达到了修复的目的。</p>
+<p>但是有一个问题是，当两个调用关系的类不在同一个DEX时，就会产生异常报错。我们知道，在APK安装时，虚拟机需要将classes.dex优化成odex文件，然后才会执行。在这个过程中，会进行类的verify操作，如果调用关系的类都在同一个DEX中的话就会被打上CLASS_ISPREVERIFIED的标志，然后才会写入odex文件。</p>
+<p>所以，为了可以正常的进行打补丁修复，必须避免类被打上CLASS_ISPREVERIFIED标志，具体的做法就是单独放一个类在另外DEX中，让其他类调用。</p>
+<p>我们来逆向手机QQ空间APK看一下具体的实现：<br>先进入程序入口QZoneRealApplication，在attachBaseContext中进行了两步操作：修复CLASS_ISPREVERIFIED标志导致的unexpected DEX problem异常、加载修复的DEX。</p>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2i5fbaqi5V1BjSspeXXcWPFXa_!!2-martrix_bbs.png" alt=""></p>
+<ul>
+<li><p>1.修复unexpectedDEX problem异常</p>
+<p>  先看代码：</p>
+<p>  <img src="http://i.imgur.com/Tb46ClC.png" alt=""></p>
+<p>  可以看到，这里是要加载一个libs目录下的dalvikhack.jar。在项目的assets/libs找到该文件，解压得到classes.dex文件，逆向打开该DEX文件，</p>
+<p>  <img src="http://i.imgur.com/mbZ8TEL.png" alt=""></p>
+<p>  通过不同的DEX加载进来，然后在每一个类的构造方法中引用其他DEX中的唯一类AnitLazyLoad，避免类被打上CLASS_ISPREVERIFIED标志。</p>
+<p>  <img src="http://i.imgur.com/CIbsTKJ.png" alt=""></p>
+<p>  在无修复的情况下，将DO_VERIFY_CLASSES设置为false，提高性能。只有在需要修复的时候，才设置为true。</p>
+<p>  <img src="http://i.imgur.com/eQYKz2a.png" alt=""></p>
+<p>  至于如何加载进来，与接下来第二个步骤基本相同。</p>
+</li>
+<li><p>2.加载修复的DEX</p>
+<p>  从loadPatchDex()方法进入，经过几次跳转，到达核心的代码段，SystemClassLoaderInjector.c()。由于进行了混淆和多次方法的跳转，于是将核心代码段做了如下整理：</p>
+<p>  <img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2W0i_aqi5V1BjSszgXXbHLpXa_!!2-martrix_bbs.png" alt=""></p>
+<p>  修复的步骤为：</p>
+<ol>
+<li>可以看出是通过获取到当前应用的Classloader，即为BaseDexClassloader</li>
+<li>通过反射获取到他的DexPathList属性对象pathList</li>
+<li>通过反射调用pathList的dexElements方法把patch.dex转化为Element[]</li>
+<li>两个Element[]进行合并，把patch.dex放到最前面去</li>
+<li>加载Element[]，达到修复目的</li>
+</ol>
+<p>整体的流程图如下：</p>
+<p>  <img src="https://img.alicdn.com/imgextra/i2/2554813229/TB2qQfaaxvzQeBjSZFxXXXLBpXa_!!2-martrix_bbs.png" alt=""></p>
+<p>  从流程图来看，可以很明显的找到这种方式的特点：</p>
+<p>  <strong>优势：</strong><br>  没有合成整包（和微信Tinker比起来），产物比较小，比较灵活<br>  可以实现类替换，兼容性高。（某些三星手机不起作用）</p>
+<p>  <strong>不足：</strong></p>
+<ol>
+<li>不支持即时生效，必须通过重启才能生效。</li>
+<li>为了实现修复这个过程，必须在应用中加入两个DEX！dalvikhack.dex中只有一个类，对性能影响不大，但是对于patch.dex来说，修复的类到了一定数量，就需要花不少的时间加载。对手淘这种航母级应用来说，启动耗时增加2s以上是不能够接受的事。</li>
+<li>在ART模式下，如果类修改了结构，就会出现内存错乱的问题。为了解决这个问题，就必须把所有相关的调用类、父类子类等等全部加载到patch.dex中，导致补丁包异常的大，进一步增加应用启动加载的时候，耗时更加严重。</li>
+</ol>
+</li>
+</ul>
+<h2 id="二、微信Tinker"><a href="#二、微信Tinker" class="headerlink" title="二、微信Tinker"></a>二、微信Tinker</h2><p>微信针对QQ空间超级补丁技术的不足提出了一个提供DEX差量包，整体替换DEX的方案。主要的原理是与QQ空间超级补丁技术基本相同，区别在于不再将patch.dex增加到elements数组中，而是差量的方式给出patch.dex，然后将patch.dex与应用的classes.dex合并，然后整体替换掉旧的DEX，达到修复的目的。</p>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2Q3S8ap95V1Bjy0FeXXXyfpXa_!!2-martrix_bbs.png" alt=""></p>
+<p>我们来逆向微信APK看一下具体的实现：<br>先找到应用入口TinkerApplication，在onBaseContextAttached()调用了loadTinker(),</p>
+<p><img src="https://img.alicdn.com/imgextra/i4/2554813229/TB29BS_aqi5V1BjSsphXXaEpXXa_!!2-martrix_bbs.png" alt=""></p>
+<p>进入TinkerLoader的tryLoad()方法中，</p>
+<p><img src="https://img.alicdn.com/imgextra/i4/2554813229/TB2h5Taaqm5V1Bjy1zbXXXsBFXa_!!2-martrix_bbs.png" alt=""></p>
+<p>从方法名可以预见，在tryLoadPatchFilesInternal()中尝试加载本地的补丁，再经过跳转进入核心修复功能类SystemClassLoaderAdder.class中。</p>
+<p><img src="https://img.alicdn.com/imgextra/i2/2554813229/TB2dIPaap_AQeBjSZFvXXbnKXXa_!!2-martrix_bbs.png" alt=""></p>
+<p>代码中可以看出，根据Android版本的不同，分别采取具体的修复操作，不过原理都是一样的。我们以V19为例：</p>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2tHbXaqe5V1Bjy1zjXXa08VXa_!!2-martrix_bbs.png" alt=""></p>
+<p>从代码中可以看到，通过反射操作得到PathClassLoader的DexPatchList,反射调用patchlist的makeDexElements()方法吧本地的DEX文件直接替换到Element[]数组中去，达到修复的目的。<br>对于如何进行patch.dex与classes.dex的合并操作，这里微信开启了一个新的进程，开启新进程的服务TinkerPatchService进行合并。</p>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB24Vjbap_AQeBjSZFBXXX22XXa_!!2-martrix_bbs.png" alt=""></p>
+<p>整体的流程如下：</p>
+<p><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2ydjbap95V1Bjy0FlXXaBbXXa_!!2-martrix_bbs.png" alt=""></p>
+<p>从流程图来看，同样可以很明显的找到这种方式的特点：</p>
+<p><strong>优势：</strong><br>合成整包，不用在构造函数插入代码，防止verify，verify和opt在编译期间就已经完成，不会在运行期间进行<br>性能提高。兼容性和稳定性比较高。<br>开发者透明，不需要对包进行额外处理。</p>
+<p><strong>不足：</strong><br>与超级补丁技术一样，不支持即时生效，必须通过重启应用的方式才能生效。<br>需要给应用开启新的进程才能进行合并，并且很容易因为内存消耗等原因合并失败。<br>合并时占用额外磁盘空间，对于多DEX的应用来说，如果修改了多个DEX文件，就需要下发多个patch.dex与对应的classes.dex进行合并操作时这种情况会更严重，因此合并过程的失败率也会更高。</p>
+<h2 id="三、阿里百川HotFix"><a href="#三、阿里百川HotFix" class="headerlink" title="三、阿里百川HotFix"></a>三、阿里百川HotFix</h2><p>阿里百川推出的热修复HotFix服务，相对于QQ空间超级补丁技术和微信Tinker来说，定位于紧急bug修复的场景下，能够最及时的修复bug，下拉补丁立即生效无需等待。</p>
+<p><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2ZzS_aqi5V1BjSszdXXXUJXXa_!!2-martrix_bbs.png" alt=""></p>
+<ul>
+<li>1、AndFix实现原理<br>AndFix不同于QQ空间超级补丁技术和微信Tinker通过增加或替换整个DEX的方案，提供了一种运行时在Native修改Filed指针的方式，实现方法的替换，达到即时生效无需重启，对应用无性能消耗的目的。<br>原理图如下：</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i4/2554813229/TB2rHm7aqi5V1BjSspdXXXyFFXa_!!2-martrix_bbs.png" alt=""></p>
+<ul>
+<li>2、AndFix实现过程</li>
+</ul>
+<p>对于实现方法的替换，需要在Native层操作，经过三个步骤：</p>
+<p><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2td2aaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png" alt=""></p>
+<p>接下来以Dalvik设备为例，来分析具体的实现过程：</p>
+<ul>
+<li>2.1 setup()</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i4/2554813229/TB2pqjaap_AQeBjSZPhXXXt5pXa_!!2-martrix_bbs.png" alt=""></p>
+<p>对于Dalvik来说，遵循JIT即时编译机制，需要在运行时装载libdvm.so动态库，获取以下内部函数：<br>1） dvmThreadSelf( )：查询当前的线程；<br>2）dvmDecodeIndirectRef()：根据当前线程获得ClassObject对象。</p>
+<ul>
+<li>2.2 setFieldFlag<br><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2pzLaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png" alt=""></li>
+</ul>
+<p>该操作的目的：让private、protected的方法和字段可被动态库看见并识别。原因在于动态库会忽略非public属性的字段和方法。</p>
+<ul>
+<li>2.3 replaceMethod</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i2/2554813229/TB2fQjaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png" alt=""></p>
+<p>该步骤是方法替换的核心，替换的流程如下：</p>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB239Dbaqi5V1BjSspiXXXGBFXa_!!2-martrix_bbs.png" alt=""></p>
+<p>AndFix对ART设备同样支持，具体的过程与Dalvik相似，这里不再赘述。<br>从技术原理，不难看出阿里百川HotFix的几个特点：</p>
+<p><strong>最大的优势在于</strong><br>BUG修复的即时性<br>补丁包同样采用差量技术，生成的PATCH体积小<br>对应用无侵入，几乎无性能损耗</p>
+<p><strong>不足：</strong><br>不支持新增字段，以及修改方法，也不支持对资源的替换。<br>由于厂商的自定义ROM，对少数机型暂不支持。</p>
+<p><strong>综合分析如下：</strong></p>
+<p><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB293jhap55V1Bjy0FoXXbVjFXa_!!2-martrix_bbs.png" alt=""></p>
+<h1 id="热修复的坑和解"><a href="#热修复的坑和解" class="headerlink" title="热修复的坑和解"></a>热修复的坑和解</h1><p>我们可以看到，QQ空间超级补丁技术和微信Tinker的修复原理都基于类加载，在功能上已经支持类、资源的替换和新增，功能非常强大。既然已经有了这么强大的热修复技术，为什么阿里百川还要推出自己的热修复方案HotFix呢？</p>
+<h2 id="一、多DEX带来的性能问题和影响"><a href="#一、多DEX带来的性能问题和影响" class="headerlink" title="一、多DEX带来的性能问题和影响"></a>一、多DEX带来的性能问题和影响</h2><p>我们知道，多DEX方案用来解决应用方法数65k的问题，现在Google也官方支持了MultiDex的实现方案。但是，这实在是应用因方法数超出而作出的不得已的下策，但是超级补丁技术和Tinker作为一种热修复的方案，平生给应用增加了多个DEX，而多DEX技术最大的问题在于性能上的坑，因此基于这种方案的补丁技术影响应用的性能是无疑的。</p>
+<ul>
+<li><p>1.启动加载时间过长</p>
+<p>  我们可以看到，超级补丁技术和Tinker都选择在Application的attachBaseContext()进行补丁DEX的加载，即使这是加载dex的最佳时机，但是依然会带来很大的性能问题，首当其冲的就是启动时间太长。</p>
+<p>  对于补丁DEX来说，应用启动时虚拟机会进行dexopt操作，将patch.dex文件转换成odex文件，这个过程非常耗时。而这个过程，又要求需要在主线程中，以同步的方式执行，否则无法成功进行修复。就DEX的加载时间，大概做了以下的时间测试。</p>
+<p>  <img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2EBDcap15V1Bjy1XbXXaNcVXa_!!2-martrix_bbs.png" alt=""></p>
+<p>  随着patch.dex的增加，在不做任何优化的情况下，启动时间也直线增长。对于一个应用来说，这简直是灾难性的。</p>
+</li>
+<li><p>2.易造成应用的ANR和Crash</p>
+<p>  正是尤其多DEX加载导致了启动时间过长，很容易就会引发应用的ANR。我们知道当应用在主线程等待超过5s以后，就会直接导致长时间无响应而退出。超级补丁技术为保证ART不出现地址错乱问题，需要将所有关联的类全部加入到补丁中，而微信Tinker采取一种差量包合并加载的方式，都会使要加载的DEX体积变得很大。这也很大程度上容易导致ANR情况的出现。</p>
+<p>  除了应用ANR以外，多DEX模式也同样很容易导致Crash情况的出现。我们知道，超级补丁技术为了保证ART设备下不出现地址错乱问题，需要把修改类的所有相关类全部加入到补丁中，这里会出现一个问题，为了保证补丁包的体积最小，能否保证引入全部的关联类而不引入无关的类呢？一旦没有引入关联的类，就会出现以下的异常：<br>  NoClassDefFoundError<br>  Could not find class<br>  Could not find method<br>  出现这些异常，就会直接导致应用的Crash退出。</p>
+<p>  所以，不难看出如果我们需要修复一个不是Crash的BUG，但是因为未加入相关类而导致了更严重的Crash，就更加的得不偿失。</p>
+<p>  总的来说，热修复本质的目的是为了保证应用更加稳定，而不是为了更强大的功能引入更大的风险和不稳定性。</p>
+</li>
+</ul>
+<h2 id="二、热修复-or-插件化？"><a href="#二、热修复-or-插件化？" class="headerlink" title="二、热修复 or 插件化？"></a>二、热修复 or 插件化？</h2><p>我们经常提到热修复和插件化，这都是当下热门的新兴技术。在讲述之前，需要对这两个概念进行一下解释。<br>插件化：一个程序划分为不同的部分，以插件的形式加载到应用中去，本质上它使用的技术还是热修复技术，只是加入了更多工程实践，让它支持大规模的代码更新以及资源和SO包的更新。<br>热修复：当线上应用出现紧急BUG，为了避免重新发版，并且保证修复的及时性而进行的一项在线推送补丁的修复方案。</p>
+<p>显然，从概念上我们可以看到，插件化使用场景更多是功能，热修复使用常见在于修复。从这个层面来说，插件化必然功能更加强大，能做的事情也更多。QQ空间超级补丁技术和微信Tinker从类、资源的替换和更新上来看，与其说是热修复，不如说是插件化。</p>
+<p>当然，强大的功能也就增加了不稳定的因素。比如上文提到的增加启动时间，导致ANR、Crash的问题。</p>
+<p>QQ空间超级补丁技术和微信Tinker提供了更加强大的功能，但是对应用的性能和稳定有较大的影响，就BUG修复的这个使用场景上还不够明确，并且显得过重。</p>
+<p>针对应用的性能损耗，我们可以举例做一个对比。某APP的启动载入时间为3s左右，本身就是基于多DEX模式的实现。<br>分别接入三种热修复服务，根据腾讯提供超级补丁技术和Tinker的数据，那么会变成以下的场景：<br>阿里百川HotFix:启动时间几乎无增加，不增加运行期额外的磁盘消耗。<br>QQ空间超级补丁技术：如果应用有700个类，启动耗时增加超过2.5s，达到5.5s以上。<br>微信Tinker：假设应用有5个DEX文件，分别修改了这5个DEX，产生5个patch.dex文件，就要进行5次的patch合并动作，假设每个补丁1M，那么就要多占用7.5M的磁盘空间。</p>
+<p>显然对于修复紧急BUG这个场景，阿里百川HotFix的更为合适，它更加轻量，可以在不重启的情况下生效，且对性能几乎没有影响。微信Tinker、QQ空间超级补丁技术更多地把场景定位在发布小的新功能上，采用ClassLoader的模式，牺牲较高的性能代价去实现类、资源新增或替换的功能。阿里百川HotFix对应用本身做到无侵入，无性能损耗。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>QQ空间超级补丁技术和微信Tinker 支持新增类和资源的替换，在一些功能化的更新上更为强大，但对应用的性能和稳定会有的一定的影响；阿里百川HotFix虽然暂时不支持新增类和资源的替换，对新功能的发布也有所限制，但是作为一项定位为线上紧急BUG的热修复的服务来说，能够真正做到BUG即时修复用户无感知，同时保证对应用性能不产生不必要的损耗，在热修复方面不失为一个好的选择。</p>
+<p>目前阿里百川HotFix已经开始公测，点击立即使用，即可开始你的热修复之旅。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        这里写留言或版权声明：<a href="/2016/12/02/Android热修复技术选型——三大流派解析/" target="_blank" rel="external">http://cstsinghua.github.io/2016/12/02/Android热修复技术选型——三大流派解析/</a>
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+        
+<div class="post-reward">
+    <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andfix/">Andfix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HotFix/">HotFix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tinker/">Tinker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/手Qzone/">手Qzone</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/插件化/">插件化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热修复/">热修复</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里百川/">阿里百川</a></li></ul>
+
+
+            
+<div class="post-share-wrap">
+    <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+    <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/11/17/Git命令使用遇到的那些坑/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Git命令使用遇到的那些坑</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="Android热修复技术选型——三大流派解析" data-title="Android热修复技术选型——三大流派解析" data-url="http://cstsinghua.github.io/2016/12/02/Android热修复技术选型——三大流派解析/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.10"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "Android热修复技术选型——三大流派解析",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://cstsinghua.github.io/2016/12/02/Android热修复技术选型——三大流派解析/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.10"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.10"></script>
+
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
+
+
+
+
+
+</body>
+</html>
