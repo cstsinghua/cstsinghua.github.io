@@ -839,7 +839,7 @@ Aborting commit due to empty commit message.
     <link href="http://cstsinghua.github.io/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
     <id>http://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/</id>
     <published>2016-07-01T02:09:43.000Z</published>
-    <updated>2016-07-01T02:34:03.073Z</updated>
+    <updated>2016-07-01T02:09:43.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Protocol-Buffers简介&quot;&gt;&lt;a href=&quot;#Protocol-Buffers简介&quot; class=&quot;headerlink&quot; title=&quot;Protocol Buffers简介&quot;&gt;&lt;/a&gt;Protocol Buffers简介&lt;/h1&gt;&lt;p&gt;Protocol Buffers是一种数据交换格式，用于结构化数据的读写，类似于序列化机制。在线客服系统里面Message的body部分其实就是具有结构化的数据，因此可以采用Protocol Buffers来实现各平台和语言之间的消息传输。Protocol Buffers特点以及与XML、各语言的序列化机制等的比较，可以后续展开，这里不赘述！此处重点说明其如何使用，特别是针对java(Android)平台。&lt;/p&gt;
 &lt;p&gt;Github地址：&lt;a href=&quot;https://github.com/google/protobuf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/google/protobuf&lt;/a&gt;&lt;/p&gt;
@@ -1175,7 +1175,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
     <link href="http://cstsinghua.github.io/2016/06/13/ZXing%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"/>
     <id>http://cstsinghua.github.io/2016/06/13/ZXing开源项目实战/</id>
     <published>2016-06-13T07:42:25.000Z</published>
-    <updated>2016-06-13T07:42:31.872Z</updated>
+    <updated>2016-06-13T07:42:25.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Zxing二维码开源库学习和优化&quot;&gt;&lt;a href=&quot;#Zxing二维码开源库学习和优化&quot; class=&quot;headerlink&quot; title=&quot;Zxing二维码开源库学习和优化&quot;&gt;&lt;/a&gt;Zxing二维码开源库学习和优化&lt;/h1&gt;&lt;p&gt;  本文对Google官方开源的二维码扫描库ZXing做一个总体概述，然后进行Android开发环境下的实战(二次)开发和优化，并用于生产项目。&lt;br&gt;  ZXing开源项目官方地址:&lt;a href=&quot;https://github.com/zxing/zxing&quot; title=&quot;ZXing&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/zxing/zxing&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
@@ -1878,7 +1878,7 @@ canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2
     <link href="http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/</id>
     <published>2016-06-13T07:41:13.000Z</published>
-    <updated>2016-06-13T11:41:02.275Z</updated>
+    <updated>2016-06-13T07:41:13.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Eclipse动态调试指南&quot;&gt;&lt;a href=&quot;#Eclipse动态调试指南&quot; class=&quot;headerlink&quot; title=&quot;Eclipse动态调试指南&quot;&gt;&lt;/a&gt;Eclipse动态调试指南&lt;/h1&gt;&lt;p&gt;本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。&lt;/p&gt;
 &lt;h1 id=&quot;操作步骤&quot;&gt;&lt;a href=&quot;#操作步骤&quot; class=&quot;headerlink&quot; title=&quot;操作步骤&quot;&gt;&lt;/a&gt;操作步骤&lt;/h1&gt;&lt;h2 id=&quot;1-反编译&quot;&gt;&lt;a href=&quot;#1-反编译&quot; class=&quot;headerlink&quot; title=&quot;1.反编译&quot;&gt;&lt;/a&gt;1.反编译&lt;/h2&gt;&lt;p&gt;对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。&lt;/p&gt;
@@ -1961,7 +1961,7 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     <link href="http://cstsinghua.github.io/2016/06/13/apktool%E6%89%93%E5%8C%85%E4%B9%8B%E5%90%8E%E5%8C%85%E4%BD%93%E5%8F%98%E5%A4%A7/"/>
     <id>http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/</id>
     <published>2016-06-13T07:40:18.000Z</published>
-    <updated>2016-06-13T07:40:33.442Z</updated>
+    <updated>2016-06-13T07:40:18.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;apktool打包之后apk包体变大&quot;&gt;&lt;a href=&quot;#apktool打包之后apk包体变大&quot; class=&quot;headerlink&quot; title=&quot;apktool打包之后apk包体变大&quot;&gt;&lt;/a&gt;apktool打包之后apk包体变大&lt;/h1&gt;&lt;p&gt;原因：应该是apktool 2.0.3版本之后引入了两个字段&lt;/p&gt;
 &lt;ul&gt;
@@ -2015,7 +2015,7 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     <link href="http://cstsinghua.github.io/2016/06/13/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%80%9D%E8%B7%AF/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android热修复的思路/</id>
     <published>2016-06-13T07:38:15.000Z</published>
-    <updated>2016-12-02T10:43:17.750Z</updated>
+    <updated>2016-06-13T07:36:18.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Android热修复的方式&quot;&gt;&lt;a href=&quot;#Android热修复的方式&quot; class=&quot;headerlink&quot; title=&quot;Android热修复的方式&quot;&gt;&lt;/a&gt;Android热修复的方式&lt;/h1&gt;&lt;p&gt;关于动态热修复，目前发现的思路集中在三点：&lt;/p&gt;
 &lt;ul&gt;
@@ -2063,7 +2063,7 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     <link href="http://cstsinghua.github.io/2016/06/13/Android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android动态加载机制/</id>
     <published>2016-06-13T07:36:18.000Z</published>
-    <updated>2016-06-13T07:36:19.502Z</updated>
+    <updated>2016-06-13T07:36:18.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;1-引言&quot;&gt;&lt;a href=&quot;#1-引言&quot; class=&quot;headerlink&quot; title=&quot;1.引言&quot;&gt;&lt;/a&gt;1.引言&lt;/h1&gt;&lt;p&gt;在Android开发中，存在一些场景：&lt;/p&gt;
 &lt;ol&gt;
@@ -2673,7 +2673,7 @@ for(int z=0; z&amp;lt;as.length; z++) {
     <link href="http://cstsinghua.github.io/2016/06/13/Android%E5%AE%89%E8%A3%85APK%E8%AF%A6%E8%A7%A3/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android安装APK详解/</id>
     <published>2016-06-13T07:34:37.000Z</published>
-    <updated>2016-06-13T07:35:45.278Z</updated>
+    <updated>2016-06-13T07:34:37.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;众所周知，Android应用最终是打包成.apk格式（其实就是一个压缩包），然后安装至手机并运行的。APK即Android Package的缩写，那么，Android安装应用APK的具体方式及其详细过程是怎样的呢？下面，我们逐一揭开里面的层层面纱。&lt;/p&gt;
 &lt;h2 id=&quot;Android应用APK安装的方式&quot;&gt;&lt;a href=&quot;#Android应用APK安装的方式&quot; class=&quot;headerlink&quot; title=&quot;Android应用APK安装的方式&quot;&gt;&lt;/a&gt;Android应用APK安装的方式&lt;/h2&gt;&lt;p&gt;一般而言，Android应用安装有如下四种方式：&lt;/p&gt;
@@ -4226,7 +4226,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <link href="http://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android studio动态调试指南/</id>
     <published>2016-06-13T07:25:56.000Z</published>
-    <updated>2016-06-13T07:26:02.974Z</updated>
+    <updated>2016-06-13T07:25:56.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h2&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging，而Smali Debugging基于开源的Android反编译工具apktool。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.&lt;/strong&gt; &lt;/p&gt;
@@ -4319,7 +4319,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <link href="http://cstsinghua.github.io/2016/06/13/Android%20APK%E7%98%A6%E8%BA%AB%E5%88%9D%E6%8E%A2/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android APK瘦身初探/</id>
     <published>2016-06-13T06:34:28.000Z</published>
-    <updated>2016-06-13T06:34:35.834Z</updated>
+    <updated>2016-06-13T06:34:28.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;随着Android技术的发展，以及用户需求的井喷，Android应用的APK大小也随着越来越“胖”，APK在安装和更新之前都需要经过网络将其下载到手机，如果APK越大消耗的流量就会越多，特别是对于使用移动网络的用户来讲，消耗流量越多就代表需要花更多的钱去购买流量。同时一些第三方应用商城也会对上传的APK大小有限制，所以为了能够让产品能够更受商城和用户欢迎，APK瘦身是第一步，更小的APK标示着更多地用户愿意去下载和体验。因此，APK瘦身大有必要！&lt;/p&gt;
 &lt;h1 id=&quot;APK文件结构&quot;&gt;&lt;a href=&quot;#APK文件结构&quot; class=&quot;headerlink&quot; title=&quot;APK文件结构&quot;&gt;&lt;/a&gt;APK文件结构&lt;/h1&gt;&lt;p&gt;Android应用的APK文件其实就是一个压缩文件，可以用常规的压缩软件打开，查看其目录结构。为了能够减小APK的大小，首先需要知道APK由哪些部分构成，然后针对每个部分做相应的优化工作，下图是一个APK解压后的文件结构（各APK的结构核心内容是一致的，差异化的文件暂不关注）:&lt;/p&gt;
@@ -4398,7 +4398,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
     <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
     <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-30T10:24:26.335Z</updated>
+    <updated>2016-06-13T01:57:02.000Z</updated>
     
     <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -4431,7 +4431,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <link href="http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
     <id>http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
     <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-13T06:08:42.947Z</updated>
+    <updated>2016-07-01T02:09:43.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;1-python安装某些第三方包报错vcvarsall-bat&quot;&gt;&lt;a href=&quot;#1-python安装某些第三方包报错vcvarsall-bat&quot; class=&quot;headerlink&quot; title=&quot;1. python安装某些第三方包报错vcvarsall.bat&quot;&gt;&lt;/a&gt;1. &lt;strong&gt;python安装某些第三方包报错vcvarsall.bat&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。&lt;/p&gt;
 &lt;p&gt;Mingw官方链接：&lt;a href=&quot;http://sourceforge.net/projects/mingw/&quot; title=&quot;Mingw官网链接&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://sourceforge.net/projects/mingw/&lt;/a&gt;&lt;/p&gt;
@@ -4483,7 +4483,7 @@ collect2.exe: error: ld returned 1 exit status
     <link href="http://cstsinghua.github.io/2016/06/08/%E6%8E%A8%E9%80%81%E6%96%B9%E6%A1%88/"/>
     <id>http://cstsinghua.github.io/2016/06/08/推送方案/</id>
     <published>2016-06-08T09:09:16.000Z</published>
-    <updated>2016-06-12T11:41:30.482Z</updated>
+    <updated>2016-06-13T07:42:25.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;推送简介&quot;&gt;&lt;a href=&quot;#推送简介&quot; class=&quot;headerlink&quot; title=&quot;推送简介&quot;&gt;&lt;/a&gt;推送简介&lt;/h1&gt;&lt;p&gt;推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)&lt;/p&gt;
 &lt;p&gt;在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于Email中，用来提示我们新的信息。由于时代的发展和移动互联网的热潮，推送功能更加地普及，已经不再仅仅用在推送邮件了，更多地用在我们的APP中了。&lt;/p&gt;
