@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  
-  <title>python安装某些第三方包报错解决办法 | Atypical programmer | 做一个非典型程序员</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="theme-color" content="#3F51B5">
-  
-  
-  <meta name="keywords" content="安装第三方包">
-  <meta name="description" content="1. python安装某些第三方包报错vcvarsall.bat原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>python安装某些第三方包报错解决办法 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="安装第三方包">
+    <meta name="description" content="1. python安装某些第三方包报错vcvarsall.bat原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。
 Mi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python安装某些第三方包报错解决办法">
@@ -25,25 +38,27 @@ Mi">
 <meta name="twitter:title" content="python安装某些第三方包报错解决办法">
 <meta name="twitter:description" content="1. python安装某些第三方包报错vcvarsall.bat原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同事，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。
 Mi">
-  
-    <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
-  
-  <meta name="summary" content="写给典型的程序员">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css?v=1.1.10">
+    
+        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <script>window.lazyScripts=[]</script>
 </head>
 
 <body>
-  <div id="loading" class="active"></div>
+    <div id="loading" class="active"></div>
 
-  <aside id="menu" class="hide" >
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
     <div class="brand-wrap">
       <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/logo.jpg"></a>
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
         <hgroup class="introduce">
           <h5 class="nickname">Cstsinghua</h5>
           <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
@@ -138,20 +153,12 @@ Mi">
             </li>
         
       </ul>
-
-      <footer class="footer">
-  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
-  <p>Atypical programmer &copy; 2006 - 2016</p>
-  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
-  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
-  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
-</footer>
-
     </div>
   </div>
 </aside>
-  <main id="main">
-    <header class="top-header" id="header">
+
+    <main id="main">
+        <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
@@ -169,7 +176,7 @@ Mi">
         </div>
         
         
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
             <i class="icon icon-lg icon-share-alt"></i>
         </a>
         
@@ -177,7 +184,7 @@ Mi">
 </header>
 <header class="content-header post-header">
 
-    <div class="container">
+    <div class="container fade-scale">
         <h1 class="title">python安装某些第三方包报错解决办法</h1>
         <h5 class="subtitle">
             
@@ -206,19 +213,29 @@ Mi">
         </nav>
     </aside>
     
-<article id="post-python安装第三方包错误解决" 
-  class="post-article article-type-post" itemprop="blogPost">
+<article id="post-python安装第三方包错误解决"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
         <h1 class="post-card-title">python安装某些第三方包报错解决办法</h1>
         <div class="post-meta">
-            <time datetime="2016-06-13T01:57:02.000Z" itemprop="datePublished" class="post-time">
-  2016-06-13
-</time>
+            <time class="post-time" title="2016-6-13 9:57" datetime="2016-06-13T01:57:02.000Z"  itemprop="datePublished">2016-06-13</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
 
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+<span>
+    <a href="/2016/06/13/python安装第三方包错误解决/#comments" class="ds-thread-count" data-thread-key="python安装第三方包错误解决" data-count-type="comments"></a>
+</span>
 
 
         </div>
@@ -255,9 +272,11 @@ collect2.exe: error: ld returned 1 exit status
 <p><strong>d.</strong>Run : dlltool –dllname pythonxx.dll –def pythonxx.def –output-lib libpythonxx.a This will create libpythonxx.a (dlltool is part of MinGW utilities).<br>Copy libpythonxx.a to c:\pythonxx\libs\ (in the same directory as  pythonxx.lib).<br>This trick should work for all Python versions, including future releases of Python. You can also use this trick to convert other libraries.</p>
 
         </div>
-        
+
         <blockquote class="post-copyright">
     <div class="content">
+        
+
         这里写留言或版权声明：<a href="/2016/06/13/python安装第三方包错误解决/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</a>
     </div>
     <footer>
@@ -267,10 +286,12 @@ collect2.exe: error: ld returned 1 exit status
         </a>
     </footer>
 </blockquote>
+
         
-<div class="post-reward">
-    <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
 </div>
+
 
 
         <div class="post-footer">
@@ -279,92 +300,98 @@ collect2.exe: error: ld returned 1 exit status
 
 
             
-<div class="post-share-wrap">
-    <div class="post-share" id="post-share">
-    <div class="tit">分享到：</div>
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/&title=《python安装某些第三方包报错解决办法》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
       <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
           <i class="icon icon-weixin"></i>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/&title=《python安装某些第三方包报错解决办法》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python安装某些第三方包报错解决办法》 — Atypical programmer&url=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/&via=http://cstsinghua.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
         </a>
       </li>
     </ul>
  </div>
 
-    <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
         <i class="icon icon-share-alt icon-lg"></i>
     </a>
 </div>
 
 
+
         </div>
-    </div>   
+    </div>
 
     
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2016/06/13/Android APK瘦身初探/" id="post-prev" class="post-nav-link">
+      <a href="/2016/06/13/hello-world/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Android APK瘦身策略</h4>
+        <h4 class="title">Hello World</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/06/13/hello-world/" id="post-next" class="post-nav-link">
+      <a href="/2016/06/08/推送方案/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Hello World</h4>
+        <h4 class="title">推送方案</h4>
       </a>
     </div>
   
 </nav>
 
 
-            
+
     
-<div class="duoshuo">
+
+<div class="comments" id="comments">
 	<div class="ds-thread" data-thread-key="python安装第三方包错误解决" data-title="python安装某些第三方包报错解决办法" data-url="http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/"></div>
 </div>
-<script src="/js/embed.min.js?v=1.1.10"></script>
-<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
 <script>
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'}
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 </script>
+
+
+
 
 
 
 
 </article>
 
-<div id="reward" class="reward-lay">
-    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <h3 class="reward-title">
         <i class="icon icon-quote-left"></i>
         Thanks~
@@ -388,58 +415,100 @@ var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'}
 </div>
 
 
+
 </div>
-  </main>
-  <div class="mask" id="mask"></div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Atypical programmer &copy; 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script>var BLOG = { ROOT: '/' };
-BLOG.SHARE = {
-title: "python安装某些第三方包报错解决办法",
-pic: "/img/logo.jpg",
-summary: document.getElementsByName('summary')[0].content,
-url: "http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/" }
-</script>
-<div class="global-share" id="global-share">
-    <div class="tit">分享到：</div>
+
+
+<div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/&title=《python安装某些第三方包报错解决办法》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
       <li>
-        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
           <i class="icon icon-weixin"></i>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/&title=《python安装某些第三方包报错解决办法》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python安装某些第三方包报错解决办法》 — Atypical programmer&url=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/&via=http://cstsinghua.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
-          豆
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
         </a>
       </li>
     </ul>
  </div>
 
 
-  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script src="/js/main.min.js?v=1.1.10"></script>
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/" alt="微信分享二维码">
+</div>
 
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.0');
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.0"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -459,16 +528,14 @@ url: "http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解�
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.1.10"></script>
+<script src="/js/search.min.js?v=1.4.0" async></script>
 
 
 
 
 
-<script src="//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891"></script>
 
-
-
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 </body>
