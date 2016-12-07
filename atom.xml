@@ -1175,7 +1175,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
     <link href="http://cstsinghua.github.io/2016/06/13/ZXing%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"/>
     <id>http://cstsinghua.github.io/2016/06/13/ZXing开源项目实战/</id>
     <published>2016-06-13T07:42:25.000Z</published>
-    <updated>2016-06-13T07:42:25.000Z</updated>
+    <updated>2016-12-07T06:56:56.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Zxing二维码开源库学习和优化&quot;&gt;&lt;a href=&quot;#Zxing二维码开源库学习和优化&quot; class=&quot;headerlink&quot; title=&quot;Zxing二维码开源库学习和优化&quot;&gt;&lt;/a&gt;Zxing二维码开源库学习和优化&lt;/h1&gt;&lt;p&gt;  本文对Google官方开源的二维码扫描库ZXing做一个总体概述，然后进行Android开发环境下的实战(二次)开发和优化，并用于生产项目。&lt;br&gt;  ZXing开源项目官方地址:&lt;a href=&quot;https://github.com/zxing/zxing&quot; title=&quot;ZXing&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/zxing/zxing&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
@@ -1226,9 +1226,9 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
 &lt;figure class=&quot;image-bubble&quot;&gt;
                 &lt;div class=&quot;img-lightbox&quot;&gt;
                     &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                    &lt;img src=&quot;http://172.20.154.39:8080/GodSDKBackground/Barcode_module_relationship.png&quot; alt=&quot;模块关系图&quot; title=&quot;&quot;&gt;
+                    &lt;img src=&quot;http://i.imgur.com/ON8GvPu.png&quot; alt=&quot;&quot; title=&quot;&quot;&gt;
                 &lt;/div&gt;
-                &lt;div class=&quot;image-caption&quot;&gt;模块关系图&lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;&lt;/div&gt;
             &lt;/figure&gt;
 &lt;h3 id=&quot;2-试用并厘清ZXing项目的源码&quot;&gt;&lt;a href=&quot;#2-试用并厘清ZXing项目的源码&quot; class=&quot;headerlink&quot; title=&quot;2.试用并厘清ZXing项目的源码&quot;&gt;&lt;/a&gt;2.试用并厘清ZXing项目的源码&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;试用：&lt;/p&gt;
