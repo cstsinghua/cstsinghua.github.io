@@ -417,15 +417,15 @@ Aborting commit due to empty commit message.
     <link href="http://cstsinghua.github.io/2016/09/12/Android%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E5%8F%8A%E6%96%B0%E6%89%8B%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
     <id>http://cstsinghua.github.io/2016/09/12/Android知识体系及新手如何快速入门/</id>
     <published>2016-09-12T06:25:13.000Z</published>
-    <updated>2016-09-12T06:25:38.000Z</updated>
+    <updated>2016-12-09T02:04:48.000Z</updated>
     
     <content type="html">&lt;p&gt;Android知识体系及新手如何快速入门&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;strong&gt;Note：本文摘录自网易梁建 | 网易云音乐安卓主程的一篇文章，稍做修改，仅供参考，其实很多还是比较粗略，后续会在此基础上进一步完善&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&quot;Android知识体系框架&quot;&gt;&lt;a href=&quot;#Android知识体系框架&quot; class=&quot;headerlink&quot; title=&quot;Android知识体系框架&quot;&gt;&lt;/a&gt;Android知识体系框架&lt;/h1&gt;&lt;figure class=&quot;image-bubble&quot;&gt;
                 &lt;div class=&quot;img-lightbox&quot;&gt;
                     &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                    &lt;img src=&quot;http://i.imgur.com/rilxPPX.jpg&quot; alt=&quot;Android只是体系框架&quot; title=&quot;&quot;&gt;
+                    &lt;img src=&quot;http://i.imgur.com/rilxPPX.jpg&quot; alt=&quot;Android知识体系框架&quot; title=&quot;&quot;&gt;
                 &lt;/div&gt;
-                &lt;div class=&quot;image-caption&quot;&gt;Android只是体系框架&lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;Android知识体系框架&lt;/div&gt;
             &lt;/figure&gt;
 &lt;p&gt;接下来，我们具体讲一讲各个部分的内容。&lt;/p&gt;
 &lt;h2 id=&quot;四大组件&quot;&gt;&lt;a href=&quot;#四大组件&quot; class=&quot;headerlink&quot; title=&quot;四大组件&quot;&gt;&lt;/a&gt;四大组件&lt;/h2&gt;&lt;figure class=&quot;image-bubble&quot;&gt;
@@ -623,7 +623,7 @@ Aborting commit due to empty commit message.
     <link href="http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://cstsinghua.github.io/2016/07/13/Android-studio常用快捷键/</id>
     <published>2016-07-13T10:07:19.000Z</published>
-    <updated>2016-11-01T02:04:02.000Z</updated>
+    <updated>2016-12-14T09:55:53.000Z</updated>
     
     <content type="html">&lt;p&gt;Android studio常用的快捷键&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;Android-studio常用快捷键总结&quot;&gt;&lt;a href=&quot;#Android-studio常用快捷键总结&quot; class=&quot;headerlink&quot; title=&quot;Android studio常用快捷键总结&quot;&gt;&lt;/a&gt;Android studio常用快捷键总结&lt;/h1&gt;&lt;p&gt;书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。其实Android studio的的settings里面Keymap可以查看所有的快捷键，另外在Android studio的菜单栏，菜单项里面也注明了每项操作的快捷键(如果有)，经常查看和练习，根本也用不着在网上找说明。当然，对于新人或者英文不是太好的初学者，借鉴别人的经验是最快的学习方式。本文暂只适用于Windows平台，Mac环境后续补充。&lt;/p&gt;
@@ -756,6 +756,12 @@ Aborting commit due to empty commit message.
 &lt;td&gt;优化导入包&lt;/td&gt;
 &lt;td&gt;Ctrl+Shift+O&lt;/td&gt;
 &lt;td&gt;优化导入包，即没有导入的包可以自动补上，没有使用到的导入包则会删除&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+Up/Down&lt;/td&gt;
+&lt;td&gt;向上或向下移动当前行&lt;/td&gt;
+&lt;td&gt;Alt+Up/Down&lt;/td&gt;
+&lt;td&gt;向上或向下移动当前行&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
