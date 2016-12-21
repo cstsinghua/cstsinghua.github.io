@@ -41,7 +41,7 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
 系统应用安装：开机时加载系统的APK和应用，没有安装界面；">
 <meta property="og:image" content="http://i.imgur.com/9QZs6oN.png">
 <meta property="og:image" content="http://i.imgur.com/aXWwlfs.png">
-<meta property="og:updated_time" content="2016-06-13T07:34:37.000Z">
+<meta property="og:updated_time" content="2016-12-21T06:40:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android安装APK详解">
 <meta name="twitter:description" content="引言众所周知，Android应用最终是打包成.apk格式（其实就是一个压缩包），然后安装至手机并运行的。APK即Android Package的缩写，那么，Android安装应用APK的具体方式及其详细过程是怎样的呢？下面，我们逐一揭开里面的层层面纱。
@@ -297,8 +297,9 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 <ol>
 <li>复制APK安装包到data/app目录下，文件名会以应用的package命名；</li>
 <li>解压并扫描安装包，把dex文件(Dalvik字节码)保存到dalvik-cache目录(一般情况下，会先执行dexopt即dex文件的优化，将优化后的dex文件保存至该目录下)，并data/data目录下创建对应的应用数据目录(data/data目录可读可写)；</li>
-<li>更新/data/system/packages.xml中的内容，将APK的信息加入进去。<h3 id="卸载过程概述"><a href="#卸载过程概述" class="headerlink" title="卸载过程概述"></a>卸载过程概述</h3>对照安装过程，卸载过程与之相逆：</li>
+<li>更新/data/system/packages.xml中的内容，将APK的信息加入进去。</li>
 </ol>
+<h3 id="卸载过程概述"><a href="#卸载过程概述" class="headerlink" title="卸载过程概述"></a>卸载过程概述</h3><p>对照安装过程，卸载过程与之相逆：</p>
 <p>删除安装过程中在上述目录下创建的文件及目录。</p>
 <h2 id="安装应用的过程代码解析"><a href="#安装应用的过程代码解析" class="headerlink" title="安装应用的过程代码解析"></a>安装应用的过程代码解析</h2><p>鉴于APK安装有四种方式，这里分别对各种方式下的安装详细过程进行代码级的解析。</p>
 <h3 id="安装过程代码解析的前奏"><a href="#安装过程代码解析的前奏" class="headerlink" title="安装过程代码解析的前奏"></a>安装过程代码解析的前奏</h3><p><strong>注意：由于Android API迭代较快，版本众多，不过关于安装和卸载的逻辑核心（代码主干）是不变的，最新level级别的API可能会加入更多分支或细节完善代码，一般建议以低版本的API作为分析基础，这样便于更加快速地厘清代码流程和主干，本文以API level14的源码做切入点,引用源代码部分前面的数字表示行号，对应于源文件里面的行号</strong></p>
@@ -1789,7 +1790,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-06-13T07:34:37.000Z" title="2016-6-13 15:34" itemprop="dateUpdated">2016年6月13日 15:34</time>
+    最后更新时间：<time datetime="2016-12-21T06:40:20.000Z" title="2016-12-21 14:40" itemprop="dateUpdated">2016年12月21日 14:40</time>
 </span><br>
 
 
