@@ -26,25 +26,22 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Push">
-    <meta name="description" content="推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)
-在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于E">
+    <meta name="keywords" content="Push,推送,长连接,进程保活,定时器,Timer">
+    <meta name="description" content="梳理当前主流的推送技术，对里面涉及到的概念和技术进行全面的阐述">
 <meta property="og:type" content="article">
 <meta property="og:title" content="推送方案">
 <meta property="og:url" content="http://cstsinghua.github.io/2016/06/08/推送方案/index.html">
 <meta property="og:site_name" content="Atypical programmer">
-<meta property="og:description" content="推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)
-在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于E">
+<meta property="og:description" content="梳理当前主流的推送技术，对里面涉及到的概念和技术进行全面的阐述">
 <meta property="og:image" content="http://i.imgur.com/GJJJdm9.png">
 <meta property="og:image" content="http://i.imgur.com/YVY49RN.png">
 <meta property="og:image" content="http://i.imgur.com/4qcYhiL.png">
 <meta property="og:image" content="http://i.imgur.com/5pg4KkF.png">
 <meta property="og:image" content="http://i.imgur.com/kOGdghH.jpg">
-<meta property="og:updated_time" content="2016-06-13T07:42:25.000Z">
+<meta property="og:updated_time" content="2016-12-21T01:53:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="推送方案">
-<meta name="twitter:description" content="推送简介推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)
-在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于E">
+<meta name="twitter:description" content="梳理当前主流的推送技术，对里面涉及到的概念和技术进行全面的阐述">
 <meta name="twitter:image" content="http://i.imgur.com/GJJJdm9.png">
     
         <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
@@ -248,7 +245,8 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="推送简介"><a href="#推送简介" class="headerlink" title="推送简介"></a>推送简介</h1><p>推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)</p>
+            <p>本文梳理当前主流的推送技术，对里面涉及到的概念和技术进行全面的阐述<br><a id="more"></a></p>
+<h1 id="推送简介"><a href="#推送简介" class="headerlink" title="推送简介"></a>推送简介</h1><p>推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)</p>
 <p>在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于Email中，用来提示我们新的信息。由于时代的发展和移动互联网的热潮，推送功能更加地普及，已经不再仅仅用在推送邮件了，更多地用在我们的APP中了。</p>
 <p>当我们开发需要和服务器交互的应用程序时，基本上都需要获取服务器端的数据，比如《地震应急通》就需要及时获取服务器上最新的地震信息。要获取服务器上不定时更新的信息，一般来说有两种方法：第一种是客户端使用Pull（拉）的方式，就是隔一段时间就去服务器上获取一下信息，看是否有更新的信息出现。第二种就是 服务器使用Push（推送）的方式，当服务器端有新信息了，则把最新的信息Push到客户端上。这样，客户端就能自动的接收到消息。 </p>
 <p>虽然Pull和Push两种方式都能实现获取服务器端更新信息的功能，但是明显来说Push方式比Pull方式更优越。因为Pull方式更费客户端的网络流量，更主要的是费电量，还需要我们的程序不停地去监测服务端的变化。  </p>
@@ -281,31 +279,30 @@
 <p> GCM (Google Cloud Messaging），官方链接：<a href="https://developers.google.com/cloud-messaging/" title="Google官方推送GCM" target="_blank" rel="external">Google官方推送GCM</a></p>
 <p> 值得一提的是，Google官方最初退出的推送方案是Android Cloud to Device Messaging (C2DM) ，已被废弃，于2015.10.20完全关闭。关于C2DM和GCM的差异，以及从C2DM迁移到GCM，可以参见<a href="https://developers.google.com/cloud-messaging/c2dm" title="C2DM迁移到GCM" target="_blank" rel="external">C2DM迁移到GCM</a></p>
 </li>
+<li><p>除了官方的方案，也存在很多第三方解决方案，这里只提国内的，原因你懂的。目前主要有：</p>
+</li>
 </ol>
-<ol>
-<li>除了官方的方案，也存在很多第三方解决方案，这里只提国内的，原因你懂的。目前主要有：</li>
-</ol>
-<pre><code>- 较早的：JPush、个推
-- 后来的：腾讯的信鸽、小米推送、百度推送、华为推送、友盟推送等
-
-关于第三方推送方案的使用统计，可以参见GitHub上面的一个调查：[Android 第三方 Push 推送方案使用调查](https://github.com/android-cn/topics/issues/4 &quot;第三推送方案调查&quot;)
-</code></pre><p>正如前文提到，目前上述方案基本都是基于长连接的方式来实现。而平台自身提供的方案将实现长连接的服务内置在系统内部，这样就即使APP进程被kill了，那么仍然可以接受消息。而第三方的方案，一旦APP进程被kill(准确来说是实现长连接的service所在的进程)，那么就无法接受推送的消息了。</p>
+<ul>
+<li>较早的：JPush、个推</li>
+<li><p>后来的：腾讯的信鸽、小米推送、百度推送、华为推送、友盟推送等</p>
+<p>  关于第三方推送方案的使用统计，可以参见GitHub上面的一个调查：<a href="https://github.com/android-cn/topics/issues/4" title="第三推送方案调查" target="_blank" rel="external">Android 第三方 Push 推送方案使用调查</a></p>
+</li>
+</ul>
+<p>正如前文提到，目前上述方案基本都是基于长连接的方式来实现。而平台自身提供的方案将实现长连接的服务内置在系统内部，这样就即使APP进程被kill了，那么仍然可以接受消息。而第三方的方案，一旦APP进程被kill(准确来说是实现长连接的service所在的进程)，那么就无法接受推送的消息了。</p>
 <p>大家在本质上都是采用长连接，但是基于长连接来实现推送，在上层实现方面存在很多的协议和具体方案：</p>
 <ol>
 <li><p>使用MQTT协议</p>
 <p> MQTT(MQ Telemetry Transport)是IBM开发的基于轻量级的、基于”发布/订阅”模式的消息传输协议,用于有限制的设备(比如嵌入式设备)和低带宽、高延迟或不可靠的网络。</p>
 <p> MQTT官网：<a href="http://mqtt.org/" target="_blank" rel="external">http://mqtt.org/</a></p>
 <p> 当前已有多个基于MQTT协议的推送开源项目：</p>
+<ul>
+<li>tokudu达人的开源项目：<a href="https://github.com/tokudu/AndroidPushNotificationsDemo" title="MQTT客户端" target="_blank" rel="external">MQTT客户端项目</a>、<a href="https://github.com/tokudu/PhpMQTTClient" title="MQTT服务端PHP实现" target="_blank" rel="external">MQTT服务端PHP实现</a></li>
+<li>IBM官方的开源实现：<a href="http://www.eclipse.org/paho/" title="paho项目" target="_blank" rel="external">paho项目</a>、<a href="http://mosquitto.org/" title="MQTT broker" target="_blank" rel="external">MQTT broker</a></li>
+<li>其他：<a href="https://code.google.com/archive/p/mosquitto-mqtt-client-android/" target="_blank" rel="external">MQTT客户端实现</a></li>
+</ul>
+<p>优点：协议简洁、小巧、可扩展性强、省流量、省电，应用到企业领域，已有多个开源项目提供参考。</p>
+<p>缺点：不够成熟、实现较复杂，部署硬件成本较高。</p>
 </li>
-</ol>
-<pre><code>- tokudu达人的开源项目：[MQTT客户端项目](https://github.com/tokudu/AndroidPushNotificationsDemo &quot;MQTT客户端&quot;)、[MQTT服务端PHP实现](https://github.com/tokudu/PhpMQTTClient &quot;MQTT服务端PHP实现&quot;)
-- IBM官方的开源实现：[paho项目](http://www.eclipse.org/paho/ &quot;paho项目&quot;)、[MQTT broker](http://mosquitto.org/ &quot;MQTT broker&quot;)
-- 其他：[MQTT客户端实现](https://code.google.com/archive/p/mosquitto-mqtt-client-android/)
-
-优点：协议简洁、小巧、可扩展性强、省流量、省电，应用到企业领域，已有多个开源项目提供参考。
-
-缺点：不够成熟、实现较复杂，部署硬件成本较高。
-</code></pre><ol>
 <li><p>使用XMPP协议（Openfire + Spark + Smack）</p>
 <p> XMPP（Extensible Messageing and Presence Protocol：可扩展消息与存在协议）是目前主流的四种IM（IM：instant messaging,即时消息）协议之一，其他三种分别为：即时信息和空间协议(IMPP)、空间和即时信息协议(PRIM)、针对即时通讯和空间平衡扩充的进程开始协议SIP(SIMPLE)。其是基于XML协议的通讯协议，前身是Jabber，已由IETF国际标准化组织完成了标准化工作。</p>
 <p> Spark,smack和Openfire，这三个合起来就是一个完整的XMPP IM实现。包括服务器端——Openfire，客户端——Spark，XMPP 传输协议的实现——Smack（记住，XMPP是一个协议，协议是需要实现的，Smack起到的就是这样的一个作用）。三者都是基于Java 语言的实现。</p>
@@ -361,14 +358,36 @@
 <p>Note that [RFC1122] places certain restrictions on the use of keepalives.In particular,the <em>keepalive time</em> must be<br>configurable and must not default to less than 2 hours.In addition,keepalives must not be enabled unless an application requests one(although this behavior is violated if the net.inet.tcp.alwayskeepalive variable is set).Linux does not provide a native facility for adding keepalives to applications that do not request it,but a special library can be preloaded(i.e., loaded prior to ordinary shared libraries)to get this effect [LKA].</p>
 <p>但是网络中的情况是复杂的, 这个连接可能会被切断。比如客户端到服务器的链路因为故障断了, 或者服务器宕机了, 或者是你家网线被人剪了, 这些都是一些莫名其妙的导致连接被切断的因素, <strong>还有几种比较特殊的</strong>：</p>
 <ul>
-<li><p><strong>NAT条目老化或超时</strong></p>
-<pre><code>因为IPv4地址不足， 或者我们想通过无线路由器上网， 我们的设备可能会处在一个NAT设备的后面,用户终端或PC实际分配到的IP是私有IP。而NAT设备的出口则是公有IP，当然也存在多级NAT级联的情况。生活中最常见的NAT设备是家用路由器。关于NAT技术和原理请参见经典文章[http://www.bford.info/pub/net/p2pnat/](http://www.bford.info/pub/net/p2pnat/ &quot;NAT参考文献&quot;)
-</code></pre><p>  NAT设备会在IP封包通过设备时修改源/目的IP地址。对于家用路由器来说， 使用的是网络地址端口转换(NAPT，Network Address/Port Translation)， 它不仅改IP，还修改TCP和UDP协议的端口号, 这样就能让内网中的设备共用同一个外网IP。 举个例子， NAPT维护一个类似下表的NAT表。</p>
-<p>  |内网地址|    外网地址|<br>  |——-|   ——-|<br>  |192.168.0.2:5566|    120.132.92.21:9200|<br>  |192.168.0.3:7788|    120.132.92.21:9201|<br>  |192.168.0.3:8888|    120.132.92.21:9202|</p>
+<li><strong>NAT条目老化或超时</strong></li>
+</ul>
+<p>因为IPv4地址不足， 或者我们想通过无线路由器上网， 我们的设备可能会处在一个NAT设备的后面,用户终端或PC实际分配到的IP是私有IP。而NAT设备的出口则是公有IP，当然也存在多级NAT级联的情况。生活中最常见的NAT设备是家用路由器。关于NAT技术和原理请参见经典文章<a href="http://www.bford.info/pub/net/p2pnat/" title="NAT参考文献" target="_blank" rel="external">http://www.bford.info/pub/net/p2pnat/</a></p>
+<p>NAT设备会在IP封包通过设备时修改源/目的IP地址。对于家用路由器来说， 使用的是网络地址端口转换(NAPT，Network Address/Port Translation)， 它不仅改IP，还修改TCP和UDP协议的端口号, 这样就能让内网中的设备共用同一个外网IP。 举个例子， NAPT维护一个类似下表的NAT表。</p>
+<table>
+<thead>
+<tr>
+<th>内网地址</th>
+<th>外网地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.0.2:5566</td>
+<td>120.132.92.21:9200</td>
+</tr>
+<tr>
+<td>192.168.0.3:7788</td>
+<td>120.132.92.21:9201</td>
+</tr>
+<tr>
+<td>192.168.0.3:8888</td>
+<td>120.132.92.21:9202</td>
+</tr>
+</tbody>
+</table>
 <p>  NAT设备会根据NAT表对出去和进来的数据做修改， 比如将192.168.0.3:8888发出去的封包改成120.132.92.21:9202， 外部就认为他们是在和120.132.92.21:9202通信。 同时NAT设备会将120.132.92.21:9202收到的封包的IP和端口改成192.168.0.3:8888， 再发给内网的主机， 这样内部和外部就能双向通信了， 但如果其中192.168.0.3:8888 == 120.132.92.21:9202这一映射因为某些原因被NAT设备淘汰了， 那么外部设备就无法直接与192.168.0.3:8888通信了。</p>
 <p>  我们的设备经常是处在NAT设备的后面， 比如在公司的内部网络内， 查一下自己分配到的IP，其实是内网IP，表明我们在NAT设备后面。</p>
 <p>  一般情况下，在网络设备比如路由器上面，NAT条目(表)存在老化时间(参见《TCP/IP详解 卷1 协议》第二版第7章)，超过老化时间(一般SOHO级路由器如TP-LINK路由器UDP对应的NAT条目老化时间在5min左右，而TCP也相差不大)，则会清空对应的NAT条目。此外，大部分移动无线网络运营商在链路上一段时间内没有数据通讯后，会淘汰NAT表中的对应项， 造成链路中断。</p>
-</li>
+<ul>
 <li><p><strong>网络状态切换</strong></p>
 <p>  手机网络和WIFI网络切换， 网络断开和连上等情况， 也会使长连接断开。 这里原因可能比较多， 但结果无非就是IP变了， 或者被系统通知连接断了。</p>
 </li>
@@ -611,7 +630,7 @@ wl.release();
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-06-13T07:42:25.000Z" title="2016-6-13 15:42" itemprop="dateUpdated">2016年6月13日 15:42</time>
+    最后更新时间：<time datetime="2016-12-21T01:53:05.000Z" title="2016-12-21 9:53" itemprop="dateUpdated">2016年12月21日 9:53</time>
 </span><br>
 
 
@@ -634,7 +653,7 @@ wl.release();
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Push/">Push</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Push/">Push</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Timer/">Timer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/定时器/">定时器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推送/">推送</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/进程保活/">进程保活</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/长连接/">长连接</a></li></ul>
 
 
             
@@ -654,7 +673,7 @@ wl.release();
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2016/06/08/推送方案/&title=《推送方案》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2016/06/08/推送方案/&title=《推送方案》 — Atypical programmer&source=本文梳理当前主流的推送技术，对里面涉及到的概念和技术进行全面的阐述" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -794,7 +813,7 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2016/06/08/推送方案/&title=《推送方案》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2016/06/08/推送方案/&title=《推送方案》 — Atypical programmer&source=本文梳理当前主流的推送技术，对里面涉及到的概念和技术进行全面的阐述" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

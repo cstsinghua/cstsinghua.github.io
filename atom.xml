@@ -4489,9 +4489,10 @@ collect2.exe: error: ld returned 1 exit status
     <link href="http://cstsinghua.github.io/2016/06/08/%E6%8E%A8%E9%80%81%E6%96%B9%E6%A1%88/"/>
     <id>http://cstsinghua.github.io/2016/06/08/推送方案/</id>
     <published>2016-06-08T09:09:16.000Z</published>
-    <updated>2016-06-13T07:42:25.000Z</updated>
+    <updated>2016-12-21T01:53:05.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;推送简介&quot;&gt;&lt;a href=&quot;#推送简介&quot; class=&quot;headerlink&quot; title=&quot;推送简介&quot;&gt;&lt;/a&gt;推送简介&lt;/h1&gt;&lt;p&gt;推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)&lt;/p&gt;
+    <content type="html">&lt;p&gt;本文梳理当前主流的推送技术，对里面涉及到的概念和技术进行全面的阐述&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;推送简介&quot;&gt;&lt;a href=&quot;#推送简介&quot; class=&quot;headerlink&quot; title=&quot;推送简介&quot;&gt;&lt;/a&gt;推送简介&lt;/h1&gt;&lt;p&gt;推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见AJAX），这种情况下请求是由用户或客户端主动向服务端发起，以拉取消息。(摘自维基百科)&lt;/p&gt;
 &lt;p&gt;在移动互联网时代以前的手机，如果有事情发生需要通知用户，则会有一个窗口弹出，将告诉用户正在发生什么事情。可能是未接电话的提示，日历的提醒，或是一封新的彩信。推送功能最早是被用于Email中，用来提示我们新的信息。由于时代的发展和移动互联网的热潮，推送功能更加地普及，已经不再仅仅用在推送邮件了，更多地用在我们的APP中了。&lt;/p&gt;
 &lt;p&gt;当我们开发需要和服务器交互的应用程序时，基本上都需要获取服务器端的数据，比如《地震应急通》就需要及时获取服务器上最新的地震信息。要获取服务器上不定时更新的信息，一般来说有两种方法：第一种是客户端使用Pull（拉）的方式，就是隔一段时间就去服务器上获取一下信息，看是否有更新的信息出现。第二种就是 服务器使用Push（推送）的方式，当服务器端有新信息了，则把最新的信息Push到客户端上。这样，客户端就能自动的接收到消息。 &lt;/p&gt;
 &lt;p&gt;虽然Pull和Push两种方式都能实现获取服务器端更新信息的功能，但是明显来说Push方式比Pull方式更优越。因为Pull方式更费客户端的网络流量，更主要的是费电量，还需要我们的程序不停地去监测服务端的变化。  &lt;/p&gt;
@@ -4524,31 +4525,30 @@ collect2.exe: error: ld returned 1 exit status
 &lt;p&gt; GCM (Google Cloud Messaging），官方链接：&lt;a href=&quot;https://developers.google.com/cloud-messaging/&quot; title=&quot;Google官方推送GCM&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Google官方推送GCM&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt; 值得一提的是，Google官方最初退出的推送方案是Android Cloud to Device Messaging (C2DM) ，已被废弃，于2015.10.20完全关闭。关于C2DM和GCM的差异，以及从C2DM迁移到GCM，可以参见&lt;a href=&quot;https://developers.google.com/cloud-messaging/c2dm&quot; title=&quot;C2DM迁移到GCM&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;C2DM迁移到GCM&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;除了官方的方案，也存在很多第三方解决方案，这里只提国内的，原因你懂的。目前主要有：&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;除了官方的方案，也存在很多第三方解决方案，这里只提国内的，原因你懂的。目前主要有：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;- 较早的：JPush、个推
-- 后来的：腾讯的信鸽、小米推送、百度推送、华为推送、友盟推送等
-
-关于第三方推送方案的使用统计，可以参见GitHub上面的一个调查：[Android 第三方 Push 推送方案使用调查](https://github.com/android-cn/topics/issues/4 &amp;quot;第三推送方案调查&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;正如前文提到，目前上述方案基本都是基于长连接的方式来实现。而平台自身提供的方案将实现长连接的服务内置在系统内部，这样就即使APP进程被kill了，那么仍然可以接受消息。而第三方的方案，一旦APP进程被kill(准确来说是实现长连接的service所在的进程)，那么就无法接受推送的消息了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;较早的：JPush、个推&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;后来的：腾讯的信鸽、小米推送、百度推送、华为推送、友盟推送等&lt;/p&gt;
+&lt;p&gt;  关于第三方推送方案的使用统计，可以参见GitHub上面的一个调查：&lt;a href=&quot;https://github.com/android-cn/topics/issues/4&quot; title=&quot;第三推送方案调查&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Android 第三方 Push 推送方案使用调查&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;正如前文提到，目前上述方案基本都是基于长连接的方式来实现。而平台自身提供的方案将实现长连接的服务内置在系统内部，这样就即使APP进程被kill了，那么仍然可以接受消息。而第三方的方案，一旦APP进程被kill(准确来说是实现长连接的service所在的进程)，那么就无法接受推送的消息了。&lt;/p&gt;
 &lt;p&gt;大家在本质上都是采用长连接，但是基于长连接来实现推送，在上层实现方面存在很多的协议和具体方案：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;使用MQTT协议&lt;/p&gt;
 &lt;p&gt; MQTT(MQ Telemetry Transport)是IBM开发的基于轻量级的、基于”发布/订阅”模式的消息传输协议,用于有限制的设备(比如嵌入式设备)和低带宽、高延迟或不可靠的网络。&lt;/p&gt;
 &lt;p&gt; MQTT官网：&lt;a href=&quot;http://mqtt.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://mqtt.org/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt; 当前已有多个基于MQTT协议的推送开源项目：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tokudu达人的开源项目：&lt;a href=&quot;https://github.com/tokudu/AndroidPushNotificationsDemo&quot; title=&quot;MQTT客户端&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;MQTT客户端项目&lt;/a&gt;、&lt;a href=&quot;https://github.com/tokudu/PhpMQTTClient&quot; title=&quot;MQTT服务端PHP实现&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;MQTT服务端PHP实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;IBM官方的开源实现：&lt;a href=&quot;http://www.eclipse.org/paho/&quot; title=&quot;paho项目&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;paho项目&lt;/a&gt;、&lt;a href=&quot;http://mosquitto.org/&quot; title=&quot;MQTT broker&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;MQTT broker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;其他：&lt;a href=&quot;https://code.google.com/archive/p/mosquitto-mqtt-client-android/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;MQTT客户端实现&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;优点：协议简洁、小巧、可扩展性强、省流量、省电，应用到企业领域，已有多个开源项目提供参考。&lt;/p&gt;
+&lt;p&gt;缺点：不够成熟、实现较复杂，部署硬件成本较高。&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;- tokudu达人的开源项目：[MQTT客户端项目](https://github.com/tokudu/AndroidPushNotificationsDemo &amp;quot;MQTT客户端&amp;quot;)、[MQTT服务端PHP实现](https://github.com/tokudu/PhpMQTTClient &amp;quot;MQTT服务端PHP实现&amp;quot;)
-- IBM官方的开源实现：[paho项目](http://www.eclipse.org/paho/ &amp;quot;paho项目&amp;quot;)、[MQTT broker](http://mosquitto.org/ &amp;quot;MQTT broker&amp;quot;)
-- 其他：[MQTT客户端实现](https://code.google.com/archive/p/mosquitto-mqtt-client-android/)
-
-优点：协议简洁、小巧、可扩展性强、省流量、省电，应用到企业领域，已有多个开源项目提供参考。
-
-缺点：不够成熟、实现较复杂，部署硬件成本较高。
-&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;使用XMPP协议（Openfire + Spark + Smack）&lt;/p&gt;
 &lt;p&gt; XMPP（Extensible Messageing and Presence Protocol：可扩展消息与存在协议）是目前主流的四种IM（IM：instant messaging,即时消息）协议之一，其他三种分别为：即时信息和空间协议(IMPP)、空间和即时信息协议(PRIM)、针对即时通讯和空间平衡扩充的进程开始协议SIP(SIMPLE)。其是基于XML协议的通讯协议，前身是Jabber，已由IETF国际标准化组织完成了标准化工作。&lt;/p&gt;
 &lt;p&gt; Spark,smack和Openfire，这三个合起来就是一个完整的XMPP IM实现。包括服务器端——Openfire，客户端——Spark，XMPP 传输协议的实现——Smack（记住，XMPP是一个协议，协议是需要实现的，Smack起到的就是这样的一个作用）。三者都是基于Java 语言的实现。&lt;/p&gt;
@@ -4604,14 +4604,36 @@ collect2.exe: error: ld returned 1 exit status
 &lt;p&gt;Note that [RFC1122] places certain restrictions on the use of keepalives.In particular,the &lt;em&gt;keepalive time&lt;/em&gt; must be&lt;br&gt;configurable and must not default to less than 2 hours.In addition,keepalives must not be enabled unless an application requests one(although this behavior is violated if the net.inet.tcp.alwayskeepalive variable is set).Linux does not provide a native facility for adding keepalives to applications that do not request it,but a special library can be preloaded(i.e., loaded prior to ordinary shared libraries)to get this effect [LKA].&lt;/p&gt;
 &lt;p&gt;但是网络中的情况是复杂的, 这个连接可能会被切断。比如客户端到服务器的链路因为故障断了, 或者服务器宕机了, 或者是你家网线被人剪了, 这些都是一些莫名其妙的导致连接被切断的因素, &lt;strong&gt;还有几种比较特殊的&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;NAT条目老化或超时&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;因为IPv4地址不足， 或者我们想通过无线路由器上网， 我们的设备可能会处在一个NAT设备的后面,用户终端或PC实际分配到的IP是私有IP。而NAT设备的出口则是公有IP，当然也存在多级NAT级联的情况。生活中最常见的NAT设备是家用路由器。关于NAT技术和原理请参见经典文章[http://www.bford.info/pub/net/p2pnat/](http://www.bford.info/pub/net/p2pnat/ &amp;quot;NAT参考文献&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  NAT设备会在IP封包通过设备时修改源/目的IP地址。对于家用路由器来说， 使用的是网络地址端口转换(NAPT，Network Address/Port Translation)， 它不仅改IP，还修改TCP和UDP协议的端口号, 这样就能让内网中的设备共用同一个外网IP。 举个例子， NAPT维护一个类似下表的NAT表。&lt;/p&gt;
-&lt;p&gt;  |内网地址|    外网地址|&lt;br&gt;  |——-|   ——-|&lt;br&gt;  |192.168.0.2:5566|    120.132.92.21:9200|&lt;br&gt;  |192.168.0.3:7788|    120.132.92.21:9201|&lt;br&gt;  |192.168.0.3:8888|    120.132.92.21:9202|&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;NAT条目老化或超时&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因为IPv4地址不足， 或者我们想通过无线路由器上网， 我们的设备可能会处在一个NAT设备的后面,用户终端或PC实际分配到的IP是私有IP。而NAT设备的出口则是公有IP，当然也存在多级NAT级联的情况。生活中最常见的NAT设备是家用路由器。关于NAT技术和原理请参见经典文章&lt;a href=&quot;http://www.bford.info/pub/net/p2pnat/&quot; title=&quot;NAT参考文献&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.bford.info/pub/net/p2pnat/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;NAT设备会在IP封包通过设备时修改源/目的IP地址。对于家用路由器来说， 使用的是网络地址端口转换(NAPT，Network Address/Port Translation)， 它不仅改IP，还修改TCP和UDP协议的端口号, 这样就能让内网中的设备共用同一个外网IP。 举个例子， NAPT维护一个类似下表的NAT表。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;内网地址&lt;/th&gt;
+&lt;th&gt;外网地址&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;192.168.0.2:5566&lt;/td&gt;
+&lt;td&gt;120.132.92.21:9200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;192.168.0.3:7788&lt;/td&gt;
+&lt;td&gt;120.132.92.21:9201&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;192.168.0.3:8888&lt;/td&gt;
+&lt;td&gt;120.132.92.21:9202&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;  NAT设备会根据NAT表对出去和进来的数据做修改， 比如将192.168.0.3:8888发出去的封包改成120.132.92.21:9202， 外部就认为他们是在和120.132.92.21:9202通信。 同时NAT设备会将120.132.92.21:9202收到的封包的IP和端口改成192.168.0.3:8888， 再发给内网的主机， 这样内部和外部就能双向通信了， 但如果其中192.168.0.3:8888 == 120.132.92.21:9202这一映射因为某些原因被NAT设备淘汰了， 那么外部设备就无法直接与192.168.0.3:8888通信了。&lt;/p&gt;
 &lt;p&gt;  我们的设备经常是处在NAT设备的后面， 比如在公司的内部网络内， 查一下自己分配到的IP，其实是内网IP，表明我们在NAT设备后面。&lt;/p&gt;
 &lt;p&gt;  一般情况下，在网络设备比如路由器上面，NAT条目(表)存在老化时间(参见《TCP/IP详解 卷1 协议》第二版第7章)，超过老化时间(一般SOHO级路由器如TP-LINK路由器UDP对应的NAT条目老化时间在5min左右，而TCP也相差不大)，则会清空对应的NAT条目。此外，大部分移动无线网络运营商在链路上一段时间内没有数据通讯后，会淘汰NAT表中的对应项， 造成链路中断。&lt;/p&gt;
-&lt;/li&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;网络状态切换&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;  手机网络和WIFI网络切换， 网络断开和连上等情况， 也会使长连接断开。 这里原因可能比较多， 但结果无非就是IP变了， 或者被系统通知连接断了。&lt;/p&gt;
 &lt;/li&gt;
@@ -4851,7 +4873,7 @@ wl.release();
     
     <summary type="html">
     
-      &lt;h1 id=&quot;推送简介&quot;&gt;&lt;a href=&quot;#推送简介&quot; class=&quot;headerlink&quot; title=&quot;推送简介&quot;&gt;&lt;/a&gt;推送简介&lt;/h1&gt;&lt;p&gt;推送技术，又名反向AJAX，指的是一种基于Internet，将由中心或发布者发出消息传输给用户的技术。与之相对的是拉取（参见
+      梳理当前主流的推送技术，对里面涉及到的概念和技术进行全面的阐述
     
     </summary>
     
@@ -4859,6 +4881,16 @@ wl.release();
     
     
       <category term="Push" scheme="http://cstsinghua.github.io/tags/Push/"/>
+    
+      <category term="推送" scheme="http://cstsinghua.github.io/tags/%E6%8E%A8%E9%80%81/"/>
+    
+      <category term="长连接" scheme="http://cstsinghua.github.io/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/"/>
+    
+      <category term="进程保活" scheme="http://cstsinghua.github.io/tags/%E8%BF%9B%E7%A8%8B%E4%BF%9D%E6%B4%BB/"/>
+    
+      <category term="定时器" scheme="http://cstsinghua.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/"/>
+    
+      <category term="Timer" scheme="http://cstsinghua.github.io/tags/Timer/"/>
     
   </entry>
   

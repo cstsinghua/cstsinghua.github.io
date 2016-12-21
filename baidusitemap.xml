@@ -4,6 +4,36 @@
 
     
   <url>
+    <loc>http://cstsinghua.github.io/2016/06/08/%E6%8E%A8%E9%80%81%E6%96%B9%E6%A1%88/</loc>
+    <lastmod>2016-12-21T01:53:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>推送方案</title>
+        <pubTime>2016-06-08T09:09:16.000Z</pubTime>
+        
+        <tag>Push</tag>
+         
+        <tag>推送</tag>
+         
+        <tag>长连接</tag>
+         
+        <tag>进程保活</tag>
+         
+        <tag>定时器</tag>
+         
+        <tag>Timer</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
     <lastmod>2016-12-14T09:55:53.000Z</lastmod>
     <data>
@@ -241,26 +271,6 @@
     
     
   <url>
-    <loc>http://cstsinghua.github.io/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</loc>
-    <lastmod>2016-07-01T02:09:43.000Z</lastmod>
-    <data>
-        <display>
-        <title>Protocol Buffers使用说明</title>
-        <pubTime>2016-07-01T02:09:43.000Z</pubTime>
-        
-        <tag>Protocol Buffers</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java" url="http://cstsinghua.github.io/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/</loc>
     <lastmod>2016-07-01T02:09:43.000Z</lastmod>
     <data>
@@ -280,26 +290,26 @@
     </url>
 
     
-    
   <url>
-    <loc>http://cstsinghua.github.io/2016/06/08/%E6%8E%A8%E9%80%81%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2016-06-13T07:42:25.000Z</lastmod>
+    <loc>http://cstsinghua.github.io/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</loc>
+    <lastmod>2016-07-01T02:09:43.000Z</lastmod>
     <data>
         <display>
-        <title>推送方案</title>
-        <pubTime>2016-06-08T09:09:16.000Z</pubTime>
+        <title>Protocol Buffers使用说明</title>
+        <pubTime>2016-07-01T02:09:43.000Z</pubTime>
         
-        <tag>Push</tag>
+        <tag>Protocol Buffers</tag>
          
          
            
              
-              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+              <breadCrumb title="Java" url="http://cstsinghua.github.io/categories/Java/"/>
           
         </display>
     </data>
     </url>
 
+    
     
   <url>
     <loc>http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/</loc>
@@ -342,26 +352,6 @@
 
     
   <url>
-    <loc>http://cstsinghua.github.io/2016/06/13/Android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</loc>
-    <lastmod>2016-06-13T07:36:18.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android动态加载机制</title>
-        <pubTime>2016-06-13T07:36:18.000Z</pubTime>
-        
-        <tag>动态加载</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cstsinghua.github.io/2016/06/13/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%80%9D%E8%B7%AF/</loc>
     <lastmod>2016-06-13T07:36:18.000Z</lastmod>
     <data>
@@ -378,6 +368,26 @@
           
              
               <breadCrumb title="插件化和热修复" url="http://cstsinghua.github.io/categories/Android/%E6%8F%92%E4%BB%B6%E5%8C%96%E5%92%8C%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cstsinghua.github.io/2016/06/13/Android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</loc>
+    <lastmod>2016-06-13T07:36:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android动态加载机制</title>
+        <pubTime>2016-06-13T07:36:18.000Z</pubTime>
+        
+        <tag>动态加载</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
           
         </display>
     </data>
