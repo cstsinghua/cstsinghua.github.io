@@ -4237,7 +4237,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     
     <content type="html">&lt;h1 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h1&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging，而Smali Debugging基于开源的Android反编译工具apktool。&lt;strong&gt;请注意：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.&lt;/strong&gt; &lt;/p&gt;
-&lt;p&gt;因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，请参见章节2(#anchor)&lt;/p&gt;
+&lt;p&gt;因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，&lt;a href=&quot;#anchor&quot;&gt;请参见章节2&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Apktool makes possible to debug smali code step by step, watch variables, set breakpoints, etc.&lt;/p&gt;
 &lt;p&gt;本文出自apktool官方网站说明&lt;a href=&quot;http://ibotpeaches.github.io/Apktool/documentation/&quot; title=&quot;smali debugging&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ibotpeaches.github.io/Apktool/documentation/&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;General-information-概述&quot;&gt;&lt;a href=&quot;#General-information-概述&quot; class=&quot;headerlink&quot; title=&quot;General information(概述)&quot;&gt;&lt;/a&gt;General information(概述)&lt;/h2&gt;&lt;ul&gt;
@@ -4300,7 +4300,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 &lt;/ol&gt;
 &lt;h2 id=&quot;Limitations-Issues-限制和已知问题&quot;&gt;&lt;a href=&quot;#Limitations-Issues-限制和已知问题&quot; class=&quot;headerlink&quot; title=&quot;Limitations/Issues(限制和已知问题)&quot;&gt;&lt;/a&gt;Limitations/Issues(限制和已知问题)&lt;/h2&gt;&lt;p&gt;Because IDE doesn’t have full sources, it doesn’t know about class members and such.&lt;br&gt;Variables watching works because most of data could be read from memory (objects in Java know about their types), but if for example, you watch an object and it has some nulled member, then you won’t see, what type this member is.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&quot;anchor&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;apktool-2-1-0之后版本动态调试-适用于Android-studio&quot;&gt;&lt;a href=&quot;#apktool-2-1-0之后版本动态调试-适用于Android-studio&quot; class=&quot;headerlink&quot; title=&quot;apktool 2.1.0之后版本动态调试(适用于Android studio)&quot;&gt;&lt;/a&gt;apktool 2.1.0之后版本动态调试(适用于Android studio)&lt;/h1&gt;&lt;p&gt;官方地址参见&lt;a href=&quot;https://github.com/JesusFreke/smali/wiki/smalidea&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/JesusFreke/smali/wiki/smalidea&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;apktool-2-1-0之后版本动态调试-适用于Android-studio&quot;&gt;&lt;a href=&quot;#apktool-2-1-0之后版本动态调试-适用于Android-studio&quot; class=&quot;headerlink&quot; title=&quot;apktool 2.1.0之后版本动态调试(适用于Android studio)&quot;&gt;&lt;/a&gt;apktool 2.1.0之后版本动态调试(适用于Android studio)&lt;/h1&gt;&lt;p&gt;apktool 2.1.0版本之后，smali调试的逻辑独立出来，放置在smalidea项目，请参见官方地址&lt;a href=&quot;https://github.com/JesusFreke/smali/wiki/smalidea&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/JesusFreke/smali/wiki/smalidea&lt;/a&gt;。依照该地址说明的步骤即可实现smali代码动态调试。&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -4313,6 +4313,12 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     
     
       <category term="动态调试" scheme="http://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
+    
+      <category term="smali" scheme="http://cstsinghua.github.io/tags/smali/"/>
+    
+      <category term="backsmali" scheme="http://cstsinghua.github.io/tags/backsmali/"/>
+    
+      <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
     
   </entry>
   

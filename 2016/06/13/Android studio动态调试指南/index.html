@@ -26,7 +26,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="动态调试">
+    <meta name="keywords" content="动态调试,smali,backsmali,apktool">
     <meta name="description" content="Android studio动态调试Android studio动态调试实际上是基于Smali Debugging，而Smali Debugging基于开源的Android反编译工具apktool。请注意：
 SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative t">
 <meta property="og:type" content="article">
@@ -244,7 +244,7 @@ SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="Android-studio动态调试"><a href="#Android-studio动态调试" class="headerlink" title="Android studio动态调试"></a>Android studio动态调试</h1><p>Android studio动态调试实际上是基于Smali Debugging，而Smali Debugging基于开源的Android反编译工具apktool。<strong>请注意：</strong></p>
 <p><strong>SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.</strong> </p>
-<p>因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，请参见章节2(#anchor)</p>
+<p>因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，<a href="#anchor">请参见章节2</a></p>
 <p>Apktool makes possible to debug smali code step by step, watch variables, set breakpoints, etc.</p>
 <p>本文出自apktool官方网站说明<a href="http://ibotpeaches.github.io/Apktool/documentation/" title="smali debugging" target="_blank" rel="external">http://ibotpeaches.github.io/Apktool/documentation/</a></p>
 <h2 id="General-information-概述"><a href="#General-information-概述" class="headerlink" title="General information(概述)"></a>General information(概述)</h2><ul>
@@ -307,7 +307,7 @@ SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.
 </ol>
 <h2 id="Limitations-Issues-限制和已知问题"><a href="#Limitations-Issues-限制和已知问题" class="headerlink" title="Limitations/Issues(限制和已知问题)"></a>Limitations/Issues(限制和已知问题)</h2><p>Because IDE doesn’t have full sources, it doesn’t know about class members and such.<br>Variables watching works because most of data could be read from memory (objects in Java know about their types), but if for example, you watch an object and it has some nulled member, then you won’t see, what type this member is.</p>
 <p><a name="anchor"></a></p>
-<h1 id="apktool-2-1-0之后版本动态调试-适用于Android-studio"><a href="#apktool-2-1-0之后版本动态调试-适用于Android-studio" class="headerlink" title="apktool 2.1.0之后版本动态调试(适用于Android studio)"></a>apktool 2.1.0之后版本动态调试(适用于Android studio)</h1><p>官方地址参见<a href="https://github.com/JesusFreke/smali/wiki/smalidea" target="_blank" rel="external">https://github.com/JesusFreke/smali/wiki/smalidea</a></p>
+<h1 id="apktool-2-1-0之后版本动态调试-适用于Android-studio"><a href="#apktool-2-1-0之后版本动态调试-适用于Android-studio" class="headerlink" title="apktool 2.1.0之后版本动态调试(适用于Android studio)"></a>apktool 2.1.0之后版本动态调试(适用于Android studio)</h1><p>apktool 2.1.0版本之后，smali调试的逻辑独立出来，放置在smalidea项目，请参见官方地址<a href="https://github.com/JesusFreke/smali/wiki/smalidea" target="_blank" rel="external">https://github.com/JesusFreke/smali/wiki/smalidea</a>。依照该地址说明的步骤即可实现smali代码动态调试。</p>
 
         </div>
 
@@ -338,7 +338,7 @@ SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态调试/">动态调试</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apktool/">apktool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/backsmali/">backsmali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smali/">smali</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态调试/">动态调试</a></li></ul>
 
 
             
