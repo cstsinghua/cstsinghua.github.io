@@ -2069,7 +2069,7 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     <link href="http://cstsinghua.github.io/2016/06/13/Android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android动态加载机制/</id>
     <published>2016-06-13T07:36:18.000Z</published>
-    <updated>2016-06-13T07:36:18.000Z</updated>
+    <updated>2016-12-22T10:46:24.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;1-引言&quot;&gt;&lt;a href=&quot;#1-引言&quot; class=&quot;headerlink&quot; title=&quot;1.引言&quot;&gt;&lt;/a&gt;1.引言&lt;/h1&gt;&lt;p&gt;在Android开发中，存在一些场景：&lt;/p&gt;
 &lt;ol&gt;
@@ -2086,8 +2086,8 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
 &lt;p&gt;本文先介绍JVM的类加载原理，讲述Java最基本的类加载机制，为Android类加载做铺垫。然后，重点介绍Android的类加载机制，及常见的实现方式。最后，在前面的基础上，扩展开来，从Android的类加载引申到更广泛的层面上，即动态加载机制(插件机制)、安全方面。从这里可以看到，整个发展历程成阶梯上升，前面的是基础也是基石，而越到后面才是实际开发中更常见的场景，也是更加复杂和综合的应用。概括之，&lt;strong&gt;Android的动态加载机制发展历程：普通的类(Class文件)加载-&amp;gt;普通jar包(包含dex)加载-&amp;gt;包含资源的jar加载-&amp;gt;直接加载其他应用程序APK&lt;/strong&gt;。&lt;/p&gt;
 &lt;h1 id=&quot;2-JVM的类加载机制&quot;&gt;&lt;a href=&quot;#2-JVM的类加载机制&quot; class=&quot;headerlink&quot; title=&quot;2.JVM的类加载机制&quot;&gt;&lt;/a&gt;2.JVM的类加载机制&lt;/h1&gt;&lt;p&gt;Java的类(class)文件是通过类加载器来加载的，每一个类加载器，都拥有一个独立的类名称空间，因此，只有比较两类是否“相等”，只有在这两个类是由同一个类加载器加载的前提下才有意义，否则，即使这两个类来源于同一个class文件，被同一个虚拟机加载，只要加载他们的类加载器不同，那这两个类就必定不相等。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;注意：上面提及的“相等”概念，包括代表类的Class对象的equals()方法、isAssignableFrom()方法、isInstance()方法的返回结果，也包括使用instanceof关键字做对象关系判断等情况。&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;2-1-双亲委派模型&quot;&gt;&lt;a href=&quot;#2-1-双亲委派模型&quot; class=&quot;headerlink&quot; title=&quot;2.1 双亲委派模型&quot;&gt;&lt;/a&gt;2.1 双亲委派模型&lt;/h2&gt;&lt;p&gt;从Java虚拟机的角度来讲，只存在两种不同的类加载器：一种是启动类加载器(Bootstrap ClassLoader)，这个类加载器使用C++语言实现，是虚拟机自身的一部分；另外一种就是所有其他的类加载器，这些类加载器均有Java语言实现，独立于虚拟机外部，并且全部继承自抽象类java.lang.ClassLoader。&lt;/p&gt;
-&lt;p&gt;从Java程序员的角度来看，类加载器划分得更细致一些，绝大部分Java程序都会使用到一下3种系统提供的类加载器：&lt;/p&gt;
+&lt;h2 id=&quot;2-1-双亲委派模型&quot;&gt;&lt;a href=&quot;#2-1-双亲委派模型&quot; class=&quot;headerlink&quot; title=&quot;2.1 双亲委派模型&quot;&gt;&lt;/a&gt;2.1 双亲委派模型&lt;/h2&gt;&lt;p&gt;从Java虚拟机的角度来讲，只存在两种不同的类加载器：一种是启动类加载器(Bootstrap ClassLoader)，这个类加载器使用C++语言实现，是虚拟机自身的一部分；另外一种就是所有其他的类加载器，这些类加载器均由Java语言实现，独立于虚拟机外部，并且全部继承自抽象类java.lang.ClassLoader。&lt;/p&gt;
+&lt;p&gt;从Java程序员的角度来看，类加载器划分得更细致一些，绝大部分Java程序都会使用到以下3种系统提供的类加载器：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;启动类加载器(Bootstrap ClassLoader):这个类加载器负责将存放在&lt;java_home&gt;/lib目录中的，或者被-Xbootclasspath参数所指定的路径中的，并且是虚拟机识别的(仅按照文件名识别，如rt.jar，名字不符合的类库即使放在lib目录中也不会被加载)类库加载到虚拟机内存中。启动类加载器无法被Java程序直接引用，用户在编写自定义的类加载器时，如果需要把加载请求委派给启动类加载器，那直接使用null代替即可。&lt;/java_home&gt;&lt;/li&gt;
 &lt;li&gt;扩展类加载器(Extension ClassLoader)：该加载器由sun.misc.Launcher$ExtClassLoader实现，其负责加载&lt;java_home&gt;/lib/ext目录中的，或者被java.ext.dirs系统变量所指定的路径中的所有类库，开发者可以直接使用扩展类加载器。&lt;/java_home&gt;&lt;/li&gt;
@@ -4233,21 +4233,22 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <link href="http://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android studio动态调试指南/</id>
     <published>2016-06-13T07:25:56.000Z</published>
-    <updated>2016-06-13T07:25:56.000Z</updated>
+    <updated>2016-12-28T10:22:33.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h2&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging，而Smali Debugging基于开源的Android反编译工具apktool。&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h1&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging，而Smali Debugging基于开源的Android反编译工具apktool。&lt;strong&gt;请注意：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，请参见章节2(#anchor)&lt;/p&gt;
 &lt;p&gt;Apktool makes possible to debug smali code step by step, watch variables, set breakpoints, etc.&lt;/p&gt;
 &lt;p&gt;本文出自apktool官方网站说明&lt;a href=&quot;http://ibotpeaches.github.io/Apktool/documentation/&quot; title=&quot;smali debugging&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ibotpeaches.github.io/Apktool/documentation/&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;General-information-概述&quot;&gt;&lt;a href=&quot;#General-information-概述&quot; class=&quot;headerlink&quot; title=&quot;General information(概述)&quot;&gt;&lt;/a&gt;General information(概述)&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Generally we need several things to run Java debugging session: &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;1. debugger server (usually Java VM)
-2. debugger client (usually IDE like IntelliJ, Eclipse or Netbeans)
-3. client must have sources of debugged application
-4. server must have binaries compiled with debugging symbols referencing these sources
-5. sources must be java files with at least package and class definitions, to properly connect them with debugging symbols
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Generally we need several things to run Java debugging session: &lt;ol&gt;
+&lt;li&gt;debugger server (usually Java VM)&lt;/li&gt;
+&lt;li&gt;debugger client (usually IDE like IntelliJ, Eclipse or Netbeans)&lt;/li&gt;
+&lt;li&gt;client must have sources of debugged application&lt;/li&gt;
+&lt;li&gt;server must have binaries compiled with debugging symbols referencing these sources&lt;/li&gt;
+&lt;li&gt;sources must be java files with at least package and class definitions, to properly connect them with debugging symbols&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;li&gt;In our particular situation we have: &lt;ol&gt;
 &lt;li&gt;server: Monitor (Previously DDMS), part of Android SDK, standard for debugging Android applications - explained here&lt;/li&gt;
 &lt;li&gt;client: any JPDA client - most of decent IDEs have support for this protocol.&lt;/li&gt;
@@ -4256,61 +4257,55 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;*Info&lt;/em&gt;:* &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;To successfully run debug sessions, the apk must be both decoded and built in debug mode. Decoding with debug decodes the application differently to allow the debug rebuild option to inject lines allowing the debugger to identify variables and types.-d / --debug
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;General-instructions-一般性步骤&quot;&gt;&lt;a href=&quot;#General-instructions-一般性步骤&quot; class=&quot;headerlink&quot; title=&quot;General instructions(一般性步骤)&quot;&gt;&lt;/a&gt;General instructions(一般性步骤)&lt;/h2&gt;&lt;p&gt;Above information is enough to debug smali code using apktool, but if you aren’t familiar with DDMS and Java debugging, then you probably still don’t know how to do it. Below are simple instructions for doing it using IntelliJ or Netbeans. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Info:&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To successfully run debug sessions, the apk must be both decoded and built in debug mode. Decoding with debug decodes the application differently to allow the debug rebuild option to inject lines allowing the debugger to identify variables and types.-d / –debug&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;General-instructions-一般性步骤&quot;&gt;&lt;a href=&quot;#General-instructions-一般性步骤&quot; class=&quot;headerlink&quot; title=&quot;General instructions(一般性步骤)&quot;&gt;&lt;/a&gt;General instructions(一般性步骤)&lt;/h2&gt;&lt;p&gt;Above information is enough to debug smali code using apktool, but if you aren’t familiar with DDMS and Java debugging, then you probably still don’t know how to do it. Below are simple instructions for doing it using IntelliJ or Netbeans. &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Decode apk in debug mode: $ apktool d -d -o out app.apk&lt;/li&gt;
 &lt;li&gt;Build new apk in debug mode: $ apktool b -d out&lt;/li&gt;
 &lt;li&gt;Sign, install and run new apk.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Follow sub-instructions below depending on IDE.&lt;/strong&gt;&lt;h3 id=&quot;IntelliJ-Android-Studio-instructions-针对Android-studio的操作步骤&quot;&gt;&lt;a href=&quot;#IntelliJ-Android-Studio-instructions-针对Android-studio的操作步骤&quot; class=&quot;headerlink&quot; title=&quot;IntelliJ (Android Studio) instructions(针对Android studio的操作步骤)&quot;&gt;&lt;/a&gt;IntelliJ (Android Studio) instructions(针对Android studio的操作步骤)&lt;/h3&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Follow sub-instructions below depending on IDE.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;In IntelliJ add new Java Module Project selecting the “out” directory as project location and the “smali” subdirectory as content root dir.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;Run Monitor (Android SDK /tools folder), find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;In IntelliJ: Debug -&amp;gt; Edit Configurations. Since this is a new project, you will have to create a Debugger.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;Create a Remote Debugger, with the settings on “Attach” and setting the Port to 8700 (Or whatever Monitor said). The rest of fields should be ok, click “Ok”.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;Start the debugging session. You will see some info in a log and debugging buttons will show up in top panel.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;Set breakpoint. You must select line with some instruction, you can’t set breakpoint on lines starting with “.”, “:” or “#”.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.&lt;/li&gt;
+&lt;h3 id=&quot;IntelliJ-Android-Studio-instructions-针对Android-studio的操作步骤&quot;&gt;&lt;a href=&quot;#IntelliJ-Android-Studio-instructions-针对Android-studio的操作步骤&quot; class=&quot;headerlink&quot; title=&quot;IntelliJ (Android Studio) instructions(针对Android studio的操作步骤)&quot;&gt;&lt;/a&gt;IntelliJ (Android Studio) instructions(针对Android studio的操作步骤)&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;In IntelliJ add new Java Module Project selecting the “out” directory as project location and the “smali” subdirectory as content root dir.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Run Monitor (Android SDK /tools folder), find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;In IntelliJ: Debug -&amp;gt; Edit Configurations. Since this is a new project, you will have to create a Debugger.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Create a Remote Debugger, with the settings on “Attach” and setting the Port to 8700 (Or whatever Monitor said). The rest of fields should be ok, click “Ok”.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Start the debugging session. You will see some info in a log and debugging buttons will show up in top panel.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Set breakpoint. You must select line with some instruction, you can’t set breakpoint on lines starting with “.”, “:” or “#”.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&quot;Netbeans-instructions-针对Netbeans的操作步骤&quot;&gt;&lt;a href=&quot;#Netbeans-instructions-针对Netbeans的操作步骤&quot; class=&quot;headerlink&quot; title=&quot;Netbeans instructions(针对Netbeans的操作步骤)&quot;&gt;&lt;/a&gt;Netbeans instructions(针对Netbeans的操作步骤)&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;In Netbeans add new Java Project with Existing Sources, select “out” directory as project root and “smali” subdirectory as sources dir.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;Run DDMS, find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;In Netbeans: Debug -&amp;gt; Attach Debugger -&amp;gt; select JPDA and set Port to 8700 (or whatever you saw in previous step). Rest of fields should be ok, click “Ok”.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;Debugging session should start: you will see some info in a log and debugging buttons will show up in top panel.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;Set breakpoint. You must select line with some instruction, you can’t set breakpoint on lines starting with “.”, “:” or “#”.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;In Netbeans add new Java Project with Existing Sources, select “out” directory as project root and “smali” subdirectory as sources dir.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Run DDMS, find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;In Netbeans: Debug -&amp;gt; Attach Debugger -&amp;gt; select JPDA and set Port to 8700 (or whatever you saw in previous step). Rest of fields should be ok, click “Ok”.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Debugging session should start: you will see some info in a log and debugging buttons will show up in top panel.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Set breakpoint. You must select line with some instruction, you can’t set breakpoint on lines starting with “.”, “:” or “#”.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&quot;Limitations-Issues-限制和已知问题&quot;&gt;&lt;a href=&quot;#Limitations-Issues-限制和已知问题&quot; class=&quot;headerlink&quot; title=&quot;Limitations/Issues(限制和已知问题)&quot;&gt;&lt;/a&gt;Limitations/Issues(限制和已知问题)&lt;/h2&gt;&lt;p&gt;Because IDE doesn’t have full sources, it doesn’t know about class members and such.&lt;br&gt;Variables watching works because most of data could be read from memory (objects in Java know about their types), but if for example, you watch an object and it has some nulled member, then you won’t see, what type this member is.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&quot;anchor&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;apktool-2-1-0之后版本动态调试-适用于Android-studio&quot;&gt;&lt;a href=&quot;#apktool-2-1-0之后版本动态调试-适用于Android-studio&quot; class=&quot;headerlink&quot; title=&quot;apktool 2.1.0之后版本动态调试(适用于Android studio)&quot;&gt;&lt;/a&gt;apktool 2.1.0之后版本动态调试(适用于Android studio)&lt;/h1&gt;&lt;p&gt;官方地址参见&lt;a href=&quot;https://github.com/JesusFreke/smali/wiki/smalidea&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/JesusFreke/smali/wiki/smalidea&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h2&gt;&lt;p&gt;Androi
+      &lt;h1 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h1&gt;&lt;p&gt;Androi
     
     </summary>
     

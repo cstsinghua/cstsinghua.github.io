@@ -40,7 +40,7 @@
 <meta property="og:image" content="http://i.imgur.com/YR2iX5b.png">
 <meta property="og:image" content="http://i.imgur.com/wwFyQk9.png">
 <meta property="og:image" content="http://i.imgur.com/FWdhXzZ.png">
-<meta property="og:updated_time" content="2016-06-13T07:36:18.000Z">
+<meta property="og:updated_time" content="2016-12-22T10:46:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android动态加载机制">
 <meta name="twitter:description" content="1.引言在Android开发中，存在一些场景：
@@ -264,8 +264,8 @@
 <p>本文先介绍JVM的类加载原理，讲述Java最基本的类加载机制，为Android类加载做铺垫。然后，重点介绍Android的类加载机制，及常见的实现方式。最后，在前面的基础上，扩展开来，从Android的类加载引申到更广泛的层面上，即动态加载机制(插件机制)、安全方面。从这里可以看到，整个发展历程成阶梯上升，前面的是基础也是基石，而越到后面才是实际开发中更常见的场景，也是更加复杂和综合的应用。概括之，<strong>Android的动态加载机制发展历程：普通的类(Class文件)加载-&gt;普通jar包(包含dex)加载-&gt;包含资源的jar加载-&gt;直接加载其他应用程序APK</strong>。</p>
 <h1 id="2-JVM的类加载机制"><a href="#2-JVM的类加载机制" class="headerlink" title="2.JVM的类加载机制"></a>2.JVM的类加载机制</h1><p>Java的类(class)文件是通过类加载器来加载的，每一个类加载器，都拥有一个独立的类名称空间，因此，只有比较两类是否“相等”，只有在这两个类是由同一个类加载器加载的前提下才有意义，否则，即使这两个类来源于同一个class文件，被同一个虚拟机加载，只要加载他们的类加载器不同，那这两个类就必定不相等。</p>
 <p><strong>注意：上面提及的“相等”概念，包括代表类的Class对象的equals()方法、isAssignableFrom()方法、isInstance()方法的返回结果，也包括使用instanceof关键字做对象关系判断等情况。</strong></p>
-<h2 id="2-1-双亲委派模型"><a href="#2-1-双亲委派模型" class="headerlink" title="2.1 双亲委派模型"></a>2.1 双亲委派模型</h2><p>从Java虚拟机的角度来讲，只存在两种不同的类加载器：一种是启动类加载器(Bootstrap ClassLoader)，这个类加载器使用C++语言实现，是虚拟机自身的一部分；另外一种就是所有其他的类加载器，这些类加载器均有Java语言实现，独立于虚拟机外部，并且全部继承自抽象类java.lang.ClassLoader。</p>
-<p>从Java程序员的角度来看，类加载器划分得更细致一些，绝大部分Java程序都会使用到一下3种系统提供的类加载器：</p>
+<h2 id="2-1-双亲委派模型"><a href="#2-1-双亲委派模型" class="headerlink" title="2.1 双亲委派模型"></a>2.1 双亲委派模型</h2><p>从Java虚拟机的角度来讲，只存在两种不同的类加载器：一种是启动类加载器(Bootstrap ClassLoader)，这个类加载器使用C++语言实现，是虚拟机自身的一部分；另外一种就是所有其他的类加载器，这些类加载器均由Java语言实现，独立于虚拟机外部，并且全部继承自抽象类java.lang.ClassLoader。</p>
+<p>从Java程序员的角度来看，类加载器划分得更细致一些，绝大部分Java程序都会使用到以下3种系统提供的类加载器：</p>
 <ol>
 <li>启动类加载器(Bootstrap ClassLoader):这个类加载器负责将存放在<java_home>/lib目录中的，或者被-Xbootclasspath参数所指定的路径中的，并且是虚拟机识别的(仅按照文件名识别，如rt.jar，名字不符合的类库即使放在lib目录中也不会被加载)类库加载到虚拟机内存中。启动类加载器无法被Java程序直接引用，用户在编写自定义的类加载器时，如果需要把加载请求委派给启动类加载器，那直接使用null代替即可。</java_home></li>
 <li>扩展类加载器(Extension ClassLoader)：该加载器由sun.misc.Launcher$ExtClassLoader实现，其负责加载<java_home>/lib/ext目录中的，或者被java.ext.dirs系统变量所指定的路径中的所有类库，开发者可以直接使用扩展类加载器。</java_home></li>
@@ -842,7 +842,7 @@ for(int z=0; z&lt;as.length; z++) {
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-06-13T07:36:18.000Z" title="2016-6-13 15:36" itemprop="dateUpdated">2016年6月13日 15:36</time>
+    最后更新时间：<time datetime="2016-12-22T10:46:24.000Z" title="2016-12-22 18:46" itemprop="dateUpdated">2016年12月22日 18:46</time>
 </span><br>
 
 
