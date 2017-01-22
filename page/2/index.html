@@ -289,7 +289,7 @@ e.g. java -jar apktool_2.0.1....
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        apktool打包之后apk包体变大原因：应该是apktool 2.0.3版本之后引入了两个字段
+        apktool重(编译)打包之后apk包体变大原因原因：应该是apktool 2.0.3版本之后引入了两个字段
 
 compressionType: 
 
@@ -297,12 +297,8 @@ doNotCompress:
 
 
 这两个字段会决定重新编译apk时哪些类型的文件不会压缩，从而影响最终生成的apk的包体大小。
-
-解决办法一：
-
-请对比apktool 2.0.1和2.1.1版本反编译之后目录下的apktool.yml文件：
-2.0.1：
-...
+解决办法一：请对比apktool 2.0.1和2.1.1版本反编译之后目录下的apktool.yml文件：
+2.0...
     
 
         <a href="/2016/06/13/apktool打包之后包体变大/" class="post-more waves-effect waves-button">
@@ -312,7 +308,7 @@ doNotCompress:
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apktool打包/">Apktool打包</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apktool打包/">Apktool打包</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apk/">apk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apktool/">apktool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/size/">size</a></li></ul>
 
     </div>
     
