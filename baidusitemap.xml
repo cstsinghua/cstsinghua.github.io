@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    <lastmod>2017-01-22T09:57:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android studio常用快捷键</title>
+        <pubTime>2016-07-13T10:07:19.000Z</pubTime>
+        
+        <tag>快捷键</tag>
+         
+        <tag>Android studio</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="Tools" url="http://cstsinghua.github.io/categories/Android/Tools/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/</loc>
     <lastmod>2016-12-28T10:22:33.000Z</lastmod>
     <data>
@@ -93,31 +118,6 @@
            
              
               <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
-    <lastmod>2016-12-14T09:55:53.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android studio常用快捷键</title>
-        <pubTime>2016-07-13T10:07:19.000Z</pubTime>
-        
-        <tag>快捷键</tag>
-         
-        <tag>Android studio</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
-          
-             
-              <breadCrumb title="Tools" url="http://cstsinghua.github.io/categories/Android/Tools/"/>
           
         </display>
     </data>
@@ -337,26 +337,6 @@
     
     
   <url>
-    <loc>http://cstsinghua.github.io/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</loc>
-    <lastmod>2016-07-01T02:09:43.000Z</lastmod>
-    <data>
-        <display>
-        <title>Protocol Buffers使用说明</title>
-        <pubTime>2016-07-01T02:09:43.000Z</pubTime>
-        
-        <tag>Protocol Buffers</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java" url="http://cstsinghua.github.io/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/</loc>
     <lastmod>2016-07-01T02:09:43.000Z</lastmod>
     <data>
@@ -370,6 +350,26 @@
            
              
               <breadCrumb title="Python" url="http://cstsinghua.github.io/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cstsinghua.github.io/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</loc>
+    <lastmod>2016-07-01T02:09:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>Protocol Buffers使用说明</title>
+        <pubTime>2016-07-01T02:09:43.000Z</pubTime>
+        
+        <tag>Protocol Buffers</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://cstsinghua.github.io/categories/Java/"/>
           
         </display>
     </data>
