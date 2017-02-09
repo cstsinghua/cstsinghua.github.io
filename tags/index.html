@@ -26,7 +26,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="APK瘦身,快捷键,Android studio,动态加载,动态调试,smali,backsmali,apktool,路线图,入门,新手,热修复,插件化,Android,HotFix,Tinker,手Qzone,Andfix,阿里百川,Android热修复,Eclipse,常用,搭建个人Blog,Git,命令,坑,Protocol Buffers,Apktool打包,杂项,Zxing,NodeJS,npm,安装第三方包,Windows,超长目录,删除,Push,推送,长连接,进程保活,定时器,Timer,APK安装,apk,size">
+    <meta name="keywords" content="APK瘦身,Android,内存管理,内存回收,机制,OS,动态调试,smali,backsmali,apktool,快捷键,Android studio,动态加载,热修复,插件化,HotFix,Tinker,手Qzone,Andfix,阿里百川,Android热修复,路线图,入门,新手,Eclipse,常用,搭建个人Blog,Git,命令,坑,Protocol Buffers,Zxing,Apktool打包,apk,size,杂项,NodeJS,npm,安装第三方包,Windows,超长目录,删除,Push,推送,长连接,进程保活,定时器,Timer,APK安装">
     <meta name="description" content="写给典型的程序员">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Atypical programmer">
@@ -200,179 +200,195 @@
 
          
 
-            <a href="/tags/快捷键/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light">快捷键</a>
+            <a href="/tags/Android/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light">Android</a>
 
          
 
-            <a href="/tags/Android-studio/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">Android studio</a>
+            <a href="/tags/内存管理/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">内存管理</a>
 
          
 
-            <a href="/tags/动态加载/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">动态加载</a>
+            <a href="/tags/内存回收/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">内存回收</a>
 
          
 
-            <a href="/tags/动态调试/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">动态调试</a>
+            <a href="/tags/机制/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">机制</a>
 
          
 
-            <a href="/tags/smali/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">smali</a>
+            <a href="/tags/OS/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">OS</a>
 
          
 
-            <a href="/tags/backsmali/" style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">backsmali</a>
+            <a href="/tags/动态调试/" style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">动态调试</a>
 
          
 
-            <a href="/tags/apktool/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">apktool</a>
+            <a href="/tags/smali/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">smali</a>
 
          
 
-            <a href="/tags/路线图/" style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">路线图</a>
+            <a href="/tags/backsmali/" style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">backsmali</a>
 
          
 
-            <a href="/tags/入门/" style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">入门</a>
+            <a href="/tags/apktool/" style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">apktool</a>
 
          
 
-            <a href="/tags/新手/" style="-webkit-order:10;order:10" class="tags-list-item waves-effect waves-button waves-light">新手</a>
+            <a href="/tags/快捷键/" style="-webkit-order:10;order:10" class="tags-list-item waves-effect waves-button waves-light">快捷键</a>
 
          
 
-            <a href="/tags/热修复/" style="-webkit-order:11;order:11" class="tags-list-item waves-effect waves-button waves-light">热修复</a>
+            <a href="/tags/Android-studio/" style="-webkit-order:11;order:11" class="tags-list-item waves-effect waves-button waves-light">Android studio</a>
 
          
 
-            <a href="/tags/插件化/" style="-webkit-order:12;order:12" class="tags-list-item waves-effect waves-button waves-light">插件化</a>
+            <a href="/tags/动态加载/" style="-webkit-order:12;order:12" class="tags-list-item waves-effect waves-button waves-light">动态加载</a>
 
          
 
-            <a href="/tags/Android/" style="-webkit-order:13;order:13" class="tags-list-item waves-effect waves-button waves-light">Android</a>
+            <a href="/tags/热修复/" style="-webkit-order:13;order:13" class="tags-list-item waves-effect waves-button waves-light">热修复</a>
 
          
 
-            <a href="/tags/HotFix/" style="-webkit-order:14;order:14" class="tags-list-item waves-effect waves-button waves-light">HotFix</a>
+            <a href="/tags/插件化/" style="-webkit-order:14;order:14" class="tags-list-item waves-effect waves-button waves-light">插件化</a>
 
          
 
-            <a href="/tags/Tinker/" style="-webkit-order:15;order:15" class="tags-list-item waves-effect waves-button waves-light">Tinker</a>
+            <a href="/tags/HotFix/" style="-webkit-order:15;order:15" class="tags-list-item waves-effect waves-button waves-light">HotFix</a>
 
          
 
-            <a href="/tags/手Qzone/" style="-webkit-order:16;order:16" class="tags-list-item waves-effect waves-button waves-light">手Qzone</a>
+            <a href="/tags/Tinker/" style="-webkit-order:16;order:16" class="tags-list-item waves-effect waves-button waves-light">Tinker</a>
 
          
 
-            <a href="/tags/Andfix/" style="-webkit-order:17;order:17" class="tags-list-item waves-effect waves-button waves-light">Andfix</a>
+            <a href="/tags/手Qzone/" style="-webkit-order:17;order:17" class="tags-list-item waves-effect waves-button waves-light">手Qzone</a>
 
          
 
-            <a href="/tags/阿里百川/" style="-webkit-order:18;order:18" class="tags-list-item waves-effect waves-button waves-light">阿里百川</a>
+            <a href="/tags/Andfix/" style="-webkit-order:18;order:18" class="tags-list-item waves-effect waves-button waves-light">Andfix</a>
 
          
 
-            <a href="/tags/Android热修复/" style="-webkit-order:19;order:19" class="tags-list-item waves-effect waves-button waves-light">Android热修复</a>
+            <a href="/tags/阿里百川/" style="-webkit-order:19;order:19" class="tags-list-item waves-effect waves-button waves-light">阿里百川</a>
 
          
 
-            <a href="/tags/Eclipse/" style="-webkit-order:20;order:20" class="tags-list-item waves-effect waves-button waves-light">Eclipse</a>
+            <a href="/tags/Android热修复/" style="-webkit-order:20;order:20" class="tags-list-item waves-effect waves-button waves-light">Android热修复</a>
 
          
 
-            <a href="/tags/常用/" style="-webkit-order:21;order:21" class="tags-list-item waves-effect waves-button waves-light">常用</a>
+            <a href="/tags/路线图/" style="-webkit-order:21;order:21" class="tags-list-item waves-effect waves-button waves-light">路线图</a>
 
          
 
-            <a href="/tags/搭建个人Blog/" style="-webkit-order:22;order:22" class="tags-list-item waves-effect waves-button waves-light">搭建个人Blog</a>
+            <a href="/tags/入门/" style="-webkit-order:22;order:22" class="tags-list-item waves-effect waves-button waves-light">入门</a>
 
          
 
-            <a href="/tags/Git/" style="-webkit-order:23;order:23" class="tags-list-item waves-effect waves-button waves-light">Git</a>
+            <a href="/tags/新手/" style="-webkit-order:23;order:23" class="tags-list-item waves-effect waves-button waves-light">新手</a>
 
          
 
-            <a href="/tags/命令/" style="-webkit-order:24;order:24" class="tags-list-item waves-effect waves-button waves-light">命令</a>
+            <a href="/tags/Eclipse/" style="-webkit-order:24;order:24" class="tags-list-item waves-effect waves-button waves-light">Eclipse</a>
 
          
 
-            <a href="/tags/坑/" style="-webkit-order:25;order:25" class="tags-list-item waves-effect waves-button waves-light">坑</a>
+            <a href="/tags/常用/" style="-webkit-order:25;order:25" class="tags-list-item waves-effect waves-button waves-light">常用</a>
 
          
 
-            <a href="/tags/Protocol-Buffers/" style="-webkit-order:26;order:26" class="tags-list-item waves-effect waves-button waves-light">Protocol Buffers</a>
+            <a href="/tags/搭建个人Blog/" style="-webkit-order:26;order:26" class="tags-list-item waves-effect waves-button waves-light">搭建个人Blog</a>
 
          
 
-            <a href="/tags/Apktool打包/" style="-webkit-order:27;order:27" class="tags-list-item waves-effect waves-button waves-light">Apktool打包</a>
+            <a href="/tags/Git/" style="-webkit-order:27;order:27" class="tags-list-item waves-effect waves-button waves-light">Git</a>
 
          
 
-            <a href="/tags/杂项/" style="-webkit-order:28;order:28" class="tags-list-item waves-effect waves-button waves-light">杂项</a>
+            <a href="/tags/命令/" style="-webkit-order:28;order:28" class="tags-list-item waves-effect waves-button waves-light">命令</a>
 
          
 
-            <a href="/tags/Zxing/" style="-webkit-order:29;order:29" class="tags-list-item waves-effect waves-button waves-light">Zxing</a>
+            <a href="/tags/坑/" style="-webkit-order:29;order:29" class="tags-list-item waves-effect waves-button waves-light">坑</a>
 
          
 
-            <a href="/tags/NodeJS/" style="-webkit-order:30;order:30" class="tags-list-item waves-effect waves-button waves-light">NodeJS</a>
+            <a href="/tags/Protocol-Buffers/" style="-webkit-order:30;order:30" class="tags-list-item waves-effect waves-button waves-light">Protocol Buffers</a>
 
          
 
-            <a href="/tags/npm/" style="-webkit-order:31;order:31" class="tags-list-item waves-effect waves-button waves-light">npm</a>
+            <a href="/tags/Zxing/" style="-webkit-order:31;order:31" class="tags-list-item waves-effect waves-button waves-light">Zxing</a>
 
          
 
-            <a href="/tags/安装第三方包/" style="-webkit-order:32;order:32" class="tags-list-item waves-effect waves-button waves-light">安装第三方包</a>
+            <a href="/tags/Apktool打包/" style="-webkit-order:32;order:32" class="tags-list-item waves-effect waves-button waves-light">Apktool打包</a>
 
          
 
-            <a href="/tags/Windows/" style="-webkit-order:33;order:33" class="tags-list-item waves-effect waves-button waves-light">Windows</a>
+            <a href="/tags/apk/" style="-webkit-order:33;order:33" class="tags-list-item waves-effect waves-button waves-light">apk</a>
 
          
 
-            <a href="/tags/超长目录/" style="-webkit-order:34;order:34" class="tags-list-item waves-effect waves-button waves-light">超长目录</a>
+            <a href="/tags/size/" style="-webkit-order:34;order:34" class="tags-list-item waves-effect waves-button waves-light">size</a>
 
          
 
-            <a href="/tags/删除/" style="-webkit-order:35;order:35" class="tags-list-item waves-effect waves-button waves-light">删除</a>
+            <a href="/tags/杂项/" style="-webkit-order:35;order:35" class="tags-list-item waves-effect waves-button waves-light">杂项</a>
 
          
 
-            <a href="/tags/Push/" style="-webkit-order:36;order:36" class="tags-list-item waves-effect waves-button waves-light">Push</a>
+            <a href="/tags/NodeJS/" style="-webkit-order:36;order:36" class="tags-list-item waves-effect waves-button waves-light">NodeJS</a>
 
          
 
-            <a href="/tags/推送/" style="-webkit-order:37;order:37" class="tags-list-item waves-effect waves-button waves-light">推送</a>
+            <a href="/tags/npm/" style="-webkit-order:37;order:37" class="tags-list-item waves-effect waves-button waves-light">npm</a>
 
          
 
-            <a href="/tags/长连接/" style="-webkit-order:38;order:38" class="tags-list-item waves-effect waves-button waves-light">长连接</a>
+            <a href="/tags/安装第三方包/" style="-webkit-order:38;order:38" class="tags-list-item waves-effect waves-button waves-light">安装第三方包</a>
 
          
 
-            <a href="/tags/进程保活/" style="-webkit-order:39;order:39" class="tags-list-item waves-effect waves-button waves-light">进程保活</a>
+            <a href="/tags/Windows/" style="-webkit-order:39;order:39" class="tags-list-item waves-effect waves-button waves-light">Windows</a>
 
          
 
-            <a href="/tags/定时器/" style="-webkit-order:40;order:40" class="tags-list-item waves-effect waves-button waves-light">定时器</a>
+            <a href="/tags/超长目录/" style="-webkit-order:40;order:40" class="tags-list-item waves-effect waves-button waves-light">超长目录</a>
 
          
 
-            <a href="/tags/Timer/" style="-webkit-order:41;order:41" class="tags-list-item waves-effect waves-button waves-light">Timer</a>
+            <a href="/tags/删除/" style="-webkit-order:41;order:41" class="tags-list-item waves-effect waves-button waves-light">删除</a>
 
          
 
-            <a href="/tags/APK安装/" style="-webkit-order:42;order:42" class="tags-list-item waves-effect waves-button waves-light">APK安装</a>
+            <a href="/tags/Push/" style="-webkit-order:42;order:42" class="tags-list-item waves-effect waves-button waves-light">Push</a>
 
          
 
-            <a href="/tags/apk/" style="-webkit-order:43;order:43" class="tags-list-item waves-effect waves-button waves-light">apk</a>
+            <a href="/tags/推送/" style="-webkit-order:43;order:43" class="tags-list-item waves-effect waves-button waves-light">推送</a>
 
          
 
-            <a href="/tags/size/" style="-webkit-order:44;order:44" class="tags-list-item waves-effect waves-button waves-light">size</a>
+            <a href="/tags/长连接/" style="-webkit-order:44;order:44" class="tags-list-item waves-effect waves-button waves-light">长连接</a>
+
+         
+
+            <a href="/tags/进程保活/" style="-webkit-order:45;order:45" class="tags-list-item waves-effect waves-button waves-light">进程保活</a>
+
+         
+
+            <a href="/tags/定时器/" style="-webkit-order:46;order:46" class="tags-list-item waves-effect waves-button waves-light">定时器</a>
+
+         
+
+            <a href="/tags/Timer/" style="-webkit-order:47;order:47" class="tags-list-item waves-effect waves-button waves-light">Timer</a>
+
+         
+
+            <a href="/tags/APK安装/" style="-webkit-order:48;order:48" class="tags-list-item waves-effect waves-button waves-light">APK安装</a>
 
         
     </nav>
@@ -429,7 +445,7 @@
             </div>
         
 
-            <h3 class="archive-separator" id="tag-快捷键">快捷键</h3>
+            <h3 class="archive-separator" id="tag-Android">Android</h3>
 
             <div class="waterfall">
             
@@ -437,10 +453,10 @@
                 <div class="waterfall-item">
   <article class="article-card archive-article">
     <div class="post-meta">
-      <time class="post-time" title="2016-7-13 18:07" datetime="2016-07-13T10:07:19.000Z"  itemprop="datePublished">Jul 13, 2016</time>
+      <time class="post-time" title="2017-2-9 9:58" datetime="2017-02-09T01:58:42.000Z"  itemprop="datePublished">Feb 9, 2017</time>
 
       
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/Tools/">Tools</a></li></ul></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/内存管理/">内存管理</a></li></ul></li></ul>
 
 
 
@@ -450,7 +466,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/13/Android-studio常用快捷键/">Android studio常用快捷键</a>
+      <a class="post-title-link" href="/2017/02/09/Android 操作系统的内存回收机制/">Android 操作系统的内存回收机制</a>
     </h3>
   
 
@@ -459,7 +475,7 @@
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-studio/">Android studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存回收/">内存回收</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存管理/">内存管理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机制/">机制</a></li></ul>
 
     </div>
     
@@ -471,10 +487,10 @@
                 <div class="waterfall-item">
   <article class="article-card archive-article">
     <div class="post-meta">
-      <time class="post-time" title="2016-7-14 17:30" datetime="2016-07-14T09:30:18.000Z"  itemprop="datePublished">Jul 14, 2016</time>
+      <time class="post-time" title="2016-12-2 17:15" datetime="2016-12-02T09:15:32.000Z"  itemprop="datePublished">Dec 2, 2016</time>
 
       
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Tools使用/">Tools使用</a></li></ul></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/插件化和热修复/">插件化和热修复</a></li></ul></li></ul>
 
 
 
@@ -484,7 +500,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/14/Eclipse常用快捷键/">Eclipse常用快捷键</a>
+      <a class="post-title-link" href="/2016/12/02/Android热修复技术选型——三大流派解析/">Android热修复技术选型——三大流派解析</a>
     </h3>
   
 
@@ -493,48 +509,7 @@
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Eclipse/">Eclipse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
-
-    </div>
-    
-  </article>
-</div>
-
-            
-            </div>
-        
-
-            <h3 class="archive-separator" id="tag-Android studio">Android studio</h3>
-
-            <div class="waterfall">
-            
-
-                <div class="waterfall-item">
-  <article class="article-card archive-article">
-    <div class="post-meta">
-      <time class="post-time" title="2016-7-13 18:07" datetime="2016-07-13T10:07:19.000Z"  itemprop="datePublished">Jul 13, 2016</time>
-
-      
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/Tools/">Tools</a></li></ul></li></ul>
-
-
-
-    </div>
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/13/Android-studio常用快捷键/">Android studio常用快捷键</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-studio/">Android studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andfix/">Andfix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HotFix/">HotFix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tinker/">Tinker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/手Qzone/">手Qzone</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/插件化/">插件化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热修复/">热修复</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里百川/">阿里百川</a></li></ul>
 
     </div>
     
@@ -545,7 +520,7 @@
             </div>
         
 
-            <h3 class="archive-separator" id="tag-动态加载">动态加载</h3>
+            <h3 class="archive-separator" id="tag-内存管理">内存管理</h3>
 
             <div class="waterfall">
             
@@ -553,10 +528,10 @@
                 <div class="waterfall-item">
   <article class="article-card archive-article">
     <div class="post-meta">
-      <time class="post-time" title="2016-6-13 15:36" datetime="2016-06-13T07:36:18.000Z"  itemprop="datePublished">Jun 13, 2016</time>
+      <time class="post-time" title="2017-2-9 9:58" datetime="2017-02-09T01:58:42.000Z"  itemprop="datePublished">Feb 9, 2017</time>
 
       
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/内存管理/">内存管理</a></li></ul></li></ul>
 
 
 
@@ -566,7 +541,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/06/13/Android动态加载机制/">Android动态加载机制</a>
+      <a class="post-title-link" href="/2017/02/09/Android 操作系统的内存回收机制/">Android 操作系统的内存回收机制</a>
     </h3>
   
 
@@ -575,7 +550,130 @@
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态加载/">动态加载</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存回收/">内存回收</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存管理/">内存管理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机制/">机制</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+            </div>
+        
+
+            <h3 class="archive-separator" id="tag-内存回收">内存回收</h3>
+
+            <div class="waterfall">
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2017-2-9 9:58" datetime="2017-02-09T01:58:42.000Z"  itemprop="datePublished">Feb 9, 2017</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/内存管理/">内存管理</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/02/09/Android 操作系统的内存回收机制/">Android 操作系统的内存回收机制</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存回收/">内存回收</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存管理/">内存管理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机制/">机制</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+            </div>
+        
+
+            <h3 class="archive-separator" id="tag-机制">机制</h3>
+
+            <div class="waterfall">
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2017-2-9 9:58" datetime="2017-02-09T01:58:42.000Z"  itemprop="datePublished">Feb 9, 2017</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/内存管理/">内存管理</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/02/09/Android 操作系统的内存回收机制/">Android 操作系统的内存回收机制</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存回收/">内存回收</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存管理/">内存管理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机制/">机制</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+            </div>
+        
+
+            <h3 class="archive-separator" id="tag-OS">OS</h3>
+
+            <div class="waterfall">
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2017-2-9 9:58" datetime="2017-02-09T01:58:42.000Z"  itemprop="datePublished">Feb 9, 2017</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/内存管理/">内存管理</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/02/09/Android 操作系统的内存回收机制/">Android 操作系统的内存回收机制</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存回收/">内存回收</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存管理/">内存管理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机制/">机制</a></li></ul>
 
     </div>
     
@@ -818,7 +916,7 @@
             </div>
         
 
-            <h3 class="archive-separator" id="tag-路线图">路线图</h3>
+            <h3 class="archive-separator" id="tag-快捷键">快捷键</h3>
 
             <div class="waterfall">
             
@@ -826,10 +924,10 @@
                 <div class="waterfall-item">
   <article class="article-card archive-article">
     <div class="post-meta">
-      <time class="post-time" title="2016-9-12 14:25" datetime="2016-09-12T06:25:13.000Z"  itemprop="datePublished">Sep 12, 2016</time>
+      <time class="post-time" title="2016-7-13 18:07" datetime="2016-07-13T10:07:19.000Z"  itemprop="datePublished">Jul 13, 2016</time>
 
       
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/学习/">学习</a></li></ul></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/Tools/">Tools</a></li></ul></li></ul>
 
 
 
@@ -839,7 +937,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/09/12/Android知识体系及新手如何快速入门/">Android知识体系及新手如何快速入门</a>
+      <a class="post-title-link" href="/2016/07/13/Android-studio常用快捷键/">Android studio常用快捷键</a>
     </h3>
   
 
@@ -848,7 +946,41 @@
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/入门/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/新手/">新手</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路线图/">路线图</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-studio/">Android studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-7-14 17:30" datetime="2016-07-14T09:30:18.000Z"  itemprop="datePublished">Jul 14, 2016</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Tools使用/">Tools使用</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/14/Eclipse常用快捷键/">Eclipse常用快捷键</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Eclipse/">Eclipse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
 
     </div>
     
@@ -859,7 +991,7 @@
             </div>
         
 
-            <h3 class="archive-separator" id="tag-入门">入门</h3>
+            <h3 class="archive-separator" id="tag-Android studio">Android studio</h3>
 
             <div class="waterfall">
             
@@ -867,10 +999,10 @@
                 <div class="waterfall-item">
   <article class="article-card archive-article">
     <div class="post-meta">
-      <time class="post-time" title="2016-9-12 14:25" datetime="2016-09-12T06:25:13.000Z"  itemprop="datePublished">Sep 12, 2016</time>
+      <time class="post-time" title="2016-7-13 18:07" datetime="2016-07-13T10:07:19.000Z"  itemprop="datePublished">Jul 13, 2016</time>
 
       
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/学习/">学习</a></li></ul></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/Tools/">Tools</a></li></ul></li></ul>
 
 
 
@@ -880,7 +1012,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/09/12/Android知识体系及新手如何快速入门/">Android知识体系及新手如何快速入门</a>
+      <a class="post-title-link" href="/2016/07/13/Android-studio常用快捷键/">Android studio常用快捷键</a>
     </h3>
   
 
@@ -889,7 +1021,7 @@
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/入门/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/新手/">新手</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路线图/">路线图</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-studio/">Android studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
 
     </div>
     
@@ -900,7 +1032,7 @@
             </div>
         
 
-            <h3 class="archive-separator" id="tag-新手">新手</h3>
+            <h3 class="archive-separator" id="tag-动态加载">动态加载</h3>
 
             <div class="waterfall">
             
@@ -908,10 +1040,10 @@
                 <div class="waterfall-item">
   <article class="article-card archive-article">
     <div class="post-meta">
-      <time class="post-time" title="2016-9-12 14:25" datetime="2016-09-12T06:25:13.000Z"  itemprop="datePublished">Sep 12, 2016</time>
+      <time class="post-time" title="2016-6-13 15:36" datetime="2016-06-13T07:36:18.000Z"  itemprop="datePublished">Jun 13, 2016</time>
 
       
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/学习/">学习</a></li></ul></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
 
 
 
@@ -921,7 +1053,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/09/12/Android知识体系及新手如何快速入门/">Android知识体系及新手如何快速入门</a>
+      <a class="post-title-link" href="/2016/06/13/Android动态加载机制/">Android动态加载机制</a>
     </h3>
   
 
@@ -930,7 +1062,7 @@
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/入门/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/新手/">新手</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路线图/">路线图</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态加载/">动态加载</a></li></ul>
 
     </div>
     
@@ -983,47 +1115,6 @@
         
 
             <h3 class="archive-separator" id="tag-插件化">插件化</h3>
-
-            <div class="waterfall">
-            
-
-                <div class="waterfall-item">
-  <article class="article-card archive-article">
-    <div class="post-meta">
-      <time class="post-time" title="2016-12-2 17:15" datetime="2016-12-02T09:15:32.000Z"  itemprop="datePublished">Dec 2, 2016</time>
-
-      
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/插件化和热修复/">插件化和热修复</a></li></ul></li></ul>
-
-
-
-    </div>
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/12/02/Android热修复技术选型——三大流派解析/">Android热修复技术选型——三大流派解析</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andfix/">Andfix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HotFix/">HotFix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tinker/">Tinker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/手Qzone/">手Qzone</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/插件化/">插件化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热修复/">热修复</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里百川/">阿里百川</a></li></ul>
-
-    </div>
-    
-  </article>
-</div>
-
-            
-            </div>
-        
-
-            <h3 class="archive-separator" id="tag-Android">Android</h3>
 
             <div class="waterfall">
             
@@ -1300,6 +1391,129 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android热修复/">Android热修复</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+            </div>
+        
+
+            <h3 class="archive-separator" id="tag-路线图">路线图</h3>
+
+            <div class="waterfall">
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-9-12 14:25" datetime="2016-09-12T06:25:13.000Z"  itemprop="datePublished">Sep 12, 2016</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/学习/">学习</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/09/12/Android知识体系及新手如何快速入门/">Android知识体系及新手如何快速入门</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/入门/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/新手/">新手</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路线图/">路线图</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+            </div>
+        
+
+            <h3 class="archive-separator" id="tag-入门">入门</h3>
+
+            <div class="waterfall">
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-9-12 14:25" datetime="2016-09-12T06:25:13.000Z"  itemprop="datePublished">Sep 12, 2016</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/学习/">学习</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/09/12/Android知识体系及新手如何快速入门/">Android知识体系及新手如何快速入门</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/入门/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/新手/">新手</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路线图/">路线图</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+            </div>
+        
+
+            <h3 class="archive-separator" id="tag-新手">新手</h3>
+
+            <div class="waterfall">
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-9-12 14:25" datetime="2016-09-12T06:25:13.000Z"  itemprop="datePublished">Sep 12, 2016</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/学习/">学习</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/09/12/Android知识体系及新手如何快速入门/">Android知识体系及新手如何快速入门</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/入门/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/新手/">新手</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路线图/">路线图</a></li></ul>
 
     </div>
     
@@ -1631,7 +1845,130 @@
             </div>
         
 
+            <h3 class="archive-separator" id="tag-Zxing">Zxing</h3>
+
+            <div class="waterfall">
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-6-13 15:42" datetime="2016-06-13T07:42:25.000Z"  itemprop="datePublished">Jun 13, 2016</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/06/13/ZXing开源项目实战/">Zxing二维码开源库实战</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Zxing/">Zxing</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+            </div>
+        
+
             <h3 class="archive-separator" id="tag-Apktool打包">Apktool打包</h3>
+
+            <div class="waterfall">
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-6-13 15:40" datetime="2016-06-13T07:40:18.000Z"  itemprop="datePublished">Jun 13, 2016</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/06/13/apktool打包之后包体变大/">apktool打包之后apk包体变大</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apktool打包/">Apktool打包</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apk/">apk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apktool/">apktool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/size/">size</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+            </div>
+        
+
+            <h3 class="archive-separator" id="tag-apk">apk</h3>
+
+            <div class="waterfall">
+            
+
+                <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-6-13 15:40" datetime="2016-06-13T07:40:18.000Z"  itemprop="datePublished">Jun 13, 2016</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/06/13/apktool打包之后包体变大/">apktool打包之后apk包体变大</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apktool打包/">Apktool打包</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apk/">apk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apktool/">apktool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/size/">size</a></li></ul>
+
+    </div>
+    
+  </article>
+</div>
+
+            
+            </div>
+        
+
+            <h3 class="archive-separator" id="tag-size">size</h3>
 
             <div class="waterfall">
             
@@ -1703,47 +2040,6 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/杂项/">杂项</a></li></ul>
-
-    </div>
-    
-  </article>
-</div>
-
-            
-            </div>
-        
-
-            <h3 class="archive-separator" id="tag-Zxing">Zxing</h3>
-
-            <div class="waterfall">
-            
-
-                <div class="waterfall-item">
-  <article class="article-card archive-article">
-    <div class="post-meta">
-      <time class="post-time" title="2016-6-13 15:42" datetime="2016-06-13T07:42:25.000Z"  itemprop="datePublished">Jun 13, 2016</time>
-
-      
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
-
-
-
-    </div>
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/06/13/ZXing开源项目实战/">Zxing二维码开源库实战</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Zxing/">Zxing</a></li></ul>
 
     </div>
     
@@ -2277,88 +2573,6 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APK安装/">APK安装</a></li></ul>
-
-    </div>
-    
-  </article>
-</div>
-
-            
-            </div>
-        
-
-            <h3 class="archive-separator" id="tag-apk">apk</h3>
-
-            <div class="waterfall">
-            
-
-                <div class="waterfall-item">
-  <article class="article-card archive-article">
-    <div class="post-meta">
-      <time class="post-time" title="2016-6-13 15:40" datetime="2016-06-13T07:40:18.000Z"  itemprop="datePublished">Jun 13, 2016</time>
-
-      
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
-
-
-
-    </div>
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/06/13/apktool打包之后包体变大/">apktool打包之后apk包体变大</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apktool打包/">Apktool打包</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apk/">apk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apktool/">apktool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/size/">size</a></li></ul>
-
-    </div>
-    
-  </article>
-</div>
-
-            
-            </div>
-        
-
-            <h3 class="archive-separator" id="tag-size">size</h3>
-
-            <div class="waterfall">
-            
-
-                <div class="waterfall-item">
-  <article class="article-card archive-article">
-    <div class="post-meta">
-      <time class="post-time" title="2016-6-13 15:40" datetime="2016-06-13T07:40:18.000Z"  itemprop="datePublished">Jun 13, 2016</time>
-
-      
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
-
-
-
-    </div>
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/06/13/apktool打包之后包体变大/">apktool打包之后apk包体变大</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apktool打包/">Apktool打包</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apk/">apk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apktool/">apktool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/size/">size</a></li></ul>
 
     </div>
     
