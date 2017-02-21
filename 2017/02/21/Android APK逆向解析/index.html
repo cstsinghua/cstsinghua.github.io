@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/">
+    
+    
+    <title>Android APK逆向解析 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,apktool,逆向,AndroidManifest.xml,ClassyShark,jadx,AXMLPrinter">
+    <meta name="description" content="Android应用APK逆向解析工具和方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android APK逆向解析">
+<meta property="og:url" content="http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="Android应用APK逆向解析工具和方法">
+<meta property="og:image" content="http://i.imgur.com/xLb60OI.png">
+<meta property="og:image" content="http://i.imgur.com/hyigywA.png">
+<meta property="og:updated_time" content="2017-02-21T10:40:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android APK逆向解析">
+<meta name="twitter:description" content="Android应用APK逆向解析工具和方法">
+<meta name="twitter:image" content="http://i.imgur.com/xLb60OI.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android APK逆向解析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android APK逆向解析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-21T06:34:42.000Z" itemprop="datePublished" class="page-time">
+  2017-02-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/逆向工程/">逆向工程</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-APK逆向解析"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android APK逆向解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#全能型选手-apktool"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">全能型选手-apktool</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jadx"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">jadx</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ClassyShark"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">ClassyShark</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AXMLParser"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">AXMLParser</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新版Android-studio"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">新版Android studio</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android APK逆向解析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android APK逆向解析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-2-21 14:34" datetime="2017-02-21T06:34:42.000Z"  itemprop="datePublished">2017-02-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/逆向工程/">逆向工程</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+<span>
+    <a href="/2017/02/21/Android APK逆向解析/#comments" class="ds-thread-count" data-thread-key="Android APK逆向解析" data-count-type="comments"></a>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Android APK逆向解析</p>
+<p>众所周知，Android系统是开源的，运行其上的Android应用APK即Android Package也是可以通过各种工具进行反编译或者逆向工程，从而可以对其他APP进行研究或者借鉴学习，抑或从APK中获取相关信息(比如清单文件AndroidManifest.xml里面的package、versionName和versionCode等等)。本文对。<br><a id="more"></a></p>
+<h1 id="Android-APK逆向解析"><a href="#Android-APK逆向解析" class="headerlink" title="Android APK逆向解析"></a>Android APK逆向解析</h1><p>首先，要对APK文件进行分析，需要了解APK文件的结构。其实APK文件就是一个zip文件，所以采用解压缩软件可以查看里面的子项。典型的APK文件的解压缩视图如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/xLb60OI.png" alt="Android" title="">
+                </div>
+                <div class="image-caption">Android</div>
+            </figure>
+<ul>
+<li><p>classes.dex：classes.dex是java源码编译后生成的java字节码文件(非传统JVM解释执行的class字节码)。但由于Android使用的dalvik虚拟机与标准的java虚拟机是不兼容的，dex文件与class文件相比，不论是文件结构还是opcode都不一样。Android模拟器中提供了一个dex文件的反编译工具，dexdump。用法为首先启动Android模拟器，把要查看的dex文件用adb push上传的模拟器中，然后通过adb shell登录，找到要查看的dex文件，执行dexdump xxx.dex（或者从压缩文件取出dex文件，直接在PC上面找到dexdump.exe的路径，然后执行命令）。另外Dedexer是一个反编译dex文件的开源工具，需要自己编译源代码。而当前，还有比如dex2jar(<a href="https://github.com/pxb1988/dex2jar" target="_blank" rel="external">https://github.com/pxb1988/dex2jar</a>)甚至封装好的GUI的工具(比如安卓逆向助手等等，可网上搜索下载)可以反编译dex文件为jar文件，再利用jd-gui(<a href="http://jd.benow.ca/" target="_blank" rel="external">http://jd.benow.ca/</a>)工具打开jar文件，就可以阅读java源代码了。</p>
+</li>
+<li><p>resources.arsc：编译Android资源文件后的生成的二进制文件，resources.arsc有固定的格式，包括了资源索引和字符串资源池等，详细可参见<a href="https://hellokugo.github.io/2016/09/03/Resource.arsc%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" target="_blank" rel="external">resources.arsc解析</a></p>
+</li>
+<li><p>AndroidManifest.xml：清单文件，该文件是每个应用都必须定义和包含的，它描述了应用的名字、版本、权限、引用的库文件等等信息，如要把apk上传到Google Market上，也要对这个xml做一些配置。在apk中的AndroidManifest.xml是经过编译的，即是二进制格式，如果直接用编辑器打开，显示会是乱码。因此需要先进行反编译处理，得到原始的AndroidManifest.xml文件。可以通过AXMLPrinter2工具解开，具体命令为：java -jar AXMLPrinter2.jar AndroidManifest.xml</p>
+</li>
+<li><p>assets：assets目录可以存放一些配置文件（比如webview本地资源、图片资源、音视频等等），不会经过编译，和原始工程里面的文件是一致的，这些文件的内容在程序运行过程中可以通过相关的API（android.content.res.AssetManager）获得。</p>
+</li>
+<li><p>lib：lib目录下的子目录存放的是一些与手机CPU架构对应的C/C++代码编译生成的so文件，一般用于JNI开发。</p>
+</li>
+<li><p>META-INF：META-INF目录下存放的是签名信息，用来保证apk包的完整性和系统的安全。在eclipse编译生成一个apk包时，会对所有要打包的文件做一个校验计算，并把计算结果放在META-INF目录下。这就保证了apk包里的文件不能被随意替换。比如拿到一个apk包后，如果想要替换里面的一幅图片，一段代码， 或一段版权信息，想直接解压缩、替换再重新打包，基本是不可能的。如此一来就给病毒感染和恶意修改增加了难度，有助于保护系统的安全。</p>
+</li>
+<li><p>res：res目录存放经过编译后的资源文件，虽与原始工程目录下的res目录层次结构类似，但是实际上是经过编译处理的，只有图片资源和原始工程是一致，其他类型的资源则是编译处理过，无法直接查看。</p>
+</li>
+</ul>
+<p>从上面对APK内部文件的分析来看，要想反编译或者逆向工程获取信息，其实主要涉及两个方面，一是对classes.dex反编译，转换成jar或者smali等，可以利用dex2jar(<a href="https://github.com/pxb1988/dex2jar" target="_blank" rel="external">https://github.com/pxb1988/dex2jar</a>)等工具生成jar，二是结合resources.arsc和res对资源进行反编译，从而得到原始的资源文件。本文罗列平时工作和搜集到的一些常见的Android APK反编译和逆向分析工具，对工具的使用不做过多阐述，关于各个工具的详细使用和技巧，可以参见下文中提及的工具的官方链接。</p>
+<h2 id="全能型选手-apktool"><a href="#全能型选手-apktool" class="headerlink" title="全能型选手-apktool"></a>全能型选手-apktool</h2><p>apktool可以对Android APK直接进行反编译(也可以在反编译得到的目录基础上进行回编，生成apk)。其是Android领域反编译最常用的开源工具，虽然有商业级的反编译工具Jeb(<a href="https://www.pnfsoftware.com/" title="Android反编译商业化工具Jeb官网" target="_blank" rel="external">https://www.pnfsoftware.com/</a>)，但鉴于收费且不开源，更多的程序开发者则选择apktool，其官方链接:<a href="https://ibotpeaches.github.io/Apktool/" title="apktool官网" target="_blank" rel="external">https://ibotpeaches.github.io/Apktool/</a>。<br><strong>Note：apktool反编译之后，得到是目录和文件，因此适用于需要对原始文件和代码进行分析的场景。dex通过apktool依赖的backsmali工具反编译之后得到的是smali文件，关于smali/backsmali可以参见<a href="https://github.com/JesusFreke/smali" target="_blank" rel="external">https://github.com/JesusFreke/smali</a></strong></p>
+<h2 id="jadx"><a href="#jadx" class="headerlink" title="jadx"></a>jadx</h2><p>可以将dex文件和apk文件反编译成可阅读的格式，主要涉及java代码和AndroidManifest.xml查看。jadx的github链接地址为<a href="https://github.com/skylot/jadx" target="_blank" rel="external">https://github.com/skylot/jadx</a>。适用场景：可以用于快速查看APK内的java代码和清单文件内容。</p>
+<h2 id="ClassyShark"><a href="#ClassyShark" class="headerlink" title="ClassyShark"></a>ClassyShark</h2><p>google官方为Android开发者推出的独立的二进制文件检查工具，因此其权威性和强大毋庸赘言，则得到较好的维护和更新。其github地址为：[<a href="https://github.com/google/android-classyshar多种文件格式的解析，包括：库文件" target="_blank" rel="external">https://github.com/google/android-classyshar多种文件格式的解析，包括：库文件</a> (.dex, .aar, .so), 可执行文件 (.apk, .jar, .class) 和所有的Android二进制XML格式文件如AndroidManifest, resources, layouts等等。另外，很重要的一点，其能分析得出dex文件里面包含的方法数，这对于Android一个著名的问题(方法数超限65535，见<a href="https://developer.android.com/studio/build/multidex.html" target="_blank" rel="external">https://developer.android.com/studio/build/multidex.html</a>)的解决很有帮助。</p>
+<h2 id="AXMLParser"><a href="#AXMLParser" class="headerlink" title="AXMLParser"></a>AXMLParser</h2><p>AXMLParser仅仅是用于解析APK里面的二进制AndroidManifest.xml，从而得到原始工程里的AndroidManifest.xml内容一致的可读xml。较轻量级，适用于只想查看和AndroidManifest.xml里面包含的信息，比如包名package，versionCode和versionName，启动Activity等。其原始链接和下载地址为：<a href="https://code.google.com/archive/p/xml-apk-parser/" target="_blank" rel="external">https://code.google.com/archive/p/xml-apk-parser/</a></p>
+<p><strong>Note:该工具很久没有更新了</strong></p>
+<h2 id="新版Android-studio"><a href="#新版Android-studio" class="headerlink" title="新版Android studio"></a>新版Android studio</h2><p>Android studio 2.x版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/hyigywA.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-02-21T10:40:39.000Z" title="2017-2-21 18:40" itemprop="dateUpdated">2017年2月21日 18:40</time>
+</span><br>
+
+
+        转载请注明出处：<a href="/2017/02/21/Android APK逆向解析/" target="_blank" rel="external">http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/</a>
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AXMLPrinter/">AXMLPrinter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidManifest-xml/">AndroidManifest.xml</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ClassyShark/">ClassyShark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apktool/">apktool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jadx/">jadx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向/">逆向</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/&title=《Android APK逆向解析》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/&title=《Android APK逆向解析》 — Atypical programmer&source=Android APK逆向解析
+众所周知，Android系统是开源的，运行其上的Android应用APK即Android Package也是可以通过各种工..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android APK逆向解析》 — Atypical programmer&url=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/09/Android 操作系统的内存回收机制/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android 操作系统的内存回收机制</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="Android APK逆向解析" data-title="Android APK逆向解析" data-url="http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Atypical programmer &copy; 2016 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/&title=《Android APK逆向解析》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/&title=《Android APK逆向解析》 — Atypical programmer&source=Android APK逆向解析
+众所周知，Android系统是开源的，运行其上的Android应用APK即Android Package也是可以通过各种工..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android APK逆向解析》 — Atypical programmer&url=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.0');
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.0"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.0" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

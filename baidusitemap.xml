@@ -4,6 +4,41 @@
 
     
   <url>
+    <loc>http://cstsinghua.github.io/2017/02/21/Android%20APK%E9%80%86%E5%90%91%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2017-02-21T10:40:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android APK逆向解析</title>
+        <pubTime>2017-02-21T06:34:42.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>apktool</tag>
+         
+        <tag>逆向</tag>
+         
+        <tag>AndroidManifest.xml</tag>
+         
+        <tag>ClassyShark</tag>
+         
+        <tag>jadx</tag>
+         
+        <tag>AXMLPrinter</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="逆向工程" url="http://cstsinghua.github.io/categories/Android/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
     <lastmod>2017-02-20T07:26:09.000Z</lastmod>
     <data>

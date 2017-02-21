@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2017-02-09T04:27:59.000Z</updated>
+  <updated>2017-02-21T10:40:39.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android APK逆向解析</title>
+    <link href="http://cstsinghua.github.io/2017/02/21/Android%20APK%E9%80%86%E5%90%91%E8%A7%A3%E6%9E%90/"/>
+    <id>http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/</id>
+    <published>2017-02-21T06:34:42.000Z</published>
+    <updated>2017-02-21T10:40:39.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Android APK逆向解析&lt;/p&gt;
+&lt;p&gt;众所周知，Android系统是开源的，运行其上的Android应用APK即Android Package也是可以通过各种工具进行反编译或者逆向工程，从而可以对其他APP进行研究或者借鉴学习，抑或从APK中获取相关信息(比如清单文件AndroidManifest.xml里面的package、versionName和versionCode等等)。本文对。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Android-APK逆向解析&quot;&gt;&lt;a href=&quot;#Android-APK逆向解析&quot; class=&quot;headerlink&quot; title=&quot;Android APK逆向解析&quot;&gt;&lt;/a&gt;Android APK逆向解析&lt;/h1&gt;&lt;p&gt;首先，要对APK文件进行分析，需要了解APK文件的结构。其实APK文件就是一个zip文件，所以采用解压缩软件可以查看里面的子项。典型的APK文件的解压缩视图如下：&lt;/p&gt;
+&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;http://i.imgur.com/xLb60OI.png&quot; alt=&quot;Android&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;Android&lt;/div&gt;
+            &lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;classes.dex：classes.dex是java源码编译后生成的java字节码文件(非传统JVM解释执行的class字节码)。但由于Android使用的dalvik虚拟机与标准的java虚拟机是不兼容的，dex文件与class文件相比，不论是文件结构还是opcode都不一样。Android模拟器中提供了一个dex文件的反编译工具，dexdump。用法为首先启动Android模拟器，把要查看的dex文件用adb push上传的模拟器中，然后通过adb shell登录，找到要查看的dex文件，执行dexdump xxx.dex（或者从压缩文件取出dex文件，直接在PC上面找到dexdump.exe的路径，然后执行命令）。另外Dedexer是一个反编译dex文件的开源工具，需要自己编译源代码。而当前，还有比如dex2jar(&lt;a href=&quot;https://github.com/pxb1988/dex2jar&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/pxb1988/dex2jar&lt;/a&gt;)甚至封装好的GUI的工具(比如安卓逆向助手等等，可网上搜索下载)可以反编译dex文件为jar文件，再利用jd-gui(&lt;a href=&quot;http://jd.benow.ca/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jd.benow.ca/&lt;/a&gt;)工具打开jar文件，就可以阅读java源代码了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;resources.arsc：编译Android资源文件后的生成的二进制文件，resources.arsc有固定的格式，包括了资源索引和字符串资源池等，详细可参见&lt;a href=&quot;https://hellokugo.github.io/2016/09/03/Resource.arsc%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;resources.arsc解析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;AndroidManifest.xml：清单文件，该文件是每个应用都必须定义和包含的，它描述了应用的名字、版本、权限、引用的库文件等等信息，如要把apk上传到Google Market上，也要对这个xml做一些配置。在apk中的AndroidManifest.xml是经过编译的，即是二进制格式，如果直接用编辑器打开，显示会是乱码。因此需要先进行反编译处理，得到原始的AndroidManifest.xml文件。可以通过AXMLPrinter2工具解开，具体命令为：java -jar AXMLPrinter2.jar AndroidManifest.xml&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;assets：assets目录可以存放一些配置文件（比如webview本地资源、图片资源、音视频等等），不会经过编译，和原始工程里面的文件是一致的，这些文件的内容在程序运行过程中可以通过相关的API（android.content.res.AssetManager）获得。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;lib：lib目录下的子目录存放的是一些与手机CPU架构对应的C/C++代码编译生成的so文件，一般用于JNI开发。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;META-INF：META-INF目录下存放的是签名信息，用来保证apk包的完整性和系统的安全。在eclipse编译生成一个apk包时，会对所有要打包的文件做一个校验计算，并把计算结果放在META-INF目录下。这就保证了apk包里的文件不能被随意替换。比如拿到一个apk包后，如果想要替换里面的一幅图片，一段代码， 或一段版权信息，想直接解压缩、替换再重新打包，基本是不可能的。如此一来就给病毒感染和恶意修改增加了难度，有助于保护系统的安全。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;res：res目录存放经过编译后的资源文件，虽与原始工程目录下的res目录层次结构类似，但是实际上是经过编译处理的，只有图片资源和原始工程是一致，其他类型的资源则是编译处理过，无法直接查看。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;从上面对APK内部文件的分析来看，要想反编译或者逆向工程获取信息，其实主要涉及两个方面，一是对classes.dex反编译，转换成jar或者smali等，可以利用dex2jar(&lt;a href=&quot;https://github.com/pxb1988/dex2jar&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/pxb1988/dex2jar&lt;/a&gt;)等工具生成jar，二是结合resources.arsc和res对资源进行反编译，从而得到原始的资源文件。本文罗列平时工作和搜集到的一些常见的Android APK反编译和逆向分析工具，对工具的使用不做过多阐述，关于各个工具的详细使用和技巧，可以参见下文中提及的工具的官方链接。&lt;/p&gt;
+&lt;h2 id=&quot;全能型选手-apktool&quot;&gt;&lt;a href=&quot;#全能型选手-apktool&quot; class=&quot;headerlink&quot; title=&quot;全能型选手-apktool&quot;&gt;&lt;/a&gt;全能型选手-apktool&lt;/h2&gt;&lt;p&gt;apktool可以对Android APK直接进行反编译(也可以在反编译得到的目录基础上进行回编，生成apk)。其是Android领域反编译最常用的开源工具，虽然有商业级的反编译工具Jeb(&lt;a href=&quot;https://www.pnfsoftware.com/&quot; title=&quot;Android反编译商业化工具Jeb官网&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.pnfsoftware.com/&lt;/a&gt;)，但鉴于收费且不开源，更多的程序开发者则选择apktool，其官方链接:&lt;a href=&quot;https://ibotpeaches.github.io/Apktool/&quot; title=&quot;apktool官网&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://ibotpeaches.github.io/Apktool/&lt;/a&gt;。&lt;br&gt;&lt;strong&gt;Note：apktool反编译之后，得到是目录和文件，因此适用于需要对原始文件和代码进行分析的场景。dex通过apktool依赖的backsmali工具反编译之后得到的是smali文件，关于smali/backsmali可以参见&lt;a href=&quot;https://github.com/JesusFreke/smali&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/JesusFreke/smali&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;jadx&quot;&gt;&lt;a href=&quot;#jadx&quot; class=&quot;headerlink&quot; title=&quot;jadx&quot;&gt;&lt;/a&gt;jadx&lt;/h2&gt;&lt;p&gt;可以将dex文件和apk文件反编译成可阅读的格式，主要涉及java代码和AndroidManifest.xml查看。jadx的github链接地址为&lt;a href=&quot;https://github.com/skylot/jadx&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/skylot/jadx&lt;/a&gt;。适用场景：可以用于快速查看APK内的java代码和清单文件内容。&lt;/p&gt;
+&lt;h2 id=&quot;ClassyShark&quot;&gt;&lt;a href=&quot;#ClassyShark&quot; class=&quot;headerlink&quot; title=&quot;ClassyShark&quot;&gt;&lt;/a&gt;ClassyShark&lt;/h2&gt;&lt;p&gt;google官方为Android开发者推出的独立的二进制文件检查工具，因此其权威性和强大毋庸赘言，则得到较好的维护和更新。其github地址为：[&lt;a href=&quot;https://github.com/google/android-classyshar多种文件格式的解析，包括：库文件&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/google/android-classyshar多种文件格式的解析，包括：库文件&lt;/a&gt; (.dex, .aar, .so), 可执行文件 (.apk, .jar, .class) 和所有的Android二进制XML格式文件如AndroidManifest, resources, layouts等等。另外，很重要的一点，其能分析得出dex文件里面包含的方法数，这对于Android一个著名的问题(方法数超限65535，见&lt;a href=&quot;https://developer.android.com/studio/build/multidex.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.android.com/studio/build/multidex.html&lt;/a&gt;)的解决很有帮助。&lt;/p&gt;
+&lt;h2 id=&quot;AXMLParser&quot;&gt;&lt;a href=&quot;#AXMLParser&quot; class=&quot;headerlink&quot; title=&quot;AXMLParser&quot;&gt;&lt;/a&gt;AXMLParser&lt;/h2&gt;&lt;p&gt;AXMLParser仅仅是用于解析APK里面的二进制AndroidManifest.xml，从而得到原始工程里的AndroidManifest.xml内容一致的可读xml。较轻量级，适用于只想查看和AndroidManifest.xml里面包含的信息，比如包名package，versionCode和versionName，启动Activity等。其原始链接和下载地址为：&lt;a href=&quot;https://code.google.com/archive/p/xml-apk-parser/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://code.google.com/archive/p/xml-apk-parser/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:该工具很久没有更新了&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;新版Android-studio&quot;&gt;&lt;a href=&quot;#新版Android-studio&quot; class=&quot;headerlink&quot; title=&quot;新版Android studio&quot;&gt;&lt;/a&gt;新版Android studio&lt;/h2&gt;&lt;p&gt;Android studio 2.x版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：&lt;br&gt;&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;http://i.imgur.com/hyigywA.png&quot; alt=&quot;&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;&lt;/div&gt;
+            &lt;/figure&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      Android应用APK逆向解析工具和方法
+    
+    </summary>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="逆向工程" scheme="http://cstsinghua.github.io/categories/Android/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
+    
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
+    
+      <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
+    
+      <category term="逆向" scheme="http://cstsinghua.github.io/tags/%E9%80%86%E5%90%91/"/>
+    
+      <category term="AndroidManifest.xml" scheme="http://cstsinghua.github.io/tags/AndroidManifest-xml/"/>
+    
+      <category term="ClassyShark" scheme="http://cstsinghua.github.io/tags/ClassyShark/"/>
+    
+      <category term="jadx" scheme="http://cstsinghua.github.io/tags/jadx/"/>
+    
+      <category term="AXMLPrinter" scheme="http://cstsinghua.github.io/tags/AXMLPrinter/"/>
+    
+  </entry>
   
   <entry>
     <title>Android 操作系统的内存回收机制</title>
@@ -801,6 +876,12 @@ Aborting commit due to empty commit message.
 &lt;td&gt;跳转至最近一次编辑位置&lt;/td&gt;
 &lt;td&gt;Ctrl+Q&lt;/td&gt;
 &lt;td&gt;连续多次按下，可以在最近编辑的历史轨迹中往后回滚&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alt+Shift+O&lt;/td&gt;
+&lt;td&gt;快速高亮显示所选中变量在当前文件中出现的地方&lt;/td&gt;
+&lt;td&gt;Alt+Shift+O&lt;/td&gt;
+&lt;td&gt;可配合Ctrl+K一起使用，英文释义：Use Alt+Shift+O (Edit、 Find、Highlight Usages in File) to quickly highlight usages of some variable in the current file.Use Ctrl+K and Ctrl+Shift+K keys to navigate through highlighted usages.Press Esc to remove highlighting.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
