@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2017-02-21T10:40:39.000Z</updated>
+  <updated>2017-02-22T01:53:03.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -20,10 +20,29 @@
     <link href="http://cstsinghua.github.io/2017/02/21/Android%20APK%E9%80%86%E5%90%91%E8%A7%A3%E6%9E%90/"/>
     <id>http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/</id>
     <published>2017-02-21T06:34:42.000Z</published>
-    <updated>2017-02-21T10:40:39.000Z</updated>
+    <updated>2017-02-22T01:53:03.000Z</updated>
     
     <content type="html">&lt;p&gt;Android APK逆向解析&lt;/p&gt;
 &lt;p&gt;众所周知，Android系统是开源的，运行其上的Android应用APK即Android Package也是可以通过各种工具进行反编译或者逆向工程，从而可以对其他APP进行研究或者借鉴学习，亦或从APK中获取相关信息(比如清单文件AndroidManifest.xml里面的package、versionName和versionCode等等)。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Android的构建流程&quot;&gt;&lt;a href=&quot;#Android的构建流程&quot; class=&quot;headerlink&quot; title=&quot;Android的构建流程&quot;&gt;&lt;/a&gt;Android的构建流程&lt;/h1&gt;&lt;p&gt;要真正进行Android反编译和逆向，首先需要对Android的编译和构建过程有一个大致的了解。因为反编译和编译的过程是相逆的。本文从Android开发者官网摘取了关于Android构建的描述，详细信息请参见&lt;a href=&quot;https://developer.android.com/studio/build/index.html#build-config&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Android构建流程&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;构建流程涉及许多将您的项目转换成 Android 应用软件包 (APK) 的工具和流程。构建流程非常灵活，因此了解它的一些底层工作原理会很有帮助。典型Android应用模块的构建流程如下图所示：&lt;br&gt;&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;http://i.imgur.com/ECzWe5b.png&quot; alt=&quot;build-process&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;build-process&lt;/div&gt;
+            &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如上图所示，典型 Android 应用模块的构建流程通常依循下列步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;编译器(这里涉及到JDK、aapt等工具)将您的源代码转换成 DEX（Dalvik Executable) 文件（其中包括运行在 Android 设备上的字节码），将所有其他内容转换成已编译资源。&lt;/li&gt;
+&lt;li&gt;APK 打包器将 DEX 文件和已编译资源合并成单个 APK。不过，必须先签署 APK，才能将应用安装并部署到 Android 设备上。&lt;/li&gt;
+&lt;li&gt;APK 打包器使用调试或发布密钥库签署您的 APK：&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;a.&lt;/strong&gt;如果您构建的是调试版本的应用（即专用于测试和分析的应用），打包器会使用调试密钥库签署您的应用。Android Studio 自动使用调试密钥库配置新项目。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;b.&lt;/strong&gt;如果您构建的是打算向外发布的发布版本应用，打包器会使用发布密钥库签署您的应用。要创建发布密钥库，请阅读在 Android Studio 中签署您的应用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;在生成最终 APK 之前，打包器会使用 zipalign 工具对应用进行优化，减少其在设备上运行时的内存占用。&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h1 id=&quot;Android-APK逆向解析&quot;&gt;&lt;a href=&quot;#Android-APK逆向解析&quot; class=&quot;headerlink&quot; title=&quot;Android APK逆向解析&quot;&gt;&lt;/a&gt;Android APK逆向解析&lt;/h1&gt;&lt;p&gt;首先，要对APK文件进行分析，需要了解APK文件的结构。其实APK文件就是一个zip文件，所以采用解压缩软件可以查看里面的子项。典型的APK文件的解压缩视图如下：&lt;/p&gt;
 &lt;figure class=&quot;image-bubble&quot;&gt;
                 &lt;div class=&quot;img-lightbox&quot;&gt;
@@ -87,6 +106,10 @@
       <category term="jadx" scheme="http://cstsinghua.github.io/tags/jadx/"/>
     
       <category term="AXMLPrinter" scheme="http://cstsinghua.github.io/tags/AXMLPrinter/"/>
+    
+      <category term="reverse engineering" scheme="http://cstsinghua.github.io/tags/reverse-engineering/"/>
+    
+      <category term="build" scheme="http://cstsinghua.github.io/tags/build/"/>
     
   </entry>
   
