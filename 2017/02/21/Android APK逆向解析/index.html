@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://i.imgur.com/ECzWe5b.png">
 <meta property="og:image" content="http://i.imgur.com/xLb60OI.png">
 <meta property="og:image" content="http://i.imgur.com/hyigywA.png">
-<meta property="og:updated_time" content="2017-02-22T01:53:03.000Z">
+<meta property="og:updated_time" content="2017-03-02T08:44:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android APK逆向解析">
 <meta name="twitter:description" content="Android应用APK逆向解析工具和方法">
@@ -291,7 +291,7 @@
 <p>从上面对APK内部文件的分析来看，要想反编译或者逆向工程获取信息，其实主要涉及两个方面，一是对classes.dex反编译，转换成jar或者smali等，可以利用dex2jar(<a href="https://github.com/pxb1988/dex2jar" target="_blank" rel="external">https://github.com/pxb1988/dex2jar</a>)等工具生成jar，二是结合resources.arsc和res对资源进行反编译，从而得到原始的资源文件。本文罗列平时工作和搜集到的一些常见的Android APK反编译和逆向分析工具，对工具的使用不做过多阐述，关于各个工具的详细使用和技巧，可以参见下文中提及的工具的官方链接。</p>
 <h2 id="全能型选手-apktool"><a href="#全能型选手-apktool" class="headerlink" title="全能型选手-apktool"></a>全能型选手-apktool</h2><p>apktool可以对Android APK直接进行反编译(也可以在反编译得到的目录基础上进行回编，生成apk)。其是Android领域反编译最常用的开源工具，虽然有商业级的反编译工具Jeb(<a href="https://www.pnfsoftware.com/" title="Android反编译商业化工具Jeb官网" target="_blank" rel="external">https://www.pnfsoftware.com/</a>)，但鉴于收费且不开源，更多的程序开发者则选择apktool，其官方链接:<a href="https://ibotpeaches.github.io/Apktool/" title="apktool官网" target="_blank" rel="external">https://ibotpeaches.github.io/Apktool/</a>。<br><strong>Note：apktool反编译之后，得到是目录和文件，因此适用于需要对原始文件和代码进行分析的场景。dex通过apktool依赖的backsmali工具反编译之后得到的是smali文件，关于smali/backsmali可以参见<a href="https://github.com/JesusFreke/smali" target="_blank" rel="external">https://github.com/JesusFreke/smali</a></strong></p>
 <h2 id="jadx"><a href="#jadx" class="headerlink" title="jadx"></a>jadx</h2><p>可以将dex文件和apk文件反编译成可阅读的格式，主要涉及java代码和AndroidManifest.xml查看。jadx的github链接地址为<a href="https://github.com/skylot/jadx" target="_blank" rel="external">https://github.com/skylot/jadx</a>。适用场景：可以用于快速查看APK内的java代码和清单文件内容。</p>
-<h2 id="ClassyShark"><a href="#ClassyShark" class="headerlink" title="ClassyShark"></a>ClassyShark</h2><p>google官方为Android开发者推出的独立的二进制文件检查工具，因此其权威性和强大毋庸赘言，且得到较好的维护和更新。其github地址为：[<a href="https://github.com/google/android-classyshar多种文件格式的解析，包括：库文件" target="_blank" rel="external">https://github.com/google/android-classyshar多种文件格式的解析，包括：库文件</a> (.dex, .aar, .so), 可执行文件 (.apk, .jar, .class) 和所有的Android二进制XML格式文件如AndroidManifest, resources, layouts等等。另外，很重要的一点，其能分析得出dex文件里面包含的方法数，这对于Android一个著名的问题(方法数超限65535，见<a href="https://developer.android.com/studio/build/multidex.html" target="_blank" rel="external">https://developer.android.com/studio/build/multidex.html</a>)的解决很有帮助。</p>
+<h2 id="ClassyShark"><a href="#ClassyShark" class="headerlink" title="ClassyShark"></a>ClassyShark</h2><p>google官方为Android开发者推出的独立的二进制文件检查工具，因此其权威性和强大毋庸赘言，且得到较好的维护和更新。其github地址为：[<a href="https://github.com/google/android-classyshark" target="_blank" rel="external">https://github.com/google/android-classyshark</a>] ，其支持多种文件格式的解析，包括：库文件 (.dex, .aar, .so), 可执行文件 (.apk, .jar, .class) 和所有的Android二进制XML格式文件如AndroidManifest, resources, layouts等等。另外，很重要的一点，其能分析得出dex文件里面包含的方法数，这对于Android一个著名的问题(方法数超限65535，见<a href="https://developer.android.com/studio/build/multidex.html" target="_blank" rel="external">https://developer.android.com/studio/build/multidex.html</a>)的解决很有帮助。</p>
 <h2 id="AXMLParser"><a href="#AXMLParser" class="headerlink" title="AXMLParser"></a>AXMLParser</h2><p>AXMLParser仅仅是用于解析APK里面的二进制AndroidManifest.xml，从而得到与原始工程里的AndroidManifest.xml内容一致的可读xml。较轻量级，适用于只想查看和AndroidManifest.xml里面包含的信息，比如包名package，versionCode和versionName，启动Activity等。其原始链接和下载地址为：<a href="https://code.google.com/archive/p/xml-apk-parser/" target="_blank" rel="external">https://code.google.com/archive/p/xml-apk-parser/</a></p>
 <p><strong>Note:该工具很久没有更新了</strong></p>
 <h2 id="新版Android-studio"><a href="#新版Android-studio" class="headerlink" title="新版Android studio"></a>新版Android studio</h2><p>Android studio 2.x版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：<br><figure class="image-bubble">
@@ -308,7 +308,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-02-22T01:53:03.000Z" title="2017-2-22 9:53" itemprop="dateUpdated">2017年2月22日 9:53</time>
+    最后更新时间：<time datetime="2017-03-02T08:44:09.000Z" title="2017-3-2 16:44" itemprop="dateUpdated">2017年3月2日 16:44</time>
 </span><br>
 
 
