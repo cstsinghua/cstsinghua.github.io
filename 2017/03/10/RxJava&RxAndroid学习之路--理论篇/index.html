@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/">
+    
+    
+    <title>RxJava&amp;RxAndroid学习之路--理论篇 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="入门,RxJava,RxAndroid,学习之路,观察者模式,迭代器模式,Observer pattern,Iterator pattern,functional programming,ReactiveX">
+    <meta name="description" content="RxJava&amp;RxAndroid快速入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava&RxAndroid学习之路--理论篇">
+<meta property="og:url" content="http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="RxJava&amp;RxAndroid快速入门">
+<meta property="og:image" content="http://i.imgur.com/OtCBvel.png">
+<meta property="og:updated_time" content="2017-03-14T06:36:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava&RxAndroid学习之路--理论篇">
+<meta name="twitter:description" content="RxJava&amp;RxAndroid快速入门">
+<meta name="twitter:image" content="http://i.imgur.com/OtCBvel.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">RxJava&amp;RxAndroid学习之路--理论篇</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">RxJava&amp;RxAndroid学习之路--理论篇</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-10T08:30:28.000Z" itemprop="datePublished" class="page-time">
+  2017-03-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/编程实践/">编程实践</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引言"><span class="post-toc-number">1.</span> <span class="post-toc-text">引言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ReactiveX是什么？"><span class="post-toc-number">2.</span> <span class="post-toc-text">ReactiveX是什么？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Rx里面的术语和角色"><span class="post-toc-number">3.</span> <span class="post-toc-text">Rx里面的术语和角色</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#RxJava-amp-RxAndroid入门"><span class="post-toc-number">4.</span> <span class="post-toc-text">RxJava&RxAndroid入门</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#进一步学习"><span class="post-toc-number">5.</span> <span class="post-toc-text">进一步学习</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-RxJava&amp;RxAndroid学习之路--理论篇"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">RxJava&RxAndroid学习之路--理论篇</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-3-10 16:30" datetime="2017-03-10T08:30:28.000Z"  itemprop="datePublished">2017-03-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/编程实践/">编程实践</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+<span>
+    <a href="/2017/03/10/RxJava&RxAndroid学习之路--理论篇/#comments" class="ds-thread-count" data-thread-key="RxJava&RxAndroid学习之路--理论篇" data-count-type="comments"></a>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>RxJava&amp;RxAndroid学习之路–理论篇</p>
+<p>最近一段时间以来，在面试的Android开发人员简历中，基本都会提及熟悉RxJava或RxAndroid，貌似不会RxJava或RxAndroid就落伍，就只是初级的Android开发人员。于是，带着好奇心和疑问准备一探究竟，于是乎接下来就是一通google balabala…但是，网上关于RxJava或RxAndroid的学习资料非常多，各种文章和blog让人眼花缭乱，不知道如何入手，可以说，大部分文章要么艰涩难懂，要么过于浅显，让人看了不明觉厉。是的，RxJava或RxAndroid的学习相对来说有一定的门槛，但是一旦入门，那么相信你就会爱上它。本文根据个人学习RxJava或RxAndroid的历程，总结出相关经验，以便他人学习之时少走弯路。<br><a id="more"></a></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>学习一个新知识的时候，一般地，我们都会带着如下几个问题：</p>
+<ol>
+<li>为什么要学习(Why to learn)？</li>
+<li>要学的新知识是什么(What is it)？</li>
+<li>怎么学习这个知识点(How to learn)？</li>
+<li>学习之后怎么用(Where to use)？</li>
+</ol>
+<p>第一个问题，这里就不用回答了，既然你打开了这篇文章，说明你肯定有着充分的理由。本文重点介绍一下2和3，也即本人学习RxJava或RxAndroid的经验总结，希望能对你有所帮助。</p>
+<h1 id="ReactiveX是什么？"><a href="#ReactiveX是什么？" class="headerlink" title="ReactiveX是什么？"></a>ReactiveX是什么？</h1><p>要了解RxJava&amp;RxAndroid是什么，首先得了解什么是ReactiveX？ReactiveX是Reactive Extensions的缩写，一般简写为Rx，RxJava&amp;RxAndroid是Rx在JVM和Android平台上的具体实现，除了Java语言，ReactiveX几乎已经被其他主流编程语言所支持。其官方网址为<a href="http://reactivex.io" target="_blank" rel="external">http://reactivex.io</a>，其实这个网站的手册和介绍已经非常详细，但是，对于初学者而言，还是有一定难度。不过，引用该网站对Rx的介绍作为一个概念性的认识，还是有必要的。</p>
+<p>正如reactivex.io所述：</p>
+<blockquote>
+<p>ReactiveX is a combination of the best ideas from the Observer pattern, the Iterator pattern, and functional programming</p>
+</blockquote>
+<p>也就是说ReactiveX结合了观察者模式、迭代器模式和函数式编程的最佳思想。</p>
+<p>因此，首先就需要熟悉观察者模式(Observer pattern)，相信熟悉java和Android的朋友应该对此比较熟悉了，其在GUI编程中经常使用。要了解观察者，建议阅读维基百科上面的阐述：<a href="https://en.wikipedia.org/wiki/Observer_pattern" target="_blank" rel="external">https://en.wikipedia.org/wiki/Observer_pattern</a>；或者阅读”The Gang of Four”(所谓”四人帮”)所著的著名著作”Design Patterns:Elements of Reusable Object-Oriented Software”一书；亦可参考Github开源库<a href="https://github.com/iluwatar/java-design-patterns" target="_blank" rel="external">https://github.com/iluwatar/java-design-patterns</a>。</p>
+<p>同理，也需要了解迭代器模式(Iterator pattern)，其在Java集合的遍历实现中经常使用。建议阅读维基百科上面的阐述：<a href="https://en.wikipedia.org/wiki/Iterator_pattern" target="_blank" rel="external">https://en.wikipedia.org/wiki/Iterator_pattern</a>；或者阅读”The Gang of Four”(所谓”四人帮”)所著的著名著作”Design Patterns:Elements of Reusable Object-Oriented Software”一书；亦可参考Github开源库<a href="https://github.com/iluwatar/java-design-patterns" target="_blank" rel="external">https://github.com/iluwatar/java-design-patterns</a>。</p>
+<p>而关于函数式编程(functional programming,一种编程范式–programming paradigm)，这个话题很大，也很深，水平有限，这里不做阐述，想了解的读者可以在维基百科<a href="https://en.wikipedia.org/wiki/Functional_programming" target="_blank" rel="external">https://en.wikipedia.org/wiki/Functional_programming</a>查询或者通过其他资料学习。其实在我看来，在这个特定场景下，仅仅理解成用流式(链式)方式编写代码即可。</p>
+<p>有背景有了大致的了解之后，笔者认为，那么接下来应该需要先弄清里面的术语，Rx里面术语比较多，要厘清每个术语对应的角色，才能真正入门(笔者在刚接触Rx的时候，被里面各种术语和角色弄得头晕)。真正弄透了各个角色，也就真正了解了Rx。</p>
+<h1 id="Rx里面的术语和角色"><a href="#Rx里面的术语和角色" class="headerlink" title="Rx里面的术语和角色"></a>Rx里面的术语和角色</h1><p>Rx里面包括很多术语，每个术语对应不同的角色，而这些角色组合在一起便是Rx的体系，也是我们在实际使用Rx进行编码的时候操作的对象。</p>
+<ul>
+<li><strong>Observable:</strong> 可观察对象，从对比角度看，相当于观察者模式中是被观察的对象(即观察者模式中的Subject，注意，请区分Rx里面的Subject，见下文)，一旦数据产生或发生变化，会通过某种方式通知观察者或订阅者。Observable的强大之处，在Rx中定义为更强大的Iterable，即可以emit(发射)item和item序列(流)，特别是数据流的概念，因为几乎所有的对象都可以理解或者转换成数据流，详细内容可参见<a href="http://reactivex.io/documentation/observable.html" target="_blank" rel="external">http://reactivex.io/documentation/observable.html</a>；</li>
+<li><strong>items:</strong> 直译为项目，条目，在Rx里是指Observable发射的数据项；</li>
+<li><strong>emit:</strong> 直译为发射，发布，发出，含义是Observable在数据产生或变化时发送通知给Observer，调用Observer对应的方法；</li>
+<li><strong>Observer:</strong> 观察者对象，可以对比理解成观察者模式里面的Observer，监听(也叫订阅，Subscribe)Observable发射的数据(流)并做出响应，Subscriber是它的一个特殊实现。Observable和Observer之间通过Subscribe方法联系在一起；</li>
+<li><strong>Operators:</strong> 操作或运算，可以对Observable进行转换、过滤等操作，也可以生成Observable，大多数Operator对Observable操作返回的仍然是Observable，这样便可以形成链式操作(Chaining Operators)，类似于构建者模式(Builder Pattern)。Rx真正强大之处，最关键之一就是Operators提供的能力。详细内容可参见<a href="http://reactivex.io/documentation/operators.html" target="_blank" rel="external">http://reactivex.io/documentation/operators.html</a></li>
+<li><strong>Single:</strong> Observable的一个变种(variant)，区别在于，它仅仅发出一个值(Value)或错误通知(error notification)。详细可参见<a href="http://reactivex.io/documentation/single.html" target="_blank" rel="external">http://reactivex.io/documentation/single.html</a></li>
+<li><strong>Subject:</strong> 在Rx的某些语言实现中出现，既是observer又是observable，详细信息可参见<a href="http://reactivex.io/documentation/subject.html" target="_blank" rel="external">http://reactivex.io/documentation/subject.html</a></li>
+<li><strong>Scheduler:</strong> 调度者，Rx引入多线程的机制。默认情况下，Observable及Operators都是在同一个线程完成所有工作，Observable的SubscribeOn方法(其实也是一个Operator)改变了默认的行为，通过指定一个不同的Scheduler，Observable则在该Scheduler上执行操作。而ObserveOn方法(其实也是一个Operator)则指定一个不同的Scheduler，Observable用来发送通知给Observer。详细信息请参见<a href="http://reactivex.io/documentation/scheduler.html" target="_blank" rel="external">http://reactivex.io/documentation/scheduler.html</a></li>
+</ul>
+<h1 id="RxJava-amp-RxAndroid入门"><a href="#RxJava-amp-RxAndroid入门" class="headerlink" title="RxJava&amp;RxAndroid入门"></a>RxJava&amp;RxAndroid入门</h1><p>对Rx有了初步的认识，特别是了解了里面的常用术语和角色，那么作为Java或Android开发者，要入门，应该怎么学习呢？首先，RxJava在Github上的仓库地址为<a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">https://github.com/ReactiveX/RxJava</a>，RxAndroid的则对应<a href="https://github.com/ReactiveX/RxAndroid" target="_blank" rel="external">https://github.com/ReactiveX/RxAndroid</a>。在仓库的Wiki页面，有相关的介绍。不过不建议直接就读取里面内容，可以在有一定了解的基础上进行系统学习。</p>
+<p>这里推荐一篇blog，<a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/" target="_blank" rel="external">http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/</a>,里面分成4个部分，分别从基础、Operator、Rx的益处、RxAndroid四个方面进行了阐述，浅显易懂。</p>
+<p><strong>特别提醒：学习RxJava之时，可以用示意图的方式将流程的marble diagram图画出来，理解了marble diagram，也就很清晰地知道了整个机制</strong></p>
+<p>Eg.<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/OtCBvel.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>除此之外，以下两篇文章或链接也值得一读：<br><a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754" target="_blank" rel="external">https://gist.github.com/staltz/868e7e9bc2a7b8c1f754</a></p>
+<p><a href="http://www.introtorx.com/" target="_blank" rel="external">http://www.introtorx.com/</a></p>
+<h1 id="进一步学习"><a href="#进一步学习" class="headerlink" title="进一步学习"></a>进一步学习</h1><p>通过上面几篇文章的介绍，就可以对RxJava有一个基本的了解，也可以简单运用了。要想全面深入学习RxJava，那么建议仔细阅读reactivex.io的全部内容，以及RxJava&amp;RxAndroid在Github上仓库中的Wiki内容。这里面又包含了其他推荐文章的链接。同时也可以研究RxJava&amp;RxAndroid的源码。</p>
+<p>特别要提及的是，对于Android开发者而言，还需要了解Retrofit等支持Rx的开源库，结合起来使用，就更能彰显威力。那就是当下比较流行的Retrofit+RxAndroid开发。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-03-14T06:36:24.000Z" title="2017-3-14 14:36" itemprop="dateUpdated">2017年3月14日 14:36</time>
+</span><br>
+
+
+        转载请注明出处：<a href="/2017/03/10/RxJava&amp;RxAndroid学习之路--理论篇/" target="_blank" rel="external">http://cstsinghua.github.io/2017/03/10/RxJava&amp;RxAndroid学习之路--理论篇/</a>
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Iterator-pattern/">Iterator pattern</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Observer-pattern/">Observer pattern</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactiveX/">ReactiveX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxAndroid/">RxAndroid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/functional-programming/">functional programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/入门/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习之路/">学习之路</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/观察者模式/">观察者模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/迭代器模式/">迭代器模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/&title=《RxJava&RxAndroid学习之路--理论篇》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/&title=《RxJava&RxAndroid学习之路--理论篇》 — Atypical programmer&source=RxJava&amp;RxAndroid学习之路–理论篇
+最近一段时间以来，在面试的Android开发人员简历中，基本都会提及熟悉RxJava或RxAnd..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RxJava&RxAndroid学习之路--理论篇》 — Atypical programmer&url=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/21/Android APK逆向解析/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android APK逆向解析</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="RxJava&RxAndroid学习之路--理论篇" data-title="RxJava&amp;RxAndroid学习之路--理论篇" data-url="http://cstsinghua.github.io/2017/03/10/RxJava&amp;RxAndroid学习之路--理论篇/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Atypical programmer &copy; 2016 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/&title=《RxJava&RxAndroid学习之路--理论篇》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/&title=《RxJava&RxAndroid学习之路--理论篇》 — Atypical programmer&source=RxJava&amp;RxAndroid学习之路–理论篇
+最近一段时间以来，在面试的Android开发人员简历中，基本都会提及熟悉RxJava或RxAnd..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RxJava&RxAndroid学习之路--理论篇》 — Atypical programmer&url=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.0');
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.0"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.0" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

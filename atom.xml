@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2017-03-02T08:44:09.000Z</updated>
+  <updated>2017-03-14T06:36:24.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,93 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RxJava&amp;RxAndroid学习之路--理论篇</title>
+    <link href="http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF--%E7%90%86%E8%AE%BA%E7%AF%87/"/>
+    <id>http://cstsinghua.github.io/2017/03/10/RxJava&RxAndroid学习之路--理论篇/</id>
+    <published>2017-03-10T08:30:28.000Z</published>
+    <updated>2017-03-14T06:36:24.000Z</updated>
+    
+    <content type="html">&lt;p&gt;RxJava&amp;amp;RxAndroid学习之路–理论篇&lt;/p&gt;
+&lt;p&gt;最近一段时间以来，在面试的Android开发人员简历中，基本都会提及熟悉RxJava或RxAndroid，貌似不会RxJava或RxAndroid就落伍，就只是初级的Android开发人员。于是，带着好奇心和疑问准备一探究竟，于是乎接下来就是一通google balabala…但是，网上关于RxJava或RxAndroid的学习资料非常多，各种文章和blog让人眼花缭乱，不知道如何入手，可以说，大部分文章要么艰涩难懂，要么过于浅显，让人看了不明觉厉。是的，RxJava或RxAndroid的学习相对来说有一定的门槛，但是一旦入门，那么相信你就会爱上它。本文根据个人学习RxJava或RxAndroid的历程，总结出相关经验，以便他人学习之时少走弯路。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;学习一个新知识的时候，一般地，我们都会带着如下几个问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为什么要学习(Why to learn)？&lt;/li&gt;
+&lt;li&gt;要学的新知识是什么(What is it)？&lt;/li&gt;
+&lt;li&gt;怎么学习这个知识点(How to learn)？&lt;/li&gt;
+&lt;li&gt;学习之后怎么用(Where to use)？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;第一个问题，这里就不用回答了，既然你打开了这篇文章，说明你肯定有着充分的理由。本文重点介绍一下2和3，也即本人学习RxJava或RxAndroid的经验总结，希望能对你有所帮助。&lt;/p&gt;
+&lt;h1 id=&quot;ReactiveX是什么？&quot;&gt;&lt;a href=&quot;#ReactiveX是什么？&quot; class=&quot;headerlink&quot; title=&quot;ReactiveX是什么？&quot;&gt;&lt;/a&gt;ReactiveX是什么？&lt;/h1&gt;&lt;p&gt;要了解RxJava&amp;amp;RxAndroid是什么，首先得了解什么是ReactiveX？ReactiveX是Reactive Extensions的缩写，一般简写为Rx，RxJava&amp;amp;RxAndroid是Rx在JVM和Android平台上的具体实现，除了Java语言，ReactiveX几乎已经被其他主流编程语言所支持。其官方网址为&lt;a href=&quot;http://reactivex.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://reactivex.io&lt;/a&gt;，其实这个网站的手册和介绍已经非常详细，但是，对于初学者而言，还是有一定难度。不过，引用该网站对Rx的介绍作为一个概念性的认识，还是有必要的。&lt;/p&gt;
+&lt;p&gt;正如reactivex.io所述：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ReactiveX is a combination of the best ideas from the Observer pattern, the Iterator pattern, and functional programming&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;也就是说ReactiveX结合了观察者模式、迭代器模式和函数式编程的最佳思想。&lt;/p&gt;
+&lt;p&gt;因此，首先就需要熟悉观察者模式(Observer pattern)，相信熟悉java和Android的朋友应该对此比较熟悉了，其在GUI编程中经常使用。要了解观察者，建议阅读维基百科上面的阐述：&lt;a href=&quot;https://en.wikipedia.org/wiki/Observer_pattern&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://en.wikipedia.org/wiki/Observer_pattern&lt;/a&gt;；或者阅读”The Gang of Four”(所谓”四人帮”)所著的著名著作”Design Patterns:Elements of Reusable Object-Oriented Software”一书；亦可参考Github开源库&lt;a href=&quot;https://github.com/iluwatar/java-design-patterns&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/iluwatar/java-design-patterns&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;同理，也需要了解迭代器模式(Iterator pattern)，其在Java集合的遍历实现中经常使用。建议阅读维基百科上面的阐述：&lt;a href=&quot;https://en.wikipedia.org/wiki/Iterator_pattern&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://en.wikipedia.org/wiki/Iterator_pattern&lt;/a&gt;；或者阅读”The Gang of Four”(所谓”四人帮”)所著的著名著作”Design Patterns:Elements of Reusable Object-Oriented Software”一书；亦可参考Github开源库&lt;a href=&quot;https://github.com/iluwatar/java-design-patterns&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/iluwatar/java-design-patterns&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;而关于函数式编程(functional programming,一种编程范式–programming paradigm)，这个话题很大，也很深，水平有限，这里不做阐述，想了解的读者可以在维基百科&lt;a href=&quot;https://en.wikipedia.org/wiki/Functional_programming&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://en.wikipedia.org/wiki/Functional_programming&lt;/a&gt;查询或者通过其他资料学习。其实在我看来，在这个特定场景下，仅仅理解成用流式(链式)方式编写代码即可。&lt;/p&gt;
+&lt;p&gt;有背景有了大致的了解之后，笔者认为，那么接下来应该需要先弄清里面的术语，Rx里面术语比较多，要厘清每个术语对应的角色，才能真正入门(笔者在刚接触Rx的时候，被里面各种术语和角色弄得头晕)。真正弄透了各个角色，也就真正了解了Rx。&lt;/p&gt;
+&lt;h1 id=&quot;Rx里面的术语和角色&quot;&gt;&lt;a href=&quot;#Rx里面的术语和角色&quot; class=&quot;headerlink&quot; title=&quot;Rx里面的术语和角色&quot;&gt;&lt;/a&gt;Rx里面的术语和角色&lt;/h1&gt;&lt;p&gt;Rx里面包括很多术语，每个术语对应不同的角色，而这些角色组合在一起便是Rx的体系，也是我们在实际使用Rx进行编码的时候操作的对象。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Observable:&lt;/strong&gt; 可观察对象，从对比角度看，相当于观察者模式中是被观察的对象(即观察者模式中的Subject，注意，请区分Rx里面的Subject，见下文)，一旦数据产生或发生变化，会通过某种方式通知观察者或订阅者。Observable的强大之处，在Rx中定义为更强大的Iterable，即可以emit(发射)item和item序列(流)，特别是数据流的概念，因为几乎所有的对象都可以理解或者转换成数据流，详细内容可参见&lt;a href=&quot;http://reactivex.io/documentation/observable.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://reactivex.io/documentation/observable.html&lt;/a&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;items:&lt;/strong&gt; 直译为项目，条目，在Rx里是指Observable发射的数据项；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;emit:&lt;/strong&gt; 直译为发射，发布，发出，含义是Observable在数据产生或变化时发送通知给Observer，调用Observer对应的方法；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Observer:&lt;/strong&gt; 观察者对象，可以对比理解成观察者模式里面的Observer，监听(也叫订阅，Subscribe)Observable发射的数据(流)并做出响应，Subscriber是它的一个特殊实现。Observable和Observer之间通过Subscribe方法联系在一起；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Operators:&lt;/strong&gt; 操作或运算，可以对Observable进行转换、过滤等操作，也可以生成Observable，大多数Operator对Observable操作返回的仍然是Observable，这样便可以形成链式操作(Chaining Operators)，类似于构建者模式(Builder Pattern)。Rx真正强大之处，最关键之一就是Operators提供的能力。详细内容可参见&lt;a href=&quot;http://reactivex.io/documentation/operators.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://reactivex.io/documentation/operators.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Single:&lt;/strong&gt; Observable的一个变种(variant)，区别在于，它仅仅发出一个值(Value)或错误通知(error notification)。详细可参见&lt;a href=&quot;http://reactivex.io/documentation/single.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://reactivex.io/documentation/single.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Subject:&lt;/strong&gt; 在Rx的某些语言实现中出现，既是observer又是observable，详细信息可参见&lt;a href=&quot;http://reactivex.io/documentation/subject.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://reactivex.io/documentation/subject.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scheduler:&lt;/strong&gt; 调度者，Rx引入多线程的机制。默认情况下，Observable及Operators都是在同一个线程完成所有工作，Observable的SubscribeOn方法(其实也是一个Operator)改变了默认的行为，通过指定一个不同的Scheduler，Observable则在该Scheduler上执行操作。而ObserveOn方法(其实也是一个Operator)则指定一个不同的Scheduler，Observable用来发送通知给Observer。详细信息请参见&lt;a href=&quot;http://reactivex.io/documentation/scheduler.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://reactivex.io/documentation/scheduler.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;RxJava-amp-RxAndroid入门&quot;&gt;&lt;a href=&quot;#RxJava-amp-RxAndroid入门&quot; class=&quot;headerlink&quot; title=&quot;RxJava&amp;amp;RxAndroid入门&quot;&gt;&lt;/a&gt;RxJava&amp;amp;RxAndroid入门&lt;/h1&gt;&lt;p&gt;对Rx有了初步的认识，特别是了解了里面的常用术语和角色，那么作为Java或Android开发者，要入门，应该怎么学习呢？首先，RxJava在Github上的仓库地址为&lt;a href=&quot;https://github.com/ReactiveX/RxJava&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/ReactiveX/RxJava&lt;/a&gt;，RxAndroid的则对应&lt;a href=&quot;https://github.com/ReactiveX/RxAndroid&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/ReactiveX/RxAndroid&lt;/a&gt;。在仓库的Wiki页面，有相关的介绍。不过不建议直接就读取里面内容，可以在有一定了解的基础上进行系统学习。&lt;/p&gt;
+&lt;p&gt;这里推荐一篇blog，&lt;a href=&quot;http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/&lt;/a&gt;,里面分成4个部分，分别从基础、Operator、Rx的益处、RxAndroid四个方面进行了阐述，浅显易懂。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;特别提醒：学习RxJava之时，可以用示意图的方式将流程的marble diagram图画出来，理解了marble diagram，也就很清晰地知道了整个机制&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Eg.&lt;br&gt;&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;http://i.imgur.com/OtCBvel.png&quot; alt=&quot;&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;&lt;/div&gt;
+            &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;除此之外，以下两篇文章或链接也值得一读：&lt;br&gt;&lt;a href=&quot;https://gist.github.com/staltz/868e7e9bc2a7b8c1f754&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://gist.github.com/staltz/868e7e9bc2a7b8c1f754&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.introtorx.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.introtorx.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;进一步学习&quot;&gt;&lt;a href=&quot;#进一步学习&quot; class=&quot;headerlink&quot; title=&quot;进一步学习&quot;&gt;&lt;/a&gt;进一步学习&lt;/h1&gt;&lt;p&gt;通过上面几篇文章的介绍，就可以对RxJava有一个基本的了解，也可以简单运用了。要想全面深入学习RxJava，那么建议仔细阅读reactivex.io的全部内容，以及RxJava&amp;amp;RxAndroid在Github上仓库中的Wiki内容。这里面又包含了其他推荐文章的链接。同时也可以研究RxJava&amp;amp;RxAndroid的源码。&lt;/p&gt;
+&lt;p&gt;特别要提及的是，对于Android开发者而言，还需要了解Retrofit等支持Rx的开源库，结合起来使用，就更能彰显威力。那就是当下比较流行的Retrofit+RxAndroid开发。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      RxJava&amp;RxAndroid快速入门
+    
+    </summary>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="编程实践" scheme="http://cstsinghua.github.io/categories/Android/%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+    
+      <category term="入门" scheme="http://cstsinghua.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="RxJava" scheme="http://cstsinghua.github.io/tags/RxJava/"/>
+    
+      <category term="RxAndroid" scheme="http://cstsinghua.github.io/tags/RxAndroid/"/>
+    
+      <category term="学习之路" scheme="http://cstsinghua.github.io/tags/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"/>
+    
+      <category term="观察者模式" scheme="http://cstsinghua.github.io/tags/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="迭代器模式" scheme="http://cstsinghua.github.io/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Observer pattern" scheme="http://cstsinghua.github.io/tags/Observer-pattern/"/>
+    
+      <category term="Iterator pattern" scheme="http://cstsinghua.github.io/tags/Iterator-pattern/"/>
+    
+      <category term="functional programming" scheme="http://cstsinghua.github.io/tags/functional-programming/"/>
+    
+      <category term="ReactiveX" scheme="http://cstsinghua.github.io/tags/ReactiveX/"/>
+    
+  </entry>
   
   <entry>
     <title>Android APK逆向解析</title>
@@ -4616,39 +4703,6 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
-    <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-13T01:57:02.000Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For Test:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-  </entry>
-  
-  <entry>
     <title>python安装某些第三方包报错解决办法</title>
     <link href="http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
     <id>http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
@@ -4697,6 +4751,39 @@ collect2.exe: error: ld returned 1 exit status
     
     
       <category term="安装第三方包" scheme="http://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
+    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
+    <published>2016-06-13T01:57:02.000Z</published>
+    <updated>2016-06-13T01:57:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For Test:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
