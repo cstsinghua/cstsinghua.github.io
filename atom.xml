@@ -907,7 +907,7 @@ Aborting commit due to empty commit message.
     <link href="http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://cstsinghua.github.io/2016/07/13/Android-studio常用快捷键/</id>
     <published>2016-07-13T10:07:19.000Z</published>
-    <updated>2017-02-20T07:26:09.000Z</updated>
+    <updated>2017-04-18T03:29:54.000Z</updated>
     
     <content type="html">&lt;p&gt;Android studio常用的快捷键&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;Android-studio常用快捷键总结&quot;&gt;&lt;a href=&quot;#Android-studio常用快捷键总结&quot; class=&quot;headerlink&quot; title=&quot;Android studio常用快捷键总结&quot;&gt;&lt;/a&gt;Android studio常用快捷键总结&lt;/h1&gt;&lt;p&gt;书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。其实Android studio的的settings里面Keymap可以查看所有的快捷键，另外在Android studio的菜单栏，菜单项里面也注明了每项操作的快捷键(如果有)，经常查看和练习，根本也用不着在网上找说明。当然，对于新人或者英文不是太好的初学者，借鉴别人的经验是最快的学习方式。本文暂只适用于Windows平台，Mac环境后续补充。&lt;/p&gt;
@@ -1082,6 +1082,12 @@ Aborting commit due to empty commit message.
 &lt;td&gt;查看方法的调用层级结构&lt;/td&gt;
 &lt;td&gt;Ctrl+Alt+H&lt;/td&gt;
 &lt;td&gt;查看方法的调用层级结构&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+F12&lt;/td&gt;
+&lt;td&gt;显示当前类的(方法)大纲&lt;/td&gt;
+&lt;td&gt;Ctrl+O&lt;/td&gt;
+&lt;td&gt;显示一个当前类的(方法)大纲，打开之后通过键盘输入可以自动过滤，这是一个非常高效的方式通过你知道的名称跳到对应的方法上&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4534,7 +4540,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <link href="http://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android studio动态调试指南/</id>
     <published>2016-06-13T07:25:56.000Z</published>
-    <updated>2016-12-28T10:22:33.000Z</updated>
+    <updated>2017-03-20T09:07:38.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h1&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging，而Smali Debugging基于开源的Android反编译工具apktool。&lt;strong&gt;请注意：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.&lt;/strong&gt; &lt;/p&gt;
@@ -4620,6 +4626,8 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
       <category term="backsmali" scheme="http://cstsinghua.github.io/tags/backsmali/"/>
     
       <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
+    
+      <category term="smali Debugging" scheme="http://cstsinghua.github.io/tags/smali-Debugging/"/>
     
   </entry>
   
