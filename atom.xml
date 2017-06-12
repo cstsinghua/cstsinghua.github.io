@@ -1115,20 +1115,26 @@ Aborting commit due to empty commit message.
     <link href="http://cstsinghua.github.io/2016/07/08/%E5%88%A0%E9%99%A4Windows%E4%B8%8B%E7%9A%84%E8%B6%85%E9%95%BF%E8%B7%AF%E5%BE%84%E7%9B%AE%E5%BD%95/"/>
     <id>http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/</id>
     <published>2016-07-08T02:28:12.000Z</published>
-    <updated>2016-07-08T03:44:08.000Z</updated>
+    <updated>2017-06-12T08:31:49.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;删除超长路径文件或者目录&quot;&gt;&lt;a href=&quot;#删除超长路径文件或者目录&quot; class=&quot;headerlink&quot; title=&quot;删除超长路径文件或者目录&quot;&gt;&lt;/a&gt;删除超长路径文件或者目录&lt;/h1&gt;&lt;p&gt;在Windows操作系统，由于使用目录工具不当或者在使用某些编程工具时生成目录时(比如反复在同一目录下导入同一个工程)常常会产生多层递归模式，导致产生多级超长目录结构，而无法用Windows可视化右键模式进行删除，市面上的很多文件删除工具，如360强力删除、unlocker删除都无济于事，真是一件恼人的事情。&lt;/p&gt;
 &lt;p&gt;其实，windows系统自身便带有相关的命令行工具可以用来删除，操作过程如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;比如D盘下面如存在D:\blog\node_modules\a\b\c......多层嵌套的目录；&lt;/li&gt;
-&lt;li&gt;通过cmd命令行输入cd命令进入上述目录；&lt;/li&gt;
-&lt;li&gt;mkdir tempDir这个为空目录结构；&lt;/li&gt;
-&lt;li&gt;robocopy /mir tempDir a；//&lt;strong&gt;tempDir是步骤3创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;上面执行完毕之后，便可以删除目录了&lt;/li&gt;
+&lt;li&gt;通过cmd命令行输入&lt;code&gt;cd D:\blog\node_modules&lt;/code&gt;命令进入上述目录(即D:\blog\node_modules)；如下图所示：&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;http://i.imgur.com/tqS8Mn7.jpg&quot; alt=&quot;&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;&lt;/div&gt;
+            &lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mkdir tempDir&lt;/code&gt;(上图中已有示例)，该命令在D:\blog\node_modules目录下创建名为tempDir的临时空目录，创建之后临时空目录的路径为D:\blog\node_modules\tempDir；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;robocopy /mir tempDir a&lt;/code&gt;；//&lt;strong&gt;tempDir是步骤3创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;上面执行完毕之后，便可以删除目录了，此时D:\blog\node_modules\a\b\c......就只剩下D:\blog\node_modules，而后面的超长子路径a\b\c......则被删除了。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;但是在某些情况下，执行robocopy命令在中途就可能停止，又不得不重新执行该命令，直到目录完全被删除为止。因此可以写批处理文件来循环操作，当然也可以采用简单的python脚本来执行。&lt;/p&gt;
 &lt;h1 id=&quot;采用python脚本循环删除超长目录&quot;&gt;&lt;a href=&quot;#采用python脚本循环删除超长目录&quot; class=&quot;headerlink&quot; title=&quot;采用python脚本循环删除超长目录&quot;&gt;&lt;/a&gt;采用python脚本循环删除超长目录&lt;/h1&gt;&lt;p&gt;示例代码如下：&lt;br&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#-*- coding:utf-8 -*-&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; os&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&#39;&#39;&#39;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1.比如无法删除的超长目录为D:\blog\node_modules\a\b\c\...\...；&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2.执行完毕之后，目录变成D:\blog\node_modules，后面的a\b\c\...\...则会被删除；&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&#39;&#39;&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;os.chdir(&lt;span class=&quot;string&quot;&gt;r&quot;D:\blog\node_modules&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;os.mkdir(&lt;span class=&quot;string&quot;&gt;r&quot;D:\blog\node_modules\tempDir&quot;&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;#创建临时的空目录&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    result = os.system(&lt;span class=&quot;string&quot;&gt;&quot;Robocopy.exe tempDir a /MIR&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(result != &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;continue&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;os.rmdir(&lt;span class=&quot;string&quot;&gt;r&quot;D:\blog\node_modules\tempDir&quot;&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;#删除之前创建的临时目录&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;note：os.system(“Robocopy.exe tempDir a /MIR”)中tempDir是步骤创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a，实际使用时需要修改成你自己的目录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;note：os.system(“Robocopy.exe tempDir a /MIR”)中tempDir是第八行代码创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a，实际使用时需要修改成你自己的目录&lt;/strong&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
