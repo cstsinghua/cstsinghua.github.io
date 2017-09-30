@@ -4,6 +4,43 @@
 
     
   <url>
+    <loc>http://cstsinghua.github.io/2017/09/30/apk%E5%8F%8C%E5%87%BB%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2017-09-30T06:07:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android应用包apk双击安装和文件图标定制</title>
+        <pubTime>2017-09-30T04:08:36.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>apk install</tag>
+         
+        <tag>双击</tag>
+         
+        <tag>double click</tag>
+         
+        <tag>installer</tag>
+         
+        <tag>apk icon</tag>
+         
+        <tag>定制apk显示图标</tag>
+         
+        <tag>apk display icon</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="tools" url="http://cstsinghua.github.io/categories/Android/tools/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cstsinghua.github.io/2016/07/08/%E5%88%A0%E9%99%A4Windows%E4%B8%8B%E7%9A%84%E8%B6%85%E9%95%BF%E8%B7%AF%E5%BE%84%E7%9B%AE%E5%BD%95/</loc>
     <lastmod>2017-06-12T08:31:49.000Z</lastmod>
     <data>
@@ -60,13 +97,13 @@
         <title>Android studio动态调试</title>
         <pubTime>2016-06-13T07:25:56.000Z</pubTime>
         
+        <tag>apktool</tag>
+         
         <tag>动态调试</tag>
          
         <tag>smali</tag>
          
         <tag>backsmali</tag>
-         
-        <tag>apktool</tag>
          
         <tag>smali Debugging</tag>
          
@@ -131,9 +168,9 @@
         
         <tag>Android</tag>
          
-        <tag>apktool</tag>
-         
         <tag>逆向</tag>
+         
+        <tag>apktool</tag>
          
         <tag>AndroidManifest.xml</tag>
          

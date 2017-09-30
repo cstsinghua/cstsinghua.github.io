@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2017-03-14T06:36:24.000Z</updated>
+  <updated>2017-09-30T06:07:29.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,94 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android应用包apk双击安装和文件图标定制</title>
+    <link href="http://cstsinghua.github.io/2017/09/30/apk%E5%8F%8C%E5%87%BB%E5%AE%89%E8%A3%85/"/>
+    <id>http://cstsinghua.github.io/2017/09/30/apk双击安装/</id>
+    <published>2017-09-30T04:08:36.000Z</published>
+    <updated>2017-09-30T06:07:29.000Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;Android应用最终是以APK文件的形式发布，在开发和调试过程中，经常需要安装某个apk，一般情况下有两种选择：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用第三方软件，比如各大厂商的手机助手等。&lt;ul&gt;
+&lt;li&gt;优点：简单省事&lt;/li&gt;
+&lt;li&gt;缺点：国内流氓厂家太多，安装一个软件经常附带安装很多其他杂七杂八的东西，对用户造成困扰不说，个人数据的安全性和隐私有泄露的隐患&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用Android自带adb命令&lt;ul&gt;
+&lt;li&gt;优点：非侵入，透明&lt;/li&gt;
+&lt;li&gt;缺点：每次都要在命令行窗口输入命令，繁琐，效率较低&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;自己造轮子-invent-the-wheel&quot;&gt;&lt;a href=&quot;#自己造轮子-invent-the-wheel&quot; class=&quot;headerlink&quot; title=&quot;自己造轮子(invent the wheel)&quot;&gt;&lt;/a&gt;自己造轮子(invent the wheel)&lt;/h1&gt;&lt;p&gt;基于上述的背景，作为开发者，自己实现一个小工具，该工具需要满足以下条件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;快捷安装&lt;br&gt;  实现便捷安装apk(双击apk文件即自动安装至调试手机)&lt;/li&gt;
+&lt;li&gt;定制文件显示图标&lt;br&gt;  可以定制apk文件在文件系统中显示时的图标，即在资源管理器中查看时不会显示空白(因为未设置默认打开程序)，如下图所示(这里以yml文件为例)：&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;https://i.imgur.com/2n3dd7W.png&quot; alt=&quot;&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;&lt;/div&gt;
+            &lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;思路&quot;&gt;&lt;a href=&quot;#思路&quot; class=&quot;headerlink&quot; title=&quot;思路&quot;&gt;&lt;/a&gt;思路&lt;/h2&gt;&lt;p&gt;要达到上述要求，那么即需要编写一个简单的可执行程序，并且设置为apk文件的默认打开程序，由该程序调用&lt;code&gt;adb install&lt;/code&gt;进行apk文件安装，同时该程序的icon即用于apk文件的展示图标。在windows系统下，要编写一个exe文件非常方便。&lt;/p&gt;
+&lt;h2 id=&quot;实施&quot;&gt;&lt;a href=&quot;#实施&quot; class=&quot;headerlink&quot; title=&quot;实施&quot;&gt;&lt;/a&gt;实施&lt;/h2&gt;&lt;p&gt;这里选择采用python脚本+Pyinstaller来开发。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;python脚本&lt;br&gt;  处理参数传入和adb intall调用安装，可以扩展功能&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.pyinstaller.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pyinstaller&lt;/a&gt;&lt;br&gt;  官方描述：Freeze (package) Python programs into stand-alone executables，简单来说就是将python脚本转换成可独立运行的程序，在windows平台即exe，其具体原理可以参见官方的介绍。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;1.python脚本示例(&lt;a href=&quot;/apk_installer.pyw&quot;&gt;apk_installer.pyw&lt;/a&gt;)：&lt;br&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; sys&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; os&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; time&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; shlex,subprocess&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    apk_name = sys.argv[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;#print apk_name&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;#os.system(&#39;adb install -r &#39; + apk_name) #will spawn command prompt,so &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cmd = &lt;span class=&quot;string&quot;&gt;&#39;adb install -r &#39;&lt;/span&gt; + apk_name&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    si = subprocess.STARTUPINFO()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    si.dwFlags |= subprocess.STARTF_USESHOWWINDOW&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    si.wShowWindow = subprocess.SW_HIDE&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;#si.wShowWindow = subprocess.SW_HIDE # hide command prompt window&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;# p = subprocess.Popen(shlex.split(cmd),shell=True)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    p = subprocess.Popen(cmd,startupinfo = si,shell = &lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    p.wait() &lt;span class=&quot;comment&quot;&gt;#waitting for child process to terminate&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;# DETACHED_PROCESS = 0x00000008&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;# subprocess.call(cmd, creationflags = DETACHED_PROCESS)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;except&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;pass&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;2.先利用python pip命令安装pyinstaller，然后利用pyinstaller将上述python脚本转换成exe：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;命令行模式下切换到python脚本的目录(D:\cstsinghua\apk install)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;cd D:\cstsinghua\apk install&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;执行转换命令&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;pyinstaller -F –nowindow -i android.ico apk_installer.pyw&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  &lt;code&gt;-F&lt;/code&gt;表示只生成一个exe，所有需要的文件都包含在生成的exe内；&lt;code&gt;--nowindow&lt;/code&gt;隐藏命令行窗口，&lt;code&gt;-i&lt;/code&gt;参数后面跟exe文件的ico文件，可以根据自己的喜好制作成想要的图(可以用png图片转成ico文件，可参见&lt;a href=&quot;http://www.bitbug.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在线制作ico图标&lt;/a&gt;)。pyinstaller命令参数请参考&lt;a href=&quot;http://pythonhosted.org/PyInstaller/usage.html#windows-specific-options&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pyinstaller参数详解&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里提供完整示例(包含python脚本和ico文件，以pyinstaller的spec文件，最终的exe文件)，请下载：&lt;a href=&quot;/apk install.zip&quot;&gt;apk install.zip&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;后记&quot;&gt;&lt;a href=&quot;#后记&quot; class=&quot;headerlink&quot; title=&quot;后记&quot;&gt;&lt;/a&gt;后记&lt;/h1&gt;&lt;p&gt;这里仅提供一种简单的思路，当然也可以采用加入鼠标右键菜单的方式来实现apk安装，可参考&lt;a href=&quot;https://github.com/pwelyn/SignapkTools&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/pwelyn/SignapkTools&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;Android应用最终是以APK文件的形式发布，在开发和调试过程中，经常需要安装某个apk，一般情况下有
+    
+    </summary>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+    
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
+    
+      <category term="apk install" scheme="http://cstsinghua.github.io/tags/apk-install/"/>
+    
+      <category term="双击" scheme="http://cstsinghua.github.io/tags/%E5%8F%8C%E5%87%BB/"/>
+    
+      <category term="double click" scheme="http://cstsinghua.github.io/tags/double-click/"/>
+    
+      <category term="installer" scheme="http://cstsinghua.github.io/tags/installer/"/>
+    
+      <category term="apk icon" scheme="http://cstsinghua.github.io/tags/apk-icon/"/>
+    
+      <category term="定制apk显示图标" scheme="http://cstsinghua.github.io/tags/%E5%AE%9A%E5%88%B6apk%E6%98%BE%E7%A4%BA%E5%9B%BE%E6%A0%87/"/>
+    
+      <category term="apk display icon" scheme="http://cstsinghua.github.io/tags/apk-display-icon/"/>
+    
+  </entry>
   
   <entry>
     <title>RxJava&amp;RxAndroid学习之路--理论篇</title>
@@ -182,9 +270,9 @@
     
       <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
     
-      <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
-    
       <category term="逆向" scheme="http://cstsinghua.github.io/tags/%E9%80%86%E5%90%91/"/>
+    
+      <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
     
       <category term="AndroidManifest.xml" scheme="http://cstsinghua.github.io/tags/AndroidManifest-xml/"/>
     
@@ -4625,13 +4713,13 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
       <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
     
     
+      <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
+    
       <category term="动态调试" scheme="http://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
     
       <category term="smali" scheme="http://cstsinghua.github.io/tags/smali/"/>
     
       <category term="backsmali" scheme="http://cstsinghua.github.io/tags/backsmali/"/>
-    
-      <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
     
       <category term="smali Debugging" scheme="http://cstsinghua.github.io/tags/smali-Debugging/"/>
     
