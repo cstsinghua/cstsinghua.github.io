@@ -40,11 +40,15 @@
 <meta name="twitter:description" content="删除Windows系统下的超长路径文件或目录">
 <meta name="twitter:image" content="http://i.imgur.com/tqS8Mn7.jpg">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -55,7 +59,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -170,7 +174,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -202,6 +206,7 @@
 
     
 
+
 </header>
 
 
@@ -220,7 +225,7 @@
     <div class="post-card">
         <h1 class="post-card-title">删除Windows下的超长路径目录</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-7-8 10:28" datetime="2016-07-08T02:28:12.000Z"  itemprop="datePublished">2016-07-08</time>
+            <time class="post-time" title="2016-07-08 10:28:12" datetime="2016-07-08T02:28:12.000Z"  itemprop="datePublished">2016-07-08</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
@@ -233,25 +238,13 @@
 </span>
 
 
-            
-<span>
-    <a href="/2016/07/08/删除Windows下的超长路径目录/#comments" class="ds-thread-count" data-thread-key="删除Windows下的超长路径目录" data-count-type="comments"></a>
-</span>
-
-
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="删除超长路径文件或者目录"><a href="#删除超长路径文件或者目录" class="headerlink" title="删除超长路径文件或者目录"></a>删除超长路径文件或者目录</h1><p>在Windows操作系统，由于使用目录工具不当或者在使用某些编程工具时生成目录时(比如反复在同一目录下导入同一个工程)常常会产生多层递归模式，导致产生多级超长目录结构，而无法用Windows可视化右键模式进行删除，市面上的很多文件删除工具，如360强力删除、unlocker删除都无济于事，真是一件恼人的事情。</p>
 <p>其实，windows系统自身便带有相关的命令行工具可以用来删除，操作过程如下：</p>
 <ol>
 <li>比如D盘下面如存在D:\blog\node_modules\a\b\c......多层嵌套的目录；</li>
-<li>通过cmd命令行输入<code>cd D:\blog\node_modules</code>命令进入上述目录(即D:\blog\node_modules)；如下图所示：<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/tqS8Mn7.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></li>
+<li>通过cmd命令行输入<code>cd D:\blog\node_modules</code>命令进入上述目录(即D:\blog\node_modules)；如下图所示：<br><img src="http://i.imgur.com/tqS8Mn7.jpg" alt=""></li>
 <li><code>mkdir tempDir</code>(上图中已有示例)，该命令在D:\blog\node_modules目录下创建名为tempDir的临时空目录，创建之后临时空目录的路径为D:\blog\node_modules\tempDir；</li>
 <li><code>robocopy /mir tempDir a</code>；//<strong>tempDir是步骤3创建的空目录名称，而a则是D:\blog\node_modules\目录下的直接子目录即a</strong></li>
 <li>上面执行完毕之后，便可以删除目录了，此时D:\blog\node_modules\a\b\c......就只剩下D:\blog\node_modules，而后面的超长子路径a\b\c......则被删除了。</li>
@@ -266,11 +259,11 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-06-12T08:31:49.000Z" title="2017-6-12 16:31" itemprop="dateUpdated">2017年6月12日 16:31</time>
+    Last updated: <time datetime="2017-06-12T08:31:49.000Z" itemprop="dateUpdated">2017-06-12 16:31:49</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2016/07/08/删除Windows下的超长路径目录/" target="_blank" rel="external">http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -368,12 +361,16 @@
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="删除Windows下的超长路径目录" data-title="删除Windows下的超长路径目录" data-url="http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -390,21 +387,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -425,14 +424,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -492,16 +495,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -521,7 +520,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -529,6 +528,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

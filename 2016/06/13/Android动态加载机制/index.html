@@ -48,11 +48,15 @@
 在低版本的Android平台(Dalvik虚拟机执行说明限制， Dalvik Executable specification)，每个dex的方法数不能超过65535，那么超过了怎么办？突破平台限制？ 引用官方原文http://developer.android.com/intl/zh-cn/tools/building/multidex.html">
 <meta name="twitter:image" content="http://i.imgur.com/YR2iX5b.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -63,7 +67,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -178,7 +182,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -210,6 +214,7 @@
 
     
 
+
 </header>
 
 
@@ -228,7 +233,7 @@
     <div class="post-card">
         <h1 class="post-card-title">Android动态加载机制</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-6-13 15:36" datetime="2016-06-13T07:36:18.000Z"  itemprop="datePublished">2016-06-13</time>
+            <time class="post-time" title="2016-06-13 15:36:18" datetime="2016-06-13T07:36:18.000Z"  itemprop="datePublished">2016-06-13</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
@@ -238,12 +243,6 @@
             
 <span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-            
-<span>
-    <a href="/2016/06/13/Android动态加载机制/#comments" class="ds-thread-count" data-thread-key="Android动态加载机制" data-count-type="comments"></a>
 </span>
 
 
@@ -271,13 +270,7 @@
 <li>扩展类加载器(Extension ClassLoader)：该加载器由sun.misc.Launcher$ExtClassLoader实现，其负责加载<java_home>/lib/ext目录中的，或者被java.ext.dirs系统变量所指定的路径中的所有类库，开发者可以直接使用扩展类加载器。</java_home></li>
 <li>应用程序类加载器(Application ClassLoader)：该类加载器由sun.misc.Launcher$AppClassLoader实现。由于这个类加载器是ClassLoader中的getSystemClassLoader()方法的返回值，因此一般也称它为系统类加载器。其负责加载用户类路径(ClassPath)上所指定的库，开发者可以直接使用这个类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</li>
 </ol>
-<p>应用程序都是由这三种类加载器互相配合进行加载的，如果有必要，还可以加入自定义的类加载器。这些类加载器之间的关系一般如下图所示：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/YR2iX5b.png" alt="ClassLoader之间关系" title="">
-                </div>
-                <div class="image-caption">ClassLoader之间关系</div>
-            </figure></p>
+<p>应用程序都是由这三种类加载器互相配合进行加载的，如果有必要，还可以加入自定义的类加载器。这些类加载器之间的关系一般如下图所示：<br><img src="http://i.imgur.com/YR2iX5b.png" alt="ClassLoader之间关系"></p>
 <p>上图中的这种层次关系，被称为类加载器的双亲委派模型(Parents Delegation Model)。双亲委派模型要求除了顶层的启动类加载器外，其余的类加载器都应当有自己的父类加载器。这里类加载器之间的父子关系一般不会以继承的关系来实现，而都是使用组合的关系来复用父类加载器的代码。</p>
 <p>类加载器的双亲委派模型在JDK1.2期间被引入并被广发应用于之后的几乎所有的Java程序中，但它并不是一个强制性的约束模型，而是Java设计者推荐给开发者的一种类加载器实现方式。</p>
 <p><strong>双亲委派模型的工作过程：</strong>如果一个类加载器收到了类加载请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都应该传送到顶层的启动类加载器中，只有当父类加载器反馈自己无法完成这个加载请求(它的搜索范围中没有找到所需的类)时，子加载器才会尝试自己去加载。</p>
@@ -361,22 +354,10 @@ protected Class&lt;?&gt; loadClass(String name, boolean resolve)
     }
 }
 </code></pre><h2 id="2-2-类加载过程"><a href="#2-2-类加载过程" class="headerlink" title="2.2 类加载过程"></a>2.2 类加载过程</h2><p>类从被加载到虚拟机内存开始，到卸载出内存为止，它的整个生命周期包括：加载(Loading)、验证(Verification)、准备(Preparation)、解析(Resolution)、初始化(Initialization)、使用(Using)和卸载(Unloading)7个阶段。其中验证、准备、解析3个部分统称为连接(Linking)，这7个阶段顺序如下图所示：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/wwFyQk9.png" alt="ClassLoading" title="">
-                </div>
-                <div class="image-caption">ClassLoading</div>
-            </figure>
+<p><img src="http://i.imgur.com/wwFyQk9.png" alt="ClassLoading process"></p>
 <p>上图中，加载、验证、准备、初始化和卸载这5个阶段的顺序是确定的，类的加载过程必须按照这个顺序按部就班地执行，而解析阶段则不一定：它在某些情况下可以在初始化阶段之后再开始，这是为了支持Java语言的运行时绑定(也被称为动态绑定或晚期绑定)。</p>
 <h1 id="3-Android中的类加载机制"><a href="#3-Android中的类加载机制" class="headerlink" title="3.Android中的类加载机制"></a>3.Android中的类加载机制</h1><p>Android的类加载机制与JVM的类加载机制类似。也采用了双亲委派模型。Android系统定义的ClassLoader相关类的架构如下图所示：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/FWdhXzZ.png" alt="Android的ClassLoader架构" title="">
-                </div>
-                <div class="image-caption">Android的ClassLoader架构</div>
-            </figure>
+<p><img src="http://i.imgur.com/FWdhXzZ.png" alt="Android的ClassLoader架构"></p>
 <p>如上图所示，ClassLoader是整个类加载器的顶层类，其为抽象类，实现了类加载器所要求的通用架构。Android中提供了几个该类的具体实现类，比如dalvik.system.PathClassLoader，应用程序可以实现ClassLoader来提供加载类的特殊方式。</p>
 <h2 id="3-1-Android中的主要类加载器介绍"><a href="#3-1-Android中的主要类加载器介绍" class="headerlink" title="3.1 Android中的主要类加载器介绍"></a>3.1 Android中的主要类加载器介绍</h2><p>从上图可知，java.lang.ClassLoader是类加载器的顶层类，dalvik.system.BaseDexClassLoader是为各种基于dex的类加载器的实现提供一个基本功能的基类。其子类dalvik.system.PathClassLoader和dalvik.system.DexClassLoader是我们关注的重点，负责具体的类加载。</p>
 <ol>
@@ -842,11 +823,11 @@ for(int z=0; z&lt;as.length; z++) {
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-22T10:46:24.000Z" title="2016-12-22 18:46" itemprop="dateUpdated">2016年12月22日 18:46</time>
+    Last updated: <time datetime="2016-12-22T10:46:24.000Z" itemprop="dateUpdated">2016-12-22 18:46:24</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2016/06/13/Android动态加载机制/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/Android动态加载机制/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -944,12 +925,16 @@ for(int z=0; z&lt;as.length; z++) {
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="Android动态加载机制" data-title="Android动态加载机制" data-url="http://cstsinghua.github.io/2016/06/13/Android动态加载机制/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -966,21 +951,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -1001,14 +988,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -1068,16 +1059,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -1097,7 +1084,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -1105,6 +1092,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

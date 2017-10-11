@@ -50,11 +50,15 @@
 因此，将个人的经验和感悟与他人分享，成就的不仅仅是个人">
 <meta name="twitter:image" content="http://i.imgur.com/gVZSKWY.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -65,7 +69,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -180,7 +184,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -212,6 +216,7 @@
 
     
 
+
 </header>
 
 
@@ -230,7 +235,7 @@
     <div class="post-card">
         <h1 class="post-card-title">Github pages+Hexo+Nodejs搭建个人blog</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-6-16 18:35" datetime="2016-06-16T10:35:07.000Z"  itemprop="datePublished">2016-06-16</time>
+            <time class="post-time" title="2016-06-16 18:35:07" datetime="2016-06-16T10:35:07.000Z"  itemprop="datePublished">2016-06-16</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/杂项/">杂项</a></li></ul>
@@ -240,12 +245,6 @@
             
 <span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-            
-<span>
-    <a href="/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/#comments" class="ds-thread-count" data-thread-key="Github pages+Hexo+Nodejs搭建个人blog" data-count-type="comments"></a>
 </span>
 
 
@@ -361,43 +360,15 @@
 <blockquote>
 <p>site:cstsinghua.github.io</p>
 </blockquote>
-<p>  如下图：</p>
-  <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/gVZSKWY.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p>  如下图：<br>  <img src="http://i.imgur.com/gVZSKWY.png" alt=""></p>
 <p>  如果已被搜索引擎收录，那恭喜你，可以不用看后面的内容了。你的blog已经在互联网上飘香四溢。</p>
 </li>
 <li><p>在google和百度的站长管理平台验证并添加blog地址</p>
 <p>  <a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="external">Google站长管理平台地址</a></p>
 <p>  <a href="http://zhanzhang.baidu.com/linksubmit/url" target="_blank" rel="external">百度站长管理平台地址</a></p>
 <p>  这里以Google为例(百度的类似)：</p>
-<p>  <strong>1.</strong>登录google站长管理平台，在首页中点击”添加属性”按钮，然后将你的blog地址填写并添加，如下图所示：</p>
-  <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/7Xp2CIP.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>  <strong>2.</strong>blog网址添加完成之后，会跳转到验证所有权页面，验证方式有很多种，可以根据自己的情况选择，这里选择推荐的方法，即上传HTML文件的方式，其步骤在跳转的页面写得很清楚，按部就班地操作就行了(<strong>注意：先点击下载页面提示的HTML文件，报错</strong>)。如下图所示：</p>
-  <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/tz37dOJ.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-  <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/UvrvykY.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p>  <strong>1.</strong>登录google站长管理平台，在首页中点击”添加属性”按钮，然后将你的blog地址填写并添加，如下图所示：<br>  <img src="http://i.imgur.com/7Xp2CIP.png" alt=""><br>  <strong>2.</strong>blog网址添加完成之后，会跳转到验证所有权页面，验证方式有很多种，可以根据自己的情况选择，这里选择推荐的方法，即上传HTML文件的方式，其步骤在跳转的页面写得很清楚，按部就班地操作就行了(<strong>注意：先点击下载页面提示的HTML文件，报错</strong>)。如下图所示：<br>  <img src="http://i.imgur.com/tz37dOJ.png" alt=""></p>
+<p>  <img src="http://i.imgur.com/UvrvykY.png" alt=""></p>
 <p>  <strong>3.</strong>生成并提交站点地图(sitemap.xml)<br>  站点地图是一种文件，您可以通过该文件列出您网站上的网页，从而将您网站内容的组织架构告知Google和其他搜索引擎。Googlebot等搜索引擎网页抓取工具会读取此文件，以便更加智能地抓取您的网站。</p>
 <p>  怎么生成blog网站的站点地图呢？方式有很多种，hexo本身也自带了生成站点地图的插件。我们要先安装插件，打开你的hexo博客根目录，分别用下面两个命令来安装针对谷歌和百度的插件：</p>
 <blockquote>
@@ -413,14 +384,7 @@
 <p>hexo g</p>
 </blockquote>
 <p>  如果你在你的blog根目录的public下面发现生成了sitemap.xml以及baidusitemap.xml就表示成功了。当然可以采用其他很多方式来生成sitemap.xml，网上也有很多在线工具或者提供下载的本地GUI工具来生成，可以参见<a href="https://code.google.com/archive/p/sitemap-generators/wikis/SitemapGenerators.wiki" target="_blank" rel="external">https://code.google.com/archive/p/sitemap-generators/wikis/SitemapGenerators.wiki</a>，里面提供了非常多的链接地址，本人使用过<a href="https://xmlsitemapgenerator.org" target="_blank" rel="external">https://xmlsitemapgenerator.org</a>在线生成过。</p>
-<p>  最后，将生成的sitemap.xml提交到google站长管理平台，如下图所示：</p>
-  <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/T0ur897.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p>  最后，将生成的sitemap.xml提交到google站长管理平台，如下图所示：<br>  <img src="http://i.imgur.com/T0ur897.png" alt=""></p>
 <p>  蓝色表示sitem.xml里面上传的网页数，橙色表示已经被google加入索引(收录)的网页数，一旦被收录，这个时候就可以在google上面搜索到blog了！关于细节可以点击google站长页面上的帮助进行了解。</p>
 </li>
 </ul>
@@ -431,11 +395,11 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-07-04T08:38:36.000Z" title="2016-7-4 16:38" itemprop="dateUpdated">2016年7月4日 16:38</time>
+    Last updated: <time datetime="2016-07-04T08:38:36.000Z" itemprop="dateUpdated">2016-07-04 16:38:36</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -533,12 +497,16 @@
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="Github pages+Hexo+Nodejs搭建个人blog" data-title="Github pages+Hexo+Nodejs搭建个人blog" data-url="http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -555,21 +523,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -590,14 +560,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -657,16 +631,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -686,7 +656,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -694,6 +664,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

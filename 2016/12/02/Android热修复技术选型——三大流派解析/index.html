@@ -65,11 +65,15 @@
 <meta name="twitter:description" content="引用自淘宝无线开发专家 所为 的文章；原文地址https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;postId=6571722">
 <meta name="twitter:image" content="http://i.imgur.com/TFaUUWJ.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -80,7 +84,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -195,7 +199,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -227,6 +231,7 @@
 
     
 
+
 </header>
 
 
@@ -245,7 +250,7 @@
     <div class="post-card">
         <h1 class="post-card-title">Android热修复技术选型——三大流派解析</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-12-2 17:15" datetime="2016-12-02T09:15:32.000Z"  itemprop="datePublished">2016-12-02</time>
+            <time class="post-time" title="2016-12-02 17:15:32" datetime="2016-12-02T09:15:32.000Z"  itemprop="datePublished">2016-12-02</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/插件化和热修复/">插件化和热修复</a></li></ul></li></ul>
@@ -258,51 +263,21 @@
 </span>
 
 
-            
-<span>
-    <a href="/2016/12/02/Android热修复技术选型——三大流派解析/#comments" class="ds-thread-count" data-thread-key="Android热修复技术选型——三大流派解析" data-count-type="comments"></a>
-</span>
-
-
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>本文是引用引用自淘宝无线开发专家 所为 的文章；原文地址<a href="https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;postId=6571722" target="_blank" rel="external">https://baichuan.bbs.taobao.com/detail.html?spm=a3c0d.7998981.0.0.hHNK0p&amp;postId=6571722</a><br><a id="more"></a></p>
-<h1 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h1><h2 id="一、正常开发流程"><a href="#一、正常开发流程" class="headerlink" title="一、正常开发流程"></a>一、正常开发流程</h2><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/TFaUUWJ.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<h1 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h1><h2 id="一、正常开发流程"><a href="#一、正常开发流程" class="headerlink" title="一、正常开发流程"></a>一、正常开发流程</h2><p><img src="http://i.imgur.com/TFaUUWJ.png" alt=""></p>
 <p>从流程来看，传统的开发流程存在很多弊端：<br>重新发布版本代价太大<br>用户下载安装成本太高<br>BUG修复不及时，用户体验太差</p>
-<h2 id="二、热修复开发流程"><a href="#二、热修复开发流程" class="headerlink" title="二、热修复开发流程"></a>二、热修复开发流程</h2><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/xdzxdsf.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<h2 id="二、热修复开发流程"><a href="#二、热修复开发流程" class="headerlink" title="二、热修复开发流程"></a>二、热修复开发流程</h2><p><img src="http://i.imgur.com/xdzxdsf.png" alt=""></p>
 <p>而热修复的开发流程显得更加灵活，优势很多：<br>无需重新发版，实时高效热修复<br>用户无感知修复，无需下载新的应用，代价小<br>修复成功率高，把损失降到最低</p>
 <h1 id="业界热门的热修复技术"><a href="#业界热门的热修复技术" class="headerlink" title="业界热门的热修复技术"></a>业界热门的热修复技术</h1><p>热修复作为当下热门的技术，在业界内比较著名的有阿里巴巴的AndFix、Dexposed，腾讯QQ空间的超级补丁技术和微信的Tinker。最近阿里百川推出的HotFix热修复服务就基于AndFix技术，定位于线上紧急BUG的即时修复，所以AndFix技术这块我们重点分析阿里百川HotFix。下面，我们就分别介绍QQ空间超级热补丁技术和微信的Tinker以及阿里百川HotFix技术。</p>
 <h2 id="一、QQ空间超级补丁技术"><a href="#一、QQ空间超级补丁技术" class="headerlink" title="一、QQ空间超级补丁技术"></a>一、QQ空间超级补丁技术</h2><p>超级补丁技术基于DEX分包方案，使用了多DEX加载的原理，大致的过程就是：把BUG方法修复以后，放到一个单独的DEX里，插入到dexElements数组的最前面，让虚拟机去加载修复完后的方法。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/IdVuVD4.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="http://i.imgur.com/IdVuVD4.png" alt=""></p>
 <p>当patch.dex中包含Test.class时就会优先加载，在后续的DEX中遇到Test.class的话就会直接返回而不去加载，这样就达到了修复的目的。</p>
 <p>但是有一个问题是，当两个调用关系的类不在同一个DEX时，就会产生异常报错。我们知道，在APK安装时，虚拟机需要将classes.dex优化成odex文件，然后才会执行。在这个过程中，会进行类的verify操作，如果调用关系的类都在同一个DEX中的话就会被打上CLASS_ISPREVERIFIED的标志，然后才会写入odex文件。</p>
 <p>所以，为了可以正常的进行打补丁修复，必须避免类被打上CLASS_ISPREVERIFIED标志，具体的做法就是单独放一个类在另外DEX中，让其他类调用。</p>
 <p>我们来逆向手机QQ空间APK看一下具体的实现：<br>先进入程序入口QZoneRealApplication，在attachBaseContext中进行了两步操作：修复CLASS_ISPREVERIFIED标志导致的unexpected DEX problem异常、加载修复的DEX。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2i5fbaqi5V1BjSspeXXcWPFXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2i5fbaqi5V1BjSspeXXcWPFXa_!!2-martrix_bbs.png" alt=""></p>
 <ul>
 <li><p>1.修复unexpectedDEX problem异常</p>
 <p>  先看代码：</p>
@@ -339,139 +314,54 @@
 </li>
 </ul>
 <h2 id="二、微信Tinker"><a href="#二、微信Tinker" class="headerlink" title="二、微信Tinker"></a>二、微信Tinker</h2><p>微信针对QQ空间超级补丁技术的不足提出了一个提供DEX差量包，整体替换DEX的方案。主要的原理是与QQ空间超级补丁技术基本相同，区别在于不再将patch.dex增加到elements数组中，而是差量的方式给出patch.dex，然后将patch.dex与应用的classes.dex合并，然后整体替换掉旧的DEX，达到修复的目的。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2Q3S8ap95V1Bjy0FeXXXyfpXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2Q3S8ap95V1Bjy0FeXXXyfpXa_!!2-martrix_bbs.png" alt=""></p>
 <p>我们来逆向微信APK看一下具体的实现：<br>先找到应用入口TinkerApplication，在onBaseContextAttached()调用了loadTinker(),</p>
 <p><img src="https://img.alicdn.com/imgextra/i4/2554813229/TB29BS_aqi5V1BjSsphXXaEpXXa_!!2-martrix_bbs.png" alt=""></p>
 <p>进入TinkerLoader的tryLoad()方法中，</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i4/2554813229/TB2h5Taaqm5V1Bjy1zbXXXsBFXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i4/2554813229/TB2h5Taaqm5V1Bjy1zbXXXsBFXa_!!2-martrix_bbs.png" alt=""></p>
 <p>从方法名可以预见，在tryLoadPatchFilesInternal()中尝试加载本地的补丁，再经过跳转进入核心修复功能类SystemClassLoaderAdder.class中。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i2/2554813229/TB2dIPaap_AQeBjSZFvXXbnKXXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i2/2554813229/TB2dIPaap_AQeBjSZFvXXbnKXXa_!!2-martrix_bbs.png" alt=""></p>
 <p>代码中可以看出，根据Android版本的不同，分别采取具体的修复操作，不过原理都是一样的。我们以V19为例：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2tHbXaqe5V1Bjy1zjXXa08VXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB2tHbXaqe5V1Bjy1zjXXa08VXa_!!2-martrix_bbs.png" alt=""></p>
 <p>从代码中可以看到，通过反射操作得到PathClassLoader的DexPatchList,反射调用patchlist的makeDexElements()方法吧本地的DEX文件直接替换到Element[]数组中去，达到修复的目的。<br>对于如何进行patch.dex与classes.dex的合并操作，这里微信开启了一个新的进程，开启新进程的服务TinkerPatchService进行合并。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i1/2554813229/TB24Vjbap_AQeBjSZFBXXX22XXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB24Vjbap_AQeBjSZFBXXX22XXa_!!2-martrix_bbs.png" alt=""></p>
 <p>整体的流程如下：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2ydjbap95V1Bjy0FlXXaBbXXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2ydjbap95V1Bjy0FlXXaBbXXa_!!2-martrix_bbs.png" alt=""></p>
 <p>从流程图来看，同样可以很明显的找到这种方式的特点：</p>
 <p><strong>优势：</strong><br>合成整包，不用在构造函数插入代码，防止verify，verify和opt在编译期间就已经完成，不会在运行期间进行<br>性能提高。兼容性和稳定性比较高。<br>开发者透明，不需要对包进行额外处理。</p>
 <p><strong>不足：</strong><br>与超级补丁技术一样，不支持即时生效，必须通过重启应用的方式才能生效。<br>需要给应用开启新的进程才能进行合并，并且很容易因为内存消耗等原因合并失败。<br>合并时占用额外磁盘空间，对于多DEX的应用来说，如果修改了多个DEX文件，就需要下发多个patch.dex与对应的classes.dex进行合并操作时这种情况会更严重，因此合并过程的失败率也会更高。</p>
 <h2 id="三、阿里百川HotFix"><a href="#三、阿里百川HotFix" class="headerlink" title="三、阿里百川HotFix"></a>三、阿里百川HotFix</h2><p>阿里百川推出的热修复HotFix服务，相对于QQ空间超级补丁技术和微信Tinker来说，定位于紧急bug修复的场景下，能够最及时的修复bug，下拉补丁立即生效无需等待。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2ZzS_aqi5V1BjSszdXXXUJXXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2ZzS_aqi5V1BjSszdXXXUJXXa_!!2-martrix_bbs.png" alt=""></p>
 <ul>
 <li>1、AndFix实现原理<br>AndFix不同于QQ空间超级补丁技术和微信Tinker通过增加或替换整个DEX的方案，提供了一种运行时在Native修改Filed指针的方式，实现方法的替换，达到即时生效无需重启，对应用无性能消耗的目的。<br>原理图如下：</li>
 </ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i4/2554813229/TB2rHm7aqi5V1BjSspdXXXyFFXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i4/2554813229/TB2rHm7aqi5V1BjSspdXXXyFFXa_!!2-martrix_bbs.png" alt=""></p>
 <ul>
 <li>2、AndFix实现过程</li>
 </ul>
 <p>对于实现方法的替换，需要在Native层操作，经过三个步骤：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2td2aaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2td2aaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png" alt=""></p>
 <p>接下来以Dalvik设备为例，来分析具体的实现过程：</p>
 <ul>
 <li>2.1 setup()</li>
 </ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i4/2554813229/TB2pqjaap_AQeBjSZPhXXXt5pXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i4/2554813229/TB2pqjaap_AQeBjSZPhXXXt5pXa_!!2-martrix_bbs.png" alt=""></p>
 <p>对于Dalvik来说，遵循JIT即时编译机制，需要在运行时装载libdvm.so动态库，获取以下内部函数：<br>1） dvmThreadSelf( )：查询当前的线程；<br>2）dvmDecodeIndirectRef()：根据当前线程获得ClassObject对象。</p>
 <ul>
-<li>2.2 setFieldFlag<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2pzLaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-</li>
+<li>2.2 setFieldFlag<br><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB2pzLaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png" alt=""></li>
 </ul>
 <p>该操作的目的：让private、protected的方法和字段可被动态库看见并识别。原因在于动态库会忽略非public属性的字段和方法。</p>
 <ul>
 <li>2.3 replaceMethod</li>
 </ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i2/2554813229/TB2fQjaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i2/2554813229/TB2fQjaaqm5V1BjSspoXXa8VXXa_!!2-martrix_bbs.png" alt=""></p>
 <p>该步骤是方法替换的核心，替换的流程如下：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i1/2554813229/TB239Dbaqi5V1BjSspiXXXGBFXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i1/2554813229/TB239Dbaqi5V1BjSspiXXXGBFXa_!!2-martrix_bbs.png" alt=""></p>
 <p>AndFix对ART设备同样支持，具体的过程与Dalvik相似，这里不再赘述。<br>从技术原理，不难看出阿里百川HotFix的几个特点：</p>
 <p><strong>最大的优势在于</strong><br>BUG修复的即时性<br>补丁包同样采用差量技术，生成的PATCH体积小<br>对应用无侵入，几乎无性能损耗</p>
 <p><strong>不足：</strong><br>不支持新增字段，以及修改方法，也不支持对资源的替换。<br>由于厂商的自定义ROM，对少数机型暂不支持。</p>
 <p><strong>综合分析如下：</strong></p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://img.alicdn.com/imgextra/i3/2554813229/TB293jhap55V1Bjy0FoXXbVjFXa_!!2-martrix_bbs.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="https://img.alicdn.com/imgextra/i3/2554813229/TB293jhap55V1Bjy0FoXXbVjFXa_!!2-martrix_bbs.png" alt=""></p>
 <h1 id="热修复的坑和解"><a href="#热修复的坑和解" class="headerlink" title="热修复的坑和解"></a>热修复的坑和解</h1><p>我们可以看到，QQ空间超级补丁技术和微信Tinker的修复原理都基于类加载，在功能上已经支持类、资源的替换和新增，功能非常强大。既然已经有了这么强大的热修复技术，为什么阿里百川还要推出自己的热修复方案HotFix呢？</p>
 <h2 id="一、多DEX带来的性能问题和影响"><a href="#一、多DEX带来的性能问题和影响" class="headerlink" title="一、多DEX带来的性能问题和影响"></a>一、多DEX带来的性能问题和影响</h2><p>我们知道，多DEX方案用来解决应用方法数65k的问题，现在Google也官方支持了MultiDex的实现方案。但是，这实在是应用因方法数超出而作出的不得已的下策，但是超级补丁技术和Tinker作为一种热修复的方案，平生给应用增加了多个DEX，而多DEX技术最大的问题在于性能上的坑，因此基于这种方案的补丁技术影响应用的性能是无疑的。</p>
 <ul>
@@ -503,11 +393,11 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-02T09:16:52.000Z" title="2016-12-2 17:16" itemprop="dateUpdated">2016年12月2日 17:16</time>
+    Last updated: <time datetime="2016-12-02T09:16:52.000Z" itemprop="dateUpdated">2016-12-02 17:16:52</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2016/12/02/Android热修复技术选型——三大流派解析/" target="_blank" rel="external">http://cstsinghua.github.io/2016/12/02/Android热修复技术选型——三大流派解析/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -605,12 +495,16 @@
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="Android热修复技术选型——三大流派解析" data-title="Android热修复技术选型——三大流派解析" data-url="http://cstsinghua.github.io/2016/12/02/Android热修复技术选型——三大流派解析/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -627,21 +521,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -662,14 +558,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -729,16 +629,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -758,7 +654,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -766,6 +662,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

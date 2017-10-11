@@ -67,11 +67,15 @@
 缺点：每次都要在命令行窗口输入">
 <meta name="twitter:image" content="https://i.imgur.com/2n3dd7W.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -82,7 +86,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -197,7 +201,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -229,6 +233,7 @@
 
     
 
+
 </header>
 
 
@@ -247,7 +252,7 @@
     <div class="post-card">
         <h1 class="post-card-title">Android应用包apk双击安装和文件图标定制</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-9-30 12:08" datetime="2017-09-30T04:08:36.000Z"  itemprop="datePublished">2017-09-30</time>
+            <time class="post-time" title="2017-09-30 12:08:36" datetime="2017-09-30T04:08:36.000Z"  itemprop="datePublished">2017-09-30</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
@@ -257,12 +262,6 @@
             
 <span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-            
-<span>
-    <a href="/2017/09/30/apk双击安装/#comments" class="ds-thread-count" data-thread-key="apk双击安装" data-count-type="comments"></a>
 </span>
 
 
@@ -285,14 +284,7 @@
 <h1 id="自己造轮子-invent-the-wheel"><a href="#自己造轮子-invent-the-wheel" class="headerlink" title="自己造轮子(invent the wheel)"></a>自己造轮子(invent the wheel)</h1><p>基于上述的背景，作为开发者，自己实现一个小工具，该工具需要满足以下条件：</p>
 <ul>
 <li>快捷安装<br>  实现便捷安装apk(双击apk文件即自动安装至调试手机)</li>
-<li>定制文件显示图标<br>  可以定制apk文件在文件系统中显示时的图标，即在资源管理器中查看时不会显示空白(因为未设置默认打开程序)，如下图所示(这里以yml文件为例)：<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://i.imgur.com/2n3dd7W.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-</li>
+<li>定制文件显示图标<br>  可以定制apk文件在文件系统中显示时的图标，即在资源管理器中查看时不会显示空白(因为未设置默认打开程序)，如下图所示(这里以yml文件为例)：<br><img src="https://i.imgur.com/2n3dd7W.png" alt=""></li>
 </ul>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>要达到上述要求，那么即需要编写一个简单的可执行程序，并且设置为apk文件的默认打开程序，由该程序调用<code>adb install</code>进行apk文件安装，同时该程序的icon即用于apk文件的展示图标。在windows系统下，要编写一个exe文件非常方便。</p>
 <h2 id="实施"><a href="#实施" class="headerlink" title="实施"></a>实施</h2><p>这里选择采用python脚本+Pyinstaller来开发。</p>
@@ -324,11 +316,11 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-09-30T06:07:29.000Z" title="2017-9-30 14:07" itemprop="dateUpdated">2017年9月30日 14:07</time>
+    Last updated: <time datetime="2017-09-30T06:07:29.000Z" itemprop="dateUpdated">2017-09-30 14:07:29</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2017/09/30/apk双击安装/" target="_blank" rel="external">http://cstsinghua.github.io/2017/09/30/apk双击安装/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -419,12 +411,16 @@
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="apk双击安装" data-title="Android应用包apk双击安装和文件图标定制" data-url="http://cstsinghua.github.io/2017/09/30/apk双击安装/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -441,21 +437,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -476,14 +474,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -543,16 +545,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -572,7 +570,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -580,6 +578,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

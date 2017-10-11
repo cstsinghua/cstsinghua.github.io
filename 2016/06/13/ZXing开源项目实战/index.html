@@ -53,11 +53,15 @@
  国外对二维码技术">
 <meta name="twitter:image" content="http://172.20.154.39:8080/GodSDKBackground/ZXing-dirTree.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -68,7 +72,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -183,7 +187,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -215,6 +219,7 @@
 
     
 
+
 </header>
 
 
@@ -233,7 +238,7 @@
     <div class="post-card">
         <h1 class="post-card-title">Zxing二维码开源库实战</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-6-13 15:42" datetime="2016-06-13T07:42:25.000Z"  itemprop="datePublished">2016-06-13</time>
+            <time class="post-time" title="2016-06-13 15:42:25" datetime="2016-06-13T07:42:25.000Z"  itemprop="datePublished">2016-06-13</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
@@ -246,12 +251,6 @@
 </span>
 
 
-            
-<span>
-    <a href="/2016/06/13/ZXing开源项目实战/#comments" class="ds-thread-count" data-thread-key="ZXing开源项目实战" data-count-type="comments"></a>
-</span>
-
-
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="Zxing二维码开源库学习和优化"><a href="#Zxing二维码开源库学习和优化" class="headerlink" title="Zxing二维码开源库学习和优化"></a>Zxing二维码开源库学习和优化</h1><p>  本文对Google官方开源的二维码扫描库ZXing做一个总体概述，然后进行Android开发环境下的实战(二次)开发和优化，并用于生产项目。<br>  ZXing开源项目官方地址:<a href="https://github.com/zxing/zxing" title="ZXing" target="_blank" rel="external">https://github.com/zxing/zxing</a></p>
@@ -260,13 +259,7 @@
 <p> 国外对二维码技术的研究始于20世纪80年代末，在二维码符号表示技术研究方面已研制出多种码制，常见的有PDF417、QR Code、Code 49、Code 16K、Code One等。这些二维码的信息密度都比传统的一维码有了较大提高，如PDF417的信息密度是一维码CodeC39的20多倍。在二维码标准化研究方面，国际自动识别制造商协会（AIM）、美国标准化协会（ANSI）已完成了PDF417、QR Code、Code 49、Code 16K、Code One等码制的符号标准。国际标准技术委员会和国际电工委员会还成立了条码自动识别技术委员会（ISO/IEC/JTC1/SC31），已制定了QR Code的国际标准（ISO/IEC 18004：2000《自动识别与数据采集技术—条码符号技术规范—QR码》），起草了PDF417、Code 16K、Data Matrix、Maxi Code等二维码的ISO/IEC标准草案。在二维码设备开发研制、生产方面，美国、日本等国的设备制造商生产的识读设备、符号生成设备，已广泛应用于各类二维码应用系统。二维码作为一种全新的信息存储、传递和识别技术，自诞生之日起就得到了世界上许多国家的关注。美国、德国、日本等国家，不仅已将二维码技术应用于公安、外交、军事等部门对各类证件的管理，而且也将二维码应用于海关、税务等部门对各类报表和票据的管理，商业、交通运输等部门对商品及货物运输的管理、邮政部门对邮政包裹的管理、工业生产领域对工业生产线的自动化管理。</p>
 <p> 我国对二维码技术的研究开始于1993年。中国物品编码中心对几种常用的二维码PDF417、QRCCode、Data Matrix、Maxi Code、Code 49、Code 16K、Code One的技术规范进行了翻译和跟踪研究。随着我国市场经济的不断完善和信息技术的迅速发展，国内对二维码这一新技术的需求与日俱增。中国物品编码中心在原国家质量技术监督局和国家有关部门的大力支持下，对二维码技术的研究不断深入。在消化国外相关技术资料的基础上，制定了两个二维码的国家标准：二维码网格矩阵码（SJ/T 11349-2006）和二维码紧密矩阵码（SJ/T 11350-2006），从而大大促进了我国具有自主知识产权技术的二维码的研发。</p>
 <h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="1-下载ZXing并选择包"><a href="#1-下载ZXing并选择包" class="headerlink" title="1. 下载ZXing并选择包"></a>1. 下载ZXing并选择包</h3><blockquote>
-<p>截止本文攥写之时，ZXing的最新版本为3.2.1，在Github网站上下载ZXing的主分支（zxing-master.zip），解压完成之后，目录树如下：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://172.20.154.39:8080/GodSDKBackground/ZXing-dirTree.png" alt="ZXing项目解压的目录层次" title="">
-                </div>
-                <div class="image-caption">ZXing项目解压的目录层次</div>
-            </figure></p>
+<p>截止本文攥写之时，ZXing的最新版本为3.2.1，在Github网站上下载ZXing的主分支（zxing-master.zip），解压完成之后，目录树如下：<br><img src="http://172.20.154.39:8080/GodSDKBackground/ZXing-dirTree.png" alt="ZXing项目解压的目录层次"></p>
 <p>以下对解压的目录结构(包含模块)的主要部分做一个概述(此处以3.2.1版本基准，不同的版本包含的模块可能稍有差异，请留意)：</p>
 </blockquote>
 <ul>
@@ -300,13 +293,7 @@
 </ul>
 <p>其中，与开发Android二维码扫码相关的模块有android、android-core、android-integration、androidtest和core模块。</p>
 <p>androidtest、android-integration、android三个模块的关系图如下：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/ON8GvPu.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="http://i.imgur.com/ON8GvPu.png" alt=""></p>
 <h3 id="2-试用并厘清ZXing项目的源码"><a href="#2-试用并厘清ZXing项目的源码" class="headerlink" title="2.试用并厘清ZXing项目的源码"></a>2.试用并厘清ZXing项目的源码</h3><ul>
 <li><p>试用：</p>
 <p>  用Eclipse导入(按照导入现有Android工程的方式)上面所述的androidtest模块，导入之后，源代码部分会报错。主要有以下两种错误：</p>
@@ -942,11 +929,11 @@ canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-07T06:56:56.000Z" title="2016-12-7 14:56" itemprop="dateUpdated">2016年12月7日 14:56</time>
+    Last updated: <time datetime="2016-12-07T06:56:56.000Z" itemprop="dateUpdated">2016-12-07 14:56:56</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2016/06/13/ZXing开源项目实战/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/ZXing开源项目实战/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -1044,12 +1031,16 @@ canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="ZXing开源项目实战" data-title="Zxing二维码开源库实战" data-url="http://cstsinghua.github.io/2016/06/13/ZXing开源项目实战/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -1066,21 +1057,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -1101,14 +1094,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -1168,16 +1165,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -1197,7 +1190,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -1205,6 +1198,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

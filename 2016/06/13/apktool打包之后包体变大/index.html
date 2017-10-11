@@ -65,11 +65,15 @@ doNotCompress:
 解决办法一：调整不压缩的文件类型请对比apktool 2.0.1和2.1.1版本反编译之后目录下的apktool.yml">
 <meta name="twitter:image" content="http://i.imgur.com/IO5RRBr.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -80,7 +84,7 @@ doNotCompress:
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -195,7 +199,7 @@ doNotCompress:
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -227,6 +231,7 @@ doNotCompress:
 
     
 
+
 </header>
 
 
@@ -245,7 +250,7 @@ doNotCompress:
     <div class="post-card">
         <h1 class="post-card-title">apktool打包之后apk包体变大</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-6-13 15:40" datetime="2016-06-13T07:40:18.000Z"  itemprop="datePublished">2016-06-13</time>
+            <time class="post-time" title="2016-06-13 15:40:18" datetime="2016-06-13T07:40:18.000Z"  itemprop="datePublished">2016-06-13</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
@@ -255,12 +260,6 @@ doNotCompress:
             
 <span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-            
-<span>
-    <a href="/2016/06/13/apktool打包之后包体变大/#comments" class="ds-thread-count" data-thread-key="apktool打包之后包体变大" data-count-type="comments"></a>
 </span>
 
 
@@ -275,20 +274,8 @@ doNotCompress:
 </ul>
 <p>这两个字段会决定重新编译apk时哪些类型的文件不会压缩，从而影响最终生成的apk的包体大小。</p>
 <h2 id="解决办法一：调整不压缩的文件类型"><a href="#解决办法一：调整不压缩的文件类型" class="headerlink" title="解决办法一：调整不压缩的文件类型"></a>解决办法一：调整不压缩的文件类型</h2><p>请对比<code>apktool 2.0.1</code>和<code>2.1.1</code>版本反编译之后目录下的<code>apktool.yml</code>文件：</p>
-<p><strong>2.0.1：</strong><br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/IO5RRBr.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-<p><strong>2.1.1：</strong><br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/SOVelmB.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure><br>因此，可以动态调整doNotCompress字段中不压缩的文件类型(比如删除图中的- lua行)，来达到压缩的效果，从而使得包体大小保持与原有大小基本一致。</p>
+<p><strong>2.0.1：</strong><br><img src="http://i.imgur.com/IO5RRBr.png" alt=""></p>
+<p><strong>2.1.1：</strong><br><img src="http://i.imgur.com/SOVelmB.png" alt=""><br>因此，可以动态调整doNotCompress字段中不压缩的文件类型(比如删除图中的- lua行)，来达到压缩的效果，从而使得包体大小保持与原有大小基本一致。</p>
 <h2 id="解决办法二：利用apktool低版本及apktool高版本释放的1-apk"><a href="#解决办法二：利用apktool低版本及apktool高版本释放的1-apk" class="headerlink" title="解决办法二：利用apktool低版本及apktool高版本释放的1.apk"></a>解决办法二：利用apktool低版本及apktool高版本释放的1.apk</h2><p>既然<code>apktool 2.0.1</code>及其之下版本未引入doNotCompress字段，那么可以采用高版本的apktool释放的1.apk(framework)来作为<code>apktool 2.0.1</code>及其之下版本重编译时的框架依赖。这样可以解决2.0.1重编译依赖<code>Android6.0</code>系统特性的apk失败的问题。</p>
 <p>举例：首先用<code>apktool 2.0.1</code>反编译<code>target.apk</code>，然后将更高版本的apktool释放(反编译操作时候就会自动释放出来)的1.apk覆盖掉<code>apktool 2.0.1</code>的<code>1.apk</code>，<code>1.apk</code>文件一般放在<code>Home_dir\apktool\framework\1.apk</code>,其中Home_dir是操作系统的默认Home目录，windows平台可以打开cmd，提示的目录即为Home_dir。当然也可以采用Everything搜索等工具全局搜索下就知道其路径了。最后，用<code>apktool 2.0.1</code>版本重新编译<code>target.apk</code>反编译时生成的目录，即可编译成功。</p>
 
@@ -298,11 +285,11 @@ doNotCompress:
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-01-22T10:04:48.000Z" title="2017-1-22 18:04" itemprop="dateUpdated">2017年1月22日 18:04</time>
+    Last updated: <time datetime="2017-01-22T10:04:48.000Z" itemprop="dateUpdated">2017-01-22 18:04:48</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2016/06/13/apktool打包之后包体变大/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -400,12 +387,16 @@ doNotCompress:
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="apktool打包之后包体变大" data-title="apktool打包之后apk包体变大" data-url="http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -422,21 +413,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -457,14 +450,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -524,16 +521,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -553,7 +546,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -561,6 +554,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

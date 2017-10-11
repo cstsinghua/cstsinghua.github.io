@@ -50,11 +50,15 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
 系统应用安装：开机时加载系统的APK和应用，没有安装界面；">
 <meta name="twitter:image" content="http://i.imgur.com/9QZs6oN.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -65,7 +69,7 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -180,7 +184,7 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -212,6 +216,7 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
 
     
 
+
 </header>
 
 
@@ -230,7 +235,7 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
     <div class="post-card">
         <h1 class="post-card-title">Android安装APK详解</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-6-13 15:34" datetime="2016-06-13T07:34:37.000Z"  itemprop="datePublished">2016-06-13</time>
+            <time class="post-time" title="2016-06-13 15:34:37" datetime="2016-06-13T07:34:37.000Z"  itemprop="datePublished">2016-06-13</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
@@ -240,12 +245,6 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
             
 <span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-            
-<span>
-    <a href="/2016/06/13/Android安装APK详解/#comments" class="ds-thread-count" data-thread-key="Android安装APK详解" data-count-type="comments"></a>
 </span>
 
 
@@ -265,14 +264,7 @@ Android应用APK安装的方式一般而言，Android应用安装有如下四种
 <li>/data/data        ：存放应用程序的数据</li>
 <li>/data/dalvik-cache：将apk中的dex文件安装到dalvik-cache目录下(dex文件是dalvik虚拟机的可执行文件,当然，ART–Android Runtime的可执行文件格式为oat，启用ART时，系统会执行dex文件转换至oat文件)   </li>
 <li><p>/data/system      ：该目录下的packages.xml文件，类似于Windows的注册表，这个文件是在解析apk时由writeLP()创建的，里面记录了系统的permissions，以及每个apk的name,codePath,flags,ts,version,uesrid等信息，这些信息主要通apk的AndroidManifest.xml解析获取，解析完apk后将更新信息写入这个文件并保存到flash，下次开机直接从里面读取相关信息添加到内存相关列表中。当有apk升级，安装或删除时会更新这个文件。</p>
-<p> /data/system/packages.xml中内容详解(这里列举的标签内容不一定完整，只是列举核心内容，packages.xml的完整定义详见官方文档)：<br> 该文件的根节点是<packages>…</packages>，内容树结构如下图所示：</p>
- <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/9QZs6oN.png" alt="/data/system/packages.xml结构图" title="">
-                </div>
-                <div class="image-caption">/data/system/packages.xml结构图</div>
-            </figure>
+<p> /data/system/packages.xml中内容详解(这里列举的标签内容不一定完整，只是列举核心内容，packages.xml的完整定义详见官方文档)：<br> 该文件的根节点是<packages>…</packages>，内容树结构如下图所示：<br> <img src="http://i.imgur.com/9QZs6oN.png" alt="/data/system/packages.xml结构图"></p>
 <p> (1)permissions标签定义了目前系统中定义的所有权限。主要分为两类：系统定义的（package属性为android）和APK定义的（package属性为APK的包名）。</p>
 <p> (2)package代表一个APK的属性，它的属性含义如下（这里并未完全列出，如需了解全部属性，请查看官方文档）。</p>
 <pre><code>name：APK的包名
@@ -1097,13 +1089,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 1158        }
             ...
 </code></pre><p>仔细分析上述代码，主要分两个部分：PackageManagerService的构造方法(启动流程)（860-1158行）、PackageHandler的逻辑(439-806行)。PackageManagerService是在系统启动阶段由systemserver启动的一个java层服务，用来管理/system/framework，/system/app，/data/app，/data/app-private等目录下的apk文件，PackageManagerService的启动流程主要包括：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/aXWwlfs.png" alt="PackageManagerService" title="">
-                </div>
-                <div class="image-caption">PackageManagerService</div>
-            </figure>
+<p><img src="http://i.imgur.com/aXWwlfs.png" alt="PackageManagerService init"></p>
 <p>以下是PackageManagerService主要的工作内容：</p>
 <ol>
 <li>建立java层的installer与c层的installd的socket联接，使得在上层的install,remove,dexopt等功能最终由installd在底层实现；</li>
@@ -1790,11 +1776,11 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-21T06:40:20.000Z" title="2016-12-21 14:40" itemprop="dateUpdated">2016年12月21日 14:40</time>
+    Last updated: <time datetime="2016-12-21T06:40:20.000Z" itemprop="dateUpdated">2016-12-21 14:40:20</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2016/06/13/Android安装APK详解/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/Android安装APK详解/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -1892,12 +1878,16 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="Android安装APK详解" data-title="Android安装APK详解" data-url="http://cstsinghua.github.io/2016/06/13/Android安装APK详解/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -1914,21 +1904,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -1949,14 +1941,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -2016,16 +2012,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -2045,7 +2037,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -2053,6 +2045,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

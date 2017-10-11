@@ -49,11 +49,15 @@ e.g. java -jar apktool_2.0.1.jar">
 e.g. java -jar apktool_2.0.1.jar">
 <meta name="twitter:image" content="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-breakpoint.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -64,7 +68,7 @@ e.g. java -jar apktool_2.0.1.jar">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -179,7 +183,7 @@ e.g. java -jar apktool_2.0.1.jar">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -211,6 +215,7 @@ e.g. java -jar apktool_2.0.1.jar">
 
     
 
+
 </header>
 
 
@@ -229,7 +234,7 @@ e.g. java -jar apktool_2.0.1.jar">
     <div class="post-card">
         <h1 class="post-card-title">Eclipse动态调试Android应用指南</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-6-13 15:41" datetime="2016-06-13T07:41:13.000Z"  itemprop="datePublished">2016-06-13</time>
+            <time class="post-time" title="2016-06-13 15:41:13" datetime="2016-06-13T07:41:13.000Z"  itemprop="datePublished">2016-06-13</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
@@ -239,12 +244,6 @@ e.g. java -jar apktool_2.0.1.jar">
             
 <span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-            
-<span>
-    <a href="/2016/06/13/Eclipse动态调试指南/#comments" class="ds-thread-count" data-thread-key="Eclipse动态调试指南" data-count-type="comments"></a>
 </span>
 
 
@@ -277,40 +276,16 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
 <li>Project Name随便起，Use default location选项去掉，Location选择第1步指定的out文件夹，然后Next</li>
 <li>把smali文件夹设为Source Folder，然后Finish</li>
 </ol>
-<h2 id="8-在eclipse中，在需要关注的地方添加断点"><a href="#8-在eclipse中，在需要关注的地方添加断点" class="headerlink" title="8.在eclipse中，在需要关注的地方添加断点"></a>8.在eclipse中，在需要关注的地方添加断点</h2><p>设置断点示例：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-breakpoint.png" alt="设置断点示意图" title="">
-                </div>
-                <div class="image-caption">设置断点示意图</div>
-            </figure></p>
-<p>打开DDMS（路径在%android-sdks%\tools\ddms.bat）,如果在第6步中运行了修改后的程序，在DDMS的设备列表中会显示可以调试的程序。<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-DDMS.png" alt="DDMS的设备列表" title="">
-                </div>
-                <div class="image-caption">DDMS的设备列表</div>
-            </figure></p>
+<h2 id="8-在eclipse中，在需要关注的地方添加断点"><a href="#8-在eclipse中，在需要关注的地方添加断点" class="headerlink" title="8.在eclipse中，在需要关注的地方添加断点"></a>8.在eclipse中，在需要关注的地方添加断点</h2><p>设置断点示例：<br><img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-breakpoint.png" alt="设置断点示意图"></p>
+<p>打开DDMS（路径在%android-sdks%\tools\ddms.bat）,如果在第6步中运行了修改后的程序，在DDMS的设备列表中会显示可以调试的程序。<br><img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-DDMS.png" alt="DDMS的设备列表"></p>
 <p>从上图可以看到，调试的端口为8608</p>
 <h2 id="9-现在要做的就是把代码与调试程序关联即可"><a href="#9-现在要做的就是把代码与调试程序关联即可" class="headerlink" title="9.现在要做的就是把代码与调试程序关联即可"></a>9.现在要做的就是把代码与调试程序关联即可</h2><p>回到eclipse，配置远程调试</p>
 <ol>
 <li>菜单Run -&gt; Debug -&gt; Debug Configurations</li>
 <li>双击Remote Java Application，Host处默认localhost就行，Port填第9步得到的8608，然后Apply -&gt; Debug。</li>
 </ol>
-<p>示意图：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-relation.png" alt="关联源码和程序" title="">
-                </div>
-                <div class="image-caption">关联源码和程序</div>
-            </figure></p>
-<h2 id="10-切换至debug视图"><a href="#10-切换至debug视图" class="headerlink" title="10.切换至debug视图"></a>10.切换至debug视图</h2><p>看到程序已经运行并中断在下一行可执行的代码了，相关的变量可以直接查看了。示意图：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-debug.png" alt="最终调试" title="">
-                </div>
-                <div class="image-caption">最终调试</div>
-            </figure></p>
+<p>示意图：<br><img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-relation.png" alt="关联源码和程序"></p>
+<h2 id="10-切换至debug视图"><a href="#10-切换至debug视图" class="headerlink" title="10.切换至debug视图"></a>10.切换至debug视图</h2><p>看到程序已经运行并中断在下一行可执行的代码了，相关的变量可以直接查看了。示意图：<br><img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-debug.png" alt="最终调试"></p>
 
         </div>
 
@@ -318,11 +293,11 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-06-13T07:41:13.000Z" title="2016-6-13 15:41" itemprop="dateUpdated">2016年6月13日 15:41</time>
+    Last updated: <time datetime="2016-06-13T07:41:13.000Z" itemprop="dateUpdated">2016-06-13 15:41:13</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2016/06/13/Eclipse动态调试指南/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -420,12 +395,16 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="Eclipse动态调试指南" data-title="Eclipse动态调试Android应用指南" data-url="http://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -442,21 +421,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -477,14 +458,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -544,16 +529,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -573,7 +554,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -581,6 +562,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

@@ -42,11 +42,15 @@
 <meta name="twitter:description" content="Android应用APK逆向解析工具和方法">
 <meta name="twitter:image" content="http://i.imgur.com/ECzWe5b.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -57,7 +61,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -172,7 +176,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -204,6 +208,7 @@
 
     
 
+
 </header>
 
 
@@ -222,7 +227,7 @@
     <div class="post-card">
         <h1 class="post-card-title">Android APK逆向解析</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-2-21 14:34" datetime="2017-02-21T06:34:42.000Z"  itemprop="datePublished">2017-02-21</time>
+            <time class="post-time" title="2017-02-21 14:34:42" datetime="2017-02-21T06:34:42.000Z"  itemprop="datePublished">2017-02-21</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/逆向工程/">逆向工程</a></li></ul></li></ul>
@@ -235,24 +240,12 @@
 </span>
 
 
-            
-<span>
-    <a href="/2017/02/21/Android APK逆向解析/#comments" class="ds-thread-count" data-thread-key="Android APK逆向解析" data-count-type="comments"></a>
-</span>
-
-
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>Android APK逆向解析</p>
 <p>众所周知，Android系统是开源的，运行其上的Android应用APK即Android Package也是可以通过各种工具进行反编译或者逆向工程，从而可以对其他APP进行研究或者借鉴学习，亦或从APK中获取相关信息(比如清单文件AndroidManifest.xml里面的package、versionName和versionCode等等)。<br><a id="more"></a></p>
 <h1 id="Android的构建流程"><a href="#Android的构建流程" class="headerlink" title="Android的构建流程"></a>Android的构建流程</h1><p>要真正进行Android反编译和逆向，首先需要对Android的编译和构建过程有一个大致的了解。因为反编译和编译的过程是相逆的。本文从Android开发者官网摘取了关于Android构建的描述，详细信息请参见<a href="https://developer.android.com/studio/build/index.html#build-config" target="_blank" rel="external">Android构建流程</a>。</p>
-<p>构建流程涉及许多将您的项目转换成 Android 应用软件包 (APK) 的工具和流程。构建流程非常灵活，因此了解它的一些底层工作原理会很有帮助。典型Android应用模块的构建流程如下图所示：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/ECzWe5b.png" alt="build-process" title="">
-                </div>
-                <div class="image-caption">build-process</div>
-            </figure></p>
+<p>构建流程涉及许多将您的项目转换成 Android 应用软件包 (APK) 的工具和流程。构建流程非常灵活，因此了解它的一些底层工作原理会很有帮助。典型Android应用模块的构建流程如下图所示：<br><img src="http://i.imgur.com/ECzWe5b.png" alt="build-process"></p>
 <p>如上图所示，典型 Android 应用模块的构建流程通常依循下列步骤：</p>
 <ol>
 <li>编译器(这里涉及到JDK、aapt等工具)将您的源代码转换成 DEX（Dalvik Executable) 文件（其中包括运行在 Android 设备上的字节码），将所有其他内容转换成已编译资源。</li>
@@ -265,13 +258,7 @@
 <li>在生成最终 APK 之前，打包器会使用 zipalign 工具对应用进行优化，减少其在设备上运行时的内存占用。</li>
 </ol>
 <h1 id="Android-APK逆向解析"><a href="#Android-APK逆向解析" class="headerlink" title="Android APK逆向解析"></a>Android APK逆向解析</h1><p>首先，要对APK文件进行分析，需要了解APK文件的结构。其实APK文件就是一个zip文件，所以采用解压缩软件可以查看里面的子项。典型的APK文件的解压缩视图如下：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/xLb60OI.png" alt="Android" title="">
-                </div>
-                <div class="image-caption">Android</div>
-            </figure>
+<p><img src="http://i.imgur.com/xLb60OI.png" alt="Android APK文件解压缩视图"></p>
 <ul>
 <li><p>classes.dex：classes.dex是java源码编译后生成的java字节码文件(非传统JVM解释执行的class字节码)。但由于Android使用的dalvik虚拟机与标准的java虚拟机是不兼容的，dex文件与class文件相比，不论是文件结构还是opcode都不一样。Android模拟器中提供了一个dex文件的反编译工具，dexdump。用法为首先启动Android模拟器，把要查看的dex文件用adb push上传的模拟器中，然后通过adb shell登录，找到要查看的dex文件，执行dexdump xxx.dex（或者从压缩文件取出dex文件，直接在PC上面找到dexdump.exe的路径，然后执行命令）。另外Dedexer是一个反编译dex文件的开源工具，需要自己编译源代码。而当前，还有比如dex2jar(<a href="https://github.com/pxb1988/dex2jar" target="_blank" rel="external">https://github.com/pxb1988/dex2jar</a>)甚至封装好的GUI的工具(比如安卓逆向助手等等，可网上搜索下载)可以反编译dex文件为jar文件，再利用jd-gui(<a href="http://jd.benow.ca/" target="_blank" rel="external">http://jd.benow.ca/</a>)工具打开jar文件，就可以阅读java源代码了。</p>
 </li>
@@ -294,13 +281,7 @@
 <h2 id="ClassyShark"><a href="#ClassyShark" class="headerlink" title="ClassyShark"></a>ClassyShark</h2><p>google官方为Android开发者推出的独立的二进制文件检查工具，因此其权威性和强大毋庸赘言，且得到较好的维护和更新。其github地址为：[<a href="https://github.com/google/android-classyshark" target="_blank" rel="external">https://github.com/google/android-classyshark</a>] ，其支持多种文件格式的解析，包括：库文件 (.dex, .aar, .so), 可执行文件 (.apk, .jar, .class) 和所有的Android二进制XML格式文件如AndroidManifest, resources, layouts等等。另外，很重要的一点，其能分析得出dex文件里面包含的方法数，这对于Android一个著名的问题(方法数超限65535，见<a href="https://developer.android.com/studio/build/multidex.html" target="_blank" rel="external">https://developer.android.com/studio/build/multidex.html</a>)的解决很有帮助。</p>
 <h2 id="AXMLParser"><a href="#AXMLParser" class="headerlink" title="AXMLParser"></a>AXMLParser</h2><p>AXMLParser仅仅是用于解析APK里面的二进制AndroidManifest.xml，从而得到与原始工程里的AndroidManifest.xml内容一致的可读xml。较轻量级，适用于只想查看和AndroidManifest.xml里面包含的信息，比如包名package，versionCode和versionName，启动Activity等。其原始链接和下载地址为：<a href="https://code.google.com/archive/p/xml-apk-parser/" target="_blank" rel="external">https://code.google.com/archive/p/xml-apk-parser/</a></p>
 <p><strong>Note:该工具很久没有更新了</strong></p>
-<h2 id="新版Android-studio"><a href="#新版Android-studio" class="headerlink" title="新版Android studio"></a>新版Android studio</h2><p>Android studio 2.x版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/hyigywA.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
+<h2 id="新版Android-studio"><a href="#新版Android-studio" class="headerlink" title="新版Android studio"></a>新版Android studio</h2><p>Android studio 2.x版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：<br><img src="http://i.imgur.com/hyigywA.png" alt=""></p>
 
         </div>
 
@@ -308,11 +289,11 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-03-02T08:44:09.000Z" title="2017-3-2 16:44" itemprop="dateUpdated">2017年3月2日 16:44</time>
+    Last updated: <time datetime="2017-03-02T08:44:09.000Z" itemprop="dateUpdated">2017-03-02 16:44:09</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2017/02/21/Android APK逆向解析/" target="_blank" rel="external">http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -411,12 +392,16 @@
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="Android APK逆向解析" data-title="Android APK逆向解析" data-url="http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -433,21 +418,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -468,14 +455,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -536,16 +527,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -565,7 +552,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -573,6 +560,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

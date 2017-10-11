@@ -40,11 +40,15 @@
 <meta name="twitter:description" content="Android系统内存管理和回收机制详解">
 <meta name="twitter:image" content="http://i.imgur.com/1sdyZGk.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -55,7 +59,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -170,7 +174,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -202,6 +206,7 @@
 
     
 
+
 </header>
 
 
@@ -220,7 +225,7 @@
     <div class="post-card">
         <h1 class="post-card-title">Android 操作系统的内存回收机制</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-2-9 9:58" datetime="2017-02-09T01:58:42.000Z"  itemprop="datePublished">2017-02-09</time>
+            <time class="post-time" title="2017-02-09 09:58:42" datetime="2017-02-09T01:58:42.000Z"  itemprop="datePublished">2017-02-09</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/内存管理/">内存管理</a></li></ul></li></ul>
@@ -233,12 +238,6 @@
 </span>
 
 
-            
-<span>
-    <a href="/2017/02/09/Android 操作系统的内存回收机制/#comments" class="ds-thread-count" data-thread-key="Android 操作系统的内存回收机制" data-count-type="comments"></a>
-</span>
-
-
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>Android 操作系统的内存回收机制</p>
@@ -247,14 +246,7 @@
 <ol>
 <li>Application Framework<br>Application Framework 将整个操作系统分隔成两个部分。对应用开发者而言，所有APP都是运行在Application Framework之上，而并不需要关心系统底层的情况。Application Framework层为应用开发者提供了丰富的应用编程接口，如Activity Manager，Content Provider，Notification Manager，以及各种窗口Widget资源等。在Application Framework层，Activity是一个APP最基本的组成部分。一般每个 Activity对应于屏幕上的一个视图（或者说一屏），一个APP可以有一个或者多个Activity。应用程序被打包成.apk格式的文件，由Dalvik VM解释执行。</li>
 <li>Dalvik VM(或ART)<br>Dalvik虚拟机采用寄存器架构，而不是JVM的栈结构。Java程序编译后的.class文件并不能在Dalvik中解释执行。因此Google提供了一个 dx 工具，用于将.class文件转换成Dalivk能够识别的.dex格式。具体Dalvik VM的细节不是本文重点，以下不再讨论。</li>
-<li>Linux kernel<br>由上所述，所有的APP都是由Java代码编写并在Dalvik VM中得到解释执行。在Android操作系统中，每个Dalvik VM的每个Instance都对应于 Linux内核中的一个进程。可以使用adb shell工具查看系统中的当前进程。如下图所示，Android2.3.3启动后内核中的进程列表。<br><strong>图 1. Android 2.3 中的进程列表（部分）</strong><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/1sdyZGk.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-图 1 中，UID 标识为 app_xx 的每一项都是一个 app 所占用的进程，可见 Android 设计使得每个应用程序由一个独立的 Dalvik 实例解释执行，而每个 Linux 内核进程加载一个 Dalvik 实例，通过这种方式提供 app 的运行环境。如此，每个 APP 的资源被完全屏蔽，互不干扰。虽然同时引入了进程间通信的困难，但也带来了更强的安全性。</li>
+<li>Linux kernel<br>由上所述，所有的APP都是由Java代码编写并在Dalvik VM中得到解释执行。在Android操作系统中，每个Dalvik VM的每个Instance都对应于 Linux内核中的一个进程。可以使用adb shell工具查看系统中的当前进程。如下图所示，Android2.3.3启动后内核中的进程列表。<br><strong>图 1. Android 2.3 中的进程列表（部分）</strong><br><img src="http://i.imgur.com/1sdyZGk.png" alt=""><br>图 1 中，UID 标识为 app_xx 的每一项都是一个 app 所占用的进程，可见 Android 设计使得每个应用程序由一个独立的 Dalvik 实例解释执行，而每个 Linux 内核进程加载一个 Dalvik 实例，通过这种方式提供 app 的运行环境。如此，每个 APP 的资源被完全屏蔽，互不干扰。虽然同时引入了进程间通信的困难，但也带来了更强的安全性。</li>
 </ol>
 <h1 id="Android-内存回收原则"><a href="#Android-内存回收原则" class="headerlink" title="Android 内存回收原则"></a>Android 内存回收原则</h1><p>下面将从 Application Framework 和 Linux kernel 两个层次分析 Android 操作系统的资源管理机制。<br>Android 之所以采用特殊的资源管理机制，原因在于其设计之初就是面向移动终端，所有可用的内存仅限于系统 RAM，必须针对这种限制设计相应的优化方案。当 Android 应用程序退出时，并不清理其所占用的内存，Linux 内核进程也相应的继续存在，所谓“退出但不关闭”。从而使得用户调用程序时能够在第一时间得到响应。当系统内存不足时，系统将激活内存回收过程。为了不因内存回收影响用户体验（如杀死当前的活动进程），Android 基于进程中运行的组件及其状态规定了默认的五个回收优先级：</p>
 <ul>
@@ -315,11 +307,11 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-02-09T04:27:59.000Z" title="2017-2-9 12:27" itemprop="dateUpdated">2017年2月9日 12:27</time>
+    Last updated: <time datetime="2017-02-09T04:27:59.000Z" itemprop="dateUpdated">2017-02-09 12:27:59</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2017/02/09/Android 操作系统的内存回收机制/" target="_blank" rel="external">http://cstsinghua.github.io/2017/02/09/Android 操作系统的内存回收机制/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -418,12 +410,16 @@ Android系统是一款基于Linux内核，面向移动终端的操作系统。�
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="Android 操作系统的内存回收机制" data-title="Android 操作系统的内存回收机制" data-url="http://cstsinghua.github.io/2017/02/09/Android 操作系统的内存回收机制/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -440,21 +436,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -475,14 +473,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -543,16 +545,12 @@ Android系统是一款基于Linux内核，面向移动终端的操作系统。�
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -572,7 +570,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -580,6 +578,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>

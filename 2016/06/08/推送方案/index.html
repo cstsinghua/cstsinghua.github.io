@@ -44,11 +44,15 @@
 <meta name="twitter:description" content="梳理当前主流的推送技术，对里面涉及到的概念和技术进行全面的阐述">
 <meta name="twitter:image" content="http://i.imgur.com/GJJJdm9.png">
     
-        <link rel="alternative" href="/atom.xml" title="Atypical programmer" type="application/atom+xml">
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.4.0">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
 
 <body>
@@ -59,7 +63,7 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
           <img src="/img/logo.jpg">
@@ -174,7 +178,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -206,6 +210,7 @@
 
     
 
+
 </header>
 
 
@@ -224,7 +229,7 @@
     <div class="post-card">
         <h1 class="post-card-title">推送方案</h1>
         <div class="post-meta">
-            <time class="post-time" title="2016-6-8 17:09" datetime="2016-06-08T09:09:16.000Z"  itemprop="datePublished">2016-06-08</time>
+            <time class="post-time" title="2016-06-08 17:09:16" datetime="2016-06-08T09:09:16.000Z"  itemprop="datePublished">2016-06-08</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
@@ -234,12 +239,6 @@
             
 <span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
     <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-            
-<span>
-    <a href="/2016/06/08/推送方案/#comments" class="ds-thread-count" data-thread-key="推送方案" data-count-type="comments"></a>
 </span>
 
 
@@ -340,13 +339,7 @@
 </li>
 </ol>
 <h2 id="再论长连接"><a href="#再论长连接" class="headerlink" title="再论长连接"></a>再论长连接</h2><p>长连接方案乍一听怪怪的, 对网络通信或TCP/IP协议族不是很了解人难免会问：什么是长连接? 定时发送心跳, 这和轮询有什么区别? 心跳是干什么的? 同样是定期和服务器沟通, 为什么长连接就比轮询更加优秀? 手机休眠了TCP连接不会断掉吗?</p>
-<h3 id="什么是长连接"><a href="#什么是长连接" class="headerlink" title="什么是长连接"></a>什么是长连接</h3><p>与长连接相对的就是短连接。先说短连接, 短连接是通讯双方有数据交互时就建立一个连接, 数据发送完成后，则断开此连接.<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/GJJJdm9.png" alt="短连接和长连接示意图" title="">
-                </div>
-                <div class="image-caption">短连接和长连接示意图</div>
-            </figure></p>
+<h3 id="什么是长连接"><a href="#什么是长连接" class="headerlink" title="什么是长连接"></a>什么是长连接</h3><p>与长连接相对的就是短连接。先说短连接, 短连接是通讯双方有数据交互时就建立一个连接, 数据发送完成后，则断开此连接.<br><img src="http://i.imgur.com/GJJJdm9.png" alt="短连接和长连接示意图"></p>
 <p>长连接就是大家建立连接之后, 不主动断开。 双方互相发送数据, 发完了也不主动断开连接, 之后有需要发送的数据就继续通过这个连接发送。</p>
 <p>TCP连接在默认的情况下就是所谓的长连接(前提是应用层没有设置keepalive，下文会做摘要介绍，详细内容关于keepalive请参见《TCP/IP详解 卷1 协议》第二版第17章), 也就是说连接双方都不主动关闭连接, 这个连接就应该一直存在。以下英文段落摘自《TCP/IP详解 卷1 协议》第二版第17章(p793)的引言部分。</p>
 <p>Many newcomers to TCP/IP are surprised to learn that no data whatsoever flows across an idle TCP/IP connection.This is，if neither process at the ends of a TCP connection is sending data to the other,nothing is exchanged between the two TCP endpoints.There is no polling,for example,as you might find with other networking protocols.<strong>This means that we can start a client process that establishes a TCP connection with a sever and walk away for hours,days,weeks,or months,and the connection should remain up.</strong>In theory, intermediate routers can crash and reboot,data lines may go down and back up,but as long as neither host at the ends of the connection reboots(or changes its IP address),the connection remainsestablished.<strong>This is how TCP/IP was designed.</strong></p>
@@ -437,20 +430,8 @@
 <p>Typically,a smartphone contains two processors:a <em>baseband processor</em> and an <em>application processor</em>(sometimes known as the radio and PDA processors).Figure 3.5 shows a typical high-level view of a two-processor system.</p>
 <p>The baseband processor runs on the low-level radio telephony protocols,like the GSM signaling stack mentioned before.Baseband software is time-critical and requires a real-time operating system(RTOS).The RTOS can be proprietary,or a commercial one such as Nucleus,OSE,or VRTX.The application processor runs Symbian OS and its applications.An IPC(inter-processor communication)mechanism is supplied to communicate between the two processors when needed.</p>
 <p>Why the need for two processors?The main reason is because Symbian OS(EKA1) does not provide the real-time response needed for the baseband software,thus requiring a dedicated processor running an RTOS.With EKA2,however,this is no longer a restriction,as shown in the next section.</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/YVY49RN.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/4qcYhiL.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="http://i.imgur.com/YVY49RN.png" alt=""></p>
+<p><img src="http://i.imgur.com/4qcYhiL.png" alt=""></p>
 <p><strong>引用2：</strong>另外，维基百科上面的描述如下(链接为<a href="https://en.wikipedia.org/wiki/Baseband_processor" title="维基百科对于Baseband processor的说明" target="_blank" rel="external">https://en.wikipedia.org/wiki/Baseband_processor</a>)：</p>
 <p>A <strong>baseband processor</strong> (also known as <strong>baseband radio processor</strong>, <strong>BP</strong>, or <strong>BBP</strong>) is a device (a chip or part of a chip) in a network interface that manages all the radio functions (all functions that require an antenna); however, this term is generally not used in reference to Wi-Fi and Bluetooth radios.  A baseband processor typically uses its own RAM and firmware.</p>
 <p>== Overview ==</p>
@@ -468,13 +449,7 @@
 </li>
 </ul>
 <p><strong>引用3：</strong>此外，虽然在Android开发官网上面没有搜索到BP的介绍，但是在其中一个页面，出现了这个术语。<a href="http://developer.android.com/intl/zh-cn/reference/android/app/ActivityManager.MemoryInfo.html" title="Android开发官网上面对BP术语的引用" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/reference/android/app/ActivityManager.MemoryInfo.html</a></p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/5pg4KkF.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="http://i.imgur.com/5pg4KkF.png" alt=""></p>
 <p><strong>引用4：</strong>在链接<a href="http://www.wisegeek.com/what-is-a-baseband-processor.htm" target="_blank" rel="external">http://www.wisegeek.com/what-is-a-baseband-processor.htm</a>上也有一段关于智能手机BP和CPU独立开来的背景方面比较详细的阐述。</p>
 <p>Mobile phones and other devices typically require considerable processing power to control their computational and communications functions. The Central Processing Unit (CPU) of such a device allows for many functions, and often includes several software applications and drivers. Most mobile communications devices also include a Baseband Processor (BP), separate from the CPU.<strong> Generally, it manages the radio control functions, such as signal generation, modulation, encoding, as well as frequency shifting. It can also manage the transmission of signals.</strong></p>
 <p>The baseband processor is typically located on the same circuit board as the CPU, but consists of a separate radio electronics component. It can therefore have a different programming interface and control software. The hardware function is often independent of the operations of other phone components as well. A benefit to this is usually that changes to software applications and operating systems do not affect the operation of the BP. Software bugs can affect other capabilities, but the baseband processor will usually function without a problem in such a case.</p>
@@ -496,13 +471,7 @@
 <h4 id="Android的WakeLock机制"><a href="#Android的WakeLock机制" class="headerlink" title="Android的WakeLock机制"></a>Android的WakeLock机制</h4><p>Android系统是通过WakeLock来实现唤醒CPU、屏幕、键盘及其他相关硬件组件的。以下英文内容摘录自<a href="https://software.intel.com/en-us/android/articles/wakelocks-for-android" title="wakelocks-for-android" target="_blank" rel="external">wakelocks-for-android</a>和<a href="https://software.intel.com/en-us/android/articles/wakelocks-detect-no-sleep-issues-in-android-applications" target="_blank" rel="external">Wakelocks: Detect No-Sleep Issues in Android* Applications</a></p>
 <h5 id="Wakelock："><a href="#Wakelock：" class="headerlink" title="Wakelock："></a><strong>Wakelock：</strong></h5><p><strong>A wakelock is a software mechanism to control the power state of the host device</strong>. The OS exports explicit power management handles and APIs to specify when a particular component needs to stay on, or awake, until it is explicitly released from duty.</p>
 <p>The wakelock mechanism is implemented in two levels: user and kernel. The figure shows the internal design of Android wakelock implementation. The user wakelock can be utilized by either high-level OS services or applications and is provided by the power management service. It allows an application to control the power state of the device. A kernel wakelock is held by the OS kernel or a driver. A user wakelock is mapped to a kernel wakelock. Any active kernel-level wakelock prevents the system from being suspended to ACPI S3 (suspended to RAM) state, which is the highest power saving state for mobile devices.</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://i.imgur.com/kOGdghH.jpg" alt="Android" title="">
-                </div>
-                <div class="image-caption">Android</div>
-            </figure>
+<p><img src="http://i.imgur.com/kOGdghH.jpg" alt="Android WakeLock原理"></p>
 <h6 id="Android-User-Wakelocks"><a href="#Android-User-Wakelocks" class="headerlink" title="Android User Wakelocks"></a>Android User Wakelocks</h6><p>Android设备的电源状态可以通过android.os.PowerManager类来控制(参见<a href="http://developer.android.com/intl/zh-cn/reference/android/os/PowerManager.html" target="_blank" rel="external">Android开发官网的API介绍</a>)。这是比较细粒度控制电源状态的方式，如果是更便捷地控制，可以参见<a href="http://developer.android.com/intl/zh-cn/training/scheduling/index.html" target="_blank" rel="external">Managing Device Awake State</a></p>
 <p>示例代码：</p>
 <pre><code>PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -630,11 +599,11 @@ wl.release();
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-21T01:53:05.000Z" title="2016-12-21 9:53" itemprop="dateUpdated">2016年12月21日 9:53</time>
+    Last updated: <time datetime="2016-12-21T01:53:05.000Z" itemprop="dateUpdated">2016-12-21 09:53:05</time>
 </span><br>
 
 
-        转载请注明出处：<a href="/2016/06/08/推送方案/" target="_blank" rel="external">http://cstsinghua.github.io/2016/06/08/推送方案/</a>
+        
     </div>
     <footer>
         <a href="http://cstsinghua.github.io">
@@ -725,12 +694,16 @@ wl.release();
 
     
 
-<div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="推送方案" data-title="推送方案" data-url="http://cstsinghua.github.io/2016/06/08/推送方案/"></div>
-</div>
-<script>
-lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
-</script>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -747,21 +720,23 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
         Thanks~
         <i class="icon icon-quote-right"></i>
     </h3>
-    <ul class="reward-items">
+    <div class="reward-content">
         
-        <li>
-            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-            <p>微信</p>
-        </li>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
-
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-        <li>
-            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-            <p>支付宝</p>
-        </li>
-        
-    </ul>
+    </div>
 </div>
 
 
@@ -782,14 +757,18 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 
 
         <p>
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
-        <p>
-            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Atypical programmer &copy; 2016 - 2017</span>
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
         </p>
     </div>
 </footer>
@@ -849,16 +828,12 @@ lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js')
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
-var duoshuoQuery = {short_name:'cstsinghua', theme: 'none'};
-lazyScripts.push('/js/embed.min.js?v=1.4.0');
-
-
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.4.0"></script>
+<script src="/js/main.min.js?v=1.6.16"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -878,7 +853,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.4.0" async></script>
+<script src="/js/search.min.js?v=1.6.16" async></script>
 
 
 
@@ -886,6 +861,9 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 
 
 </body>
