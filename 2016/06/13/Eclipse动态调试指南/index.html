@@ -27,27 +27,27 @@
     
     
     <meta name="keywords" content="动态调试">
-    <meta name="description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
+    <meta name="description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
 操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。
-e.g. java -jar apktool_2.0.1.jar">
+e.g. java -jar ap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Eclipse动态调试Android应用指南">
 <meta property="og:url" content="http://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/index.html">
 <meta property="og:site_name" content="Atypical programmer">
-<meta property="og:description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
+<meta property="og:description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
 操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。
-e.g. java -jar apktool_2.0.1.jar">
-<meta property="og:image" content="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-breakpoint.png">
-<meta property="og:image" content="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-DDMS.png">
-<meta property="og:image" content="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-relation.png">
-<meta property="og:image" content="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-debug.png">
-<meta property="og:updated_time" content="2016-06-13T07:41:13.000Z">
+e.g. java -jar ap">
+<meta property="og:image" content="https://i.imgur.com/0GOzzsD.png">
+<meta property="og:image" content="https://i.imgur.com/oD7NFxk.png">
+<meta property="og:image" content="https://i.imgur.com/n8R9QJs.png">
+<meta property="og:image" content="https://i.imgur.com/w4AFI4x.png">
+<meta property="og:updated_time" content="2017-10-11T11:34:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Eclipse动态调试Android应用指南">
-<meta name="twitter:description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
+<meta name="twitter:description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
 操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。
-e.g. java -jar apktool_2.0.1.jar">
-<meta name="twitter:image" content="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-breakpoint.png">
+e.g. java -jar ap">
+<meta name="twitter:image" content="https://i.imgur.com/0GOzzsD.png">
     
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
@@ -249,7 +249,7 @@ e.g. java -jar apktool_2.0.1.jar">
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="Eclipse动态调试指南"><a href="#Eclipse动态调试指南" class="headerlink" title="Eclipse动态调试指南"></a>Eclipse动态调试指南</h1><p>本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。</p>
+            <h1 id="Eclipse动态调试指南"><a href="#Eclipse动态调试指南" class="headerlink" title="Eclipse动态调试指南"></a>Eclipse动态调试指南</h1><p>本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。</p>
 <h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="1-反编译"><a href="#1-反编译" class="headerlink" title="1.反编译"></a>1.反编译</h2><p>对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。</p>
 <pre><code>e.g. java -jar apktool_2.0.1.jar d -d target.apk -o out
 </code></pre><p>注意:-d参数是必须的，因为这样反编译出来的代码后缀均是java，因为只有java文件才能被eclipse/netbeans识别调试。</p>
@@ -276,16 +276,16 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
 <li>Project Name随便起，Use default location选项去掉，Location选择第1步指定的out文件夹，然后Next</li>
 <li>把smali文件夹设为Source Folder，然后Finish</li>
 </ol>
-<h2 id="8-在eclipse中，在需要关注的地方添加断点"><a href="#8-在eclipse中，在需要关注的地方添加断点" class="headerlink" title="8.在eclipse中，在需要关注的地方添加断点"></a>8.在eclipse中，在需要关注的地方添加断点</h2><p>设置断点示例：<br><img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-breakpoint.png" alt="设置断点示意图"></p>
-<p>打开DDMS（路径在%android-sdks%\tools\ddms.bat）,如果在第6步中运行了修改后的程序，在DDMS的设备列表中会显示可以调试的程序。<br><img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-DDMS.png" alt="DDMS的设备列表"></p>
+<h2 id="8-在eclipse中，在需要关注的地方添加断点"><a href="#8-在eclipse中，在需要关注的地方添加断点" class="headerlink" title="8.在eclipse中，在需要关注的地方添加断点"></a>8.在eclipse中，在需要关注的地方添加断点</h2><p>设置断点示例：<br><img src="https://i.imgur.com/0GOzzsD.png" alt="设置断点示意图"></p>
+<p>打开DDMS（路径在%android-sdks%\tools\ddms.bat）,如果在第6步中运行了修改后的程序，在DDMS的设备列表中会显示可以调试的程序。<br><img src="https://i.imgur.com/oD7NFxk.png" alt="DDMS的设备列表"></p>
 <p>从上图可以看到，调试的端口为8608</p>
 <h2 id="9-现在要做的就是把代码与调试程序关联即可"><a href="#9-现在要做的就是把代码与调试程序关联即可" class="headerlink" title="9.现在要做的就是把代码与调试程序关联即可"></a>9.现在要做的就是把代码与调试程序关联即可</h2><p>回到eclipse，配置远程调试</p>
 <ol>
 <li>菜单Run -&gt; Debug -&gt; Debug Configurations</li>
 <li>双击Remote Java Application，Host处默认localhost就行，Port填第9步得到的8608，然后Apply -&gt; Debug。</li>
 </ol>
-<p>示意图：<br><img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-relation.png" alt="关联源码和程序"></p>
-<h2 id="10-切换至debug视图"><a href="#10-切换至debug视图" class="headerlink" title="10.切换至debug视图"></a>10.切换至debug视图</h2><p>看到程序已经运行并中断在下一行可执行的代码了，相关的变量可以直接查看了。示意图：<br><img src="http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-debug.png" alt="最终调试"></p>
+<p>示意图：<br><img src="https://i.imgur.com/n8R9QJs.png" alt="关联源码和程序"></p>
+<h2 id="10-切换至debug视图"><a href="#10-切换至debug视图" class="headerlink" title="10.切换至debug视图"></a>10.切换至debug视图</h2><p>看到程序已经运行并中断在下一行可执行的代码了，相关的变量可以直接查看了。示意图：<br><img src="https://i.imgur.com/w4AFI4x.png" alt="最终调试"></p>
 
         </div>
 
@@ -293,7 +293,7 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2016-06-13T07:41:13.000Z" itemprop="dateUpdated">2016-06-13 15:41:13</time>
+    Last updated: <time datetime="2017-10-11T11:34:42.000Z" itemprop="dateUpdated">2017-10-11 19:34:42</time>
 </span><br>
 
 

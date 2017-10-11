@@ -1978,9 +1978,9 @@ canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2
     <link href="http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/</id>
     <published>2016-06-13T07:41:13.000Z</published>
-    <updated>2016-06-13T07:41:13.000Z</updated>
+    <updated>2017-10-11T11:34:42.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;Eclipse动态调试指南&quot;&gt;&lt;a href=&quot;#Eclipse动态调试指南&quot; class=&quot;headerlink&quot; title=&quot;Eclipse动态调试指南&quot;&gt;&lt;/a&gt;Eclipse动态调试指南&lt;/h1&gt;&lt;p&gt;本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;Eclipse动态调试指南&quot;&gt;&lt;a href=&quot;#Eclipse动态调试指南&quot; class=&quot;headerlink&quot; title=&quot;Eclipse动态调试指南&quot;&gt;&lt;/a&gt;Eclipse动态调试指南&lt;/h1&gt;&lt;p&gt;本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。&lt;/p&gt;
 &lt;h1 id=&quot;操作步骤&quot;&gt;&lt;a href=&quot;#操作步骤&quot; class=&quot;headerlink&quot; title=&quot;操作步骤&quot;&gt;&lt;/a&gt;操作步骤&lt;/h1&gt;&lt;h2 id=&quot;1-反编译&quot;&gt;&lt;a href=&quot;#1-反编译&quot; class=&quot;headerlink&quot; title=&quot;1.反编译&quot;&gt;&lt;/a&gt;1.反编译&lt;/h2&gt;&lt;p&gt;对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;e.g. java -jar apktool_2.0.1.jar d -d target.apk -o out
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意:-d参数是必须的，因为这样反编译出来的代码后缀均是java，因为只有java文件才能被eclipse/netbeans识别调试。&lt;/p&gt;
@@ -2007,16 +2007,16 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
 &lt;li&gt;Project Name随便起，Use default location选项去掉，Location选择第1步指定的out文件夹，然后Next&lt;/li&gt;
 &lt;li&gt;把smali文件夹设为Source Folder，然后Finish&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&quot;8-在eclipse中，在需要关注的地方添加断点&quot;&gt;&lt;a href=&quot;#8-在eclipse中，在需要关注的地方添加断点&quot; class=&quot;headerlink&quot; title=&quot;8.在eclipse中，在需要关注的地方添加断点&quot;&gt;&lt;/a&gt;8.在eclipse中，在需要关注的地方添加断点&lt;/h2&gt;&lt;p&gt;设置断点示例：&lt;br&gt;&lt;img src=&quot;http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-breakpoint.png&quot; alt=&quot;设置断点示意图&quot;&gt;&lt;/p&gt;
-&lt;p&gt;打开DDMS（路径在%android-sdks%\tools\ddms.bat）,如果在第6步中运行了修改后的程序，在DDMS的设备列表中会显示可以调试的程序。&lt;br&gt;&lt;img src=&quot;http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-DDMS.png&quot; alt=&quot;DDMS的设备列表&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;8-在eclipse中，在需要关注的地方添加断点&quot;&gt;&lt;a href=&quot;#8-在eclipse中，在需要关注的地方添加断点&quot; class=&quot;headerlink&quot; title=&quot;8.在eclipse中，在需要关注的地方添加断点&quot;&gt;&lt;/a&gt;8.在eclipse中，在需要关注的地方添加断点&lt;/h2&gt;&lt;p&gt;设置断点示例：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/0GOzzsD.png&quot; alt=&quot;设置断点示意图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;打开DDMS（路径在%android-sdks%\tools\ddms.bat）,如果在第6步中运行了修改后的程序，在DDMS的设备列表中会显示可以调试的程序。&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/oD7NFxk.png&quot; alt=&quot;DDMS的设备列表&quot;&gt;&lt;/p&gt;
 &lt;p&gt;从上图可以看到，调试的端口为8608&lt;/p&gt;
 &lt;h2 id=&quot;9-现在要做的就是把代码与调试程序关联即可&quot;&gt;&lt;a href=&quot;#9-现在要做的就是把代码与调试程序关联即可&quot; class=&quot;headerlink&quot; title=&quot;9.现在要做的就是把代码与调试程序关联即可&quot;&gt;&lt;/a&gt;9.现在要做的就是把代码与调试程序关联即可&lt;/h2&gt;&lt;p&gt;回到eclipse，配置远程调试&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;菜单Run -&amp;gt; Debug -&amp;gt; Debug Configurations&lt;/li&gt;
 &lt;li&gt;双击Remote Java Application，Host处默认localhost就行，Port填第9步得到的8608，然后Apply -&amp;gt; Debug。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;示意图：&lt;br&gt;&lt;img src=&quot;http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-relation.png&quot; alt=&quot;关联源码和程序&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;10-切换至debug视图&quot;&gt;&lt;a href=&quot;#10-切换至debug视图&quot; class=&quot;headerlink&quot; title=&quot;10.切换至debug视图&quot;&gt;&lt;/a&gt;10.切换至debug视图&lt;/h2&gt;&lt;p&gt;看到程序已经运行并中断在下一行可执行的代码了，相关的变量可以直接查看了。示意图：&lt;br&gt;&lt;img src=&quot;http://172.20.154.39:8080/GodSDKBackground/dynamicDebug-debug.png&quot; alt=&quot;最终调试&quot;&gt;&lt;/p&gt;
+&lt;p&gt;示意图：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/n8R9QJs.png&quot; alt=&quot;关联源码和程序&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;10-切换至debug视图&quot;&gt;&lt;a href=&quot;#10-切换至debug视图&quot; class=&quot;headerlink&quot; title=&quot;10.切换至debug视图&quot;&gt;&lt;/a&gt;10.切换至debug视图&lt;/h2&gt;&lt;p&gt;看到程序已经运行并中断在下一行可执行的代码了，相关的变量可以直接查看了。示意图：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/w4AFI4x.png&quot; alt=&quot;最终调试&quot;&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -4261,7 +4261,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <published>2016-06-13T07:25:56.000Z</published>
     <updated>2017-03-20T09:07:38.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h1&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging，而Smali Debugging基于开源的Android反编译工具apktool。&lt;strong&gt;请注意：&lt;/strong&gt;&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h1&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging(早期Android开发采用Eclipse ADT，其动态调试请参见&lt;a href=&quot;http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot; title=&quot;Eclipse动态调试&quot;&gt;Eclipse动态调试&lt;/a&gt;，可以作为本文的步骤参考)，而Smali Debugging基于开源的Android反编译工具apktool。&lt;strong&gt;请注意：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，&lt;a href=&quot;#anchor&quot;&gt;请参见章节2&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Apktool makes possible to debug smali code step by step, watch variables, set breakpoints, etc.&lt;/p&gt;
