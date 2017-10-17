@@ -1980,7 +1980,7 @@ canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2
     <published>2016-06-13T07:41:13.000Z</published>
     <updated>2017-10-11T11:34:42.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;Eclipse动态调试指南&quot;&gt;&lt;a href=&quot;#Eclipse动态调试指南&quot; class=&quot;headerlink&quot; title=&quot;Eclipse动态调试指南&quot;&gt;&lt;/a&gt;Eclipse动态调试指南&lt;/h1&gt;&lt;p&gt;本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;Eclipse动态调试指南&quot;&gt;&lt;a href=&quot;#Eclipse动态调试指南&quot; class=&quot;headerlink&quot; title=&quot;Eclipse动态调试指南&quot;&gt;&lt;/a&gt;Eclipse动态调试指南&lt;/h1&gt;&lt;p&gt;本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，请参见&lt;a href=&quot;http://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot; title=&quot;Android studio动态调试指南&quot;&gt;Android studio动态调试指南&lt;/a&gt;），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。&lt;/p&gt;
 &lt;h1 id=&quot;操作步骤&quot;&gt;&lt;a href=&quot;#操作步骤&quot; class=&quot;headerlink&quot; title=&quot;操作步骤&quot;&gt;&lt;/a&gt;操作步骤&lt;/h1&gt;&lt;h2 id=&quot;1-反编译&quot;&gt;&lt;a href=&quot;#1-反编译&quot; class=&quot;headerlink&quot; title=&quot;1.反编译&quot;&gt;&lt;/a&gt;1.反编译&lt;/h2&gt;&lt;p&gt;对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;e.g. java -jar apktool_2.0.1.jar d -d target.apk -o out
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意:-d参数是必须的，因为这样反编译出来的代码后缀均是java，因为只有java文件才能被eclipse/netbeans识别调试。&lt;/p&gt;

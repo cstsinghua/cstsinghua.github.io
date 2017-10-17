@@ -27,16 +27,14 @@
     
     
     <meta name="keywords" content="动态调试">
-    <meta name="description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
-操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。
-e.g. java -jar ap">
+    <meta name="description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，请参见Android studio动态调试指南），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
+操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Eclipse动态调试Android应用指南">
 <meta property="og:url" content="http://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/index.html">
 <meta property="og:site_name" content="Atypical programmer">
-<meta property="og:description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
-操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。
-e.g. java -jar ap">
+<meta property="og:description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，请参见Android studio动态调试指南），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
+操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1">
 <meta property="og:image" content="https://i.imgur.com/0GOzzsD.png">
 <meta property="og:image" content="https://i.imgur.com/oD7NFxk.png">
 <meta property="og:image" content="https://i.imgur.com/n8R9QJs.png">
@@ -44,9 +42,8 @@ e.g. java -jar ap">
 <meta property="og:updated_time" content="2017-10-11T11:34:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Eclipse动态调试Android应用指南">
-<meta name="twitter:description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
-操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。
-e.g. java -jar ap">
+<meta name="twitter:description" content="Eclipse动态调试指南本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，请参见Android studio动态调试指南），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。
+操作步骤1.反编译对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1">
 <meta name="twitter:image" content="https://i.imgur.com/0GOzzsD.png">
     
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
@@ -183,7 +180,7 @@ e.g. java -jar ap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -249,7 +246,7 @@ e.g. java -jar ap">
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="Eclipse动态调试指南"><a href="#Eclipse动态调试指南" class="headerlink" title="Eclipse动态调试指南"></a>Eclipse动态调试指南</h1><p>本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，暂不阐述），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。</p>
+            <h1 id="Eclipse动态调试指南"><a href="#Eclipse动态调试指南" class="headerlink" title="Eclipse动态调试指南"></a>Eclipse动态调试指南</h1><p>本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，请参见<a href="http://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/" title="Android studio动态调试指南">Android studio动态调试指南</a>），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。</p>
 <h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="1-反编译"><a href="#1-反编译" class="headerlink" title="1.反编译"></a>1.反编译</h2><p>对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。</p>
 <pre><code>e.g. java -jar apktool_2.0.1.jar d -d target.apk -o out
 </code></pre><p>注意:-d参数是必须的，因为这样反编译出来的代码后缀均是java，因为只有java文件才能被eclipse/netbeans识别调试。</p>
@@ -293,7 +290,7 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-10-11T11:34:42.000Z" itemprop="dateUpdated">2017-10-11 19:34:42</time>
+    Last updated: <time datetime="2017-10-11T11:34:42.000Z" itemprop="dateUpdated">2017-10-11 19:34:42</time>
 </span><br>
 
 
@@ -461,7 +458,7 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&gt;onCreate(Landroid/o
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
