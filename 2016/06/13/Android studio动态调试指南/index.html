@@ -35,11 +35,22 @@ SmaliDebugging has been marked as depr">
 <meta property="og:site_name" content="Atypical programmer">
 <meta property="og:description" content="Android studio动态调试Android studio动态调试实际上是基于Smali Debugging(早期Android开发采用Eclipse ADT，其动态调试请参见Eclipse动态调试，可以作为本文的步骤参考)，而Smali Debugging基于开源的Android反编译工具apktool。请注意：
 SmaliDebugging has been marked as depr">
+<meta property="og:image" content="https://i.imgur.com/juKDS7S.png">
+<meta property="og:image" content="https://i.imgur.com/bz49aqX.png">
+<meta property="og:image" content="https://i.imgur.com/SPsN1WM.png">
+<meta property="og:image" content="https://i.imgur.com/3Jr4Vrn.png">
+<meta property="og:image" content="https://i.imgur.com/b1OfikC.png">
+<meta property="og:image" content="https://i.imgur.com/y9PLNZJ.png">
+<meta property="og:image" content="https://i.imgur.com/iHKGQu5.png">
+<meta property="og:image" content="https://i.imgur.com/ANH5sVi.png">
+<meta property="og:image" content="https://i.imgur.com/576Irpi.png">
+<meta property="og:image" content="https://i.imgur.com/0QHwwGj.png">
 <meta property="og:updated_time" content="2017-10-17T07:42:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android studio动态调试">
 <meta name="twitter:description" content="Android studio动态调试Android studio动态调试实际上是基于Smali Debugging(早期Android开发采用Eclipse ADT，其动态调试请参见Eclipse动态调试，可以作为本文的步骤参考)，而Smali Debugging基于开源的Android反编译工具apktool。请注意：
 SmaliDebugging has been marked as depr">
+<meta name="twitter:image" content="https://i.imgur.com/juKDS7S.png">
     
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
@@ -175,7 +186,7 @@ SmaliDebugging has been marked as depr">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -281,7 +292,7 @@ SmaliDebugging has been marked as depr">
 </li>
 <li><p>修改反编译得到的文件，比如替换图片，增删代码等等操作(根据实际需要进行)，另外就是<strong>设置调试标记(如没有特殊要求，除了设置调试标记外，可以不修改其他任何文件)</strong>，即在输出的out文件夹中，用文本编辑工具打开AndroidManifest.xml，在application节点中设置属性android:debuggable=”true”。比如：<br>  <code>&lt;application android:debuggable=&quot;true&quot; android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot; android:name=&quot;com.boyaa.godsdk.core.MutiUnipayApplication&quot;&gt;</code></p>
 </li>
-<li><p>Build new apk in debug mode(用apktool重新编译打包为debug.apk): </p>
+<li><p>Build new apk in debug mode(用apktool重新编译打包为debug.apk,注意：回编生成的debug.apk是没有进行签名的，也就无法直接安装在手机上，因此需要进行步骤4): </p>
 <blockquote>
 <p><code>apktool b -d out -o debug.apk</code></p>
 </blockquote>
@@ -290,24 +301,33 @@ SmaliDebugging has been marked as depr">
 <p><code>java -jar apktool_x.x.x.jar b -d out -o debug.apk</code></p>
 </blockquote>
 </li>
-<li><p>Sign, install and run new apk(对debug.apk签名(建议采用安卓逆向助手)，生成debug_sign.apk，然后安装debug_sign.apk至手机并允许该apk).<br> 当然也可以直接采用JDK里面的签名工具通过命令行手动进行签名，比如：<br> <code>&quot;jarsigner&quot; -keystore &quot;C:\Users\CoulsonChen\Desktop\kop.keystore&quot; -storepass &quot;kop1122334&quot; -keypass &quot;kop1122334&quot; &quot;D:\t\125.apk&quot; &quot;kop&quot; -sigalg SHA1withRSA -digestalg SHA1</code></p>
+<li><p>Sign, install and run new apk(对debug.apk签名(建议采用<a href="/Android逆向助手_v2.2.zip">安卓逆向助手</a> )，生成debug_sign.apk，然后安装debug_sign.apk至手机并<strong>启动运行</strong>该apk).<br> 当然也可以直接采用JDK里面的签名工具通过命令行手动进行签名，比如：<br> <code>&quot;jarsigner&quot; -keystore &quot;C:\Users\CoulsonChen\Desktop\kop.keystore&quot; -storepass &quot;kop1122334&quot; -keypass &quot;kop1122334&quot; &quot;D:\t\125.apk&quot; &quot;kop&quot; -sigalg SHA1withRSA -digestalg SHA1</code></p>
 </li>
 <li><strong>Follow sub-instructions below depending on IDE(参见下面Android studio的后续子步骤，同时可参考<a href="http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/">Eclipse 动态调试指南的7-10步</a>).</strong></li>
 </ol>
-<h3 id="IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤"><a href="#IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤" class="headerlink" title="IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)"></a>IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)</h3><ol>
-<li><p>In IntelliJ add new Java Module Project selecting the “out” directory as project location and the “smali” subdirectory as content root dir(在Android studio中，导入一个java module project，选择apktool反编译时的out目录作为项目位置引入，引入之后，将out下的smali目录设置为内容根目录).</p>
+<h3 id="IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤"><a href="#IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤" class="headerlink" title="IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)"></a>IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)</h3><p><strong>注意：在完成上述的一般性步骤之后，再进行这里的子步骤。</strong></p>
+<ol>
+<li><p>In IntelliJ add new Java Module Project selecting the “out” directory as project location and the “smali” subdirectory as content root dir(在Android studio中，本文Android studio的版本是2.3.3，选择菜单”File”–&gt;”New”–&gt;”import project”，选择apktool反编译时的out目录作为项目位置引入，引入之后，将out下的smali目录设置为内容根目录).具体请参见下面截图示意图：</p>
+<p> a.导入项目，<strong>注意：导入时选择默认设置即可，不断点击next直到导入结束。如果在中途出现错误，注意下Android SDK的选择即可</strong></p>
+<p> <img src="https://i.imgur.com/juKDS7S.png" alt="import project"></p>
+<p> <img src="https://i.imgur.com/bz49aqX.png" alt="select project"></p>
+<p> b.成功导入之后，以”project”视图展示项目，选中smali目录，鼠标右键点击，在弹出菜单中按照下图勾选(即将smali目录设置为源码根目录)</p>
+<p> <img src="https://i.imgur.com/SPsN1WM.png" alt="mark src root"></p>
 </li>
-<li><p>Run Monitor (Android SDK /tools folder), find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.</p>
+<li><p>Run Monitor (Android SDK /tools folder), find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.先启动调试的apk，然后打开Android Device Monitor,如下图所示：</p>
+<p> a.打开Android Device Monitor(从Android SDK安装目录下的tools子目录下的monitor.bat(针对windows系统)打开也可)<br> <img src="https://i.imgur.com/3Jr4Vrn.png" alt="DDMS"></p>
+<p> b.查看目标程序的<strong>调试端口(每次启动目标程序，端口是系统分配，可能会变化，下面的步骤4中的debugger配置的端口必须与这个值一致)</strong>，如下图所示：<br> <img src="https://i.imgur.com/b1OfikC.png" alt="Debug port"></p>
 </li>
-<li><p>In IntelliJ: Debug -&gt; Edit Configurations. Since this is a new project, you will have to create a Debugger.</p>
+<li><p>In IntelliJ: Debug -&gt; Edit Configurations. Since this is a new project, you will have to create a Debugger.即在Debug菜单中选择<code>Edit Configurations</code>，添加一个调试器。如下图所示：</p>
+<p> a.添加调试配置<br> <img src="https://i.imgur.com/y9PLNZJ.png" alt="edit config"></p>
 </li>
-<li><p>Create a Remote Debugger, with the settings on “Attach” and setting the Port to 8700 (Or whatever Monitor said). The rest of fields should be ok, click “Ok”.</p>
+<li><p>Create a Remote Debugger, with the settings on “Attach” and setting the Port to 8700 (Or whatever Monitor said). The rest of fields should be ok, click “Ok”.<strong>创建Debugger，注意配置的端口必须与上面步骤2中查询到的调试端口一致。</strong><br> a.创建debugger<br> <img src="https://i.imgur.com/iHKGQu5.png" alt="add debugger"></p>
 </li>
-<li><p>Start the debugging session. You will see some info in a log and debugging buttons will show up in top panel.</p>
+<li><p>Start the debugging session. You will see some info in a log and debugging buttons will show up in top panel.从Android studio的工具栏中启动调试会话，如下图：<br> <img src="https://i.imgur.com/ANH5sVi.png" alt="start debug"></p>
 </li>
-<li><p>Set breakpoint. You must select line with some instruction, you can’t set breakpoint on lines starting with “.”, “:” or “#”.</p>
+<li><p>Set breakpoint. You must select line with some instruction, you can’t set breakpoint on lines starting with “.”, “:” or “#”.这一步主要设置断点，以”.”/“:”/“#”开头的行是无法设置断点的，因为这里是基于smali调试，如不熟悉其语法，可先在google上搜索以了解smali的语法和相关的原理。选择要观察的程序点，在对应的代码行设置断点，示例如下：<br> <img src="https://i.imgur.com/576Irpi.png" alt="set breakpoint"></p>
 </li>
-<li><p>Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.</p>
+<li><p>Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.在手机端，操作目标程序，如果恰好你执行的操作的逻辑段设置了断点，那么线程将会被挂起，从而可以进入调试，查看变量的值，等等。<br> <img src="https://i.imgur.com/0QHwwGj.png" alt="view variables"></p>
 </li>
 </ol>
 <h3 id="Netbeans-instructions-针对Netbeans的后续操作步骤"><a href="#Netbeans-instructions-针对Netbeans的后续操作步骤" class="headerlink" title="Netbeans instructions(针对Netbeans的后续操作步骤)"></a>Netbeans instructions(针对Netbeans的后续操作步骤)</h3><ol>
@@ -334,7 +354,7 @@ SmaliDebugging has been marked as depr">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-10-17T07:42:06.000Z" itemprop="dateUpdated">2017-10-17 15:42:06</time>
+    最後更新時間：<time datetime="2017-10-17T07:42:06.000Z" itemprop="dateUpdated">2017-10-17 15:42:06</time>
 </span><br>
 
 
@@ -502,7 +522,7 @@ SmaliDebugging has been marked as depr">
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
         </p>
     </div>
     <div class="bottom">
