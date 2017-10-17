@@ -35,7 +35,7 @@ SmaliDebugging has been marked as depr">
 <meta property="og:site_name" content="Atypical programmer">
 <meta property="og:description" content="Android studio动态调试Android studio动态调试实际上是基于Smali Debugging(早期Android开发采用Eclipse ADT，其动态调试请参见Eclipse动态调试，可以作为本文的步骤参考)，而Smali Debugging基于开源的Android反编译工具apktool。请注意：
 SmaliDebugging has been marked as depr">
-<meta property="og:updated_time" content="2017-03-20T09:07:38.000Z">
+<meta property="og:updated_time" content="2017-10-17T07:42:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android studio动态调试">
 <meta name="twitter:description" content="Android studio动态调试Android studio动态调试实际上是基于Smali Debugging(早期Android开发采用Eclipse ADT，其动态调试请参见Eclipse动态调试，可以作为本文的步骤参考)，而Smali Debugging基于开源的Android反编译工具apktool。请注意：
@@ -43,7 +43,7 @@ SmaliDebugging has been marked as depr">
     
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
-    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/style.css?v=1.6.16">
     <script>window.lazyScripts=[]</script>
 
@@ -175,7 +175,7 @@ SmaliDebugging has been marked as depr">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -216,7 +216,7 @@ SmaliDebugging has been marked as depr">
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-studio动态调试"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android studio动态调试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#General-information-概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">General information(概述)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#General-instructions-一般性步骤"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">General instructions(一般性步骤)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IntelliJ-Android-Studio-instructions-针对Android-studio的操作步骤"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">IntelliJ (Android Studio) instructions(针对Android studio的操作步骤)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Netbeans-instructions-针对Netbeans的操作步骤"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">Netbeans instructions(针对Netbeans的操作步骤)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Limitations-Issues-限制和已知问题"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Limitations/Issues(限制和已知问题)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#apktool-2-1-0之后版本动态调试-适用于Android-studio"><span class="post-toc-number">2.</span> <span class="post-toc-text">apktool 2.1.0之后版本动态调试(适用于Android studio)</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-studio动态调试"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android studio动态调试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#General-information-概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">General information(概述)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#General-instructions-一般性步骤"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">General instructions(一般性步骤)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Netbeans-instructions-针对Netbeans的后续操作步骤"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">Netbeans instructions(针对Netbeans的后续操作步骤)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Limitations-Issues-限制和已知问题"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Limitations/Issues(限制和已知问题)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#apktool-2-1-0之后版本动态调试-适用于Android-studio"><span class="post-toc-number">2.</span> <span class="post-toc-text">apktool 2.1.0之后版本动态调试(适用于Android studio)</span></a></li></ol>
         </nav>
     </aside>
     
@@ -245,7 +245,7 @@ SmaliDebugging has been marked as depr">
 <p><strong>SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.</strong> </p>
 <p>因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，<a href="#anchor">请参见章节2</a></p>
 <p>Apktool makes possible to debug smali code step by step, watch variables, set breakpoints, etc.</p>
-<p>本文出自apktool官方网站说明<a href="http://ibotpeaches.github.io/Apktool/documentation/" title="smali debugging" target="_blank" rel="external">http://ibotpeaches.github.io/Apktool/documentation/</a></p>
+<p>本文出自apktool官方网站说明<a href="https://ibotpeaches.github.io/Apktool/documentation/#smali-debugging" title="smali debugging" target="_blank" rel="external">https://ibotpeaches.github.io/Apktool/documentation/#smali-debugging</a></p>
 <h2 id="General-information-概述"><a href="#General-information-概述" class="headerlink" title="General information(概述)"></a>General information(概述)</h2><ul>
 <li>Generally we need several things to run Java debugging session: <ol>
 <li>debugger server (usually Java VM)</li>
@@ -268,14 +268,34 @@ SmaliDebugging has been marked as depr">
 <p>To successfully run debug sessions, the apk must be both decoded and built in debug mode. Decoding with debug decodes the application differently to allow the debug rebuild option to inject lines allowing the debugger to identify variables and types.-d / –debug</p>
 </blockquote>
 <h2 id="General-instructions-一般性步骤"><a href="#General-instructions-一般性步骤" class="headerlink" title="General instructions(一般性步骤)"></a>General instructions(一般性步骤)</h2><p>Above information is enough to debug smali code using apktool, but if you aren’t familiar with DDMS and Java debugging, then you probably still don’t know how to do it. Below are simple instructions for doing it using IntelliJ or Netbeans. </p>
+<p>首先，请先下载apktool工具并熟悉其命令的使用，可参见其官网说明<a href="https://ibotpeaches.github.io/Apktool/install/" title="apktool install" target="_blank" rel="external">https://ibotpeaches.github.io/Apktool/install/</a>。根据你的操作系统选择对应的版本，其实最终都是jar包，可以直接下载其<a href="https://bitbucket.org/iBotPeaches/apktool/downloads/" title="apktool jar download" target="_blank" rel="external">jar版本</a>，然后使用的时候采用命令<code>java -jar apktool_x.x.x.jar [cmd ...]</code></p>
 <ol>
-<li>Decode apk in debug mode: $ apktool d -d -o out app.apk</li>
-<li>Build new apk in debug mode: $ apktool b -d out</li>
-<li>Sign, install and run new apk.</li>
-<li><strong>Follow sub-instructions below depending on IDE.</strong></li>
+<li><p>Decode apk in debug mode(利用apktool反编译目标apk，命令格式如下，其中out表示输出目录，可以根据需要替换成你自己指定的输出目录): </p>
+<blockquote>
+<p> <code>apktool d -d -o out app.apk</code> </p>
+</blockquote>
+<p>或者 </p>
+<blockquote>
+<p> <code>java -jar apktool_x.x.x.jar d -d -o out app.apk</code></p>
+</blockquote>
+</li>
+<li><p>修改反编译得到的文件，比如替换图片，增删代码等等操作(根据实际需要进行)，另外就是<strong>设置调试标记(如没有特殊要求，除了设置调试标记外，可以不修改其他任何文件)</strong>，即在输出的out文件夹中，用文本编辑工具打开AndroidManifest.xml，在application节点中设置属性android:debuggable=”true”。比如：<br>  <code>&lt;application android:debuggable=&quot;true&quot; android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot; android:name=&quot;com.boyaa.godsdk.core.MutiUnipayApplication&quot;&gt;</code></p>
+</li>
+<li><p>Build new apk in debug mode(用apktool重新编译打包为debug.apk): </p>
+<blockquote>
+<p><code>apktool b -d out -o debug.apk</code></p>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<p><code>java -jar apktool_x.x.x.jar b -d out -o debug.apk</code></p>
+</blockquote>
+</li>
+<li><p>Sign, install and run new apk(对debug.apk签名(建议采用安卓逆向助手)，生成debug_sign.apk，然后安装debug_sign.apk至手机并允许该apk).<br> 当然也可以直接采用JDK里面的签名工具通过命令行手动进行签名，比如：<br> <code>&quot;jarsigner&quot; -keystore &quot;C:\Users\CoulsonChen\Desktop\kop.keystore&quot; -storepass &quot;kop1122334&quot; -keypass &quot;kop1122334&quot; &quot;D:\t\125.apk&quot; &quot;kop&quot; -sigalg SHA1withRSA -digestalg SHA1</code></p>
+</li>
+<li><strong>Follow sub-instructions below depending on IDE(参见下面Android studio的后续子步骤，同时可参考<a href="http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/">Eclipse 动态调试指南的7-10步</a>).</strong></li>
 </ol>
-<h3 id="IntelliJ-Android-Studio-instructions-针对Android-studio的操作步骤"><a href="#IntelliJ-Android-Studio-instructions-针对Android-studio的操作步骤" class="headerlink" title="IntelliJ (Android Studio) instructions(针对Android studio的操作步骤)"></a>IntelliJ (Android Studio) instructions(针对Android studio的操作步骤)</h3><ol>
-<li><p>In IntelliJ add new Java Module Project selecting the “out” directory as project location and the “smali” subdirectory as content root dir.</p>
+<h3 id="IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤"><a href="#IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤" class="headerlink" title="IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)"></a>IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)</h3><ol>
+<li><p>In IntelliJ add new Java Module Project selecting the “out” directory as project location and the “smali” subdirectory as content root dir(在Android studio中，导入一个java module project，选择apktool反编译时的out目录作为项目位置引入，引入之后，将out下的smali目录设置为内容根目录).</p>
 </li>
 <li><p>Run Monitor (Android SDK /tools folder), find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.</p>
 </li>
@@ -290,7 +310,7 @@ SmaliDebugging has been marked as depr">
 <li><p>Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.</p>
 </li>
 </ol>
-<h3 id="Netbeans-instructions-针对Netbeans的操作步骤"><a href="#Netbeans-instructions-针对Netbeans的操作步骤" class="headerlink" title="Netbeans instructions(针对Netbeans的操作步骤)"></a>Netbeans instructions(针对Netbeans的操作步骤)</h3><ol>
+<h3 id="Netbeans-instructions-针对Netbeans的后续操作步骤"><a href="#Netbeans-instructions-针对Netbeans的后续操作步骤" class="headerlink" title="Netbeans instructions(针对Netbeans的后续操作步骤)"></a>Netbeans instructions(针对Netbeans的后续操作步骤)</h3><ol>
 <li><p>In Netbeans add new Java Project with Existing Sources, select “out” directory as project root and “smali” subdirectory as sources dir.</p>
 </li>
 <li><p>Run DDMS, find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.</p>
@@ -314,7 +334,7 @@ SmaliDebugging has been marked as depr">
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-03-20T09:07:38.000Z" itemprop="dateUpdated">2017-03-20 17:07:38</time>
+    Last updated: <time datetime="2017-10-17T07:42:06.000Z" itemprop="dateUpdated">2017-10-17 15:42:06</time>
 </span><br>
 
 
@@ -482,7 +502,7 @@ SmaliDebugging has been marked as depr">
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">

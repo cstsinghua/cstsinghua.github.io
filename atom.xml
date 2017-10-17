@@ -4259,13 +4259,13 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <link href="http://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
     <id>http://cstsinghua.github.io/2016/06/13/Android studio动态调试指南/</id>
     <published>2016-06-13T07:25:56.000Z</published>
-    <updated>2017-03-20T09:07:38.000Z</updated>
+    <updated>2017-10-17T07:42:06.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h1&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging(早期Android开发采用Eclipse ADT，其动态调试请参见&lt;a href=&quot;http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot; title=&quot;Eclipse动态调试&quot;&gt;Eclipse动态调试&lt;/a&gt;，可以作为本文的步骤参考)，而Smali Debugging基于开源的Android反编译工具apktool。&lt;strong&gt;请注意：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，&lt;a href=&quot;#anchor&quot;&gt;请参见章节2&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Apktool makes possible to debug smali code step by step, watch variables, set breakpoints, etc.&lt;/p&gt;
-&lt;p&gt;本文出自apktool官方网站说明&lt;a href=&quot;http://ibotpeaches.github.io/Apktool/documentation/&quot; title=&quot;smali debugging&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ibotpeaches.github.io/Apktool/documentation/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本文出自apktool官方网站说明&lt;a href=&quot;https://ibotpeaches.github.io/Apktool/documentation/#smali-debugging&quot; title=&quot;smali debugging&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://ibotpeaches.github.io/Apktool/documentation/#smali-debugging&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;General-information-概述&quot;&gt;&lt;a href=&quot;#General-information-概述&quot; class=&quot;headerlink&quot; title=&quot;General information(概述)&quot;&gt;&lt;/a&gt;General information(概述)&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Generally we need several things to run Java debugging session: &lt;ol&gt;
 &lt;li&gt;debugger server (usually Java VM)&lt;/li&gt;
@@ -4288,14 +4288,34 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 &lt;p&gt;To successfully run debug sessions, the apk must be both decoded and built in debug mode. Decoding with debug decodes the application differently to allow the debug rebuild option to inject lines allowing the debugger to identify variables and types.-d / –debug&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;General-instructions-一般性步骤&quot;&gt;&lt;a href=&quot;#General-instructions-一般性步骤&quot; class=&quot;headerlink&quot; title=&quot;General instructions(一般性步骤)&quot;&gt;&lt;/a&gt;General instructions(一般性步骤)&lt;/h2&gt;&lt;p&gt;Above information is enough to debug smali code using apktool, but if you aren’t familiar with DDMS and Java debugging, then you probably still don’t know how to do it. Below are simple instructions for doing it using IntelliJ or Netbeans. &lt;/p&gt;
+&lt;p&gt;首先，请先下载apktool工具并熟悉其命令的使用，可参见其官网说明&lt;a href=&quot;https://ibotpeaches.github.io/Apktool/install/&quot; title=&quot;apktool install&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://ibotpeaches.github.io/Apktool/install/&lt;/a&gt;。根据你的操作系统选择对应的版本，其实最终都是jar包，可以直接下载其&lt;a href=&quot;https://bitbucket.org/iBotPeaches/apktool/downloads/&quot; title=&quot;apktool jar download&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;jar版本&lt;/a&gt;，然后使用的时候采用命令&lt;code&gt;java -jar apktool_x.x.x.jar [cmd ...]&lt;/code&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Decode apk in debug mode: $ apktool d -d -o out app.apk&lt;/li&gt;
-&lt;li&gt;Build new apk in debug mode: $ apktool b -d out&lt;/li&gt;
-&lt;li&gt;Sign, install and run new apk.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Follow sub-instructions below depending on IDE.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Decode apk in debug mode(利用apktool反编译目标apk，命令格式如下，其中out表示输出目录，可以根据需要替换成你自己指定的输出目录): &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; &lt;code&gt;apktool d -d -o out app.apk&lt;/code&gt; &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;或者 &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; &lt;code&gt;java -jar apktool_x.x.x.jar d -d -o out app.apk&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;修改反编译得到的文件，比如替换图片，增删代码等等操作(根据实际需要进行)，另外就是&lt;strong&gt;设置调试标记(如没有特殊要求，除了设置调试标记外，可以不修改其他任何文件)&lt;/strong&gt;，即在输出的out文件夹中，用文本编辑工具打开AndroidManifest.xml，在application节点中设置属性android:debuggable=”true”。比如：&lt;br&gt;  &lt;code&gt;&amp;lt;application android:debuggable=&amp;quot;true&amp;quot; android:icon=&amp;quot;@drawable/icon&amp;quot; android:label=&amp;quot;@string/app_name&amp;quot; android:name=&amp;quot;com.boyaa.godsdk.core.MutiUnipayApplication&amp;quot;&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Build new apk in debug mode(用apktool重新编译打包为debug.apk): &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;apktool b -d out -o debug.apk&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;或者&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;java -jar apktool_x.x.x.jar b -d out -o debug.apk&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Sign, install and run new apk(对debug.apk签名(建议采用安卓逆向助手)，生成debug_sign.apk，然后安装debug_sign.apk至手机并允许该apk).&lt;br&gt; 当然也可以直接采用JDK里面的签名工具通过命令行手动进行签名，比如：&lt;br&gt; &lt;code&gt;&amp;quot;jarsigner&amp;quot; -keystore &amp;quot;C:\Users\CoulsonChen\Desktop\kop.keystore&amp;quot; -storepass &amp;quot;kop1122334&amp;quot; -keypass &amp;quot;kop1122334&amp;quot; &amp;quot;D:\t\125.apk&amp;quot; &amp;quot;kop&amp;quot; -sigalg SHA1withRSA -digestalg SHA1&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Follow sub-instructions below depending on IDE(参见下面Android studio的后续子步骤，同时可参考&lt;a href=&quot;http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot;&gt;Eclipse 动态调试指南的7-10步&lt;/a&gt;).&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&quot;IntelliJ-Android-Studio-instructions-针对Android-studio的操作步骤&quot;&gt;&lt;a href=&quot;#IntelliJ-Android-Studio-instructions-针对Android-studio的操作步骤&quot; class=&quot;headerlink&quot; title=&quot;IntelliJ (Android Studio) instructions(针对Android studio的操作步骤)&quot;&gt;&lt;/a&gt;IntelliJ (Android Studio) instructions(针对Android studio的操作步骤)&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;In IntelliJ add new Java Module Project selecting the “out” directory as project location and the “smali” subdirectory as content root dir.&lt;/p&gt;
+&lt;h3 id=&quot;IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤&quot;&gt;&lt;a href=&quot;#IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤&quot; class=&quot;headerlink&quot; title=&quot;IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)&quot;&gt;&lt;/a&gt;IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;In IntelliJ add new Java Module Project selecting the “out” directory as project location and the “smali” subdirectory as content root dir(在Android studio中，导入一个java module project，选择apktool反编译时的out目录作为项目位置引入，引入之后，将out下的smali目录设置为内容根目录).&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Run Monitor (Android SDK /tools folder), find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.&lt;/p&gt;
 &lt;/li&gt;
@@ -4310,7 +4330,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 &lt;li&gt;&lt;p&gt;Trigger some action in application. If you run at breakpoint, then thread should stop and you will be able to debug step by step, watch variables, etc.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&quot;Netbeans-instructions-针对Netbeans的操作步骤&quot;&gt;&lt;a href=&quot;#Netbeans-instructions-针对Netbeans的操作步骤&quot; class=&quot;headerlink&quot; title=&quot;Netbeans instructions(针对Netbeans的操作步骤)&quot;&gt;&lt;/a&gt;Netbeans instructions(针对Netbeans的操作步骤)&lt;/h3&gt;&lt;ol&gt;
+&lt;h3 id=&quot;Netbeans-instructions-针对Netbeans的后续操作步骤&quot;&gt;&lt;a href=&quot;#Netbeans-instructions-针对Netbeans的后续操作步骤&quot; class=&quot;headerlink&quot; title=&quot;Netbeans instructions(针对Netbeans的后续操作步骤)&quot;&gt;&lt;/a&gt;Netbeans instructions(针对Netbeans的后续操作步骤)&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;In Netbeans add new Java Project with Existing Sources, select “out” directory as project root and “smali” subdirectory as sources dir.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Run DDMS, find your application on a list and click it. Note port information in last column - it should be something like “86xx / 8700”.&lt;/p&gt;
