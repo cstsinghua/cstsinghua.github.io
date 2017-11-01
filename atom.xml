@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2017-09-30T06:07:29.000Z</updated>
+  <updated>2017-11-01T03:24:13.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,75 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android手机屏幕实时展示</title>
+    <link href="http://cstsinghua.github.io/2017/11/01/Android%E5%AE%9E%E6%97%B6%E5%B1%8F%E5%B9%95%E5%B1%95%E7%A4%BA/"/>
+    <id>http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/</id>
+    <published>2017-11-01T02:04:55.000Z</published>
+    <updated>2017-11-01T03:24:13.000Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;在Android开发中，有这样的情形：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;手机连接在本机，但是因为在一边调试，不方便同时拿着手机看结果(手机屏幕和PC屏幕来回切换较麻烦)，期望手机屏幕与调试程序的屏幕同时在PC的屏幕一并展示，这样更加便捷；&lt;/li&gt;
+&lt;li&gt;调试(或测试)的手机并非连接在本机上，此时需要在测试的时候在本机上同步查看远端手机的屏幕(调试时实时的展示)。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在上述情况下，就需要将调试的手机屏幕通过一定技术手段在PC屏幕上实时展示。通过查询资料和实践，目前总结出两种方法可以达到目标。&lt;/p&gt;
+&lt;h1 id=&quot;原生adb方式&quot;&gt;&lt;a href=&quot;#原生adb方式&quot; class=&quot;headerlink&quot; title=&quot;原生adb方式&quot;&gt;&lt;/a&gt;原生adb方式&lt;/h1&gt;&lt;p&gt;我们知道，Android调试都是通过&lt;a href=&quot;https://developer.android.com/studio/command-line/adb.html&quot; title=&quot;官方adb介绍&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;adb&lt;/a&gt;来实现。adb原理看似简单，其实涉及到的知识和原理很多也比较复杂，要想完全弄清楚adb的原理和运行机制，除了查阅官方资料、网上的相关资料(这里提供两份参考资料，请下载&lt;a href=&quot;/adb原理.pdf&quot;&gt;adb原理.pdf&lt;/a&gt;、&lt;a href=&quot;/Android远程控制技术.pdf&quot;&gt;Android远程控制技术.pdf&lt;/a&gt;，不过个人认为这两份资料并未将adb原理讲透将明白，也缺乏实际的场景抓包说明)，实际动手(抓包、测试)都不可少，本文暂不对adb原理进行展开，后续会单独写一篇adb的原理介绍。&lt;/p&gt;
+&lt;p&gt;这里以windows系统为例，开发人员常使用adb.exe，在命令行下执行各种adb命令，比如截图&lt;code&gt;adb shell screencap /sdcard/your_path.png&lt;/code&gt;。那么既然通过adb命令可以截图，我们是否可以想到，如果不停地执行截图，然后将N张截图以类似播放电影的方式连贯起来，那不就相当于实时查看手机屏幕了吗。&lt;/p&gt;
+&lt;p&gt;看起来这个方式应该可行，但是存在两个问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;adb shell screencap&lt;/code&gt;命令截图，耗时还是比较多，一般在1-2s之间，而且对手机资源消耗也比较多，不停截图的话，CPU和其他资源占用就更多了，可能影响正在调试的APP的测试指标；&lt;/li&gt;
+&lt;li&gt;还需要单独对adb.exe的命令行使用进行代码封装，原理虽简单，但是做这些重复性的活很让人厌烦。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对于问题1，我们可以通过minicap的方式来解决；对于问题2，其实Android SDK包里面已经有相关工具库可供使用，那就是ddmlib，位于&lt;code&gt;%ANDROID_HOME%\tools\lib\&lt;/code&gt;目录下(其中&lt;code&gt;%ANDROID_HOME%&lt;/code&gt;表示Android SDK的安装目录)，名字一般叫&lt;code&gt;ddmlib-x.y.z-xx.jar&lt;/code&gt;(x.y.z-xx表示版本号，建议更新Android SDK至最新版)。关于ddmlib，网上资料相对较少，可以查看jar包的源码进行详细的研究，也可以参考网上已有的部分资料(比如github上一个ddmlib封装库&lt;a href=&quot;https://github.com/cosysoft/device&quot; title=&quot;cosysoft/device&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/cosysoft/device&lt;/a&gt;)。ddmlib相当于提供了一个adb client，提供了调用的接口，可以实现连接设备，发送和执行adb命令，获取结果等等，也就是说，大家平时通过adb.exe能干的事情，ddmlib都可以做到，提供了很好的封装和调用接口，其实Android的DDMS工具和其他类似工具等底层都是通过调用ddmlib实现调试和操作的。&lt;/p&gt;
+&lt;p&gt;但是，我们这里仍然不直接使用ddmlib，为什么呢，答案就是“站在巨人的肩膀上前进”。其实Github上已有一个较好的实现&lt;a href=&quot;https://github.com/adakoda/android-screen-monitor&quot; title=&quot;android-screen-monitor&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;android-screen-monitor&lt;/a&gt;，该实现基于ddmlib，另外还使用到chimpchat(与ddmlib库一样，位于位于&lt;code&gt;%ANDROID_HOME%\tools\lib\&lt;/code&gt;目录下，名字一般叫&lt;code&gt;ddmlib-x.y.z-xx.jar&lt;/code&gt;)和&lt;a href=&quot;https://github.com/google/guava&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;google的guava库&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;从Github将&lt;a href=&quot;https://github.com/adakoda/android-screen-monitor&quot; title=&quot;android-screen-monitor&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;android-screen-monitor&lt;/a&gt;工程clone下来之后，通过Eclipse导入工程，效果如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/BQ6uUWw.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;对工程源码进行定制或二次开发之后，可以将工程导出为一个可执行jar包。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/s3VwaWb.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;minicap和minitouch&quot;&gt;&lt;a href=&quot;#minicap和minitouch&quot; class=&quot;headerlink&quot; title=&quot;minicap和minitouch&quot;&gt;&lt;/a&gt;minicap和minitouch&lt;/h1&gt;&lt;p&gt;该方式基于Github上一个比较有名的云测手机测试项目&lt;a href=&quot;https://github.com/openstf/stf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;STF项目&lt;/a&gt;的两个子项目&lt;a href=&quot;https://github.com/openstf/minicap&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;minicap&lt;/a&gt;、&lt;a href=&quot;https://github.com/openstf/minitouch&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;minitouch&lt;/a&gt;。其中minicap实现屏幕实时展示，而minitouch实现模拟点击和滑动，从而可以在本机上直接操作手机，就如同直接在手机上点击和滑动一样。&lt;/p&gt;
+&lt;p&gt;minicap的原理大致为(可详细查看minicap Github的readme)：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在手机端通过minicap.so(Android NDK开发，其基于Android底层开发，从设备底层获取屏幕的数据)&lt;/li&gt;
+&lt;li&gt;minicap可执行文件，在手机端开启一个socket server，接收来自PC客户端的连接，将屏幕帧流不断发送至PC端的socket client&lt;/li&gt;
+&lt;li&gt;PC端通过adb forward命令实现socket连接转发，因为PC连接Android手机一切都通过adb server。PC的socket client通过adb forward转发连接至minicap开启的socket server，读取其发送的帧流，然后在PC端处理之后即可通过GUI程序或者web页面展示。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关于minicap实现手机屏幕实时展示，官方Github仓库的sample中提供了NodeJS的示例，而python和java的示例在网上已有很多人实现过(本文后续会提供一份python版本的实现)，可以参阅：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://testerhome.com/topics/3115&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;STF 框架之 minicap 工具&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/777af34b4f21&quot; title=&quot;Python实现minicap协议解析并通过PyQt渲染&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Python实现minicap协议解析并通过PyQt渲染&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;在Android开发中，有这样的情形：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;手机连接在本机，但是因为在一边调试，不
+    
+    </summary>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+    
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
+    
+      <category term="实时" scheme="http://cstsinghua.github.io/tags/%E5%AE%9E%E6%97%B6/"/>
+    
+      <category term="real time" scheme="http://cstsinghua.github.io/tags/real-time/"/>
+    
+      <category term="screen" scheme="http://cstsinghua.github.io/tags/screen/"/>
+    
+      <category term="展示" scheme="http://cstsinghua.github.io/tags/%E5%B1%95%E7%A4%BA/"/>
+    
+      <category term="display" scheme="http://cstsinghua.github.io/tags/display/"/>
+    
+  </entry>
   
   <entry>
     <title>Android应用包apk双击安装和文件图标定制</title>

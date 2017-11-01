@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/">
+    
+    
+    <title>Android手机屏幕实时展示 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,实时,real time,screen,展示,display">
+    <meta name="description" content="背景在Android开发中，有这样的情形：
+
+手机连接在本机，但是因为在一边调试，不方便同时拿着手机看结果(手机屏幕和PC屏幕来回切换较麻烦)，期望手机屏幕与调试程序的屏幕同时在PC的屏幕一并展示，这样更加便捷；
+调试(或测试)的手机并非连接在本机上，此时需要在测试的时候在本机上同步查看远端手机的屏幕(调试时实时的展示)。
+
+在上述情况下，就需要将调试的手机屏幕通过一定技术手段在PC屏幕上实时展">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android手机屏幕实时展示">
+<meta property="og:url" content="http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="背景在Android开发中，有这样的情形：
+
+手机连接在本机，但是因为在一边调试，不方便同时拿着手机看结果(手机屏幕和PC屏幕来回切换较麻烦)，期望手机屏幕与调试程序的屏幕同时在PC的屏幕一并展示，这样更加便捷；
+调试(或测试)的手机并非连接在本机上，此时需要在测试的时候在本机上同步查看远端手机的屏幕(调试时实时的展示)。
+
+在上述情况下，就需要将调试的手机屏幕通过一定技术手段在PC屏幕上实时展">
+<meta property="og:image" content="https://i.imgur.com/BQ6uUWw.png">
+<meta property="og:image" content="https://i.imgur.com/s3VwaWb.gif">
+<meta property="og:updated_time" content="2017-11-01T03:24:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android手机屏幕实时展示">
+<meta name="twitter:description" content="背景在Android开发中，有这样的情形：
+
+手机连接在本机，但是因为在一边调试，不方便同时拿着手机看结果(手机屏幕和PC屏幕来回切换较麻烦)，期望手机屏幕与调试程序的屏幕同时在PC的屏幕一并展示，这样更加便捷；
+调试(或测试)的手机并非连接在本机上，此时需要在测试的时候在本机上同步查看远端手机的屏幕(调试时实时的展示)。
+
+在上述情况下，就需要将调试的手机屏幕通过一定技术手段在PC屏幕上实时展">
+<meta name="twitter:image" content="https://i.imgur.com/BQ6uUWw.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android手机屏幕实时展示</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android手机屏幕实时展示</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-01T02:04:55.000Z" itemprop="datePublished" class="page-time">
+  2017-11-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原生adb方式"><span class="post-toc-number">2.</span> <span class="post-toc-text">原生adb方式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#minicap和minitouch"><span class="post-toc-number">3.</span> <span class="post-toc-text">minicap和minitouch</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android实时屏幕展示"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android手机屏幕实时展示</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-01 10:04:55" datetime="2017-11-01T02:04:55.000Z"  itemprop="datePublished">2017-11-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在Android开发中，有这样的情形：</p>
+<ol>
+<li>手机连接在本机，但是因为在一边调试，不方便同时拿着手机看结果(手机屏幕和PC屏幕来回切换较麻烦)，期望手机屏幕与调试程序的屏幕同时在PC的屏幕一并展示，这样更加便捷；</li>
+<li>调试(或测试)的手机并非连接在本机上，此时需要在测试的时候在本机上同步查看远端手机的屏幕(调试时实时的展示)。</li>
+</ol>
+<p>在上述情况下，就需要将调试的手机屏幕通过一定技术手段在PC屏幕上实时展示。通过查询资料和实践，目前总结出两种方法可以达到目标。</p>
+<h1 id="原生adb方式"><a href="#原生adb方式" class="headerlink" title="原生adb方式"></a>原生adb方式</h1><p>我们知道，Android调试都是通过<a href="https://developer.android.com/studio/command-line/adb.html" title="官方adb介绍" target="_blank" rel="external">adb</a>来实现。adb原理看似简单，其实涉及到的知识和原理很多也比较复杂，要想完全弄清楚adb的原理和运行机制，除了查阅官方资料、网上的相关资料(这里提供两份参考资料，请下载<a href="/adb原理.pdf">adb原理.pdf</a>、<a href="/Android远程控制技术.pdf">Android远程控制技术.pdf</a>，不过个人认为这两份资料并未将adb原理讲透将明白，也缺乏实际的场景抓包说明)，实际动手(抓包、测试)都不可少，本文暂不对adb原理进行展开，后续会单独写一篇adb的原理介绍。</p>
+<p>这里以windows系统为例，开发人员常使用adb.exe，在命令行下执行各种adb命令，比如截图<code>adb shell screencap /sdcard/your_path.png</code>。那么既然通过adb命令可以截图，我们是否可以想到，如果不停地执行截图，然后将N张截图以类似播放电影的方式连贯起来，那不就相当于实时查看手机屏幕了吗。</p>
+<p>看起来这个方式应该可行，但是存在两个问题：</p>
+<ol>
+<li><code>adb shell screencap</code>命令截图，耗时还是比较多，一般在1-2s之间，而且对手机资源消耗也比较多，不停截图的话，CPU和其他资源占用就更多了，可能影响正在调试的APP的测试指标；</li>
+<li>还需要单独对adb.exe的命令行使用进行代码封装，原理虽简单，但是做这些重复性的活很让人厌烦。</li>
+</ol>
+<p>对于问题1，我们可以通过minicap的方式来解决；对于问题2，其实Android SDK包里面已经有相关工具库可供使用，那就是ddmlib，位于<code>%ANDROID_HOME%\tools\lib\</code>目录下(其中<code>%ANDROID_HOME%</code>表示Android SDK的安装目录)，名字一般叫<code>ddmlib-x.y.z-xx.jar</code>(x.y.z-xx表示版本号，建议更新Android SDK至最新版)。关于ddmlib，网上资料相对较少，可以查看jar包的源码进行详细的研究，也可以参考网上已有的部分资料(比如github上一个ddmlib封装库<a href="https://github.com/cosysoft/device" title="cosysoft/device" target="_blank" rel="external">https://github.com/cosysoft/device</a>)。ddmlib相当于提供了一个adb client，提供了调用的接口，可以实现连接设备，发送和执行adb命令，获取结果等等，也就是说，大家平时通过adb.exe能干的事情，ddmlib都可以做到，提供了很好的封装和调用接口，其实Android的DDMS工具和其他类似工具等底层都是通过调用ddmlib实现调试和操作的。</p>
+<p>但是，我们这里仍然不直接使用ddmlib，为什么呢，答案就是“站在巨人的肩膀上前进”。其实Github上已有一个较好的实现<a href="https://github.com/adakoda/android-screen-monitor" title="android-screen-monitor" target="_blank" rel="external">android-screen-monitor</a>，该实现基于ddmlib，另外还使用到chimpchat(与ddmlib库一样，位于位于<code>%ANDROID_HOME%\tools\lib\</code>目录下，名字一般叫<code>ddmlib-x.y.z-xx.jar</code>)和<a href="https://github.com/google/guava" target="_blank" rel="external">google的guava库</a>。</p>
+<p>从Github将<a href="https://github.com/adakoda/android-screen-monitor" title="android-screen-monitor" target="_blank" rel="external">android-screen-monitor</a>工程clone下来之后，通过Eclipse导入工程，效果如下：</p>
+<p><img src="https://i.imgur.com/BQ6uUWw.png" alt=""></p>
+<p>对工程源码进行定制或二次开发之后，可以将工程导出为一个可执行jar包。</p>
+<p><img src="https://i.imgur.com/s3VwaWb.gif" alt=""></p>
+<h1 id="minicap和minitouch"><a href="#minicap和minitouch" class="headerlink" title="minicap和minitouch"></a>minicap和minitouch</h1><p>该方式基于Github上一个比较有名的云测手机测试项目<a href="https://github.com/openstf/stf" target="_blank" rel="external">STF项目</a>的两个子项目<a href="https://github.com/openstf/minicap" target="_blank" rel="external">minicap</a>、<a href="https://github.com/openstf/minitouch" target="_blank" rel="external">minitouch</a>。其中minicap实现屏幕实时展示，而minitouch实现模拟点击和滑动，从而可以在本机上直接操作手机，就如同直接在手机上点击和滑动一样。</p>
+<p>minicap的原理大致为(可详细查看minicap Github的readme)：</p>
+<ul>
+<li>在手机端通过minicap.so(Android NDK开发，其基于Android底层开发，从设备底层获取屏幕的数据)</li>
+<li>minicap可执行文件，在手机端开启一个socket server，接收来自PC客户端的连接，将屏幕帧流不断发送至PC端的socket client</li>
+<li>PC端通过adb forward命令实现socket连接转发，因为PC连接Android手机一切都通过adb server。PC的socket client通过adb forward转发连接至minicap开启的socket server，读取其发送的帧流，然后在PC端处理之后即可通过GUI程序或者web页面展示。</li>
+</ul>
+<p>关于minicap实现手机屏幕实时展示，官方Github仓库的sample中提供了NodeJS的示例，而python和java的示例在网上已有很多人实现过(本文后续会提供一份python版本的实现)，可以参阅：</p>
+<ul>
+<li><a href="https://testerhome.com/topics/3115" target="_blank" rel="external">STF 框架之 minicap 工具</a></li>
+<li><a href="http://www.jianshu.com/p/777af34b4f21" title="Python实现minicap协议解析并通过PyQt渲染" target="_blank" rel="external">Python实现minicap协议解析并通过PyQt渲染</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-11-01T03:24:13.000Z" itemprop="dateUpdated">2017-11-01 11:24:13</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/display/">display</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/real-time/">real time</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/screen/">screen</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实时/">实时</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/展示/">展示</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/&title=《Android手机屏幕实时展示》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/&title=《Android手机屏幕实时展示》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android手机屏幕实时展示》 — Atypical programmer&url=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/30/apk双击安装/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android应用包apk双击安装和文件图标定制</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/&title=《Android手机屏幕实时展示》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/&title=《Android手机屏幕实时展示》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android手机屏幕实时展示》 — Atypical programmer&url=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.6.16"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.6.16" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
