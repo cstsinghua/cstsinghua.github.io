@@ -271,7 +271,7 @@
 <li>还需要单独对adb.exe的命令行使用进行代码封装，原理虽简单，但是做这些重复性的活很让人厌烦。</li>
 </ol>
 <p>对于问题1，我们可以通过minicap的方式来解决；对于问题2，其实Android SDK包里面已经有相关工具库可供使用，那就是ddmlib，位于<code>%ANDROID_HOME%\tools\lib\</code>目录下(其中<code>%ANDROID_HOME%</code>表示Android SDK的安装目录)，名字一般叫<code>ddmlib-x.y.z-xx.jar</code>(x.y.z-xx表示版本号，建议更新Android SDK至最新版)。关于ddmlib，网上资料相对较少，可以查看jar包的源码进行详细的研究，也可以参考网上已有的部分资料(比如github上一个ddmlib封装库<a href="https://github.com/cosysoft/device" title="cosysoft/device" target="_blank" rel="external">https://github.com/cosysoft/device</a>)。ddmlib相当于提供了一个adb client，提供了调用的接口，可以实现连接设备，发送和执行adb命令，获取结果等等，也就是说，大家平时通过adb.exe能干的事情，ddmlib都可以做到，提供了很好的封装和调用接口，其实Android的DDMS工具和其他类似工具等底层都是通过调用ddmlib实现调试和操作的。</p>
-<p>但是，我们这里仍然不直接使用ddmlib，为什么呢，答案就是“站在巨人的肩膀上前进”。其实Github上已有一个较好的实现<a href="https://github.com/adakoda/android-screen-monitor" title="android-screen-monitor" target="_blank" rel="external">android-screen-monitor</a>，该实现基于ddmlib，另外还使用到chimpchat(与ddmlib库一样，位于位于<code>%ANDROID_HOME%\tools\lib\</code>目录下，名字一般叫<code>ddmlib-x.y.z-xx.jar</code>)和<a href="https://github.com/google/guava" target="_blank" rel="external">google的guava库</a>。</p>
+<p>但是，我们这里仍然不直接使用ddmlib，为什么呢，答案就是“站在巨人的肩膀上前进”。其实Github上已有一个较好的实现<a href="https://github.com/adakoda/android-screen-monitor" title="android-screen-monitor" target="_blank" rel="external">android-screen-monitor</a>，该实现基于ddmlib，另外还使用到chimpchat(与ddmlib库一样，位于位于<code>%ANDROID_HOME%\tools\lib\</code>目录下，名字一般叫<code>chimpchat-x.y.z-xx.jar</code>)和<a href="https://github.com/google/guava" target="_blank" rel="external">google的guava库</a>。</p>
 <p>从Github将<a href="https://github.com/adakoda/android-screen-monitor" title="android-screen-monitor" target="_blank" rel="external">android-screen-monitor</a>工程clone下来之后，通过Eclipse导入工程，效果如下：</p>
 <p><img src="https://i.imgur.com/BQ6uUWw.png" alt=""></p>
 <p>对工程源码进行定制或二次开发之后，可以将工程导出为一个可执行jar包。</p>
@@ -373,7 +373,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/16/编写sphinx文档/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">用sphinx编写智能和漂亮的文档</h4>
+      </a>
+    </div>
   
 
   

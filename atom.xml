@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2017-11-01T03:24:13.000Z</updated>
+  <updated>2017-11-16T03:07:29.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用sphinx编写智能和漂亮的文档</title>
+    <link href="http://cstsinghua.github.io/2017/11/16/%E7%BC%96%E5%86%99sphinx%E6%96%87%E6%A1%A3/"/>
+    <id>http://cstsinghua.github.io/2017/11/16/编写sphinx文档/</id>
+    <published>2017-11-16T03:07:26.000Z</published>
+    <updated>2017-11-16T03:07:29.000Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;本文基于实际工作中的场景，&lt;strong&gt;其中的仓库和地址等均是公司内部网址，外部无法访问&lt;/strong&gt;。但原理是相通的，在本地创建API文档或基于远程仓库创建文档时都可参考。&lt;/p&gt;
+&lt;p&gt;引擎插件文档采用了&lt;a href=&quot;http://www.sphinx-doc.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;sphinx&lt;/a&gt;工具，将rst格式的源文件(rst文件采用&lt;a href=&quot;http://www.sphinx-doc.org/en/stable/rest.html&quot; title=&quot;reStructuredText (reST)&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;reStructuredText (reST)&lt;/a&gt;标记语言编写，类似markdown)生成为html格式，从而在浏览器打开查看。生成的html格式模板主题采用了&lt;a href=&quot;https://github.com/rtfd/sphinx_rtd_theme&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;sphinx_rtd_theme&lt;/a&gt;。当前&lt;a href=&quot;https://docs.python.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;python的官方文档&lt;/a&gt;就是用sphinx工具来生成的。&lt;/p&gt;
+&lt;p&gt;引擎插件库的源文件仓库地址：公司的&lt;a href=&quot;http://gogit.oa.com/Engine/engine_doc/src/master&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;gogit仓库&lt;/a&gt;(基于&lt;a href=&quot;https://gogs.io/docs&quot; title=&quot;gogs&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Gogs&lt;/a&gt;搭建的自助Git服务平台)，引擎插件对应的子目录为&lt;a href=&quot;http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;修改即针对&lt;a href=&quot;http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others/device.rst&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;device.rst&lt;/a&gt;进行。&lt;/p&gt;
+&lt;h1 id=&quot;安装、编辑和发布步骤&quot;&gt;&lt;a href=&quot;#安装、编辑和发布步骤&quot; class=&quot;headerlink&quot; title=&quot;安装、编辑和发布步骤&quot;&gt;&lt;/a&gt;安装、编辑和发布步骤&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;安装python，这里以windows系统为例，安装python3.4版本，当然python2.7或最新的python3.6应该也OK的。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装sphinx(可参照&lt;a href=&quot;https://github.com/sphinx-doc/sphinx&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/sphinx-doc/sphinx&lt;/a&gt;)，在命令行输入(安装python之后，一般都会自带安装python的包安装管理工具pip，如果输入下面命令提示找不到pip，则需要安装pip工具，可以参照网上教程执行)：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;pip install Sphinx&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装sphinx的主题&lt;a href=&quot;https://github.com/rtfd/sphinx_rtd_theme&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;sphinx_rtd_theme&lt;/a&gt;(Sphinx theme for &lt;a href=&quot;https://readthedocs.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;readthedocs.org&lt;/a&gt;)，在命令行输入：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;pip install sphinx_rtd_theme&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装&lt;a href=&quot;http://mirrors.shuosc.org/apache/tomcat/tomcat-7/v7.0.82/bin/apache-tomcat-7.0.82.zip&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;tomcat&lt;/a&gt;，解压到给定目录(比如&lt;code&gt;E:\apache-tomcat-7.0.82&lt;/code&gt;)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将&lt;a href=&quot;/others.zip&quot;&gt;others.zip&lt;/a&gt;解压，然后解压的目录(连同other目录)copy至tomcat安装目录的&lt;code&gt;E:\tomcat_path\webapps\ROOT&lt;/code&gt;下(比如&lt;code&gt;E:\apache-tomcat-7.0.82\webapps\ROOT&lt;/code&gt;)。如下图所示：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/DeFhy0s.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;注：other目录是已经用&lt;code&gt;sphinx-quickstart&lt;/code&gt;命令配置好的文档根目录，如果想自己配置，则可以新建一个目录(比如&lt;code&gt;E:\apache-tomcat-7.0.82\webapps\ROOT\docRoot&lt;/code&gt;)，然后执行如下操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;打开命令行，输入下面命令&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;cd E:\apache-tomcat-7.0.82\webapps\ROOT\docRoot&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;然后输入命令&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;sphinx-quickstart&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 该命令会自动引导你对该目录进行配置，这些配置用于sphinx构建时候使用。配置完成之后会在目录的source子目录(配置的时候选择源文件和构建文件分离的选项)下生成conf.py文件，该文件里面就是用python语言来编写的配置，可以在配置完成之后打开进行修改。建议在引导过程中，大部分选项直接选按enter键选默认配置即可，但对于“autodoc” extension和是否支持make两个选项，请选择&lt;code&gt;yes&lt;/code&gt;。选择支持make的话，则会在该目录下生成&lt;code&gt;make.bat&lt;/code&gt;和&lt;code&gt;Makefile&lt;/code&gt;文件，这样后续在修改了rst源文件之后，只需要在该目录下执行&lt;code&gt;make html&lt;/code&gt;命令，即可将最新rst文件实时生成对于的html文件。(查看make.bat文件，可以发现其只是对sphinx-build命令进行了封装，这样构建的时候更加便捷，所以也可以不用make，直接采用sphinx-build命令将rst文件构建生成html文件，当然sphinx其实支持还支持将rst文件转换成pdf等格式，详细情况可以阅读&lt;a href=&quot;http://www.sphinx-doc.org/en/stable/contents.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;sphinx的使用文档&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;配置tomcat的http服务端口为8080(避免与常用的http 80端口冲突，在&lt;code&gt;%tomcat_install_path%/conf/server.xml&lt;/code&gt;中更改)，启动tomcat，即双击运行&lt;code&gt;E:\tomcat_path\bin\startup.bat&lt;/code&gt;(比如&lt;code&gt;E:\apache-tomcat-7.0.82\bin\startup.bat&lt;/code&gt;)；&lt;/li&gt;
+&lt;li&gt;打开浏览器，输入&lt;a href=&quot;http://localhost:8080/others/build/html/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/others/build/html/&lt;/a&gt;，此时可查看引擎插件的本地打开文档效果，与&lt;a href=&quot;http://engine.by.com:8000/doc/sphinx/build/html/others/device.html#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://engine.by.com:8000/doc/sphinx/build/html/others/device.html#&lt;/a&gt;完全一致，只是运行在本地tomcat服务器。&lt;/li&gt;
+&lt;li&gt;用文本编辑器编辑device.rst(可查阅并熟悉&lt;a href=&quot;http://www.sphinx-doc.org/en/stable/rest.html&quot; title=&quot;reStructuredText (reST)&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;reStructuredText (reST)标记语言&lt;/a&gt;的语法，在网上搜索了解该标记语言的语法也可)，完成编辑之后，在文档根目录(比如上面示例&lt;code&gt;E:\apache-tomcat-7.0.82\webapps\ROOT\other&lt;/code&gt;)下打开命令行，执行&lt;code&gt;make html&lt;/code&gt;,构建完成之后，再次用浏览器打开&lt;a href=&quot;http://localhost:8080/others/build/html/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/others/build/html/&lt;/a&gt;(或按F5刷新，重新加载)，可以查看到刚才编辑修改过的地方。我们编辑了device.rst之后，先在本地加载预览，符合要求，则提交到gogit仓库&lt;a href=&quot;http://gogit.oa.com/Engine/engine_doc/src/master&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://gogit.oa.com/Engine/engine_doc/src/master&lt;/a&gt;，引擎插件对应的子目录为&lt;a href=&quot;http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others&lt;/a&gt;。引擎部采用&lt;a href=&quot;https://readthedocs.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Read the Docs&lt;/a&gt;从gogit的文档仓库&lt;a href=&quot;http://gogit.oa.com/Engine/engine_doc/src/master&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://gogit.oa.com/Engine/engine_doc/src/master&lt;/a&gt;将里面的rst文档拉取并构建，然后部署到&lt;a href=&quot;http://engine.by.com:8000/doc/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;HTTP server&lt;/a&gt;上，从而可以打开&lt;a href=&quot;http://engine.by.com:8000/doc/sphinx/build/html/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://engine.by.com:8000/doc/sphinx/build/html/index.html&lt;/a&gt;查看，关于Read the Doc的原理，请参见其官网&lt;a href=&quot;https://readthedocs.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://readthedocs.org/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;本文基于实际工作中的场景，&lt;strong&gt;其中的仓库和地址等均是公司内部网址，外部无法访问&lt;/stron
+    
+    </summary>
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+      <category term="文档" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/%E6%96%87%E6%A1%A3/"/>
+    
+    
+      <category term="sphinx" scheme="http://cstsinghua.github.io/tags/sphinx/"/>
+    
+      <category term="API 文档" scheme="http://cstsinghua.github.io/tags/API-%E6%96%87%E6%A1%A3/"/>
+    
+      <category term="rst" scheme="http://cstsinghua.github.io/tags/rst/"/>
+    
+      <category term="reStructuredText" scheme="http://cstsinghua.github.io/tags/reStructuredText/"/>
+    
+      <category term="readthedocs" scheme="http://cstsinghua.github.io/tags/readthedocs/"/>
+    
+      <category term="python" scheme="http://cstsinghua.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>Android手机屏幕实时展示</title>
@@ -37,7 +109,7 @@
 &lt;li&gt;还需要单独对adb.exe的命令行使用进行代码封装，原理虽简单，但是做这些重复性的活很让人厌烦。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;对于问题1，我们可以通过minicap的方式来解决；对于问题2，其实Android SDK包里面已经有相关工具库可供使用，那就是ddmlib，位于&lt;code&gt;%ANDROID_HOME%\tools\lib\&lt;/code&gt;目录下(其中&lt;code&gt;%ANDROID_HOME%&lt;/code&gt;表示Android SDK的安装目录)，名字一般叫&lt;code&gt;ddmlib-x.y.z-xx.jar&lt;/code&gt;(x.y.z-xx表示版本号，建议更新Android SDK至最新版)。关于ddmlib，网上资料相对较少，可以查看jar包的源码进行详细的研究，也可以参考网上已有的部分资料(比如github上一个ddmlib封装库&lt;a href=&quot;https://github.com/cosysoft/device&quot; title=&quot;cosysoft/device&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/cosysoft/device&lt;/a&gt;)。ddmlib相当于提供了一个adb client，提供了调用的接口，可以实现连接设备，发送和执行adb命令，获取结果等等，也就是说，大家平时通过adb.exe能干的事情，ddmlib都可以做到，提供了很好的封装和调用接口，其实Android的DDMS工具和其他类似工具等底层都是通过调用ddmlib实现调试和操作的。&lt;/p&gt;
-&lt;p&gt;但是，我们这里仍然不直接使用ddmlib，为什么呢，答案就是“站在巨人的肩膀上前进”。其实Github上已有一个较好的实现&lt;a href=&quot;https://github.com/adakoda/android-screen-monitor&quot; title=&quot;android-screen-monitor&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;android-screen-monitor&lt;/a&gt;，该实现基于ddmlib，另外还使用到chimpchat(与ddmlib库一样，位于位于&lt;code&gt;%ANDROID_HOME%\tools\lib\&lt;/code&gt;目录下，名字一般叫&lt;code&gt;ddmlib-x.y.z-xx.jar&lt;/code&gt;)和&lt;a href=&quot;https://github.com/google/guava&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;google的guava库&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;但是，我们这里仍然不直接使用ddmlib，为什么呢，答案就是“站在巨人的肩膀上前进”。其实Github上已有一个较好的实现&lt;a href=&quot;https://github.com/adakoda/android-screen-monitor&quot; title=&quot;android-screen-monitor&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;android-screen-monitor&lt;/a&gt;，该实现基于ddmlib，另外还使用到chimpchat(与ddmlib库一样，位于位于&lt;code&gt;%ANDROID_HOME%\tools\lib\&lt;/code&gt;目录下，名字一般叫&lt;code&gt;chimpchat-x.y.z-xx.jar&lt;/code&gt;)和&lt;a href=&quot;https://github.com/google/guava&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;google的guava库&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;从Github将&lt;a href=&quot;https://github.com/adakoda/android-screen-monitor&quot; title=&quot;android-screen-monitor&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;android-screen-monitor&lt;/a&gt;工程clone下来之后，通过Eclipse导入工程，效果如下：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/BQ6uUWw.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;对工程源码进行定制或二次开发之后，可以将工程导出为一个可执行jar包。&lt;/p&gt;
@@ -833,7 +905,7 @@ Aborting commit due to empty commit message.
     <link href="http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://cstsinghua.github.io/2016/07/13/Android-studio常用快捷键/</id>
     <published>2016-07-13T10:07:19.000Z</published>
-    <updated>2017-04-18T03:29:54.000Z</updated>
+    <updated>2017-11-16T01:26:27.000Z</updated>
     
     <content type="html">&lt;p&gt;Android studio常用的快捷键&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;Android-studio常用快捷键总结&quot;&gt;&lt;a href=&quot;#Android-studio常用快捷键总结&quot; class=&quot;headerlink&quot; title=&quot;Android studio常用快捷键总结&quot;&gt;&lt;/a&gt;Android studio常用快捷键总结&lt;/h1&gt;&lt;p&gt;书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。其实Android studio的的settings里面Keymap可以查看所有的快捷键，另外在Android studio的菜单栏，菜单项里面也注明了每项操作的快捷键(如果有)，经常查看和练习，根本也用不着在网上找说明。当然，对于新人或者英文不是太好的初学者，借鉴别人的经验是最快的学习方式。本文暂只适用于Windows平台，Mac环境后续补充。&lt;/p&gt;
@@ -990,6 +1062,12 @@ Aborting commit due to empty commit message.
 &lt;td&gt;扩展所选区域(extend selection)&lt;/td&gt;
 &lt;td&gt;Alt+Shift+Up&lt;/td&gt;
 &lt;td&gt;从当前光标位置扩展当前所选区域，一直按住Alt、Shift键，多次点击up键，可以不断扩大所选的区域，此时点击down键则是相反的操作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+Backspace&lt;/td&gt;
+&lt;td&gt;跳转到最近一次编辑的地方，连续多次操作则沿着编辑历史记录回退&lt;/td&gt;
+&lt;td&gt;Control+Q&lt;/td&gt;
+&lt;td&gt;跳转至最近一次编辑的地方&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4522,6 +4600,39 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
   </entry>
   
   <entry>
+    <title>Hello World</title>
+    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
+    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
+    <published>2016-06-13T01:57:02.000Z</published>
+    <updated>2016-06-13T01:57:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For Test:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+    
+  </entry>
+  
+  <entry>
     <title>python安装某些第三方包报错解决办法</title>
     <link href="http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
     <id>http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
@@ -4577,39 +4688,6 @@ collect2.exe: error: ld returned 1 exit status
     
     
       <category term="安装第三方包" scheme="http://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
-    <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-13T01:57:02.000Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For Test:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   

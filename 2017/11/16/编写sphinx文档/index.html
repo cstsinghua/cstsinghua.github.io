@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://cstsinghua.github.io/2017/11/16/编写sphinx文档/">
+    
+    
+    <title>用sphinx编写智能和漂亮的文档 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="sphinx,API 文档,rst,reStructuredText,readthedocs,python">
+    <meta name="description" content="背景本文基于实际工作中的场景，其中的仓库和地址等均是公司内部网址，外部无法访问。但原理是相通的，在本地创建API文档或基于远程仓库创建文档时都可参考。
+引擎插件文档采用了sphinx工具，将rst格式的源文件(rst文件采用reStructuredText (reST)标记语言编写，类似markdown)生成为html格式，从而在浏览器打开查看。生成的html格式模板主题采用了sphinx_rt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用sphinx编写智能和漂亮的文档">
+<meta property="og:url" content="http://cstsinghua.github.io/2017/11/16/编写sphinx文档/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="背景本文基于实际工作中的场景，其中的仓库和地址等均是公司内部网址，外部无法访问。但原理是相通的，在本地创建API文档或基于远程仓库创建文档时都可参考。
+引擎插件文档采用了sphinx工具，将rst格式的源文件(rst文件采用reStructuredText (reST)标记语言编写，类似markdown)生成为html格式，从而在浏览器打开查看。生成的html格式模板主题采用了sphinx_rt">
+<meta property="og:image" content="https://i.imgur.com/DeFhy0s.png">
+<meta property="og:updated_time" content="2017-11-16T03:07:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用sphinx编写智能和漂亮的文档">
+<meta name="twitter:description" content="背景本文基于实际工作中的场景，其中的仓库和地址等均是公司内部网址，外部无法访问。但原理是相通的，在本地创建API文档或基于远程仓库创建文档时都可参考。
+引擎插件文档采用了sphinx工具，将rst格式的源文件(rst文件采用reStructuredText (reST)标记语言编写，类似markdown)生成为html格式，从而在浏览器打开查看。生成的html格式模板主题采用了sphinx_rt">
+<meta name="twitter:image" content="https://i.imgur.com/DeFhy0s.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用sphinx编写智能和漂亮的文档</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">用sphinx编写智能和漂亮的文档</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-16T03:07:26.000Z" itemprop="datePublished" class="page-time">
+  2017-11-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/杂项/">杂项</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/杂项/文档/">文档</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装、编辑和发布步骤"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装、编辑和发布步骤</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-编写sphinx文档"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">用sphinx编写智能和漂亮的文档</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-16 11:07:26" datetime="2017-11-16T03:07:26.000Z"  itemprop="datePublished">2017-11-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/杂项/">杂项</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/杂项/文档/">文档</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>本文基于实际工作中的场景，<strong>其中的仓库和地址等均是公司内部网址，外部无法访问</strong>。但原理是相通的，在本地创建API文档或基于远程仓库创建文档时都可参考。</p>
+<p>引擎插件文档采用了<a href="http://www.sphinx-doc.org" target="_blank" rel="external">sphinx</a>工具，将rst格式的源文件(rst文件采用<a href="http://www.sphinx-doc.org/en/stable/rest.html" title="reStructuredText (reST)" target="_blank" rel="external">reStructuredText (reST)</a>标记语言编写，类似markdown)生成为html格式，从而在浏览器打开查看。生成的html格式模板主题采用了<a href="https://github.com/rtfd/sphinx_rtd_theme" target="_blank" rel="external">sphinx_rtd_theme</a>。当前<a href="https://docs.python.org" target="_blank" rel="external">python的官方文档</a>就是用sphinx工具来生成的。</p>
+<p>引擎插件库的源文件仓库地址：公司的<a href="http://gogit.oa.com/Engine/engine_doc/src/master" target="_blank" rel="external">gogit仓库</a>(基于<a href="https://gogs.io/docs" title="gogs" target="_blank" rel="external">Gogs</a>搭建的自助Git服务平台)，引擎插件对应的子目录为<a href="http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others" target="_blank" rel="external">http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others</a></p>
+<p>修改即针对<a href="http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others/device.rst" target="_blank" rel="external">device.rst</a>进行。</p>
+<h1 id="安装、编辑和发布步骤"><a href="#安装、编辑和发布步骤" class="headerlink" title="安装、编辑和发布步骤"></a>安装、编辑和发布步骤</h1><ol>
+<li>安装python，这里以windows系统为例，安装python3.4版本，当然python2.7或最新的python3.6应该也OK的。</li>
+<li><p>安装sphinx(可参照<a href="https://github.com/sphinx-doc/sphinx" target="_blank" rel="external">https://github.com/sphinx-doc/sphinx</a>)，在命令行输入(安装python之后，一般都会自带安装python的包安装管理工具pip，如果输入下面命令提示找不到pip，则需要安装pip工具，可以参照网上教程执行)：</p>
+<blockquote>
+<p>pip install Sphinx</p>
+</blockquote>
+</li>
+<li><p>安装sphinx的主题<a href="https://github.com/rtfd/sphinx_rtd_theme" target="_blank" rel="external">sphinx_rtd_theme</a>(Sphinx theme for <a href="https://readthedocs.org/" target="_blank" rel="external">readthedocs.org</a>)，在命令行输入：</p>
+<blockquote>
+<p>pip install sphinx_rtd_theme</p>
+</blockquote>
+</li>
+<li><p>安装<a href="http://mirrors.shuosc.org/apache/tomcat/tomcat-7/v7.0.82/bin/apache-tomcat-7.0.82.zip" target="_blank" rel="external">tomcat</a>，解压到给定目录(比如<code>E:\apache-tomcat-7.0.82</code>)。</p>
+</li>
+<li><p>将<a href="/others.zip">others.zip</a>解压，然后解压的目录(连同other目录)copy至tomcat安装目录的<code>E:\tomcat_path\webapps\ROOT</code>下(比如<code>E:\apache-tomcat-7.0.82\webapps\ROOT</code>)。如下图所示：<br><img src="https://i.imgur.com/DeFhy0s.png" alt=""><br>注：other目录是已经用<code>sphinx-quickstart</code>命令配置好的文档根目录，如果想自己配置，则可以新建一个目录(比如<code>E:\apache-tomcat-7.0.82\webapps\ROOT\docRoot</code>)，然后执行如下操作：</p>
+<ul>
+<li>打开命令行，输入下面命令<blockquote>
+<p><code>cd E:\apache-tomcat-7.0.82\webapps\ROOT\docRoot</code></p>
+</blockquote>
+</li>
+<li><p>然后输入命令</p>
+<blockquote>
+<p><code>sphinx-quickstart</code></p>
+</blockquote>
+<p> 该命令会自动引导你对该目录进行配置，这些配置用于sphinx构建时候使用。配置完成之后会在目录的source子目录(配置的时候选择源文件和构建文件分离的选项)下生成conf.py文件，该文件里面就是用python语言来编写的配置，可以在配置完成之后打开进行修改。建议在引导过程中，大部分选项直接选按enter键选默认配置即可，但对于“autodoc” extension和是否支持make两个选项，请选择<code>yes</code>。选择支持make的话，则会在该目录下生成<code>make.bat</code>和<code>Makefile</code>文件，这样后续在修改了rst源文件之后，只需要在该目录下执行<code>make html</code>命令，即可将最新rst文件实时生成对于的html文件。(查看make.bat文件，可以发现其只是对sphinx-build命令进行了封装，这样构建的时候更加便捷，所以也可以不用make，直接采用sphinx-build命令将rst文件构建生成html文件，当然sphinx其实支持还支持将rst文件转换成pdf等格式，详细情况可以阅读<a href="http://www.sphinx-doc.org/en/stable/contents.html" target="_blank" rel="external">sphinx的使用文档</a>)</p>
+</li>
+</ul>
+</li>
+<li>配置tomcat的http服务端口为8080(避免与常用的http 80端口冲突，在<code>%tomcat_install_path%/conf/server.xml</code>中更改)，启动tomcat，即双击运行<code>E:\tomcat_path\bin\startup.bat</code>(比如<code>E:\apache-tomcat-7.0.82\bin\startup.bat</code>)；</li>
+<li>打开浏览器，输入<a href="http://localhost:8080/others/build/html/" target="_blank" rel="external">http://localhost:8080/others/build/html/</a>，此时可查看引擎插件的本地打开文档效果，与<a href="http://engine.by.com:8000/doc/sphinx/build/html/others/device.html#" target="_blank" rel="external">http://engine.by.com:8000/doc/sphinx/build/html/others/device.html#</a>完全一致，只是运行在本地tomcat服务器。</li>
+<li>用文本编辑器编辑device.rst(可查阅并熟悉<a href="http://www.sphinx-doc.org/en/stable/rest.html" title="reStructuredText (reST)" target="_blank" rel="external">reStructuredText (reST)标记语言</a>的语法，在网上搜索了解该标记语言的语法也可)，完成编辑之后，在文档根目录(比如上面示例<code>E:\apache-tomcat-7.0.82\webapps\ROOT\other</code>)下打开命令行，执行<code>make html</code>,构建完成之后，再次用浏览器打开<a href="http://localhost:8080/others/build/html/" target="_blank" rel="external">http://localhost:8080/others/build/html/</a>(或按F5刷新，重新加载)，可以查看到刚才编辑修改过的地方。我们编辑了device.rst之后，先在本地加载预览，符合要求，则提交到gogit仓库<a href="http://gogit.oa.com/Engine/engine_doc/src/master" target="_blank" rel="external">http://gogit.oa.com/Engine/engine_doc/src/master</a>，引擎插件对应的子目录为<a href="http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others" target="_blank" rel="external">http://gogit.oa.com/Engine/engine_doc/src/master/sphinx/source/others</a>。引擎部采用<a href="https://readthedocs.org/" target="_blank" rel="external">Read the Docs</a>从gogit的文档仓库<a href="http://gogit.oa.com/Engine/engine_doc/src/master" target="_blank" rel="external">http://gogit.oa.com/Engine/engine_doc/src/master</a>将里面的rst文档拉取并构建，然后部署到<a href="http://engine.by.com:8000/doc/" target="_blank" rel="external">HTTP server</a>上，从而可以打开<a href="http://engine.by.com:8000/doc/sphinx/build/html/index.html" target="_blank" rel="external">http://engine.by.com:8000/doc/sphinx/build/html/index.html</a>查看，关于Read the Doc的原理，请参见其官网<a href="https://readthedocs.org/" target="_blank" rel="external">https://readthedocs.org/</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-11-16T03:07:29.000Z" itemprop="dateUpdated">2017-11-16 11:07:29</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API-文档/">API 文档</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reStructuredText/">reStructuredText</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/readthedocs/">readthedocs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rst/">rst</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sphinx/">sphinx</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/&title=《用sphinx编写智能和漂亮的文档》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/&title=《用sphinx编写智能和漂亮的文档》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用sphinx编写智能和漂亮的文档》 — Atypical programmer&url=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/01/Android实时屏幕展示/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android手机屏幕实时展示</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/&title=《用sphinx编写智能和漂亮的文档》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/&title=《用sphinx编写智能和漂亮的文档》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用sphinx编写智能和漂亮的文档》 — Atypical programmer&url=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2017/11/16/编写sphinx文档/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.6.16"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.6.16" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
