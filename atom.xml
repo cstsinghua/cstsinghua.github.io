@@ -991,6 +991,12 @@ Aborting commit due to empty commit message.
 &lt;td&gt;Alt+Shift+O&lt;/td&gt;
 &lt;td&gt;可配合Ctrl+K一起使用，英文释义：Use Alt+Shift+O (Edit、 Find、Highlight Usages in File) to quickly highlight usages of some variable in the current file.Use Ctrl+K and Ctrl+Shift+K keys to navigate through highlighted usages.Press Esc to remove highlighting.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+N&lt;/td&gt;
+&lt;td&gt;Go to File，打开文件，在弹框中输入要打开的文件名，会模糊匹配&lt;/td&gt;
+&lt;td&gt;未知&lt;/td&gt;
+&lt;td&gt;打开文件，在弹框中输入要打开的文件名，会模糊匹配&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&quot;编辑代码的快捷键&quot;&gt;&lt;a href=&quot;#编辑代码的快捷键&quot; class=&quot;headerlink&quot; title=&quot;编辑代码的快捷键&quot;&gt;&lt;/a&gt;编辑代码的快捷键&lt;/h2&gt;&lt;table&gt;
