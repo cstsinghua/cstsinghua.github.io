@@ -46,7 +46,7 @@
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.6.16">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -177,7 +177,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -345,7 +345,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2016-07-01T02:09:43.000Z" itemprop="dateUpdated">2016-07-01 10:09:43</time>
+    post.last_updated<time datetime="2016-07-01T02:09:43.000Z" itemprop="dateUpdated">2016-07-01 10:09:43</time>
 </span><br>
 
 
@@ -464,6 +464,33 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
 
 
 
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "4DjAfnIwjxGfITAYl8eVX5Pe-gzGzoHsz",
+            appKey: "ss62qxcFEjf5opJ4Ii5xI2zn",
+            avatar: "mm",
+            placeholder: "欢迎交流",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
 </article>
 
 <div id="reward" class="page-modal reward-lay">
@@ -513,7 +540,7 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>footer.license</span>
         </p>
     </div>
     <div class="bottom">
@@ -586,7 +613,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.6.16"></script>
+<script src="/js/main.min.js?v=1.7.1"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -606,7 +633,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.6.16" async></script>
+<script src="/js/search.min.js?v=1.7.1" async></script>
 
 
 

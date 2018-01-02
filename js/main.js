@@ -32,18 +32,20 @@
                 y: y
             };
         },
-        docEl = !!navigator.userAgent.match(/firefox/i) || navigator.msPointerEnabled ? d.documentElement : body;
+        rootScollTop = function() {
+            return d.documentElement.scrollTop || d.body.scrollTop;
+        };
 
     var Blog = {
         goTop: function (end) {
-            var top = docEl.scrollTop;
+            var top = rootScollTop();
             var interval = arguments.length > 2 ? arguments[1] : Math.abs(top - end) / scrollSpeed;
 
             if (top && top > end) {
-                docEl.scrollTop = Math.max(top - interval, 0);
+                w.scrollTo(0, Math.max(top - interval, 0));
                 animate(arguments.callee.bind(this, end, interval));
             } else if (end && top < end) {
-                docEl.scrollTop = Math.min(top + interval, end);
+                w.scrollTo(0, Math.min(top + interval, end));
                 animate(arguments.callee.bind(this, end, interval));
             } else {
                 this.toc.actived(end);
@@ -66,7 +68,7 @@
                     menu.classList.add('show');
 
                     if (isWX) {
-                        var top = docEl.scrollTop;
+                        var top = rootScollTop();
                         main.classList.add('lock');
                         main.scrollTop = top;
                     } else {
@@ -80,7 +82,7 @@
                 if (isWX) {
                     var top = main.scrollTop;
                     main.classList.remove('lock');
-                    docEl.scrollTop = top;
+                    w.scrollTo(0, top);
                 } else {
                     root.classList.remove('lock');
                 }
@@ -110,19 +112,9 @@
 
             toc.querySelector('a[href="#' + titles[0].id + '"]').parentNode.classList.add('active');
 
-            forEach.call($$('a[href^="#"]'), function (el) {
-
-                el.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    var top = offset($('[id="' + decodeURIComponent(this.hash).substr(1) + '"]')).y - headerH;
-                    // animate(Blog.goTop.bind(Blog, top));
-                    docEl.scrollTop = top;
-                })
-            });
-
             return {
                 fixed: function (top) {
-                    top >= bannerH - headerH ? toc.classList.add('fixed') : toc.classList.remove('fixed')
+                    top >= bannerH - headerH ? toc.classList.add('fixed') : toc.classList.remove('fixed');
                 },
                 actived: function (top) {
                     for (i = 0, len = titles.length; i < len; i++) {
@@ -211,9 +203,16 @@
             $('#search').addEventListener(even, toggleSearch);
         },
         reward: function () {
-            var modal = new this.modal('#reward')
+            var modal = new this.modal('#reward');
+            $('#rewardBtn').addEventListener(even, modal.toggle);
 
-            $('#rewardBtn').addEventListener(even, modal.toggle)
+            var $rewardToggle = $('#rewardToggle');
+            var $rewardCode = $('#rewardCode');
+            if ($rewardToggle) {
+                $rewardToggle.addEventListener('change', function () {
+                    $rewardCode.src = this.checked ? this.dataset.alipay : this.dataset.wechat
+                })
+            }
         },
         waterfall: function () {
 
@@ -239,18 +238,22 @@
         },
         page: (function () {
             var $elements = $$('.fade, .fade-scale');
+            var visible = false;
 
             return {
                 loaded: function () {
                     forEach.call($elements, function (el) {
                         el.classList.add('in')
-                    })
+                    });
+                    visible = true;
                 },
                 unload: function () {
                     forEach.call($elements, function (el) {
                         el.classList.remove('in')
-                    })
-                }
+                    });
+                    visible = false;
+                },
+                visible: visible
             }
 
         })(),
@@ -406,26 +409,38 @@
     };
 
     w.addEventListener('load', function () {
-        Blog.waterfall();
-        var top = docEl.scrollTop;
-        Blog.toc.fixed(top);
-        Blog.toc.actived(top);
         loading.classList.remove('active');
         Blog.page.loaded();
-
         w.lazyScripts && w.lazyScripts.length && Blog.loadScript(w.lazyScripts)
     });
 
-    var ignoreUnload = false;
-    $('a[href^="mailto"]').addEventListener(even, function () {
-        ignoreUnload = true;
+    w.addEventListener('DOMContentLoaded', function () {
+        Blog.waterfall();
+        var top = rootScollTop();
+        Blog.toc.fixed(top);
+        Blog.toc.actived(top);
+        Blog.page.loaded();
     });
+
+    var ignoreUnload = false;
+    var $mailTarget = $('a[href^="mailto"]');
+    if($mailTarget) {
+        $mailTarget.addEventListener(even, function () {
+            ignoreUnload = true;
+        });
+    }
+
     w.addEventListener('beforeunload', function (e) {
         if (!ignoreUnload) {
             Blog.page.unload();
         } else {
             ignoreUnload = false;
         }
+    });
+
+    w.addEventListener('pageshow', function () {
+        // fix OSX safari #162
+        !Blog.page.visible && Blog.page.loaded();
     });
 
     w.addEventListener('resize', function () {
@@ -456,7 +471,7 @@
     }, false);
 
     d.addEventListener('scroll', function () {
-        var top = docEl.scrollTop;
+        var top = rootScollTop();
         Blog.toggleGotop(top);
         Blog.fixedHeader(top);
         Blog.toc.fixed(top);
