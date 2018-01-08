@@ -4,6 +4,37 @@
 
     
   <url>
+    <loc>http://cstsinghua.github.io/2018/01/08/adb%E5%8E%9F%E7%90%86%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2018-01-08T09:31:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>adb原理简介及常用命令介绍</title>
+        <pubTime>2018-01-08T08:18:23.000Z</pubTime>
+        
+        <tag>命令</tag>
+         
+        <tag>常用</tag>
+         
+        <tag>adb</tag>
+         
+        <tag>原理</tag>
+         
+        <tag>简介</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="tools" url="http://cstsinghua.github.io/categories/Android/tools/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cstsinghua.github.io/2017/11/16/%E7%BC%96%E5%86%99sphinx%E6%96%87%E6%A1%A3/</loc>
     <lastmod>2017-11-16T03:07:29.000Z</lastmod>
     <data>

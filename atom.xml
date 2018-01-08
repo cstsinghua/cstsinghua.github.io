@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2017-11-16T03:07:29.000Z</updated>
+  <updated>2018-01-08T09:31:21.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,175 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>adb原理简介及常用命令介绍</title>
+    <link href="http://cstsinghua.github.io/2018/01/08/adb%E5%8E%9F%E7%90%86%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/</id>
+    <published>2018-01-08T08:18:23.000Z</published>
+    <updated>2018-01-08T09:31:21.000Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;我们知道，Android程序安装和调试都可通过&lt;a href=&quot;https://developer.android.com/studio/command-line/adb.html&quot; title=&quot;官方adb介绍&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;adb&lt;/a&gt;来实现。adb原理看似简单，其实涉及到的知识和原理很多也比较复杂，要想完全弄清楚adb的原理和运行机制，除了查阅官方资料、网上的相关资料(这里提供两份参考资料，请下载&lt;a href=&quot;/adb原理.pdf&quot;&gt;adb原理.pdf&lt;/a&gt;、&lt;a href=&quot;/Android远程控制技术.pdf&quot;&gt;Android远程控制技术.pdf&lt;/a&gt;，不过个人认为这两份资料并未将adb原理讲透将明白，也缺乏实际的场景抓包说明)，实际动手(抓包、测试)都不可少，本文下面章节对adb原理做详细介绍。&lt;/p&gt;
+&lt;h1 id=&quot;adb原理分析&quot;&gt;&lt;a href=&quot;#adb原理分析&quot; class=&quot;headerlink&quot; title=&quot;adb原理分析&quot;&gt;&lt;/a&gt;adb原理分析&lt;/h1&gt;&lt;p&gt;(待续)&lt;/p&gt;
+&lt;h1 id=&quot;adb常用命令介绍&quot;&gt;&lt;a href=&quot;#adb常用命令介绍&quot; class=&quot;headerlink&quot; title=&quot;adb常用命令介绍&quot;&gt;&lt;/a&gt;adb常用命令介绍&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;adb命令详解(官方文档)&lt;br&gt; adb命令的官方文档和命令使用请参见&lt;a href=&quot;https://developer.android.com/studio/command-line/adb.html&quot; title=&quot;adb命令官方文档说明&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.android.com/studio/command-line/adb.html&lt;/a&gt;。里面对命令的各种参数和子命令都有详细的介绍，可以根据需要，查阅对应的子命令章节。&lt;/li&gt;
+&lt;li&gt;通过命令行学习&lt;br&gt; 打开命令行，这里以windows系统为例。如果没有将adb.exe的父目录添加到环境变量path路径中，那么在命令行里面需要输入adb命令的全路径。adb.exe在&lt;code&gt;%ANDROID_HOME%\platform-tools&lt;/code&gt;下，其中&lt;code&gt;%ANDROID_HOME%&lt;/code&gt;代表你电脑上Android SDK的安装路径。&lt;br&gt; 打开命令行，输入adb命令，就可以看到命令的帮助信息，从中也可以了解有哪些子命令和参数可用。如下图所示：&lt;br&gt; &lt;img src=&quot;https://i.imgur.com/ZaDEzmS.png&quot; alt=&quot;adb命令&quot;&gt;&lt;/li&gt;
+&lt;li&gt;常用命令介绍&lt;br&gt;&lt;strong&gt;adb命令通用格式&lt;/strong&gt;：&lt;br&gt; 参见官方文档：&lt;a href=&quot;http://developer.android.com/intl/zh-cn/tools/help/adb.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://developer.android.com/intl/zh-cn/tools/help/adb.html&lt;/a&gt;&lt;blockquote&gt;
+&lt;p&gt;adb [-d|-e|-s &lt;serialnumber&gt;] &amp;lt;command&amp;gt;&lt;/serialnumber&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;获取系统版本&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell getprop ro.build.version.release&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看手机SDK API Level&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell getprop ro.build.version.sdk&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看手机CPU信息&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell getprop ro.product.cpu.abi&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  或按照下面命令序列依次输入，即进入Android手机的shell命令行，读取&lt;code&gt;cpuinfo&lt;/code&gt;文件的内容&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell&lt;br&gt;cd /proc&lt;br&gt;cat cpuinfo&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;发送文件到手机 &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb push [-p] &amp;lt;local&amp;gt;  &amp;lt;remote&amp;gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 命令说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;copy file/dir to device(复制文件或目录至手机设备)&lt;/li&gt;
+&lt;li&gt;(‘-p’ to display the transfer progress)，-p参数表示显示传输进度&lt;/li&gt;
+&lt;li&gt;local为本地的文件目录(全路径)&lt;/li&gt;
+&lt;li&gt;remote为手机端指定存放目录(Linux风格，/开头，如/data/dir)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;从手机拉取文件到本地&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb pull [-p] [-a] &amp;lt;remote&amp;gt; [&amp;lt;local&amp;gt;]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  命令说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;copy file/dir from device(从手机设备复制文件或目录至本机)&lt;/li&gt;
+&lt;li&gt;(‘-p’ to display the transfer progress)，-p参数表示显示传输进度&lt;/li&gt;
+&lt;li&gt;(‘-a’ means copy timestamp and mode)，复制文件的同时复制文件的时间戳和模式(权限模式)&lt;/li&gt;
+&lt;li&gt;local为本地的文件目录(全路径)&lt;/li&gt;
+&lt;li&gt;remote为手机端指定存放目录(Linux风格，/开头，如/data/dir)&lt;/li&gt;
+&lt;li&gt;示例(e.g.) &lt;code&gt;adb pull -p /default.prop D:\&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;adb shell dumpsys&lt;br&gt;  默认打印出当前系统所有service信息，在后面可加上具体的服务名 需要列出当前运行的服务，可运行：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell dumpsys | findstr DUMP&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查看手机上层(顶层)Activity的名字&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell dumpsys activity -h  加上-h可以获取帮助信息&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  linux:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell dumpsys activity | grep “mFocusedActivity”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  windows:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell dumpsys activity | findstr “mFocusedActivity”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查看UI层级&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell uiautomator dump&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看手机分辨率&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell wm size&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  或&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell dumpsys window displays&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看机型(手机型号)时，可以使用以下命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell getprop ro.product.model&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  如果我们忘记具体系统属性的名字，我们可以使用grep进行过滤，比如：&lt;br&gt;  windows系统：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell getprop | findstr product&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  或&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell cat /system/build.prop | findstr product&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  Linux系统：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell getprop | grep product&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  或 &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb shell cat /system/build.prop | grep product&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;常见问题&quot;&gt;&lt;a href=&quot;#常见问题&quot; class=&quot;headerlink&quot; title=&quot;常见问题&quot;&gt;&lt;/a&gt;常见问题&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;打开adb时(在命令行输入adb命令的时候)出现类似报错：&lt;/strong&gt;&lt;br&gt; adb server version (31) doesn’t match this client (39); killing…&lt;br&gt; error: could not install &lt;em&gt;smartsocket&lt;/em&gt; listener: cannot bind to &lt;code&gt;127.0.0.1:5037:&lt;/code&gt; 通常每个套接字地址(协议/网络地址/端口)只允许使用一次。 (10048)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;原因：电脑上安装了其他手机助手，比如360，腾讯手机管家等，其开启了adb server，但是这些软件自带的adb版本与当前Android SDK路径(添加进了系统path)下的adb(位于&lt;code&gt;%ANDROID_HOME%\platform-tools&lt;/code&gt;下，其中&lt;code&gt;%ANDROID_HOME%&lt;/code&gt;代表你电脑上Android SDK的安装路径)版本不一致，从命令行运行adb devices或者adb start-server，会从Android SDK路径下(已加入到了环境变量path中)的adb启动adb server，&lt;br&gt;从而与当前正在运行的其他软件开启的adb server冲突。而两个版本的server都默认监听5037端口，从而导致系统提示”&lt;code&gt;cannot bind to 127.0.0.1:5037&lt;/code&gt;,只能使用一次”的字样。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;解决办法：&lt;br&gt;  查找是哪个软件开启了adb server，然后将其进程kill掉；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;具体步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Netstat –ano|findstr “5037”,找到正在使用5037端口的进程ID；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tasklist|findstr &amp;quot;&amp;lt;PID号&amp;gt;&amp;quot;&lt;/code&gt;(其中&lt;code&gt;&amp;lt;PID&amp;gt;&lt;/code&gt;为步骤1中查询到的进程ID号),查看该PID对应的进程名称；&lt;/li&gt;
+&lt;li&gt;通过任务管理器的详细信息栏(适用于windows7以上版本系统)，找到对应PID和进程名称的进程，kill之(或者直接用&lt;code&gt;taskkill /F /PID &amp;lt;PID&amp;gt;&lt;/code&gt;命令直接kill对应PID的进程也可，其中&lt;code&gt;&amp;lt;PID&amp;gt;&lt;/code&gt;为步骤1中查询到的进程ID号)；&lt;/li&gt;
+&lt;li&gt;重新打开命令行然后输入adb devices即可；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;我们知道，Android程序安装和调试都可通过&lt;a href=&quot;https://developer.an
+    
+    </summary>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+    
+    
+      <category term="命令" scheme="http://cstsinghua.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="常用" scheme="http://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
+    
+      <category term="adb" scheme="http://cstsinghua.github.io/tags/adb/"/>
+    
+      <category term="原理" scheme="http://cstsinghua.github.io/tags/%E5%8E%9F%E7%90%86/"/>
+    
+      <category term="简介" scheme="http://cstsinghua.github.io/tags/%E7%AE%80%E4%BB%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>用sphinx编写智能和漂亮的文档</title>
@@ -4606,39 +4775,6 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
-    <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-13T01:57:02.000Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For Test:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-  </entry>
-  
-  <entry>
     <title>python安装某些第三方包报错解决办法</title>
     <link href="http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
     <id>http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
@@ -4694,6 +4830,39 @@ collect2.exe: error: ld returned 1 exit status
     
     
       <category term="安装第三方包" scheme="http://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
+    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
+    <published>2016-06-13T01:57:02.000Z</published>
+    <updated>2016-06-13T01:57:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For Test:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   

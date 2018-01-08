@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/">
+    
+    
+    <title>adb原理简介及常用命令介绍 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="命令,常用,adb,原理,简介">
+    <meta name="description" content="引言我们知道，Android程序安装和调试都可通过adb来实现。adb原理看似简单，其实涉及到的知识和原理很多也比较复杂，要想完全弄清楚adb的原理和运行机制，除了查阅官方资料、网上的相关资料(这里提供两份参考资料，请下载adb原理.pdf、Android远程控制技术.pdf，不过个人认为这两份资料并未将adb原理讲透将明白，也缺乏实际的场景抓包说明)，实际动手(抓包、测试)都不可少，本文下面章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="adb原理简介及常用命令介绍">
+<meta property="og:url" content="http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="引言我们知道，Android程序安装和调试都可通过adb来实现。adb原理看似简单，其实涉及到的知识和原理很多也比较复杂，要想完全弄清楚adb的原理和运行机制，除了查阅官方资料、网上的相关资料(这里提供两份参考资料，请下载adb原理.pdf、Android远程控制技术.pdf，不过个人认为这两份资料并未将adb原理讲透将明白，也缺乏实际的场景抓包说明)，实际动手(抓包、测试)都不可少，本文下面章">
+<meta property="og:image" content="https://i.imgur.com/ZaDEzmS.png">
+<meta property="og:updated_time" content="2018-01-08T09:31:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="adb原理简介及常用命令介绍">
+<meta name="twitter:description" content="引言我们知道，Android程序安装和调试都可通过adb来实现。adb原理看似简单，其实涉及到的知识和原理很多也比较复杂，要想完全弄清楚adb的原理和运行机制，除了查阅官方资料、网上的相关资料(这里提供两份参考资料，请下载adb原理.pdf、Android远程控制技术.pdf，不过个人认为这两份资料并未将adb原理讲透将明白，也缺乏实际的场景抓包说明)，实际动手(抓包、测试)都不可少，本文下面章">
+<meta name="twitter:image" content="https://i.imgur.com/ZaDEzmS.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">adb原理简介及常用命令介绍</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">adb原理简介及常用命令介绍</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-08T08:18:23.000Z" itemprop="datePublished" class="page-time">
+  2018-01-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引言"><span class="post-toc-number">1.</span> <span class="post-toc-text">引言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#adb原理分析"><span class="post-toc-number">2.</span> <span class="post-toc-text">adb原理分析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#adb常用命令介绍"><span class="post-toc-number">3.</span> <span class="post-toc-text">adb常用命令介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#常见问题"><span class="post-toc-number">4.</span> <span class="post-toc-text">常见问题</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-adb原理简介及常用命令介绍"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">adb原理简介及常用命令介绍</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-08 16:18:23" datetime="2018-01-08T08:18:23.000Z"  itemprop="datePublished">2018-01-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>我们知道，Android程序安装和调试都可通过<a href="https://developer.android.com/studio/command-line/adb.html" title="官方adb介绍" target="_blank" rel="external">adb</a>来实现。adb原理看似简单，其实涉及到的知识和原理很多也比较复杂，要想完全弄清楚adb的原理和运行机制，除了查阅官方资料、网上的相关资料(这里提供两份参考资料，请下载<a href="/adb原理.pdf">adb原理.pdf</a>、<a href="/Android远程控制技术.pdf">Android远程控制技术.pdf</a>，不过个人认为这两份资料并未将adb原理讲透将明白，也缺乏实际的场景抓包说明)，实际动手(抓包、测试)都不可少，本文下面章节对adb原理做详细介绍。</p>
+<h1 id="adb原理分析"><a href="#adb原理分析" class="headerlink" title="adb原理分析"></a>adb原理分析</h1><p>(待续)</p>
+<h1 id="adb常用命令介绍"><a href="#adb常用命令介绍" class="headerlink" title="adb常用命令介绍"></a>adb常用命令介绍</h1><ol>
+<li>adb命令详解(官方文档)<br> adb命令的官方文档和命令使用请参见<a href="https://developer.android.com/studio/command-line/adb.html" title="adb命令官方文档说明" target="_blank" rel="external">https://developer.android.com/studio/command-line/adb.html</a>。里面对命令的各种参数和子命令都有详细的介绍，可以根据需要，查阅对应的子命令章节。</li>
+<li>通过命令行学习<br> 打开命令行，这里以windows系统为例。如果没有将adb.exe的父目录添加到环境变量path路径中，那么在命令行里面需要输入adb命令的全路径。adb.exe在<code>%ANDROID_HOME%\platform-tools</code>下，其中<code>%ANDROID_HOME%</code>代表你电脑上Android SDK的安装路径。<br> 打开命令行，输入adb命令，就可以看到命令的帮助信息，从中也可以了解有哪些子命令和参数可用。如下图所示：<br> <img src="https://i.imgur.com/ZaDEzmS.png" alt="adb命令"></li>
+<li>常用命令介绍<br><strong>adb命令通用格式</strong>：<br> 参见官方文档：<a href="http://developer.android.com/intl/zh-cn/tools/help/adb.html" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/tools/help/adb.html</a><blockquote>
+<p>adb [-d|-e|-s <serialnumber>] &lt;command&gt;</serialnumber></p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li><p>获取系统版本</p>
+<blockquote>
+<p>adb shell getprop ro.build.version.release</p>
+</blockquote>
+</li>
+<li><p>查看手机SDK API Level</p>
+<blockquote>
+<p>adb shell getprop ro.build.version.sdk</p>
+</blockquote>
+</li>
+<li><p>查看手机CPU信息</p>
+<blockquote>
+<p>adb shell getprop ro.product.cpu.abi</p>
+</blockquote>
+<p>  或按照下面命令序列依次输入，即进入Android手机的shell命令行，读取<code>cpuinfo</code>文件的内容</p>
+<blockquote>
+<p>adb shell<br>cd /proc<br>cat cpuinfo</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>发送文件到手机 </p>
+<blockquote>
+<p>adb push [-p] &lt;local&gt;  &lt;remote&gt;</p>
+</blockquote>
+<p> 命令说明：</p>
+<ul>
+<li>copy file/dir to device(复制文件或目录至手机设备)</li>
+<li>(‘-p’ to display the transfer progress)，-p参数表示显示传输进度</li>
+<li>local为本地的文件目录(全路径)</li>
+<li>remote为手机端指定存放目录(Linux风格，/开头，如/data/dir)</li>
+</ul>
+</li>
+<li><p>从手机拉取文件到本地</p>
+<blockquote>
+<p>adb pull [-p] [-a] &lt;remote&gt; [&lt;local&gt;]</p>
+</blockquote>
+<p>  命令说明：</p>
+<ul>
+<li>copy file/dir from device(从手机设备复制文件或目录至本机)</li>
+<li>(‘-p’ to display the transfer progress)，-p参数表示显示传输进度</li>
+<li>(‘-a’ means copy timestamp and mode)，复制文件的同时复制文件的时间戳和模式(权限模式)</li>
+<li>local为本地的文件目录(全路径)</li>
+<li>remote为手机端指定存放目录(Linux风格，/开头，如/data/dir)</li>
+<li>示例(e.g.) <code>adb pull -p /default.prop D:\</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>adb shell dumpsys<br>  默认打印出当前系统所有service信息，在后面可加上具体的服务名 需要列出当前运行的服务，可运行：</p>
+<blockquote>
+<p>adb shell dumpsys | findstr DUMP</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>查看手机上层(顶层)Activity的名字</p>
+<blockquote>
+<p>adb shell dumpsys activity -h  加上-h可以获取帮助信息</p>
+</blockquote>
+<p>  linux:</p>
+<blockquote>
+<p>adb shell dumpsys activity | grep “mFocusedActivity”</p>
+</blockquote>
+<p>  windows:</p>
+<blockquote>
+<p>adb shell dumpsys activity | findstr “mFocusedActivity”</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>查看UI层级</p>
+<blockquote>
+<p>adb shell uiautomator dump</p>
+</blockquote>
+</li>
+<li><p>查看手机分辨率</p>
+<blockquote>
+<p>adb shell wm size</p>
+</blockquote>
+<p>  或</p>
+<blockquote>
+<p>adb shell dumpsys window displays</p>
+</blockquote>
+</li>
+<li><p>查看机型(手机型号)时，可以使用以下命令：</p>
+<blockquote>
+<p>adb shell getprop ro.product.model</p>
+</blockquote>
+<p>  如果我们忘记具体系统属性的名字，我们可以使用grep进行过滤，比如：<br>  windows系统：</p>
+<blockquote>
+<p>adb shell getprop | findstr product</p>
+</blockquote>
+<p>  或</p>
+<blockquote>
+<p>adb shell cat /system/build.prop | findstr product</p>
+</blockquote>
+<p>  Linux系统：</p>
+<blockquote>
+<p>adb shell getprop | grep product</p>
+</blockquote>
+<p>  或 </p>
+<blockquote>
+<p>adb shell cat /system/build.prop | grep product</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><ol>
+<li><strong>打开adb时(在命令行输入adb命令的时候)出现类似报错：</strong><br> adb server version (31) doesn’t match this client (39); killing…<br> error: could not install <em>smartsocket</em> listener: cannot bind to <code>127.0.0.1:5037:</code> 通常每个套接字地址(协议/网络地址/端口)只允许使用一次。 (10048)</li>
+</ol>
+<ul>
+<li><p>原因：电脑上安装了其他手机助手，比如360，腾讯手机管家等，其开启了adb server，但是这些软件自带的adb版本与当前Android SDK路径(添加进了系统path)下的adb(位于<code>%ANDROID_HOME%\platform-tools</code>下，其中<code>%ANDROID_HOME%</code>代表你电脑上Android SDK的安装路径)版本不一致，从命令行运行adb devices或者adb start-server，会从Android SDK路径下(已加入到了环境变量path中)的adb启动adb server，<br>从而与当前正在运行的其他软件开启的adb server冲突。而两个版本的server都默认监听5037端口，从而导致系统提示”<code>cannot bind to 127.0.0.1:5037</code>,只能使用一次”的字样。</p>
+</li>
+<li><p>解决办法：<br>  查找是哪个软件开启了adb server，然后将其进程kill掉；</p>
+</li>
+<li><p>具体步骤：</p>
+<ol>
+<li>Netstat –ano|findstr “5037”,找到正在使用5037端口的进程ID；</li>
+<li><code>tasklist|findstr &quot;&lt;PID号&gt;&quot;</code>(其中<code>&lt;PID&gt;</code>为步骤1中查询到的进程ID号),查看该PID对应的进程名称；</li>
+<li>通过任务管理器的详细信息栏(适用于windows7以上版本系统)，找到对应PID和进程名称的进程，kill之(或者直接用<code>taskkill /F /PID &lt;PID&gt;</code>命令直接kill对应PID的进程也可，其中<code>&lt;PID&gt;</code>为步骤1中查询到的进程ID号)；</li>
+<li>重新打开命令行然后输入adb devices即可；</li>
+</ol>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    post.last_updated<time datetime="2018-01-08T09:31:21.000Z" itemprop="dateUpdated">2018-01-08 17:31:21</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adb/">adb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原理/">原理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/简介/">简介</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/&title=《adb原理简介及常用命令介绍》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/&title=《adb原理简介及常用命令介绍》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《adb原理简介及常用命令介绍》 — Atypical programmer&url=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/16/编写sphinx文档/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">用sphinx编写智能和漂亮的文档</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "4DjAfnIwjxGfITAYl8eVX5Pe-gzGzoHsz",
+            appKey: "ss62qxcFEjf5opJ4Ii5xI2zn",
+            avatar: "mm",
+            placeholder: "欢迎交流",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/&title=《adb原理简介及常用命令介绍》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/&title=《adb原理简介及常用命令介绍》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《adb原理简介及常用命令介绍》 — Atypical programmer&url=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
