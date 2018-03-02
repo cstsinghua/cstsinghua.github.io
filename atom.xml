@@ -546,7 +546,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;aapt list -v -a D:\UserProfiles\CoulsonChen\Desktop\QR.apk | findstr package&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;示例2：读取APk的packageName、versionCode、applicationLabel、launcherActivity、permission等各种详细信息(可以使用findstr对输出信息过滤，关注某一个具体的内容，比如包名packageName)&lt;/p&gt;
+&lt;p&gt;示例2：读取APK的packageName、versionCode、applicationLabel、launcherActivity、permission等各种详细信息(可以使用findstr对输出信息过滤，关注某一个具体的内容，比如包名packageName)&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk&lt;br&gt;aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk | findstr launchable-activity&lt;/p&gt;
 &lt;/blockquote&gt;
