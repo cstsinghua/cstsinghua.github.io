@@ -1078,7 +1078,7 @@ Aborting commit due to empty commit message.
     
     <content type="html">&lt;p&gt;Android studio常用的快捷键&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;Android-studio常用快捷键总结&quot;&gt;&lt;a href=&quot;#Android-studio常用快捷键总结&quot; class=&quot;headerlink&quot; title=&quot;Android studio常用快捷键总结&quot;&gt;&lt;/a&gt;Android studio常用快捷键总结&lt;/h1&gt;&lt;p&gt;书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。其实Android studio的的settings里面Keymap可以查看所有的快捷键，另外在Android studio的菜单栏，菜单项里面也注明了每项操作的快捷键(如果有)，经常查看和练习，根本也用不着在网上找说明。当然，对于新人或者英文不是太好的初学者，借鉴别人的经验是最快的学习方式。本文暂只适用于Windows平台，Mac环境后续补充。&lt;/p&gt;
-&lt;h2 id=&quot;搜索快捷键&quot;&gt;&lt;a href=&quot;#搜索快捷键&quot; class=&quot;headerlink&quot; title=&quot;搜索快捷键&quot;&gt;&lt;/a&gt;搜索快捷键&lt;/h2&gt;&lt;table&gt;
+&lt;h2 id=&quot;搜索和跳转快捷键&quot;&gt;&lt;a href=&quot;#搜索和跳转快捷键&quot; class=&quot;headerlink&quot; title=&quot;搜索和跳转快捷键&quot;&gt;&lt;/a&gt;搜索和跳转快捷键&lt;/h2&gt;&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;快捷键&lt;/th&gt;
@@ -1138,9 +1138,9 @@ Aborting commit due to empty commit message.
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;2次点击Shift&lt;/td&gt;
-&lt;td&gt;跳转到相关的文件&lt;/td&gt;
-&lt;td&gt;暂无&lt;/td&gt;
-&lt;td&gt;跳转到相关的文件&lt;/td&gt;
+&lt;td&gt;搜索任意内容&lt;/td&gt;
+&lt;td&gt;Ctrl+H&lt;/td&gt;
+&lt;td&gt;全局搜索任意内容&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Ctrl+E&lt;/td&gt;
@@ -1165,6 +1165,12 @@ Aborting commit due to empty commit message.
 &lt;td&gt;Go to File，打开文件，在弹框中输入要打开的文件名，会模糊匹配&lt;/td&gt;
 &lt;td&gt;未知&lt;/td&gt;
 &lt;td&gt;打开文件，在弹框中输入要打开的文件名，会模糊匹配&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl + [&lt;/td&gt;
+&lt;td&gt;跳至括号开头/结尾&lt;/td&gt;
+&lt;td&gt;Ctrl+Shift+P&lt;/td&gt;
+&lt;td&gt;反向组合键为Ctrl + ]&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
