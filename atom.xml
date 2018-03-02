@@ -492,7 +492,7 @@
     <link href="http://cstsinghua.github.io/2017/02/21/Android%20APK%E9%80%86%E5%90%91%E8%A7%A3%E6%9E%90/"/>
     <id>http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/</id>
     <published>2017-02-21T06:34:42.000Z</published>
-    <updated>2017-03-02T08:44:09.000Z</updated>
+    <updated>2018-03-02T03:43:02.000Z</updated>
     
     <content type="html">&lt;p&gt;Android APK逆向解析&lt;/p&gt;
 &lt;p&gt;众所周知，Android系统是开源的，运行其上的Android应用APK即Android Package也是可以通过各种工具进行反编译或者逆向工程，从而可以对其他APP进行研究或者借鉴学习，亦或从APK中获取相关信息(比如清单文件AndroidManifest.xml里面的package、versionName和versionCode等等)。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -516,7 +516,7 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;resources.arsc：编译Android资源文件后的生成的二进制文件，resources.arsc有固定的格式，包括了资源索引和字符串资源池等，详细可参见&lt;a href=&quot;https://hellokugo.github.io/2016/09/03/Resource.arsc%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;resources.arsc解析&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;AndroidManifest.xml：清单文件，该文件是每个应用都必须定义和包含的，它描述了应用的名字、版本、权限、引用的库文件等等信息，如要把apk上传到Google Market上，也要对这个xml做一些配置。在apk中的AndroidManifest.xml是经过编译的，即是二进制格式，如果直接用编辑器打开，显示会是乱码。因此需要先进行反编译处理，得到原始的AndroidManifest.xml文件。可以通过AXMLPrinter2工具解开，具体命令为：java -jar AXMLPrinter2.jar AndroidManifest.xml&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;AndroidManifest.xml：清单文件，该文件是每个应用都必须定义和包含的，它描述了应用的名字、版本、权限、引用的库文件等等信息，如要把apk上传到Google Market上，也要对这个xml做一些配置。在apk中的AndroidManifest.xml是经过编译的，即是二进制格式，如果直接用编辑器打开，显示会是乱码。因此需要先进行反编译处理，得到原始的AndroidManifest.xml文件。可以通过AXMLPrinter2或aapt工具解开或解析，具体命令为：java -jar AXMLPrinter2.jar AndroidManifest.xml&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;assets：assets目录可以存放一些配置文件（比如webview本地资源、图片资源、音视频等等），不会经过编译，和原始工程里面的文件是一致的，这些文件的内容在程序运行过程中可以通过相关的API（android.content.res.AssetManager）获得。&lt;/p&gt;
 &lt;/li&gt;
@@ -533,6 +533,24 @@
 &lt;h2 id=&quot;ClassyShark&quot;&gt;&lt;a href=&quot;#ClassyShark&quot; class=&quot;headerlink&quot; title=&quot;ClassyShark&quot;&gt;&lt;/a&gt;ClassyShark&lt;/h2&gt;&lt;p&gt;google官方为Android开发者推出的独立的二进制文件检查工具，因此其权威性和强大毋庸赘言，且得到较好的维护和更新。其github地址为：[&lt;a href=&quot;https://github.com/google/android-classyshark&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/google/android-classyshark&lt;/a&gt;] ，其支持多种文件格式的解析，包括：库文件 (.dex, .aar, .so), 可执行文件 (.apk, .jar, .class) 和所有的Android二进制XML格式文件如AndroidManifest, resources, layouts等等。另外，很重要的一点，其能分析得出dex文件里面包含的方法数，这对于Android一个著名的问题(方法数超限65535，见&lt;a href=&quot;https://developer.android.com/studio/build/multidex.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.android.com/studio/build/multidex.html&lt;/a&gt;)的解决很有帮助。&lt;/p&gt;
 &lt;h2 id=&quot;AXMLParser&quot;&gt;&lt;a href=&quot;#AXMLParser&quot; class=&quot;headerlink&quot; title=&quot;AXMLParser&quot;&gt;&lt;/a&gt;AXMLParser&lt;/h2&gt;&lt;p&gt;AXMLParser仅仅是用于解析APK里面的二进制AndroidManifest.xml，从而得到与原始工程里的AndroidManifest.xml内容一致的可读xml。较轻量级，适用于只想查看和AndroidManifest.xml里面包含的信息，比如包名package，versionCode和versionName，启动Activity等。其原始链接和下载地址为：&lt;a href=&quot;https://code.google.com/archive/p/xml-apk-parser/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://code.google.com/archive/p/xml-apk-parser/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:该工具很久没有更新了&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;AAPT-aapt&quot;&gt;&lt;a href=&quot;#AAPT-aapt&quot; class=&quot;headerlink&quot; title=&quot;AAPT(aapt)&quot;&gt;&lt;/a&gt;AAPT(aapt)&lt;/h2&gt;&lt;p&gt;Android SDK中自带的appt工具(位于%ANDROID_HOME%\build-tools\%Android version%\aapt.exe,API Level 24及以后版本新增了aapt2,即%ANDROID_HOME%\build-tools\%Android version%\aapt2.exe。其中&lt;code&gt;%ANDROID_HOME%&lt;/code&gt;是Android SDK的安装目录，&lt;code&gt;%Android version%&lt;/code&gt;表示构建版本，完整示例比如&lt;code&gt;&amp;quot;F:\Android\sdk\build-tools\27.0.0\aapt.exe&amp;quot;&lt;/code&gt;)，其实构建APK的过程中，aapt工具起到了非常关键的作用，比如将原始资源等进行编译，生成R.id等。反过来，aapt也可以用于解析APK，包括清单文件AndroidManifest.xml中的信息。appt工具的功能很强大，子命令和参数非常丰富，具体可以进入&lt;code&gt;%ANDROID_HOME%\build-tools\%Android version%&lt;/code&gt;目录，然后在该目录的命令行输入：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;cd &lt;code&gt;%ANDROID_HOME%\build-tools\%Android version%&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;appt&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可得到下面提示(这里重点说明aapt解析zip,jar,apk的命令使用方式。主要使用到appt的两个&lt;strong&gt;子命令list和dump&lt;/strong&gt;，命令的使用请多实践或查阅命令帮助，这里不详细赘述)：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/KRnIJOi.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;示例1：读取APK的包名(Windows下可以使用findstr对输出信息过滤，linux则是grep。从而对信息进行过滤筛选，比如包名packageName)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;aapt list -v -a D:\UserProfiles\CoulsonChen\Desktop\QR.apk | findstr package&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例2：读取APk的packageName、versionCode、applicationLabel、launcherActivity、permission等各种详细信息(可以使用findstr对输出信息过滤，关注某一个具体的内容，比如包名packageName)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk&lt;br&gt;aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk | findstr launchable-activity&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;通过aapt方式解析APK，需要熟悉命令的使用，也比较繁琐。但好处在于可以将其封装进脚本，用于编写自动化工具去解析和执行，这对于构建自动化测试或者自动打包流程等非常有用，而不依赖于GUI。&lt;/p&gt;
 &lt;h2 id=&quot;新版Android-studio&quot;&gt;&lt;a href=&quot;#新版Android-studio&quot; class=&quot;headerlink&quot; title=&quot;新版Android studio&quot;&gt;&lt;/a&gt;新版Android studio&lt;/h2&gt;&lt;p&gt;Android studio 2.x版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：&lt;br&gt;&lt;img src=&quot;http://i.imgur.com/hyigywA.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 </content>
     
@@ -564,6 +582,8 @@
       <category term="reverse engineering" scheme="http://cstsinghua.github.io/tags/reverse-engineering/"/>
     
       <category term="build" scheme="http://cstsinghua.github.io/tags/build/"/>
+    
+      <category term="aapt" scheme="http://cstsinghua.github.io/tags/aapt/"/>
     
   </entry>
   
@@ -1074,7 +1094,7 @@ Aborting commit due to empty commit message.
     <link href="http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://cstsinghua.github.io/2016/07/13/Android-studio常用快捷键/</id>
     <published>2016-07-13T10:07:19.000Z</published>
-    <updated>2017-11-16T01:26:27.000Z</updated>
+    <updated>2018-03-02T03:42:50.000Z</updated>
     
     <content type="html">&lt;p&gt;Android studio常用的快捷键&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;Android-studio常用快捷键总结&quot;&gt;&lt;a href=&quot;#Android-studio常用快捷键总结&quot; class=&quot;headerlink&quot; title=&quot;Android studio常用快捷键总结&quot;&gt;&lt;/a&gt;Android studio常用快捷键总结&lt;/h1&gt;&lt;p&gt;书读百遍，其义自现。同理，快捷键的使用需要孰能生巧。其实Android studio的的settings里面Keymap可以查看所有的快捷键，另外在Android studio的菜单栏，菜单项里面也注明了每项操作的快捷键(如果有)，经常查看和练习，根本也用不着在网上找说明。当然，对于新人或者英文不是太好的初学者，借鉴别人的经验是最快的学习方式。本文暂只适用于Windows平台，Mac环境后续补充。&lt;/p&gt;

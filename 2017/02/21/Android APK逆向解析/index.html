@@ -26,7 +26,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Android,逆向,apktool,AndroidManifest.xml,ClassyShark,jadx,AXMLPrinter,reverse engineering,build">
+    <meta name="keywords" content="Android,逆向,apktool,AndroidManifest.xml,ClassyShark,jadx,AXMLPrinter,reverse engineering,build,aapt">
     <meta name="description" content="Android应用APK逆向解析工具和方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android APK逆向解析">
@@ -35,8 +35,9 @@
 <meta property="og:description" content="Android应用APK逆向解析工具和方法">
 <meta property="og:image" content="http://i.imgur.com/ECzWe5b.png">
 <meta property="og:image" content="http://i.imgur.com/xLb60OI.png">
+<meta property="og:image" content="https://i.imgur.com/KRnIJOi.jpg">
 <meta property="og:image" content="http://i.imgur.com/hyigywA.png">
-<meta property="og:updated_time" content="2017-03-02T08:44:09.000Z">
+<meta property="og:updated_time" content="2018-03-02T03:43:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android APK逆向解析">
 <meta name="twitter:description" content="Android应用APK逆向解析工具和方法">
@@ -217,7 +218,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android的构建流程"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android的构建流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-APK逆向解析"><span class="post-toc-number">2.</span> <span class="post-toc-text">Android APK逆向解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#全能型选手-apktool"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">全能型选手-apktool</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jadx"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">jadx</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ClassyShark"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">ClassyShark</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AXMLParser"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">AXMLParser</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新版Android-studio"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">新版Android studio</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android的构建流程"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android的构建流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-APK逆向解析"><span class="post-toc-number">2.</span> <span class="post-toc-text">Android APK逆向解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#全能型选手-apktool"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">全能型选手-apktool</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jadx"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">jadx</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ClassyShark"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">ClassyShark</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AXMLParser"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">AXMLParser</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AAPT-aapt"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">AAPT(aapt)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新版Android-studio"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">新版Android studio</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -264,7 +265,7 @@
 </li>
 <li><p>resources.arsc：编译Android资源文件后的生成的二进制文件，resources.arsc有固定的格式，包括了资源索引和字符串资源池等，详细可参见<a href="https://hellokugo.github.io/2016/09/03/Resource.arsc%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" target="_blank" rel="external">resources.arsc解析</a></p>
 </li>
-<li><p>AndroidManifest.xml：清单文件，该文件是每个应用都必须定义和包含的，它描述了应用的名字、版本、权限、引用的库文件等等信息，如要把apk上传到Google Market上，也要对这个xml做一些配置。在apk中的AndroidManifest.xml是经过编译的，即是二进制格式，如果直接用编辑器打开，显示会是乱码。因此需要先进行反编译处理，得到原始的AndroidManifest.xml文件。可以通过AXMLPrinter2工具解开，具体命令为：java -jar AXMLPrinter2.jar AndroidManifest.xml</p>
+<li><p>AndroidManifest.xml：清单文件，该文件是每个应用都必须定义和包含的，它描述了应用的名字、版本、权限、引用的库文件等等信息，如要把apk上传到Google Market上，也要对这个xml做一些配置。在apk中的AndroidManifest.xml是经过编译的，即是二进制格式，如果直接用编辑器打开，显示会是乱码。因此需要先进行反编译处理，得到原始的AndroidManifest.xml文件。可以通过AXMLPrinter2或aapt工具解开或解析，具体命令为：java -jar AXMLPrinter2.jar AndroidManifest.xml</p>
 </li>
 <li><p>assets：assets目录可以存放一些配置文件（比如webview本地资源、图片资源、音视频等等），不会经过编译，和原始工程里面的文件是一致的，这些文件的内容在程序运行过程中可以通过相关的API（android.content.res.AssetManager）获得。</p>
 </li>
@@ -281,6 +282,24 @@
 <h2 id="ClassyShark"><a href="#ClassyShark" class="headerlink" title="ClassyShark"></a>ClassyShark</h2><p>google官方为Android开发者推出的独立的二进制文件检查工具，因此其权威性和强大毋庸赘言，且得到较好的维护和更新。其github地址为：[<a href="https://github.com/google/android-classyshark" target="_blank" rel="external">https://github.com/google/android-classyshark</a>] ，其支持多种文件格式的解析，包括：库文件 (.dex, .aar, .so), 可执行文件 (.apk, .jar, .class) 和所有的Android二进制XML格式文件如AndroidManifest, resources, layouts等等。另外，很重要的一点，其能分析得出dex文件里面包含的方法数，这对于Android一个著名的问题(方法数超限65535，见<a href="https://developer.android.com/studio/build/multidex.html" target="_blank" rel="external">https://developer.android.com/studio/build/multidex.html</a>)的解决很有帮助。</p>
 <h2 id="AXMLParser"><a href="#AXMLParser" class="headerlink" title="AXMLParser"></a>AXMLParser</h2><p>AXMLParser仅仅是用于解析APK里面的二进制AndroidManifest.xml，从而得到与原始工程里的AndroidManifest.xml内容一致的可读xml。较轻量级，适用于只想查看和AndroidManifest.xml里面包含的信息，比如包名package，versionCode和versionName，启动Activity等。其原始链接和下载地址为：<a href="https://code.google.com/archive/p/xml-apk-parser/" target="_blank" rel="external">https://code.google.com/archive/p/xml-apk-parser/</a></p>
 <p><strong>Note:该工具很久没有更新了</strong></p>
+<h2 id="AAPT-aapt"><a href="#AAPT-aapt" class="headerlink" title="AAPT(aapt)"></a>AAPT(aapt)</h2><p>Android SDK中自带的appt工具(位于%ANDROID_HOME%\build-tools\%Android version%\aapt.exe,API Level 24及以后版本新增了aapt2,即%ANDROID_HOME%\build-tools\%Android version%\aapt2.exe。其中<code>%ANDROID_HOME%</code>是Android SDK的安装目录，<code>%Android version%</code>表示构建版本，完整示例比如<code>&quot;F:\Android\sdk\build-tools\27.0.0\aapt.exe&quot;</code>)，其实构建APK的过程中，aapt工具起到了非常关键的作用，比如将原始资源等进行编译，生成R.id等。反过来，aapt也可以用于解析APK，包括清单文件AndroidManifest.xml中的信息。appt工具的功能很强大，子命令和参数非常丰富，具体可以进入<code>%ANDROID_HOME%\build-tools\%Android version%</code>目录，然后在该目录的命令行输入：</p>
+<blockquote>
+<p>cd <code>%ANDROID_HOME%\build-tools\%Android version%</code></p>
+</blockquote>
+<p>然后</p>
+<blockquote>
+<p>appt</p>
+</blockquote>
+<p>可得到下面提示(这里重点说明aapt解析zip,jar,apk的命令使用方式。主要使用到appt的两个<strong>子命令list和dump</strong>，命令的使用请多实践或查阅命令帮助，这里不详细赘述)：<br><img src="https://i.imgur.com/KRnIJOi.jpg" alt=""></p>
+<p>示例1：读取APK的包名(Windows下可以使用findstr对输出信息过滤，linux则是grep。从而对信息进行过滤筛选，比如包名packageName)</p>
+<blockquote>
+<p>aapt list -v -a D:\UserProfiles\CoulsonChen\Desktop\QR.apk | findstr package</p>
+</blockquote>
+<p>示例2：读取APk的packageName、versionCode、applicationLabel、launcherActivity、permission等各种详细信息(可以使用findstr对输出信息过滤，关注某一个具体的内容，比如包名packageName)</p>
+<blockquote>
+<p>aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk<br>aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk | findstr launchable-activity</p>
+</blockquote>
+<p>通过aapt方式解析APK，需要熟悉命令的使用，也比较繁琐。但好处在于可以将其封装进脚本，用于编写自动化工具去解析和执行，这对于构建自动化测试或者自动打包流程等非常有用，而不依赖于GUI。</p>
 <h2 id="新版Android-studio"><a href="#新版Android-studio" class="headerlink" title="新版Android studio"></a>新版Android studio</h2><p>Android studio 2.x版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：<br><img src="http://i.imgur.com/hyigywA.png" alt=""></p>
 
         </div>
@@ -289,7 +308,7 @@
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2017-03-02T08:44:09.000Z" itemprop="dateUpdated">2017-03-02 16:44:09</time>
+    post.last_updated<time datetime="2018-03-02T03:43:02.000Z" itemprop="dateUpdated">2018-03-02 11:43:02</time>
 </span><br>
 
 
@@ -312,7 +331,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AXMLPrinter/">AXMLPrinter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidManifest-xml/">AndroidManifest.xml</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ClassyShark/">ClassyShark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apktool/">apktool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jadx/">jadx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reverse-engineering/">reverse engineering</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向/">逆向</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AXMLPrinter/">AXMLPrinter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidManifest-xml/">AndroidManifest.xml</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ClassyShark/">ClassyShark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aapt/">aapt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apktool/">apktool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jadx/">jadx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reverse-engineering/">reverse engineering</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向/">逆向</a></li></ul>
 
 
             
