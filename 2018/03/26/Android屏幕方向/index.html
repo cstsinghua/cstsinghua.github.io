@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://cstsinghua.github.io/2018/03/26/Android屏幕方向/">
+    
+    
+    <title>Android屏幕方向 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="screen orientation,landscape,portrait,reverseLandscape,reversePortrai,Sensor,屏幕方向">
+    <meta name="description" content="Android屏幕方向就普通层面而言，大家理解的屏幕方向就是横竖屏(landscape和portrait。而随着Android平台的演进，对屏幕方向做出了更细致化的划分：可参见https://developer.android.com/guide/topics/manifest/activity-element.html#screen)。
+传统获取方式1(不建议使用该方法。该方法使用前提，在清单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android屏幕方向">
+<meta property="og:url" content="http://cstsinghua.github.io/2018/03/26/Android屏幕方向/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="Android屏幕方向就普通层面而言，大家理解的屏幕方向就是横竖屏(landscape和portrait。而随着Android平台的演进，对屏幕方向做出了更细致化的划分：可参见https://developer.android.com/guide/topics/manifest/activity-element.html#screen)。
+传统获取方式1(不建议使用该方法。该方法使用前提，在清单">
+<meta property="og:updated_time" content="2018-03-26T06:45:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android屏幕方向">
+<meta name="twitter:description" content="Android屏幕方向就普通层面而言，大家理解的屏幕方向就是横竖屏(landscape和portrait。而随着Android平台的演进，对屏幕方向做出了更细致化的划分：可参见https://developer.android.com/guide/topics/manifest/activity-element.html#screen)。
+传统获取方式1(不建议使用该方法。该方法使用前提，在清单">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android屏幕方向</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android屏幕方向</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-26T06:45:05.000Z" itemprop="datePublished" class="page-time">
+  2018-03-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android屏幕方向"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android屏幕方向</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#传统获取方式1-不建议使用该方法。该方法使用前提，在清单文件里面没有固定Activity的方向"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">传统获取方式1(不建议使用该方法。该方法使用前提，在清单文件里面没有固定Activity的方向)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取方式2，根据WindowManager获取当前窗口的orientation-注意：适用于Android-API-level-8"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">获取方式2，根据WindowManager获取当前窗口的orientation(注意：适用于Android API level 8+)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取方式3，注册OrientationEventListener"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">获取方式3，注册OrientationEventListener</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android屏幕方向"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android屏幕方向</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-26 14:45:05" datetime="2018-03-26T06:45:05.000Z"  itemprop="datePublished">2018-03-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="Android屏幕方向"><a href="#Android屏幕方向" class="headerlink" title="Android屏幕方向"></a>Android屏幕方向</h1><p>就普通层面而言，大家理解的屏幕方向就是横竖屏(landscape和portrait。而随着Android平台的演进，对屏幕方向做出了更细致化的划分：可参见<a href="https://developer.android.com/guide/topics/manifest/activity-element.html#screen)。" target="_blank" rel="external">https://developer.android.com/guide/topics/manifest/activity-element.html#screen)。</a></p>
+<h2 id="传统获取方式1-不建议使用该方法。该方法使用前提，在清单文件里面没有固定Activity的方向"><a href="#传统获取方式1-不建议使用该方法。该方法使用前提，在清单文件里面没有固定Activity的方向" class="headerlink" title="传统获取方式1(不建议使用该方法。该方法使用前提，在清单文件里面没有固定Activity的方向)"></a>传统获取方式1(不建议使用该方法。该方法使用前提，在清单文件里面没有固定Activity的方向)</h2><p>覆写Activity的如下方法：(这里获取的就是横屏或者竖屏，没有更精细化划分)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">super</span>.onConfigurationChanged(newConfig);</span><br><span class="line">	<span class="comment">//Overall orientation of the screen. May be one of ORIENTATION_LANDSCAPE, ORIENTATION_PORTRAIT. </span></span><br><span class="line">	<span class="keyword">int</span> or = newConfig.orientation;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="获取方式2，根据WindowManager获取当前窗口的orientation-注意：适用于Android-API-level-8"><a href="#获取方式2，根据WindowManager获取当前窗口的orientation-注意：适用于Android-API-level-8" class="headerlink" title="获取方式2，根据WindowManager获取当前窗口的orientation(注意：适用于Android API level 8+)"></a>获取方式2，根据WindowManager获取当前窗口的orientation(注意：适用于Android API level 8+)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getRotation</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> <span class="keyword">int</span> rotation = ((WindowManager) context</span><br><span class="line">			.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();</span><br><span class="line">	<span class="keyword">switch</span> (rotation) &#123;</span><br><span class="line">	<span class="keyword">case</span> Surface.ROTATION_0:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"portrait"</span>;</span><br><span class="line">	<span class="keyword">case</span> Surface.ROTATION_90:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"landscape"</span>;</span><br><span class="line">	<span class="keyword">case</span> Surface.ROTATION_180:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"reverse portrait"</span>;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"reverse landscape"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取方式3，注册OrientationEventListener"><a href="#获取方式3，注册OrientationEventListener" class="headerlink" title="获取方式3，注册OrientationEventListener"></a>获取方式3，注册OrientationEventListener</h2><p>在Activity内部处理方向事件较为简单。简单初始化一个OrientationEventListener并提供它的实现方法即可。比如， 参考如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleOrientationActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    OrientationEventListener mOrientationListener;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line"></span><br><span class="line">        mOrientationListener = <span class="keyword">new</span> OrientationEventListener(<span class="keyword">this</span>,</span><br><span class="line">            SensorManager.SENSOR_DELAY_GAME) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onOrientationChanged</span><span class="params">(<span class="keyword">int</span> orientation)</span> </span>&#123;</span><br><span class="line">                Log.v(DEBUG_TAG,</span><br><span class="line">                    <span class="string">"Orientation changed to "</span> + orientation);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (mOrientationListener.canDetectOrientation() == <span class="keyword">true</span>) &#123;</span><br><span class="line">           Log.v(DEBUG_TAG, <span class="string">"Can detect orientation"</span>);</span><br><span class="line">           mOrientationListener.enable();</span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">           Log.v(DEBUG_TAG, <span class="string">"Cannot detect orientation"</span>);</span><br><span class="line">           mOrientationListener.disable();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        mOrientationListener.disable();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>请注意上述代码中的new OrientationEventListener(this,SensorManager.SENSOR_DELAY_GAME)。这个构造方法的第二个参数，可以取几个值，这取决于应用的实际场景。The default rate, SENSOR_DELAY_NORMAL, 适合于简单的屏幕方向改变(suitable for screen orientation changes)。而SENSOR_DELAY_UI(suitable for the user interface)，SENSOR_DELAY_GAME适合于游戏(suitable for games)。详细的取值模型请参考<a href="https://developer.android.com/reference/android/hardware/SensorManager.html#SENSOR_DELAY_NORMAL" target="_blank" rel="external">https://developer.android.com/reference/android/hardware/SensorManager.html#SENSOR_DELAY_NORMAL</a></p>
+<p>After you have a valid OrientationEventListener object, you can check if it can detect orientation changes using the canDetectOrientation() method, and enable and disable the listener using its enable() and disable() methods.</p>
+<p>The OrientationEventListener has a single callback method, which enables you to listen for orientation transitions, the onOrientationChanged() method. This method has a single parameter, an integer. This integer normally represents the device tilt as a number between 0 and 359:</p>
+<ul>
+<li>未知方向：A result of ORIENTATION_UNKNOWN (-1) means the device is flat (perhaps on a table) and the orientation is unknown.</li>
+<li>正常方向(对于普通手机而言，即portrait)：A result of 0 means the device is in its “normal” orientation, with the top of the device facing in the up direction. (“Normal” is defined by the device manufacturer. You need to test on each device to find out for sure what “normal” means.)</li>
+<li>逆向横屏(对于普通手机而言，即reverseLandscape)：A result of 90 means the device is tilted 90 degrees, with the left side of the device facing in the up direction.</li>
+<li>逆向竖屏(对于普通手机而言，即reversePortrait)A result of 180 means the device is tilted 180 degrees, with the bottom side of the device facing in the up direction (upside down).</li>
+<li>横屏(对于普通手机而言，即landscape)A result of 270 means the device is tilted 270 degrees, with the right side of the device facing in the up direction.</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    post.last_updated<time datetime="2018-03-26T06:45:08.000Z" itemprop="dateUpdated">2018-03-26 14:45:08</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sensor/">Sensor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/landscape/">landscape</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/portrait/">portrait</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reverseLandscape/">reverseLandscape</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reversePortrai/">reversePortrai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/screen-orientation/">screen orientation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/屏幕方向/">屏幕方向</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/&title=《Android屏幕方向》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/&title=《Android屏幕方向》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android屏幕方向》 — Atypical programmer&url=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/08/adb原理简介及常用命令介绍/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">adb原理简介及常用命令介绍</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "4DjAfnIwjxGfITAYl8eVX5Pe-gzGzoHsz",
+            appKey: "ss62qxcFEjf5opJ4Ii5xI2zn",
+            avatar: "mm",
+            placeholder: "欢迎交流",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/&title=《Android屏幕方向》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/&title=《Android屏幕方向》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android屏幕方向》 — Atypical programmer&url=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2018/03/26/Android屏幕方向/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

@@ -205,6 +205,55 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Android热修复的思路"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-06-13 15:38:15" datetime="2016-06-13T07:38:15.000Z"  itemprop="datePublished">2016-06-13</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/插件化和热修复/">插件化和热修复</a></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/06/13/Android热修复的思路/">Android热修复</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Android热修复的方式关于动态热修复，目前发现的思路集中在三点：
+
+方式1：既然是热修复，那么就是新的类替换掉旧的类，而java世界类的加载是通过类加载器来实现，而Android应用程序的默认类加载器PathClassLoader加载的时候其实是通过关联的DexFile来实现(动态加载的时候已经反复涉及，这里不再赘述)，当有多个Dex文件的时候，是按照dexElements中的顺序来执行...
+    
+
+        <a href="/2016/06/13/Android热修复的思路/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android热修复/">Android热修复</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-Android动态加载机制"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -399,53 +448,6 @@ SmaliDebugging has been marked as d...
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-python安装第三方包错误解决"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-06-13 09:57:02" datetime="2016-06-13T01:57:02.000Z"  itemprop="datePublished">2016-06-13</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/06/13/python安装第三方包错误解决/">python安装某些第三方包报错解决办法</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        1. python安装某些第三方包报错vcvarsall.bat原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同时，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。...
-    
-
-        <a href="/2016/06/13/python安装第三方包错误解决/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装第三方包/">安装第三方包</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
             <article id="post-hello-world"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -486,6 +488,53 @@ Qu...
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/杂项/">杂项</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-python安装第三方包错误解决"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-06-13 09:57:02" datetime="2016-06-13T01:57:02.000Z"  itemprop="datePublished">2016-06-13</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/06/13/python安装第三方包错误解决/">python安装某些第三方包报错解决办法</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        1. python安装某些第三方包报错vcvarsall.bat原因：python安装某些第三方包(这里主要针对Windows平台)，主要是涉及系统底层和本地代码库时，需要C编译环境，Windows平台下，python本身是通过VC的编译环境编译的，不同的python版本对应不同的VC的动态库，同时，第三方库可能是采用其他编译器（比如GNU C、Cygwin、MinGW等）编译扩展的C代码。...
+    
+
+        <a href="/2016/06/13/python安装第三方包错误解决/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安装第三方包/">安装第三方包</a></li></ul>
 
     </div>
     
