@@ -4,6 +4,47 @@
 
     
   <url>
+    <loc>http://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/</loc>
+    <lastmod>2018-04-04T10:16:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>adb原理简介及常用命令介绍</title>
+        <pubTime>2018-04-04T10:16:35.000Z</pubTime>
+        
+        <tag>build</tag>
+         
+        <tag>V8</tag>
+         
+        <tag>构建</tag>
+         
+        <tag>GN</tag>
+         
+        <tag>depot_tools</tag>
+         
+        <tag>Linux</tag>
+         
+        <tag>VS</tag>
+         
+        <tag>v8 embedded in Android APP</tag>
+         
+        <tag>no webview</tag>
+         
+        <tag>JS</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="tools" url="http://cstsinghua.github.io/categories/Android/tools/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cstsinghua.github.io/2018/03/26/Android%E5%B1%8F%E5%B9%95%E6%96%B9%E5%90%91/</loc>
     <lastmod>2018-03-26T06:45:08.000Z</lastmod>
     <data>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/">
+    
+    
+    <title>adb原理简介及常用命令介绍 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="build,V8,构建,GN,depot_tools,Linux,VS,v8 embedded in Android APP,no webview,JS">
+    <meta name="description" content="#背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Andro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="adb原理简介及常用命令介绍">
+<meta property="og:url" content="http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="#背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Andro">
+<meta property="og:image" content="https://i.imgur.com/q5Qk8li.jpg">
+<meta property="og:image" content="https://i.imgur.com/KjQ0CNp.jpg">
+<meta property="og:updated_time" content="2018-04-04T10:16:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="adb原理简介及常用命令介绍">
+<meta name="twitter:description" content="#背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Andro">
+<meta name="twitter:image" content="https://i.imgur.com/q5Qk8li.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">adb原理简介及常用命令介绍</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">adb原理简介及常用命令介绍</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-04T10:16:35.000Z" itemprop="datePublished" class="page-time">
+  2018-04-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#平台和环境的选择"><span class="post-toc-number">1.</span> <span class="post-toc-text">平台和环境的选择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#具体步骤"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">具体步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#win10构建v8-engine的心路历程"><span class="post-toc-number">2.</span> <span class="post-toc-text">win10构建v8 engine的心路历程</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-构建v8 engine指南"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">adb原理简介及常用命令介绍</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-04 18:16:35" datetime="2018-04-04T10:16:35.000Z"  itemprop="datePublished">2018-04-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<p>#背景<br>最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Android平台讲解。IOS下，OC调用C++更简单，这里暂不赘述)：<br><img src="https://i.imgur.com/q5Qk8li.jpg" alt=""></p>
+<p>由此，大概思考了下，如果要实现JavaScript和业务层的Lua互调，那么应该与上面的原理类似。这基于以下几点分析：</p>
+<ol>
+<li>Javascript和java一样，都是解释性语言，需要类似VM的虚拟机(一般采用C或C++语言实现)来执行。java世界里，JVM是我们所熟知的。而JS领域，在移动平台方面，除了大名鼎鼎的google的v8引擎，还有其他的一些JS引擎(相当于VM)，比如JavaScriptCore、SpiderMonkey和Rhino(java实现，从这个角度看，Rhino似乎直接在Android上可以无缝对接)。关于JS引擎介绍，可以参见维基百科<a href="https://en.wikipedia.org/wiki/JavaScript_engine" title="JavaScript_engine" target="_blank" rel="external">JavaScript_engine介绍</a></li>
+<li>既然JS引擎是C/C++实现，在Android中，嵌入进引擎的so库中，便可实现JS与C++互调，而Lua语言天生就是C/C++的寄生语言，从而就可以建立JS和Lua互调的纽带。</li>
+</ol>
+<p>基于性能和平台适配考虑，最终选择v8作为Android平台的嵌入JS引擎，而JavaScriptCore作为IOS平台的嵌入引擎。本文主要讲解，如果从v8的源码构建出Android平台的嵌入库，然后通过Android NDK开发，进而实现在Android APP(非Hybrid应用，即不会通过Webview来运行JS代码)中运行JS代码，JS与C/C++、Lua互调。</p>
+<h1 id="平台和环境的选择"><a href="#平台和环境的选择" class="headerlink" title="平台和环境的选择"></a>平台和环境的选择</h1><p>如果有过大型开源C++项目编译的经验，就知道，选择开发系统和环境是非常重要的，一般而言，在Windows下编译真的是非常艰难。所以文本先以Linux系统(这里选择Ubuntu)为例，讲解如何构建出适用于Android ARM架构的JS引擎嵌入静态库。再讲解Windows平台下的编译构建。</p>
+<h2 id="Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8"><a href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8"></a>Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8</h2><p>v8项目在Github的官方镜像地址为<a href="https://github.com/v8/v8" target="_blank" rel="external">https://github.com/v8/v8</a>。而其官方的<a href="https://github.com/v8/v8/wiki" target="_blank" rel="external">wiki文档</a>也在这个仓库中。但是如果直接按照这个wiki去构建，失败几乎是不可避免。因为wiki的步骤非常简化(当然先总体阅览一下wiki还是大有必要，而且当回过头来对照的时候将会发现”原来是这样，Soga^_^”)，有些关键的环境配置和要点被省略掉，所以如果不跳过这些坑，将浪费大量的时间，甚至有很严重的挫败感。本文的目的就是为了对v8的构建做一个记录，总结遇到的问题，便于以后查阅，也为他人提供一个便捷的指引。</p>
+<p>这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Linux/Mac x64。</p>
+<p>如果没有单独的Ubuntu主机，那么可以在Windows主机下安装<a href="https://www.virtualbox.org/" target="_blank" rel="external">virtual box</a>或者<a href="https://www.vmware.com/" target="_blank" rel="external">VMware</a>，建议安装virtualbox，相对来说更轻量级，这里足够满足需求。然后利用virtualbox加载Ubuntu 16.04的ISO镜像(可网上下载，或找CoulsonChen索取)，创建虚拟机环境，即可在虚拟机环境下实现编译。</p>
+<h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><ol>
+<li>安装Git，在终端里面输入下面命令：<blockquote>
+<p>apt-get install git</p>
+</blockquote>
+</li>
+<li><p>安装depot_tools，在终端输入下面命令：</p>
+<blockquote>
+<p>git clone <a href="https://chromium.googlesource.com/chromium/tools/depot_tools.git" target="_blank" rel="external">https://chromium.googlesource.com/chromium/tools/depot_tools.git</a></p>
+</blockquote>
+<p> 将depot_tools的目录添加到系统的PATH路径，可以将depot_tools所在的目录加入到<code>~/.bashrc</code>或 <code>~/.zshrc</code>(~代表当前用户目录，一般为/home/yourName/，即打开终端时候默认进入的目录)，这样对当前用户的环境变量都生效了)。如果只是在当前终端环境下添加(假定depot_tools所在的目录为/path/to/depot_tools），则执行:</p>
+<blockquote>
+<p>export PATH=/path/to/depot_tools:$PATH</p>
+</blockquote>
+<p> depot_tools已经自带了GN工具(GYP从V8 6.5版本开始就不再使用。请使用GN代替)。V8的构建需要借助于GN。GN是一个元构建系统(meta build system of sorts)，因为它为其他构建系统(比如ninja)生成构建文件(it generates build files for a number of other build systems)。也就是说，GYP和GN 并不是构建系统，V8使用的构建系统使用的是Ninja，而GN是用来生产Ninja构建文件的工具。</p>
+</li>
+<li><p>更新depot_tool工具，在终端输入如下命令(注意，该命令不带任何参数)：</p>
+<blockquote>
+<p>gclient</p>
+</blockquote>
+<p> 该步骤更新depot_tool工具，特别如果是Windows系统下面构建，这一步骤将会在depot_tool目录下下载Git和python(2.7版本)</p>
+</li>
+<li><p>选择一个目录(该目录用于存放下载v8的源码），比如<code>/usr/local/v8/</code>，<strong>在该目录下</strong>打开终端，执行如下命令：</p>
+<blockquote>
+<p>fetch v8</p>
+</blockquote>
+<p>然后进入v8的源文件目录</p>
+<blockquote>
+<p>cd v8</p>
+</blockquote>
+</li>
+<li><p>步骤1-4确保工具和v8的源码下载完成，在执行第5步前，再次确认当前工作目录已经在v8的源目录下(步骤4中的示例来看的话，就是<code>/usr/local/v8/v8/</code>)。然后在当前工作目录(比如<code>/usr/local/v8/v8/</code>)下执行如下命令，该命令将会下载所有的构建依赖项(Download all the build dependencies）</p>
+<blockquote>
+<p>gclient sync</p>
+</blockquote>
+</li>
+<li><p>(这一步只在linux系统构建时才需要执行，且只需要执行一次–<strong>only on linux, only needed once</strong>) 安装构建依赖项：</p>
+<blockquote>
+<p>./build/install-build-deps.sh</p>
+</blockquote>
+</li>
+<li><p>生成必需的构建文件(Generate the necessary build files by executing the following in your terminal/shell）:</p>
+<blockquote>
+<p>tools/dev/v8gen.py x64.release</p>
+</blockquote>
+</li>
+<li><p>编译v8源码(Compile the source by executing the following in your terminal/shell）：</p>
+<blockquote>
+<p>ninja -C out.gn/x64.release</p>
+</blockquote>
+<p> 编译完成之后，可以在<code>/path/to/v8 Source dir/out.gn/x64.release</code>目录(这里示例即<code>/usr/local/v8/v8/out.gn/x64.release</code>)及其子目录下查看构建产生的库和可执行文件。</p>
+</li>
+<li>(<strong>可选,用于测试构建是否OK</strong>)执行测试(Run the tests by executing the following in your terminal/shell)：<blockquote>
+<p>tools/run-tests.py –gn</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8"><a href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Android arm版本的v8"></a>Linux(Ubuntu 16.04)下构建用于Android arm版本的v8</h2><p>这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Android arm。由于构建平台和目标平台是不同的平台，因此这里，需要使用<a href="https://en.wikipedia.org/wiki/Cross_compiler" target="_blank" rel="external">交叉编译(Cross compiling)</a>。</p>
+<p>首先理一下思路：</p>
+<ol>
+<li>先利用交叉编译，构建出用于Android平台的v8静态库文件；</li>
+<li>利用Android studio进行NDK开发，将步骤1中生成的静态库文件进行链接封装，向Java层暴露方法(对应java层的native方法)，最终生成动态库文件；</li>
+<li>Android APP内部，原生的Java层可以通过JNI调用步骤2中生成的动态库中的方法(去加载JS代码并执行相关逻辑，然后返回相关数据，反之亦然)</li>
+</ol>
+<p><strong>具体步骤待补充</strong></p>
+<h1 id="win10构建v8-engine的心路历程"><a href="#win10构建v8-engine的心路历程" class="headerlink" title="win10构建v8 engine的心路历程"></a>win10构建v8 engine的心路历程</h1><p>这里可以完全参照<a href="https://medium.com/dailyjs/how-to-build-v8-on-windows-and-not-go-mad-6347c69aacd4" target="_blank" rel="external">https://medium.com/dailyjs/how-to-build-v8-on-windows-and-not-go-mad-6347c69aacd4</a>这篇文章的步骤来完成。</p>
+<p>但需要强调的是，这篇文章编写的时候，当时的v8版本可以使用VS 2015编译，而v8的最新版本(截止到2018.4.4)要求VS 2017(随着时间推移，可能后续会要求更新版本的VS，这里就必须注意，可以在下载下来的v8源目录下面的build子目录下的vs_toolchain.py文件中查看默认的VS版本，如下图)，所以这篇文章里面关于VS 2015的部分，请替换成VS 2017。另外，关于Windows SDK的部分，也请下载最新版本的。<br><img src="https://i.imgur.com/KjQ0CNp.jpg" alt=""></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    post.last_updated<time datetime="2018-04-04T10:16:39.000Z" itemprop="dateUpdated">2018-04-04 18:16:39</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GN/">GN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/V8/">V8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VS/">VS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/depot-tools/">depot_tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/no-webview/">no webview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/v8-embedded-in-Android-APP/">v8 embedded in Android APP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/构建/">构建</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/&title=《adb原理简介及常用命令介绍》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/&title=《adb原理简介及常用命令介绍》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《adb原理简介及常用命令介绍》 — Atypical programmer&url=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/26/Android屏幕方向/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android屏幕方向</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "4DjAfnIwjxGfITAYl8eVX5Pe-gzGzoHsz",
+            appKey: "ss62qxcFEjf5opJ4Ii5xI2zn",
+            avatar: "mm",
+            placeholder: "欢迎交流",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/&title=《adb原理简介及常用命令介绍》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/&title=《adb原理简介及常用命令介绍》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《adb原理简介及常用命令介绍》 — Atypical programmer&url=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
