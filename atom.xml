@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2018-04-04T10:16:39.000Z</updated>
+  <updated>2018-04-09T04:29:50.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/"/>
     <id>http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/</id>
     <published>2018-04-04T10:16:35.000Z</published>
-    <updated>2018-04-04T10:16:39.000Z</updated>
+    <updated>2018-04-09T04:29:50.000Z</updated>
     
     <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;#背景&lt;br&gt;最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Android平台讲解。IOS下，OC调用C++更简单，这里暂不赘述)：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/q5Qk8li.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -31,7 +31,7 @@
 &lt;/ol&gt;
 &lt;p&gt;基于性能和平台适配考虑，最终选择v8作为Android平台的嵌入JS引擎，而JavaScriptCore作为IOS平台的嵌入引擎。本文主要讲解，如果从v8的源码构建出Android平台的嵌入库，然后通过Android NDK开发，进而实现在Android APP(非Hybrid应用，即不会通过Webview来运行JS代码)中运行JS代码，JS与C/C++、Lua互调。&lt;/p&gt;
 &lt;h1 id=&quot;平台和环境的选择&quot;&gt;&lt;a href=&quot;#平台和环境的选择&quot; class=&quot;headerlink&quot; title=&quot;平台和环境的选择&quot;&gt;&lt;/a&gt;平台和环境的选择&lt;/h1&gt;&lt;p&gt;如果有过大型开源C++项目编译的经验，就知道，选择开发系统和环境是非常重要的，一般而言，在Windows下编译真的是非常艰难。所以文本先以Linux系统(这里选择Ubuntu)为例，讲解如何构建出适用于Android ARM架构的JS引擎嵌入静态库。再讲解Windows平台下的编译构建。&lt;/p&gt;
-&lt;h2 id=&quot;Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8&quot;&gt;&lt;a href=&quot;#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8&quot; class=&quot;headerlink&quot; title=&quot;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8&quot;&gt;&lt;/a&gt;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8&lt;/h2&gt;&lt;p&gt;v8项目在Github的官方镜像地址为&lt;a href=&quot;https://github.com/v8/v8&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/v8/v8&lt;/a&gt;。而其官方的&lt;a href=&quot;https://github.com/v8/v8/wiki&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;wiki文档&lt;/a&gt;也在这个仓库中。但是如果直接按照这个wiki去构建，失败几乎是不可避免。因为wiki的步骤非常简化(当然先总体阅览一下wiki还是大有必要，而且当回过头来对照的时候将会发现”原来是这样，Soga^_^”)，有些关键的环境配置和要点被省略掉，所以如果不跳过这些坑，将浪费大量的时间，甚至有很严重的挫败感。本文的目的就是为了对v8的构建做一个记录，总结遇到的问题，便于以后查阅，也为他人提供一个便捷的指引。&lt;/p&gt;
+&lt;h2 id=&quot;Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件&quot;&gt;&lt;a href=&quot;#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件&quot; class=&quot;headerlink&quot; title=&quot;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&quot;&gt;&lt;/a&gt;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&lt;/h2&gt;&lt;p&gt;v8项目在Github的官方镜像地址为&lt;a href=&quot;https://github.com/v8/v8&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/v8/v8&lt;/a&gt;。而其官方的&lt;a href=&quot;https://github.com/v8/v8/wiki&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;wiki文档&lt;/a&gt;也在这个仓库中。但是如果直接按照这个wiki去构建，失败几乎是不可避免。因为wiki的步骤非常简化(当然先总体阅览一下wiki还是大有必要，而且当回过头来对照的时候将会发现”原来是这样，Soga^_^”)，有些关键的环境配置和要点被省略掉，所以如果不跳过这些坑，将浪费大量的时间，甚至有很严重的挫败感。本文的目的就是为了对v8的构建做一个记录，总结遇到的问题，便于以后查阅，也为他人提供一个便捷的指引。&lt;/p&gt;
 &lt;p&gt;这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Linux/Mac x64。&lt;/p&gt;
 &lt;p&gt;如果没有单独的Ubuntu主机，那么可以在Windows主机下安装&lt;a href=&quot;https://www.virtualbox.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;virtual box&lt;/a&gt;或者&lt;a href=&quot;https://www.vmware.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;VMware&lt;/a&gt;，建议安装virtualbox，相对来说更轻量级，这里足够满足需求。然后利用virtualbox加载Ubuntu 16.04的ISO镜像(可网上下载，或找CoulsonChen索取)，创建虚拟机环境，即可在虚拟机环境下实现编译。&lt;/p&gt;
 &lt;h3 id=&quot;具体步骤&quot;&gt;&lt;a href=&quot;#具体步骤&quot; class=&quot;headerlink&quot; title=&quot;具体步骤&quot;&gt;&lt;/a&gt;具体步骤&lt;/h3&gt;&lt;ol&gt;
@@ -83,15 +83,62 @@
 &lt;blockquote&gt;
 &lt;p&gt;ninja -C out.gn/x64.release&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt; 编译完成之后，可以在&lt;code&gt;/path/to/v8 Source dir/out.gn/x64.release&lt;/code&gt;目录(这里示例即&lt;code&gt;/usr/local/v8/v8/out.gn/x64.release&lt;/code&gt;)及其子目录下查看构建产生的库和可执行文件。&lt;/p&gt;
+&lt;p&gt; 该命令是&lt;strong&gt;编译构建v8运行的所有文件&lt;/strong&gt;(building all of V8 run (assuming gn generated to the x64.release folder))。编译完成之后，可以在&lt;code&gt;/path/to/v8 Source dir/out.gn/x64.release&lt;/code&gt;目录(这里示例即&lt;code&gt;/usr/local/v8/v8/out.gn/x64.release&lt;/code&gt;)及其子目录下查看构建产生的库和可执行文件。可进入该目录下，执行生成的d8可执行程序，进入javascript的交互命令行模式，示例如下图：&lt;br&gt; &lt;img src=&quot;https://i.imgur.com/Y6KhNNw.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt; 如果只需要&lt;strong&gt;编译构建指定的文件&lt;/strong&gt;，比如d8(build specific targets like d8, add them to the command line)。则可执行如下命令(将要指定的构建文件添加到ninja命令的参数中)：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ninja -C out.gn/x64.release d8&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;(&lt;strong&gt;可选,用于测试构建是否OK&lt;/strong&gt;)执行测试(Run the tests by executing the following in your terminal/shell)：&lt;blockquote&gt;
 &lt;p&gt;tools/run-tests.py –gn&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&quot;Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8&quot;&gt;&lt;a href=&quot;#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8&quot; class=&quot;headerlink&quot; title=&quot;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8&quot;&gt;&lt;/a&gt;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8&lt;/h2&gt;&lt;p&gt;这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Android arm。由于构建平台和目标平台是不同的平台，因此这里，需要使用&lt;a href=&quot;https://en.wikipedia.org/wiki/Cross_compiler&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;交叉编译(Cross compiling)&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;首先理一下思路：&lt;/p&gt;
+&lt;h2 id=&quot;Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件&quot;&gt;&lt;a href=&quot;#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件&quot; class=&quot;headerlink&quot; title=&quot;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)&quot;&gt;&lt;/a&gt;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)&lt;/h2&gt;&lt;p&gt;这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Android arm。由于构建平台和目标平台是不同的平台，因此这里，需要使用&lt;a href=&quot;https://en.wikipedia.org/wiki/Cross_compiler&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;交叉编译(Cross compiling)&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;前置条件，和&lt;code&gt;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&lt;/code&gt;章节的1-6步完全一致。接下来，可参考&lt;a href=&quot;https://github.com/v8/v8/wiki/Cross-compiling-for-ARM&quot; title=&quot;Cross compiling for ARM&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Cross compiling for ARM&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这里单独对Cross compiling for ARM的步骤做下说明：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在配置好上述提到的环境之后，编辑&lt;code&gt;.gclient配置文件&lt;/code&gt;(.gclient configuration file)，位于用于存放下载v8的源码的目录，对应于&lt;code&gt;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&lt;/code&gt;章节的步骤4中的说明，这里的目录路径示例为&lt;code&gt;/usr/local/v8&lt;/code&gt;，如下图：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/5RXz9UG.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;打开该文件，在末尾添加如下一行：&lt;br&gt;&lt;code&gt;target_os = [&amp;#39;android&amp;#39;]&lt;/code&gt;  # Add this to get Android stuff checked out.&lt;br&gt;示例如下：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/lLMsqrq.jpg&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;然后在v8的源码目录下(&lt;code&gt;/usr/local/v8/v8&lt;/code&gt;)，执行如下命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;gclient sync&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 一旦配置了&lt;code&gt;target_os = [&amp;#39;android&amp;#39;]&lt;/code&gt;，再执行&lt;code&gt;gclient sync&lt;/code&gt;，将会在v8的源码目录下下载Android相关的工具和文件，主要包括android_tools和android_ndk等(示例，对应目录&lt;code&gt;/usr/local/v8/v8/third_party/android/android_tools&lt;/code&gt;和&lt;code&gt;/usr/local/v8/v8/third_party/android_ndk&lt;/code&gt;)。&lt;strong&gt;注意：这些文件非常大，有10G左右，所以需要下载很长时间，网络如果不好的话，会很痛苦&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;利用8gen.py生成ARM架构编译时必要的构建文件(和&lt;code&gt;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&lt;/code&gt;章节的第7步类似)。在v8的源码目录下(&lt;code&gt;/usr/local/v8/v8&lt;/code&gt;)，执行如下命令：&lt;blockquote&gt;
+&lt;p&gt;tools/dev/v8gen.py arm.release&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;然后，进入生成的&lt;code&gt;arm.release&lt;/code&gt;子目录(示例，&lt;code&gt;/usr/local/v8/v8/out.gn/arm.release&lt;/code&gt;)，编辑其中的&lt;code&gt;args.gn&lt;/code&gt;文件，在其中添加如下几行：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;target_os = “android”&lt;br&gt;target_cpu = “arm”&lt;br&gt;v8_target_cpu = “arm”&lt;br&gt;is_component_build = false&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; &lt;img src=&quot;https://i.imgur.com/Da1SRZK.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://i.imgur.com/JpaKJRR.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt; 如果是arm64设备，则上面几行应该替换为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;target_os = “android”&lt;br&gt;target_cpu = “arm64”&lt;br&gt;v8_target_cpu = “arm64”&lt;br&gt;is_component_build = false&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;编译构建。这一步与&lt;code&gt;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&lt;/code&gt;章节的第8步类似。执行如下命令(构建全部目标文件)：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ninja -C out.gn/arm.release&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 或(只构建d8)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ninja -C out.gn/arm.release d8&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;构建完成后，可以将生成的d8及其相关文件push到Android手机中，体验一把，看看效果。可以通过adb工具来将文件push到手机(adb工具已经在步骤2完成后下载了，具体目录&lt;code&gt;/usr/local/v8/v8/third_party/android_tools/sdk/platform-tools&lt;/code&gt;。当然你也可以直接通过&lt;code&gt;sudo apt install android-tools-adb&lt;/code&gt;命令来额外安装adb。然后adb所在路径添加到PATH路径中)。在v8源文件目录下(&lt;code&gt;/usr/local/v8/v8&lt;/code&gt;)执行如下命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;adb push out.gn/arm.release/d8 /data/local/tmp&lt;br&gt;adb push out.gn/arm.release/natives_blob.bin /data/local/tmp&lt;br&gt;adb push out.gn/arm.release/snapshot_blob.bin /data/local/tmp&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 然后，通过adb shell进入到Android手机的交互shell中。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;$ adb shell&lt;br&gt;$ cd /data/local/tmp&lt;br&gt;$ ls&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;v8 natives_blob.bin snapshot_blob.bin
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;$ ./d8&lt;br&gt; V8 version 5.8.0 (candidate)&lt;br&gt; d8&amp;gt; ‘w00t!’&lt;br&gt; “w00t!”&lt;br&gt; d8&amp;gt; &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装&quot;&gt;&lt;a href=&quot;#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装&quot; class=&quot;headerlink&quot; title=&quot;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)&quot;&gt;&lt;/a&gt;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)&lt;/h2&gt;&lt;p&gt;首先理一下思路：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;先利用交叉编译，构建出用于Android平台的v8静态库文件；&lt;/li&gt;
 &lt;li&gt;利用Android studio进行NDK开发，将步骤1中生成的静态库文件进行链接封装，向Java层暴露方法(对应java层的native方法)，最终生成动态库文件；&lt;/li&gt;

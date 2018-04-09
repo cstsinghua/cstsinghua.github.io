@@ -34,8 +34,13 @@
 <meta property="og:site_name" content="Atypical programmer">
 <meta property="og:description" content="#背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Andro">
 <meta property="og:image" content="https://i.imgur.com/q5Qk8li.jpg">
+<meta property="og:image" content="https://i.imgur.com/Y6KhNNw.jpg">
+<meta property="og:image" content="https://i.imgur.com/5RXz9UG.jpg">
+<meta property="og:image" content="https://i.imgur.com/lLMsqrq.jpg">
+<meta property="og:image" content="https://i.imgur.com/Da1SRZK.jpg">
+<meta property="og:image" content="https://i.imgur.com/JpaKJRR.jpg">
 <meta property="og:image" content="https://i.imgur.com/KjQ0CNp.jpg">
-<meta property="og:updated_time" content="2018-04-04T10:16:39.000Z">
+<meta property="og:updated_time" content="2018-04-09T04:29:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="adb原理简介及常用命令介绍">
 <meta name="twitter:description" content="#背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Andro">
@@ -216,7 +221,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#平台和环境的选择"><span class="post-toc-number">1.</span> <span class="post-toc-text">平台和环境的选择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#具体步骤"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">具体步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#win10构建v8-engine的心路历程"><span class="post-toc-number">2.</span> <span class="post-toc-text">win10构建v8 engine的心路历程</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#平台和环境的选择"><span class="post-toc-number">1.</span> <span class="post-toc-text">平台和环境的选择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#具体步骤"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">具体步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#win10构建v8-engine的心路历程"><span class="post-toc-number">2.</span> <span class="post-toc-text">win10构建v8 engine的心路历程</span></a></li></ol>
         </nav>
     </aside>
     
@@ -250,7 +255,7 @@
 </ol>
 <p>基于性能和平台适配考虑，最终选择v8作为Android平台的嵌入JS引擎，而JavaScriptCore作为IOS平台的嵌入引擎。本文主要讲解，如果从v8的源码构建出Android平台的嵌入库，然后通过Android NDK开发，进而实现在Android APP(非Hybrid应用，即不会通过Webview来运行JS代码)中运行JS代码，JS与C/C++、Lua互调。</p>
 <h1 id="平台和环境的选择"><a href="#平台和环境的选择" class="headerlink" title="平台和环境的选择"></a>平台和环境的选择</h1><p>如果有过大型开源C++项目编译的经验，就知道，选择开发系统和环境是非常重要的，一般而言，在Windows下编译真的是非常艰难。所以文本先以Linux系统(这里选择Ubuntu)为例，讲解如何构建出适用于Android ARM架构的JS引擎嵌入静态库。再讲解Windows平台下的编译构建。</p>
-<h2 id="Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8"><a href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8"></a>Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8</h2><p>v8项目在Github的官方镜像地址为<a href="https://github.com/v8/v8" target="_blank" rel="external">https://github.com/v8/v8</a>。而其官方的<a href="https://github.com/v8/v8/wiki" target="_blank" rel="external">wiki文档</a>也在这个仓库中。但是如果直接按照这个wiki去构建，失败几乎是不可避免。因为wiki的步骤非常简化(当然先总体阅览一下wiki还是大有必要，而且当回过头来对照的时候将会发现”原来是这样，Soga^_^”)，有些关键的环境配置和要点被省略掉，所以如果不跳过这些坑，将浪费大量的时间，甚至有很严重的挫败感。本文的目的就是为了对v8的构建做一个记录，总结遇到的问题，便于以后查阅，也为他人提供一个便捷的指引。</p>
+<h2 id="Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件"><a href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)"></a>Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</h2><p>v8项目在Github的官方镜像地址为<a href="https://github.com/v8/v8" target="_blank" rel="external">https://github.com/v8/v8</a>。而其官方的<a href="https://github.com/v8/v8/wiki" target="_blank" rel="external">wiki文档</a>也在这个仓库中。但是如果直接按照这个wiki去构建，失败几乎是不可避免。因为wiki的步骤非常简化(当然先总体阅览一下wiki还是大有必要，而且当回过头来对照的时候将会发现”原来是这样，Soga^_^”)，有些关键的环境配置和要点被省略掉，所以如果不跳过这些坑，将浪费大量的时间，甚至有很严重的挫败感。本文的目的就是为了对v8的构建做一个记录，总结遇到的问题，便于以后查阅，也为他人提供一个便捷的指引。</p>
 <p>这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Linux/Mac x64。</p>
 <p>如果没有单独的Ubuntu主机，那么可以在Windows主机下安装<a href="https://www.virtualbox.org/" target="_blank" rel="external">virtual box</a>或者<a href="https://www.vmware.com/" target="_blank" rel="external">VMware</a>，建议安装virtualbox，相对来说更轻量级，这里足够满足需求。然后利用virtualbox加载Ubuntu 16.04的ISO镜像(可网上下载，或找CoulsonChen索取)，创建虚拟机环境，即可在虚拟机环境下实现编译。</p>
 <h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><ol>
@@ -302,15 +307,62 @@
 <blockquote>
 <p>ninja -C out.gn/x64.release</p>
 </blockquote>
-<p> 编译完成之后，可以在<code>/path/to/v8 Source dir/out.gn/x64.release</code>目录(这里示例即<code>/usr/local/v8/v8/out.gn/x64.release</code>)及其子目录下查看构建产生的库和可执行文件。</p>
+<p> 该命令是<strong>编译构建v8运行的所有文件</strong>(building all of V8 run (assuming gn generated to the x64.release folder))。编译完成之后，可以在<code>/path/to/v8 Source dir/out.gn/x64.release</code>目录(这里示例即<code>/usr/local/v8/v8/out.gn/x64.release</code>)及其子目录下查看构建产生的库和可执行文件。可进入该目录下，执行生成的d8可执行程序，进入javascript的交互命令行模式，示例如下图：<br> <img src="https://i.imgur.com/Y6KhNNw.jpg" alt=""><br> 如果只需要<strong>编译构建指定的文件</strong>，比如d8(build specific targets like d8, add them to the command line)。则可执行如下命令(将要指定的构建文件添加到ninja命令的参数中)：</p>
+<blockquote>
+<p>ninja -C out.gn/x64.release d8</p>
+</blockquote>
 </li>
 <li>(<strong>可选,用于测试构建是否OK</strong>)执行测试(Run the tests by executing the following in your terminal/shell)：<blockquote>
 <p>tools/run-tests.py –gn</p>
 </blockquote>
 </li>
 </ol>
-<h2 id="Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8"><a href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Android arm版本的v8"></a>Linux(Ubuntu 16.04)下构建用于Android arm版本的v8</h2><p>这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Android arm。由于构建平台和目标平台是不同的平台，因此这里，需要使用<a href="https://en.wikipedia.org/wiki/Cross_compiler" target="_blank" rel="external">交叉编译(Cross compiling)</a>。</p>
-<p>首先理一下思路：</p>
+<h2 id="Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件"><a href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)"></a>Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)</h2><p>这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Android arm。由于构建平台和目标平台是不同的平台，因此这里，需要使用<a href="https://en.wikipedia.org/wiki/Cross_compiler" target="_blank" rel="external">交叉编译(Cross compiling)</a>。</p>
+<p>前置条件，和<code>Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</code>章节的1-6步完全一致。接下来，可参考<a href="https://github.com/v8/v8/wiki/Cross-compiling-for-ARM" title="Cross compiling for ARM" target="_blank" rel="external">Cross compiling for ARM</a>。</p>
+<p>这里单独对Cross compiling for ARM的步骤做下说明：</p>
+<ol>
+<li>在配置好上述提到的环境之后，编辑<code>.gclient配置文件</code>(.gclient configuration file)，位于用于存放下载v8的源码的目录，对应于<code>Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</code>章节的步骤4中的说明，这里的目录路径示例为<code>/usr/local/v8</code>，如下图：<br><img src="https://i.imgur.com/5RXz9UG.jpg" alt=""><br>打开该文件，在末尾添加如下一行：<br><code>target_os = [&#39;android&#39;]</code>  # Add this to get Android stuff checked out.<br>示例如下：<br><img src="https://i.imgur.com/lLMsqrq.jpg" alt=""></li>
+<li><p>然后在v8的源码目录下(<code>/usr/local/v8/v8</code>)，执行如下命令：</p>
+<blockquote>
+<p><code>gclient sync</code></p>
+</blockquote>
+<p> 一旦配置了<code>target_os = [&#39;android&#39;]</code>，再执行<code>gclient sync</code>，将会在v8的源码目录下下载Android相关的工具和文件，主要包括android_tools和android_ndk等(示例，对应目录<code>/usr/local/v8/v8/third_party/android/android_tools</code>和<code>/usr/local/v8/v8/third_party/android_ndk</code>)。<strong>注意：这些文件非常大，有10G左右，所以需要下载很长时间，网络如果不好的话，会很痛苦</strong></p>
+</li>
+<li>利用8gen.py生成ARM架构编译时必要的构建文件(和<code>Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</code>章节的第7步类似)。在v8的源码目录下(<code>/usr/local/v8/v8</code>)，执行如下命令：<blockquote>
+<p>tools/dev/v8gen.py arm.release</p>
+</blockquote>
+</li>
+<li><p>然后，进入生成的<code>arm.release</code>子目录(示例，<code>/usr/local/v8/v8/out.gn/arm.release</code>)，编辑其中的<code>args.gn</code>文件，在其中添加如下几行：</p>
+<blockquote>
+<p>target_os = “android”<br>target_cpu = “arm”<br>v8_target_cpu = “arm”<br>is_component_build = false</p>
+</blockquote>
+<p> <img src="https://i.imgur.com/Da1SRZK.jpg" alt=""><br> <img src="https://i.imgur.com/JpaKJRR.jpg" alt=""><br> 如果是arm64设备，则上面几行应该替换为：</p>
+<blockquote>
+<p>target_os = “android”<br>target_cpu = “arm64”<br>v8_target_cpu = “arm64”<br>is_component_build = false</p>
+</blockquote>
+</li>
+<li><p>编译构建。这一步与<code>Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</code>章节的第8步类似。执行如下命令(构建全部目标文件)：</p>
+<blockquote>
+<p>ninja -C out.gn/arm.release</p>
+</blockquote>
+<p> 或(只构建d8)</p>
+<blockquote>
+<p>ninja -C out.gn/arm.release d8</p>
+</blockquote>
+</li>
+<li><p>构建完成后，可以将生成的d8及其相关文件push到Android手机中，体验一把，看看效果。可以通过adb工具来将文件push到手机(adb工具已经在步骤2完成后下载了，具体目录<code>/usr/local/v8/v8/third_party/android_tools/sdk/platform-tools</code>。当然你也可以直接通过<code>sudo apt install android-tools-adb</code>命令来额外安装adb。然后adb所在路径添加到PATH路径中)。在v8源文件目录下(<code>/usr/local/v8/v8</code>)执行如下命令：</p>
+<blockquote>
+<p>adb push out.gn/arm.release/d8 /data/local/tmp<br>adb push out.gn/arm.release/natives_blob.bin /data/local/tmp<br>adb push out.gn/arm.release/snapshot_blob.bin /data/local/tmp</p>
+</blockquote>
+<p> 然后，通过adb shell进入到Android手机的交互shell中。</p>
+<blockquote>
+<p>$ adb shell<br>$ cd /data/local/tmp<br>$ ls</p>
+<pre><code>v8 natives_blob.bin snapshot_blob.bin
+</code></pre><p>$ ./d8<br> V8 version 5.8.0 (candidate)<br> d8&gt; ‘w00t!’<br> “w00t!”<br> d8&gt; </p>
+</blockquote>
+</li>
+</ol>
+<h2 id="Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装"><a href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)"></a>Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)</h2><p>首先理一下思路：</p>
 <ol>
 <li>先利用交叉编译，构建出用于Android平台的v8静态库文件；</li>
 <li>利用Android studio进行NDK开发，将步骤1中生成的静态库文件进行链接封装，向Java层暴露方法(对应java层的native方法)，最终生成动态库文件；</li>
@@ -326,7 +378,7 @@
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-04-04T10:16:39.000Z" itemprop="dateUpdated">2018-04-04 18:16:39</time>
+    post.last_updated<time datetime="2018-04-09T04:29:50.000Z" itemprop="dateUpdated">2018-04-09 12:29:50</time>
 </span><br>
 
 
