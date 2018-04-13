@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/">
+    
+    
+    <title>编译及嵌入v8遇到的错误汇总 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="build,V8,depot_tools,Linux,v8 embedded in Android APP,embed v8,编译,嵌入,错误,问题,汇总">
+    <meta name="description" content="Android APP embed v8的错误汇总Android APP embed v8的过程，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：
+
+在Ubuntu 16.04系统下，编译v8的时候，环境的配置、各种参数的设置问题，这最终会影响到生成的库(分static library和shared library两种情形)是否正确。这里">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译及嵌入v8遇到的错误汇总">
+<meta property="og:url" content="http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="Android APP embed v8的错误汇总Android APP embed v8的过程，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：
+
+在Ubuntu 16.04系统下，编译v8的时候，环境的配置、各种参数的设置问题，这最终会影响到生成的库(分static library和shared library两种情形)是否正确。这里">
+<meta property="og:image" content="https://i.imgur.com/nf9WbO8.jpg">
+<meta property="og:updated_time" content="2018-04-13T07:15:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编译及嵌入v8遇到的错误汇总">
+<meta name="twitter:description" content="Android APP embed v8的错误汇总Android APP embed v8的过程，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：
+
+在Ubuntu 16.04系统下，编译v8的时候，环境的配置、各种参数的设置问题，这最终会影响到生成的库(分static library和shared library两种情形)是否正确。这里">
+<meta name="twitter:image" content="https://i.imgur.com/nf9WbO8.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">编译及嵌入v8遇到的错误汇总</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">编译及嵌入v8遇到的错误汇总</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-13T07:14:56.000Z" itemprop="datePublished" class="page-time">
+  2018-04-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-APP-embed-v8的错误汇总"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android APP embed v8的错误汇总</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编译v8库的问题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">编译v8库的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#embed-v8-in-Android-APP问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">embed v8 in Android APP问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#附录和链接"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">附录和链接</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-编译v8遇到的错误汇总"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">编译及嵌入v8遇到的错误汇总</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-13 15:14:56" datetime="2018-04-13T07:14:56.000Z"  itemprop="datePublished">2018-04-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="Android-APP-embed-v8的错误汇总"><a href="#Android-APP-embed-v8的错误汇总" class="headerlink" title="Android APP embed v8的错误汇总"></a>Android APP embed v8的错误汇总</h1><p>Android APP embed v8的过程，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：</p>
+<ol>
+<li>在Ubuntu 16.04系统下，编译v8的时候，环境的配置、各种参数的设置问题，这最终会影响到生成的库(分static library和shared library两种情形)是否正确。这里定义叫编译v8库的问题。</li>
+<li>利用Android studio将生成的v8的静态库或者分享库通过NDK嵌入到Android APP时候的各种编译错误或者参数配置问题。此类问题定义为embed v8 in Android APP问题。</li>
+</ol>
+<p>解决问题的思路：</p>
+<ol>
+<li>得到问题的信息，然后在网上搜索，查询是否已有他人的经验可用，比如Stack Overflow和其他网站；</li>
+<li>在v8的<a href="https://github.com/v8/v8/wiki" title="wiki页面" target="_blank" rel="external">官方wiki页面</a>，找到问题反馈途径(其中，<a href="http://groups.google.com/group/v8-users" target="_blank" rel="external">mailing list</a>较常用)：<br> <img src="https://i.imgur.com/nf9WbO8.jpg" alt=""></li>
+<li>结合已有的知识储备，通过实际分析v8构建和相关工具链的机制来修改参数，不断尝试。</li>
+</ol>
+<h2 id="编译v8库的问题"><a href="#编译v8库的问题" class="headerlink" title="编译v8库的问题"></a>编译v8库的问题</h2><ol>
+<li>How to build v8 use gnu-libstdc++ instead of llvm-libc++?<pre><code>tools/dev/v8gen.py android.arm.release -- use_sysroot=false use_glib=false use_custom_libcxx=false
+</code></pre></li>
+</ol>
+<h2 id="embed-v8-in-Android-APP问题"><a href="#embed-v8-in-Android-APP问题" class="headerlink" title="embed v8 in Android APP问题"></a>embed v8 in Android APP问题</h2><ol>
+<li>利用v8的最新分支编译成静态库，然后在AS里面gradle打包，CMake构建时出现下面错误：<pre><code>Build command failed.
+Error while executing process /usr/local/v8/v8/third_party/android_tools/sdk/cmake/3.6.4111459/bin/cmake with arguments {--build /mnt/share/V8Wrapper/app/.externalNativeBuild/cmake/debug/armeabi-v7a --target native-lib}
+[1/1] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so
+FAILED: : &amp;&amp; /usr/local/v8/v8/third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++  --target=armv7-none-linux-androideabi --gcc-toolchain=/usr/local/v8/v8/third_party/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 --sysroot=/usr/local/v8/v8/third_party/android_ndk/sysroot -fPIC -isystem /usr/local/v8/v8/third_party/android_ndk/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -std=c++11 -std=c++11 -frtti -fexceptions -O0 -fno-limit-debug-info  -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libatomic.a --sysroot /usr/local/v8/v8/third_party/android_ndk/platforms/android-16/arch-arm -Wl,--build-id -Wl,--warn-shared-textrel -Wl,--fatal-warnings -Wl,--fix-cortex-a8 -Wl,--exclude-libs,libunwind.a -L/usr/local/v8/v8/third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a -Wl,--no-undefined -Wl,-z,noexecstack -Qunused-arguments -Wl,-z,relro -Wl,-z,now -shared -Wl,-soname,libnative-lib.so -o ../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o  /usr/local/v8/v8/third_party/android_ndk/platforms/android-16/arch-arm/usr/lib/liblog.so ../../../../src/main/cpp/libs/libv8_base.a ../../../../src/main/cpp/libs/libv8_libplatform.a ../../../../src/main/cpp/libs/libv8_libbase.a ../../../../src/main/cpp/libs/libv8_nosnapshot.a ../../../../src/main/cpp/libs/libv8_libsampler.a -latomic -lm &quot;/usr/local/v8/v8/third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++.a&quot; &amp;&amp; :
+../../src/isolate.cc:0: error: undefined reference to &apos;vtable for v8::internal::SetupIsolateDelegate&apos;
+/usr/local/v8/v8/third_party/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld: the vtable symbol may be undefined because the class is missing its key function
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+</code></pre></li>
+</ol>
+<h2 id="附录和链接"><a href="#附录和链接" class="headerlink" title="附录和链接"></a>附录和链接</h2><ul>
+<li><a href="http://v8-users.narkive.com/eqwIR5SF/building-v8" target="_blank" rel="external">http://v8-users.narkive.com/eqwIR5SF/building-v8</a></li>
+<li><a href="https://medium.com/@hyperandroid/compile-v8-for-arm-7-df45372f9d4e" target="_blank" rel="external">https://medium.com/@hyperandroid/compile-v8-for-arm-7-df45372f9d4e</a></li>
+<li><a href="https://medium.com/@hyperandroid/android-v8-embedding-guide-f64173f7958b" target="_blank" rel="external">https://medium.com/@hyperandroid/android-v8-embedding-guide-f64173f7958b</a></li>
+<li><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=738056" target="_blank" rel="external">https://bugs.chromium.org/p/chromium/issues/detail?id=738056</a></li>
+<li><a href="https://github.com/lorinbeer/vatedroid" target="_blank" rel="external">https://github.com/lorinbeer/vatedroid</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    post.last_updated<time datetime="2018-04-13T07:15:01.000Z" itemprop="dateUpdated">2018-04-13 15:15:01</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/V8/">V8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/depot-tools/">depot_tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/embed-v8/">embed v8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/v8-embedded-in-Android-APP/">v8 embedded in Android APP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/嵌入/">嵌入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/汇总/">汇总</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译/">编译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/错误/">错误</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/问题/">问题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/&title=《编译及嵌入v8遇到的错误汇总》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/&title=《编译及嵌入v8遇到的错误汇总》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《编译及嵌入v8遇到的错误汇总》 — Atypical programmer&url=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/04/构建v8 engine指南/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">构建v8 engine指南</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "4DjAfnIwjxGfITAYl8eVX5Pe-gzGzoHsz",
+            appKey: "ss62qxcFEjf5opJ4Ii5xI2zn",
+            avatar: "mm",
+            placeholder: "欢迎交流",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/&title=《编译及嵌入v8遇到的错误汇总》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/&title=《编译及嵌入v8遇到的错误汇总》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《编译及嵌入v8遇到的错误汇总》 — Atypical programmer&url=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

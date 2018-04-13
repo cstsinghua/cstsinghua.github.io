@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2018-04-09T04:29:50.000Z</updated>
+  <updated>2018-04-13T07:15:01.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -16,11 +16,90 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>adb原理简介及常用命令介绍</title>
+    <title>编译及嵌入v8遇到的错误汇总</title>
+    <link href="http://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/"/>
+    <id>http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/</id>
+    <published>2018-04-13T07:14:56.000Z</published>
+    <updated>2018-04-13T07:15:01.000Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Android-APP-embed-v8的错误汇总&quot;&gt;&lt;a href=&quot;#Android-APP-embed-v8的错误汇总&quot; class=&quot;headerlink&quot; title=&quot;Android APP embed v8的错误汇总&quot;&gt;&lt;/a&gt;Android APP embed v8的错误汇总&lt;/h1&gt;&lt;p&gt;Android APP embed v8的过程，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在Ubuntu 16.04系统下，编译v8的时候，环境的配置、各种参数的设置问题，这最终会影响到生成的库(分static library和shared library两种情形)是否正确。这里定义叫编译v8库的问题。&lt;/li&gt;
+&lt;li&gt;利用Android studio将生成的v8的静态库或者分享库通过NDK嵌入到Android APP时候的各种编译错误或者参数配置问题。此类问题定义为embed v8 in Android APP问题。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;解决问题的思路：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;得到问题的信息，然后在网上搜索，查询是否已有他人的经验可用，比如Stack Overflow和其他网站；&lt;/li&gt;
+&lt;li&gt;在v8的&lt;a href=&quot;https://github.com/v8/v8/wiki&quot; title=&quot;wiki页面&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官方wiki页面&lt;/a&gt;，找到问题反馈途径(其中，&lt;a href=&quot;http://groups.google.com/group/v8-users&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;mailing list&lt;/a&gt;较常用)：&lt;br&gt; &lt;img src=&quot;https://i.imgur.com/nf9WbO8.jpg&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;结合已有的知识储备，通过实际分析v8构建和相关工具链的机制来修改参数，不断尝试。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;编译v8库的问题&quot;&gt;&lt;a href=&quot;#编译v8库的问题&quot; class=&quot;headerlink&quot; title=&quot;编译v8库的问题&quot;&gt;&lt;/a&gt;编译v8库的问题&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;How to build v8 use gnu-libstdc++ instead of llvm-libc++?&lt;pre&gt;&lt;code&gt;tools/dev/v8gen.py android.arm.release -- use_sysroot=false use_glib=false use_custom_libcxx=false
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;embed-v8-in-Android-APP问题&quot;&gt;&lt;a href=&quot;#embed-v8-in-Android-APP问题&quot; class=&quot;headerlink&quot; title=&quot;embed v8 in Android APP问题&quot;&gt;&lt;/a&gt;embed v8 in Android APP问题&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;利用v8的最新分支编译成静态库，然后在AS里面gradle打包，CMake构建时出现下面错误：&lt;pre&gt;&lt;code&gt;Build command failed.
+Error while executing process /usr/local/v8/v8/third_party/android_tools/sdk/cmake/3.6.4111459/bin/cmake with arguments {--build /mnt/share/V8Wrapper/app/.externalNativeBuild/cmake/debug/armeabi-v7a --target native-lib}
+[1/1] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so
+FAILED: : &amp;amp;&amp;amp; /usr/local/v8/v8/third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++  --target=armv7-none-linux-androideabi --gcc-toolchain=/usr/local/v8/v8/third_party/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 --sysroot=/usr/local/v8/v8/third_party/android_ndk/sysroot -fPIC -isystem /usr/local/v8/v8/third_party/android_ndk/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=16 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -std=c++11 -std=c++11 -frtti -fexceptions -O0 -fno-limit-debug-info  -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libatomic.a --sysroot /usr/local/v8/v8/third_party/android_ndk/platforms/android-16/arch-arm -Wl,--build-id -Wl,--warn-shared-textrel -Wl,--fatal-warnings -Wl,--fix-cortex-a8 -Wl,--exclude-libs,libunwind.a -L/usr/local/v8/v8/third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a -Wl,--no-undefined -Wl,-z,noexecstack -Qunused-arguments -Wl,-z,relro -Wl,-z,now -shared -Wl,-soname,libnative-lib.so -o ../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o  /usr/local/v8/v8/third_party/android_ndk/platforms/android-16/arch-arm/usr/lib/liblog.so ../../../../src/main/cpp/libs/libv8_base.a ../../../../src/main/cpp/libs/libv8_libplatform.a ../../../../src/main/cpp/libs/libv8_libbase.a ../../../../src/main/cpp/libs/libv8_nosnapshot.a ../../../../src/main/cpp/libs/libv8_libsampler.a -latomic -lm &amp;quot;/usr/local/v8/v8/third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++.a&amp;quot; &amp;amp;&amp;amp; :
+../../src/isolate.cc:0: error: undefined reference to &amp;apos;vtable for v8::internal::SetupIsolateDelegate&amp;apos;
+/usr/local/v8/v8/third_party/android_ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/../../../../arm-linux-androideabi/bin/ld: the vtable symbol may be undefined because the class is missing its key function
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;附录和链接&quot;&gt;&lt;a href=&quot;#附录和链接&quot; class=&quot;headerlink&quot; title=&quot;附录和链接&quot;&gt;&lt;/a&gt;附录和链接&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://v8-users.narkive.com/eqwIR5SF/building-v8&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://v8-users.narkive.com/eqwIR5SF/building-v8&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://medium.com/@hyperandroid/compile-v8-for-arm-7-df45372f9d4e&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://medium.com/@hyperandroid/compile-v8-for-arm-7-df45372f9d4e&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://medium.com/@hyperandroid/android-v8-embedding-guide-f64173f7958b&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://medium.com/@hyperandroid/android-v8-embedding-guide-f64173f7958b&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://bugs.chromium.org/p/chromium/issues/detail?id=738056&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://bugs.chromium.org/p/chromium/issues/detail?id=738056&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/lorinbeer/vatedroid&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/lorinbeer/vatedroid&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Android-APP-embed-v8的错误汇总&quot;&gt;&lt;a href=&quot;#Android-APP-embed-v8的错误汇总&quot; class=&quot;headerlink&quot; title=&quot;Android APP embed v8的错误汇
+    
+    </summary>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+    
+    
+      <category term="build" scheme="http://cstsinghua.github.io/tags/build/"/>
+    
+      <category term="V8" scheme="http://cstsinghua.github.io/tags/V8/"/>
+    
+      <category term="depot_tools" scheme="http://cstsinghua.github.io/tags/depot-tools/"/>
+    
+      <category term="Linux" scheme="http://cstsinghua.github.io/tags/Linux/"/>
+    
+      <category term="v8 embedded in Android APP" scheme="http://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
+    
+      <category term="embed v8" scheme="http://cstsinghua.github.io/tags/embed-v8/"/>
+    
+      <category term="编译" scheme="http://cstsinghua.github.io/tags/%E7%BC%96%E8%AF%91/"/>
+    
+      <category term="嵌入" scheme="http://cstsinghua.github.io/tags/%E5%B5%8C%E5%85%A5/"/>
+    
+      <category term="错误" scheme="http://cstsinghua.github.io/tags/%E9%94%99%E8%AF%AF/"/>
+    
+      <category term="问题" scheme="http://cstsinghua.github.io/tags/%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="汇总" scheme="http://cstsinghua.github.io/tags/%E6%B1%87%E6%80%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>构建v8 engine指南</title>
     <link href="http://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/"/>
     <id>http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/</id>
     <published>2018-04-04T10:16:35.000Z</published>
-    <updated>2018-04-09T04:29:50.000Z</updated>
+    <updated>2018-04-13T07:12:44.000Z</updated>
     
     <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;#背景&lt;br&gt;最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Android平台讲解。IOS下，OC调用C++更简单，这里暂不赘述)：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/q5Qk8li.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -31,6 +110,7 @@
 &lt;/ol&gt;
 &lt;p&gt;基于性能和平台适配考虑，最终选择v8作为Android平台的嵌入JS引擎，而JavaScriptCore作为IOS平台的嵌入引擎。本文主要讲解，如果从v8的源码构建出Android平台的嵌入库，然后通过Android NDK开发，进而实现在Android APP(非Hybrid应用，即不会通过Webview来运行JS代码)中运行JS代码，JS与C/C++、Lua互调。&lt;/p&gt;
 &lt;h1 id=&quot;平台和环境的选择&quot;&gt;&lt;a href=&quot;#平台和环境的选择&quot; class=&quot;headerlink&quot; title=&quot;平台和环境的选择&quot;&gt;&lt;/a&gt;平台和环境的选择&lt;/h1&gt;&lt;p&gt;如果有过大型开源C++项目编译的经验，就知道，选择开发系统和环境是非常重要的，一般而言，在Windows下编译真的是非常艰难。所以文本先以Linux系统(这里选择Ubuntu)为例，讲解如何构建出适用于Android ARM架构的JS引擎嵌入静态库。再讲解Windows平台下的编译构建。&lt;/p&gt;
+&lt;p&gt;&lt;a name=&quot;anchor1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件&quot;&gt;&lt;a href=&quot;#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件&quot; class=&quot;headerlink&quot; title=&quot;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&quot;&gt;&lt;/a&gt;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&lt;/h2&gt;&lt;p&gt;v8项目在Github的官方镜像地址为&lt;a href=&quot;https://github.com/v8/v8&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/v8/v8&lt;/a&gt;。而其官方的&lt;a href=&quot;https://github.com/v8/v8/wiki&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;wiki文档&lt;/a&gt;也在这个仓库中。但是如果直接按照这个wiki去构建，失败几乎是不可避免。因为wiki的步骤非常简化(当然先总体阅览一下wiki还是大有必要，而且当回过头来对照的时候将会发现”原来是这样，Soga^_^”)，有些关键的环境配置和要点被省略掉，所以如果不跳过这些坑，将浪费大量的时间，甚至有很严重的挫败感。本文的目的就是为了对v8的构建做一个记录，总结遇到的问题，便于以后查阅，也为他人提供一个便捷的指引。&lt;/p&gt;
 &lt;p&gt;这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Linux/Mac x64。&lt;/p&gt;
 &lt;p&gt;如果没有单独的Ubuntu主机，那么可以在Windows主机下安装&lt;a href=&quot;https://www.virtualbox.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;virtual box&lt;/a&gt;或者&lt;a href=&quot;https://www.vmware.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;VMware&lt;/a&gt;，建议安装virtualbox，相对来说更轻量级，这里足够满足需求。然后利用virtualbox加载Ubuntu 16.04的ISO镜像(可网上下载，或找CoulsonChen索取)，创建虚拟机环境，即可在虚拟机环境下实现编译。&lt;/p&gt;
@@ -39,7 +119,7 @@
 &lt;p&gt;apt-get install git&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;安装depot_tools，在终端输入下面命令：&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;安装depot_tools(详细可参见&lt;a href=&quot;http://dev.chromium.org/developers/how-tos/install-depot-tools&quot; title=&quot;安装depot-tools&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;安装depot-tools&lt;/a&gt;)，在终端输入下面命令：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;git clone &lt;a href=&quot;https://chromium.googlesource.com/chromium/tools/depot_tools.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://chromium.googlesource.com/chromium/tools/depot_tools.git&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -69,16 +149,51 @@
 &lt;p&gt;gclient sync&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;(这一步只在linux系统构建时才需要执行，且只需要执行一次–&lt;strong&gt;only on linux, only needed once&lt;/strong&gt;) 安装构建依赖项：&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;(这一步只在linux系统构建时才需要执行，且只需要执行一次–(&lt;strong&gt;only on linux, only needed once&lt;/strong&gt;) 安装构建依赖项：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;./build/install-build-deps.sh&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;生成必需的构建文件(Generate the necessary build files by executing the following in your terminal/shell）:&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;生成目标平台必需的构建文件(Generate the necessary build files by executing the following in your terminal/shell）:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;tools/dev/v8gen.py x64.release&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;/li&gt;
+&lt;p&gt; &lt;strong&gt;注意：目标平台有很多，可以通过&lt;code&gt;tools/dev/v8gen.py --list&lt;/code&gt;命令查看&lt;/strong&gt;。这里以本文写作时的master分支版本为例，执行&lt;code&gt;tools/dev/v8gen.py --list&lt;/code&gt;命令后，可以看到v8支持如下目标平台构建：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;coulsonchen@coulsonchen:/usr/local/v8/v8$ tools/dev/v8gen.py list
+android.arm.debug
+android.arm.optdebug
+android.arm.release
+arm.debug
+arm.optdebug
+arm.release
+arm64.debug
+arm64.optdebug
+arm64.release
+ia32.debug
+ia32.optdebug
+ia32.release
+mips64el.debug
+mips64el.optdebug
+mips64el.release
+mipsel.debug
+mipsel.optdebug
+mipsel.release
+ppc.debug
+ppc.optdebug
+ppc.release
+ppc64.debug
+ppc64.optdebug
+ppc64.release
+s390.debug
+s390.optdebug
+s390.release
+s390x.debug
+s390x.optdebug
+s390x.release
+x64.debug
+x64.optdebug
+x64.release
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;编译v8源码(Compile the source by executing the following in your terminal/shell）：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;ninja -C out.gn/x64.release&lt;/p&gt;
@@ -93,6 +208,7 @@
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;a name=&quot;anchor2&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件&quot;&gt;&lt;a href=&quot;#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件&quot; class=&quot;headerlink&quot; title=&quot;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)&quot;&gt;&lt;/a&gt;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)&lt;/h2&gt;&lt;p&gt;这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Android arm。由于构建平台和目标平台是不同的平台，因此这里，需要使用&lt;a href=&quot;https://en.wikipedia.org/wiki/Cross_compiler&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;交叉编译(Cross compiling)&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;前置条件，和&lt;code&gt;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&lt;/code&gt;章节的1-6步完全一致。接下来，可参考&lt;a href=&quot;https://github.com/v8/v8/wiki/Cross-compiling-for-ARM&quot; title=&quot;Cross compiling for ARM&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Cross compiling for ARM&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;这里单独对Cross compiling for ARM的步骤做下说明：&lt;/p&gt;
@@ -108,7 +224,7 @@
 &lt;p&gt;tools/dev/v8gen.py arm.release&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;然后，进入生成的&lt;code&gt;arm.release&lt;/code&gt;子目录(示例，&lt;code&gt;/usr/local/v8/v8/out.gn/arm.release&lt;/code&gt;)，编辑其中的&lt;code&gt;args.gn&lt;/code&gt;文件，在其中添加如下几行：&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;然后，进入生成的&lt;code&gt;arm.release&lt;/code&gt;子目录(示例，&lt;code&gt;/usr/local/v8/v8/out.gn/arm.release&lt;/code&gt;)，编辑其中的&lt;code&gt;args.gn&lt;/code&gt;文件，在其中添加如下几行(如果要查看所有可配置的参数，可以先执行命令&lt;code&gt;gn args out.gn/arm.release --list&lt;/code&gt;查看)：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;target_os = “android”&lt;br&gt;target_cpu = “arm”&lt;br&gt;v8_target_cpu = “arm”&lt;br&gt;is_component_build = false&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -138,13 +254,28 @@
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;a name=&quot;anchor3&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装&quot;&gt;&lt;a href=&quot;#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装&quot; class=&quot;headerlink&quot; title=&quot;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)&quot;&gt;&lt;/a&gt;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)&lt;/h2&gt;&lt;p&gt;首先理一下思路：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;先利用交叉编译，构建出用于Android平台的v8静态库文件；&lt;/li&gt;
 &lt;li&gt;利用Android studio进行NDK开发，将步骤1中生成的静态库文件进行链接封装，向Java层暴露方法(对应java层的native方法)，最终生成动态库文件；&lt;/li&gt;
 &lt;li&gt;Android APP内部，原生的Java层可以通过JNI调用步骤2中生成的动态库中的方法(去加载JS代码并执行相关逻辑，然后返回相关数据，反之亦然)&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;具体步骤待补充&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;具体实施步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首先与章节&lt;code&gt;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)&lt;/code&gt;(#anchor2)的步骤基本一致，但需要在其第3步修改目标构建平台(即将arm.release改为android.arm.release)，执行命令替换为：&lt;blockquote&gt;
+&lt;p&gt;tools/dev/v8gen.py gen -m client.v8.ports -b “V8 Android Arm - builder” android.arm.release&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;首先与章节&lt;code&gt;Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)&lt;/code&gt;(#anchor2)的步骤基本一致，只是需要在其第4步修改下&lt;code&gt;args.gn&lt;/code&gt;配置文件，如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;is_component_build = false&lt;br&gt;is_debug = false&lt;br&gt;symbol_level = 1&lt;br&gt;target_cpu = “arm”&lt;br&gt;target_os = “android”&lt;br&gt;use_goma = false&lt;br&gt;v8_android_log_stdout = true&lt;br&gt;v8_enable_i18n_support = false&lt;br&gt;v8_static_library = true&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 注意：use_goma = false、v8_static_library = true、v8_enable_i18n_support = false都需要添加&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;然后重新执行构建，构建完成之后，在v8源码目录下的子目录&lt;code&gt;out.gn/android.arm.release/obj&lt;/code&gt;下可以找到对应的静态库。然后按照&lt;a href=&quot;https://medium.com/@hyperandroid/compile-v8-for-arm-7-df45372f9d4e&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt;的步骤，将相关静态库和头文件聚合整理到一个单独的目录(比如libs，最终将libs目录copy到Android Studio的工程的cpp源文件目录下)。&lt;/li&gt;
+&lt;li&gt;新创建一个Android Studio工程(支持C++，利用默认的向导创建完成即可。注：这里AS的版本是3.1，默认采用cmake构建C++代码)，然后将步骤2得到的libs拷贝到工程的cpp源文件对应的目录下。然后就是编辑工程的CMakeLists.txt文件，将libs里面的静态库链接进来。这一步还在调试中，后续进一步补充完善。可先参考&lt;a href=&quot;https://medium.com/@hyperandroid/android-v8-embedding-guide-f64173f7958b&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt;。&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h1 id=&quot;win10构建v8-engine的心路历程&quot;&gt;&lt;a href=&quot;#win10构建v8-engine的心路历程&quot; class=&quot;headerlink&quot; title=&quot;win10构建v8 engine的心路历程&quot;&gt;&lt;/a&gt;win10构建v8 engine的心路历程&lt;/h1&gt;&lt;p&gt;这里可以完全参照&lt;a href=&quot;https://medium.com/dailyjs/how-to-build-v8-on-windows-and-not-go-mad-6347c69aacd4&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://medium.com/dailyjs/how-to-build-v8-on-windows-and-not-go-mad-6347c69aacd4&lt;/a&gt;这篇文章的步骤来完成。&lt;/p&gt;
 &lt;p&gt;但需要强调的是，这篇文章编写的时候，当时的v8版本可以使用VS 2015编译，而v8的最新版本(截止到2018.4.4)要求VS 2017(随着时间推移，可能后续会要求更新版本的VS，这里就必须注意，可以在下载下来的v8源目录下面的build子目录下的vs_toolchain.py文件中查看默认的VS版本，如下图)，所以这篇文章里面关于VS 2015的部分，请替换成VS 2017。另外，关于Windows SDK的部分，也请下载最新版本的。&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/KjQ0CNp.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 </content>
@@ -180,6 +311,8 @@
       <category term="no webview" scheme="http://cstsinghua.github.io/tags/no-webview/"/>
     
       <category term="JS" scheme="http://cstsinghua.github.io/tags/JS/"/>
+    
+      <category term="embed v8" scheme="http://cstsinghua.github.io/tags/embed-v8/"/>
     
   </entry>
   
