@@ -27,12 +27,12 @@
     
     
     <meta name="keywords" content="build,V8,构建,GN,depot_tools,Linux,VS,v8 embedded in Android APP,no webview,JS,embed v8">
-    <meta name="description" content="#背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Andro">
+    <meta name="description" content="背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Androi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="构建v8 engine指南">
 <meta property="og:url" content="http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/index.html">
 <meta property="og:site_name" content="Atypical programmer">
-<meta property="og:description" content="#背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Andro">
+<meta property="og:description" content="背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Androi">
 <meta property="og:image" content="https://i.imgur.com/q5Qk8li.jpg">
 <meta property="og:image" content="https://i.imgur.com/Y6KhNNw.jpg">
 <meta property="og:image" content="https://i.imgur.com/5RXz9UG.jpg">
@@ -40,10 +40,10 @@
 <meta property="og:image" content="https://i.imgur.com/Da1SRZK.jpg">
 <meta property="og:image" content="https://i.imgur.com/JpaKJRR.jpg">
 <meta property="og:image" content="https://i.imgur.com/KjQ0CNp.jpg">
-<meta property="og:updated_time" content="2018-04-13T07:12:44.000Z">
+<meta property="og:updated_time" content="2018-04-18T06:34:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建v8 engine指南">
-<meta name="twitter:description" content="#背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Andro">
+<meta name="twitter:description" content="背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Androi">
 <meta name="twitter:image" content="https://i.imgur.com/q5Qk8li.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
@@ -221,7 +221,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#平台和环境的选择"><span class="post-toc-number">1.</span> <span class="post-toc-text">平台和环境的选择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#具体步骤"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">具体步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#win10构建v8-engine的心路历程"><span class="post-toc-number">2.</span> <span class="post-toc-text">win10构建v8 engine的心路历程</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#平台和环境的选择"><span class="post-toc-number">2.</span> <span class="post-toc-text">平台和环境的选择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#具体步骤"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">具体步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#win10构建v8-engine的心路历程"><span class="post-toc-number">3.</span> <span class="post-toc-text">win10构建v8 engine的心路历程</span></a></li></ol>
         </nav>
     </aside>
     
@@ -247,7 +247,7 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <a id="more"></a>
-<p>#背景<br>最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Android平台讲解。IOS下，OC调用C++更简单，这里暂不赘述)：<br><img src="https://i.imgur.com/q5Qk8li.jpg" alt=""></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Android平台讲解。IOS下，OC调用C++更简单，这里暂不赘述)：<br><img src="https://i.imgur.com/q5Qk8li.jpg" alt=""></p>
 <p>由此，大概思考了下，如果要实现JavaScript和业务层的Lua互调，那么应该与上面的原理类似。这基于以下几点分析：</p>
 <ol>
 <li>Javascript和java一样，都是解释性语言，需要类似VM的虚拟机(一般采用C或C++语言实现)来执行。java世界里，JVM是我们所熟知的。而JS领域，在移动平台方面，除了大名鼎鼎的google的v8引擎，还有其他的一些JS引擎(相当于VM)，比如JavaScriptCore、SpiderMonkey和Rhino(java实现，从这个角度看，Rhino似乎直接在Android上可以无缝对接)。关于JS引擎介绍，可以参见维基百科<a href="https://en.wikipedia.org/wiki/JavaScript_engine" title="JavaScript_engine" target="_blank" rel="external">JavaScript_engine介绍</a></li>
@@ -255,6 +255,7 @@
 </ol>
 <p>基于性能和平台适配考虑，最终选择v8作为Android平台的嵌入JS引擎，而JavaScriptCore作为IOS平台的嵌入引擎。本文主要讲解，如果从v8的源码构建出Android平台的嵌入库，然后通过Android NDK开发，进而实现在Android APP(非Hybrid应用，即不会通过Webview来运行JS代码)中运行JS代码，JS与C/C++、Lua互调。</p>
 <h1 id="平台和环境的选择"><a href="#平台和环境的选择" class="headerlink" title="平台和环境的选择"></a>平台和环境的选择</h1><p>如果有过大型开源C++项目编译的经验，就知道，选择开发系统和环境是非常重要的，一般而言，在Windows下编译真的是非常艰难。所以文本先以Linux系统(这里选择Ubuntu)为例，讲解如何构建出适用于Android ARM架构的JS引擎嵌入静态库。再讲解Windows平台下的编译构建。</p>
+<p><strong>注：v8的构建真的是非常复杂和繁琐的过程，各种坑，各种层出不穷的问题。另外一篇文章<a href="http://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/">编译及嵌入v8遇到的错误汇总</a>详细记录了学习v8构建过程中遇到的一些问题，以及分析和解决途径、链接等，以供探讨。</strong></p>
 <p><a name="anchor1"></a></p>
 <h2 id="Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件"><a href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)"></a>Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</h2><p>v8项目在Github的官方镜像地址为<a href="https://github.com/v8/v8" target="_blank" rel="external">https://github.com/v8/v8</a>。而其官方的<a href="https://github.com/v8/v8/wiki" target="_blank" rel="external">wiki文档</a>也在这个仓库中。但是如果直接按照这个wiki去构建，失败几乎是不可避免。因为wiki的步骤非常简化(当然先总体阅览一下wiki还是大有必要，而且当回过头来对照的时候将会发现”原来是这样，Soga^_^”)，有些关键的环境配置和要点被省略掉，所以如果不跳过这些坑，将浪费大量的时间，甚至有很严重的挫败感。本文的目的就是为了对v8的构建做一个记录，总结遇到的问题，便于以后查阅，也为他人提供一个便捷的指引。</p>
 <p>这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Linux/Mac x64。</p>
@@ -400,26 +401,34 @@ x64.release
 </li>
 </ol>
 <p><a name="anchor3"></a></p>
-<h2 id="Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装"><a href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)"></a>Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)</h2><p>首先理一下思路：</p>
+<h2 id="Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装"><a href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)"></a>Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)</h2><p>注：已经有人在Github上提供编译好的v8静态库供Android NDK嵌入开发，这样可以节省很多时间(只是并非对应v8的最新版，不过也是次新版)。请参见<a href="https://github.com/social-games/CompiledV8" target="_blank" rel="external">https://github.com/social-games/CompiledV8</a></p>
+<p>首先理一下思路：</p>
 <ol>
 <li>先利用交叉编译，构建出用于Android平台的v8静态库文件；</li>
 <li>利用Android studio进行NDK开发，将步骤1中生成的静态库文件进行链接封装，向Java层暴露方法(对应java层的native方法)，最终生成动态库文件；</li>
 <li>Android APP内部，原生的Java层可以通过JNI调用步骤2中生成的动态库中的方法(去加载JS代码并执行相关逻辑，然后返回相关数据，反之亦然)</li>
 </ol>
-<p>具体实施步骤：</p>
+<p>实施前的题外话：<br>    如果是为了练练手，那么可以采用v8的最新master分支进行构建即可；但如果是为了用于生产环境，那么请一定采用最新的稳定版本来构建。怎么查询到最新的稳定版本是多少呢？请参见<a href="https://github.com/v8/v8/wiki/Version-numbers" target="_blank" rel="external">官方原文说明</a>。本文写作时最新的适用于Android平台的分支是<code>6.5.254.43</code>。因此，在执行前，需要先逐一执行以下命令：</p>
+<pre><code>&gt; git pull
+&gt; git checkout branch-heads/6.5
+&gt; gclient sync
+</code></pre><p>具体实施步骤：</p>
 <ol>
 <li>首先与章节<code>Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)</code>(#anchor2)的步骤基本一致，但需要在其第3步修改目标构建平台(即将arm.release改为android.arm.release)，执行命令替换为：<blockquote>
 <p>tools/dev/v8gen.py gen -m client.v8.ports -b “V8 Android Arm - builder” android.arm.release</p>
 </blockquote>
 </li>
-<li><p>首先与章节<code>Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)</code>(#anchor2)的步骤基本一致，只是需要在其第4步修改下<code>args.gn</code>配置文件，如下：</p>
+<li><p>首先与章节<code>Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)</code>(#anchor2)的步骤基本一致，只是需要在其第4步修改下<code>args.gn</code>配置文件（如果是arm64机器，则target_cpu = “arm64”），如下：</p>
 <blockquote>
 <p>is_component_build = false<br>is_debug = false<br>symbol_level = 1<br>target_cpu = “arm”<br>target_os = “android”<br>use_goma = false<br>v8_android_log_stdout = true<br>v8_enable_i18n_support = false<br>v8_static_library = true</p>
 </blockquote>
 <p> 注意：use_goma = false、v8_static_library = true、v8_enable_i18n_support = false都需要添加</p>
 </li>
-<li>然后重新执行构建，构建完成之后，在v8源码目录下的子目录<code>out.gn/android.arm.release/obj</code>下可以找到对应的静态库。然后按照<a href="https://medium.com/@hyperandroid/compile-v8-for-arm-7-df45372f9d4e" target="_blank" rel="external">这篇文章</a>的步骤，将相关静态库和头文件聚合整理到一个单独的目录(比如libs，最终将libs目录copy到Android Studio的工程的cpp源文件目录下)。</li>
-<li>新创建一个Android Studio工程(支持C++，利用默认的向导创建完成即可。注：这里AS的版本是3.1，默认采用cmake构建C++代码)，然后将步骤2得到的libs拷贝到工程的cpp源文件对应的目录下。然后就是编辑工程的CMakeLists.txt文件，将libs里面的静态库链接进来。这一步还在调试中，后续进一步补充完善。可先参考<a href="https://medium.com/@hyperandroid/android-v8-embedding-guide-f64173f7958b" target="_blank" rel="external">这篇文章</a>。</li>
+<li><p>然后重新执行构建，构建完成之后，在v8源码目录下的子目录<code>out.gn/android.arm.release/obj</code>下可以找到对应的静态库。然后按照<a href="https://medium.com/@hyperandroid/compile-v8-for-arm-7-df45372f9d4e" target="_blank" rel="external">这篇文章</a>的步骤，将相关静态库和头文件聚合整理到一个单独的目录(比如libs，最终将libs目录copy到Android Studio的工程的cpp源文件目录下)。这里列出关键示例代码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// Create fat lib files. </span><br><span class="line">// You also could add all .* files into one single library.</span><br><span class="line">// </span><br><span class="line">cd out.gn/android_arm.release/obj</span><br><span class="line">mkdir libs</span><br><span class="line">cd libs</span><br><span class="line">// one lib to rule them all.</span><br><span class="line">ar -rcsD libv8_base.a ../v8_base/*.o</span><br><span class="line">ar -rcsD libv8_base.a ../v8_libbase/*.o</span><br><span class="line">ar -rcsD libv8_base.a ../v8_libsampler/*.o</span><br><span class="line">ar -rcsD libv8_base.a ../v8_libplatform/*.o </span><br><span class="line">ar -rcsD libv8_base.a ../src/inspector/inspector/*.o</span><br><span class="line">// preferred snapshot type: linked into binary.</span><br><span class="line">ar -rcsD libv8_snapshot.a ../v8_snapshot/*.o </span><br><span class="line">// depending on snapshot options, you should left out </span><br><span class="line">// v8_snapshot files and include any of these other libs.</span><br><span class="line">ar -rcsD libv8_nosnapshot.a ../v8_nosnapshot/*.o</span><br><span class="line">ar -rcsD libv8_external_snapshot.a ../v8_external_snapshot/*.o</span><br><span class="line">// source headers, for inspector compilation.</span><br><span class="line">mkdir -p src/base/platform</span><br><span class="line">cp -R ../../../../src/*.h ./src</span><br><span class="line">cp -R ../../../../src/base/*.h ./src/base</span><br><span class="line">cp -R ../../../../src/base/platform/*.h ./src/base/platform</span><br><span class="line">// copy v8 compilation header files:</span><br><span class="line">cp -R ../../../../include ./</span><br><span class="line">// For compilation on Android, always **use the same ndk** as </span><br><span class="line">// `gclient sync` downloaded. </span><br><span class="line">// As of the time of this writing it was `ndk r12b`</span><br><span class="line">// Enjoy v8 embedded in an Android app</span><br></pre></td></tr></table></figure>
+<p> 关于libv8_snapshot.a/libv8_nosnapshot.a/libv8_external_snapshot.a在使用的时候任选其一，这三者的区别如下：<br> Currently, snapshots are compiled by default. These snapshots will contain base objects, like for example, Math. There’s no runtime difference among them, just different initialization times. In my nexus 5x, no snapshot takes around 400ms to initialize an Isolate and a Context, and around 30 with snapshot. The external snapshot and snapshot differ in that the external snapshot must be explicitly loaded (.bin files in the compilation output), and snapshot library is a static lib file of roughly 1Mb in size, that will be linked with the final .so file binary instead of externally loaded. Bear in mind that snapshot libs, internal or external, would require you to supply some extra native code for reading the Natives (.bin) files.</p>
+</li>
+<li>新创建一个Android Studio工程(支持C++，利用默认的向导创建完成即可。注：这里AS的版本是3.1，默认采用cmake构建C++代码)，然后将步骤2得到的libs拷贝到工程的cpp源文件对应的目录下。然后就是编辑工程的CMakeLists.txt文件，将libs里面的静态库链接进来。具体代码和配置可以参考我的<a href="https://github.com/cstsinghua/V8Android" target="_blank" rel="external">Github demo</a>。另外也可参考<a href="https://medium.com/@hyperandroid/android-v8-embedding-guide-f64173f7958b" target="_blank" rel="external">这篇文章</a>。</li>
 </ol>
 <h1 id="win10构建v8-engine的心路历程"><a href="#win10构建v8-engine的心路历程" class="headerlink" title="win10构建v8 engine的心路历程"></a>win10构建v8 engine的心路历程</h1><p>这里可以完全参照<a href="https://medium.com/dailyjs/how-to-build-v8-on-windows-and-not-go-mad-6347c69aacd4" target="_blank" rel="external">https://medium.com/dailyjs/how-to-build-v8-on-windows-and-not-go-mad-6347c69aacd4</a>这篇文章的步骤来完成。</p>
 <p>但需要强调的是，这篇文章编写的时候，当时的v8版本可以使用VS 2015编译，而v8的最新版本(截止到2018.4.4)要求VS 2017(随着时间推移，可能后续会要求更新版本的VS，这里就必须注意，可以在下载下来的v8源目录下面的build子目录下的vs_toolchain.py文件中查看默认的VS版本，如下图)，所以这篇文章里面关于VS 2015的部分，请替换成VS 2017。另外，关于Windows SDK的部分，也请下载最新版本的。<br><img src="https://i.imgur.com/KjQ0CNp.jpg" alt=""></p>
@@ -430,7 +439,7 @@ x64.release
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-04-13T07:12:44.000Z" itemprop="dateUpdated">2018-04-13 15:12:44</time>
+    post.last_updated<time datetime="2018-04-18T06:34:44.000Z" itemprop="dateUpdated">2018-04-18 14:34:44</time>
 </span><br>
 
 
