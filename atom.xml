@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2018-04-18T06:15:35.000Z</updated>
+  <updated>2018-04-23T01:33:56.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <link href="http://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/"/>
     <id>http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/</id>
     <published>2018-04-13T07:14:56.000Z</published>
-    <updated>2018-04-18T06:15:35.000Z</updated>
+    <updated>2018-04-23T01:33:56.000Z</updated>
     
     <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;Android-APP-embed-v8的错误汇总&quot;&gt;&lt;a href=&quot;#Android-APP-embed-v8的错误汇总&quot; class=&quot;headerlink&quot; title=&quot;Android APP embed v8的错误汇总&quot;&gt;&lt;/a&gt;Android APP embed v8的错误汇总&lt;/h1&gt;&lt;p&gt;Android APP embed v8的过程，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：&lt;/p&gt;
+&lt;h1 id=&quot;Android-APP-embed-v8的错误汇总&quot;&gt;&lt;a href=&quot;#Android-APP-embed-v8的错误汇总&quot; class=&quot;headerlink&quot; title=&quot;Android APP embed v8的错误汇总&quot;&gt;&lt;/a&gt;Android APP embed v8的错误汇总&lt;/h1&gt;&lt;p&gt;Android APP embed v8的过程(请参见&lt;a href=&quot;http://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/&quot;&gt;编译和嵌入v8至Android APP&lt;/a&gt;)，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;在Ubuntu 16.04系统下，编译v8的时候，环境的配置、各种参数的设置问题，这最终会影响到生成的库(分static library和shared library两种情形)是否正确。这里定义叫编译v8库的问题。&lt;/li&gt;
 &lt;li&gt;利用Android studio将生成的v8的静态库或者分享库通过NDK嵌入到Android APP时候的各种编译错误或者参数配置问题。此类问题定义为embed v8 in Android APP问题。&lt;/li&gt;
