@@ -36,7 +36,7 @@
 <meta property="og:description" content="前言随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的ReactNative，而Cocos2D引擎也实现了JS的版本Cocos2d-JS。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。
 关于J">
 <meta property="og:image" content="https://i.imgur.com/spTwrnj.jpg">
-<meta property="og:image" content="https://i.imgur.com/jfwzwkX.jpg">
+<meta property="og:image" content="https://i.imgur.com/2GYIHJp.jpg">
 <meta property="og:image" content="https://i.imgur.com/SqjVtPC.jpg">
 <meta property="og:image" content="https://i.imgur.com/qBGsgml.jpg">
 <meta property="og:updated_time" content="2018-04-25T06:55:55.000Z">
@@ -300,7 +300,7 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
 <blockquote>
 <p>./mach build</p>
 </blockquote>
-<p> 构建完成之后，这个时候其实是可以用Android Studio打开Firefox的整个工程的（build过程已经生成了gradle相关文件）。通过Android Studio open项目的时候，选择项目的路径为Firefox的源码下载目录，即<code>/usr/local/spidermonkey/mozilla-central</code>。然后就可以通过Android studio开发和构建Firefox了，并且可Debug和Run。具体请参见官方说明<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build" target="_blank" rel="external">构建Firefox For Android</a>的“Developing Firefox for Android in Android Studio”章节部分。<br> <img src="https://i.imgur.com/jfwzwkX.jpg" alt=""></p>
+<p> 构建完成之后，这个时候其实是可以用Android Studio打开Firefox的整个工程的（build过程已经生成了gradle相关文件）。注意：需要在<code>./mach build</code>后执行<code>./mach gradle clean app:assembleLocalWithGeckoBinariesMinApi21PhotonDebug</code>命令，然后通过Android Studio open项目的时候，选择项目的路径为Firefox的源码下载目录，即<code>/usr/local/spidermonkey/mozilla-central</code>。接着就可以通过Android studio开发和构建Firefox了，并且可Debug和Run。具体请参见官方说明<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build" target="_blank" rel="external">构建Firefox For Android</a>的“Developing Firefox for Android in Android Studio”章节部分。<br> <img src="https://i.imgur.com/2GYIHJp.jpg" alt=""></p>
 </li>
 <li><p>打包成Android的APK文件：</p>
 <blockquote>

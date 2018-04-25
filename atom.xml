@@ -76,7 +76,7 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
 &lt;blockquote&gt;
 &lt;p&gt;./mach build&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt; 构建完成之后，这个时候其实是可以用Android Studio打开Firefox的整个工程的（build过程已经生成了gradle相关文件）。通过Android Studio open项目的时候，选择项目的路径为Firefox的源码下载目录，即&lt;code&gt;/usr/local/spidermonkey/mozilla-central&lt;/code&gt;。然后就可以通过Android studio开发和构建Firefox了，并且可Debug和Run。具体请参见官方说明&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;构建Firefox For Android&lt;/a&gt;的“Developing Firefox for Android in Android Studio”章节部分。&lt;br&gt; &lt;img src=&quot;https://i.imgur.com/jfwzwkX.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt; 构建完成之后，这个时候其实是可以用Android Studio打开Firefox的整个工程的（build过程已经生成了gradle相关文件）。注意：需要在&lt;code&gt;./mach build&lt;/code&gt;后执行&lt;code&gt;./mach gradle clean app:assembleLocalWithGeckoBinariesMinApi21PhotonDebug&lt;/code&gt;命令，然后通过Android Studio open项目的时候，选择项目的路径为Firefox的源码下载目录，即&lt;code&gt;/usr/local/spidermonkey/mozilla-central&lt;/code&gt;。接着就可以通过Android studio开发和构建Firefox了，并且可Debug和Run。具体请参见官方说明&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;构建Firefox For Android&lt;/a&gt;的“Developing Firefox for Android in Android Studio”章节部分。&lt;br&gt; &lt;img src=&quot;https://i.imgur.com/2GYIHJp.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;打包成Android的APK文件：&lt;/p&gt;
 &lt;blockquote&gt;
