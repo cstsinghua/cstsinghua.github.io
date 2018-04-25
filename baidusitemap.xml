@@ -4,6 +4,49 @@
 
     
   <url>
+    <loc>http://cstsinghua.github.io/2018/04/25/%E6%9E%84%E5%BB%BAspidermonkey%E6%8C%87%E5%8D%97/</loc>
+    <lastmod>2018-04-25T06:55:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>构建spidermonkey指南</title>
+        <pubTime>2018-04-25T06:55:51.000Z</pubTime>
+        
+        <tag>build</tag>
+         
+        <tag>构建</tag>
+         
+        <tag>Linux</tag>
+         
+        <tag>no webview</tag>
+         
+        <tag>spidermonkey</tag>
+         
+        <tag>hg</tag>
+         
+        <tag>embed spidermonkey</tag>
+         
+        <tag>Firefox</tag>
+         
+        <tag>ubuntu</tag>
+         
+        <tag>spidermonkey embedded in Android APP</tag>
+         
+        <tag>JS engine</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="tools" url="http://cstsinghua.github.io/categories/Android/tools/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/</loc>
     <lastmod>2018-04-23T01:33:56.000Z</lastmod>
     <data>

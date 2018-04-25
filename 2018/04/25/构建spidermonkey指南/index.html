@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?5bdd93f06ab5180cf97a5e1c1033c6ef"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/">
+    
+    
+    <title>构建spidermonkey指南 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="build,构建,Linux,no webview,spidermonkey,hg,embed spidermonkey,Firefox,ubuntu,spidermonkey embedded in Android APP,JS engine">
+    <meta name="description" content="前言随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的ReactNative，而Cocos2D引擎也实现了JS的版本Cocos2d-JS。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。
+关于J">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建spidermonkey指南">
+<meta property="og:url" content="http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="前言随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的ReactNative，而Cocos2D引擎也实现了JS的版本Cocos2d-JS。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。
+关于J">
+<meta property="og:image" content="https://i.imgur.com/spTwrnj.jpg">
+<meta property="og:image" content="https://i.imgur.com/jfwzwkX.jpg">
+<meta property="og:image" content="https://i.imgur.com/SqjVtPC.jpg">
+<meta property="og:image" content="https://i.imgur.com/qBGsgml.jpg">
+<meta property="og:updated_time" content="2018-04-25T06:55:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建spidermonkey指南">
+<meta name="twitter:description" content="前言随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的ReactNative，而Cocos2D引擎也实现了JS的版本Cocos2d-JS。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。
+关于J">
+<meta name="twitter:image" content="https://i.imgur.com/spTwrnj.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">构建spidermonkey指南</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">构建spidermonkey指南</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-25T06:55:51.000Z" itemprop="datePublished" class="page-time">
+  2018-04-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ubuntu-16-04-LTS系统下构建Firefox-for-Android"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ubuntu 16.04 LTS系统下构建Firefox for Android</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-构建spidermonkey指南"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">构建spidermonkey指南</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-25 14:55:51" datetime="2018-04-25T06:55:51.000Z"  itemprop="datePublished">2018-04-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/tools/">tools</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的<a href="https://github.com/facebook/react-native" target="_blank" rel="external">ReactNative</a>，而Cocos2D引擎也实现了JS的版本<a href="http://www.cocos.com/docs/js/1-about-cocos2d-js/1-1-a-brief-history/zh.html" target="_blank" rel="external">Cocos2d-JS</a>。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。</p>
+<p>关于JS引擎介绍，可以参见维基百科<a href="https://en.wikipedia.org/wiki/JavaScript_engine" title="JavaScript_engine" target="_blank" rel="external">JavaScript_engine介绍</a>。</p>
+<p>关于各引擎的对比，可以参见<a href="http://openaphid.github.io/blog/2013/01/17/part-i-how-to-choose-a-javascript-engine-for-ios-and-android-apps/" target="_blank" rel="external">JS engine对比文章1</a>、<a href="https://www.skyscanner.net/blogs/developing-mobile-cross-platform-library-part-3-javascript" target="_blank" rel="external">JS engine简单对比文章2</a>。文章1有人翻译成了中文，请参见<a href="https://blog.csdn.net/Kaitiren/article/details/23255195。" target="_blank" rel="external">https://blog.csdn.net/Kaitiren/article/details/23255195。</a></p>
+<p>关于如何选择一个JS engine，这里提几点：</p>
+<ol>
+<li>引擎的性能，当然是越快越好；</li>
+<li>嵌入之后，对APP的包体大小的影响；</li>
+<li>该引擎的官方文档是否齐全，API是否清晰好用，是否处于活跃开发阶段，开发社区的支持是否足够</li>
+<li>多平台的支持性，比如v8只支持JIT编译，而IOS是限制第三方JS engine使用JIT的。</li>
+</ol>
+<p>关于v8引擎的构建，请参考<a href="http://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/">构建v8 engine指南</a>。</p>
+<h2 id="ubuntu-16-04-LTS系统下构建Firefox-for-Android"><a href="#ubuntu-16-04-LTS系统下构建Firefox-for-Android" class="headerlink" title="ubuntu 16.04 LTS系统下构建Firefox for Android"></a>ubuntu 16.04 LTS系统下构建Firefox for Android</h2><p><strong>前提条件：</strong><br>    Hardware requirements<br>        2G RAM with lots of available swap space. Additional RAM will significantly decrease build time.<br>        For debug builds: at least 8 GB free disk space<br>        For optimized builds: at least 1 GB free disk space (6 GB recommended)</p>
+<p><strong>注意：实际上，构建很消耗资源，所以建议RAM 8G以上，磁盘空间剩余30G以上。另外网络带宽要比较高，国内的话，最好使用VPN</strong></p>
+<p>Mozilla官方也有构建指南，不过其中有些不是很清楚，官方文档请参见<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build</a></p>
+<p><strong>具体构建步骤：</strong></p>
+<ol>
+<li>安装支持32位的相关库（If you’re using a 64-bit Linux, you’ll need to install 32 bit libs to allow the toolchain binaries to run）<blockquote>
+<p>sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386</p>
+</blockquote>
+</li>
+<li>获取启动配置的py文件，打开终端，执行如下命令：<blockquote>
+<p>wget -O bootstrap.py <a href="https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py" target="_blank" rel="external">https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py</a></p>
+</blockquote>
+</li>
+<li><p>确保系统的默认的python版本为2.7(Ubuntu 16.04LTS版本默认安装的python就是2.7，所以这里只需确认下即可)，在终端里执行步骤2中下载的bootstrap.py：</p>
+<blockquote>
+<p>python #先确认python版本是2.7<br>python bootstrap.py</p>
+</blockquote>
+<p> 其中，<code>python bootstrap.py</code>会去安装python和autoconf2.13等工具(在执行的终端窗口可以看到<code>sudo apt-get install autoconf2.13 build-essential nodejs python-dev python-pip python-setuptools unzip uuid zip</code>命令被自动执行)，此外还会下载构建所依赖的Android SDK、NDK等，下载过程比较耗时，需要耐心等候。同时，执行途中会弹出如图1提示(请选择3，这里Artifact mode构建更快，3和4的具体区别，请参见<a href="https://developer.mozilla.org/en-US/docs/Artifact_builds" target="_blank" rel="external">Artifact_builds</a>)：<br> <img src="https://i.imgur.com/spTwrnj.jpg" alt=""><br> 其他选项，默认选择Y(是)或者按照终端的提示建议操作，然后继续让命令过程继续执行即可。下面摘录自官方文档的说明：</p>
+<pre><code>The bootstrapping script will install system packages, the Android SDK (and NDK, if required), and the currently required versions of the Android platform plus extras. If you want to know more about what Bootstrap.py is doing you can look at our detailed setup instructions. Please follow the steps in the terminal to complete the configuration. If you want to use git, when you are aksed to run the Mercurial configuration wizard, you can select option 2. No.
+
+The bootstrap script will print out configuration options for you when it finishes (more on this below).  For now, copy this configuration text to a safe place and continue on.  You can re-run the bootstrap script to print this information again later.
+
+Once you have all the dependencies installed, you need to clone the Firefox repository.
+</code></pre></li>
+<li>拉取源码，这里建议采用hg而非Git。<blockquote>
+<p>hg clone <a href="https://hg.mozilla.org/mozilla-central" target="_blank" rel="external">https://hg.mozilla.org/mozilla-central</a></p>
+</blockquote>
+</li>
+<li><p>下载完成之后，在源码目录，本文以<code>/usr/local/spidermonkey/mozilla-central</code>为例。在终端下，进入该目录（留意该目录下的mach文件），然后再次执行启动配置命令：</p>
+<blockquote>
+<p>cd /usr/local/spidermonkey/mozilla-central<br>./mach bootstrap</p>
+</blockquote>
+<p> 这一步会弹出步骤3中示意图1的选项，仍然选择3即可。</p>
+</li>
+<li><p>在<code>/usr/local/spidermonkey/mozilla-central</code>目录下，新建一个名为mozconfig的文件，打开该文件，在里面添加入下内容：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Build Firefox <span class="keyword">for</span> Android:</span><br><span class="line">ac_add_options --enable-application=mobile/android</span><br><span class="line">ac_add_options --target=arm-linux-androideabi</span><br><span class="line"></span><br><span class="line"># With the following Android SDK:</span><br><span class="line">ac_add_options --with-android-sdk="/absolute/<span class="built_in">path</span>/to/.mozbuild/android-sdk"</span><br><span class="line"></span><br><span class="line"># Enable artifact building:</span><br><span class="line">ac_add_options --enable-artifact-builds</span><br><span class="line"></span><br><span class="line"># Write build artifacts to:</span><br><span class="line">mk_add_options MOZ_OBJDIR=./objdir-frontend</span><br></pre></td></tr></table></figure>
+<p> 注意：上面的Android SDK的路径<code>/absolute/path/to/.mozbuild/android-sdk</code>，需要根据你当前的实际路径做修改。一般而言，步骤3完成之后，会将Android SDK默认安装在你的用户目录即$Home/.mozbuild/下，比如我的就是<code>/home/coulsonchen/.mozbuild/android-sdk-linux</code>。可去该目录下实际确认下。另外，<code>MOZ_OBJDIR=./objdir-frontend</code>，这里是指定构建的目标目录，位于<code>/usr/local/spidermonkey/mozilla-central/objdir-frontend</code>下，<code>objdir-frontend</code>可以修改成你设定的其他名称。</p>
+</li>
+<li><p>可以修改源码目录下的源码或者配置，修改完成之后，执行构建：</p>
+<blockquote>
+<p>./mach build</p>
+</blockquote>
+<p> 构建完成之后，这个时候其实是可以用Android Studio打开Firefox的整个工程的（build过程已经生成了gradle相关文件）。通过Android Studio open项目的时候，选择项目的路径为Firefox的源码下载目录，即<code>/usr/local/spidermonkey/mozilla-central</code>。然后就可以通过Android studio开发和构建Firefox了，并且可Debug和Run。具体请参见官方说明<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build" target="_blank" rel="external">构建Firefox For Android</a>的“Developing Firefox for Android in Android Studio”章节部分。<br> <img src="https://i.imgur.com/jfwzwkX.jpg" alt=""></p>
+</li>
+<li><p>打包成Android的APK文件：</p>
+<blockquote>
+<p>./mach package</p>
+</blockquote>
+<p> 生成的APK文件在构建的目标目录下的/dist子目录下，即<code>/usr/local/spidermonkey/mozilla-central/objdir-frontend/dist</code>下，名称类似fennec-61.0a1.en-US.android-arm.apk</p>
+</li>
+<li><p>安装到Android手机(支持<strong>Android Ice Cream Sandwich (API 15)</strong>及以后版本的手机)</p>
+<blockquote>
+<p>./mach install</p>
+</blockquote>
+<p> 可在终端的输出中查看到相关信息，比如：<br> <img src="https://i.imgur.com/SqjVtPC.jpg" alt=""><br> 也可以直接copy步骤8中生成的apk文件，通过adb install安装即可，安装后在手机桌面会生成Firefox的快捷图标。</p>
+</li>
+<li><p>运行Firefox，在手机上查看效果</p>
+<blockquote>
+<p>./mach run</p>
+</blockquote>
+<p>类似效果如下：<br><img src="https://i.imgur.com/qBGsgml.jpg" alt=""><br>也可以直接在手机桌面，点击Firefox的快捷图标，启动浏览器，即可体验试用。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    post.last_updated<time datetime="2018-04-25T06:55:55.000Z" itemprop="dateUpdated">2018-04-25 14:55:55</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Firefox/">Firefox</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-engine/">JS engine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/embed-spidermonkey/">embed spidermonkey</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hg/">hg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/no-webview/">no webview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spidermonkey/">spidermonkey</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spidermonkey-embedded-in-Android-APP/">spidermonkey embedded in Android APP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/构建/">构建</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/&title=《构建spidermonkey指南》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/&title=《构建spidermonkey指南》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《构建spidermonkey指南》 — Atypical programmer&url=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/13/编译v8遇到的错误汇总/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">编译及嵌入v8遇到的错误汇总</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "4DjAfnIwjxGfITAYl8eVX5Pe-gzGzoHsz",
+            appKey: "ss62qxcFEjf5opJ4Ii5xI2zn",
+            avatar: "mm",
+            placeholder: "欢迎交流",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/&title=《构建spidermonkey指南》 — Atypical programmer&pic=http://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/&title=《构建spidermonkey指南》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《构建spidermonkey指南》 — Atypical programmer&url=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/&via=http://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

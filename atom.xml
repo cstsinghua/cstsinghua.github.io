@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2018-04-23T01:33:56.000Z</updated>
+  <updated>2018-04-25T06:55:55.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,126 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>构建spidermonkey指南</title>
+    <link href="http://cstsinghua.github.io/2018/04/25/%E6%9E%84%E5%BB%BAspidermonkey%E6%8C%87%E5%8D%97/"/>
+    <id>http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/</id>
+    <published>2018-04-25T06:55:51.000Z</published>
+    <updated>2018-04-25T06:55:55.000Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的&lt;a href=&quot;https://github.com/facebook/react-native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ReactNative&lt;/a&gt;，而Cocos2D引擎也实现了JS的版本&lt;a href=&quot;http://www.cocos.com/docs/js/1-about-cocos2d-js/1-1-a-brief-history/zh.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Cocos2d-JS&lt;/a&gt;。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。&lt;/p&gt;
+&lt;p&gt;关于JS引擎介绍，可以参见维基百科&lt;a href=&quot;https://en.wikipedia.org/wiki/JavaScript_engine&quot; title=&quot;JavaScript_engine&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;JavaScript_engine介绍&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;关于各引擎的对比，可以参见&lt;a href=&quot;http://openaphid.github.io/blog/2013/01/17/part-i-how-to-choose-a-javascript-engine-for-ios-and-android-apps/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;JS engine对比文章1&lt;/a&gt;、&lt;a href=&quot;https://www.skyscanner.net/blogs/developing-mobile-cross-platform-library-part-3-javascript&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;JS engine简单对比文章2&lt;/a&gt;。文章1有人翻译成了中文，请参见&lt;a href=&quot;https://blog.csdn.net/Kaitiren/article/details/23255195。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://blog.csdn.net/Kaitiren/article/details/23255195。&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;关于如何选择一个JS engine，这里提几点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;引擎的性能，当然是越快越好；&lt;/li&gt;
+&lt;li&gt;嵌入之后，对APP的包体大小的影响；&lt;/li&gt;
+&lt;li&gt;该引擎的官方文档是否齐全，API是否清晰好用，是否处于活跃开发阶段，开发社区的支持是否足够&lt;/li&gt;
+&lt;li&gt;多平台的支持性，比如v8只支持JIT编译，而IOS是限制第三方JS engine使用JIT的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;关于v8引擎的构建，请参考&lt;a href=&quot;http://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/&quot;&gt;构建v8 engine指南&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;ubuntu-16-04-LTS系统下构建Firefox-for-Android&quot;&gt;&lt;a href=&quot;#ubuntu-16-04-LTS系统下构建Firefox-for-Android&quot; class=&quot;headerlink&quot; title=&quot;ubuntu 16.04 LTS系统下构建Firefox for Android&quot;&gt;&lt;/a&gt;ubuntu 16.04 LTS系统下构建Firefox for Android&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;前提条件：&lt;/strong&gt;&lt;br&gt;    Hardware requirements&lt;br&gt;        2G RAM with lots of available swap space. Additional RAM will significantly decrease build time.&lt;br&gt;        For debug builds: at least 8 GB free disk space&lt;br&gt;        For optimized builds: at least 1 GB free disk space (6 GB recommended)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：实际上，构建很消耗资源，所以建议RAM 8G以上，磁盘空间剩余30G以上。另外网络带宽要比较高，国内的话，最好使用VPN&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Mozilla官方也有构建指南，不过其中有些不是很清楚，官方文档请参见&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;具体构建步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装支持32位的相关库（If you’re using a 64-bit Linux, you’ll need to install 32 bit libs to allow the toolchain binaries to run）&lt;blockquote&gt;
+&lt;p&gt;sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;获取启动配置的py文件，打开终端，执行如下命令：&lt;blockquote&gt;
+&lt;p&gt;wget -O bootstrap.py &lt;a href=&quot;https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;确保系统的默认的python版本为2.7(Ubuntu 16.04LTS版本默认安装的python就是2.7，所以这里只需确认下即可)，在终端里执行步骤2中下载的bootstrap.py：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;python #先确认python版本是2.7&lt;br&gt;python bootstrap.py&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 其中，&lt;code&gt;python bootstrap.py&lt;/code&gt;会去安装python和autoconf2.13等工具(在执行的终端窗口可以看到&lt;code&gt;sudo apt-get install autoconf2.13 build-essential nodejs python-dev python-pip python-setuptools unzip uuid zip&lt;/code&gt;命令被自动执行)，此外还会下载构建所依赖的Android SDK、NDK等，下载过程比较耗时，需要耐心等候。同时，执行途中会弹出如图1提示(请选择3，这里Artifact mode构建更快，3和4的具体区别，请参见&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Artifact_builds&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Artifact_builds&lt;/a&gt;)：&lt;br&gt; &lt;img src=&quot;https://i.imgur.com/spTwrnj.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt; 其他选项，默认选择Y(是)或者按照终端的提示建议操作，然后继续让命令过程继续执行即可。下面摘录自官方文档的说明：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;The bootstrapping script will install system packages, the Android SDK (and NDK, if required), and the currently required versions of the Android platform plus extras. If you want to know more about what Bootstrap.py is doing you can look at our detailed setup instructions. Please follow the steps in the terminal to complete the configuration. If you want to use git, when you are aksed to run the Mercurial configuration wizard, you can select option 2. No.
+
+The bootstrap script will print out configuration options for you when it finishes (more on this below).  For now, copy this configuration text to a safe place and continue on.  You can re-run the bootstrap script to print this information again later.
+
+Once you have all the dependencies installed, you need to clone the Firefox repository.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;拉取源码，这里建议采用hg而非Git。&lt;blockquote&gt;
+&lt;p&gt;hg clone &lt;a href=&quot;https://hg.mozilla.org/mozilla-central&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hg.mozilla.org/mozilla-central&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;下载完成之后，在源码目录，本文以&lt;code&gt;/usr/local/spidermonkey/mozilla-central&lt;/code&gt;为例。在终端下，进入该目录（留意该目录下的mach文件），然后再次执行启动配置命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;cd /usr/local/spidermonkey/mozilla-central&lt;br&gt;./mach bootstrap&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 这一步会弹出步骤3中示意图1的选项，仍然选择3即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在&lt;code&gt;/usr/local/spidermonkey/mozilla-central&lt;/code&gt;目录下，新建一个名为mozconfig的文件，打开该文件，在里面添加入下内容：&lt;/p&gt;
+&lt;figure class=&quot;highlight cmd&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;# Build Firefox &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; Android:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ac_add_options --enable-application=mobile/android&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ac_add_options --target=arm-linux-androideabi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# With the following Android SDK:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ac_add_options --with-android-sdk=&quot;/absolute/&lt;span class=&quot;built_in&quot;&gt;path&lt;/span&gt;/to/.mozbuild/android-sdk&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Enable artifact building:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ac_add_options --enable-artifact-builds&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Write build artifacts to:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mk_add_options MOZ_OBJDIR=./objdir-frontend&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; 注意：上面的Android SDK的路径&lt;code&gt;/absolute/path/to/.mozbuild/android-sdk&lt;/code&gt;，需要根据你当前的实际路径做修改。一般而言，步骤3完成之后，会将Android SDK默认安装在你的用户目录即$Home/.mozbuild/下，比如我的就是&lt;code&gt;/home/coulsonchen/.mozbuild/android-sdk-linux&lt;/code&gt;。可去该目录下实际确认下。另外，&lt;code&gt;MOZ_OBJDIR=./objdir-frontend&lt;/code&gt;，这里是指定构建的目标目录，位于&lt;code&gt;/usr/local/spidermonkey/mozilla-central/objdir-frontend&lt;/code&gt;下，&lt;code&gt;objdir-frontend&lt;/code&gt;可以修改成你设定的其他名称。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可以修改源码目录下的源码或者配置，修改完成之后，执行构建：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;./mach build&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 构建完成之后，这个时候其实是可以用Android Studio打开Firefox的整个工程的（build过程已经生成了gradle相关文件）。通过Android Studio open项目的时候，选择项目的路径为Firefox的源码下载目录，即&lt;code&gt;/usr/local/spidermonkey/mozilla-central&lt;/code&gt;。然后就可以通过Android studio开发和构建Firefox了，并且可Debug和Run。具体请参见官方说明&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;构建Firefox For Android&lt;/a&gt;的“Developing Firefox for Android in Android Studio”章节部分。&lt;br&gt; &lt;img src=&quot;https://i.imgur.com/jfwzwkX.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;打包成Android的APK文件：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;./mach package&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 生成的APK文件在构建的目标目录下的/dist子目录下，即&lt;code&gt;/usr/local/spidermonkey/mozilla-central/objdir-frontend/dist&lt;/code&gt;下，名称类似fennec-61.0a1.en-US.android-arm.apk&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装到Android手机(支持&lt;strong&gt;Android Ice Cream Sandwich (API 15)&lt;/strong&gt;及以后版本的手机)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;./mach install&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 可在终端的输出中查看到相关信息，比如：&lt;br&gt; &lt;img src=&quot;https://i.imgur.com/SqjVtPC.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt; 也可以直接copy步骤8中生成的apk文件，通过adb install安装即可，安装后在手机桌面会生成Firefox的快捷图标。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行Firefox，在手机上查看效果&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;./mach run&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;类似效果如下：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/qBGsgml.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;也可以直接在手机桌面，点击Firefox的快捷图标，启动浏览器，即可体验试用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine
+    
+    </summary>
+    
+      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+    
+    
+      <category term="build" scheme="http://cstsinghua.github.io/tags/build/"/>
+    
+      <category term="构建" scheme="http://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+    
+      <category term="Linux" scheme="http://cstsinghua.github.io/tags/Linux/"/>
+    
+      <category term="no webview" scheme="http://cstsinghua.github.io/tags/no-webview/"/>
+    
+      <category term="spidermonkey" scheme="http://cstsinghua.github.io/tags/spidermonkey/"/>
+    
+      <category term="hg" scheme="http://cstsinghua.github.io/tags/hg/"/>
+    
+      <category term="embed spidermonkey" scheme="http://cstsinghua.github.io/tags/embed-spidermonkey/"/>
+    
+      <category term="Firefox" scheme="http://cstsinghua.github.io/tags/Firefox/"/>
+    
+      <category term="ubuntu" scheme="http://cstsinghua.github.io/tags/ubuntu/"/>
+    
+      <category term="spidermonkey embedded in Android APP" scheme="http://cstsinghua.github.io/tags/spidermonkey-embedded-in-Android-APP/"/>
+    
+      <category term="JS engine" scheme="http://cstsinghua.github.io/tags/JS-engine/"/>
+    
+  </entry>
   
   <entry>
     <title>编译及嵌入v8遇到的错误汇总</title>
@@ -5172,39 +5292,6 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
-    <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-13T01:57:02.000Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For Test:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-  </entry>
-  
-  <entry>
     <title>python安装某些第三方包报错解决办法</title>
     <link href="http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
     <id>http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
@@ -5260,6 +5347,39 @@ collect2.exe: error: ld returned 1 exit status
     
     
       <category term="安装第三方包" scheme="http://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
+    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
+    <published>2016-06-13T01:57:02.000Z</published>
+    <updated>2016-06-13T01:57:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For Test:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
