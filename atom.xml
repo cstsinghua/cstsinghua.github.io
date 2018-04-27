@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cstsinghua.github.io/"/>
-  <updated>2018-04-25T06:55:55.000Z</updated>
+  <updated>2018-04-27T07:10:41.000Z</updated>
   <id>http://cstsinghua.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://cstsinghua.github.io/2018/04/25/%E6%9E%84%E5%BB%BAspidermonkey%E6%8C%87%E5%8D%97/"/>
     <id>http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/</id>
     <published>2018-04-25T06:55:51.000Z</published>
-    <updated>2018-04-25T06:55:55.000Z</updated>
+    <updated>2018-04-27T07:10:41.000Z</updated>
     
     <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的&lt;a href=&quot;https://github.com/facebook/react-native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ReactNative&lt;/a&gt;，而Cocos2D引擎也实现了JS的版本&lt;a href=&quot;http://www.cocos.com/docs/js/1-about-cocos2d-js/1-1-a-brief-history/zh.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Cocos2d-JS&lt;/a&gt;。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。&lt;/p&gt;
@@ -97,6 +97,112 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
 &lt;p&gt;类似效果如下：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/qBGsgml.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;也可以直接在手机桌面，点击Firefox的快捷图标，启动浏览器，即可体验试用。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&quot;ubuntu-16-04-LTS系统下构建spidermonkey的shared-library&quot;&gt;&lt;a href=&quot;#ubuntu-16-04-LTS系统下构建spidermonkey的shared-library&quot; class=&quot;headerlink&quot; title=&quot;ubuntu 16.04 LTS系统下构建spidermonkey的shared library&quot;&gt;&lt;/a&gt;ubuntu 16.04 LTS系统下构建spidermonkey的shared library&lt;/h2&gt;&lt;p&gt;前置条件：&lt;br&gt;    1.spidermonkey的源码和Firefox的源码位于是同一个仓库(事实上，Firefox就是内嵌spidermonkey作为JS的执行engine)，因此这里按照“ubuntu 16.04 LTS系统下构建Firefox for Android”的步骤1-4以完成spidermonkey的源码下载。然后安装下面步骤执行：&lt;/p&gt;
+&lt;p&gt;实施步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;进入源码的js/src子目录(本文示例源码下载存放路径为&lt;code&gt;/usr/local/spidermonkey/mozilla-central&lt;/code&gt;)，即&lt;code&gt;/usr/local/spidermonkey/mozilla-central/js/src&lt;/code&gt;。依序执行下列命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;cd /usr/local/spidermonkey/mozilla-central&lt;br&gt;cd js/src&lt;br&gt;autoconf2.13 &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;   spidermonkey当前强制要求使用autoconf2.13，在python bootstrap.py的过程中会自动安装，如果没有成功安装，请单独选择一个目录，然后按照下面方式手工安装(安装成功之后再从终端回到&lt;code&gt;/usr/local/spidermonkey/mozilla-central/js/src&lt;/code&gt;目录)：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;wget &lt;a href=&quot;http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz&lt;/a&gt;&lt;br&gt; tar -xvzf autoconf-2.13.tar.gz&lt;br&gt; cd autoconf-2.13/&lt;br&gt; ./configure –program-suffix=2.13&lt;br&gt; make&lt;br&gt; sudo make install&lt;br&gt; cd /usr/local/spidermonkey/mozilla-central/js/src&lt;br&gt; autoconf2.13&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;# This name should end with &amp;quot;_OPT.OBJ&amp;quot; to make the version control system ignore it.如果之前已有上一次构建遗留的build_OPT.OBJ目录，可以先`rm -R build_OPT.OBJ`删除之后再新建，避免多次构建直接缓存干扰
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;rm -R build_OPT.OBJ&lt;br&gt;mkdir build_OPT.OBJ&lt;br&gt;cd build_OPT.OBJ&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;先测试构建环境的配置是否OK。通过构建Linux 64位下的库(target system type:x86_64-pc-linux-gnu)来检验:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;2.1、检查配置&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;coulsonchen@coulsonchen:/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ$ ../configure&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  执行该命令后，可能遇到下面错误(Only GCC 6.1 or newer is supported (found version 5.4.0))：&lt;/p&gt;
+  &lt;figure class=&quot;highlight cmd&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;51&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Creating Python environment&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;New python executable &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python2.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Also creating executable &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Installing setuptools, pip, wheel...done.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;running build_ext&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;copying build/lib.linux-x86_64-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;/psutil/_psutil_linux.so -&amp;gt; psutil&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;copying build/lib.linux-x86_64-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;/psutil/_psutil_posix.so -&amp;gt; psutil&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Error processing command. Ignoring because optional. (optional:packages.txt:comm/build/virtualenv_packages.txt)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Reexecuting &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; the virtualenv&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; vcs source checkout... hg&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; a shell... /bin/sh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; host system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; target system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; a shell... /bin/sh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; host system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; target system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android platform directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android sysroot directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android system directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; the Android toolchain directory... &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; found&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android platform directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android system directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android sysroot directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; the Android toolchain directory... &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; found&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; vcs source checkout... hg&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking whether cross compiling... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; the target C compiler... /usr/bin/gcc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking whether the target C compiler can be used... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;DEBUG: &amp;lt;&lt;span class=&quot;title&quot;&gt;truncated&lt;/span&gt; - &lt;span class=&quot;title&quot;&gt;see&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;config.log&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;full&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;output&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;Linux&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;_WIN32&lt;/span&gt; || &lt;span class=&quot;title&quot;&gt;__CYGWIN__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;WINNT&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__NetBSD__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;NetBSD&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__APPLE__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;Darwin&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;endif&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;_MSC_VER&lt;/span&gt; || &lt;span class=&quot;title&quot;&gt;__BYTE_ORDER__&lt;/span&gt; == &lt;span class=&quot;title&quot;&gt;__ORDER_LITTLE_ENDIAN__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;ENDIANNESS&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;little&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__BYTE_ORDER__&lt;/span&gt; == &lt;span class=&quot;title&quot;&gt;__ORDER_BIG_ENDIAN__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;ENDIANNESS&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;big&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;endif&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;Executing&lt;/span&gt;: `/&lt;span class=&quot;title&quot;&gt;usr&lt;/span&gt;/&lt;span class=&quot;title&quot;&gt;bin&lt;/span&gt;/&lt;span class=&quot;title&quot;&gt;gcc&lt;/span&gt; -&lt;span class=&quot;title&quot;&gt;std&lt;/span&gt;=&lt;span class=&quot;title&quot;&gt;gnu99&lt;/span&gt; -&lt;span class=&quot;title&quot;&gt;E&lt;/span&gt; /&lt;span class=&quot;title&quot;&gt;tmp&lt;/span&gt;/&lt;span class=&quot;title&quot;&gt;conftest._Zswij.c&lt;/span&gt;`&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;COMPILER&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;gcc&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;VERSION&lt;/span&gt; = 5.4.0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;STDC_VERSION&lt;/span&gt; = 199901&lt;span class=&quot;title&quot;&gt;L&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;CPU&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;x86_64&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;Linux&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;ENDIANNESS&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;little&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;ERROR&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;Only&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;GCC&lt;/span&gt; 6.1 &lt;span class=&quot;title&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;newer&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;supported&lt;/span&gt; (&lt;span class=&quot;title&quot;&gt;found&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;version&lt;/span&gt; 5.4.0).&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;这里有两种解决办法：
+- 用clang替代gcc(添加环境变量指定编译使用的编译器为clang，CC=clang CXX=clang++  ../configure，即在./configure前面加上`CC=clang CXX=clang++`)，如下所示：
+    &amp;gt; coulsonchen@coulsonchen:/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ$ CC=clang CXX=clang++  ../configure
+
+        Reexecuting in the virtualenv
+        checking for vcs source checkout... hg
+        checking for a shell... /bin/sh
+        checking for host system type... x86_64-pc-linux-gnu
+        checking for target system type... x86_64-pc-linux-gnu
+        checking for a shell... /bin/sh
+        checking for host system type... x86_64-pc-linux-gnu
+        checking for target system type... x86_64-pc-linux-gnu
+        checking for android platform directory... no
+        checking for android sysroot directory... no
+        checking for android system directory... no
+        checking for the Android toolchain directory... not found
+        checking for android platform directory... no
+        checking for android system directory... no
+        checking for android sysroot directory... no
+        checking for the Android toolchain directory... not found
+        checking for vcs source checkout... hg
+        checking whether cross compiling... no
+        checking for the target C compiler... not found
+        DEBUG: _cc: Trying clang
+        ERROR: Cannot find the target C compiler
+    这里提示找不到clang编译器，那么就通过命令安装即可(`sudo apt-get install clang`)。当然也可以使用Android ndk目录下自带的clang。
+- 更新gcc至6.1之后的版本，请参见[https://blog.csdn.net/gatieme/article/details/52871438](https://blog.csdn.net/gatieme/article/details/52871438)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;2.2、构建(make)，检查是否构建成功并测试构建出来的可执行程序是否可用。注：依然在目录&lt;code&gt;/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ&lt;/code&gt;下执行终端命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;make&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  构建的时间比较长，需要耐心等待。待完成之后，在&lt;code&gt;/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ&lt;/code&gt;的子目录&lt;code&gt;/dist/bin&lt;/code&gt;下可看到生成了名为js的可执行程序(javascript的交互命令行)，另外也生成了spidermonkey的分享库(shared library)libmozjs-xxx.so(在&lt;code&gt;/dist/bin&lt;/code&gt;子目录下，其中xx表示当前源码的版本，如采用Mozilla源码45，那么就是libmozjs-45.so，嵌入其他C++程序使用的时候可以将其改名为libmozjs.so)执行如下命令：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;./dist/bin/js ../Y.js&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  可看到输出信息“5! is 120”。执行执行&lt;code&gt;./dist/bin/js&lt;/code&gt;就进入了javascript的交互命令行，在交互命令行里面可以执行javascript的语句，定义函数等等。和python的交互命令行类似。&lt;br&gt;  &lt;img src=&quot;https://i.imgur.com/nb6sRYK.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt;先清除之前的配置缓存&lt;br&gt;如果是重新下载的源码，第一次执行的时候可以不用担心。但多次构建时该步骤一定要引起重视。所以为了保险起见，在构建目录&lt;code&gt;/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ&lt;/code&gt;的终端下执行：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;rm ./config.cache&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; 修改构建Android库的配置参数&lt;br&gt;因为这里涉及到交叉编译，即在Linux Host主机上构建target为Android arm(或arm64，或x86)平台的库。这里首先需要弄清楚，配置脚本有哪些参数是可以配置，哪些参数又是针对构建Android平台库时必须设置的呢？&lt;/p&gt;
+&lt;p&gt;我们可以通过运行如下命令来检查所有的参数：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;../configure –help&lt;br&gt;../configure –help |grep reStr  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其中reStr是需要过滤的字符串，比如要查看Android相关的参数&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;../configure –help |grep android&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/aPTjYxD.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;最终配置交叉编译Android arm平台库的参数命令如下(反复尝试，查阅多个文章才得出，这个过程很艰难，稍微多了或者少了某个参数，或者参数错误，都可能导致配置失败，进而也无法进行make构建)： &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;../configure –with-android-sdk=”/home/coulsonchen/.mozbuild/android-sdk-linux”   –with-android-ndk=”/home/coulsonchen/.mozbuild/android-ndk-r15c” –with-android-version=23  –with-android-toolchain=/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 –target=arm-linux-androideabi&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果是编译Android arm64平台库，则应该修改为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;../configure –with-android-sdk=”/home/coulsonchen/.mozbuild/android-sdk-linux”   –with-android-ndk=”/home/coulsonchen/.mozbuild/android-ndk-r15c” –with-android-version=23  –with-android-toolchain=/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64 –target=aarch64-linux-android&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;即目标平台target和with-android-toolchain参数需要根据目标平台变化而相应修改。&lt;strong&gt;Android ndk r15c(目前spidermonkey构建采用的ndk版本)&lt;/strong&gt;支持的目标平台可去其路径下(&lt;code&gt;/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains&lt;/code&gt;)查看：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/IfhGD0W.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：x86 for Android的名称应该为i386-linux-android&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; 完成最终构建(make)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;make&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;构建完成之后，在构建目录()的子&lt;code&gt;dist/bin&lt;/code&gt;下，可以找到生成的libmozjs-xxx.so共享库，此时在Android studio中新建支持cpp的工程，把libmozjs-xxx.so copy进去，通过NDK连接，然后就可以实现嵌入spidermonkey engine到Android APP，在APP里面执行javascript的代码了。简单的demo请参见&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/How_to_embed_the_JavaScript_engine&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/How_to_embed_the_JavaScript_engine&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果要生成static库(.a格式)而不是shared库，那么在步骤4中，还应该添加一个参数(–disable-shared-js)，示例：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;../configure –with-android-sdk=”/home/coulsonchen/.mozbuild/android-sdk-linux”   –with-android-ndk=”/home/coulsonchen/.mozbuild/android-ndk-r15c” –with-android-version=23  –with-android-toolchain=/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 –target=arm-linux-androideabi –disable-shared-js&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;附录&quot;&gt;&lt;a href=&quot;#附录&quot; class=&quot;headerlink&quot; title=&quot;附录&quot;&gt;&lt;/a&gt;附录&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Build_Documentation&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Build_Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://mozilla.6506.n7.nabble.com/How-to-build-SpiderMonkey-for-Android-arm64-td333026.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://mozilla.6506.n7.nabble.com/How-to-build-SpiderMonkey-for-Android-arm64-td333026.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.android.com/ndk/downloads/older_releases.html#ndk-15c-downloads&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.android.com/ndk/downloads/older_releases.html#ndk-15c-downloads&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 </content>
     
     <summary type="html">
@@ -132,6 +238,12 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
       <category term="spidermonkey embedded in Android APP" scheme="http://cstsinghua.github.io/tags/spidermonkey-embedded-in-Android-APP/"/>
     
       <category term="JS engine" scheme="http://cstsinghua.github.io/tags/JS-engine/"/>
+    
+      <category term="arm" scheme="http://cstsinghua.github.io/tags/arm/"/>
+    
+      <category term="arm64" scheme="http://cstsinghua.github.io/tags/arm64/"/>
+    
+      <category term="x86" scheme="http://cstsinghua.github.io/tags/x86/"/>
     
   </entry>
   

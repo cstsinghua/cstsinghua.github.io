@@ -26,7 +26,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="build,构建,Linux,no webview,spidermonkey,hg,embed spidermonkey,Firefox,ubuntu,spidermonkey embedded in Android APP,JS engine">
+    <meta name="keywords" content="build,构建,Linux,no webview,spidermonkey,hg,embed spidermonkey,Firefox,ubuntu,spidermonkey embedded in Android APP,JS engine,arm,arm64,x86">
     <meta name="description" content="前言随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的ReactNative，而Cocos2D引擎也实现了JS的版本Cocos2d-JS。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。
 关于J">
 <meta property="og:type" content="article">
@@ -39,7 +39,10 @@
 <meta property="og:image" content="https://i.imgur.com/2GYIHJp.jpg">
 <meta property="og:image" content="https://i.imgur.com/SqjVtPC.jpg">
 <meta property="og:image" content="https://i.imgur.com/qBGsgml.jpg">
-<meta property="og:updated_time" content="2018-04-25T06:55:55.000Z">
+<meta property="og:image" content="https://i.imgur.com/nb6sRYK.jpg">
+<meta property="og:image" content="https://i.imgur.com/aPTjYxD.jpg">
+<meta property="og:image" content="https://i.imgur.com/IfhGD0W.jpg">
+<meta property="og:updated_time" content="2018-04-27T07:10:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建spidermonkey指南">
 <meta name="twitter:description" content="前言随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的ReactNative，而Cocos2D引擎也实现了JS的版本Cocos2d-JS。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。
@@ -221,7 +224,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ubuntu-16-04-LTS系统下构建Firefox-for-Android"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ubuntu 16.04 LTS系统下构建Firefox for Android</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ubuntu-16-04-LTS系统下构建Firefox-for-Android"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ubuntu 16.04 LTS系统下构建Firefox for Android</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ubuntu-16-04-LTS系统下构建spidermonkey的shared-library"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">ubuntu 16.04 LTS系统下构建spidermonkey的shared library</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#附录"><span class="post-toc-number">2.</span> <span class="post-toc-text">附录</span></a></li></ol>
         </nav>
     </aside>
     
@@ -321,6 +324,112 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
 <p>类似效果如下：<br><img src="https://i.imgur.com/qBGsgml.jpg" alt=""><br>也可以直接在手机桌面，点击Firefox的快捷图标，启动浏览器，即可体验试用。</p>
 </li>
 </ol>
+<h2 id="ubuntu-16-04-LTS系统下构建spidermonkey的shared-library"><a href="#ubuntu-16-04-LTS系统下构建spidermonkey的shared-library" class="headerlink" title="ubuntu 16.04 LTS系统下构建spidermonkey的shared library"></a>ubuntu 16.04 LTS系统下构建spidermonkey的shared library</h2><p>前置条件：<br>    1.spidermonkey的源码和Firefox的源码位于是同一个仓库(事实上，Firefox就是内嵌spidermonkey作为JS的执行engine)，因此这里按照“ubuntu 16.04 LTS系统下构建Firefox for Android”的步骤1-4以完成spidermonkey的源码下载。然后安装下面步骤执行：</p>
+<p>实施步骤：</p>
+<ol>
+<li><p>进入源码的js/src子目录(本文示例源码下载存放路径为<code>/usr/local/spidermonkey/mozilla-central</code>)，即<code>/usr/local/spidermonkey/mozilla-central/js/src</code>。依序执行下列命令：</p>
+<blockquote>
+<p>cd /usr/local/spidermonkey/mozilla-central<br>cd js/src<br>autoconf2.13 </p>
+</blockquote>
+<p>   spidermonkey当前强制要求使用autoconf2.13，在python bootstrap.py的过程中会自动安装，如果没有成功安装，请单独选择一个目录，然后按照下面方式手工安装(安装成功之后再从终端回到<code>/usr/local/spidermonkey/mozilla-central/js/src</code>目录)：</p>
+<blockquote>
+<p>wget <a href="http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz" target="_blank" rel="external">http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz</a><br> tar -xvzf autoconf-2.13.tar.gz<br> cd autoconf-2.13/<br> ./configure –program-suffix=2.13<br> make<br> sudo make install<br> cd /usr/local/spidermonkey/mozilla-central/js/src<br> autoconf2.13</p>
+</blockquote>
+<pre><code># This name should end with &quot;_OPT.OBJ&quot; to make the version control system ignore it.如果之前已有上一次构建遗留的build_OPT.OBJ目录，可以先`rm -R build_OPT.OBJ`删除之后再新建，避免多次构建直接缓存干扰
+</code></pre><blockquote>
+<p>rm -R build_OPT.OBJ<br>mkdir build_OPT.OBJ<br>cd build_OPT.OBJ</p>
+</blockquote>
+</li>
+<li><p>先测试构建环境的配置是否OK。通过构建Linux 64位下的库(target system type:x86_64-pc-linux-gnu)来检验:</p>
+</li>
+</ol>
+<ul>
+<li><p>2.1、检查配置</p>
+<blockquote>
+<p>coulsonchen@coulsonchen:/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ$ ../configure</p>
+</blockquote>
+<p>  执行该命令后，可能遇到下面错误(Only GCC 6.1 or newer is supported (found version 5.4.0))：</p>
+  <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">Creating Python environment</span><br><span class="line">New python executable <span class="keyword">in</span> /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python2.<span class="number">7</span></span><br><span class="line">Also creating executable <span class="keyword">in</span> /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br><span class="line">running build_ext</span><br><span class="line">copying build/lib.linux-x86_64-<span class="number">2</span>.<span class="number">7</span>/psutil/_psutil_linux.so -&gt; psutil</span><br><span class="line">copying build/lib.linux-x86_64-<span class="number">2</span>.<span class="number">7</span>/psutil/_psutil_posix.so -&gt; psutil</span><br><span class="line"></span><br><span class="line">Error processing command. Ignoring because optional. (optional:packages.txt:comm/build/virtualenv_packages.txt)</span><br><span class="line">Reexecuting <span class="keyword">in</span> the virtualenv</span><br><span class="line">checking <span class="keyword">for</span> vcs source checkout... hg</span><br><span class="line">checking <span class="keyword">for</span> a shell... /bin/sh</span><br><span class="line">checking <span class="keyword">for</span> host system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> target system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> a shell... /bin/sh</span><br><span class="line">checking <span class="keyword">for</span> host system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> target system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> android platform directory... no</span><br><span class="line">checking <span class="keyword">for</span> android sysroot directory... no</span><br><span class="line">checking <span class="keyword">for</span> android system directory... no</span><br><span class="line">checking <span class="keyword">for</span> the Android toolchain directory... <span class="keyword">not</span> found</span><br><span class="line">checking <span class="keyword">for</span> android platform directory... no</span><br><span class="line">checking <span class="keyword">for</span> android system directory... no</span><br><span class="line">checking <span class="keyword">for</span> android sysroot directory... no</span><br><span class="line">checking <span class="keyword">for</span> the Android toolchain directory... <span class="keyword">not</span> found</span><br><span class="line">checking <span class="keyword">for</span> vcs source checkout... hg</span><br><span class="line">checking whether cross compiling... no</span><br><span class="line">checking <span class="keyword">for</span> the target C compiler... /usr/bin/gcc</span><br><span class="line">checking whether the target C compiler can be used... no</span><br><span class="line"><span class="function">DEBUG: &lt;<span class="title">truncated</span> - <span class="title">see</span> <span class="title">config.log</span> <span class="title">for</span> <span class="title">full</span> <span class="title">output</span>&gt;</span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">Linux</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> <span class="title">_WIN32</span> || <span class="title">__CYGWIN__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">WINNT</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> <span class="title">__NetBSD__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">NetBSD</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> <span class="title">__APPLE__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">Darwin</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">endif</span></span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">if</span> <span class="title">_MSC_VER</span> || <span class="title">__BYTE_ORDER__</span> == <span class="title">__ORDER_LITTLE_ENDIAN__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">ENDIANNESS</span> "<span class="title">little</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> <span class="title">__BYTE_ORDER__</span> == <span class="title">__ORDER_BIG_ENDIAN__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">ENDIANNESS</span> "<span class="title">big</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">endif</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">Executing</span>: `/<span class="title">usr</span>/<span class="title">bin</span>/<span class="title">gcc</span> -<span class="title">std</span>=<span class="title">gnu99</span> -<span class="title">E</span> /<span class="title">tmp</span>/<span class="title">conftest._Zswij.c</span>`</span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">COMPILER</span> = <span class="title">gcc</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">VERSION</span> = 5.4.0</span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">STDC_VERSION</span> = 199901<span class="title">L</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">CPU</span> = <span class="title">x86_64</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">KERNEL</span> = <span class="title">Linux</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">ENDIANNESS</span> = <span class="title">little</span></span><br><span class="line"><span class="title">ERROR</span>: <span class="title">Only</span> <span class="title">GCC</span> 6.1 <span class="title">or</span> <span class="title">newer</span> <span class="title">is</span> <span class="title">supported</span> (<span class="title">found</span> <span class="title">version</span> 5.4.0).</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>这里有两种解决办法：
+- 用clang替代gcc(添加环境变量指定编译使用的编译器为clang，CC=clang CXX=clang++  ../configure，即在./configure前面加上`CC=clang CXX=clang++`)，如下所示：
+    &gt; coulsonchen@coulsonchen:/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ$ CC=clang CXX=clang++  ../configure
+
+        Reexecuting in the virtualenv
+        checking for vcs source checkout... hg
+        checking for a shell... /bin/sh
+        checking for host system type... x86_64-pc-linux-gnu
+        checking for target system type... x86_64-pc-linux-gnu
+        checking for a shell... /bin/sh
+        checking for host system type... x86_64-pc-linux-gnu
+        checking for target system type... x86_64-pc-linux-gnu
+        checking for android platform directory... no
+        checking for android sysroot directory... no
+        checking for android system directory... no
+        checking for the Android toolchain directory... not found
+        checking for android platform directory... no
+        checking for android system directory... no
+        checking for android sysroot directory... no
+        checking for the Android toolchain directory... not found
+        checking for vcs source checkout... hg
+        checking whether cross compiling... no
+        checking for the target C compiler... not found
+        DEBUG: _cc: Trying clang
+        ERROR: Cannot find the target C compiler
+    这里提示找不到clang编译器，那么就通过命令安装即可(`sudo apt-get install clang`)。当然也可以使用Android ndk目录下自带的clang。
+- 更新gcc至6.1之后的版本，请参见[https://blog.csdn.net/gatieme/article/details/52871438](https://blog.csdn.net/gatieme/article/details/52871438)
+</code></pre><ul>
+<li><p>2.2、构建(make)，检查是否构建成功并测试构建出来的可执行程序是否可用。注：依然在目录<code>/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ</code>下执行终端命令：</p>
+<blockquote>
+<p>make</p>
+</blockquote>
+<p>  构建的时间比较长，需要耐心等待。待完成之后，在<code>/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ</code>的子目录<code>/dist/bin</code>下可看到生成了名为js的可执行程序(javascript的交互命令行)，另外也生成了spidermonkey的分享库(shared library)libmozjs-xxx.so(在<code>/dist/bin</code>子目录下，其中xx表示当前源码的版本，如采用Mozilla源码45，那么就是libmozjs-45.so，嵌入其他C++程序使用的时候可以将其改名为libmozjs.so)执行如下命令：</p>
+<blockquote>
+<p>./dist/bin/js ../Y.js</p>
+</blockquote>
+<p>  可看到输出信息“5! is 120”。执行执行<code>./dist/bin/js</code>就进入了javascript的交互命令行，在交互命令行里面可以执行javascript的语句，定义函数等等。和python的交互命令行类似。<br>  <img src="https://i.imgur.com/nb6sRYK.jpg" alt=""></p>
+</li>
+</ul>
+<p><strong>3.</strong>先清除之前的配置缓存<br>如果是重新下载的源码，第一次执行的时候可以不用担心。但多次构建时该步骤一定要引起重视。所以为了保险起见，在构建目录<code>/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ</code>的终端下执行：</p>
+<blockquote>
+<p>rm ./config.cache</p>
+</blockquote>
+<p><strong>4.</strong> 修改构建Android库的配置参数<br>因为这里涉及到交叉编译，即在Linux Host主机上构建target为Android arm(或arm64，或x86)平台的库。这里首先需要弄清楚，配置脚本有哪些参数是可以配置，哪些参数又是针对构建Android平台库时必须设置的呢？</p>
+<p>我们可以通过运行如下命令来检查所有的参数：</p>
+<blockquote>
+<p>../configure –help<br>../configure –help |grep reStr  </p>
+</blockquote>
+<p>其中reStr是需要过滤的字符串，比如要查看Android相关的参数</p>
+<blockquote>
+<p>../configure –help |grep android</p>
+</blockquote>
+<p><img src="https://i.imgur.com/aPTjYxD.jpg" alt=""></p>
+<p>最终配置交叉编译Android arm平台库的参数命令如下(反复尝试，查阅多个文章才得出，这个过程很艰难，稍微多了或者少了某个参数，或者参数错误，都可能导致配置失败，进而也无法进行make构建)： </p>
+<blockquote>
+<p>../configure –with-android-sdk=”/home/coulsonchen/.mozbuild/android-sdk-linux”   –with-android-ndk=”/home/coulsonchen/.mozbuild/android-ndk-r15c” –with-android-version=23  –with-android-toolchain=/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 –target=arm-linux-androideabi</p>
+</blockquote>
+<p>如果是编译Android arm64平台库，则应该修改为：</p>
+<blockquote>
+<p>../configure –with-android-sdk=”/home/coulsonchen/.mozbuild/android-sdk-linux”   –with-android-ndk=”/home/coulsonchen/.mozbuild/android-ndk-r15c” –with-android-version=23  –with-android-toolchain=/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64 –target=aarch64-linux-android</p>
+</blockquote>
+<p>即目标平台target和with-android-toolchain参数需要根据目标平台变化而相应修改。<strong>Android ndk r15c(目前spidermonkey构建采用的ndk版本)</strong>支持的目标平台可去其路径下(<code>/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains</code>)查看：<br><img src="https://i.imgur.com/IfhGD0W.jpg" alt=""></p>
+<p><strong>注意：x86 for Android的名称应该为i386-linux-android</strong></p>
+<p><strong>5.</strong> 完成最终构建(make)</p>
+<blockquote>
+<p>make</p>
+</blockquote>
+<p>构建完成之后，在构建目录()的子<code>dist/bin</code>下，可以找到生成的libmozjs-xxx.so共享库，此时在Android studio中新建支持cpp的工程，把libmozjs-xxx.so copy进去，通过NDK连接，然后就可以实现嵌入spidermonkey engine到Android APP，在APP里面执行javascript的代码了。简单的demo请参见<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/How_to_embed_the_JavaScript_engine" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/How_to_embed_the_JavaScript_engine</a></p>
+<p>如果要生成static库(.a格式)而不是shared库，那么在步骤4中，还应该添加一个参数(–disable-shared-js)，示例：</p>
+<blockquote>
+<p>../configure –with-android-sdk=”/home/coulsonchen/.mozbuild/android-sdk-linux”   –with-android-ndk=”/home/coulsonchen/.mozbuild/android-ndk-r15c” –with-android-version=23  –with-android-toolchain=/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 –target=arm-linux-androideabi –disable-shared-js</p>
+</blockquote>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Build_Documentation" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Build_Documentation</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build</a></li>
+<li><a href="http://mozilla.6506.n7.nabble.com/How-to-build-SpiderMonkey-for-Android-arm64-td333026.html" target="_blank" rel="external">http://mozilla.6506.n7.nabble.com/How-to-build-SpiderMonkey-for-Android-arm64-td333026.html</a></li>
+<li><a href="https://developer.android.com/ndk/downloads/older_releases.html#ndk-15c-downloads" target="_blank" rel="external">https://developer.android.com/ndk/downloads/older_releases.html#ndk-15c-downloads</a></li>
+</ol>
 
         </div>
 
@@ -328,7 +437,7 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-04-25T06:55:55.000Z" itemprop="dateUpdated">2018-04-25 14:55:55</time>
+    post.last_updated<time datetime="2018-04-27T07:10:41.000Z" itemprop="dateUpdated">2018-04-27 15:10:41</time>
 </span><br>
 
 
@@ -351,7 +460,7 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Firefox/">Firefox</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-engine/">JS engine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/embed-spidermonkey/">embed spidermonkey</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hg/">hg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/no-webview/">no webview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spidermonkey/">spidermonkey</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spidermonkey-embedded-in-Android-APP/">spidermonkey embedded in Android APP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/构建/">构建</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Firefox/">Firefox</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-engine/">JS engine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm64/">arm64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/embed-spidermonkey/">embed spidermonkey</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hg/">hg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/no-webview/">no webview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spidermonkey/">spidermonkey</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spidermonkey-embedded-in-Android-APP/">spidermonkey embedded in Android APP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/x86/">x86</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/构建/">构建</a></li></ul>
 
 
             
