@@ -42,7 +42,8 @@
 <meta property="og:image" content="https://i.imgur.com/nb6sRYK.jpg">
 <meta property="og:image" content="https://i.imgur.com/aPTjYxD.jpg">
 <meta property="og:image" content="https://i.imgur.com/IfhGD0W.jpg">
-<meta property="og:updated_time" content="2018-04-27T07:10:41.000Z">
+<meta property="og:image" content="https://i.imgur.com/ybIVtW1.jpg">
+<meta property="og:updated_time" content="2018-05-02T10:16:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建spidermonkey指南">
 <meta name="twitter:description" content="前言随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的ReactNative，而Cocos2D引擎也实现了JS的版本Cocos2d-JS。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。
@@ -419,7 +420,38 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
 <blockquote>
 <p>make</p>
 </blockquote>
-<p>构建完成之后，在构建目录()的子<code>dist/bin</code>下，可以找到生成的libmozjs-xxx.so共享库，此时在Android studio中新建支持cpp的工程，把libmozjs-xxx.so copy进去，通过NDK连接，然后就可以实现嵌入spidermonkey engine到Android APP，在APP里面执行javascript的代码了。简单的demo请参见<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/How_to_embed_the_JavaScript_engine" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/How_to_embed_the_JavaScript_engine</a></p>
+<p><strong>注：在默认情况下，这一步构建会出现异常，且该问题很难找到原因，目前官方也没有给出解答，在网上也几乎找不到类似问题。这里有几个回避的方案：</strong></p>
+<ul>
+<li><strong>异常现象：</strong><br>  执行<code>make</code>之后，构建一段时间，可以在终端看到，因为异常退出了，并没有真正成功构建。异常信息截取如下(其中第一行是整个链接命令)：<pre><code>/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -std=gnu++14 --target=arm-linux-androideabi -Qunused-arguments -isystem /home/coulsonchen/.mozbuild/android-ndk-r15c/platforms/android-23/arch-arm/usr/include -isystem /home/coulsonchen/.mozbuild/android-ndk-r15c/platforms/android-23/arch-arm/usr/include -gcc-toolchain /usr/local/my-android-toolchain -D__ANDROID_API__=23 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -Qunused-arguments -Wall -Wempty-body -Wignored-qualifiers -Woverloaded-virtual -Wpointer-arith -Wsign-compare -Wtype-limits -Wunreachable-code -Wunreachable-code-return -Wwrite-strings -Wno-invalid-offsetof -Wclass-varargs -Wloop-analysis -Wc++1z-compat -Wcomma -Wimplicit-fallthrough -Wstring-conversion -Wno-inline-new-delete -Wno-error=deprecated-declarations -Wno-error=array-bounds -Wformat -Wformat-security -Wno-gnu-zero-variadic-macro-arguments -Wno-unknown-warning-option -Wno-return-type-c-linkage -fno-sized-deallocation -fno-short-enums -fno-exceptions -I/home/coulsonchen/.mozbuild/android-ndk-r15c/sources/cxx-stl/llvm-libc++/include -I/home/coulsonchen/.mozbuild/android-ndk-r15c/sources/android/support/include -I/home/coulsonchen/.mozbuild/android-ndk-r15c/sources/cxx-stl/llvm-libc++abi/include -march=armv7-a -mthumb -mfpu=vfpv3-d16 -mfloat-abi=softfp -mno-unaligned-access -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-rtti -fno-exceptions -fno-math-errno -pipe -g -O3 -funwind-tables  -fPIC -shared -Wl,-z,defs -Wl,-h,libmozjs-61a1.so -o libmozjs-61a1.so /usr/local/gecko-dev/js/src/obj/js/src/build/libmozjs-61a1_so.list  -L/home/coulsonchen/.mozbuild/android-ndk-r15c/platforms/android-23/arch-arm/usr/lib -Wl,-rpath-link=/home/coulsonchen/.mozbuild/android-ndk-r15c/platforms/android-23/arch-arm/usr/lib --sysroot=/home/coulsonchen/.mozbuild/android-ndk-r15c/platforms/android-23/arch-arm -Wl,--allow-shlib-undefined -gcc-toolchain /usr/local/my-android-toolchain -mthumb -Wl,-z,noexecstack -Wl,-z,text -Wl,-z,relro -Wl,--build-id -B /usr/local/gecko-dev/js/src/obj/build/unix/gold -Wl,-rpath-link,/usr/local/gecko-dev/js/src/obj/dist/bin -Wl,-rpath-link,/usr/local/lib     ../../../mozglue/build/libmozglue.so   -lm  -lz -llog -lm -ldl -L/home/coulsonchen/.mozbuild/android-ndk-r15c/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a -lc++_static -lc++abi -lunwind -landroid_support
+../../../build/unix/gold/ld: error: hidden symbol &apos;__android_log_print&apos; is not defined locally
+../../../build/unix/gold/ld: error: hidden symbol &apos;__android_log_print&apos; is not defined locally
+../../../build/unix/gold/ld: error: hidden symbol &apos;__android_log_print&apos; is not defined locally
+../../../build/unix/gold/ld: error: hidden symbol &apos;__android_log_print&apos; is not defined locally
+../../../build/unix/gold/ld: error: hidden symbol &apos;__android_log_print&apos; is not defined locally
+../../../build/unix/gold/ld: error: hidden symbol &apos;__android_log_print&apos; is not defined locally
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+/usr/local/spidermonkey/mozilla-central/config/rules.mk:699: recipe for target &apos;libmozjs-60a1.so&apos; failed
+make[3]: *** [libmozjs-60a1.so] Error 1
+make[3]: Leaving directory &apos;/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/js/src/build&apos;
+/usr/local/spidermonkey/mozilla-central/config/recurse.mk:73: recipe for target &apos;js/src/build/target&apos; failed
+make[2]: *** [js/src/build/target] Error 2
+make[2]: Leaving directory &apos;/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ&apos;
+/usr/local/spidermonkey/mozilla-central/config/recurse.mk:32: recipe for target &apos;compile&apos; failed
+make[1]: *** [compile] Error 2
+make[1]: Leaving directory &apos;/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ&apos;
+/usr/local/spidermonkey/mozilla-central/config/rules.mk:434: recipe for target &apos;default&apos; failed
+make: *** [default] Error 2
+</code></pre></li>
+<li>问题分析：<br>  根据报错信息，可以看出是在链接生成<code>libmozjs-60a1.so</code>(60a1是源码的版本号，版本是xx，那么应该对应libmozjs-xx.so)的时候出错，且都是<code>error: hidden symbol &#39;__android_log_print&#39; is not defined locally</code>错误，我们知道<code>__android_log_print</code>是Android的log库里面提供的日志打印方法。但查询ndk的目录，log库和工具类设置都是正常的，也能找到相关的头文件。且这个错误的信息对于不熟悉C++的人来说，简直一头雾水，在网上查询也几乎找不到像样的解释(Stack Overflow上<a href="https://stackoverflow.com/questions/23696585/what-does-exactly-the-warning-mean-about-hidden-symbol-being-referenced-by-dso" target="_blank" rel="external">有一篇帖子</a>对hidden symbol的问题做了较好的解释，比较有启发性，这里不做具体阐述)。</li>
+<li><p>解决(回避)的方案：</p>
+<ol>
+<li>既然，是引用Android log库的<code>__android_log_print</code>方法，那我们直接注释掉相关引用，绕过去，不就可以解决该问题吗。初步想来，该方法是可行的，因为日志打印只是辅助调试，对功能使用不影响。那么首先需要找出spidermonkey源码里面引用到<code>__android_log_print</code>的地方。这里可以直接利用工具在源码目录下面搜索，也可以通过在终端copy上面提到的链接命令，将其中的<code>-llog</code>去掉(也就是不再链接Android的log库)，然后执行该链接命令，可以看到有类似下图的报错(注意，图中源码存放路径和本文的源码存放路径不同)：<br><img src="https://i.imgur.com/ybIVtW1.jpg" alt=""><br>这说明，去掉链接log库之后，由于<code>__android_log_print</code>未定义，所以肯定报错<code>undefined reference to __android_log_print</code>，但是这给我们提供了信息，即spidermonkey的哪些源码文件引用了<code>__android_log_print</code>，直接找到这些地方，将其注释掉(目前发现在两个文件中存在引用<code>__android_log_print</code>，一是<code>/usr/local/spidermonkey/mozilla-central/js/src/vm/JSContext.cpp</code>，二是构建目录下头文件<code>/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/dist/include/mozilla/Assertions.h</code>，其实是链接到<code>/usr/local/spidermonkey/mozilla-central/mfbt/Assertions.h</code>)。注释掉这些地方之后，再次执行make，应该就可以成功了(最终会生成交互命令行的可执行程序<code>js</code>和<code>libmozjs-xx.so</code>分享库)。</li>
+<li>上面提到Stack Overflow上<a href="https://stackoverflow.com/questions/23696585/what-does-exactly-the-warning-mean-about-hidden-symbol-being-referenced-by-dso" target="_blank" rel="external">这篇帖子</a>解释了hidden symbol的问题，主要是与分享库有关，那么我们是不是可以生成static library来绕过这个问题呢，生成静态库只需要在配置命令加一个参数即可，请参见下面章节的描述。不过这种方法，暂无验证是否有效。</li>
+<li>直接从make构建的异常信息入手，找到相关的Makefile文件及其引用的.mk文件，找到链接生成libmozjs-xx.so的命令所在处(mk文件内的具体行)，弄清楚其中的逻辑，然后修改Makefile文件，再次执行make构建即可。不过这个方法非常费事，对C++和make构建不熟悉的话难度非常大，不建议采用。</li>
+</ol>
+</li>
+</ul>
+<p>构建完成之后，在构建目录(<code>/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ</code>)下(或在其子目录<code>dist/bin</code>和<code>js/src/build</code>下，<code>dist/bin</code>下其实是一个链接文件，最终链接到<code>js/src/build</code>下的libmozjs-xxx.so)，可以找到生成的libmozjs-xxx.so共享库，此时在Android studio中新建支持cpp的工程，把libmozjs-xxx.so和spidermonkey的相关头文件(位于<code>/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/dist/include</code>，其实最终链接到源码目录即<code>/usr/local/spidermonkey/mozilla-central/js/src</code>下的头文件，这些头文件不一定全部复制，可根据实际需要选取要引用到的) copy进去，通过NDK连接，然后就可以实现嵌入spidermonkey engine到Android APP，在APP里面执行javascript的代码了。简单的demo请参见<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/How_to_embed_the_JavaScript_engine" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/How_to_embed_the_JavaScript_engine</a></p>
 <p>如果要生成static库(.a格式)而不是shared库，那么在步骤4中，还应该添加一个参数(–disable-shared-js)，示例：</p>
 <blockquote>
 <p>../configure –with-android-sdk=”/home/coulsonchen/.mozbuild/android-sdk-linux”   –with-android-ndk=”/home/coulsonchen/.mozbuild/android-ndk-r15c” –with-android-version=23  –with-android-toolchain=/home/coulsonchen/.mozbuild/android-ndk-r15c/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64 –target=arm-linux-androideabi –disable-shared-js</p>
@@ -437,7 +469,7 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-04-27T07:10:41.000Z" itemprop="dateUpdated">2018-04-27 15:10:41</time>
+    post.last_updated<time datetime="2018-05-02T10:16:00.000Z" itemprop="dateUpdated">2018-05-02 18:16:00</time>
 </span><br>
 
 
