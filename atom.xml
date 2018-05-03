@@ -33,7 +33,7 @@
 &lt;li&gt;该引擎的官方文档是否齐全，API是否清晰好用，是否处于活跃开发阶段，开发社区的支持是否足够&lt;/li&gt;
 &lt;li&gt;多平台的支持性，比如v8只支持JIT编译，而IOS是限制第三方JS engine使用JIT的。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;关于v8引擎的构建，请参考&lt;a href=&quot;http://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/&quot;&gt;构建v8 engine指南&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;关于v8引擎的构建，请参考&lt;a href=&quot;https://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/&quot;&gt;构建v8 engine指南&lt;/a&gt;。&lt;/p&gt;
 &lt;h2 id=&quot;ubuntu-16-04-LTS系统下构建Firefox-for-Android&quot;&gt;&lt;a href=&quot;#ubuntu-16-04-LTS系统下构建Firefox-for-Android&quot; class=&quot;headerlink&quot; title=&quot;ubuntu 16.04 LTS系统下构建Firefox for Android&quot;&gt;&lt;/a&gt;ubuntu 16.04 LTS系统下构建Firefox for Android&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;前提条件：&lt;/strong&gt;&lt;br&gt;    Hardware requirements&lt;br&gt;        2G RAM with lots of available swap space. Additional RAM will significantly decrease build time.&lt;br&gt;        For debug builds: at least 8 GB free disk space&lt;br&gt;        For optimized builds: at least 1 GB free disk space (6 GB recommended)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;注意：实际上，构建很消耗资源，所以建议RAM 8G以上，磁盘空间剩余30G以上。另外网络带宽要比较高，国内的话，最好使用VPN&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Mozilla官方也有构建指南，不过其中有些不是很清楚，官方文档请参见&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_for_Android_build&lt;/a&gt;&lt;/p&gt;
@@ -286,7 +286,7 @@ make: *** [default] Error 2
     <updated>2018-04-23T01:33:56.000Z</updated>
     
     <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;Android-APP-embed-v8的错误汇总&quot;&gt;&lt;a href=&quot;#Android-APP-embed-v8的错误汇总&quot; class=&quot;headerlink&quot; title=&quot;Android APP embed v8的错误汇总&quot;&gt;&lt;/a&gt;Android APP embed v8的错误汇总&lt;/h1&gt;&lt;p&gt;Android APP embed v8的过程(请参见&lt;a href=&quot;http://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/&quot;&gt;编译和嵌入v8至Android APP&lt;/a&gt;)，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：&lt;/p&gt;
+&lt;h1 id=&quot;Android-APP-embed-v8的错误汇总&quot;&gt;&lt;a href=&quot;#Android-APP-embed-v8的错误汇总&quot; class=&quot;headerlink&quot; title=&quot;Android APP embed v8的错误汇总&quot;&gt;&lt;/a&gt;Android APP embed v8的错误汇总&lt;/h1&gt;&lt;p&gt;Android APP embed v8的过程(请参见&lt;a href=&quot;https://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/&quot;&gt;编译和嵌入v8至Android APP&lt;/a&gt;)，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;在Ubuntu 16.04系统下，编译v8的时候，环境的配置、各种参数的设置问题，这最终会影响到生成的库(分static library和shared library两种情形)是否正确。这里定义叫编译v8库的问题。&lt;/li&gt;
 &lt;li&gt;利用Android studio将生成的v8的静态库或者分享库通过NDK嵌入到Android APP时候的各种编译错误或者参数配置问题。此类问题定义为embed v8 in Android APP问题。&lt;/li&gt;
@@ -382,7 +382,7 @@ ninja: build stopped: subcommand failed.
 &lt;/ol&gt;
 &lt;p&gt;基于性能和平台适配考虑，最终选择v8作为Android平台的嵌入JS引擎，而JavaScriptCore作为IOS平台的嵌入引擎。本文主要讲解，如果从v8的源码构建出Android平台的嵌入库，然后通过Android NDK开发，进而实现在Android APP(非Hybrid应用，即不会通过Webview来运行JS代码)中运行JS代码，JS与C/C++、Lua互调。&lt;/p&gt;
 &lt;h1 id=&quot;平台和环境的选择&quot;&gt;&lt;a href=&quot;#平台和环境的选择&quot; class=&quot;headerlink&quot; title=&quot;平台和环境的选择&quot;&gt;&lt;/a&gt;平台和环境的选择&lt;/h1&gt;&lt;p&gt;如果有过大型开源C++项目编译的经验，就知道，选择开发系统和环境是非常重要的，一般而言，在Windows下编译真的是非常艰难。所以文本先以Linux系统(这里选择Ubuntu)为例，讲解如何构建出适用于Android ARM架构的JS引擎嵌入静态库。再讲解Windows平台下的编译构建。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;注：v8的构建真的是非常复杂和繁琐的过程，各种坑，各种层出不穷的问题。另外一篇文章&lt;a href=&quot;http://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/&quot;&gt;编译及嵌入v8遇到的错误汇总&lt;/a&gt;详细记录了学习v8构建过程中遇到的一些问题，以及分析和解决途径、链接等，以供探讨。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注：v8的构建真的是非常复杂和繁琐的过程，各种坑，各种层出不穷的问题。另外一篇文章&lt;a href=&quot;https://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/&quot;&gt;编译及嵌入v8遇到的错误汇总&lt;/a&gt;详细记录了学习v8构建过程中遇到的一些问题，以及分析和解决途径、链接等，以供探讨。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a name=&quot;anchor1&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件&quot;&gt;&lt;a href=&quot;#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件&quot; class=&quot;headerlink&quot; title=&quot;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&quot;&gt;&lt;/a&gt;Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)&lt;/h2&gt;&lt;p&gt;v8项目在Github的官方镜像地址为&lt;a href=&quot;https://github.com/v8/v8&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/v8/v8&lt;/a&gt;。而其官方的&lt;a href=&quot;https://github.com/v8/v8/wiki&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;wiki文档&lt;/a&gt;也在这个仓库中。但是如果直接按照这个wiki去构建，失败几乎是不可避免。因为wiki的步骤非常简化(当然先总体阅览一下wiki还是大有必要，而且当回过头来对照的时候将会发现”原来是这样，Soga^_^”)，有些关键的环境配置和要点被省略掉，所以如果不跳过这些坑，将浪费大量的时间，甚至有很严重的挫败感。本文的目的就是为了对v8的构建做一个记录，总结遇到的问题，便于以后查阅，也为他人提供一个便捷的指引。&lt;/p&gt;
 &lt;p&gt;这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Linux/Mac x64。&lt;/p&gt;
@@ -2962,7 +2962,7 @@ canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2
     <published>2016-06-13T07:41:13.000Z</published>
     <updated>2017-10-11T11:34:42.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;Eclipse动态调试指南&quot;&gt;&lt;a href=&quot;#Eclipse动态调试指南&quot; class=&quot;headerlink&quot; title=&quot;Eclipse动态调试指南&quot;&gt;&lt;/a&gt;Eclipse动态调试指南&lt;/h1&gt;&lt;p&gt;本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，请参见&lt;a href=&quot;http://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot; title=&quot;Android studio动态调试指南&quot;&gt;Android studio动态调试指南&lt;/a&gt;），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;Eclipse动态调试指南&quot;&gt;&lt;a href=&quot;#Eclipse动态调试指南&quot; class=&quot;headerlink&quot; title=&quot;Eclipse动态调试指南&quot;&gt;&lt;/a&gt;Eclipse动态调试指南&lt;/h1&gt;&lt;p&gt;本文对Eclipse进行动态调试做一个全面的讲解（动态调试还可以采用Android studio、netbeans等工具，请参见&lt;a href=&quot;https://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot; title=&quot;Android studio动态调试指南&quot;&gt;Android studio动态调试指南&lt;/a&gt;），旨在为广大只有apk而没有源代码的程序猿提供排查bug的另辟蹊径。&lt;/p&gt;
 &lt;h1 id=&quot;操作步骤&quot;&gt;&lt;a href=&quot;#操作步骤&quot; class=&quot;headerlink&quot; title=&quot;操作步骤&quot;&gt;&lt;/a&gt;操作步骤&lt;/h1&gt;&lt;h2 id=&quot;1-反编译&quot;&gt;&lt;a href=&quot;#1-反编译&quot; class=&quot;headerlink&quot; title=&quot;1.反编译&quot;&gt;&lt;/a&gt;1.反编译&lt;/h2&gt;&lt;p&gt;对目标apk使用apktool反编译出可调试的smali代码到out文件夹，目前apktool最新的版本是2.0.1。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;e.g. java -jar apktool_2.0.1.jar d -d target.apk -o out
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意:-d参数是必须的，因为这样反编译出来的代码后缀均是java，因为只有java文件才能被eclipse/netbeans识别调试。&lt;/p&gt;
@@ -5243,7 +5243,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     <published>2016-06-13T07:25:56.000Z</published>
     <updated>2017-10-17T07:42:06.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h1&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging(&lt;strong&gt;早期Android开发采用Eclipse ADT，其动态调试请参见&lt;a href=&quot;http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot; title=&quot;Eclipse动态调试&quot;&gt;Eclipse动态调试&lt;/a&gt;，可以作为本文的步骤参考&lt;/strong&gt;)，而Smali Debugging基于开源的Android反编译工具apktool。&lt;strong&gt;请注意：&lt;/strong&gt;&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;Android-studio动态调试&quot;&gt;&lt;a href=&quot;#Android-studio动态调试&quot; class=&quot;headerlink&quot; title=&quot;Android studio动态调试&quot;&gt;&lt;/a&gt;Android studio动态调试&lt;/h1&gt;&lt;p&gt;Android studio动态调试实际上是基于Smali Debugging(&lt;strong&gt;早期Android开发采用Eclipse ADT，其动态调试请参见&lt;a href=&quot;https://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot; title=&quot;Eclipse动态调试&quot;&gt;Eclipse动态调试&lt;/a&gt;，可以作为本文的步骤参考&lt;/strong&gt;)，而Smali Debugging基于开源的Android反编译工具apktool。&lt;strong&gt;请注意：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，&lt;a href=&quot;#anchor&quot;&gt;请参见章节2&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Apktool makes possible to debug smali code step by step, watch variables, set breakpoints, etc.&lt;/p&gt;
@@ -5294,7 +5294,7 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Sign, install and run new apk(对debug.apk签名(建议采用&lt;a href=&quot;/Android逆向助手_v2.2.zip&quot;&gt;安卓逆向助手&lt;/a&gt; )，生成debug_sign.apk，然后安装debug_sign.apk至手机并&lt;strong&gt;启动运行&lt;/strong&gt;该apk).&lt;br&gt; 当然也可以直接采用JDK里面的签名工具通过命令行手动进行签名，比如：&lt;br&gt; &lt;code&gt;&amp;quot;jarsigner&amp;quot; -keystore &amp;quot;C:\Users\CoulsonChen\Desktop\kop.keystore&amp;quot; -storepass &amp;quot;kop1122334&amp;quot; -keypass &amp;quot;kop1122334&amp;quot; &amp;quot;D:\t\125.apk&amp;quot; &amp;quot;kop&amp;quot; -sigalg SHA1withRSA -digestalg SHA1&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Follow sub-instructions below depending on IDE(参见下面Android studio的后续子步骤，同时可参考&lt;a href=&quot;http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot;&gt;Eclipse 动态调试指南的7-10步&lt;/a&gt;).&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Follow sub-instructions below depending on IDE(参见下面Android studio的后续子步骤，同时可参考&lt;a href=&quot;https://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/&quot;&gt;Eclipse 动态调试指南的7-10步&lt;/a&gt;).&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&quot;IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤&quot;&gt;&lt;a href=&quot;#IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤&quot; class=&quot;headerlink&quot; title=&quot;IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)&quot;&gt;&lt;/a&gt;IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;注意：在完成上述的一般性步骤之后，再进行这里的子步骤。&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;

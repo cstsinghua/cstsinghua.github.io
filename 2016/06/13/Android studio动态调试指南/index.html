@@ -252,7 +252,7 @@ SmaliDebugging has been marked as depr">
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="Android-studio动态调试"><a href="#Android-studio动态调试" class="headerlink" title="Android studio动态调试"></a>Android studio动态调试</h1><p>Android studio动态调试实际上是基于Smali Debugging(<strong>早期Android开发采用Eclipse ADT，其动态调试请参见<a href="http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/" title="Eclipse动态调试">Eclipse动态调试</a>，可以作为本文的步骤参考</strong>)，而Smali Debugging基于开源的Android反编译工具apktool。<strong>请注意：</strong></p>
+            <h1 id="Android-studio动态调试"><a href="#Android-studio动态调试" class="headerlink" title="Android studio动态调试"></a>Android studio动态调试</h1><p>Android studio动态调试实际上是基于Smali Debugging(<strong>早期Android开发采用Eclipse ADT，其动态调试请参见<a href="https://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/" title="Eclipse动态调试">Eclipse动态调试</a>，可以作为本文的步骤参考</strong>)，而Smali Debugging基于开源的Android反编译工具apktool。<strong>请注意：</strong></p>
 <p><strong>SmaliDebugging has been marked as deprecated in 2.0.3, and will be removed in 2.1. Alternative tool(s) will be linked on 2.1 release.</strong> </p>
 <p>因此，apktool 2.0.3及其之前版本，可以直接使用apktool工具来实现动态调试；而采用apktool 2.1.0及其之后版本，需要采用独立出来的工具来调试，<a href="#anchor">请参见章节2</a></p>
 <p>Apktool makes possible to debug smali code step by step, watch variables, set breakpoints, etc.</p>
@@ -303,7 +303,7 @@ SmaliDebugging has been marked as depr">
 </li>
 <li><p>Sign, install and run new apk(对debug.apk签名(建议采用<a href="/Android逆向助手_v2.2.zip">安卓逆向助手</a> )，生成debug_sign.apk，然后安装debug_sign.apk至手机并<strong>启动运行</strong>该apk).<br> 当然也可以直接采用JDK里面的签名工具通过命令行手动进行签名，比如：<br> <code>&quot;jarsigner&quot; -keystore &quot;C:\Users\CoulsonChen\Desktop\kop.keystore&quot; -storepass &quot;kop1122334&quot; -keypass &quot;kop1122334&quot; &quot;D:\t\125.apk&quot; &quot;kop&quot; -sigalg SHA1withRSA -digestalg SHA1</code></p>
 </li>
-<li><strong>Follow sub-instructions below depending on IDE(参见下面Android studio的后续子步骤，同时可参考<a href="http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/">Eclipse 动态调试指南的7-10步</a>).</strong></li>
+<li><strong>Follow sub-instructions below depending on IDE(参见下面Android studio的后续子步骤，同时可参考<a href="https://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/">Eclipse 动态调试指南的7-10步</a>).</strong></li>
 </ol>
 <h3 id="IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤"><a href="#IntelliJ-Android-Studio-instructions-针对Android-studio的后续操作步骤" class="headerlink" title="IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)"></a>IntelliJ (Android Studio) instructions(针对Android studio的后续操作步骤)</h3><p><strong>注意：在完成上述的一般性步骤之后，再进行这里的子步骤。</strong></p>
 <ol>

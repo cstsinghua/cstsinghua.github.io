@@ -255,7 +255,7 @@
 </ol>
 <p>基于性能和平台适配考虑，最终选择v8作为Android平台的嵌入JS引擎，而JavaScriptCore作为IOS平台的嵌入引擎。本文主要讲解，如果从v8的源码构建出Android平台的嵌入库，然后通过Android NDK开发，进而实现在Android APP(非Hybrid应用，即不会通过Webview来运行JS代码)中运行JS代码，JS与C/C++、Lua互调。</p>
 <h1 id="平台和环境的选择"><a href="#平台和环境的选择" class="headerlink" title="平台和环境的选择"></a>平台和环境的选择</h1><p>如果有过大型开源C++项目编译的经验，就知道，选择开发系统和环境是非常重要的，一般而言，在Windows下编译真的是非常艰难。所以文本先以Linux系统(这里选择Ubuntu)为例，讲解如何构建出适用于Android ARM架构的JS引擎嵌入静态库。再讲解Windows平台下的编译构建。</p>
-<p><strong>注：v8的构建真的是非常复杂和繁琐的过程，各种坑，各种层出不穷的问题。另外一篇文章<a href="http://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/">编译及嵌入v8遇到的错误汇总</a>详细记录了学习v8构建过程中遇到的一些问题，以及分析和解决途径、链接等，以供探讨。</strong></p>
+<p><strong>注：v8的构建真的是非常复杂和繁琐的过程，各种坑，各种层出不穷的问题。另外一篇文章<a href="https://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/">编译及嵌入v8遇到的错误汇总</a>详细记录了学习v8构建过程中遇到的一些问题，以及分析和解决途径、链接等，以供探讨。</strong></p>
 <p><a name="anchor1"></a></p>
 <h2 id="Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件"><a href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件" class="headerlink" title="Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)"></a>Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</h2><p>v8项目在Github的官方镜像地址为<a href="https://github.com/v8/v8" target="_blank" rel="external">https://github.com/v8/v8</a>。而其官方的<a href="https://github.com/v8/v8/wiki" target="_blank" rel="external">wiki文档</a>也在这个仓库中。但是如果直接按照这个wiki去构建，失败几乎是不可避免。因为wiki的步骤非常简化(当然先总体阅览一下wiki还是大有必要，而且当回过头来对照的时候将会发现”原来是这样，Soga^_^”)，有些关键的环境配置和要点被省略掉，所以如果不跳过这些坑，将浪费大量的时间，甚至有很严重的挫败感。本文的目的就是为了对v8的构建做一个记录，总结遇到的问题，便于以后查阅，也为他人提供一个便捷的指引。</p>
 <p>这里，构建主机(Host)是Ubuntu 16.04系统，而目标平台(Target)是Linux/Mac x64。</p>
