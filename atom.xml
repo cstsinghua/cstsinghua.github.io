@@ -4,9 +4,9 @@
   <subtitle>做一个非典型程序员</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://cstsinghua.github.io/"/>
+  <link href="https://cstsinghua.github.io/"/>
   <updated>2018-05-02T10:16:00.000Z</updated>
-  <id>http://cstsinghua.github.io/</id>
+  <id>https://cstsinghua.github.io/</id>
   
   <author>
     <name>Cstsinghua</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>构建spidermonkey指南</title>
-    <link href="http://cstsinghua.github.io/2018/04/25/%E6%9E%84%E5%BB%BAspidermonkey%E6%8C%87%E5%8D%97/"/>
-    <id>http://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/</id>
+    <link href="https://cstsinghua.github.io/2018/04/25/%E6%9E%84%E5%BB%BAspidermonkey%E6%8C%87%E5%8D%97/"/>
+    <id>https://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/</id>
     <published>2018-04-25T06:55:51.000Z</published>
     <updated>2018-05-02T10:16:00.000Z</updated>
     
@@ -243,45 +243,45 @@ make: *** [default] Error 2
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+      <category term="tools" scheme="https://cstsinghua.github.io/categories/Android/tools/"/>
     
     
-      <category term="build" scheme="http://cstsinghua.github.io/tags/build/"/>
+      <category term="build" scheme="https://cstsinghua.github.io/tags/build/"/>
     
-      <category term="构建" scheme="http://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+      <category term="构建" scheme="https://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
-      <category term="Linux" scheme="http://cstsinghua.github.io/tags/Linux/"/>
+      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
     
-      <category term="no webview" scheme="http://cstsinghua.github.io/tags/no-webview/"/>
+      <category term="no webview" scheme="https://cstsinghua.github.io/tags/no-webview/"/>
     
-      <category term="spidermonkey" scheme="http://cstsinghua.github.io/tags/spidermonkey/"/>
+      <category term="spidermonkey" scheme="https://cstsinghua.github.io/tags/spidermonkey/"/>
     
-      <category term="hg" scheme="http://cstsinghua.github.io/tags/hg/"/>
+      <category term="hg" scheme="https://cstsinghua.github.io/tags/hg/"/>
     
-      <category term="embed spidermonkey" scheme="http://cstsinghua.github.io/tags/embed-spidermonkey/"/>
+      <category term="embed spidermonkey" scheme="https://cstsinghua.github.io/tags/embed-spidermonkey/"/>
     
-      <category term="Firefox" scheme="http://cstsinghua.github.io/tags/Firefox/"/>
+      <category term="Firefox" scheme="https://cstsinghua.github.io/tags/Firefox/"/>
     
-      <category term="ubuntu" scheme="http://cstsinghua.github.io/tags/ubuntu/"/>
+      <category term="ubuntu" scheme="https://cstsinghua.github.io/tags/ubuntu/"/>
     
-      <category term="spidermonkey embedded in Android APP" scheme="http://cstsinghua.github.io/tags/spidermonkey-embedded-in-Android-APP/"/>
+      <category term="spidermonkey embedded in Android APP" scheme="https://cstsinghua.github.io/tags/spidermonkey-embedded-in-Android-APP/"/>
     
-      <category term="JS engine" scheme="http://cstsinghua.github.io/tags/JS-engine/"/>
+      <category term="JS engine" scheme="https://cstsinghua.github.io/tags/JS-engine/"/>
     
-      <category term="arm" scheme="http://cstsinghua.github.io/tags/arm/"/>
+      <category term="arm" scheme="https://cstsinghua.github.io/tags/arm/"/>
     
-      <category term="arm64" scheme="http://cstsinghua.github.io/tags/arm64/"/>
+      <category term="arm64" scheme="https://cstsinghua.github.io/tags/arm64/"/>
     
-      <category term="x86" scheme="http://cstsinghua.github.io/tags/x86/"/>
+      <category term="x86" scheme="https://cstsinghua.github.io/tags/x86/"/>
     
   </entry>
   
   <entry>
     <title>编译及嵌入v8遇到的错误汇总</title>
-    <link href="http://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/"/>
-    <id>http://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/</id>
+    <link href="https://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/"/>
+    <id>https://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/</id>
     <published>2018-04-13T07:14:56.000Z</published>
     <updated>2018-04-23T01:33:56.000Z</updated>
     
@@ -337,39 +337,39 @@ ninja: build stopped: subcommand failed.
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+      <category term="tools" scheme="https://cstsinghua.github.io/categories/Android/tools/"/>
     
     
-      <category term="build" scheme="http://cstsinghua.github.io/tags/build/"/>
+      <category term="build" scheme="https://cstsinghua.github.io/tags/build/"/>
     
-      <category term="V8" scheme="http://cstsinghua.github.io/tags/V8/"/>
+      <category term="V8" scheme="https://cstsinghua.github.io/tags/V8/"/>
     
-      <category term="depot_tools" scheme="http://cstsinghua.github.io/tags/depot-tools/"/>
+      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
     
-      <category term="Linux" scheme="http://cstsinghua.github.io/tags/Linux/"/>
+      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
     
-      <category term="v8 embedded in Android APP" scheme="http://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
+      <category term="v8 embedded in Android APP" scheme="https://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
     
-      <category term="embed v8" scheme="http://cstsinghua.github.io/tags/embed-v8/"/>
+      <category term="embed v8" scheme="https://cstsinghua.github.io/tags/embed-v8/"/>
     
-      <category term="编译" scheme="http://cstsinghua.github.io/tags/%E7%BC%96%E8%AF%91/"/>
+      <category term="编译" scheme="https://cstsinghua.github.io/tags/%E7%BC%96%E8%AF%91/"/>
     
-      <category term="嵌入" scheme="http://cstsinghua.github.io/tags/%E5%B5%8C%E5%85%A5/"/>
+      <category term="嵌入" scheme="https://cstsinghua.github.io/tags/%E5%B5%8C%E5%85%A5/"/>
     
-      <category term="错误" scheme="http://cstsinghua.github.io/tags/%E9%94%99%E8%AF%AF/"/>
+      <category term="错误" scheme="https://cstsinghua.github.io/tags/%E9%94%99%E8%AF%AF/"/>
     
-      <category term="问题" scheme="http://cstsinghua.github.io/tags/%E9%97%AE%E9%A2%98/"/>
+      <category term="问题" scheme="https://cstsinghua.github.io/tags/%E9%97%AE%E9%A2%98/"/>
     
-      <category term="汇总" scheme="http://cstsinghua.github.io/tags/%E6%B1%87%E6%80%BB/"/>
+      <category term="汇总" scheme="https://cstsinghua.github.io/tags/%E6%B1%87%E6%80%BB/"/>
     
   </entry>
   
   <entry>
     <title>构建v8 engine指南</title>
-    <link href="http://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/"/>
-    <id>http://cstsinghua.github.io/2018/04/04/构建v8 engine指南/</id>
+    <link href="https://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/"/>
+    <id>https://cstsinghua.github.io/2018/04/04/构建v8 engine指南/</id>
     <published>2018-04-04T10:16:35.000Z</published>
     <updated>2018-04-18T06:34:44.000Z</updated>
     
@@ -568,39 +568,39 @@ x64.release
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+      <category term="tools" scheme="https://cstsinghua.github.io/categories/Android/tools/"/>
     
     
-      <category term="build" scheme="http://cstsinghua.github.io/tags/build/"/>
+      <category term="build" scheme="https://cstsinghua.github.io/tags/build/"/>
     
-      <category term="V8" scheme="http://cstsinghua.github.io/tags/V8/"/>
+      <category term="V8" scheme="https://cstsinghua.github.io/tags/V8/"/>
     
-      <category term="构建" scheme="http://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+      <category term="构建" scheme="https://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
-      <category term="GN" scheme="http://cstsinghua.github.io/tags/GN/"/>
+      <category term="GN" scheme="https://cstsinghua.github.io/tags/GN/"/>
     
-      <category term="depot_tools" scheme="http://cstsinghua.github.io/tags/depot-tools/"/>
+      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
     
-      <category term="Linux" scheme="http://cstsinghua.github.io/tags/Linux/"/>
+      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
     
-      <category term="VS" scheme="http://cstsinghua.github.io/tags/VS/"/>
+      <category term="VS" scheme="https://cstsinghua.github.io/tags/VS/"/>
     
-      <category term="v8 embedded in Android APP" scheme="http://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
+      <category term="v8 embedded in Android APP" scheme="https://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
     
-      <category term="no webview" scheme="http://cstsinghua.github.io/tags/no-webview/"/>
+      <category term="no webview" scheme="https://cstsinghua.github.io/tags/no-webview/"/>
     
-      <category term="JS" scheme="http://cstsinghua.github.io/tags/JS/"/>
+      <category term="JS" scheme="https://cstsinghua.github.io/tags/JS/"/>
     
-      <category term="embed v8" scheme="http://cstsinghua.github.io/tags/embed-v8/"/>
+      <category term="embed v8" scheme="https://cstsinghua.github.io/tags/embed-v8/"/>
     
   </entry>
   
   <entry>
     <title>Android屏幕方向</title>
-    <link href="http://cstsinghua.github.io/2018/03/26/Android%E5%B1%8F%E5%B9%95%E6%96%B9%E5%90%91/"/>
-    <id>http://cstsinghua.github.io/2018/03/26/Android屏幕方向/</id>
+    <link href="https://cstsinghua.github.io/2018/03/26/Android%E5%B1%8F%E5%B9%95%E6%96%B9%E5%90%91/"/>
+    <id>https://cstsinghua.github.io/2018/03/26/Android屏幕方向/</id>
     <published>2018-03-26T06:45:05.000Z</published>
     <updated>2018-03-26T06:45:08.000Z</updated>
     
@@ -628,31 +628,31 @@ x64.release
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+      <category term="tools" scheme="https://cstsinghua.github.io/categories/Android/tools/"/>
     
     
-      <category term="screen orientation" scheme="http://cstsinghua.github.io/tags/screen-orientation/"/>
+      <category term="screen orientation" scheme="https://cstsinghua.github.io/tags/screen-orientation/"/>
     
-      <category term="landscape" scheme="http://cstsinghua.github.io/tags/landscape/"/>
+      <category term="landscape" scheme="https://cstsinghua.github.io/tags/landscape/"/>
     
-      <category term="portrait" scheme="http://cstsinghua.github.io/tags/portrait/"/>
+      <category term="portrait" scheme="https://cstsinghua.github.io/tags/portrait/"/>
     
-      <category term="reverseLandscape" scheme="http://cstsinghua.github.io/tags/reverseLandscape/"/>
+      <category term="reverseLandscape" scheme="https://cstsinghua.github.io/tags/reverseLandscape/"/>
     
-      <category term="reversePortrai" scheme="http://cstsinghua.github.io/tags/reversePortrai/"/>
+      <category term="reversePortrai" scheme="https://cstsinghua.github.io/tags/reversePortrai/"/>
     
-      <category term="Sensor" scheme="http://cstsinghua.github.io/tags/Sensor/"/>
+      <category term="Sensor" scheme="https://cstsinghua.github.io/tags/Sensor/"/>
     
-      <category term="屏幕方向" scheme="http://cstsinghua.github.io/tags/%E5%B1%8F%E5%B9%95%E6%96%B9%E5%90%91/"/>
+      <category term="屏幕方向" scheme="https://cstsinghua.github.io/tags/%E5%B1%8F%E5%B9%95%E6%96%B9%E5%90%91/"/>
     
   </entry>
   
   <entry>
     <title>adb原理简介及常用命令介绍</title>
-    <link href="http://cstsinghua.github.io/2018/01/08/adb%E5%8E%9F%E7%90%86%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/</id>
+    <link href="https://cstsinghua.github.io/2018/01/08/adb%E5%8E%9F%E7%90%86%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D/"/>
+    <id>https://cstsinghua.github.io/2018/01/08/adb原理简介及常用命令介绍/</id>
     <published>2018-01-08T08:18:23.000Z</published>
     <updated>2018-01-08T09:31:21.000Z</updated>
     
@@ -801,27 +801,27 @@ x64.release
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+      <category term="tools" scheme="https://cstsinghua.github.io/categories/Android/tools/"/>
     
     
-      <category term="命令" scheme="http://cstsinghua.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
+      <category term="命令" scheme="https://cstsinghua.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
     
-      <category term="常用" scheme="http://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
+      <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
     
-      <category term="adb" scheme="http://cstsinghua.github.io/tags/adb/"/>
+      <category term="adb" scheme="https://cstsinghua.github.io/tags/adb/"/>
     
-      <category term="原理" scheme="http://cstsinghua.github.io/tags/%E5%8E%9F%E7%90%86/"/>
+      <category term="原理" scheme="https://cstsinghua.github.io/tags/%E5%8E%9F%E7%90%86/"/>
     
-      <category term="简介" scheme="http://cstsinghua.github.io/tags/%E7%AE%80%E4%BB%8B/"/>
+      <category term="简介" scheme="https://cstsinghua.github.io/tags/%E7%AE%80%E4%BB%8B/"/>
     
   </entry>
   
   <entry>
     <title>用sphinx编写智能和漂亮的文档</title>
-    <link href="http://cstsinghua.github.io/2017/11/16/%E7%BC%96%E5%86%99sphinx%E6%96%87%E6%A1%A3/"/>
-    <id>http://cstsinghua.github.io/2017/11/16/编写sphinx文档/</id>
+    <link href="https://cstsinghua.github.io/2017/11/16/%E7%BC%96%E5%86%99sphinx%E6%96%87%E6%A1%A3/"/>
+    <id>https://cstsinghua.github.io/2017/11/16/编写sphinx文档/</id>
     <published>2017-11-16T03:07:26.000Z</published>
     <updated>2017-11-16T03:07:29.000Z</updated>
     
@@ -871,29 +871,29 @@ x64.release
     
     </summary>
     
-      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+      <category term="杂项" scheme="https://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
     
-      <category term="文档" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/%E6%96%87%E6%A1%A3/"/>
+      <category term="文档" scheme="https://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/%E6%96%87%E6%A1%A3/"/>
     
     
-      <category term="sphinx" scheme="http://cstsinghua.github.io/tags/sphinx/"/>
+      <category term="sphinx" scheme="https://cstsinghua.github.io/tags/sphinx/"/>
     
-      <category term="API 文档" scheme="http://cstsinghua.github.io/tags/API-%E6%96%87%E6%A1%A3/"/>
+      <category term="API 文档" scheme="https://cstsinghua.github.io/tags/API-%E6%96%87%E6%A1%A3/"/>
     
-      <category term="rst" scheme="http://cstsinghua.github.io/tags/rst/"/>
+      <category term="rst" scheme="https://cstsinghua.github.io/tags/rst/"/>
     
-      <category term="reStructuredText" scheme="http://cstsinghua.github.io/tags/reStructuredText/"/>
+      <category term="reStructuredText" scheme="https://cstsinghua.github.io/tags/reStructuredText/"/>
     
-      <category term="readthedocs" scheme="http://cstsinghua.github.io/tags/readthedocs/"/>
+      <category term="readthedocs" scheme="https://cstsinghua.github.io/tags/readthedocs/"/>
     
-      <category term="python" scheme="http://cstsinghua.github.io/tags/python/"/>
+      <category term="python" scheme="https://cstsinghua.github.io/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>Android手机屏幕实时展示</title>
-    <link href="http://cstsinghua.github.io/2017/11/01/Android%E5%AE%9E%E6%97%B6%E5%B1%8F%E5%B9%95%E5%B1%95%E7%A4%BA/"/>
-    <id>http://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/</id>
+    <link href="https://cstsinghua.github.io/2017/11/01/Android%E5%AE%9E%E6%97%B6%E5%B1%8F%E5%B9%95%E5%B1%95%E7%A4%BA/"/>
+    <id>https://cstsinghua.github.io/2017/11/01/Android实时屏幕展示/</id>
     <published>2017-11-01T02:04:55.000Z</published>
     <updated>2017-11-01T03:24:13.000Z</updated>
     
@@ -940,29 +940,29 @@ x64.release
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+      <category term="tools" scheme="https://cstsinghua.github.io/categories/Android/tools/"/>
     
     
-      <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/tags/Android/"/>
     
-      <category term="实时" scheme="http://cstsinghua.github.io/tags/%E5%AE%9E%E6%97%B6/"/>
+      <category term="实时" scheme="https://cstsinghua.github.io/tags/%E5%AE%9E%E6%97%B6/"/>
     
-      <category term="real time" scheme="http://cstsinghua.github.io/tags/real-time/"/>
+      <category term="real time" scheme="https://cstsinghua.github.io/tags/real-time/"/>
     
-      <category term="screen" scheme="http://cstsinghua.github.io/tags/screen/"/>
+      <category term="screen" scheme="https://cstsinghua.github.io/tags/screen/"/>
     
-      <category term="展示" scheme="http://cstsinghua.github.io/tags/%E5%B1%95%E7%A4%BA/"/>
+      <category term="展示" scheme="https://cstsinghua.github.io/tags/%E5%B1%95%E7%A4%BA/"/>
     
-      <category term="display" scheme="http://cstsinghua.github.io/tags/display/"/>
+      <category term="display" scheme="https://cstsinghua.github.io/tags/display/"/>
     
   </entry>
   
   <entry>
     <title>Android应用包apk双击安装和文件图标定制</title>
-    <link href="http://cstsinghua.github.io/2017/09/30/apk%E5%8F%8C%E5%87%BB%E5%AE%89%E8%A3%85/"/>
-    <id>http://cstsinghua.github.io/2017/09/30/apk双击安装/</id>
+    <link href="https://cstsinghua.github.io/2017/09/30/apk%E5%8F%8C%E5%87%BB%E5%AE%89%E8%A3%85/"/>
+    <id>https://cstsinghua.github.io/2017/09/30/apk双击安装/</id>
     <published>2017-09-30T04:08:36.000Z</published>
     <updated>2017-09-30T06:07:29.000Z</updated>
     
@@ -1017,33 +1017,33 @@ x64.release
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="tools" scheme="http://cstsinghua.github.io/categories/Android/tools/"/>
+      <category term="tools" scheme="https://cstsinghua.github.io/categories/Android/tools/"/>
     
     
-      <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/tags/Android/"/>
     
-      <category term="apk install" scheme="http://cstsinghua.github.io/tags/apk-install/"/>
+      <category term="apk install" scheme="https://cstsinghua.github.io/tags/apk-install/"/>
     
-      <category term="双击" scheme="http://cstsinghua.github.io/tags/%E5%8F%8C%E5%87%BB/"/>
+      <category term="双击" scheme="https://cstsinghua.github.io/tags/%E5%8F%8C%E5%87%BB/"/>
     
-      <category term="double click" scheme="http://cstsinghua.github.io/tags/double-click/"/>
+      <category term="double click" scheme="https://cstsinghua.github.io/tags/double-click/"/>
     
-      <category term="installer" scheme="http://cstsinghua.github.io/tags/installer/"/>
+      <category term="installer" scheme="https://cstsinghua.github.io/tags/installer/"/>
     
-      <category term="apk icon" scheme="http://cstsinghua.github.io/tags/apk-icon/"/>
+      <category term="apk icon" scheme="https://cstsinghua.github.io/tags/apk-icon/"/>
     
-      <category term="定制apk显示图标" scheme="http://cstsinghua.github.io/tags/%E5%AE%9A%E5%88%B6apk%E6%98%BE%E7%A4%BA%E5%9B%BE%E6%A0%87/"/>
+      <category term="定制apk显示图标" scheme="https://cstsinghua.github.io/tags/%E5%AE%9A%E5%88%B6apk%E6%98%BE%E7%A4%BA%E5%9B%BE%E6%A0%87/"/>
     
-      <category term="apk display icon" scheme="http://cstsinghua.github.io/tags/apk-display-icon/"/>
+      <category term="apk display icon" scheme="https://cstsinghua.github.io/tags/apk-display-icon/"/>
     
   </entry>
   
   <entry>
     <title>RxJava&amp;RxAndroid学习之路--理论篇</title>
-    <link href="http://cstsinghua.github.io/2017/03/10/RxJava%E5%92%8CRxAndroid%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94%E7%90%86%E8%AE%BA%E7%AF%87/"/>
-    <id>http://cstsinghua.github.io/2017/03/10/RxJava和RxAndroid学习之路——理论篇/</id>
+    <link href="https://cstsinghua.github.io/2017/03/10/RxJava%E5%92%8CRxAndroid%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94%E7%90%86%E8%AE%BA%E7%AF%87/"/>
+    <id>https://cstsinghua.github.io/2017/03/10/RxJava和RxAndroid学习之路——理论篇/</id>
     <published>2017-03-10T08:30:28.000Z</published>
     <updated>2017-03-14T06:36:24.000Z</updated>
     
@@ -1094,37 +1094,37 @@ x64.release
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="编程实践" scheme="http://cstsinghua.github.io/categories/Android/%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+      <category term="编程实践" scheme="https://cstsinghua.github.io/categories/Android/%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
     
     
-      <category term="入门" scheme="http://cstsinghua.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+      <category term="入门" scheme="https://cstsinghua.github.io/tags/%E5%85%A5%E9%97%A8/"/>
     
-      <category term="RxJava" scheme="http://cstsinghua.github.io/tags/RxJava/"/>
+      <category term="RxJava" scheme="https://cstsinghua.github.io/tags/RxJava/"/>
     
-      <category term="RxAndroid" scheme="http://cstsinghua.github.io/tags/RxAndroid/"/>
+      <category term="RxAndroid" scheme="https://cstsinghua.github.io/tags/RxAndroid/"/>
     
-      <category term="学习之路" scheme="http://cstsinghua.github.io/tags/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"/>
+      <category term="学习之路" scheme="https://cstsinghua.github.io/tags/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"/>
     
-      <category term="观察者模式" scheme="http://cstsinghua.github.io/tags/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+      <category term="观察者模式" scheme="https://cstsinghua.github.io/tags/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
     
-      <category term="迭代器模式" scheme="http://cstsinghua.github.io/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
+      <category term="迭代器模式" scheme="https://cstsinghua.github.io/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
     
-      <category term="Observer pattern" scheme="http://cstsinghua.github.io/tags/Observer-pattern/"/>
+      <category term="Observer pattern" scheme="https://cstsinghua.github.io/tags/Observer-pattern/"/>
     
-      <category term="Iterator pattern" scheme="http://cstsinghua.github.io/tags/Iterator-pattern/"/>
+      <category term="Iterator pattern" scheme="https://cstsinghua.github.io/tags/Iterator-pattern/"/>
     
-      <category term="functional programming" scheme="http://cstsinghua.github.io/tags/functional-programming/"/>
+      <category term="functional programming" scheme="https://cstsinghua.github.io/tags/functional-programming/"/>
     
-      <category term="ReactiveX" scheme="http://cstsinghua.github.io/tags/ReactiveX/"/>
+      <category term="ReactiveX" scheme="https://cstsinghua.github.io/tags/ReactiveX/"/>
     
   </entry>
   
   <entry>
     <title>Android APK逆向解析</title>
-    <link href="http://cstsinghua.github.io/2017/02/21/Android%20APK%E9%80%86%E5%90%91%E8%A7%A3%E6%9E%90/"/>
-    <id>http://cstsinghua.github.io/2017/02/21/Android APK逆向解析/</id>
+    <link href="https://cstsinghua.github.io/2017/02/21/Android%20APK%E9%80%86%E5%90%91%E8%A7%A3%E6%9E%90/"/>
+    <id>https://cstsinghua.github.io/2017/02/21/Android APK逆向解析/</id>
     <published>2017-02-21T06:34:42.000Z</published>
     <updated>2018-03-02T03:43:02.000Z</updated>
     
@@ -1194,37 +1194,37 @@ x64.release
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="逆向工程" scheme="http://cstsinghua.github.io/categories/Android/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
+      <category term="逆向工程" scheme="https://cstsinghua.github.io/categories/Android/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
     
     
-      <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/tags/Android/"/>
     
-      <category term="逆向" scheme="http://cstsinghua.github.io/tags/%E9%80%86%E5%90%91/"/>
+      <category term="逆向" scheme="https://cstsinghua.github.io/tags/%E9%80%86%E5%90%91/"/>
     
-      <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
+      <category term="apktool" scheme="https://cstsinghua.github.io/tags/apktool/"/>
     
-      <category term="AndroidManifest.xml" scheme="http://cstsinghua.github.io/tags/AndroidManifest-xml/"/>
+      <category term="AndroidManifest.xml" scheme="https://cstsinghua.github.io/tags/AndroidManifest-xml/"/>
     
-      <category term="ClassyShark" scheme="http://cstsinghua.github.io/tags/ClassyShark/"/>
+      <category term="ClassyShark" scheme="https://cstsinghua.github.io/tags/ClassyShark/"/>
     
-      <category term="jadx" scheme="http://cstsinghua.github.io/tags/jadx/"/>
+      <category term="jadx" scheme="https://cstsinghua.github.io/tags/jadx/"/>
     
-      <category term="AXMLPrinter" scheme="http://cstsinghua.github.io/tags/AXMLPrinter/"/>
+      <category term="AXMLPrinter" scheme="https://cstsinghua.github.io/tags/AXMLPrinter/"/>
     
-      <category term="reverse engineering" scheme="http://cstsinghua.github.io/tags/reverse-engineering/"/>
+      <category term="reverse engineering" scheme="https://cstsinghua.github.io/tags/reverse-engineering/"/>
     
-      <category term="build" scheme="http://cstsinghua.github.io/tags/build/"/>
+      <category term="build" scheme="https://cstsinghua.github.io/tags/build/"/>
     
-      <category term="aapt" scheme="http://cstsinghua.github.io/tags/aapt/"/>
+      <category term="aapt" scheme="https://cstsinghua.github.io/tags/aapt/"/>
     
   </entry>
   
   <entry>
     <title>Android 操作系统的内存回收机制</title>
-    <link href="http://cstsinghua.github.io/2017/02/09/Android%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"/>
-    <id>http://cstsinghua.github.io/2017/02/09/Android 操作系统的内存回收机制/</id>
+    <link href="https://cstsinghua.github.io/2017/02/09/Android%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"/>
+    <id>https://cstsinghua.github.io/2017/02/09/Android 操作系统的内存回收机制/</id>
     <published>2017-02-09T01:58:42.000Z</published>
     <updated>2017-02-09T04:27:59.000Z</updated>
     
@@ -1296,27 +1296,27 @@ x64.release
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="内存管理" scheme="http://cstsinghua.github.io/categories/Android/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+      <category term="内存管理" scheme="https://cstsinghua.github.io/categories/Android/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
     
     
-      <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/tags/Android/"/>
     
-      <category term="内存管理" scheme="http://cstsinghua.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+      <category term="内存管理" scheme="https://cstsinghua.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
     
-      <category term="内存回收" scheme="http://cstsinghua.github.io/tags/%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6/"/>
+      <category term="内存回收" scheme="https://cstsinghua.github.io/tags/%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6/"/>
     
-      <category term="机制" scheme="http://cstsinghua.github.io/tags/%E6%9C%BA%E5%88%B6/"/>
+      <category term="机制" scheme="https://cstsinghua.github.io/tags/%E6%9C%BA%E5%88%B6/"/>
     
-      <category term="OS" scheme="http://cstsinghua.github.io/tags/OS/"/>
+      <category term="OS" scheme="https://cstsinghua.github.io/tags/OS/"/>
     
   </entry>
   
   <entry>
     <title>Android热修复技术选型——三大流派解析</title>
-    <link href="http://cstsinghua.github.io/2016/12/02/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E2%80%94%E2%80%94%E4%B8%89%E5%A4%A7%E6%B5%81%E6%B4%BE%E8%A7%A3%E6%9E%90/"/>
-    <id>http://cstsinghua.github.io/2016/12/02/Android热修复技术选型——三大流派解析/</id>
+    <link href="https://cstsinghua.github.io/2016/12/02/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E2%80%94%E2%80%94%E4%B8%89%E5%A4%A7%E6%B5%81%E6%B4%BE%E8%A7%A3%E6%9E%90/"/>
+    <id>https://cstsinghua.github.io/2016/12/02/Android热修复技术选型——三大流派解析/</id>
     <published>2016-12-02T09:15:32.000Z</published>
     <updated>2016-12-02T09:16:52.000Z</updated>
     
@@ -1449,33 +1449,33 @@ x64.release
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="插件化和热修复" scheme="http://cstsinghua.github.io/categories/Android/%E6%8F%92%E4%BB%B6%E5%8C%96%E5%92%8C%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
+      <category term="插件化和热修复" scheme="https://cstsinghua.github.io/categories/Android/%E6%8F%92%E4%BB%B6%E5%8C%96%E5%92%8C%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
     
     
-      <category term="Android" scheme="http://cstsinghua.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/tags/Android/"/>
     
-      <category term="热修复" scheme="http://cstsinghua.github.io/tags/%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
+      <category term="热修复" scheme="https://cstsinghua.github.io/tags/%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
     
-      <category term="插件化" scheme="http://cstsinghua.github.io/tags/%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
+      <category term="插件化" scheme="https://cstsinghua.github.io/tags/%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
     
-      <category term="HotFix" scheme="http://cstsinghua.github.io/tags/HotFix/"/>
+      <category term="HotFix" scheme="https://cstsinghua.github.io/tags/HotFix/"/>
     
-      <category term="Tinker" scheme="http://cstsinghua.github.io/tags/Tinker/"/>
+      <category term="Tinker" scheme="https://cstsinghua.github.io/tags/Tinker/"/>
     
-      <category term="手Qzone" scheme="http://cstsinghua.github.io/tags/%E6%89%8BQzone/"/>
+      <category term="手Qzone" scheme="https://cstsinghua.github.io/tags/%E6%89%8BQzone/"/>
     
-      <category term="Andfix" scheme="http://cstsinghua.github.io/tags/Andfix/"/>
+      <category term="Andfix" scheme="https://cstsinghua.github.io/tags/Andfix/"/>
     
-      <category term="阿里百川" scheme="http://cstsinghua.github.io/tags/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D/"/>
+      <category term="阿里百川" scheme="https://cstsinghua.github.io/tags/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D/"/>
     
   </entry>
   
   <entry>
     <title>Git命令使用遇到的那些坑</title>
-    <link href="http://cstsinghua.github.io/2016/11/17/Git%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
-    <id>http://cstsinghua.github.io/2016/11/17/Git命令使用遇到的那些坑/</id>
+    <link href="https://cstsinghua.github.io/2016/11/17/Git%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
+    <id>https://cstsinghua.github.io/2016/11/17/Git命令使用遇到的那些坑/</id>
     <published>2016-11-17T03:40:58.000Z</published>
     <updated>2016-11-17T03:41:21.000Z</updated>
     
@@ -1531,23 +1531,23 @@ Aborting commit due to empty commit message.
     
     </summary>
     
-      <category term="版本控制" scheme="http://cstsinghua.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+      <category term="版本控制" scheme="https://cstsinghua.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
     
-      <category term="Git" scheme="http://cstsinghua.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/Git/"/>
+      <category term="Git" scheme="https://cstsinghua.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/Git/"/>
     
     
-      <category term="Git" scheme="http://cstsinghua.github.io/tags/Git/"/>
+      <category term="Git" scheme="https://cstsinghua.github.io/tags/Git/"/>
     
-      <category term="命令" scheme="http://cstsinghua.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
+      <category term="命令" scheme="https://cstsinghua.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
     
-      <category term="坑" scheme="http://cstsinghua.github.io/tags/%E5%9D%91/"/>
+      <category term="坑" scheme="https://cstsinghua.github.io/tags/%E5%9D%91/"/>
     
   </entry>
   
   <entry>
     <title>npm常用命令</title>
-    <link href="http://cstsinghua.github.io/2016/11/04/npm%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://cstsinghua.github.io/2016/11/04/npm常用命令/</id>
+    <link href="https://cstsinghua.github.io/2016/11/04/npm%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>https://cstsinghua.github.io/2016/11/04/npm常用命令/</id>
     <published>2016-11-04T03:53:47.000Z</published>
     <updated>2016-11-04T03:53:52.000Z</updated>
     
@@ -1588,23 +1588,23 @@ Aborting commit due to empty commit message.
     
     </summary>
     
-      <category term="NodeJS" scheme="http://cstsinghua.github.io/categories/NodeJS/"/>
+      <category term="NodeJS" scheme="https://cstsinghua.github.io/categories/NodeJS/"/>
     
-      <category term="npm" scheme="http://cstsinghua.github.io/categories/NodeJS/npm/"/>
+      <category term="npm" scheme="https://cstsinghua.github.io/categories/NodeJS/npm/"/>
     
     
-      <category term="常用" scheme="http://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
+      <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
     
-      <category term="NodeJS" scheme="http://cstsinghua.github.io/tags/NodeJS/"/>
+      <category term="NodeJS" scheme="https://cstsinghua.github.io/tags/NodeJS/"/>
     
-      <category term="npm" scheme="http://cstsinghua.github.io/tags/npm/"/>
+      <category term="npm" scheme="https://cstsinghua.github.io/tags/npm/"/>
     
   </entry>
   
   <entry>
     <title>Android知识体系及新手如何快速入门</title>
-    <link href="http://cstsinghua.github.io/2016/09/12/Android%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E5%8F%8A%E6%96%B0%E6%89%8B%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
-    <id>http://cstsinghua.github.io/2016/09/12/Android知识体系及新手如何快速入门/</id>
+    <link href="https://cstsinghua.github.io/2016/09/12/Android%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E5%8F%8A%E6%96%B0%E6%89%8B%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
+    <id>https://cstsinghua.github.io/2016/09/12/Android知识体系及新手如何快速入门/</id>
     <published>2016-09-12T06:25:13.000Z</published>
     <updated>2016-12-09T02:04:48.000Z</updated>
     
@@ -1652,23 +1652,23 @@ Aborting commit due to empty commit message.
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="学习" scheme="http://cstsinghua.github.io/categories/Android/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="学习" scheme="https://cstsinghua.github.io/categories/Android/%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="路线图" scheme="http://cstsinghua.github.io/tags/%E8%B7%AF%E7%BA%BF%E5%9B%BE/"/>
+      <category term="路线图" scheme="https://cstsinghua.github.io/tags/%E8%B7%AF%E7%BA%BF%E5%9B%BE/"/>
     
-      <category term="入门" scheme="http://cstsinghua.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+      <category term="入门" scheme="https://cstsinghua.github.io/tags/%E5%85%A5%E9%97%A8/"/>
     
-      <category term="新手" scheme="http://cstsinghua.github.io/tags/%E6%96%B0%E6%89%8B/"/>
+      <category term="新手" scheme="https://cstsinghua.github.io/tags/%E6%96%B0%E6%89%8B/"/>
     
   </entry>
   
   <entry>
     <title>Eclipse常用快捷键</title>
-    <link href="http://cstsinghua.github.io/2016/07/14/Eclipse%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
-    <id>http://cstsinghua.github.io/2016/07/14/Eclipse常用快捷键/</id>
+    <link href="https://cstsinghua.github.io/2016/07/14/Eclipse%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>https://cstsinghua.github.io/2016/07/14/Eclipse常用快捷键/</id>
     <published>2016-07-14T09:30:18.000Z</published>
     <updated>2016-07-14T09:31:04.000Z</updated>
     
@@ -1710,23 +1710,23 @@ Aborting commit due to empty commit message.
     
     </summary>
     
-      <category term="Java" scheme="http://cstsinghua.github.io/categories/Java/"/>
+      <category term="Java" scheme="https://cstsinghua.github.io/categories/Java/"/>
     
-      <category term="Tools使用" scheme="http://cstsinghua.github.io/categories/Java/Tools%E4%BD%BF%E7%94%A8/"/>
+      <category term="Tools使用" scheme="https://cstsinghua.github.io/categories/Java/Tools%E4%BD%BF%E7%94%A8/"/>
     
     
-      <category term="快捷键" scheme="http://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
-      <category term="Eclipse" scheme="http://cstsinghua.github.io/tags/Eclipse/"/>
+      <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
     
-      <category term="常用" scheme="http://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
+      <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
     
   </entry>
   
   <entry>
     <title>Android studio常用快捷键</title>
-    <link href="http://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
-    <id>http://cstsinghua.github.io/2016/07/13/Android-studio常用快捷键/</id>
+    <link href="https://cstsinghua.github.io/2016/07/13/Android-studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>https://cstsinghua.github.io/2016/07/13/Android-studio常用快捷键/</id>
     <published>2016-07-13T10:07:19.000Z</published>
     <updated>2018-03-02T03:42:50.000Z</updated>
     
@@ -1938,21 +1938,21 @@ Aborting commit due to empty commit message.
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="Tools" scheme="http://cstsinghua.github.io/categories/Android/Tools/"/>
+      <category term="Tools" scheme="https://cstsinghua.github.io/categories/Android/Tools/"/>
     
     
-      <category term="快捷键" scheme="http://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
-      <category term="Android studio" scheme="http://cstsinghua.github.io/tags/Android-studio/"/>
+      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
     
   </entry>
   
   <entry>
     <title>删除Windows下的超长路径目录</title>
-    <link href="http://cstsinghua.github.io/2016/07/08/%E5%88%A0%E9%99%A4Windows%E4%B8%8B%E7%9A%84%E8%B6%85%E9%95%BF%E8%B7%AF%E5%BE%84%E7%9B%AE%E5%BD%95/"/>
-    <id>http://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/</id>
+    <link href="https://cstsinghua.github.io/2016/07/08/%E5%88%A0%E9%99%A4Windows%E4%B8%8B%E7%9A%84%E8%B6%85%E9%95%BF%E8%B7%AF%E5%BE%84%E7%9B%AE%E5%BD%95/"/>
+    <id>https://cstsinghua.github.io/2016/07/08/删除Windows下的超长路径目录/</id>
     <published>2016-07-08T02:28:12.000Z</published>
     <updated>2017-06-12T08:31:49.000Z</updated>
     
@@ -1976,21 +1976,21 @@ Aborting commit due to empty commit message.
     
     </summary>
     
-      <category term="Python" scheme="http://cstsinghua.github.io/categories/Python/"/>
+      <category term="Python" scheme="https://cstsinghua.github.io/categories/Python/"/>
     
     
-      <category term="Windows" scheme="http://cstsinghua.github.io/tags/Windows/"/>
+      <category term="Windows" scheme="https://cstsinghua.github.io/tags/Windows/"/>
     
-      <category term="超长目录" scheme="http://cstsinghua.github.io/tags/%E8%B6%85%E9%95%BF%E7%9B%AE%E5%BD%95/"/>
+      <category term="超长目录" scheme="https://cstsinghua.github.io/tags/%E8%B6%85%E9%95%BF%E7%9B%AE%E5%BD%95/"/>
     
-      <category term="删除" scheme="http://cstsinghua.github.io/tags/%E5%88%A0%E9%99%A4/"/>
+      <category term="删除" scheme="https://cstsinghua.github.io/tags/%E5%88%A0%E9%99%A4/"/>
     
   </entry>
   
   <entry>
     <title>Protocol Buffers使用说明</title>
-    <link href="http://cstsinghua.github.io/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
-    <id>http://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/</id>
+    <link href="https://cstsinghua.github.io/2016/07/01/Protocol%20Buffers%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
+    <id>https://cstsinghua.github.io/2016/07/01/Protocol Buffers使用说明/</id>
     <published>2016-07-01T02:09:43.000Z</published>
     <updated>2016-07-01T02:09:43.000Z</updated>
     
@@ -2097,17 +2097,17 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
     
     </summary>
     
-      <category term="Java" scheme="http://cstsinghua.github.io/categories/Java/"/>
+      <category term="Java" scheme="https://cstsinghua.github.io/categories/Java/"/>
     
     
-      <category term="Protocol Buffers" scheme="http://cstsinghua.github.io/tags/Protocol-Buffers/"/>
+      <category term="Protocol Buffers" scheme="https://cstsinghua.github.io/tags/Protocol-Buffers/"/>
     
   </entry>
   
   <entry>
     <title>Github pages+Hexo+Nodejs搭建个人blog</title>
-    <link href="http://cstsinghua.github.io/2016/06/16/Github%20pages+Hexo+Nodejs%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/"/>
-    <id>http://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/</id>
+    <link href="https://cstsinghua.github.io/2016/06/16/Github%20pages+Hexo+Nodejs%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/"/>
+    <id>https://cstsinghua.github.io/2016/06/16/Github pages+Hexo+Nodejs搭建个人blog/</id>
     <published>2016-06-16T10:35:07.000Z</published>
     <updated>2016-07-04T08:38:36.000Z</updated>
     
@@ -2257,17 +2257,17 @@ static Type(定义的类，比如步骤1中的Person) parseFrom(InputStream inpu
     
     </summary>
     
-      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+      <category term="杂项" scheme="https://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
-      <category term="搭建个人Blog" scheme="http://cstsinghua.github.io/tags/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BABlog/"/>
+      <category term="搭建个人Blog" scheme="https://cstsinghua.github.io/tags/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BABlog/"/>
     
   </entry>
   
   <entry>
     <title>Zxing二维码开源库实战</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/ZXing%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/ZXing开源项目实战/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/ZXing%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/ZXing开源项目实战/</id>
     <published>2016-06-13T07:42:25.000Z</published>
     <updated>2016-12-07T06:56:56.000Z</updated>
     
@@ -2948,17 +2948,17 @@ canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH/2
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="Zxing" scheme="http://cstsinghua.github.io/tags/Zxing/"/>
+      <category term="Zxing" scheme="https://cstsinghua.github.io/tags/Zxing/"/>
     
   </entry>
   
   <entry>
     <title>Eclipse动态调试Android应用指南</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Eclipse%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Eclipse动态调试指南/</id>
     <published>2016-06-13T07:41:13.000Z</published>
     <updated>2017-10-11T11:34:42.000Z</updated>
     
@@ -3007,17 +3007,17 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="动态调试" scheme="http://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
+      <category term="动态调试" scheme="https://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>apktool打包之后apk包体变大</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/apktool%E6%89%93%E5%8C%85%E4%B9%8B%E5%90%8E%E5%8C%85%E4%BD%93%E5%8F%98%E5%A4%A7/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/apktool%E6%89%93%E5%8C%85%E4%B9%8B%E5%90%8E%E5%8C%85%E4%BD%93%E5%8F%98%E5%A4%A7/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/apktool打包之后包体变大/</id>
     <published>2016-06-13T07:40:18.000Z</published>
     <updated>2017-01-22T10:04:48.000Z</updated>
     
@@ -3042,23 +3042,23 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
+      <category term="apktool" scheme="https://cstsinghua.github.io/tags/apktool/"/>
     
-      <category term="Apktool打包" scheme="http://cstsinghua.github.io/tags/Apktool%E6%89%93%E5%8C%85/"/>
+      <category term="Apktool打包" scheme="https://cstsinghua.github.io/tags/Apktool%E6%89%93%E5%8C%85/"/>
     
-      <category term="apk" scheme="http://cstsinghua.github.io/tags/apk/"/>
+      <category term="apk" scheme="https://cstsinghua.github.io/tags/apk/"/>
     
-      <category term="size" scheme="http://cstsinghua.github.io/tags/size/"/>
+      <category term="size" scheme="https://cstsinghua.github.io/tags/size/"/>
     
   </entry>
   
   <entry>
     <title>Android热修复</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%80%9D%E8%B7%AF/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/Android热修复的思路/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%80%9D%E8%B7%AF/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android热修复的思路/</id>
     <published>2016-06-13T07:38:15.000Z</published>
     <updated>2016-06-13T07:36:18.000Z</updated>
     
@@ -3094,19 +3094,19 @@ a=0;//     invoke-super {p0, p1}, Landroid/app/Activity;-&amp;gt;onCreate(Landro
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
-      <category term="插件化和热修复" scheme="http://cstsinghua.github.io/categories/Android/%E6%8F%92%E4%BB%B6%E5%8C%96%E5%92%8C%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
+      <category term="插件化和热修复" scheme="https://cstsinghua.github.io/categories/Android/%E6%8F%92%E4%BB%B6%E5%8C%96%E5%92%8C%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
     
     
-      <category term="Android热修复" scheme="http://cstsinghua.github.io/tags/Android%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
+      <category term="Android热修复" scheme="https://cstsinghua.github.io/tags/Android%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
     
   </entry>
   
   <entry>
     <title>Android动态加载机制</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/Android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/Android动态加载机制/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android动态加载机制/</id>
     <published>2016-06-13T07:36:18.000Z</published>
     <updated>2016-12-22T10:46:24.000Z</updated>
     
@@ -3688,17 +3688,17 @@ for(int z=0; z&amp;lt;as.length; z++) {
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="动态加载" scheme="http://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/"/>
+      <category term="动态加载" scheme="https://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/"/>
     
   </entry>
   
   <entry>
     <title>Android安装APK详解</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/Android%E5%AE%89%E8%A3%85APK%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/Android安装APK详解/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%E5%AE%89%E8%A3%85APK%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android安装APK详解/</id>
     <published>2016-06-13T07:34:37.000Z</published>
     <updated>2016-12-21T06:40:20.000Z</updated>
     
@@ -5229,17 +5229,17 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="APK安装" scheme="http://cstsinghua.github.io/tags/APK%E5%AE%89%E8%A3%85/"/>
+      <category term="APK安装" scheme="https://cstsinghua.github.io/tags/APK%E5%AE%89%E8%A3%85/"/>
     
   </entry>
   
   <entry>
     <title>Android studio动态调试</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/Android studio动态调试指南/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%20studio%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android studio动态调试指南/</id>
     <published>2016-06-13T07:25:56.000Z</published>
     <updated>2017-10-17T07:42:06.000Z</updated>
     
@@ -5346,25 +5346,25 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="apktool" scheme="http://cstsinghua.github.io/tags/apktool/"/>
+      <category term="apktool" scheme="https://cstsinghua.github.io/tags/apktool/"/>
     
-      <category term="动态调试" scheme="http://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
+      <category term="动态调试" scheme="https://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
     
-      <category term="smali" scheme="http://cstsinghua.github.io/tags/smali/"/>
+      <category term="smali" scheme="https://cstsinghua.github.io/tags/smali/"/>
     
-      <category term="backsmali" scheme="http://cstsinghua.github.io/tags/backsmali/"/>
+      <category term="backsmali" scheme="https://cstsinghua.github.io/tags/backsmali/"/>
     
-      <category term="smali Debugging" scheme="http://cstsinghua.github.io/tags/smali-Debugging/"/>
+      <category term="smali Debugging" scheme="https://cstsinghua.github.io/tags/smali-Debugging/"/>
     
   </entry>
   
   <entry>
     <title>Android APK瘦身策略</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/Android%20APK%E7%98%A6%E8%BA%AB%E5%88%9D%E6%8E%A2/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/Android APK瘦身初探/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/Android%20APK%E7%98%A6%E8%BA%AB%E5%88%9D%E6%8E%A2/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/Android APK瘦身初探/</id>
     <published>2016-06-13T06:34:28.000Z</published>
     <updated>2016-06-13T06:34:28.000Z</updated>
     
@@ -5427,17 +5427,17 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="APK瘦身" scheme="http://cstsinghua.github.io/tags/APK%E7%98%A6%E8%BA%AB/"/>
+      <category term="APK瘦身" scheme="https://cstsinghua.github.io/tags/APK%E7%98%A6%E8%BA%AB/"/>
     
   </entry>
   
   <entry>
     <title>python安装某些第三方包报错解决办法</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
     <published>2016-06-13T01:57:02.000Z</published>
     <updated>2017-10-11T02:01:42.000Z</updated>
     
@@ -5486,17 +5486,17 @@ collect2.exe: error: ld returned 1 exit status
     
     </summary>
     
-      <category term="Python" scheme="http://cstsinghua.github.io/categories/Python/"/>
+      <category term="Python" scheme="https://cstsinghua.github.io/categories/Python/"/>
     
     
-      <category term="安装第三方包" scheme="http://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
+      <category term="安装第三方包" scheme="https://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://cstsinghua.github.io/2016/06/13/hello-world/"/>
-    <id>http://cstsinghua.github.io/2016/06/13/hello-world/</id>
+    <link href="https://cstsinghua.github.io/2016/06/13/hello-world/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/hello-world/</id>
     <published>2016-06-13T01:57:02.000Z</published>
     <updated>2016-06-13T01:57:02.000Z</updated>
     
@@ -5519,17 +5519,17 @@ collect2.exe: error: ld returned 1 exit status
     
     </summary>
     
-      <category term="杂项" scheme="http://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+      <category term="杂项" scheme="https://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
-      <category term="杂项" scheme="http://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
+      <category term="杂项" scheme="https://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   
   <entry>
     <title>推送方案</title>
-    <link href="http://cstsinghua.github.io/2016/06/08/%E6%8E%A8%E9%80%81%E6%96%B9%E6%A1%88/"/>
-    <id>http://cstsinghua.github.io/2016/06/08/推送方案/</id>
+    <link href="https://cstsinghua.github.io/2016/06/08/%E6%8E%A8%E9%80%81%E6%96%B9%E6%A1%88/"/>
+    <id>https://cstsinghua.github.io/2016/06/08/推送方案/</id>
     <published>2016-06-08T09:09:16.000Z</published>
     <updated>2016-12-21T01:53:05.000Z</updated>
     
@@ -5889,20 +5889,20 @@ wl.release();
     
     </summary>
     
-      <category term="Android" scheme="http://cstsinghua.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="Push" scheme="http://cstsinghua.github.io/tags/Push/"/>
+      <category term="Push" scheme="https://cstsinghua.github.io/tags/Push/"/>
     
-      <category term="推送" scheme="http://cstsinghua.github.io/tags/%E6%8E%A8%E9%80%81/"/>
+      <category term="推送" scheme="https://cstsinghua.github.io/tags/%E6%8E%A8%E9%80%81/"/>
     
-      <category term="长连接" scheme="http://cstsinghua.github.io/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/"/>
+      <category term="长连接" scheme="https://cstsinghua.github.io/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/"/>
     
-      <category term="进程保活" scheme="http://cstsinghua.github.io/tags/%E8%BF%9B%E7%A8%8B%E4%BF%9D%E6%B4%BB/"/>
+      <category term="进程保活" scheme="https://cstsinghua.github.io/tags/%E8%BF%9B%E7%A8%8B%E4%BF%9D%E6%B4%BB/"/>
     
-      <category term="定时器" scheme="http://cstsinghua.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/"/>
+      <category term="定时器" scheme="https://cstsinghua.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/"/>
     
-      <category term="Timer" scheme="http://cstsinghua.github.io/tags/Timer/"/>
+      <category term="Timer" scheme="https://cstsinghua.github.io/tags/Timer/"/>
     
   </entry>
   
