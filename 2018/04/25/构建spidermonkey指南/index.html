@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://i.imgur.com/aPTjYxD.jpg">
 <meta property="og:image" content="https://i.imgur.com/IfhGD0W.jpg">
 <meta property="og:image" content="https://i.imgur.com/ybIVtW1.jpg">
-<meta property="og:updated_time" content="2018-05-02T10:16:00.000Z">
+<meta property="og:updated_time" content="2018-05-04T03:01:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建spidermonkey指南">
 <meta name="twitter:description" content="前言随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的ReactNative，而Cocos2D引擎也实现了JS的版本Cocos2d-JS。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。
@@ -325,7 +325,7 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
 <p>类似效果如下：<br><img src="https://i.imgur.com/qBGsgml.jpg" alt=""><br>也可以直接在手机桌面，点击Firefox的快捷图标，启动浏览器，即可体验试用。</p>
 </li>
 </ol>
-<h2 id="ubuntu-16-04-LTS系统下构建spidermonkey的shared-library"><a href="#ubuntu-16-04-LTS系统下构建spidermonkey的shared-library" class="headerlink" title="ubuntu 16.04 LTS系统下构建spidermonkey的shared library"></a>ubuntu 16.04 LTS系统下构建spidermonkey的shared library</h2><p>前置条件：<br>    1.spidermonkey的源码和Firefox的源码位于是同一个仓库(事实上，Firefox就是内嵌spidermonkey作为JS的执行engine)，因此这里按照“ubuntu 16.04 LTS系统下构建Firefox for Android”的步骤1-4以完成spidermonkey的源码下载。然后安装下面步骤执行：</p>
+<h2 id="ubuntu-16-04-LTS系统下构建spidermonkey的shared-library"><a href="#ubuntu-16-04-LTS系统下构建spidermonkey的shared-library" class="headerlink" title="ubuntu 16.04 LTS系统下构建spidermonkey的shared library"></a>ubuntu 16.04 LTS系统下构建spidermonkey的shared library</h2><p>前置条件：<br>    1.spidermonkey的源码和Firefox的源码位于是同一个仓库(事实上，Firefox就是内嵌spidermonkey作为JS的执行engine)，因此这里按照“ubuntu 16.04 LTS系统下构建Firefox for Android”的步骤1-4以完成spidermonkey的源码下载。然后接着按照下面步骤执行：</p>
 <p>实施步骤：</p>
 <ol>
 <li><p>进入源码的js/src子目录(本文示例源码下载存放路径为<code>/usr/local/spidermonkey/mozilla-central</code>)，即<code>/usr/local/spidermonkey/mozilla-central/js/src</code>。依序执行下列命令：</p>
@@ -445,7 +445,7 @@ make: *** [default] Error 2
 <li>问题分析：<br>  根据报错信息，可以看出是在链接生成<code>libmozjs-60a1.so</code>(60a1是源码的版本号，版本是xx，那么应该对应libmozjs-xx.so)的时候出错，且都是<code>error: hidden symbol &#39;__android_log_print&#39; is not defined locally</code>错误，我们知道<code>__android_log_print</code>是Android的log库里面提供的日志打印方法。但查询ndk的目录，log库和工具类设置都是正常的，也能找到相关的头文件。且这个错误的信息对于不熟悉C++的人来说，简直一头雾水，在网上查询也几乎找不到像样的解释(Stack Overflow上<a href="https://stackoverflow.com/questions/23696585/what-does-exactly-the-warning-mean-about-hidden-symbol-being-referenced-by-dso" target="_blank" rel="external">有一篇帖子</a>对hidden symbol的问题做了较好的解释，比较有启发性，这里不做具体阐述)。</li>
 <li><p>解决(回避)的方案：</p>
 <ol>
-<li>既然，是引用Android log库的<code>__android_log_print</code>方法，那我们直接注释掉相关引用，绕过去，不就可以解决该问题吗。初步想来，该方法是可行的，因为日志打印只是辅助调试，对功能使用不影响。那么首先需要找出spidermonkey源码里面引用到<code>__android_log_print</code>的地方。这里可以直接利用工具在源码目录下面搜索，也可以通过在终端copy上面提到的链接命令，将其中的<code>-llog</code>去掉(也就是不再链接Android的log库)，然后执行该链接命令，可以看到有类似下图的报错(注意，图中源码存放路径和本文的源码存放路径不同)：<br><img src="https://i.imgur.com/ybIVtW1.jpg" alt=""><br>这说明，去掉链接log库之后，由于<code>__android_log_print</code>未定义，所以肯定报错<code>undefined reference to __android_log_print</code>，但是这给我们提供了信息，即spidermonkey的哪些源码文件引用了<code>__android_log_print</code>，直接找到这些地方，将其注释掉(目前发现在两个文件中存在引用<code>__android_log_print</code>，一是<code>/usr/local/spidermonkey/mozilla-central/js/src/vm/JSContext.cpp</code>，二是构建目录下头文件<code>/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/dist/include/mozilla/Assertions.h</code>，其实是链接到<code>/usr/local/spidermonkey/mozilla-central/mfbt/Assertions.h</code>)。注释掉这些地方之后，再次执行make，应该就可以成功了(最终会生成交互命令行的可执行程序<code>js</code>和<code>libmozjs-xx.so</code>分享库)。</li>
+<li>既然，是引用Android log库的<code>__android_log_print</code>方法，那我们直接注释掉相关引用，绕过去，不就可以解决该问题吗。初步想来，该方法是可行的，因为日志打印只是辅助调试，对功能使用不影响。那么首先需要找出spidermonkey源码里面引用到<code>__android_log_print</code>的地方。这里可以直接利用工具在源码目录下面搜索，也可以通过在终端copy上面提到的链接命令，将其中的<code>-llog</code>去掉(也就是不再链接Android的log库)，然后执行该链接命令(<strong>注意：直接copy链接命令，命令里面的某些路径是用的相对路径，copy到终端里面直接执行的话，可能会提示找不到某个文件或者目录的错误，这里一定要将找不到的这些文件或者目录替换成绝对路径，这样就可以找到了。这是因为该链接命令执行前，构建过程可能切换了工作路径，所以直接copy链接命令执行，相对路径就发生了变化，从而无法直接copy后执行</strong>)，可以看到有类似下图的报错(注意，图中源码存放路径和本文的源码存放路径不同)：<br><img src="https://i.imgur.com/ybIVtW1.jpg" alt=""><br>这说明，去掉链接log库之后，由于<code>__android_log_print</code>未定义，所以肯定报错<code>undefined reference to __android_log_print</code>，但是这给我们提供了信息，即spidermonkey的哪些源码文件引用了<code>__android_log_print</code>，直接找到这些地方，将其注释掉(目前发现在两个文件中存在引用<code>__android_log_print</code>，一是<code>/usr/local/spidermonkey/mozilla-central/js/src/vm/JSContext.cpp</code>，二是构建目录下头文件<code>/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/dist/include/mozilla/Assertions.h</code>，其实是链接到<code>/usr/local/spidermonkey/mozilla-central/mfbt/Assertions.h</code>)。注释掉这些地方之后，再次执行make，应该就可以成功了(最终会生成交互命令行的可执行程序<code>js</code>和<code>libmozjs-xx.so</code>分享库)。</li>
 <li>上面提到Stack Overflow上<a href="https://stackoverflow.com/questions/23696585/what-does-exactly-the-warning-mean-about-hidden-symbol-being-referenced-by-dso" target="_blank" rel="external">这篇帖子</a>解释了hidden symbol的问题，主要是与分享库有关，那么我们是不是可以生成static library来绕过这个问题呢，生成静态库只需要在配置命令加一个参数即可，请参见下面章节的描述。不过这种方法，暂无验证是否有效。</li>
 <li>直接从make构建的异常信息入手，找到相关的Makefile文件及其引用的.mk文件，找到链接生成libmozjs-xx.so的命令所在处(mk文件内的具体行)，弄清楚其中的逻辑，然后修改Makefile文件，再次执行make构建即可。不过这个方法非常费事，对C++和make构建不熟悉的话难度非常大，不建议采用。</li>
 </ol>
@@ -469,7 +469,7 @@ make: *** [default] Error 2
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-05-02T10:16:00.000Z" itemprop="dateUpdated">2018-05-02 18:16:00</time>
+    post.last_updated<time datetime="2018-05-04T03:01:55.000Z" itemprop="dateUpdated">2018-05-04 11:01:55</time>
 </span><br>
 
 
@@ -547,7 +547,14 @@ make: *** [default] Error 2
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/16/JS game engine based on  v8 and OpenGL/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JS game engine based on  v8 and OpenGL</h4>
+      </a>
+    </div>
   
 
   

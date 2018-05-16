@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://cstsinghua.github.io/2018/05/16/JS%20game%20engine%20based%20on%20%20v8%20and%20OpenGL/</loc>
+    
+    <lastmod>2018-05-16T11:17:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://cstsinghua.github.io/2018/04/25/%E6%9E%84%E5%BB%BAspidermonkey%E6%8C%87%E5%8D%97/</loc>
     
-    <lastmod>2018-05-02T10:16:00.000Z</lastmod>
+    <lastmod>2018-05-04T03:01:55.000Z</lastmod>
     
   </url>
   

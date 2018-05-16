@@ -4,8 +4,41 @@
 
     
   <url>
+    <loc>https://cstsinghua.github.io/2018/05/16/JS%20game%20engine%20based%20on%20%20v8%20and%20OpenGL/</loc>
+    <lastmod>2018-05-16T11:17:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>JS game engine based on  v8 and OpenGL</title>
+        <pubTime>2018-05-16T11:17:49.000Z</pubTime>
+        
+        <tag>V8</tag>
+         
+        <tag>GN</tag>
+         
+        <tag>v8 embedded in Android APP</tag>
+         
+        <tag>embed v8</tag>
+         
+        <tag>JS game engine</tag>
+         
+        <tag>OpenGL</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="tools" url="https://cstsinghua.github.io/categories/Android/tools/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://cstsinghua.github.io/2018/04/25/%E6%9E%84%E5%BB%BAspidermonkey%E6%8C%87%E5%8D%97/</loc>
-    <lastmod>2018-05-02T10:16:00.000Z</lastmod>
+    <lastmod>2018-05-04T03:01:55.000Z</lastmod>
     <data>
         <display>
         <title>构建spidermonkey指南</title>
