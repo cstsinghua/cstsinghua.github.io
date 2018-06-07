@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?338a0bb40db1ba116191683538324875"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/">
+    
+    
+    <title>Android NDK调试和分析 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,NDK,JNI,调试,分析,ndk-gdb,ndk-stack,LLDB">
+    <meta name="description" content="简介(初稿)Android NDK开发属于Android开发中的高阶内容，其不仅要熟悉Android平台知识，更需要熟悉C++语言和相关的构建工具。而NDK开发中出现的异常是Android APP crash的主要原因。NDK开发的异常调试和分析比较困难，日志信息可读性很差。因此本文对NDK开发中常用的工具和方法进行总结，以期能帮助大家提升Android NDK开发的水平。
+首先，关于JNI和A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android NDK调试和分析">
+<meta property="og:url" content="https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="简介(初稿)Android NDK开发属于Android开发中的高阶内容，其不仅要熟悉Android平台知识，更需要熟悉C++语言和相关的构建工具。而NDK开发中出现的异常是Android APP crash的主要原因。NDK开发的异常调试和分析比较困难，日志信息可读性很差。因此本文对NDK开发中常用的工具和方法进行总结，以期能帮助大家提升Android NDK开发的水平。
+首先，关于JNI和A">
+<meta property="og:image" content="https://i.imgur.com/hlg4F5o.png">
+<meta property="og:updated_time" content="2018-06-07T06:45:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android NDK调试和分析">
+<meta name="twitter:description" content="简介(初稿)Android NDK开发属于Android开发中的高阶内容，其不仅要熟悉Android平台知识，更需要熟悉C++语言和相关的构建工具。而NDK开发中出现的异常是Android APP crash的主要原因。NDK开发的异常调试和分析比较困难，日志信息可读性很差。因此本文对NDK开发中常用的工具和方法进行总结，以期能帮助大家提升Android NDK开发的水平。
+首先，关于JNI和A">
+<meta name="twitter:image" content="https://i.imgur.com/hlg4F5o.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android NDK调试和分析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android NDK调试和分析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-07T06:45:47.000Z" itemprop="datePublished" class="page-time">
+  2018-06-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/NDK/">NDK</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#LLDB"><span class="post-toc-number">2.</span> <span class="post-toc-text">LLDB</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ndk-gdb"><span class="post-toc-number">3.</span> <span class="post-toc-text">ndk-gdb</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ndk-stack"><span class="post-toc-number">4.</span> <span class="post-toc-text">ndk-stack</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android NDK调试和分析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android NDK调试和分析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-07 14:45:47" datetime="2018-06-07T06:45:47.000Z"  itemprop="datePublished">2018-06-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/NDK/">NDK</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>(初稿)</strong><br>Android NDK开发属于Android开发中的高阶内容，其不仅要熟悉Android平台知识，更需要熟悉C++语言和相关的构建工具。而NDK开发中出现的异常是Android APP crash的主要原因。NDK开发的异常调试和分析比较困难，日志信息可读性很差。因此本文对NDK开发中常用的工具和方法进行总结，以期能帮助大家提升Android NDK开发的水平。</p>
+<p>首先，关于JNI和Android NDK开发，请务必先认真完成以下文章的阅读：</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/jniTOC.html" target="_blank" rel="external">JNI官方文档</a></li>
+<li><a href="https://developer.android.com/training/articles/perf-jni.html" target="_blank" rel="external">JNI Tips(Android官网JNI培训系列)</a></li>
+<li><a href="https://developer.android.com/ndk/guides/index.html" target="_blank" rel="external">NDK入门指南</a>，从<code>Getting Started</code>开始看，<strong>每一个章节全部都不要遗漏</strong>。<br>  <img src="https://i.imgur.com/hlg4F5o.png" alt=""></li>
+</ul>
+<p>Android NDK的调试和分析主要有以下几种方法：</p>
+<ol>
+<li>LLDB：原生调试，支持断点和变量查看，用于开发者有源码的情况下，多用于开发阶段；</li>
+<li>ndk-gdb：支持ndk-build脚本构建的工程，当前Android studio默认已采用CMake方式构建工程，所以不是很推荐；</li>
+<li>ndk-stack：适用于已经发布版本，或者用户反馈问题(提供了错误logcat日志)等情况，即直接分析NDK错误日志，分析C++源码的错误点。</li>
+</ol>
+<p><strong>Note：推荐采用LLDB或ndk-stack</strong></p>
+<h1 id="LLDB"><a href="#LLDB" class="headerlink" title="LLDB"></a>LLDB</h1><p>请参见<a href="https://developer.android.com/studio/debug/" target="_blank" rel="external">https://developer.android.com/studio/debug/</a></p>
+<h1 id="ndk-gdb"><a href="#ndk-gdb" class="headerlink" title="ndk-gdb"></a>ndk-gdb</h1><p>请参见<a href="https://developer.android.com/ndk/guides/ndk-gdb" target="_blank" rel="external">https://developer.android.com/ndk/guides/ndk-gdb</a></p>
+<h1 id="ndk-stack"><a href="#ndk-stack" class="headerlink" title="ndk-stack"></a>ndk-stack</h1><p>请参见<a href="https://developer.android.com/ndk/guides/ndk-stack" target="_blank" rel="external">https://developer.android.com/ndk/guides/ndk-stack</a></p>
+<p>使用命令格式如下(其中，<code>$NDK</code>代表NDK的安装目录，新版Android studio的SDK Manager会将NDK安装在Android SDK目录下的<code>ndk-bundle</code>子目录，如果是自己单独下载NDK的话，请找到对应的解压路径。新版Android studio采用CMake构建，构建生成的so文件位于<code>$PROJECT_PATH/app/build/intermediates/cmake/debug/obj/&lt;abi&gt;</code>下(debug模式)或<code>$PROJECT_PATH/app/build/intermediates/cmake/debug/release/&lt;abi&gt;</code>(release模式)，其中 <code>&lt;abi&gt;</code> 表示您的<a href="https://developer.android.com/ndk/guides/abis" target="_blank" rel="external">设备的ABI</a>)。当然也可以直接从Android APK解压提取共享库so文件，然后存放在指定目录，以便分析。</p>
+<blockquote>
+<p>adb logcat | $NDK/ndk-stack -sym $PROJECT_PATH/app/build/intermediates/cmake/debug/obj/<abi></abi></p>
+</blockquote>
+<p>或者分开执行：</p>
+<blockquote>
+<p>adb logcat &gt; /tmp/foo.txt<br>$NDK/ndk-stack -sym $PROJECT_PATH/app/build/intermediates/cmake/debug/obj/<abi> -dump foo.txt</abi></p>
+</blockquote>
+<p>示例（以windows为例）：</p>
+<blockquote>
+<p>cd F:\ubuntu\share\V8Android\app\build\intermediates\cmake\debug\obj\arm64-v8a<br>“F:\Android\sdk\ndk-bundle\ndk-stack.cmd” -sym . -dump D:\UserProfiles\CoulsonChen\Desktop\ndk.txt &gt;analyze.txt</p>
+</blockquote>
+<p>analyze.txt的内容如下(从中可以明确看到出错的代码行在哪里)：</p>
+<pre><code>********** Crash dump: **********
+Build fingerprint: &apos;google/walleye/walleye:8.1.0/OPM1.171019.019/4527419:user/release-keys&apos;
+pid: 6740, tid: 6740, name: boyaa.v8wrapper  &gt;&gt;&gt; com.boyaa.v8wrapper &lt;&lt;&lt;
+signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x27
+Stack frame         #00 pc 000000000056f204  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/lib/arm64/libnative-lib.so: Routine v8::base::Relaxed_Load(long const volatile*) at /home/ibon/v8/v8/out.gn/aar_lkgr_64/../../src/base/atomicops_internals_portable.h:168
+Stack frame         #01 pc 000000000056df00  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/lib/arm64/libnative-lib.so: Routine v8::internal::(anonymous namespace)::InstantiateObject(v8::internal::Isolate*, v8::internal::Handle&lt;v8::internal::ObjectTemplateInfo&gt;, v8::internal::Handle&lt;v8::internal::JSReceiver&gt;, bool, bool) at /home/ibon/v8/v8/out.gn/aar_lkgr_64/../../src/api-natives.cc:375
+Stack frame         #02 pc 000000000056ddc4  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/lib/arm64/libnative-lib.so: Routine v8::internal::ApiNatives::InstantiateObject(v8::internal::Handle&lt;v8::internal::ObjectTemplateInfo&gt;, v8::internal::Handle&lt;v8::internal::JSReceiver&gt;) at /home/ibon/v8/v8/out.gn/aar_lkgr_64/../../src/api-natives.cc:547
+Stack frame         #03 pc 00000000000f4774  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/lib/arm64/libnative-lib.so: Routine v8::ObjectTemplate::NewInstance(v8::Local&lt;v8::Context&gt;) at /home/ibon/v8/v8/out.gn/aar_lkgr_64/../../src/api.cc:6733 (discriminator 2)
+Stack frame         #04 pc 00000000000cfa40  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/lib/arm64/libnative-lib.so (WrapGamerObject(v8::Isolate*, Gamer*)+588): Routine WrapGamerObject(v8::Isolate*, Gamer*) at F:\ubuntu\share\V8Android\app\src\main\cpp/util.cpp:208
+Stack frame         #05 pc 00000000000d22cc  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/lib/arm64/libnative-lib.so (initV8()+792): Routine initV8() at F:\ubuntu\share\V8Android\app\src\main\cpp/native-lib.cpp:67
+Stack frame         #06 pc 00000000000d35d0  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/lib/arm64/libnative-lib.so (Java_com_boyaa_v8wrapper_MainActivity_nativeInit+72): Routine Java_com_boyaa_v8wrapper_MainActivity_nativeInit at F:\ubuntu\share\V8Android\app\src\main\cpp/native-lib.cpp:165
+Stack frame         #07 pc 00000000000092b8  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/oat/arm64/base.odex (offset 0x9000)
+</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    post.last_updated<time datetime="2018-06-07T06:45:50.000Z" itemprop="dateUpdated">2018-06-07 14:45:50</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JNI/">JNI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLDB/">LLDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ndk-gdb/">ndk-gdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ndk-stack/">ndk-stack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分析/">分析</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/&title=《Android NDK调试和分析》 — Atypical programmer&pic=https://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/&title=《Android NDK调试和分析》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android NDK调试和分析》 — Atypical programmer&url=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/&via=https://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/16/JS game engine based on  v8 and OpenGL/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JS game engine based on  v8 and OpenGL</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "4DjAfnIwjxGfITAYl8eVX5Pe-gzGzoHsz",
+            appKey: "ss62qxcFEjf5opJ4Ii5xI2zn",
+            avatar: "mm",
+            placeholder: "欢迎交流",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/&title=《Android NDK调试和分析》 — Atypical programmer&pic=https://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/&title=《Android NDK调试和分析》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android NDK调试和分析》 — Atypical programmer&url=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/&via=https://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://cstsinghua.github.io/2018/06/07/Android NDK调试和分析/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
