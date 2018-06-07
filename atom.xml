@@ -949,6 +949,124 @@ x64.release
   </entry>
   
   <entry>
+    <title>Android NDK开发和遇到的坑</title>
+    <link href="https://cstsinghua.github.io/2017/11/17/Android%20studio%20NDK%E5%BC%80%E5%8F%91%E4%B8%AD%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
+    <id>https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/</id>
+    <published>2017-11-17T02:39:15.000Z</published>
+    <updated>2017-11-17T02:39:19.000Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;本文对Android NDK开发进行较详细的梳理，特别是针对其中涉及到的坑进行重点阐述，以让大家在后续的开发中重复踩坑。&lt;/p&gt;
+&lt;h1 id=&quot;CMake&quot;&gt;&lt;a href=&quot;#CMake&quot; class=&quot;headerlink&quot; title=&quot;CMake&quot;&gt;&lt;/a&gt;CMake&lt;/h1&gt;&lt;p&gt;待续&lt;/p&gt;
+&lt;h1 id=&quot;ndk-build&quot;&gt;&lt;a href=&quot;#ndk-build&quot; class=&quot;headerlink&quot; title=&quot;ndk-build&quot;&gt;&lt;/a&gt;ndk-build&lt;/h1&gt;&lt;p&gt;待续&lt;/p&gt;
+&lt;h1 id=&quot;工程实施&quot;&gt;&lt;a href=&quot;#工程实施&quot; class=&quot;headerlink&quot; title=&quot;工程实施&quot;&gt;&lt;/a&gt;工程实施&lt;/h1&gt;&lt;p&gt;待续&lt;/p&gt;
+&lt;h1 id=&quot;构建&quot;&gt;&lt;a href=&quot;#构建&quot; class=&quot;headerlink&quot; title=&quot;构建&quot;&gt;&lt;/a&gt;构建&lt;/h1&gt;&lt;h2 id=&quot;构建命令&quot;&gt;&lt;a href=&quot;#构建命令&quot; class=&quot;headerlink&quot; title=&quot;构建命令&quot;&gt;&lt;/a&gt;构建命令&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;打开Android studio的内嵌终端；&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/DEE8MD9.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在项目根目录下，执行形如&lt;code&gt;gradlew.bat [module_name]:externalNativeBuild[buildTypesName]&lt;/code&gt;的命令，比如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;gradlew.bat ndkbuild:externalNativeBuildRelease&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其中，module_name为你的工程模块(module)名称，如果是app模块，这里则取“app”。buildTypesName是该模块的build.gradle配置里面的buildTypes(构建类型)中的其中一种，比如release或者你自己配置的名字。下面代码片段是截取自示例模块ndkbuild的build.gradle示例：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;gralde&quot;&gt;android {
+ compileSdkVersion 26
+
+ lintOptions {
+     disable &amp;apos;OldTargetApi&amp;apos;,&amp;apos;UnusedResources&amp;apos;
+ }
+
+ defaultConfig {
+     minSdkVersion 15
+     targetSdkVersion 26
+     versionCode 1
+     versionName &amp;quot;1.0&amp;quot;
+
+     testInstrumentationRunner &amp;quot;android.support.test.runner.AndroidJUnitRunner&amp;quot;
+
+     externalNativeBuild {
+         ndkBuild {
+             //arguments &amp;quot;NDK_APPLICATION_MK:=src/main/jni/Application.mk&amp;quot;
+             //cFlags &amp;quot;-DTEST_C_FLAG1&amp;quot;, &amp;quot;-DTEST_C_FLAG2&amp;quot;
+             //cppFlags &amp;quot;-DTEST_CPP_FLAG2&amp;quot;, &amp;quot;-DTEST_CPP_FLAG2&amp;quot;
+             abiFilters &amp;quot;armeabi-v7a&amp;quot;
+         }
+     }
+
+ }
+
+ buildTypes {
+     release {
+         minifyEnabled false
+         proguardFiles getDefaultProguardFile(&amp;apos;proguard-android.txt&amp;apos;), &amp;apos;proguard-rules.pro&amp;apos;
+     }
+ }
+
+ externalNativeBuild {
+     ndkBuild {
+         path &amp;apos;src/main/jni/projects/android/jni/Android.mk&amp;apos;
+     }
+ }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;构建命令执行完成之后，如果是采用ndk-build构建，在&lt;code&gt;%module_path%/build/intermediates/ndkBuild&lt;/code&gt;，如果是采用cmake构建，则&lt;code&gt;%module_path%/build/intermediates/cmake&lt;/code&gt;下可查看构建的结果。其中&lt;code&gt;%module_path%&lt;/code&gt;代表module的全路径。则是示例如下图：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/KrQU2KV.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;从步骤3中查看构建出来的so往往比正常情况下大很多，这里原因暂未找到!!!不过可以在目录&lt;code&gt;%module_path%/build/outputs/aar&lt;/code&gt;下面找到aar(前提是这里的module是android library module而非app module)，用压缩软件打开，提取出压缩包中的jni子目录下的so，这里的so大小正常。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;clean命令&quot;&gt;&lt;a href=&quot;#clean命令&quot; class=&quot;headerlink&quot; title=&quot;clean命令&quot;&gt;&lt;/a&gt;clean命令&lt;/h2&gt;&lt;p&gt;想要清除上一次构建的结果，类似于构建命令，可按照如下步骤操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;打开Android studio的内嵌终端；&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/DEE8MD9.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;分两种clean模式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;a.只针对性清理某一构建命令生成的文件，在项目根目录下执行形如&lt;code&gt;gradlew.bat [module_name]:externalNativeBuildClean[buildTypesName]&lt;/code&gt;的命令，比如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;gradlew.bat ndkbuild:externalNativeBuildCleanRelease&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;b.全清除，即清楚所有生成的构建文件和目录。即&lt;code&gt;%module_path%/build&lt;/code&gt;目录全部删除。那么应该执行形如形如&lt;code&gt;gradlew.bat [module_name]:clean&lt;/code&gt;的命令，比如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;gradlew.bat ndkbuild:clean&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 当然也直接利用Android studio的菜单栏中的选项(&lt;code&gt;Build--&amp;gt;Clean Project&lt;/code&gt;)进行clean(不过这样是清理整个project)，比如：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/wK3miZG.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;清理完成之后，如果项目是采用ndk-build构建，在&lt;code&gt;%module_path%/build/intermediates/ndkBuild&lt;/code&gt;，如果是采用cmake构建，则&lt;code&gt;%module_path%/build/intermediates/cmake&lt;/code&gt;下可查看是否清理完成。如果是全清除模式，则查看&lt;code&gt;%module_path%/build&lt;/code&gt;目录是否删除。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;本文对Android NDK开发进行较详细的梳理，特别是针对其中涉及到的坑进行重点阐述，以让大家在后续的
+    
+    </summary>
+    
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="NDK" scheme="https://cstsinghua.github.io/categories/Android/NDK/"/>
+    
+    
+      <category term="Android" scheme="https://cstsinghua.github.io/tags/Android/"/>
+    
+      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
+    
+      <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
+    
+      <category term="NDK" scheme="https://cstsinghua.github.io/tags/NDK/"/>
+    
+      <category term="JNI" scheme="https://cstsinghua.github.io/tags/JNI/"/>
+    
+      <category term="cmake" scheme="https://cstsinghua.github.io/tags/cmake/"/>
+    
+      <category term="ndk-build" scheme="https://cstsinghua.github.io/tags/ndk-build/"/>
+    
+  </entry>
+  
+  <entry>
     <title>用sphinx编写智能和漂亮的文档</title>
     <link href="https://cstsinghua.github.io/2017/11/16/%E7%BC%96%E5%86%99sphinx%E6%96%87%E6%A1%A3/"/>
     <id>https://cstsinghua.github.io/2017/11/16/编写sphinx文档/</id>

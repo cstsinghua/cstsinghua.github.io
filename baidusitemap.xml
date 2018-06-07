@@ -341,6 +341,41 @@
 
     
   <url>
+    <loc>https://cstsinghua.github.io/2017/11/17/Android%20studio%20NDK%E5%BC%80%E5%8F%91%E4%B8%AD%E9%82%A3%E4%BA%9B%E5%9D%91/</loc>
+    <lastmod>2017-11-17T02:39:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android NDK开发和遇到的坑</title>
+        <pubTime>2017-11-17T02:39:15.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Android studio</tag>
+         
+        <tag>Eclipse</tag>
+         
+        <tag>NDK</tag>
+         
+        <tag>JNI</tag>
+         
+        <tag>cmake</tag>
+         
+        <tag>ndk-build</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="NDK" url="https://cstsinghua.github.io/categories/Android/NDK/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://cstsinghua.github.io/2017/11/16/%E7%BC%96%E5%86%99sphinx%E6%96%87%E6%A1%A3/</loc>
     <lastmod>2017-11-16T03:07:29.000Z</lastmod>
     <data>

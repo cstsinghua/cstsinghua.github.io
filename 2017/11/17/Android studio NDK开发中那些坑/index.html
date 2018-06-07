@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?338a0bb40db1ba116191683538324875"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/">
+    
+    
+    <title>Android NDK开发和遇到的坑 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,Android studio,Eclipse,NDK,JNI,cmake,ndk-build">
+    <meta name="description" content="前言本文对Android NDK开发进行较详细的梳理，特别是针对其中涉及到的坑进行重点阐述，以让大家在后续的开发中重复踩坑。
+CMake待续
+ndk-build待续
+工程实施待续
+构建构建命令
+打开Android studio的内嵌终端；
+
+在项目根目录下，执行形如gradlew.bat [module_name]:externalNativeBuild[buildTypesName]的命令，比">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android NDK开发和遇到的坑">
+<meta property="og:url" content="https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="前言本文对Android NDK开发进行较详细的梳理，特别是针对其中涉及到的坑进行重点阐述，以让大家在后续的开发中重复踩坑。
+CMake待续
+ndk-build待续
+工程实施待续
+构建构建命令
+打开Android studio的内嵌终端；
+
+在项目根目录下，执行形如gradlew.bat [module_name]:externalNativeBuild[buildTypesName]的命令，比">
+<meta property="og:image" content="https://i.imgur.com/DEE8MD9.png">
+<meta property="og:image" content="https://i.imgur.com/KrQU2KV.png">
+<meta property="og:image" content="https://i.imgur.com/DEE8MD9.png">
+<meta property="og:image" content="https://i.imgur.com/wK3miZG.png">
+<meta property="og:updated_time" content="2017-11-17T02:39:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android NDK开发和遇到的坑">
+<meta name="twitter:description" content="前言本文对Android NDK开发进行较详细的梳理，特别是针对其中涉及到的坑进行重点阐述，以让大家在后续的开发中重复踩坑。
+CMake待续
+ndk-build待续
+工程实施待续
+构建构建命令
+打开Android studio的内嵌终端；
+
+在项目根目录下，执行形如gradlew.bat [module_name]:externalNativeBuild[buildTypesName]的命令，比">
+<meta name="twitter:image" content="https://i.imgur.com/DEE8MD9.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android NDK开发和遇到的坑</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android NDK开发和遇到的坑</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-17T02:39:15.000Z" itemprop="datePublished" class="page-time">
+  2017-11-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/NDK/">NDK</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CMake"><span class="post-toc-number">2.</span> <span class="post-toc-text">CMake</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ndk-build"><span class="post-toc-number">3.</span> <span class="post-toc-text">ndk-build</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#工程实施"><span class="post-toc-number">4.</span> <span class="post-toc-text">工程实施</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#构建"><span class="post-toc-number">5.</span> <span class="post-toc-text">构建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构建命令"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">构建命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#clean命令"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">clean命令</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android studio NDK开发中那些坑"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android NDK开发和遇到的坑</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-17 10:39:15" datetime="2017-11-17T02:39:15.000Z"  itemprop="datePublished">2017-11-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/NDK/">NDK</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文对Android NDK开发进行较详细的梳理，特别是针对其中涉及到的坑进行重点阐述，以让大家在后续的开发中重复踩坑。</p>
+<h1 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a>CMake</h1><p>待续</p>
+<h1 id="ndk-build"><a href="#ndk-build" class="headerlink" title="ndk-build"></a>ndk-build</h1><p>待续</p>
+<h1 id="工程实施"><a href="#工程实施" class="headerlink" title="工程实施"></a>工程实施</h1><p>待续</p>
+<h1 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h1><h2 id="构建命令"><a href="#构建命令" class="headerlink" title="构建命令"></a>构建命令</h2><ol>
+<li><p>打开Android studio的内嵌终端；<br><img src="https://i.imgur.com/DEE8MD9.png" alt=""></p>
+</li>
+<li><p>在项目根目录下，执行形如<code>gradlew.bat [module_name]:externalNativeBuild[buildTypesName]</code>的命令，比如：</p>
+<blockquote>
+<p>gradlew.bat ndkbuild:externalNativeBuildRelease</p>
+</blockquote>
+<p>其中，module_name为你的工程模块(module)名称，如果是app模块，这里则取“app”。buildTypesName是该模块的build.gradle配置里面的buildTypes(构建类型)中的其中一种，比如release或者你自己配置的名字。下面代码片段是截取自示例模块ndkbuild的build.gradle示例：</p>
+<pre><code class="gralde">android {
+ compileSdkVersion 26
+
+ lintOptions {
+     disable &apos;OldTargetApi&apos;,&apos;UnusedResources&apos;
+ }
+
+ defaultConfig {
+     minSdkVersion 15
+     targetSdkVersion 26
+     versionCode 1
+     versionName &quot;1.0&quot;
+
+     testInstrumentationRunner &quot;android.support.test.runner.AndroidJUnitRunner&quot;
+
+     externalNativeBuild {
+         ndkBuild {
+             //arguments &quot;NDK_APPLICATION_MK:=src/main/jni/Application.mk&quot;
+             //cFlags &quot;-DTEST_C_FLAG1&quot;, &quot;-DTEST_C_FLAG2&quot;
+             //cppFlags &quot;-DTEST_CPP_FLAG2&quot;, &quot;-DTEST_CPP_FLAG2&quot;
+             abiFilters &quot;armeabi-v7a&quot;
+         }
+     }
+
+ }
+
+ buildTypes {
+     release {
+         minifyEnabled false
+         proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;
+     }
+ }
+
+ externalNativeBuild {
+     ndkBuild {
+         path &apos;src/main/jni/projects/android/jni/Android.mk&apos;
+     }
+ }
+}
+</code></pre>
+</li>
+<li><p>构建命令执行完成之后，如果是采用ndk-build构建，在<code>%module_path%/build/intermediates/ndkBuild</code>，如果是采用cmake构建，则<code>%module_path%/build/intermediates/cmake</code>下可查看构建的结果。其中<code>%module_path%</code>代表module的全路径。则是示例如下图：<br><img src="https://i.imgur.com/KrQU2KV.png" alt=""></p>
+</li>
+<li><p>从步骤3中查看构建出来的so往往比正常情况下大很多，这里原因暂未找到!!!不过可以在目录<code>%module_path%/build/outputs/aar</code>下面找到aar(前提是这里的module是android library module而非app module)，用压缩软件打开，提取出压缩包中的jni子目录下的so，这里的so大小正常。</p>
+</li>
+</ol>
+<h2 id="clean命令"><a href="#clean命令" class="headerlink" title="clean命令"></a>clean命令</h2><p>想要清除上一次构建的结果，类似于构建命令，可按照如下步骤操作：</p>
+<ol>
+<li><p>打开Android studio的内嵌终端；<br><img src="https://i.imgur.com/DEE8MD9.png" alt=""></p>
+</li>
+<li><p>分两种clean模式：</p>
+<ul>
+<li><p>a.只针对性清理某一构建命令生成的文件，在项目根目录下执行形如<code>gradlew.bat [module_name]:externalNativeBuildClean[buildTypesName]</code>的命令，比如：</p>
+<blockquote>
+<p>gradlew.bat ndkbuild:externalNativeBuildCleanRelease</p>
+</blockquote>
+</li>
+<li><p>b.全清除，即清楚所有生成的构建文件和目录。即<code>%module_path%/build</code>目录全部删除。那么应该执行形如形如<code>gradlew.bat [module_name]:clean</code>的命令，比如：</p>
+<blockquote>
+<p>gradlew.bat ndkbuild:clean</p>
+</blockquote>
+<p> 当然也直接利用Android studio的菜单栏中的选项(<code>Build--&gt;Clean Project</code>)进行clean(不过这样是清理整个project)，比如：<br><img src="https://i.imgur.com/wK3miZG.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>清理完成之后，如果项目是采用ndk-build构建，在<code>%module_path%/build/intermediates/ndkBuild</code>，如果是采用cmake构建，则<code>%module_path%/build/intermediates/cmake</code>下可查看是否清理完成。如果是全清除模式，则查看<code>%module_path%/build</code>目录是否删除。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    post.last_updated<time datetime="2017-11-17T02:39:19.000Z" itemprop="dateUpdated">2017-11-17 10:39:19</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-studio/">Android studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Eclipse/">Eclipse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JNI/">JNI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmake/">cmake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ndk-build/">ndk-build</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/&title=《Android NDK开发和遇到的坑》 — Atypical programmer&pic=https://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/&title=《Android NDK开发和遇到的坑》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android NDK开发和遇到的坑》 — Atypical programmer&url=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/&via=https://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/01/08/adb原理简介及常用命令介绍/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">adb原理简介及常用命令介绍</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/16/编写sphinx文档/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">用sphinx编写智能和漂亮的文档</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "4DjAfnIwjxGfITAYl8eVX5Pe-gzGzoHsz",
+            appKey: "ss62qxcFEjf5opJ4Ii5xI2zn",
+            avatar: "mm",
+            placeholder: "欢迎交流",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/&title=《Android NDK开发和遇到的坑》 — Atypical programmer&pic=https://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/&title=《Android NDK开发和遇到的坑》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android NDK开发和遇到的坑》 — Atypical programmer&url=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/&via=https://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
