@@ -26,7 +26,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Android,NDK,JNI,调试,分析,ndk-gdb,ndk-stack,LLDB">
+    <meta name="keywords" content="Android,NDK,JNI,调试,分析,ndk-gdb,ndk-stack,LLDB,Native Tracing,AddressSanitize">
     <meta name="description" content="简介(初稿)Android NDK开发属于Android开发中的高阶内容，其不仅要熟悉Android平台知识，更需要熟悉C++语言和相关的构建工具。而NDK开发中出现的异常是Android APP crash的主要原因。NDK开发的异常调试和分析比较困难，日志信息可读性很差。因此本文对NDK开发中常用的工具和方法进行总结，以期能帮助大家提升Android NDK开发的水平。
 首先，关于JNI和A">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 <meta property="og:description" content="简介(初稿)Android NDK开发属于Android开发中的高阶内容，其不仅要熟悉Android平台知识，更需要熟悉C++语言和相关的构建工具。而NDK开发中出现的异常是Android APP crash的主要原因。NDK开发的异常调试和分析比较困难，日志信息可读性很差。因此本文对NDK开发中常用的工具和方法进行总结，以期能帮助大家提升Android NDK开发的水平。
 首先，关于JNI和A">
 <meta property="og:image" content="https://i.imgur.com/hlg4F5o.png">
-<meta property="og:updated_time" content="2018-06-07T06:45:50.000Z">
+<meta property="og:updated_time" content="2018-06-11T06:28:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android NDK调试和分析">
 <meta name="twitter:description" content="简介(初稿)Android NDK开发属于Android开发中的高阶内容，其不仅要熟悉Android平台知识，更需要熟悉C++语言和相关的构建工具。而NDK开发中出现的异常是Android APP crash的主要原因。NDK开发的异常调试和分析比较困难，日志信息可读性很差。因此本文对NDK开发中常用的工具和方法进行总结，以期能帮助大家提升Android NDK开发的水平。
@@ -218,7 +218,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#LLDB"><span class="post-toc-number">2.</span> <span class="post-toc-text">LLDB</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ndk-gdb"><span class="post-toc-number">3.</span> <span class="post-toc-text">ndk-gdb</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ndk-stack"><span class="post-toc-number">4.</span> <span class="post-toc-text">ndk-stack</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#LLDB"><span class="post-toc-number">2.</span> <span class="post-toc-text">LLDB</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ndk-gdb"><span class="post-toc-number">3.</span> <span class="post-toc-text">ndk-gdb</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ndk-stack"><span class="post-toc-number">4.</span> <span class="post-toc-text">ndk-stack</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#AddressSanitize"><span class="post-toc-number">5.</span> <span class="post-toc-text">AddressSanitize</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Native-Tracing"><span class="post-toc-number">6.</span> <span class="post-toc-text">Native Tracing</span></a></li></ol>
         </nav>
     </aside>
     
@@ -256,6 +256,8 @@
 <li>LLDB：原生调试，支持断点和变量查看，用于开发者有源码的情况下，多用于开发阶段；</li>
 <li>ndk-gdb：支持ndk-build脚本构建的工程，当前Android studio默认已采用CMake方式构建工程，所以不是很推荐；</li>
 <li>ndk-stack：适用于已经发布版本，或者用户反馈问题(提供了错误logcat日志)等情况，即直接分析NDK错误日志，分析C++源码的错误点。</li>
+<li><a href="https://github.com/google/sanitizers/wiki/AddressSanitizerOnAndroid" target="_blank" rel="external">AddressSanitize</a>：google官方提供的用于检测C/C++代码的memory error的工具(除了Android，其他平台也可以使用)。</li>
+<li>Native Tracing：对C++代码进行跟踪分析，比如执行时间和效率等等。使用非常简单，仅需要依赖Android的<code>#include &lt;android/trace.h&gt;</code>头文件即可。但仅在Android API Level&gt;=23才支持。用于在开发阶段优化代码逻辑，提升算法质量等。</li>
 </ol>
 <p><strong>Note：推荐采用LLDB或ndk-stack</strong></p>
 <h1 id="LLDB"><a href="#LLDB" class="headerlink" title="LLDB"></a>LLDB</h1><p>请参见<a href="https://developer.android.com/studio/debug/" target="_blank" rel="external">https://developer.android.com/studio/debug/</a></p>
@@ -263,15 +265,15 @@
 <h1 id="ndk-stack"><a href="#ndk-stack" class="headerlink" title="ndk-stack"></a>ndk-stack</h1><p>请参见<a href="https://developer.android.com/ndk/guides/ndk-stack" target="_blank" rel="external">https://developer.android.com/ndk/guides/ndk-stack</a></p>
 <p>使用命令格式如下(其中，<code>$NDK</code>代表NDK的安装目录，新版Android studio的SDK Manager会将NDK安装在Android SDK目录下的<code>ndk-bundle</code>子目录，如果是自己单独下载NDK的话，请找到对应的解压路径。新版Android studio采用CMake构建，构建生成的so文件位于<code>$PROJECT_PATH/app/build/intermediates/cmake/debug/obj/&lt;abi&gt;</code>下(debug模式)或<code>$PROJECT_PATH/app/build/intermediates/cmake/debug/release/&lt;abi&gt;</code>(release模式)，其中 <code>&lt;abi&gt;</code> 表示您的<a href="https://developer.android.com/ndk/guides/abis" target="_blank" rel="external">设备的ABI</a>)。当然也可以直接从Android APK解压提取共享库so文件，然后存放在指定目录，以便分析。</p>
 <blockquote>
-<p>adb logcat | $NDK/ndk-stack -sym $PROJECT_PATH/app/build/intermediates/cmake/debug/obj/<abi></abi></p>
+<p>adb logcat | $NDK/ndk-stack -sym $PROJECT_PATH/app/build/intermediates/cmake/debug/obj/&lt;abi&gt;</p>
 </blockquote>
 <p>或者分开执行：</p>
 <blockquote>
-<p>adb logcat &gt; /tmp/foo.txt<br>$NDK/ndk-stack -sym $PROJECT_PATH/app/build/intermediates/cmake/debug/obj/<abi> -dump foo.txt</abi></p>
+<p>adb &nbsp;logcat &nbsp; &gt; /tmp/foo.txt<br>$NDK/ndk-stack  &nbsp;-sym &nbsp; $PROJECT_PATH/app/build/intermediates/cmake/debug/obj/&lt;abi&gt;  &nbsp; -dump &nbsp; foo.txt</p>
 </blockquote>
 <p>示例（以windows为例）：</p>
 <blockquote>
-<p>cd F:\ubuntu\share\V8Android\app\build\intermediates\cmake\debug\obj\arm64-v8a<br>“F:\Android\sdk\ndk-bundle\ndk-stack.cmd” -sym . -dump D:\UserProfiles\CoulsonChen\Desktop\ndk.txt &gt;analyze.txt</p>
+<p>cd F:\ubuntu\share\V8Android\app\build\intermediates\cmake\debug\obj\arm64-v8a<br>“F:\Android\sdk\ndk-bundle\ndk-stack.cmd” &nbsp;-sym &nbsp;. &nbsp;-dump &nbsp;D:\UserProfiles\CoulsonChen\Desktop\ndk.txt &nbsp; &gt;analyze.txt</p>
 </blockquote>
 <p>analyze.txt的内容如下(从中可以明确看到出错的代码行在哪里)：</p>
 <pre><code>********** Crash dump: **********
@@ -286,14 +288,16 @@ Stack frame         #04 pc 00000000000cfa40  /data/app/com.boyaa.v8wrapper-gc82k
 Stack frame         #05 pc 00000000000d22cc  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/lib/arm64/libnative-lib.so (initV8()+792): Routine initV8() at F:\ubuntu\share\V8Android\app\src\main\cpp/native-lib.cpp:67
 Stack frame         #06 pc 00000000000d35d0  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/lib/arm64/libnative-lib.so (Java_com_boyaa_v8wrapper_MainActivity_nativeInit+72): Routine Java_com_boyaa_v8wrapper_MainActivity_nativeInit at F:\ubuntu\share\V8Android\app\src\main\cpp/native-lib.cpp:165
 Stack frame         #07 pc 00000000000092b8  /data/app/com.boyaa.v8wrapper-gc82kSUIyk_jPb6OjAZERw==/oat/arm64/base.odex (offset 0x9000)
-</code></pre>
+</code></pre><h1 id="AddressSanitize"><a href="#AddressSanitize" class="headerlink" title="AddressSanitize"></a>AddressSanitize</h1><p>请参见<a href="https://github.com/google/sanitizers/wiki/AddressSanitizerOnAndroid" target="_blank" rel="external">AddressSanitize</a></p>
+<h1 id="Native-Tracing"><a href="#Native-Tracing" class="headerlink" title="Native Tracing"></a>Native Tracing</h1><p>请参见<a href="https://developer.android.com/ndk/guides/tracing" target="_blank" rel="external">Native Tracing</a></p>
+
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-06-07T06:45:50.000Z" itemprop="dateUpdated">2018-06-07 14:45:50</time>
+    post.last_updated<time datetime="2018-06-11T06:28:37.000Z" itemprop="dateUpdated">2018-06-11 14:28:37</time>
 </span><br>
 
 
@@ -316,7 +320,7 @@ Stack frame         #07 pc 00000000000092b8  /data/app/com.boyaa.v8wrapper-gc82k
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JNI/">JNI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLDB/">LLDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ndk-gdb/">ndk-gdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ndk-stack/">ndk-stack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分析/">分析</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AddressSanitize/">AddressSanitize</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JNI/">JNI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLDB/">LLDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Native-Tracing/">Native Tracing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ndk-gdb/">ndk-gdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ndk-stack/">ndk-stack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分析/">分析</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
 
 
             
