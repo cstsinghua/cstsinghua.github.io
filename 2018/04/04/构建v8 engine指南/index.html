@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://i.imgur.com/Da1SRZK.jpg">
 <meta property="og:image" content="https://i.imgur.com/JpaKJRR.jpg">
 <meta property="og:image" content="https://i.imgur.com/KjQ0CNp.jpg">
-<meta property="og:updated_time" content="2018-04-18T06:34:44.000Z">
+<meta property="og:updated_time" content="2018-06-11T07:03:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建v8 engine指南">
 <meta name="twitter:description" content="背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Androi">
@@ -304,7 +304,7 @@
 <blockquote>
 <p>tools/dev/v8gen.py x64.release</p>
 </blockquote>
-<p> <strong>注意：目标平台有很多，可以通过<code>tools/dev/v8gen.py --list</code>命令查看</strong>。这里以本文写作时的master分支版本为例，执行<code>tools/dev/v8gen.py --list</code>命令后，可以看到v8支持如下目标平台构建：</p>
+<p> <strong>注意：目标平台有很多，可以通过<code>tools/dev/v8gen.py list</code>命令查看</strong>。这里以本文写作时的master分支版本为例，执行<code>tools/dev/v8gen.py list</code>命令后，可以看到v8支持如下目标平台构建：</p>
 <pre><code>coulsonchen@coulsonchen:/usr/local/v8/v8$ tools/dev/v8gen.py list
 android.arm.debug
 android.arm.optdebug
@@ -439,7 +439,7 @@ x64.release
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-04-18T06:34:44.000Z" itemprop="dateUpdated">2018-04-18 14:34:44</time>
+    post.last_updated<time datetime="2018-06-11T07:03:29.000Z" itemprop="dateUpdated">2018-06-11 15:03:29</time>
 </span><br>
 
 

@@ -509,7 +509,7 @@ ninja: build stopped: subcommand failed.
     <link href="https://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/"/>
     <id>https://cstsinghua.github.io/2018/04/04/构建v8 engine指南/</id>
     <published>2018-04-04T10:16:35.000Z</published>
-    <updated>2018-04-18T06:34:44.000Z</updated>
+    <updated>2018-06-11T07:03:29.000Z</updated>
     
     <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Android平台讲解。IOS下，OC调用C++更简单，这里暂不赘述)：&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/q5Qk8li.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -569,7 +569,7 @@ ninja: build stopped: subcommand failed.
 &lt;blockquote&gt;
 &lt;p&gt;tools/dev/v8gen.py x64.release&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt; &lt;strong&gt;注意：目标平台有很多，可以通过&lt;code&gt;tools/dev/v8gen.py --list&lt;/code&gt;命令查看&lt;/strong&gt;。这里以本文写作时的master分支版本为例，执行&lt;code&gt;tools/dev/v8gen.py --list&lt;/code&gt;命令后，可以看到v8支持如下目标平台构建：&lt;/p&gt;
+&lt;p&gt; &lt;strong&gt;注意：目标平台有很多，可以通过&lt;code&gt;tools/dev/v8gen.py list&lt;/code&gt;命令查看&lt;/strong&gt;。这里以本文写作时的master分支版本为例，执行&lt;code&gt;tools/dev/v8gen.py list&lt;/code&gt;命令后，可以看到v8支持如下目标平台构建：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;coulsonchen@coulsonchen:/usr/local/v8/v8$ tools/dev/v8gen.py list
 android.arm.debug
 android.arm.optdebug
