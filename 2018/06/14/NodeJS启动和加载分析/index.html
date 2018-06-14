@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?338a0bb40db1ba116191683538324875"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/">
+    
+    
+    <title>NodeJS启动和加载分析 | Atypical programmer | 做一个非典型程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS,require,module system,启动,加载,源码分析,source analysis,load,bootstrap,实现,implementation">
+    <meta name="description" content="NodeJS启动和加载分析本文以目前NodeJS最新的源码的master分支(截止到2018.6.7日的commit，SHA1值为22c826f5aa3811e758686fd00a8fe15728f6fc37。即将NodeJS仓库从Github clone下来之后，在本地仓库目录下执行git checout 22c826f5aa3811e758686fd00a8fe15728f6fc37即可获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NodeJS启动和加载分析">
+<meta property="og:url" content="https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/index.html">
+<meta property="og:site_name" content="Atypical programmer">
+<meta property="og:description" content="NodeJS启动和加载分析本文以目前NodeJS最新的源码的master分支(截止到2018.6.7日的commit，SHA1值为22c826f5aa3811e758686fd00a8fe15728f6fc37。即将NodeJS仓库从Github clone下来之后，在本地仓库目录下执行git checout 22c826f5aa3811e758686fd00a8fe15728f6fc37即可获">
+<meta property="og:image" content="https://i.imgur.com/sqANOlH.jpg">
+<meta property="og:image" content="https://i.imgur.com/VviVahN.jpg">
+<meta property="og:updated_time" content="2018-06-14T09:58:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NodeJS启动和加载分析">
+<meta name="twitter:description" content="NodeJS启动和加载分析本文以目前NodeJS最新的源码的master分支(截止到2018.6.7日的commit，SHA1值为22c826f5aa3811e758686fd00a8fe15728f6fc37。即将NodeJS仓库从Github clone下来之后，在本地仓库目录下执行git checout 22c826f5aa3811e758686fd00a8fe15728f6fc37即可获">
+<meta name="twitter:image" content="https://i.imgur.com/sqANOlH.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Cstsinghua</h5>
+          <a href="mailto:cstsinghua@126.com" title="cstsinghua@126.com" class="mail">cstsinghua@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Android"  >
+                <i class="icon icon-lg icon-android"></i>
+                Android
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Java"  >
+                <i class="icon icon-lg icon-coffee"></i>
+                Java
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/Python"  >
+                <i class="icon icon-lg icon-product-hunt"></i>
+                Python
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/NodeJS"  >
+                <i class="icon icon-lg icon-shield"></i>
+                NodeJS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/版本控制/"  >
+                <i class="icon icon-lg icon-git"></i>
+                版本控制
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/杂项/"  >
+                <i class="icon icon-lg icon-book"></i>
+                杂项
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/sitemap.xml"  >
+                <i class="icon icon-lg icon-sitemap"></i>
+                Sitemap
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cstsinghua" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://developer.android.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                Android官网
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">NodeJS启动和加载分析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">NodeJS启动和加载分析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-14T09:58:30.000Z" itemprop="datePublished" class="page-time">
+  2018-06-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/source/">source</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#NodeJS启动和加载分析"><span class="post-toc-number">1.</span> <span class="post-toc-text">NodeJS启动和加载分析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#模仿实现NodeJS的require和module-system-module加载机制"><span class="post-toc-number">2.</span> <span class="post-toc-text">模仿实现NodeJS的require和module system(module加载机制)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#附录-参考"><span class="post-toc-number">3.</span> <span class="post-toc-text">附录(参考)</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-NodeJS启动和加载分析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">NodeJS启动和加载分析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-14 17:58:30" datetime="2018-06-14T09:58:30.000Z"  itemprop="datePublished">2018-06-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/source/">source</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<h1 id="NodeJS启动和加载分析"><a href="#NodeJS启动和加载分析" class="headerlink" title="NodeJS启动和加载分析"></a>NodeJS启动和加载分析</h1><p>本文以目前<a href="https://github.com/nodejs/node" target="_blank" rel="external">NodeJS最新的源码的master分支</a>(截止到2018.6.7日的commit，SHA1值为22c826f5aa3811e758686fd00a8fe15728f6fc37。即将NodeJS仓库从Github clone下来之后，在本地仓库目录下执行<code>git checout 22c826f5aa3811e758686fd00a8fe15728f6fc37</code>即可获取本文内容采用的源码版本)为基准，梳理NodeJS的启动流程和模块加载机制，即执行形如命令”node app.js”时的源码逻辑。</p>
+<ol>
+<li><strong>node_main.cc：</strong>入口代码(这里是以Unix和Linux版本作为目标，Windows对应30行的<code>int wmain(int argc, wchar_t* wargv[])</code>)，在NodeJS源码的src子目录下：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">94</span>     <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line"><span class="number">95</span>     <span class="meta">#<span class="meta-keyword">if</span> defined(__POSIX__) &amp;&amp; defined(NODE_SHARED_MODE)</span></span><br><span class="line"><span class="number">96</span>       <span class="comment">// In node::PlatformInit(), we squash all signal handlers for non-shared lib</span></span><br><span class="line"><span class="number">97</span>       <span class="comment">// build. In order to run test cases against shared lib build, we also need</span></span><br><span class="line"><span class="number">98</span>       <span class="comment">// to do the same thing for shared lib build here, but only for SIGPIPE for</span></span><br><span class="line"><span class="number">99</span>       <span class="comment">// now. If node::PlatformInit() is moved to here, then this section could be</span></span><br><span class="line"><span class="number">100</span>      <span class="comment">// removed.</span></span><br><span class="line"><span class="number">101</span>      &#123;</span><br><span class="line"><span class="number">102</span>        <span class="keyword">struct</span> sigaction act;</span><br><span class="line"><span class="number">103</span>        <span class="built_in">memset</span>(&amp;act, <span class="number">0</span>, <span class="keyword">sizeof</span>(act));</span><br><span class="line"><span class="number">104</span>        act.sa_handler = SIG_IGN;</span><br><span class="line"><span class="number">105</span>        sigaction(SIGPIPE, &amp;act, <span class="literal">nullptr</span>);</span><br><span class="line"><span class="number">106</span>      &#125;</span><br><span class="line"><span class="number">107</span>    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="number">108</span></span><br><span class="line"><span class="number">109</span>    <span class="meta">#<span class="meta-keyword">if</span> defined(__linux__)</span></span><br><span class="line"><span class="number">110</span>      <span class="keyword">char</span>** envp = environ;</span><br><span class="line"><span class="number">111</span>      <span class="keyword">while</span> (*envp++ != <span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line"><span class="number">112</span>      Elf_auxv_t* auxv = <span class="keyword">reinterpret_cast</span>&lt;Elf_auxv_t*&gt;(envp);</span><br><span class="line"><span class="number">113</span>      <span class="keyword">for</span> (; auxv-&gt;a_type != AT_NULL; auxv++) &#123;</span><br><span class="line"><span class="number">114</span>        <span class="keyword">if</span> (auxv-&gt;a_type == AT_SECURE) &#123;</span><br><span class="line"><span class="number">115</span>          node::linux_at_secure = auxv-&gt;a_un.a_val;</span><br><span class="line"><span class="number">116</span>          <span class="keyword">break</span>;</span><br><span class="line"><span class="number">117</span>        &#125;</span><br><span class="line"><span class="number">118</span>      &#125;</span><br><span class="line"><span class="number">119</span>    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="number">120</span>      <span class="comment">// Disable stdio buffering, it interacts poorly with printf()</span></span><br><span class="line"><span class="number">121</span>      <span class="comment">// calls elsewhere in the program (e.g., any logging from V8.)</span></span><br><span class="line"><span class="number">122</span>      setvbuf(<span class="built_in">stdout</span>, <span class="literal">nullptr</span>, _IONBF, <span class="number">0</span>);</span><br><span class="line"><span class="number">123</span>      setvbuf(<span class="built_in">stderr</span>, <span class="literal">nullptr</span>, _IONBF, <span class="number">0</span>);</span><br><span class="line"><span class="number">124</span>      <span class="keyword">return</span> node::Start(argc, argv);</span><br><span class="line"><span class="number">125</span>    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可以看到，关键行在于124行。其中Start函数定义在node.cc里面。</p>
+<ol>
+<li><strong>node.cc:加载启动的关键逻辑所在，其在NodeJS源码的src子目录下。</strong><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4180</span>    <span class="function"><span class="keyword">int</span> <span class="title">Start</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line"><span class="number">4181</span>      atexit([] () &#123; uv_tty_reset_mode(); &#125;);</span><br><span class="line"><span class="number">4182</span>      PlatformInit();</span><br><span class="line"><span class="number">4183</span>      performance::performance_node_start = PERFORMANCE_NOW();</span><br><span class="line"><span class="number">4184</span></span><br><span class="line"><span class="number">4185</span>      CHECK_GT(argc, <span class="number">0</span>);</span><br><span class="line"><span class="number">4186</span></span><br><span class="line"><span class="number">4187</span>      <span class="comment">// Hack around with the argv pointer. Used for process.title = "blah".</span></span><br><span class="line"><span class="number">4188</span>      argv = uv_setup_args(argc, argv);</span><br><span class="line"><span class="number">4189</span></span><br><span class="line"><span class="number">4190</span>      <span class="comment">// This needs to run *before* V8::Initialize().  The const_cast is not</span></span><br><span class="line"><span class="number">4191</span>      <span class="comment">// optional, in case you're wondering.</span></span><br><span class="line"><span class="number">4192</span>      <span class="keyword">int</span> exec_argc;</span><br><span class="line"><span class="number">4193</span>      <span class="keyword">const</span> <span class="keyword">char</span>** exec_argv;</span><br><span class="line"><span class="number">4194</span>      Init(&amp;argc, <span class="keyword">const_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">char</span>**&gt;(argv), &amp;exec_argc, &amp;exec_argv);</span><br><span class="line"><span class="number">4195</span></span><br><span class="line"><span class="number">4196</span>    <span class="meta">#<span class="meta-keyword">if</span> HAVE_OPENSSL</span></span><br><span class="line"><span class="number">4197</span>      &#123;</span><br><span class="line"><span class="number">4198</span>        <span class="built_in">std</span>::<span class="built_in">string</span> extra_ca_certs;</span><br><span class="line"><span class="number">4199</span>        <span class="keyword">if</span> (SafeGetenv(<span class="string">"NODE_EXTRA_CA_CERTS"</span>, &amp;extra_ca_certs))</span><br><span class="line"><span class="number">4200</span>          crypto::UseExtraCaCerts(extra_ca_certs);</span><br><span class="line"><span class="number">4201</span>      &#125;</span><br><span class="line"><span class="number">4202</span>    <span class="meta">#<span class="meta-keyword">ifdef</span> NODE_FIPS_MODE</span></span><br><span class="line"><span class="number">4203</span>      <span class="comment">// In the case of FIPS builds we should make sure</span></span><br><span class="line"><span class="number">4204</span>      <span class="comment">// the random source is properly initialized first.</span></span><br><span class="line"><span class="number">4205</span>      OPENSSL_init();</span><br><span class="line"><span class="number">4206</span>    <span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">// NODE_FIPS_MODE</span></span></span><br><span class="line"><span class="number">4207</span>      <span class="comment">// V8 on Windows doesn't have a good source of entropy. Seed it from</span></span><br><span class="line"><span class="number">4208</span>      <span class="comment">// OpenSSL's pool.</span></span><br><span class="line"><span class="number">4209</span>      V8::SetEntropySource(crypto::EntropySource);</span><br><span class="line"><span class="number">4210</span>    <span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">// HAVE_OPENSSL</span></span></span><br><span class="line"><span class="number">4211</span></span><br><span class="line"><span class="number">4212</span>      v8_platform.Initialize(v8_thread_pool_size);</span><br><span class="line"><span class="number">4213</span>      V8::Initialize();</span><br><span class="line"><span class="number">4214</span>      performance::performance_v8_start = PERFORMANCE_NOW();</span><br><span class="line"><span class="number">4215</span>      v8_initialized = <span class="literal">true</span>;</span><br><span class="line"><span class="number">4216</span>      <span class="keyword">const</span> <span class="keyword">int</span> exit_code =</span><br><span class="line"><span class="number">4217</span>          Start(uv_default_loop(), argc, argv, exec_argc, exec_argv);</span><br><span class="line"><span class="number">4218</span>      v8_platform.StopTracingAgent();</span><br><span class="line"><span class="number">4219</span>      v8_initialized = <span class="literal">false</span>;</span><br><span class="line"><span class="number">4220</span>      V8::Dispose();</span><br><span class="line"><span class="number">4221</span></span><br><span class="line"><span class="number">4222</span>      <span class="comment">// uv_run cannot be called from the time before the beforeExit callback</span></span><br><span class="line"><span class="number">4223</span>      <span class="comment">// runs until the program exits unless the event loop has any referenced</span></span><br><span class="line"><span class="number">4224</span>      <span class="comment">// handles after beforeExit terminates. This prevents unrefed timers</span></span><br><span class="line"><span class="number">4225</span>      <span class="comment">// that happen to terminate during shutdown from being run unsafely.</span></span><br><span class="line"><span class="number">4226</span>      <span class="comment">// Since uv_run cannot be called, uv_async handles held by the platform</span></span><br><span class="line"><span class="number">4227</span>      <span class="comment">// will never be fully cleaned up.</span></span><br><span class="line"><span class="number">4228</span>      v8_platform.Dispose();</span><br><span class="line"><span class="number">4229</span></span><br><span class="line"><span class="number">4230</span>      <span class="keyword">delete</span>[] exec_argv;</span><br><span class="line"><span class="number">4231</span>      exec_argv = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="number">4232</span></span><br><span class="line"><span class="number">4233</span>      <span class="keyword">return</span> exit_code;</span><br><span class="line"><span class="number">4234</span>    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中，我们可以清楚地看到，NodeJS对v8 engine进行了初始化，然后在4217行关键代码，跳转进入到NodeJS的封装的事件循环之中(NodeJS是基于事件循环的单线程JS执行环境)。<code>Start(uv_default_loop(), argc, argv, exec_argc, exec_argv);</code>则定义在node.cc的4135行，如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4135</span>    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Start</span><span class="params">(<span class="keyword">uv_loop_t</span>* event_loop,</span><br><span class="line"><span class="number">4136</span>                     <span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span>* argv,</span><br><span class="line"><span class="number">4137</span>                     <span class="keyword">int</span> exec_argc, <span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span>* exec_argv)</span> </span>&#123;</span><br><span class="line"><span class="number">4138</span>      <span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;ArrayBufferAllocator, <span class="keyword">decltype</span>(&amp;FreeArrayBufferAllocator)&gt;</span><br><span class="line"><span class="number">4139</span>          allocator(CreateArrayBufferAllocator(), &amp;FreeArrayBufferAllocator);</span><br><span class="line"><span class="number">4140</span>      Isolate* <span class="keyword">const</span> isolate = NewIsolate(allocator.get());</span><br><span class="line"><span class="number">4141</span>      <span class="keyword">if</span> (isolate == <span class="literal">nullptr</span>)</span><br><span class="line"><span class="number">4142</span>        <span class="keyword">return</span> <span class="number">12</span>;  <span class="comment">// Signal internal error.</span></span><br><span class="line"><span class="number">4143</span></span><br><span class="line"><span class="number">4144</span>      &#123;</span><br><span class="line"><span class="number">4145</span>        Mutex::<span class="function">ScopedLock <span class="title">scoped_lock</span><span class="params">(node_isolate_mutex)</span></span>;</span><br><span class="line"><span class="number">4146</span>        CHECK_NULL(node_isolate);</span><br><span class="line"><span class="number">4147</span>        node_isolate = isolate;</span><br><span class="line"><span class="number">4148</span>      &#125;</span><br><span class="line"><span class="number">4149</span></span><br><span class="line"><span class="number">4150</span>      <span class="keyword">int</span> exit_code;</span><br><span class="line"><span class="number">4151</span>      &#123;</span><br><span class="line"><span class="number">4152</span>        <span class="function">Locker <span class="title">locker</span><span class="params">(isolate)</span></span>;</span><br><span class="line"><span class="number">4153</span>        Isolate::<span class="function">Scope <span class="title">isolate_scope</span><span class="params">(isolate)</span></span>;</span><br><span class="line"><span class="number">4154</span>        <span class="function">HandleScope <span class="title">handle_scope</span><span class="params">(isolate)</span></span>;</span><br><span class="line"><span class="number">4155</span>        <span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;IsolateData, <span class="keyword">decltype</span>(&amp;FreeIsolateData)&gt; isolate_data(</span><br><span class="line"><span class="number">4156</span>            CreateIsolateData(</span><br><span class="line"><span class="number">4157</span>                isolate,</span><br><span class="line"><span class="number">4158</span>                event_loop,</span><br><span class="line"><span class="number">4159</span>                v8_platform.Platform(),</span><br><span class="line"><span class="number">4160</span>                allocator.get()),</span><br><span class="line"><span class="number">4161</span>            &amp;FreeIsolateData);</span><br><span class="line"><span class="number">4162</span>        <span class="keyword">if</span> (track_heap_objects) &#123;</span><br><span class="line"><span class="number">4163</span>          isolate-&gt;GetHeapProfiler()-&gt;StartTrackingHeapObjects(<span class="literal">true</span>);</span><br><span class="line"><span class="number">4164</span>        &#125;</span><br><span class="line"><span class="number">4165</span>        exit_code =</span><br><span class="line"><span class="number">4166</span>            Start(isolate, isolate_data.get(), argc, argv, exec_argc, exec_argv);</span><br><span class="line"><span class="number">4167</span>      &#125;</span><br><span class="line"><span class="number">4168</span></span><br><span class="line"><span class="number">4169</span>      &#123;</span><br><span class="line"><span class="number">4170</span>        Mutex::<span class="function">ScopedLock <span class="title">scoped_lock</span><span class="params">(node_isolate_mutex)</span></span>;</span><br><span class="line"><span class="number">4171</span>        CHECK_EQ(node_isolate, isolate);</span><br><span class="line"><span class="number">4172</span>        node_isolate = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="number">4173</span>      &#125;</span><br><span class="line"><span class="number">4174</span></span><br><span class="line"><span class="number">4175</span>      isolate-&gt;Dispose();</span><br><span class="line"><span class="number">4176</span></span><br><span class="line"><span class="number">4177</span>      <span class="keyword">return</span> exit_code;</span><br><span class="line"><span class="number">4178</span>    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>而该函数的关键点则在4166行<code>Start(isolate, isolate_data.get(), argc, argv, exec_argc, exec_argv);</code>。这个函数定义在node.cc的4029行，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">4029    inline int Start(Isolate* isolate, IsolateData* isolate_data,</span><br><span class="line">4030                     int argc, const char* const* argv,</span><br><span class="line">4031                     int exec_argc, const char* const* exec_argv) &#123;</span><br><span class="line">4032      HandleScope handle_scope(isolate);</span><br><span class="line">4033      Local&lt;Context&gt; context = NewContext(isolate);</span><br><span class="line">4034      Context::Scope context_scope(context);</span><br><span class="line">4035      Environment env(isolate_data, context, v8_platform.GetTracingAgent());</span><br><span class="line">4036      env.Start(argc, argv, exec_argc, exec_argv, v8_is_profiling);</span><br><span class="line">4037</span><br><span class="line">4038      TRACE_EVENT_METADATA1("__metadata", "version", "node", NODE_VERSION_STRING);</span><br><span class="line">4039      TRACE_EVENT_METADATA1("__metadata", "thread_name", "name",</span><br><span class="line">4040                            "JavaScriptMainThread");</span><br><span class="line">4041</span><br><span class="line">4042      const char* path = argc &gt; 1 ? argv[1] : nullptr;</span><br><span class="line">4043      StartInspector(&amp;env, path, debug_options);</span><br><span class="line">4044</span><br><span class="line">4045      if (debug_options.inspector_enabled() &amp;&amp; !v8_platform.InspectorStarted(&amp;env))</span><br><span class="line">4046        return 12;  // Signal internal error.</span><br><span class="line">4047</span><br><span class="line">4048      env.set_abort_on_uncaught_exception(abort_on_uncaught_exception);</span><br><span class="line">4049</span><br><span class="line">4050      if (no_force_async_hooks_checks) &#123;</span><br><span class="line">4051        env.async_hooks()-&gt;no_force_checks();</span><br><span class="line">4052      &#125;</span><br><span class="line">4053</span><br><span class="line">4054      &#123;</span><br><span class="line">4055        Environment::AsyncCallbackScope callback_scope(&amp;env);</span><br><span class="line">4056        env.async_hooks()-&gt;push_async_ids(1, 0);</span><br><span class="line">4057        LoadEnvironment(&amp;env);</span><br><span class="line">4058        env.async_hooks()-&gt;pop_async_id(1);</span><br><span class="line">4059      &#125;</span><br><span class="line">4060</span><br><span class="line">4061      env.set_trace_sync_io(trace_sync_io);</span><br><span class="line">4062</span><br><span class="line">4063      &#123;</span><br><span class="line">4064        SealHandleScope seal(isolate);</span><br><span class="line">4065        bool more;</span><br><span class="line">4066        env.performance_state()-&gt;Mark(</span><br><span class="line">4067            node::performance::NODE_PERFORMANCE_MILESTONE_LOOP_START);</span><br><span class="line">4068        do &#123;</span><br><span class="line">4069          uv_run(env.event_loop(), UV_RUN_DEFAULT);</span><br><span class="line">4070</span><br><span class="line">4071          v8_platform.DrainVMTasks(isolate);</span><br><span class="line">4072</span><br><span class="line">4073          more = uv_loop_alive(env.event_loop());</span><br><span class="line">4074          if (more)</span><br><span class="line">4075            continue;</span><br><span class="line">4076</span><br><span class="line">4077          RunBeforeExit(&amp;env);</span><br><span class="line">4078</span><br><span class="line">4079          // Emit `beforeExit` if the loop became alive either after emitting</span><br><span class="line">4080          // event, or after running some callbacks.</span><br><span class="line">4081          more = uv_loop_alive(env.event_loop());</span><br><span class="line">4082        &#125; while (more == true);</span><br><span class="line">4083        env.performance_state()-&gt;Mark(</span><br><span class="line">4084            node::performance::NODE_PERFORMANCE_MILESTONE_LOOP_EXIT);</span><br><span class="line">4085      &#125;</span><br><span class="line">4086</span><br><span class="line">4087      env.set_trace_sync_io(false);</span><br><span class="line">4088</span><br><span class="line">4089      const int exit_code = EmitExit(&amp;env);</span><br><span class="line">4090</span><br><span class="line">4091      WaitForInspectorDisconnect(&amp;env);</span><br><span class="line">4092</span><br><span class="line">4093      env.set_can_call_into_js(false);</span><br><span class="line">4094      env.stop_sub_worker_contexts();</span><br><span class="line">4095      uv_tty_reset_mode();</span><br><span class="line">4096      env.RunCleanup();</span><br><span class="line">4097      RunAtExit(&amp;env);</span><br><span class="line">4098</span><br><span class="line">4099      v8_platform.DrainVMTasks(isolate);</span><br><span class="line">4100      v8_platform.CancelVMTasks(isolate);</span><br><span class="line">4101    #if defined(LEAK_SANITIZER)</span><br><span class="line">4102      __lsan_do_leak_check();</span><br><span class="line">4103    #endif</span><br><span class="line">4104</span><br><span class="line">4105      return exit_code;</span><br><span class="line">4106    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中，4036行<code>env.Start(argc, argv, exec_argc, exec_argv, v8_is_profiling);</code>进行启动环境的设置和检查，比如输入<code>node --help</code>时打印出命令帮助信息；而真正的核心启动逻辑则在4057行<code>LoadEnvironment(&amp;env);</code>，该函数也定义在node.cc，在2870行，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">2870    void LoadEnvironment(Environment* env) &#123;</span><br><span class="line">2871      HandleScope handle_scope(env-&gt;isolate());</span><br><span class="line">2872</span><br><span class="line">2873      TryCatch try_catch(env-&gt;isolate());</span><br><span class="line">2874      // Disable verbose mode to stop FatalException() handler from trying</span><br><span class="line">2875      // to handle the exception. Errors this early in the start-up phase</span><br><span class="line">2876      // are not safe to ignore.</span><br><span class="line">2877      try_catch.SetVerbose(false);</span><br><span class="line">2878</span><br><span class="line">2879      // The bootstrapper scripts are lib/internal/bootstrap/loaders.js and</span><br><span class="line">2880      // lib/internal/bootstrap/node.js, each included as a static C string</span><br><span class="line">2881      // defined in node_javascript.h, generated in node_javascript.cc by</span><br><span class="line">2882      // node_js2c.</span><br><span class="line">2883      Local&lt;String&gt; loaders_name =</span><br><span class="line">2884          FIXED_ONE_BYTE_STRING(env-&gt;isolate(), "internal/bootstrap/loaders.js");</span><br><span class="line">2885      MaybeLocal&lt;Function&gt; loaders_bootstrapper =</span><br><span class="line">2886          GetBootstrapper(env, LoadersBootstrapperSource(env), loaders_name);</span><br><span class="line">2887      Local&lt;String&gt; node_name =</span><br><span class="line">2888          FIXED_ONE_BYTE_STRING(env-&gt;isolate(), "internal/bootstrap/node.js");</span><br><span class="line">2889      MaybeLocal&lt;Function&gt; node_bootstrapper =</span><br><span class="line">2890          GetBootstrapper(env, NodeBootstrapperSource(env), node_name);</span><br><span class="line">2891</span><br><span class="line">2892      if (loaders_bootstrapper.IsEmpty() || node_bootstrapper.IsEmpty()) &#123;</span><br><span class="line">2893        // Execution was interrupted.</span><br><span class="line">2894        return;</span><br><span class="line">2895      &#125;</span><br><span class="line">2896</span><br><span class="line">2897      // Add a reference to the global object</span><br><span class="line">2898      Local&lt;Object&gt; global = env-&gt;context()-&gt;Global();</span><br><span class="line">2899</span><br><span class="line">2900    #if defined HAVE_DTRACE || defined HAVE_ETW</span><br><span class="line">2901      InitDTrace(env, global);</span><br><span class="line">2902    #endif</span><br><span class="line">2903</span><br><span class="line">2904    #if defined HAVE_PERFCTR</span><br><span class="line">2905      InitPerfCounters(env, global);</span><br><span class="line">2906    #endif</span><br><span class="line">2907</span><br><span class="line">2908      // Enable handling of uncaught exceptions</span><br><span class="line">2909      // (FatalException(), break on uncaught exception in debugger)</span><br><span class="line">2910      //</span><br><span class="line">2911      // This is not strictly necessary since it's almost impossible</span><br><span class="line">2912      // to attach the debugger fast enough to break on exception</span><br><span class="line">2913      // thrown during process startup.</span><br><span class="line">2914      try_catch.SetVerbose(true);</span><br><span class="line">2915</span><br><span class="line">2916      env-&gt;SetMethod(env-&gt;process_object(), "_rawDebug", RawDebug);</span><br><span class="line">2917</span><br><span class="line">2918      // Expose the global object as a property on itself</span><br><span class="line">2919      // (Allows you to set stuff on `global` from anywhere in JavaScript.)</span><br><span class="line">2920      global-&gt;Set(FIXED_ONE_BYTE_STRING(env-&gt;isolate(), "global"), global);</span><br><span class="line">2921</span><br><span class="line">2922      // Create binding loaders</span><br><span class="line">2923      v8::Local&lt;v8::Function&gt; get_binding_fn =</span><br><span class="line">2924          env-&gt;NewFunctionTemplate(GetBinding)-&gt;GetFunction(env-&gt;context())</span><br><span class="line">2925              .ToLocalChecked();</span><br><span class="line">2926</span><br><span class="line">2927      v8::Local&lt;v8::Function&gt; get_linked_binding_fn =</span><br><span class="line">2928          env-&gt;NewFunctionTemplate(GetLinkedBinding)-&gt;GetFunction(env-&gt;context())</span><br><span class="line">2929              .ToLocalChecked();</span><br><span class="line">2930</span><br><span class="line">2931      v8::Local&lt;v8::Function&gt; get_internal_binding_fn =</span><br><span class="line">2932          env-&gt;NewFunctionTemplate(GetInternalBinding)-&gt;GetFunction(env-&gt;context())</span><br><span class="line">2933              .ToLocalChecked();</span><br><span class="line">2934</span><br><span class="line">2935      Local&lt;Value&gt; loaders_bootstrapper_args[] = &#123;</span><br><span class="line">2936        env-&gt;process_object(),</span><br><span class="line">2937        get_binding_fn,</span><br><span class="line">2938        get_linked_binding_fn,</span><br><span class="line">2939        get_internal_binding_fn</span><br><span class="line">2940      &#125;;</span><br><span class="line">2941</span><br><span class="line">2942      // Bootstrap internal loaders</span><br><span class="line">2943      Local&lt;Value&gt; bootstrapped_loaders;</span><br><span class="line">2944      if (!ExecuteBootstrapper(env, loaders_bootstrapper.ToLocalChecked(),</span><br><span class="line">2945                               arraysize(loaders_bootstrapper_args),</span><br><span class="line">2946                               loaders_bootstrapper_args,</span><br><span class="line">2947                               &amp;bootstrapped_loaders)) &#123;</span><br><span class="line">2948        return;</span><br><span class="line">2949      &#125;</span><br><span class="line">2950</span><br><span class="line">2951      // Bootstrap Node.js</span><br><span class="line">2952      Local&lt;Object&gt; bootstrapper = Object::New(env-&gt;isolate());</span><br><span class="line">2953      SetupBootstrapObject(env, bootstrapper);</span><br><span class="line">2954      Local&lt;Value&gt; bootstrapped_node;</span><br><span class="line">2955      Local&lt;Value&gt; node_bootstrapper_args[] = &#123;</span><br><span class="line">2956        env-&gt;process_object(),</span><br><span class="line">2957        bootstrapper,</span><br><span class="line">2958        bootstrapped_loaders</span><br><span class="line">2959      &#125;;</span><br><span class="line">2960      if (!ExecuteBootstrapper(env, node_bootstrapper.ToLocalChecked(),</span><br><span class="line">2961                               arraysize(node_bootstrapper_args),</span><br><span class="line">2962                               node_bootstrapper_args,</span><br><span class="line">2963                               &amp;bootstrapped_node)) &#123;</span><br><span class="line">2964        return;</span><br><span class="line">2965      &#125;</span><br><span class="line">2966    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>该函数比较长，但核心逻辑有如下几个：</p>
+<pre><code>- **a.将js编写的启动引导程序(NodeJS源码中的lib/internal/bootstrap/loaders.js和lib/internal/bootstrap/node.js,)加载到执行环境(需要执行程序其实C++编写，并且js执行是依赖于v8 engine，这里需要将js文件定义的函数加载并通过v8 engine来执行。注：JS的函数在v8 engine中对应的定义是`Local&lt;Function&gt;`类型，然后可以调用其Call方法执行该函数)**：
+</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2879</span>      <span class="comment">// The bootstrapper scripts are lib/internal/bootstrap/loaders.js and</span></span><br><span class="line"><span class="number">2880</span>      <span class="comment">// lib/internal/bootstrap/node.js, each included as a static C string</span></span><br><span class="line"><span class="number">2881</span>      <span class="comment">// defined in node_javascript.h, generated in node_javascript.cc by</span></span><br><span class="line"><span class="number">2882</span>      <span class="comment">// node_js2c.</span></span><br><span class="line"><span class="number">2883</span>      Local&lt;String&gt; loaders_name =</span><br><span class="line"><span class="number">2884</span>          FIXED_ONE_BYTE_STRING(env-&gt;isolate(), <span class="string">"internal/bootstrap/loaders.js"</span>);</span><br><span class="line"><span class="number">2885</span>      MaybeLocal&lt;Function&gt; loaders_bootstrapper =</span><br><span class="line"><span class="number">2886</span>          GetBootstrapper(env, LoadersBootstrapperSource(env), loaders_name);</span><br><span class="line"><span class="number">2887</span>      Local&lt;String&gt; node_name =</span><br><span class="line"><span class="number">2888</span>          FIXED_ONE_BYTE_STRING(env-&gt;isolate(), <span class="string">"internal/bootstrap/node.js"</span>);</span><br><span class="line"><span class="number">2889</span>      MaybeLocal&lt;Function&gt; node_bootstrapper =</span><br><span class="line"><span class="number">2890</span>          GetBootstrapper(env, NodeBootstrapperSource(env), node_name);</span><br><span class="line"><span class="number">2891</span></span><br><span class="line"><span class="number">2892</span>      <span class="keyword">if</span> (loaders_bootstrapper.IsEmpty() || node_bootstrapper.IsEmpty()) &#123;</span><br><span class="line"><span class="number">2893</span>        <span class="comment">// Execution was interrupted.</span></span><br><span class="line"><span class="number">2894</span>        <span class="keyword">return</span>;</span><br><span class="line"><span class="number">2895</span>      &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>- **b.将上个环节加载的引导程序函数利用v8 engine执行(2944行和2960行)：**
+</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2942</span>      <span class="comment">// Bootstrap internal loaders</span></span><br><span class="line"><span class="number">2943</span>      Local&lt;Value&gt; bootstrapped_loaders;</span><br><span class="line"><span class="number">2944</span>      <span class="keyword">if</span> (!ExecuteBootstrapper(env, loaders_bootstrapper.ToLocalChecked(),</span><br><span class="line"><span class="number">2945</span>                               arraysize(loaders_bootstrapper_args),</span><br><span class="line"><span class="number">2946</span>                               loaders_bootstrapper_args,</span><br><span class="line"><span class="number">2947</span>                               &amp;bootstrapped_loaders)) &#123;</span><br><span class="line"><span class="number">2948</span>        <span class="keyword">return</span>;</span><br><span class="line"><span class="number">2949</span>      &#125;</span><br><span class="line"><span class="number">2950</span></span><br><span class="line"><span class="number">2951</span>      <span class="comment">// Bootstrap Node.js</span></span><br><span class="line"><span class="number">2952</span>      Local&lt;Object&gt; bootstrapper = Object::New(env-&gt;isolate());</span><br><span class="line"><span class="number">2953</span>      SetupBootstrapObject(env, bootstrapper);</span><br><span class="line"><span class="number">2954</span>      Local&lt;Value&gt; bootstrapped_node;</span><br><span class="line"><span class="number">2955</span>      Local&lt;Value&gt; node_bootstrapper_args[] = &#123;</span><br><span class="line"><span class="number">2956</span>        env-&gt;process_object(),</span><br><span class="line"><span class="number">2957</span>        bootstrapper,</span><br><span class="line"><span class="number">2958</span>        bootstrapped_loaders</span><br><span class="line"><span class="number">2959</span>      &#125;;</span><br><span class="line"><span class="number">2960</span>      <span class="keyword">if</span> (!ExecuteBootstrapper(env, node_bootstrapper.ToLocalChecked(),</span><br><span class="line"><span class="number">2961</span>                               arraysize(node_bootstrapper_args),</span><br><span class="line"><span class="number">2962</span>                               node_bootstrapper_args,</span><br><span class="line"><span class="number">2963</span>                               &amp;bootstrapped_node)) &#123;</span><br><span class="line"><span class="number">2964</span>        <span class="keyword">return</span>;</span><br><span class="line"><span class="number">2965</span>      &#125;</span><br></pre></td></tr></table></figure>
+<p>ExecuteBootstrapper函数定义在node.cc的2849行(非常简单，其实就是将传入的函数<code>Local&lt;Function&gt; bootstrapper</code>，调用其Call方法执行)，如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2849</span>    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">ExecuteBootstrapper</span><span class="params">(Environment* env, Local&lt;Function&gt; bootstrapper,</span><br><span class="line"><span class="number">2850</span>                                    <span class="keyword">int</span> argc, Local&lt;Value&gt; argv[],</span><br><span class="line"><span class="number">2851</span>                                    Local&lt;Value&gt;* out)</span> </span>&#123;</span><br><span class="line"><span class="number">2852</span>      <span class="keyword">bool</span> ret = bootstrapper-&gt;Call(</span><br><span class="line"><span class="number">2853</span>          env-&gt;context(), Null(env-&gt;isolate()), argc, argv).ToLocal(out);</span><br><span class="line"><span class="number">2854</span></span><br><span class="line"><span class="number">2855</span>      <span class="comment">// If there was an error during bootstrap then it was either handled by the</span></span><br><span class="line"><span class="number">2856</span>      <span class="comment">// FatalException handler or it's unrecoverable (e.g. max call stack</span></span><br><span class="line"><span class="number">2857</span>      <span class="comment">// exceeded). Either way, clear the stack so that the AsyncCallbackScope</span></span><br><span class="line"><span class="number">2858</span>      <span class="comment">// destructor doesn't fail on the id check.</span></span><br><span class="line"><span class="number">2859</span>      <span class="comment">// There are only two ways to have a stack size &gt; 1: 1) the user manually</span></span><br><span class="line"><span class="number">2860</span>      <span class="comment">// called MakeCallback or 2) user awaited during bootstrap, which triggered</span></span><br><span class="line"><span class="number">2861</span>      <span class="comment">// _tickCallback().</span></span><br><span class="line"><span class="number">2862</span>      <span class="keyword">if</span> (!ret) &#123;</span><br><span class="line"><span class="number">2863</span>        env-&gt;async_hooks()-&gt;clear_async_id_stack();</span><br><span class="line"><span class="number">2864</span>      &#125;</span><br><span class="line"><span class="number">2865</span></span><br><span class="line"><span class="number">2866</span>      <span class="keyword">return</span> ret;</span><br><span class="line"><span class="number">2867</span>    &#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>关于<code>lib/internal/bootstrap/loaders.js</code>和<code>lib/internal/bootstrap/node.js</code>的作用，这两个文件的源码开头的文档说明非常清楚，也对于理解NodeJS底层的module system加载机制非常有帮助。这里将<code>lib/internal/bootstrap/loaders.js</code>的文档说明贴出来，以便查看：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// This file creates the internal module &amp; binding loaders used by built-in</span><br><span class="line">// modules. In contrast, user land modules are loaded using</span><br><span class="line">// lib/internal/modules/cjs/loader.js (CommonJS Modules) or</span><br><span class="line">// lib/internal/modules/esm/* (ES Modules).</span><br><span class="line">//</span><br><span class="line">// This file is compiled and run by node.cc before bootstrap/node.js</span><br><span class="line">// was called, therefore the loaders are bootstraped before we start to</span><br><span class="line">// actually bootstrap Node.js. It creates the following objects:</span><br><span class="line">//</span><br><span class="line">// C++ binding loaders:</span><br><span class="line">// - process.binding(): the legacy C++ binding loader, accessible from user land</span><br><span class="line">//   because it is an object attached to the global process object.</span><br><span class="line">//   These C++ bindings are created using NODE_BUILTIN_MODULE_CONTEXT_AWARE()</span><br><span class="line">//   and have their nm_flags set to NM_F_BUILTIN. We do not make any guarantees</span><br><span class="line">//   about the stability of these bindings, but still have to take care of</span><br><span class="line">//   compatibility issues caused by them from time to time.</span><br><span class="line">// - process._linkedBinding(): intended to be used by embedders to add</span><br><span class="line">//   additional C++ bindings in their applications. These C++ bindings</span><br><span class="line">//   can be created using NODE_MODULE_CONTEXT_AWARE_CPP() with the flag</span><br><span class="line">//   NM_F_LINKED.</span><br><span class="line">// - internalBinding(): the private internal C++ binding loader, inaccessible</span><br><span class="line">//   from user land because they are only available from NativeModule.require()</span><br><span class="line">//   These C++ bindings are created using NODE_MODULE_CONTEXT_AWARE_INTERNAL()</span><br><span class="line">//   and have their nm_flags set to NM_F_INTERNAL.</span><br><span class="line">//</span><br><span class="line">// Internal JavaScript module loader:</span><br><span class="line">// - NativeModule: a minimal module system used to load the JavaScript core</span><br><span class="line">//   modules found in lib/**/*.js and deps/**/*.js. All core modules are</span><br><span class="line">//   compiled into the node binary via node_javascript.cc generated by js2c.py,</span><br><span class="line">//   so they can be loaded faster without the cost of I/O. This class makes the</span><br><span class="line">//   lib/internal/*, deps/internal/* modules and internalBinding() available by</span><br><span class="line">//   default to core modules, and lets the core modules require itself via</span><br><span class="line">//   require(&apos;internal/bootstrap/loaders&apos;) even when this file is not written in</span><br><span class="line">//   CommonJS style.</span><br><span class="line">//</span><br><span class="line">// Other objects:</span><br><span class="line">// - process.moduleLoadList: an array recording the bindings and the modules</span><br><span class="line">//   loaded in the process and the order in which they are loaded.</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>至此，我们可以很清楚，<code>lib/internal/bootstrap/loaders.js</code>和<code>lib/internal/bootstrap/node.js</code>两个文件包裹的函数其实就是整个启动流程的核心和执行逻辑所在。<br><code>lib/internal/bootstrap/loaders.js</code>的代码折叠之后，如下图所示：<br><img src="https://i.imgur.com/sqANOlH.jpg" alt=""><br><code>lib/internal/bootstrap/node.js</code>的代码折叠之后，如下图所示：<br><img src="https://i.imgur.com/VviVahN.jpg" alt=""><br>这两个文件的内部逻辑都被一个顶层函数包裹住，在<strong>环节a</strong>中(2879-2895行)，就是将这两个顶层包裹的JS function加载映射到v8 engine的映射函数<code>Local&lt;Function&gt;</code> <code>loaders_bootstrapper.ToLocalChecked()</code>、<code>node_bootstrapper.ToLocalChecked()</code>来执行。<code>lib/internal/bootstrap/loaders.js</code>的内部逻辑，主要是将NodeJS的C++原生代码的一些类和函数绑定到JS执行环境(v8 engine负责解释执行)，另外就是创建NativeModule模块并加载NodeJS源码lib子目录下的JS原生模块(NodeJS源码中lib子目录的原始JS模块也引用了require函数，这个require函数是在这里实现的，而用户编写的JS文件即用户模块是通过<code>lib/internal/modules/cjs/loader.js</code>中创建Module及其机制来load的，对于用户JS文件里面引用的require函数，其实并非global全局的，是属于该用户模块对象自身包含的require函数。这里一定要区分清楚两种require函数和机制，下文重点会分析用户JS文件所使用到的require函数，以及如何模仿之来实现类似的require机制，以用于基于v8 engine开发其他C++程序时使用的独立的module system和加载机制)。此外，<code>lib/internal/bootstrap/loaders.js</code>还会导出<code>{ internalBinding, NativeModule }</code>（参见<code>lib/internal/bootstrap/loaders.js</code>的127行和303行）对象给<code>lib/internal/bootstrap/node.js</code>定义的函数使用(通过传参的方式，可以看截图中的函数参数)。<code>lib/internal/bootstrap/node.js</code>定义的函数很长，但是<strong>真正执行核心逻辑在243-268行之间</strong>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">243</span>    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (process.argv[<span class="number">1</span>] &amp;&amp; process.argv[<span class="number">1</span>] !== <span class="string">'-'</span>) &#123;</span><br><span class="line"><span class="number">244</span>        perf.markMilestone(NODE_PERFORMANCE_MILESTONE_MODULE_LOAD_START);</span><br><span class="line"><span class="number">245</span>        <span class="comment">// Make process.argv[1] into a full path.</span></span><br><span class="line"><span class="number">246</span>        <span class="keyword">const</span> path = NativeModule.require(<span class="string">'path'</span>);</span><br><span class="line"><span class="number">247</span>        process.argv[<span class="number">1</span>] = path.resolve(process.argv[<span class="number">1</span>]);</span><br><span class="line"><span class="number">248</span></span><br><span class="line"><span class="number">249</span>        <span class="keyword">const</span> CJSModule = NativeModule.require(<span class="string">'internal/modules/cjs/loader'</span>);</span><br><span class="line"><span class="number">250</span></span><br><span class="line"><span class="number">251</span>        perf.markMilestone(NODE_PERFORMANCE_MILESTONE_MODULE_LOAD_END);</span><br><span class="line"><span class="number">252</span>        perf.markMilestone(</span><br><span class="line"><span class="number">253</span>          NODE_PERFORMANCE_MILESTONE_PRELOAD_MODULE_LOAD_START);</span><br><span class="line"><span class="number">254</span>        preloadModules();</span><br><span class="line"><span class="number">255</span>        perf.markMilestone(</span><br><span class="line"><span class="number">256</span>          NODE_PERFORMANCE_MILESTONE_PRELOAD_MODULE_LOAD_END);</span><br><span class="line"><span class="number">257</span>        <span class="comment">// Check if user passed `-c` or `--check` arguments to Node.</span></span><br><span class="line"><span class="number">258</span>        <span class="keyword">if</span> (process._syntax_check_only != <span class="literal">null</span>) &#123;</span><br><span class="line"><span class="number">259</span>          <span class="keyword">const</span> fs = NativeModule.require(<span class="string">'fs'</span>);</span><br><span class="line"><span class="number">260</span>          <span class="comment">// Read the source.</span></span><br><span class="line"><span class="number">261</span>          <span class="keyword">const</span> filename = CJSModule._resolveFilename(process.argv[<span class="number">1</span>]);</span><br><span class="line"><span class="number">262</span>          <span class="keyword">const</span> source = fs.readFileSync(filename, <span class="string">'utf-8'</span>);</span><br><span class="line"><span class="number">263</span>          checkScriptSyntax(source, filename);</span><br><span class="line"><span class="number">264</span>          process.exit(<span class="number">0</span>);</span><br><span class="line"><span class="number">265</span>        &#125;</span><br><span class="line"><span class="number">266</span>        perf.markMilestone(NODE_PERFORMANCE_MILESTONE_BOOTSTRAP_COMPLETE);</span><br><span class="line"><span class="number">267</span>        CJSModule.runMain();</span><br><span class="line"><span class="number">268</span>      &#125; <span class="keyword">else</span> &#123;</span><br></pre></td></tr></table></figure></p>
+<p>其中，<code>process.argv[1]</code>代表执行命令中的脚本文件(比如，你在命令行输入<code>node a.js</code>那么这里<code>process.argv[1]</code>就是<code>a.js</code>)。249行，通过<code>lib/internal/bootstrap/loaders.js</code>加载执行得到的NativeModule将NodeJS 源码中的lib子目录下<code>lib/internal/modules/cjs/loader.js</code>加载成<code>CJSModule</code>，这个缩写其实表明目前NodeJS用户编写的JS文件都遵循<a href="https://en.wikipedia.org/wiki/CommonJS" target="_blank" rel="external">CommonJS</a>规范，那么也就是认为用户编写的每个JS文件就是一个CommonJS module(模块)。在<code>lib/internal/modules/cjs/loader.js</code>中，关于用户的CommonJS module定义如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">52</span>    <span class="built_in">module</span>.exports = Module;</span><br><span class="line">	  .</span><br><span class="line">	  .</span><br><span class="line">	  .</span><br><span class="line"><span class="number">102</span>    <span class="function"><span class="keyword">function</span> <span class="title">Module</span>(<span class="params">id, parent</span>) </span>&#123;</span><br><span class="line"><span class="number">103</span>      <span class="keyword">this</span>.id = id;</span><br><span class="line"><span class="number">104</span>      <span class="keyword">this</span>.exports = &#123;&#125;;</span><br><span class="line"><span class="number">105</span>      <span class="keyword">this</span>.parent = parent;</span><br><span class="line"><span class="number">106</span>      updateChildren(parent, <span class="keyword">this</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="number">107</span>      <span class="keyword">this</span>.filename = <span class="literal">null</span>;</span><br><span class="line"><span class="number">108</span>      <span class="keyword">this</span>.loaded = <span class="literal">false</span>;</span><br><span class="line"><span class="number">109</span>      <span class="keyword">this</span>.children = [];</span><br><span class="line"><span class="number">110</span>    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在上面提到的<code>lib/internal/bootstrap/node.js</code>的267行<code>CJSModule.runMain();</code>，执行用户模块，从而进入用户程序的逻辑执行。<code>runMain()</code>函数定义在<code>lib/internal/modules/cjs/loader.js</code>的741行，如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">741</span>    <span class="comment">// bootstrap main module.</span></span><br><span class="line"><span class="number">742</span>    Module.runMain = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="number">743</span>      <span class="comment">// Load the main module--the command line argument.</span></span><br><span class="line"><span class="number">744</span>      Module._load(process.argv[<span class="number">1</span>], <span class="literal">null</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="number">745</span>      <span class="comment">// Handle any nextTicks added in the first tick of the program</span></span><br><span class="line"><span class="number">746</span>      process._tickCallback();</span><br><span class="line"><span class="number">747</span>    &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>至此，则进入到<code>Module._load</code>函数。由刚才的分析得知，NodeJS中，用户编写的每个JS文件对应一个module，每个module都是<code>function Module(id, parent)</code>(可以理解为function obj，因为Javascript是class-free的面向对象编程语言)的一个instance obj(示例对象)。关于Javascript语言中对象的理解，请参见下文(摘自<a href="https://github.com/v8/v8/wiki/Embedder&#39;s-Guide" target="_blank" rel="external">v8 engine的嵌入文档</a>)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">JavaScript is a class-free, object-oriented language, and as such, it uses prototypal inheritance instead of classical inheritance. This can be puzzling to programmers trained in conventional object-oriented languages like C++ and Java.</span><br><span class="line"></span><br><span class="line">Class-based object-oriented languages, such as Java and C++, are founded on the concept of two distinct entities: classes and instances. JavaScript is a prototype-based language and so does not make this distinction: it simply has objects. JavaScript does not natively support the declaration of class hierarchies; however, JavaScript&apos;s prototype mechanism simplifies the process of adding custom properties and methods to all instances of an object. In JavaScript, you can add custom properties to objects. For example:</span><br><span class="line"></span><br><span class="line">// Create an object &quot;bicycle&quot; </span><br><span class="line">function bicycle()&#123; </span><br><span class="line">&#125; </span><br><span class="line">// Create an instance of bicycle called roadbike</span><br><span class="line">var roadbike = new bicycle()</span><br><span class="line">// Define a custom property, wheels, on roadbike </span><br><span class="line">roadbike.wheels = 2</span><br><span class="line">A custom property added this way only exists for that instance of the object. If we create another instance of bicycle(), called mountainbike for example, mountainbike.wheels would return undefined unless the wheels property is explicitly added.</span><br><span class="line"></span><br><span class="line">Sometimes this is exactly what is required, at other times it would be helpful to add the custom property to all instances of an object - all bicycles have wheels after all. This is where the prototype object of JavaScript is very useful. To use the prototype object, reference the keyword prototype on the object before adding the custom property to it as follows:</span><br><span class="line"></span><br><span class="line">// First, create the &quot;bicycle&quot; object</span><br><span class="line">function bicycle()&#123; </span><br><span class="line">&#125;</span><br><span class="line">// Assign the wheels property to the object&apos;s prototype</span><br><span class="line">bicycle.prototype.wheels = 2</span><br><span class="line">All instances of bicycle() will now have the wheels property prebuilt into them.</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><code>lib/internal/modules/cjs/loader.js</code>：在这里面，通过<code>Module._load</code>作为进入用户程序的入口：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">495</span>    <span class="comment">// Check the cache for the requested file.</span></span><br><span class="line"><span class="number">496</span>    <span class="comment">// 1. If a module already exists in the cache: return its exports object.</span></span><br><span class="line"><span class="number">497</span>    <span class="comment">// 2. If the module is native: call `NativeModule.require()` with the</span></span><br><span class="line"><span class="number">498</span>    <span class="comment">//    filename and return the result.</span></span><br><span class="line"><span class="number">499</span>    <span class="comment">// 3. Otherwise, create a new module for the file and save it to the cache.</span></span><br><span class="line"><span class="number">500</span>    <span class="comment">//    Then have it load  the file contents before returning its exports</span></span><br><span class="line"><span class="number">501</span>    <span class="comment">//    object.</span></span><br><span class="line"><span class="number">502</span>    Module._load = <span class="function"><span class="keyword">function</span>(<span class="params">request, parent, isMain</span>) </span>&#123;</span><br><span class="line"><span class="number">503</span>      <span class="keyword">if</span> (parent) &#123;</span><br><span class="line"><span class="number">504</span>        debug(<span class="string">'Module._load REQUEST %s parent: %s'</span>, request, parent.id);</span><br><span class="line"><span class="number">505</span>      &#125;</span><br><span class="line"><span class="number">506</span></span><br><span class="line"><span class="number">507</span>      <span class="keyword">if</span> (experimentalModules &amp;&amp; isMain) &#123;</span><br><span class="line"><span class="number">508</span>        <span class="keyword">if</span> (asyncESM === <span class="literal">undefined</span>) lazyLoadESM();</span><br><span class="line"><span class="number">509</span>        asyncESM.loaderPromise.then((loader) =&gt; &#123;</span><br><span class="line"><span class="number">510</span>          <span class="keyword">return</span> loader.import(getURLFromFilePath(request).pathname);</span><br><span class="line"><span class="number">511</span>        &#125;)</span><br><span class="line"><span class="number">512</span>        .catch((e) =&gt; &#123;</span><br><span class="line"><span class="number">513</span>          decorateErrorStack(e);</span><br><span class="line"><span class="number">514</span>          <span class="built_in">console</span>.error(e);</span><br><span class="line"><span class="number">515</span>          process.exit(<span class="number">1</span>);</span><br><span class="line"><span class="number">516</span>        &#125;);</span><br><span class="line"><span class="number">517</span>        <span class="keyword">return</span>;</span><br><span class="line"><span class="number">518</span>      &#125;</span><br><span class="line"><span class="number">519</span></span><br><span class="line"><span class="number">520</span>      <span class="keyword">var</span> filename = Module._resolveFilename(request, parent, isMain);</span><br><span class="line"><span class="number">521</span></span><br><span class="line"><span class="number">522</span>      <span class="keyword">var</span> cachedModule = Module._cache[filename];</span><br><span class="line"><span class="number">523</span>      <span class="keyword">if</span> (cachedModule) &#123;</span><br><span class="line"><span class="number">524</span>        updateChildren(parent, cachedModule, <span class="literal">true</span>);</span><br><span class="line"><span class="number">525</span>        <span class="keyword">return</span> cachedModule.exports;</span><br><span class="line"><span class="number">526</span>      &#125;</span><br><span class="line"><span class="number">527</span></span><br><span class="line"><span class="number">528</span>      <span class="keyword">if</span> (NativeModule.nonInternalExists(filename)) &#123;</span><br><span class="line"><span class="number">529</span>        debug(<span class="string">'load native module %s'</span>, request);</span><br><span class="line"><span class="number">530</span>        <span class="keyword">return</span> NativeModule.require(filename);</span><br><span class="line"><span class="number">531</span>      &#125;</span><br><span class="line"><span class="number">532</span></span><br><span class="line"><span class="number">533</span>      <span class="comment">// Don't call updateChildren(), Module constructor already does.</span></span><br><span class="line"><span class="number">534</span>      <span class="keyword">var</span> <span class="built_in">module</span> = <span class="keyword">new</span> Module(filename, parent);</span><br><span class="line"><span class="number">535</span></span><br><span class="line"><span class="number">536</span>      <span class="keyword">if</span> (isMain) &#123;</span><br><span class="line"><span class="number">537</span>        process.mainModule = <span class="built_in">module</span>;</span><br><span class="line"><span class="number">538</span>        <span class="built_in">module</span>.id = <span class="string">'.'</span>;</span><br><span class="line"><span class="number">539</span>      &#125;</span><br><span class="line"><span class="number">540</span></span><br><span class="line"><span class="number">541</span>      Module._cache[filename] = <span class="built_in">module</span>;</span><br><span class="line"><span class="number">542</span></span><br><span class="line"><span class="number">543</span>      tryModuleLoad(<span class="built_in">module</span>, filename);</span><br><span class="line"><span class="number">544</span></span><br><span class="line"><span class="number">545</span>      <span class="keyword">return</span> <span class="built_in">module</span>.exports;</span><br><span class="line"><span class="number">546</span>    &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>关于<code>Module._load</code>内部模块缓存逻辑这一块，我们后续再阐述。该函数最终跳转至543行的<code>tryModuleLoad(module, filename);</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">548</span>    <span class="function"><span class="keyword">function</span> <span class="title">tryModuleLoad</span>(<span class="params">module, filename</span>) </span>&#123;</span><br><span class="line"><span class="number">549</span>      <span class="keyword">var</span> threw = <span class="literal">true</span>;</span><br><span class="line"><span class="number">550</span>      <span class="keyword">try</span> &#123;</span><br><span class="line"><span class="number">551</span>        <span class="built_in">module</span>.load(filename);</span><br><span class="line"><span class="number">552</span>        threw = <span class="literal">false</span>;</span><br><span class="line"><span class="number">553</span>      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"><span class="number">554</span>        <span class="keyword">if</span> (threw) &#123;</span><br><span class="line"><span class="number">555</span>          <span class="keyword">delete</span> Module._cache[filename];</span><br><span class="line"><span class="number">556</span>        &#125;</span><br><span class="line"><span class="number">557</span>      &#125;</span><br><span class="line"><span class="number">558</span>    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>跟踪到551行的<code>module.load(filename);</code>，该函数实际上定义在603行，如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">602</span>    <span class="comment">// Given a file name, pass it to the proper extension handler.</span></span><br><span class="line"><span class="number">603</span>    Module.prototype.load = <span class="function"><span class="keyword">function</span>(<span class="params">filename</span>) </span>&#123;</span><br><span class="line"><span class="number">604</span>      debug(<span class="string">'load %j for module %j'</span>, filename, <span class="keyword">this</span>.id);</span><br><span class="line"><span class="number">605</span></span><br><span class="line"><span class="number">606</span>      assert(!<span class="keyword">this</span>.loaded);</span><br><span class="line"><span class="number">607</span>      <span class="keyword">this</span>.filename = filename;</span><br><span class="line"><span class="number">608</span>      <span class="keyword">this</span>.paths = Module._nodeModulePaths(path.dirname(filename));</span><br><span class="line"><span class="number">609</span></span><br><span class="line"><span class="number">610</span>      <span class="keyword">var</span> extension = path.extname(filename) || <span class="string">'.js'</span>;</span><br><span class="line"><span class="number">611</span>      <span class="keyword">if</span> (!Module._extensions[extension]) extension = <span class="string">'.js'</span>;</span><br><span class="line"><span class="number">612</span>      Module._extensions[extension](<span class="keyword">this</span>, filename);</span><br><span class="line"><span class="number">613</span>      <span class="keyword">this</span>.loaded = <span class="literal">true</span>;</span><br><span class="line"><span class="number">614</span></span><br><span class="line"><span class="number">615</span>      <span class="keyword">if</span> (experimentalModules) &#123;</span><br><span class="line"><span class="number">616</span>        <span class="keyword">if</span> (asyncESM === <span class="literal">undefined</span>) lazyLoadESM();</span><br><span class="line"><span class="number">617</span>        <span class="keyword">const</span> ESMLoader = asyncESM.ESMLoader;</span><br><span class="line"><span class="number">618</span>        <span class="keyword">const</span> url = getURLFromFilePath(filename);</span><br><span class="line"><span class="number">619</span>        <span class="keyword">const</span> urlString = <span class="string">`<span class="subst">$&#123;url&#125;</span>`</span>;</span><br><span class="line"><span class="number">620</span>        <span class="keyword">const</span> exports = <span class="keyword">this</span>.exports;</span><br><span class="line"><span class="number">621</span>        <span class="keyword">if</span> (ESMLoader.moduleMap.has(urlString) !== <span class="literal">true</span>) &#123;</span><br><span class="line"><span class="number">622</span>          ESMLoader.moduleMap.set(</span><br><span class="line"><span class="number">623</span>            urlString,</span><br><span class="line"><span class="number">624</span>            <span class="keyword">new</span> ModuleJob(ESMLoader, url, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line"><span class="number">625</span>              <span class="keyword">const</span> ctx = createDynamicModule(</span><br><span class="line"><span class="number">626</span>                [<span class="string">'default'</span>], url);</span><br><span class="line"><span class="number">627</span>              ctx.reflect.exports.default.set(exports);</span><br><span class="line"><span class="number">628</span>              <span class="keyword">return</span> ctx;</span><br><span class="line"><span class="number">629</span>            &#125;)</span><br><span class="line"><span class="number">630</span>          );</span><br><span class="line"><span class="number">631</span>        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="number">632</span>          <span class="keyword">const</span> job = ESMLoader.moduleMap.get(urlString);</span><br><span class="line"><span class="number">633</span>          <span class="keyword">if</span> (job.reflect)</span><br><span class="line"><span class="number">634</span>            job.reflect.exports.default.set(exports);</span><br><span class="line"><span class="number">635</span>        &#125;</span><br><span class="line"><span class="number">636</span>      &#125;</span><br><span class="line"><span class="number">637</span>    &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>因为我们这里暂时只关注.js结尾的文件即javascript源代码默认文件格式文件。那么，612行<code>Module._extensions[extension](this, filename);</code>则相当于是执行<code>Module._extensions[&#39;.js&#39;](this, filename);</code>,而<code>Module._extensions[&#39;.js&#39;]</code>是一个函数，定义如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">710</span>    <span class="comment">// Native extension for .js</span></span><br><span class="line"><span class="number">711</span>    Module._extensions[<span class="string">'.js'</span>] = <span class="function"><span class="keyword">function</span>(<span class="params">module, filename</span>) </span>&#123;</span><br><span class="line"><span class="number">712</span>      <span class="keyword">var</span> content = fs.readFileSync(filename, <span class="string">'utf8'</span>);</span><br><span class="line"><span class="number">713</span>      <span class="built_in">module</span>._compile(stripBOM(content), filename);</span><br><span class="line"><span class="number">714</span>    &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>这里可以发现，实则跳转至<code>module._compile</code>函数，该函数定义如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">659</span>    <span class="comment">// Run the file contents in the correct scope or sandbox. Expose</span></span><br><span class="line"><span class="number">660</span>    <span class="comment">// the correct helper variables (require, module, exports) to</span></span><br><span class="line"><span class="number">661</span>    <span class="comment">// the file.</span></span><br><span class="line"><span class="number">662</span>    <span class="comment">// Returns exception, if any.</span></span><br><span class="line"><span class="number">663</span>    Module.prototype._compile = <span class="function"><span class="keyword">function</span>(<span class="params">content, filename</span>) </span>&#123;</span><br><span class="line"><span class="number">664</span></span><br><span class="line"><span class="number">665</span>      content = stripShebang(content);</span><br><span class="line"><span class="number">666</span></span><br><span class="line"><span class="number">667</span>      <span class="comment">// create wrapper function</span></span><br><span class="line"><span class="number">668</span>      <span class="keyword">var</span> wrapper = Module.wrap(content);</span><br><span class="line"><span class="number">669</span></span><br><span class="line"><span class="number">670</span>      <span class="keyword">var</span> compiledWrapper = vm.runInThisContext(wrapper, &#123;</span><br><span class="line"><span class="number">671</span>        filename: filename,</span><br><span class="line"><span class="number">672</span>        lineOffset: <span class="number">0</span>,</span><br><span class="line"><span class="number">673</span>        displayErrors: <span class="literal">true</span></span><br><span class="line"><span class="number">674</span>      &#125;);</span><br><span class="line"><span class="number">675</span></span><br><span class="line"><span class="number">676</span>      <span class="keyword">var</span> inspectorWrapper = <span class="literal">null</span>;</span><br><span class="line"><span class="number">677</span>      <span class="keyword">if</span> (process._breakFirstLine &amp;&amp; process._eval == <span class="literal">null</span>) &#123;</span><br><span class="line"><span class="number">678</span>        <span class="keyword">if</span> (!resolvedArgv) &#123;</span><br><span class="line"><span class="number">679</span>          <span class="comment">// we enter the repl if we're not given a filename argument.</span></span><br><span class="line"><span class="number">680</span>          <span class="keyword">if</span> (process.argv[<span class="number">1</span>]) &#123;</span><br><span class="line"><span class="number">681</span>            resolvedArgv = Module._resolveFilename(process.argv[<span class="number">1</span>], <span class="literal">null</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="number">682</span>          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="number">683</span>            resolvedArgv = <span class="string">'repl'</span>;</span><br><span class="line"><span class="number">684</span>          &#125;</span><br><span class="line"><span class="number">685</span>        &#125;</span><br><span class="line"><span class="number">686</span></span><br><span class="line"><span class="number">687</span>        <span class="comment">// Set breakpoint on module start</span></span><br><span class="line"><span class="number">688</span>        <span class="keyword">if</span> (filename === resolvedArgv) &#123;</span><br><span class="line"><span class="number">689</span>          <span class="keyword">delete</span> process._breakFirstLine;</span><br><span class="line"><span class="number">690</span>          inspectorWrapper = process.binding(<span class="string">'inspector'</span>).callAndPauseOnStart;</span><br><span class="line"><span class="number">691</span>        &#125;</span><br><span class="line"><span class="number">692</span>      &#125;</span><br><span class="line"><span class="number">693</span>      <span class="keyword">var</span> dirname = path.dirname(filename);</span><br><span class="line"><span class="number">694</span>      <span class="keyword">var</span> <span class="built_in">require</span> = makeRequireFunction(<span class="keyword">this</span>);</span><br><span class="line"><span class="number">695</span>      <span class="keyword">var</span> depth = requireDepth;</span><br><span class="line"><span class="number">696</span>      <span class="keyword">if</span> (depth === <span class="number">0</span>) stat.cache = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="number">697</span>      <span class="keyword">var</span> result;</span><br><span class="line"><span class="number">698</span>      <span class="keyword">if</span> (inspectorWrapper) &#123;</span><br><span class="line"><span class="number">699</span>        result = inspectorWrapper(compiledWrapper, <span class="keyword">this</span>.exports, <span class="keyword">this</span>.exports,</span><br><span class="line"><span class="number">700</span>                                  <span class="built_in">require</span>, <span class="keyword">this</span>, filename, dirname);</span><br><span class="line"><span class="number">701</span>      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="number">702</span>        result = compiledWrapper.call(<span class="keyword">this</span>.exports, <span class="keyword">this</span>.exports, <span class="built_in">require</span>, <span class="keyword">this</span>,</span><br><span class="line"><span class="number">703</span>                                      filename, dirname);</span><br><span class="line"><span class="number">704</span>      &#125;</span><br><span class="line"><span class="number">705</span>      <span class="keyword">if</span> (depth === <span class="number">0</span>) stat.cache = <span class="literal">null</span>;</span><br><span class="line"><span class="number">706</span>      <span class="keyword">return</span> result;</span><br><span class="line"><span class="number">707</span>    &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>从该函数的参数和文档注释可以得知，其将传入的原始js文件的内容，先通过668行的<code>Module.wrap</code>函数进行包裹。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">124</span>    Module.wrap = <span class="function"><span class="keyword">function</span>(<span class="params">script</span>) </span>&#123;</span><br><span class="line"><span class="number">125</span>      <span class="keyword">return</span> Module.wrapper[<span class="number">0</span>] + script + Module.wrapper[<span class="number">1</span>];</span><br><span class="line"><span class="number">126</span>    &#125;;</span><br><span class="line"><span class="number">127</span></span><br><span class="line"><span class="number">128</span>    Module.wrapper = [</span><br><span class="line"><span class="number">129</span>      <span class="string">'(function (exports, require, module, __filename, __dirname) &#123; '</span>,</span><br><span class="line"><span class="number">130</span>      <span class="string">'\n&#125;);'</span></span><br><span class="line"><span class="number">131</span>    ];</span><br></pre></td></tr></table></figure></p>
+<p>这样就是众多文献资料提到的，NodeJS在底层(under the hood)会将用户编写的每一个JS文件源码包裹在一个函数内部(如上代码所示)。包裹完成之后，通过670行的编译函数，将字符串格式的源码编译(当然也是v8 engine来负责)成目标代码(v8 engine可解释执行)并赋值给变量compiledWrapper，这里我们不考虑inspector机制(用于调试等功能)。那么真正执行代码的逻辑就在702行<code>compiledWrapper.call</code>，传入的后5个参数，依次对应包裹时添加的外层函数<code>function (exports, require, module, __filename, __dirname)</code>的每个参数。其实，本质就是调用该函数执行。这里的vm及其函数runInThisContext在NodeJS的build-in(内置)JS模块vm.js(位于NodeJS源码下的lib/vm.js)中定义。</p>
+<h1 id="模仿实现NodeJS的require和module-system-module加载机制"><a href="#模仿实现NodeJS的require和module-system-module加载机制" class="headerlink" title="模仿实现NodeJS的require和module system(module加载机制)"></a>模仿实现NodeJS的require和module system(module加载机制)</h1><p>思路：</p>
+<ol>
+<li><p>那么我们就可以完全模仿实现我们自己的module system。这里思路目前想到两种：1.我们直接参考他的<code>lib\internal\modules\cjs\loader.js</code>中的逻辑，我们在我们的脚本根目录建一个<code>module.js</code>，把这个文件的内容全部copy进去，然后进行适当修改，保留大部分逻辑，然后在v8初始化的时候，在C++层事先加载这个module.js到global全局，这样游戏相关的其他任何js源文件仍然也被包裹在<code>function (exports, require, module, __filename, __dirname)</code>函数内部，然后我们加载每一个游戏的js源文件的时候，利用module.js里面的函数来load的，并传参，这样就和NodeJS的执行流程完全一致了，其require和模块加载机制也是一样的。</p>
+</li>
+<li><p>在C++层来实现这个<code>module.js</code>，也就是把<code>lib\internal\modules\cjs\loader.js</code>中的逻辑直接在C++这层来写个类或者多个函数来实现，然后每个游戏相关的js文件，仍然会在加载的时候被<code>function (exports, require, module, __filename, __dirname)</code>函数包裹，然后执行的时候，就从C++层将参数传进去，这些参数就需要C++的对象和JS的参数对象做映射，这个我们之前就已经实现了(请参见<a href="https://github.com/cstsinghua/V8Android" target="_blank" rel="external">V8Android</a>)。</p>
+</li>
+</ol>
+<h1 id="附录-参考"><a href="#附录-参考" class="headerlink" title="附录(参考)"></a>附录(参考)</h1><ul>
+<li><a href="https://cnodejs.org/topic/574433fdfd93c1011f94aab7" target="_blank" rel="external">https://cnodejs.org/topic/574433fdfd93c1011f94aab7</a></li>
+<li><a href="https://stackoverflow.com/questions/50071737/wrapper-in-nodejss-module-module" target="_blank" rel="external">https://stackoverflow.com/questions/50071737/wrapper-in-nodejss-module-module</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/05/require.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/05/require.html</a></li>
+<li><a href="https://www.cnblogs.com/gibbon/archive/2013/04/16/load_js_module.html" target="_blank" rel="external">https://www.cnblogs.com/gibbon/archive/2013/04/16/load_js_module.html</a></li>
+<li><a href="https://nodejs.org/dist/latest-v8.x/docs/api/modules.html" target="_blank" rel="external">https://nodejs.org/dist/latest-v8.x/docs/api/modules.html</a></li>
+<li><a href="http://fredkschott.com/post/2014/06/require-and-the-module-system/" target="_blank" rel="external">http://fredkschott.com/post/2014/06/require-and-the-module-system/</a></li>
+<li><a href="https://hackernoon.com/node-js-tc-39-and-modules-a1118aecf95e" target="_blank" rel="external">https://hackernoon.com/node-js-tc-39-and-modules-a1118aecf95e</a></li>
+<li><a href="https://blog.risingstack.com/node-js-at-scale-module-system-commonjs-require/" target="_blank" rel="external">https://blog.risingstack.com/node-js-at-scale-module-system-commonjs-require/</a></li>
+<li><a href="https://github.com/pmed/v8pp" target="_blank" rel="external">https://github.com/pmed/v8pp</a></li>
+<li><a href="https://cnodejs.org/topic/57454824991011691ef17b09" target="_blank" rel="external">https://cnodejs.org/topic/57454824991011691ef17b09</a></li>
+<li><a href="http://maples7.com/2016/08/17/cyclic-dependencies-in-node-and-its-solution/" target="_blank" rel="external">http://maples7.com/2016/08/17/cyclic-dependencies-in-node-and-its-solution/</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    post.last_updated<time datetime="2018-06-14T09:58:35.000Z" itemprop="dateUpdated">2018-06-14 17:58:35</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://cstsinghua.github.io">
+            <img src="/img/logo.jpg" alt="Cstsinghua">
+            Cstsinghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/implementation/">implementation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/load/">load</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/module-system/">module system</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/require/">require</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/source-analysis/">source analysis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加载/">加载</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启动/">启动</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实现/">实现</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码分析/">源码分析</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/&title=《NodeJS启动和加载分析》 — Atypical programmer&pic=https://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/&title=《NodeJS启动和加载分析》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《NodeJS启动和加载分析》 — Atypical programmer&url=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/&via=https://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/07/Android NDK调试和分析/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android NDK调试和分析</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2146219"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "4DjAfnIwjxGfITAYl8eVX5Pe-gzGzoHsz",
+            appKey: "ss62qxcFEjf5opJ4Ii5xI2zn",
+            avatar: "mm",
+            placeholder: "欢迎交流",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        Thanks~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Cstsinghua &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/&title=《NodeJS启动和加载分析》 — Atypical programmer&pic=https://cstsinghua.github.io/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/&title=《NodeJS启动和加载分析》 — Atypical programmer&source=写给典型的程序员" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《NodeJS启动和加载分析》 — Atypical programmer&url=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/&via=https://cstsinghua.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://cstsinghua.github.io/2018/06/14/NodeJS启动和加载分析/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

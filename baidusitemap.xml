@@ -4,6 +4,49 @@
 
     
   <url>
+    <loc>https://cstsinghua.github.io/2018/06/14/NodeJS%E5%90%AF%E5%8A%A8%E5%92%8C%E5%8A%A0%E8%BD%BD%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2018-06-14T09:58:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>NodeJS启动和加载分析</title>
+        <pubTime>2018-06-14T09:58:30.000Z</pubTime>
+        
+        <tag>NodeJS</tag>
+         
+        <tag>require</tag>
+         
+        <tag>module system</tag>
+         
+        <tag>启动</tag>
+         
+        <tag>加载</tag>
+         
+        <tag>源码分析</tag>
+         
+        <tag>source analysis</tag>
+         
+        <tag>load</tag>
+         
+        <tag>bootstrap</tag>
+         
+        <tag>实现</tag>
+         
+        <tag>implementation</tag>
+         
+         
+           
+             
+              <breadCrumb title="NodeJS" url="https://cstsinghua.github.io/categories/NodeJS/"/>
+          
+             
+              <breadCrumb title="source" url="https://cstsinghua.github.io/categories/NodeJS/source/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/</loc>
     <lastmod>2018-06-11T07:03:29.000Z</lastmod>
     <data>
