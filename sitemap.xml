@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/</loc>
+    
+    <lastmod>2018-06-15T01:47:39.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://cstsinghua.github.io/2018/06/14/NodeJS%E5%90%AF%E5%8A%A8%E5%92%8C%E5%8A%A0%E8%BD%BD%E5%88%86%E6%9E%90/</loc>
     
     <lastmod>2018-06-14T09:58:35.000Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>https://cstsinghua.github.io/2018/04/25/%E6%9E%84%E5%BB%BAspidermonkey%E6%8C%87%E5%8D%97/</loc>
     
     <lastmod>2018-05-04T03:01:55.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/</loc>
-    
-    <lastmod>2018-04-23T01:33:56.000Z</lastmod>
     
   </url>
   

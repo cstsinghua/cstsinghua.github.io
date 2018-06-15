@@ -38,7 +38,7 @@
 
 在Ubuntu 16.04系统下，编译v8的时候，环境的配置、各种参数的设置问题，这最终会影响到生成的库(分static library和sh">
 <meta property="og:image" content="https://i.imgur.com/nf9WbO8.jpg">
-<meta property="og:updated_time" content="2018-04-23T01:33:56.000Z">
+<meta property="og:updated_time" content="2018-06-15T01:47:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译及嵌入v8遇到的错误汇总">
 <meta name="twitter:description" content="Android APP embed v8的错误汇总Android APP embed v8的过程(请参见编译和嵌入v8至Android APP)，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：
@@ -262,7 +262,8 @@
 <li>How to build v8 use gnu-libstdc++ instead of llvm-libc++?<pre><code>tools/dev/v8gen.py android.arm.release -- use_sysroot=false use_glib=false use_custom_libcxx=false
 </code></pre></li>
 </ol>
-<h2 id="embed-v8-in-Android-APP问题"><a href="#embed-v8-in-Android-APP问题" class="headerlink" title="embed v8 in Android APP问题"></a>embed v8 in Android APP问题</h2><ol>
+<h2 id="embed-v8-in-Android-APP问题"><a href="#embed-v8-in-Android-APP问题" class="headerlink" title="embed v8 in Android APP问题"></a>embed v8 in Android APP问题</h2><p><strong>Note：目前已实现嵌入v8到Android APP并进一步实现基于v8和OpenGL的javascript游戏引擎。请参见我的Github 示例<a href="https://github.com/cstsinghua/V8Android" target="_blank" rel="external">V8Android</a>和<a href="https://github.com/cstsinghua/SunGameEngine" target="_blank" rel="external">SunGameEngine</a></strong></p>
+<ol>
 <li><p>利用v8的最新分支编译成静态库，然后在AS里面gradle打包，CMake构建时出现下面错误：</p>
 <pre><code>Build command failed.
 Error while executing process /usr/local/v8/v8/third_party/android_tools/sdk/cmake/3.6.4111459/bin/cmake with arguments {--build /mnt/share/V8Wrapper/app/.externalNativeBuild/cmake/debug/armeabi-v7a --target native-lib}
@@ -296,7 +297,7 @@ ninja: build stopped: subcommand failed.
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-04-23T01:33:56.000Z" itemprop="dateUpdated">2018-04-23 09:33:56</time>
+    post.last_updated<time datetime="2018-06-15T01:47:39.000Z" itemprop="dateUpdated">2018-06-15 09:47:39</time>
 </span><br>
 
 

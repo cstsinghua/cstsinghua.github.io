@@ -524,7 +524,7 @@ make: *** [default] Error 2
     <link href="https://cstsinghua.github.io/2018/04/13/%E7%BC%96%E8%AF%91v8%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB/"/>
     <id>https://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/</id>
     <published>2018-04-13T07:14:56.000Z</published>
-    <updated>2018-04-23T01:33:56.000Z</updated>
+    <updated>2018-06-15T01:47:39.000Z</updated>
     
     <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;Android-APP-embed-v8的错误汇总&quot;&gt;&lt;a href=&quot;#Android-APP-embed-v8的错误汇总&quot; class=&quot;headerlink&quot; title=&quot;Android APP embed v8的错误汇总&quot;&gt;&lt;/a&gt;Android APP embed v8的错误汇总&lt;/h1&gt;&lt;p&gt;Android APP embed v8的过程(请参见&lt;a href=&quot;https://cstsinghua.github.io/2018/04/04/%E6%9E%84%E5%BB%BAv8%20engine%E6%8C%87%E5%8D%97/&quot;&gt;编译和嵌入v8至Android APP&lt;/a&gt;)，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：&lt;/p&gt;
@@ -542,7 +542,8 @@ make: *** [default] Error 2
 &lt;li&gt;How to build v8 use gnu-libstdc++ instead of llvm-libc++?&lt;pre&gt;&lt;code&gt;tools/dev/v8gen.py android.arm.release -- use_sysroot=false use_glib=false use_custom_libcxx=false
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&quot;embed-v8-in-Android-APP问题&quot;&gt;&lt;a href=&quot;#embed-v8-in-Android-APP问题&quot; class=&quot;headerlink&quot; title=&quot;embed v8 in Android APP问题&quot;&gt;&lt;/a&gt;embed v8 in Android APP问题&lt;/h2&gt;&lt;ol&gt;
+&lt;h2 id=&quot;embed-v8-in-Android-APP问题&quot;&gt;&lt;a href=&quot;#embed-v8-in-Android-APP问题&quot; class=&quot;headerlink&quot; title=&quot;embed v8 in Android APP问题&quot;&gt;&lt;/a&gt;embed v8 in Android APP问题&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Note：目前已实现嵌入v8到Android APP并进一步实现基于v8和OpenGL的javascript游戏引擎。请参见我的Github 示例&lt;a href=&quot;https://github.com/cstsinghua/V8Android&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;V8Android&lt;/a&gt;和&lt;a href=&quot;https://github.com/cstsinghua/SunGameEngine&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SunGameEngine&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;利用v8的最新分支编译成静态库，然后在AS里面gradle打包，CMake构建时出现下面错误：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Build command failed.
 Error while executing process /usr/local/v8/v8/third_party/android_tools/sdk/cmake/3.6.4111459/bin/cmake with arguments {--build /mnt/share/V8Wrapper/app/.externalNativeBuild/cmake/debug/armeabi-v7a --target native-lib}
