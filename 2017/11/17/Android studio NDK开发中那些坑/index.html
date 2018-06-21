@@ -17,6 +17,7 @@
     <meta charset="utf-8">
     
     
+    
     <link rel="canonical" href="https://cstsinghua.github.io/2017/11/17/Android studio NDK开发中那些坑/">
     
     
@@ -26,7 +27,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Android,Android studio,Eclipse,NDK,JNI,cmake,ndk-build">
+    <meta name="keywords" content="Android,NDK,JNI,cmake,ndk-build,Eclipse,Android studio">
     <meta name="description" content="前言本文对Android NDK开发进行较详细的梳理，特别是针对其中涉及到的坑进行重点阐述，以让大家在后续的开发中重复踩坑。
 CMake待续
 ndk-build待续
@@ -67,7 +68,7 @@ ndk-build待续
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -198,7 +199,7 @@ ndk-build待续
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -237,12 +238,13 @@ ndk-build待续
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CMake"><span class="post-toc-number">2.</span> <span class="post-toc-text">CMake</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ndk-build"><span class="post-toc-number">3.</span> <span class="post-toc-text">ndk-build</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#工程实施"><span class="post-toc-number">4.</span> <span class="post-toc-text">工程实施</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#构建"><span class="post-toc-number">5.</span> <span class="post-toc-text">构建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构建命令"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">构建命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#clean命令"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">clean命令</span></a></li></ol></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-Android studio NDK开发中那些坑"
   class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -349,15 +351,17 @@ ndk-build待续
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2017-11-17T02:39:19.000Z" itemprop="dateUpdated">2017-11-17 10:39:19</time>
+    最終更新：<time datetime="2017-11-17T02:39:19.000Z" itemprop="dateUpdated">2017-11-17 10:39:19</time>
 </span><br>
 
 
         
     </div>
+    
     <footer>
         <a href="https://cstsinghua.github.io">
             <img src="/img/logo.jpg" alt="Cstsinghua">
@@ -498,6 +502,9 @@ ndk-build待续
 
 
 
+
+
+
 </article>
 
 <div id="reward" class="page-modal reward-lay">
@@ -547,7 +554,7 @@ ndk-build待续
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>footer.license</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
@@ -620,7 +627,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.7.1"></script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -640,7 +647,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.7.1" async></script>
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 

@@ -23,6 +23,8 @@
          
         <tag>源码分析</tag>
          
+        <tag>source    analysis</tag>
+         
         <tag>load</tag>
          
         <tag>bootstrap</tag>
@@ -30,8 +32,6 @@
         <tag>实现</tag>
          
         <tag>implementation</tag>
-         
-        <tag>source    analysis</tag>
          
         <tag>under the hood</tag>
          
@@ -60,13 +60,13 @@
          
         <tag>V8</tag>
          
-        <tag>depot_tools</tag>
-         
-        <tag>Linux</tag>
+        <tag>embed v8</tag>
          
         <tag>v8 embedded in Android APP</tag>
          
-        <tag>embed v8</tag>
+        <tag>Linux</tag>
+         
+        <tag>depot_tools</tag>
          
         <tag>编译</tag>
          
@@ -103,23 +103,23 @@
          
         <tag>V8</tag>
          
-        <tag>构建</tag>
-         
         <tag>GN</tag>
          
-        <tag>depot_tools</tag>
-         
-        <tag>Linux</tag>
-         
-        <tag>VS</tag>
+        <tag>embed v8</tag>
          
         <tag>v8 embedded in Android APP</tag>
          
+        <tag>构建</tag>
+         
+        <tag>Linux</tag>
+         
         <tag>no webview</tag>
          
-        <tag>JS</tag>
+        <tag>depot_tools</tag>
          
-        <tag>embed v8</tag>
+        <tag>VS</tag>
+         
+        <tag>JS</tag>
          
          
            
@@ -185,15 +185,15 @@
         
         <tag>V8</tag>
          
-        <tag>GN</tag>
+        <tag>JS game engine</tag>
          
-        <tag>v8 embedded in Android APP</tag>
+        <tag>GN</tag>
          
         <tag>embed v8</tag>
          
-        <tag>JS game engine</tag>
-         
         <tag>OpenGL</tag>
+         
+        <tag>v8 embedded in Android APP</tag>
          
          
            
@@ -218,13 +218,9 @@
         
         <tag>build</tag>
          
-        <tag>构建</tag>
-         
-        <tag>Linux</tag>
-         
-        <tag>no webview</tag>
-         
         <tag>spidermonkey</tag>
+         
+        <tag>构建</tag>
          
         <tag>hg</tag>
          
@@ -232,9 +228,13 @@
          
         <tag>Firefox</tag>
          
+        <tag>Linux</tag>
+         
         <tag>ubuntu</tag>
          
         <tag>spidermonkey embedded in Android APP</tag>
+         
+        <tag>no webview</tag>
          
         <tag>JS engine</tag>
          
@@ -341,9 +341,9 @@
         <title>Android studio常用快捷键</title>
         <pubTime>2016-07-13T10:07:19.000Z</pubTime>
         
-        <tag>快捷键</tag>
-         
         <tag>Android studio</tag>
+         
+        <tag>快捷键</tag>
          
          
            
@@ -366,9 +366,9 @@
         <title>adb原理简介及常用命令介绍</title>
         <pubTime>2018-01-08T08:18:23.000Z</pubTime>
         
-        <tag>命令</tag>
-         
         <tag>常用</tag>
+         
+        <tag>命令</tag>
          
         <tag>adb</tag>
          
@@ -399,10 +399,6 @@
         
         <tag>Android</tag>
          
-        <tag>Android studio</tag>
-         
-        <tag>Eclipse</tag>
-         
         <tag>NDK</tag>
          
         <tag>JNI</tag>
@@ -410,6 +406,10 @@
         <tag>cmake</tag>
          
         <tag>ndk-build</tag>
+         
+        <tag>Eclipse</tag>
+         
+        <tag>Android studio</tag>
          
          
            
@@ -935,9 +935,9 @@
         <title>Eclipse常用快捷键</title>
         <pubTime>2016-07-14T09:30:18.000Z</pubTime>
         
-        <tag>快捷键</tag>
-         
         <tag>Eclipse</tag>
+         
+        <tag>快捷键</tag>
          
         <tag>常用</tag>
          

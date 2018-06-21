@@ -17,6 +17,7 @@
     <meta charset="utf-8">
     
     
+    
     <link rel="canonical" href="https://cstsinghua.github.io/2018/04/04/构建v8 engine指南/">
     
     
@@ -26,7 +27,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="build,V8,构建,GN,depot_tools,Linux,VS,v8 embedded in Android APP,no webview,JS,embed v8">
+    <meta name="keywords" content="build,V8,GN,embed v8,v8 embedded in Android APP,构建,Linux,no webview,depot_tools,VS,JS">
     <meta name="description" content="背景最近公司的移动引擎(自研，用于公司的游戏APP开发，引擎核心采用C++开发，而游戏的UI和业务逻辑采用Lua语言开发)需要支持Javascript和Lua互相调用(支持Android和IOS两大平台)。刚开始的时候，没有什么头绪。由于之前实现过Lua和Android/IOS原生语言(API)即Java/Object-C的互调，其中Android平台交互原理大致如下图(本文主要基于Androi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="构建v8 engine指南">
@@ -49,7 +50,7 @@
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -180,7 +181,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -219,12 +220,13 @@
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#平台和环境的选择"><span class="post-toc-number">2.</span> <span class="post-toc-text">平台和环境的选择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Linux-Mac-x64版本的v8-可执行的二进制文件"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Linux/Mac x64版本的v8(可执行的二进制文件)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#具体步骤"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">具体步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-可执行的二进制文件"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(可执行的二进制文件)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-Ubuntu-16-04-下构建用于Android-arm版本的v8-静态库，用于Android-NDK链接和封装"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Linux(Ubuntu 16.04)下构建用于Android arm版本的v8(静态库，用于Android NDK链接和封装)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#win10构建v8-engine的心路历程"><span class="post-toc-number">3.</span> <span class="post-toc-text">win10构建v8 engine的心路历程</span></a></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-构建v8 engine指南"
   class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -436,15 +438,17 @@ x64.release
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-06-11T07:03:29.000Z" itemprop="dateUpdated">2018-06-11 15:03:29</time>
+    最終更新：<time datetime="2018-06-11T07:03:29.000Z" itemprop="dateUpdated">2018-06-11 15:03:29</time>
 </span><br>
 
 
         
     </div>
+    
     <footer>
         <a href="https://cstsinghua.github.io">
             <img src="/img/logo.jpg" alt="Cstsinghua">
@@ -585,6 +589,9 @@ x64.release
 
 
 
+
+
+
 </article>
 
 <div id="reward" class="page-modal reward-lay">
@@ -634,7 +641,7 @@ x64.release
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>footer.license</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
@@ -707,7 +714,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.7.1"></script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -727,7 +734,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.7.1" async></script>
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 

@@ -17,6 +17,7 @@
     <meta charset="utf-8">
     
     
+    
     <link rel="canonical" href="https://cstsinghua.github.io/2016/06/13/Android动态加载机制/">
     
     
@@ -51,7 +52,7 @@
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -182,7 +183,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -221,12 +222,13 @@
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-引言"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.引言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-JVM的类加载机制"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.JVM的类加载机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-双亲委派模型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 双亲委派模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-类加载过程"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2 类加载过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-Android中的类加载机制"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.Android中的类加载机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-Android中的主要类加载器介绍"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 Android中的主要类加载器介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-DexClassLoader加载类示例"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 DexClassLoader加载类示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-1-DexClassLoader加载示例1"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">3.2.1 DexClassLoader加载示例1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-2-DexClassLoader加载示例2"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">3.2.2 DexClassLoader加载示例2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-DexClassLoader加载的缺点，类加载的进一步探索"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">3.3 DexClassLoader加载的缺点，类加载的进一步探索</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3-1-DexClassLoader进阶，自定义DexClassLoader方式1"><span class="post-toc-number">3.2.3.1.</span> <span class="post-toc-text">3.3.1 DexClassLoader进阶，自定义DexClassLoader方式1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3-2-DexClassLoader进阶，自定义DexClassLoader方式2"><span class="post-toc-number">3.2.3.2.</span> <span class="post-toc-text">3.3.2 DexClassLoader进阶，自定义DexClassLoader方式2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3-3-DexClassLoader进阶，自定义DexClassLoader方式3"><span class="post-toc-number">3.2.3.3.</span> <span class="post-toc-text">3.3.3 DexClassLoader进阶，自定义DexClassLoader方式3</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-Android动态加载引申"><span class="post-toc-number">4.</span> <span class="post-toc-text">4.Android动态加载引申</span></a></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-Android动态加载机制"
   class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -820,15 +822,17 @@ for(int z=0; z&lt;as.length; z++) {
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2016-12-22T10:46:24.000Z" itemprop="dateUpdated">2016-12-22 18:46:24</time>
+    最終更新：<time datetime="2016-12-22T10:46:24.000Z" itemprop="dateUpdated">2016-12-22 18:46:24</time>
 </span><br>
 
 
         
     </div>
+    
     <footer>
         <a href="https://cstsinghua.github.io">
             <img src="/img/logo.jpg" alt="Cstsinghua">
@@ -969,6 +973,9 @@ for(int z=0; z&lt;as.length; z++) {
 
 
 
+
+
+
 </article>
 
 <div id="reward" class="page-modal reward-lay">
@@ -1018,7 +1025,7 @@ for(int z=0; z&lt;as.length; z++) {
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>footer.license</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
@@ -1091,7 +1098,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.7.1"></script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -1111,7 +1118,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.7.1" async></script>
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 

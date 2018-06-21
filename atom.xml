@@ -100,6 +100,8 @@
     
       <category term="源码分析" scheme="https://cstsinghua.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     
+      <category term="source    analysis" scheme="https://cstsinghua.github.io/tags/source-analysis/"/>
+    
       <category term="load" scheme="https://cstsinghua.github.io/tags/load/"/>
     
       <category term="bootstrap" scheme="https://cstsinghua.github.io/tags/bootstrap/"/>
@@ -107,8 +109,6 @@
       <category term="实现" scheme="https://cstsinghua.github.io/tags/%E5%AE%9E%E7%8E%B0/"/>
     
       <category term="implementation" scheme="https://cstsinghua.github.io/tags/implementation/"/>
-    
-      <category term="source    analysis" scheme="https://cstsinghua.github.io/tags/source-analysis/"/>
     
       <category term="under the hood" scheme="https://cstsinghua.github.io/tags/under-the-hood/"/>
     
@@ -240,15 +240,15 @@ Stack frame         #07 pc 00000000000092b8  /data/app/com.boyaa.v8wrapper-gc82k
     
       <category term="V8" scheme="https://cstsinghua.github.io/tags/V8/"/>
     
-      <category term="GN" scheme="https://cstsinghua.github.io/tags/GN/"/>
+      <category term="JS game engine" scheme="https://cstsinghua.github.io/tags/JS-game-engine/"/>
     
-      <category term="v8 embedded in Android APP" scheme="https://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
+      <category term="GN" scheme="https://cstsinghua.github.io/tags/GN/"/>
     
       <category term="embed v8" scheme="https://cstsinghua.github.io/tags/embed-v8/"/>
     
-      <category term="JS game engine" scheme="https://cstsinghua.github.io/tags/JS-game-engine/"/>
-    
       <category term="OpenGL" scheme="https://cstsinghua.github.io/tags/OpenGL/"/>
+    
+      <category term="v8 embedded in Android APP" scheme="https://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
     
   </entry>
   
@@ -359,7 +359,7 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
 &lt;p&gt;coulsonchen@coulsonchen:/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ$ ../configure&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;  执行该命令后，可能遇到下面错误(Only GCC 6.1 or newer is supported (found version 5.4.0))：&lt;/p&gt;
-  &lt;figure class=&quot;highlight cmd&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;51&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Creating Python environment&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;New python executable &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python2.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Also creating executable &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Installing setuptools, pip, wheel...done.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;running build_ext&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;copying build/lib.linux-x86_64-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;/psutil/_psutil_linux.so -&amp;gt; psutil&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;copying build/lib.linux-x86_64-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;/psutil/_psutil_posix.so -&amp;gt; psutil&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Error processing command. Ignoring because optional. (optional:packages.txt:comm/build/virtualenv_packages.txt)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Reexecuting &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; the virtualenv&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; vcs source checkout... hg&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; a shell... /bin/sh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; host system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; target system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; a shell... /bin/sh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; host system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; target system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android platform directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android sysroot directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android system directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; the Android toolchain directory... &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; found&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android platform directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android system directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android sysroot directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; the Android toolchain directory... &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; found&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; vcs source checkout... hg&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking whether cross compiling... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; the target C compiler... /usr/bin/gcc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking whether the target C compiler can be used... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;DEBUG: &amp;lt;&lt;span class=&quot;title&quot;&gt;truncated&lt;/span&gt; - &lt;span class=&quot;title&quot;&gt;see&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;config.log&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;full&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;output&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;Linux&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;_WIN32&lt;/span&gt; || &lt;span class=&quot;title&quot;&gt;__CYGWIN__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;WINNT&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__NetBSD__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;NetBSD&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__APPLE__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;Darwin&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;endif&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;_MSC_VER&lt;/span&gt; || &lt;span class=&quot;title&quot;&gt;__BYTE_ORDER__&lt;/span&gt; == &lt;span class=&quot;title&quot;&gt;__ORDER_LITTLE_ENDIAN__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;ENDIANNESS&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;little&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__BYTE_ORDER__&lt;/span&gt; == &lt;span class=&quot;title&quot;&gt;__ORDER_BIG_ENDIAN__&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;ENDIANNESS&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;big&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;endif&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;Executing&lt;/span&gt;: `/&lt;span class=&quot;title&quot;&gt;usr&lt;/span&gt;/&lt;span class=&quot;title&quot;&gt;bin&lt;/span&gt;/&lt;span class=&quot;title&quot;&gt;gcc&lt;/span&gt; -&lt;span class=&quot;title&quot;&gt;std&lt;/span&gt;=&lt;span class=&quot;title&quot;&gt;gnu99&lt;/span&gt; -&lt;span class=&quot;title&quot;&gt;E&lt;/span&gt; /&lt;span class=&quot;title&quot;&gt;tmp&lt;/span&gt;/&lt;span class=&quot;title&quot;&gt;conftest._Zswij.c&lt;/span&gt;`&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;COMPILER&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;gcc&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;VERSION&lt;/span&gt; = 5.4.0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;STDC_VERSION&lt;/span&gt; = 199901&lt;span class=&quot;title&quot;&gt;L&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;CPU&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;x86_64&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;Linux&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;ENDIANNESS&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;little&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;ERROR&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;Only&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;GCC&lt;/span&gt; 6.1 &lt;span class=&quot;title&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;newer&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;supported&lt;/span&gt; (&lt;span class=&quot;title&quot;&gt;found&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;version&lt;/span&gt; 5.4.0).&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+  &lt;figure class=&quot;highlight cmd&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;51&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Creating Python environment&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;New python executable &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python2.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Also creating executable &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Installing setuptools, pip, wheel...done.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;running build_ext&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;copying build/lib.linux-x86_64-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;/psutil/_psutil_linux.so -&amp;gt; psutil&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;copying build/lib.linux-x86_64-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;/psutil/_psutil_posix.so -&amp;gt; psutil&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Error processing command. Ignoring because optional. (optional:packages.txt:comm/build/virtualenv_packages.txt)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Reexecuting &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; the virtualenv&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; vcs source checkout... hg&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; a shell... /bin/sh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; host system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; target system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; a shell... /bin/sh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; host system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; target system &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;... x86_64-pc-linux-gnu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android platform directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android sysroot directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android system directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; the Android toolchain directory... &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; found&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android platform directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android system directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; android sysroot directory... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; the Android toolchain directory... &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; found&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; vcs source checkout... hg&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking whether cross compiling... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; the target C compiler... /usr/bin/gcc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;checking whether the target C compiler can be used... no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;DEBUG: &amp;lt;&lt;span class=&quot;title&quot;&gt;truncated&lt;/span&gt; - &lt;span class=&quot;title&quot;&gt;see&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;config.log&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;full&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;output&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;Linux&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; _WIN32 || __CYGWIN__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;WINNT&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; __NetBSD__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;NetBSD&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; __APPLE__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;Darwin&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;endif&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;if&lt;/span&gt; _MSC_VER || __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;ENDIANNESS&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;little&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;elif&lt;/span&gt; __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | %&lt;span class=&quot;title&quot;&gt;ENDIANNESS&lt;/span&gt; &quot;&lt;span class=&quot;title&quot;&gt;big&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: | #&lt;span class=&quot;title&quot;&gt;endif&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;Executing&lt;/span&gt;: `/&lt;span class=&quot;title&quot;&gt;usr&lt;/span&gt;/&lt;span class=&quot;title&quot;&gt;bin&lt;/span&gt;/&lt;span class=&quot;title&quot;&gt;gcc&lt;/span&gt; -&lt;span class=&quot;title&quot;&gt;std&lt;/span&gt;=&lt;span class=&quot;title&quot;&gt;gnu99&lt;/span&gt; -&lt;span class=&quot;title&quot;&gt;E&lt;/span&gt; /&lt;span class=&quot;title&quot;&gt;tmp&lt;/span&gt;/&lt;span class=&quot;title&quot;&gt;conftest._Zswij.c&lt;/span&gt;`&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;COMPILER&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;gcc&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;VERSION&lt;/span&gt; = 5.4.0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;STDC_VERSION&lt;/span&gt; = 199901&lt;span class=&quot;title&quot;&gt;L&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;CPU&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;x86_64&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;KERNEL&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;Linux&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;DEBUG&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;ENDIANNESS&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;little&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;ERROR&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;Only&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;GCC&lt;/span&gt; 6.1 &lt;span class=&quot;title&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;newer&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;supported&lt;/span&gt; (&lt;span class=&quot;title&quot;&gt;found&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;version&lt;/span&gt; 5.4.0).&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;这里有两种解决办法：
@@ -487,13 +487,9 @@ make: *** [default] Error 2
     
       <category term="build" scheme="https://cstsinghua.github.io/tags/build/"/>
     
-      <category term="构建" scheme="https://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
-    
-      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
-    
-      <category term="no webview" scheme="https://cstsinghua.github.io/tags/no-webview/"/>
-    
       <category term="spidermonkey" scheme="https://cstsinghua.github.io/tags/spidermonkey/"/>
+    
+      <category term="构建" scheme="https://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
       <category term="hg" scheme="https://cstsinghua.github.io/tags/hg/"/>
     
@@ -501,9 +497,13 @@ make: *** [default] Error 2
     
       <category term="Firefox" scheme="https://cstsinghua.github.io/tags/Firefox/"/>
     
+      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
+    
       <category term="ubuntu" scheme="https://cstsinghua.github.io/tags/ubuntu/"/>
     
       <category term="spidermonkey embedded in Android APP" scheme="https://cstsinghua.github.io/tags/spidermonkey-embedded-in-Android-APP/"/>
+    
+      <category term="no webview" scheme="https://cstsinghua.github.io/tags/no-webview/"/>
     
       <category term="JS engine" scheme="https://cstsinghua.github.io/tags/JS-engine/"/>
     
@@ -584,13 +584,13 @@ ninja: build stopped: subcommand failed.
     
       <category term="V8" scheme="https://cstsinghua.github.io/tags/V8/"/>
     
-      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
-    
-      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
+      <category term="embed v8" scheme="https://cstsinghua.github.io/tags/embed-v8/"/>
     
       <category term="v8 embedded in Android APP" scheme="https://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
     
-      <category term="embed v8" scheme="https://cstsinghua.github.io/tags/embed-v8/"/>
+      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
+    
+      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
     
       <category term="编译" scheme="https://cstsinghua.github.io/tags/%E7%BC%96%E8%AF%91/"/>
     
@@ -815,23 +815,23 @@ x64.release
     
       <category term="V8" scheme="https://cstsinghua.github.io/tags/V8/"/>
     
-      <category term="构建" scheme="https://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
-    
       <category term="GN" scheme="https://cstsinghua.github.io/tags/GN/"/>
     
-      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
-    
-      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
-    
-      <category term="VS" scheme="https://cstsinghua.github.io/tags/VS/"/>
+      <category term="embed v8" scheme="https://cstsinghua.github.io/tags/embed-v8/"/>
     
       <category term="v8 embedded in Android APP" scheme="https://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
     
+      <category term="构建" scheme="https://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+    
+      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
+    
       <category term="no webview" scheme="https://cstsinghua.github.io/tags/no-webview/"/>
     
-      <category term="JS" scheme="https://cstsinghua.github.io/tags/JS/"/>
+      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
     
-      <category term="embed v8" scheme="https://cstsinghua.github.io/tags/embed-v8/"/>
+      <category term="VS" scheme="https://cstsinghua.github.io/tags/VS/"/>
+    
+      <category term="JS" scheme="https://cstsinghua.github.io/tags/JS/"/>
     
   </entry>
   
@@ -1044,9 +1044,9 @@ x64.release
       <category term="tools" scheme="https://cstsinghua.github.io/categories/Android/tools/"/>
     
     
-      <category term="命令" scheme="https://cstsinghua.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
-    
       <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
+    
+      <category term="命令" scheme="https://cstsinghua.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
     
       <category term="adb" scheme="https://cstsinghua.github.io/tags/adb/"/>
     
@@ -1160,10 +1160,6 @@ x64.release
     
       <category term="Android" scheme="https://cstsinghua.github.io/tags/Android/"/>
     
-      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
-    
-      <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
-    
       <category term="NDK" scheme="https://cstsinghua.github.io/tags/NDK/"/>
     
       <category term="JNI" scheme="https://cstsinghua.github.io/tags/JNI/"/>
@@ -1171,6 +1167,10 @@ x64.release
       <category term="cmake" scheme="https://cstsinghua.github.io/tags/cmake/"/>
     
       <category term="ndk-build" scheme="https://cstsinghua.github.io/tags/ndk-build/"/>
+    
+      <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
+    
+      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
     
   </entry>
   
@@ -2071,9 +2071,9 @@ Aborting commit due to empty commit message.
       <category term="Tools使用" scheme="https://cstsinghua.github.io/categories/Java/Tools%E4%BD%BF%E7%94%A8/"/>
     
     
-      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
-    
       <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
+    
+      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
       <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
     
@@ -2299,9 +2299,9 @@ Aborting commit due to empty commit message.
       <category term="Tools" scheme="https://cstsinghua.github.io/categories/Android/Tools/"/>
     
     
-      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
-    
       <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
+    
+      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
@@ -5791,39 +5791,6 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://cstsinghua.github.io/2016/06/13/hello-world/"/>
-    <id>https://cstsinghua.github.io/2016/06/13/hello-world/</id>
-    <published>2016-06-13T01:57:02.000Z</published>
-    <updated>2016-06-13T01:57:02.000Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For Test:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="杂项" scheme="https://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-      <category term="杂项" scheme="https://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
-    
-  </entry>
-  
-  <entry>
     <title>python安装某些第三方包报错解决办法</title>
     <link href="https://cstsinghua.github.io/2016/06/13/python%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/"/>
     <id>https://cstsinghua.github.io/2016/06/13/python安装第三方包错误解决/</id>
@@ -5879,6 +5846,39 @@ collect2.exe: error: ld returned 1 exit status
     
     
       <category term="安装第三方包" scheme="https://cstsinghua.github.io/tags/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://cstsinghua.github.io/2016/06/13/hello-world/"/>
+    <id>https://cstsinghua.github.io/2016/06/13/hello-world/</id>
+    <published>2016-06-13T01:57:02.000Z</published>
+    <updated>2016-06-13T01:57:02.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For Test:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/okhttp-3.3.1.jar&quot;&gt;文件下载&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="杂项" scheme="https://cstsinghua.github.io/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="杂项" scheme="https://cstsinghua.github.io/tags/%E6%9D%82%E9%A1%B9/"/>
     
   </entry>
   

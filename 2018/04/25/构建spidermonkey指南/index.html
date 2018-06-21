@@ -17,6 +17,7 @@
     <meta charset="utf-8">
     
     
+    
     <link rel="canonical" href="https://cstsinghua.github.io/2018/04/25/构建spidermonkey指南/">
     
     
@@ -26,7 +27,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="build,构建,Linux,no webview,spidermonkey,hg,embed spidermonkey,Firefox,ubuntu,spidermonkey embedded in Android APP,JS engine,arm,arm64,x86">
+    <meta name="keywords" content="build,spidermonkey,构建,hg,embed spidermonkey,Firefox,Linux,ubuntu,spidermonkey embedded in Android APP,no webview,JS engine,arm,arm64,x86">
     <meta name="description" content="前言随着javascript语言的快速发展，以及跨平台应用的场景越来越广，当前已经出现采用JS engine嵌入移动APP，实现JS编写跨移动平台的应用。比如FaceBook的ReactNative，而Cocos2D引擎也实现了JS的版本Cocos2d-JS。当前主流的JS engine很多，包括v8、spidermonkey、JavascriptCore、Rhino和Nashorn等。
 关于J">
 <meta property="og:type" content="article">
@@ -53,7 +54,7 @@
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -184,7 +185,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -223,12 +224,13 @@
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ubuntu-16-04-LTS系统下构建Firefox-for-Android"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ubuntu 16.04 LTS系统下构建Firefox for Android</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ubuntu-16-04-LTS系统下构建spidermonkey的shared-library"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">ubuntu 16.04 LTS系统下构建spidermonkey的shared library</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#附录"><span class="post-toc-number">2.</span> <span class="post-toc-text">附录</span></a></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-构建spidermonkey指南"
   class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -350,7 +352,7 @@ Once you have all the dependencies installed, you need to clone the Firefox repo
 <p>coulsonchen@coulsonchen:/usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ$ ../configure</p>
 </blockquote>
 <p>  执行该命令后，可能遇到下面错误(Only GCC 6.1 or newer is supported (found version 5.4.0))：</p>
-  <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">Creating Python environment</span><br><span class="line">New python executable <span class="keyword">in</span> /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python2.<span class="number">7</span></span><br><span class="line">Also creating executable <span class="keyword">in</span> /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br><span class="line">running build_ext</span><br><span class="line">copying build/lib.linux-x86_64-<span class="number">2</span>.<span class="number">7</span>/psutil/_psutil_linux.so -&gt; psutil</span><br><span class="line">copying build/lib.linux-x86_64-<span class="number">2</span>.<span class="number">7</span>/psutil/_psutil_posix.so -&gt; psutil</span><br><span class="line"></span><br><span class="line">Error processing command. Ignoring because optional. (optional:packages.txt:comm/build/virtualenv_packages.txt)</span><br><span class="line">Reexecuting <span class="keyword">in</span> the virtualenv</span><br><span class="line">checking <span class="keyword">for</span> vcs source checkout... hg</span><br><span class="line">checking <span class="keyword">for</span> a shell... /bin/sh</span><br><span class="line">checking <span class="keyword">for</span> host system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> target system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> a shell... /bin/sh</span><br><span class="line">checking <span class="keyword">for</span> host system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> target system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> android platform directory... no</span><br><span class="line">checking <span class="keyword">for</span> android sysroot directory... no</span><br><span class="line">checking <span class="keyword">for</span> android system directory... no</span><br><span class="line">checking <span class="keyword">for</span> the Android toolchain directory... <span class="keyword">not</span> found</span><br><span class="line">checking <span class="keyword">for</span> android platform directory... no</span><br><span class="line">checking <span class="keyword">for</span> android system directory... no</span><br><span class="line">checking <span class="keyword">for</span> android sysroot directory... no</span><br><span class="line">checking <span class="keyword">for</span> the Android toolchain directory... <span class="keyword">not</span> found</span><br><span class="line">checking <span class="keyword">for</span> vcs source checkout... hg</span><br><span class="line">checking whether cross compiling... no</span><br><span class="line">checking <span class="keyword">for</span> the target C compiler... /usr/bin/gcc</span><br><span class="line">checking whether the target C compiler can be used... no</span><br><span class="line"><span class="function">DEBUG: &lt;<span class="title">truncated</span> - <span class="title">see</span> <span class="title">config.log</span> <span class="title">for</span> <span class="title">full</span> <span class="title">output</span>&gt;</span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">Linux</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> <span class="title">_WIN32</span> || <span class="title">__CYGWIN__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">WINNT</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> <span class="title">__NetBSD__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">NetBSD</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> <span class="title">__APPLE__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">Darwin</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">endif</span></span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">if</span> <span class="title">_MSC_VER</span> || <span class="title">__BYTE_ORDER__</span> == <span class="title">__ORDER_LITTLE_ENDIAN__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">ENDIANNESS</span> "<span class="title">little</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> <span class="title">__BYTE_ORDER__</span> == <span class="title">__ORDER_BIG_ENDIAN__</span></span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">ENDIANNESS</span> "<span class="title">big</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">endif</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">Executing</span>: `/<span class="title">usr</span>/<span class="title">bin</span>/<span class="title">gcc</span> -<span class="title">std</span>=<span class="title">gnu99</span> -<span class="title">E</span> /<span class="title">tmp</span>/<span class="title">conftest._Zswij.c</span>`</span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">COMPILER</span> = <span class="title">gcc</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">VERSION</span> = 5.4.0</span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">STDC_VERSION</span> = 199901<span class="title">L</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">CPU</span> = <span class="title">x86_64</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">KERNEL</span> = <span class="title">Linux</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">ENDIANNESS</span> = <span class="title">little</span></span><br><span class="line"><span class="title">ERROR</span>: <span class="title">Only</span> <span class="title">GCC</span> 6.1 <span class="title">or</span> <span class="title">newer</span> <span class="title">is</span> <span class="title">supported</span> (<span class="title">found</span> <span class="title">version</span> 5.4.0).</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">Creating Python environment</span><br><span class="line">New python executable <span class="keyword">in</span> /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python2.<span class="number">7</span></span><br><span class="line">Also creating executable <span class="keyword">in</span> /usr/local/spidermonkey/mozilla-central/js/src/build_OPT.OBJ/_virtualenv/bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br><span class="line">running build_ext</span><br><span class="line">copying build/lib.linux-x86_64-<span class="number">2</span>.<span class="number">7</span>/psutil/_psutil_linux.so -&gt; psutil</span><br><span class="line">copying build/lib.linux-x86_64-<span class="number">2</span>.<span class="number">7</span>/psutil/_psutil_posix.so -&gt; psutil</span><br><span class="line"></span><br><span class="line">Error processing command. Ignoring because optional. (optional:packages.txt:comm/build/virtualenv_packages.txt)</span><br><span class="line">Reexecuting <span class="keyword">in</span> the virtualenv</span><br><span class="line">checking <span class="keyword">for</span> vcs source checkout... hg</span><br><span class="line">checking <span class="keyword">for</span> a shell... /bin/sh</span><br><span class="line">checking <span class="keyword">for</span> host system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> target system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> a shell... /bin/sh</span><br><span class="line">checking <span class="keyword">for</span> host system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> target system <span class="built_in">type</span>... x86_64-pc-linux-gnu</span><br><span class="line">checking <span class="keyword">for</span> android platform directory... no</span><br><span class="line">checking <span class="keyword">for</span> android sysroot directory... no</span><br><span class="line">checking <span class="keyword">for</span> android system directory... no</span><br><span class="line">checking <span class="keyword">for</span> the Android toolchain directory... <span class="keyword">not</span> found</span><br><span class="line">checking <span class="keyword">for</span> android platform directory... no</span><br><span class="line">checking <span class="keyword">for</span> android system directory... no</span><br><span class="line">checking <span class="keyword">for</span> android sysroot directory... no</span><br><span class="line">checking <span class="keyword">for</span> the Android toolchain directory... <span class="keyword">not</span> found</span><br><span class="line">checking <span class="keyword">for</span> vcs source checkout... hg</span><br><span class="line">checking whether cross compiling... no</span><br><span class="line">checking <span class="keyword">for</span> the target C compiler... /usr/bin/gcc</span><br><span class="line">checking whether the target C compiler can be used... no</span><br><span class="line"><span class="function">DEBUG: &lt;<span class="title">truncated</span> - <span class="title">see</span> <span class="title">config.log</span> <span class="title">for</span> <span class="title">full</span> <span class="title">output</span>&gt;</span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">Linux</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> _WIN32 || __CYGWIN__</span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">WINNT</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> __NetBSD__</span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">NetBSD</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> __APPLE__</span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">KERNEL</span> "<span class="title">Darwin</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">endif</span></span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">if</span> _MSC_VER || __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__</span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">ENDIANNESS</span> "<span class="title">little</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">elif</span> __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__</span><br><span class="line"><span class="title">DEBUG</span>: | %<span class="title">ENDIANNESS</span> "<span class="title">big</span>"</span><br><span class="line"><span class="title">DEBUG</span>: | #<span class="title">endif</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">Executing</span>: `/<span class="title">usr</span>/<span class="title">bin</span>/<span class="title">gcc</span> -<span class="title">std</span>=<span class="title">gnu99</span> -<span class="title">E</span> /<span class="title">tmp</span>/<span class="title">conftest._Zswij.c</span>`</span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">COMPILER</span> = <span class="title">gcc</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">VERSION</span> = 5.4.0</span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">STDC_VERSION</span> = 199901<span class="title">L</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">CPU</span> = <span class="title">x86_64</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">KERNEL</span> = <span class="title">Linux</span></span><br><span class="line"><span class="title">DEBUG</span>: <span class="title">ENDIANNESS</span> = <span class="title">little</span></span><br><span class="line"><span class="title">ERROR</span>: <span class="title">Only</span> <span class="title">GCC</span> 6.1 <span class="title">or</span> <span class="title">newer</span> <span class="title">is</span> <span class="title">supported</span> (<span class="title">found</span> <span class="title">version</span> 5.4.0).</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <pre><code>这里有两种解决办法：
@@ -466,15 +468,17 @@ make: *** [default] Error 2
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-05-04T03:01:55.000Z" itemprop="dateUpdated">2018-05-04 11:01:55</time>
+    最終更新：<time datetime="2018-05-04T03:01:55.000Z" itemprop="dateUpdated">2018-05-04 11:01:55</time>
 </span><br>
 
 
         
     </div>
+    
     <footer>
         <a href="https://cstsinghua.github.io">
             <img src="/img/logo.jpg" alt="Cstsinghua">
@@ -615,6 +619,9 @@ make: *** [default] Error 2
 
 
 
+
+
+
 </article>
 
 <div id="reward" class="page-modal reward-lay">
@@ -664,7 +671,7 @@ make: *** [default] Error 2
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>footer.license</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
@@ -737,7 +744,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.7.1"></script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -757,7 +764,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.7.1" async></script>
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 

@@ -17,6 +17,7 @@
     <meta charset="utf-8">
     
     
+    
     <link rel="canonical" href="https://cstsinghua.github.io/2017/02/09/Android 操作系统的内存回收机制/">
     
     
@@ -43,7 +44,7 @@
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -174,7 +175,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -213,12 +214,13 @@
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-APP-的运行环境"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android APP 的运行环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-内存回收原则"><span class="post-toc-number">2.</span> <span class="post-toc-text">Android 内存回收原则</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#默认回收过程"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">默认回收过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#回收动作入口：activityIdleInternal"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">回收动作入口：activityIdleInternal()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#回收过程函数-trimApplications"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">回收过程函数 trimApplications()</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-内核中的内存回收"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Linux 内核中的内存回收</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#lowmemorykiller"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">lowmemorykiller</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Oom-killer"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">Oom_killer</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-Android 操作系统的内存回收机制"
   class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -304,15 +306,17 @@
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2017-02-09T04:27:59.000Z" itemprop="dateUpdated">2017-02-09 12:27:59</time>
+    最終更新：<time datetime="2017-02-09T04:27:59.000Z" itemprop="dateUpdated">2017-02-09 12:27:59</time>
 </span><br>
 
 
         
     </div>
+    
     <footer>
         <a href="https://cstsinghua.github.io">
             <img src="/img/logo.jpg" alt="Cstsinghua">
@@ -454,6 +458,9 @@ Android系统是一款基于Linux内核，面向移动终端的操作系统。�
 
 
 
+
+
+
 </article>
 
 <div id="reward" class="page-modal reward-lay">
@@ -503,7 +510,7 @@ Android系统是一款基于Linux内核，面向移动终端的操作系统。�
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>footer.license</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
@@ -577,7 +584,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.7.1"></script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -597,7 +604,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.7.1" async></script>
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 

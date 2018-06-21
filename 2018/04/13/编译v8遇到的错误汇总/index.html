@@ -17,6 +17,7 @@
     <meta charset="utf-8">
     
     
+    
     <link rel="canonical" href="https://cstsinghua.github.io/2018/04/13/编译v8遇到的错误汇总/">
     
     
@@ -26,7 +27,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="build,V8,depot_tools,Linux,v8 embedded in Android APP,embed v8,编译,嵌入,错误,问题,汇总">
+    <meta name="keywords" content="build,V8,embed v8,v8 embedded in Android APP,Linux,depot_tools,编译,嵌入,错误,问题,汇总">
     <meta name="description" content="Android APP embed v8的错误汇总Android APP embed v8的过程(请参见编译和嵌入v8至Android APP)，非常艰难，会出现各种各样的错误，此文对此进行总结，便于问题的记录和后续查询和分析。遇到的问题大致分为2类：
 
 在Ubuntu 16.04系统下，编译v8的时候，环境的配置、各种参数的设置问题，这最终会影响到生成的库(分static library和sh">
@@ -49,7 +50,7 @@
         <link rel="alternate" type="application/atom+xml" title="Atypical programmer" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -180,7 +181,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -219,12 +220,13 @@
 <div class="container body-wrap">
     
     <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-APP-embed-v8的错误汇总"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android APP embed v8的错误汇总</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编译v8库的问题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">编译v8库的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#embed-v8-in-Android-APP问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">embed v8 in Android APP问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#附录和链接"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">附录和链接</span></a></li></ol></li></ol>
         </nav>
     </aside>
-    
+
+
 <article id="post-编译v8遇到的错误汇总"
   class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -294,15 +296,17 @@ ninja: build stopped: subcommand failed.
         </div>
 
         <blockquote class="post-copyright">
+    
     <div class="content">
         
 <span class="post-time">
-    post.last_updated<time datetime="2018-06-15T01:47:39.000Z" itemprop="dateUpdated">2018-06-15 09:47:39</time>
+    最終更新：<time datetime="2018-06-15T01:47:39.000Z" itemprop="dateUpdated">2018-06-15 09:47:39</time>
 </span><br>
 
 
         
     </div>
+    
     <footer>
         <a href="https://cstsinghua.github.io">
             <img src="/img/logo.jpg" alt="Cstsinghua">
@@ -443,6 +447,9 @@ ninja: build stopped: subcommand failed.
 
 
 
+
+
+
 </article>
 
 <div id="reward" class="page-modal reward-lay">
@@ -492,7 +499,7 @@ ninja: build stopped: subcommand failed.
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>footer.license</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
@@ -565,7 +572,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 
 </script>
 
-<script src="/js/main.min.js?v=1.7.1"></script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -585,7 +592,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1259817891&web_id=1259817891')
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.7.1" async></script>
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 
