@@ -234,7 +234,7 @@
 
     
         
-NodeJS启动和加载分析本文以目前NodeJS最新的源码的master分支(截止到2018.6.7日的commit，SHA1值为22c826f5aa3811e758686fd00a8fe15728f6fc37。即将NodeJS仓库从Github clone下来之后，在本地仓库目录下执行git checout 22c826f5aa3811e758686fd00a8fe15728f6fc37...
+前言由于近期需要基于OpenGL ES和Google的v8 engine开发Android平台的javascript游戏引擎，所以对v8的编译构建、嵌入和运行JS代码进行了较深入的研究和实践。目前在Github上已经放了一个简单的demo engine。不过在实现的过程中，出现一个严重的问题，就是多个游戏js文件(模块)相互require时，最初实现的require函数无法满足要求，因为不...
     
 
         <a href="/2018/06/14/NodeJS启动和加载分析/" class="post-more waves-effect waves-button">
@@ -244,7 +244,7 @@ NodeJS启动和加载分析本文以目前NodeJS最新的源码的master分支(�
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/implementation/">implementation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/load/">load</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/module-system/">module system</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/require/">require</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/source-analysis/">source analysis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加载/">加载</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启动/">启动</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实现/">实现</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码分析/">源码分析</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/implementation/">implementation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/load/">load</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/module-system/">module system</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/require/">require</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/source-analysis/">source    analysis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/under-the-hood/">under the hood</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加载/">加载</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启动/">启动</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实现/">实现</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码分析/">源码分析</a></li></ul>
 
     </div>
     
