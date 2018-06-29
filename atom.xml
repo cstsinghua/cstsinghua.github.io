@@ -1576,6 +1576,8 @@ x64.release
     
       <category term="aapt" scheme="https://cstsinghua.github.io/tags/aapt/"/>
     
+      <category term="apkanalyzer" scheme="https://cstsinghua.github.io/tags/apkanalyzer/"/>
+    
   </entry>
   
   <entry>
