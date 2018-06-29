@@ -1482,7 +1482,7 @@ x64.release
     <link href="https://cstsinghua.github.io/2017/02/21/Android%20APK%E9%80%86%E5%90%91%E8%A7%A3%E6%9E%90/"/>
     <id>https://cstsinghua.github.io/2017/02/21/Android APK逆向解析/</id>
     <published>2017-02-21T06:34:42.000Z</published>
-    <updated>2018-03-02T03:43:02.000Z</updated>
+    <updated>2018-06-29T08:00:46.000Z</updated>
     
     <content type="html">&lt;p&gt;Android APK逆向解析&lt;/p&gt;
 &lt;p&gt;众所周知，Android系统是开源的，运行其上的Android应用APK即Android Package也是可以通过各种工具进行反编译或者逆向工程，从而可以对其他APP进行研究或者借鉴学习，亦或从APK中获取相关信息(比如清单文件AndroidManifest.xml里面的package、versionName和versionCode等等)。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -1541,7 +1541,8 @@ x64.release
 &lt;p&gt;aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk&lt;br&gt;aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk | findstr launchable-activity&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;通过aapt方式解析APK，需要熟悉命令的使用，也比较繁琐。但好处在于可以将其封装进脚本，用于&lt;strong&gt;编写自动化工具去解析和执行，这对于构建自动化测试或者自动打包流程等非常有用，而不依赖于GUI&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id=&quot;新版Android-studio&quot;&gt;&lt;a href=&quot;#新版Android-studio&quot; class=&quot;headerlink&quot; title=&quot;新版Android studio&quot;&gt;&lt;/a&gt;新版Android studio&lt;/h2&gt;&lt;p&gt;Android studio 2.x版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：&lt;br&gt;&lt;img src=&quot;http://i.imgur.com/hyigywA.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;新版Android-studio-对应于Android-SDK里面附带的命令行工具apkanalyzer&quot;&gt;&lt;a href=&quot;#新版Android-studio-对应于Android-SDK里面附带的命令行工具apkanalyzer&quot; class=&quot;headerlink&quot; title=&quot;新版Android studio(对应于Android SDK里面附带的命令行工具apkanalyzer)&quot;&gt;&lt;/a&gt;新版Android studio(对应于Android SDK里面附带的命令行工具apkanalyzer)&lt;/h2&gt;&lt;p&gt;Android studio 2.x及更新版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：&lt;br&gt;&lt;img src=&quot;http://i.imgur.com/hyigywA.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;而实际上，在底层，就是&lt;strong&gt;调用Android SDK tools里面附带的apkanalyzer工具&lt;/strong&gt;，位于&lt;code&gt;$android_sdk/tools/bin/apkanalyzer&lt;/code&gt;，其中&lt;code&gt;$android_sdk&lt;/code&gt;表示Android sdk的安装目录。而apkanalyzer真正的逻辑在&lt;code&gt;$android_sdk/tools/lib/apkanalyzer-cli.jar&lt;/code&gt;和&lt;code&gt;$android_sdk/tools/lib/apkanalyzer.jar&lt;/code&gt;两个jar包中实现，可以用&lt;a href=&quot;http://jd.benow.ca/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;jd-gui&lt;/a&gt;等类似工具查看其java源码，学习里面的实现方法。有了apkanalyzer工具，也可以用命令行或者用脚本语言封装，从而在自动化开发或者其他分析场景使用。apkanalyzer工具可以在Android开发者官网找到&lt;a href=&quot;https://developer.android.com/studio/command-line/apkanalyzer&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;说明文档&lt;/a&gt;。&lt;/p&gt;
 </content>
     
     <summary type="html">

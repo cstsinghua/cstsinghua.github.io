@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://i.imgur.com/xLb60OI.png">
 <meta property="og:image" content="https://i.imgur.com/KRnIJOi.jpg">
 <meta property="og:image" content="http://i.imgur.com/hyigywA.png">
-<meta property="og:updated_time" content="2018-03-02T03:43:02.000Z">
+<meta property="og:updated_time" content="2018-06-29T08:00:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android APK逆向解析">
 <meta name="twitter:description" content="Android应用APK逆向解析工具和方法">
@@ -219,7 +219,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android的构建流程"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android的构建流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-APK逆向解析"><span class="post-toc-number">2.</span> <span class="post-toc-text">Android APK逆向解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#全能型选手-apktool"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">全能型选手-apktool</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jadx"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">jadx</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ClassyShark"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">ClassyShark</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AXMLParser"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">AXMLParser</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AAPT-aapt"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">AAPT(aapt)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新版Android-studio"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">新版Android studio</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android的构建流程"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android的构建流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-APK逆向解析"><span class="post-toc-number">2.</span> <span class="post-toc-text">Android APK逆向解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#全能型选手-apktool"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">全能型选手-apktool</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jadx"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">jadx</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ClassyShark"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">ClassyShark</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AXMLParser"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">AXMLParser</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AAPT-aapt"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">AAPT(aapt)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新版Android-studio-对应于Android-SDK里面附带的命令行工具apkanalyzer"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">新版Android studio(对应于Android SDK里面附带的命令行工具apkanalyzer)</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -302,7 +302,8 @@
 <p>aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk<br>aapt dump badging D:\UserProfiles\CoulsonChen\Desktop\QR.apk | findstr launchable-activity</p>
 </blockquote>
 <p>通过aapt方式解析APK，需要熟悉命令的使用，也比较繁琐。但好处在于可以将其封装进脚本，用于<strong>编写自动化工具去解析和执行，这对于构建自动化测试或者自动打包流程等非常有用，而不依赖于GUI</strong>。</p>
-<h2 id="新版Android-studio"><a href="#新版Android-studio" class="headerlink" title="新版Android studio"></a>新版Android studio</h2><p>Android studio 2.x版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：<br><img src="http://i.imgur.com/hyigywA.png" alt=""></p>
+<h2 id="新版Android-studio-对应于Android-SDK里面附带的命令行工具apkanalyzer"><a href="#新版Android-studio-对应于Android-SDK里面附带的命令行工具apkanalyzer" class="headerlink" title="新版Android studio(对应于Android SDK里面附带的命令行工具apkanalyzer)"></a>新版Android studio(对应于Android SDK里面附带的命令行工具apkanalyzer)</h2><p>Android studio 2.x及更新版本提供了一个新功能，可以分析APK文件，得到dex的方法数，查看清单文件等。如下图所示：<br><img src="http://i.imgur.com/hyigywA.png" alt=""></p>
+<p>而实际上，在底层，就是<strong>调用Android SDK tools里面附带的apkanalyzer工具</strong>，位于<code>$android_sdk/tools/bin/apkanalyzer</code>，其中<code>$android_sdk</code>表示Android sdk的安装目录。而apkanalyzer真正的逻辑在<code>$android_sdk/tools/lib/apkanalyzer-cli.jar</code>和<code>$android_sdk/tools/lib/apkanalyzer.jar</code>两个jar包中实现，可以用<a href="http://jd.benow.ca/" target="_blank" rel="external">jd-gui</a>等类似工具查看其java源码，学习里面的实现方法。有了apkanalyzer工具，也可以用命令行或者用脚本语言封装，从而在自动化开发或者其他分析场景使用。apkanalyzer工具可以在Android开发者官网找到<a href="https://developer.android.com/studio/command-line/apkanalyzer" target="_blank" rel="external">说明文档</a>。</p>
 
         </div>
 
@@ -311,7 +312,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-02T03:43:02.000Z" itemprop="dateUpdated">2018-03-02 11:43:02</time>
+    最后更新时间：<time datetime="2018-06-29T08:00:46.000Z" itemprop="dateUpdated">2018-06-29 16:00:46</time>
 </span><br>
 
 
