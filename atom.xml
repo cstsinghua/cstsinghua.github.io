@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://cstsinghua.github.io/"/>
-  <updated>2018-06-15T09:43:39.000Z</updated>
+  <updated>2018-07-12T03:55:47.000Z</updated>
   <id>https://cstsinghua.github.io/</id>
   
   <author>
@@ -14,6 +14,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OpenGL学习路径</title>
+    <link href="https://cstsinghua.github.io/2018/07/12/openGL%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/"/>
+    <id>https://cstsinghua.github.io/2018/07/12/openGL学习路径/</id>
+    <published>2018-07-12T03:55:40.000Z</published>
+    <updated>2018-07-12T03:55:47.000Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;openGL的名字如雷贯耳，不管是游戏开发程序员还是普通的应用开发工程师，都知道它的应用非常广泛。但学习openGL是一项比较有难度的事情，主要是门槛比较高，涉及到一些数学知识(特别是线性代数的矩阵)、图形学的知识、一大堆专业术语、API的使用。&lt;/p&gt;
+&lt;p&gt;因此，要想真正入门openGL和OpenGL ES，找到好的学习资料以及学习路线图，是非常有必要的。本文针对Android开发人员，提出一条较平缓的学习路径。&lt;/p&gt;
+&lt;h1 id=&quot;学习路径&quot;&gt;&lt;a href=&quot;#学习路径&quot; class=&quot;headerlink&quot; title=&quot;学习路径&quot;&gt;&lt;/a&gt;学习路径&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;首先，先对openGL有一个整体的认识，比如先大致看下其&lt;a href=&quot;https://www.opengl.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网的介绍&lt;/a&gt;，以及&lt;a href=&quot;https://zh.wikipedia.org/wiki/OpenGL&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;维基百科的介绍&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;通读一遍&lt;a href=&quot;https://learnopengl.com/Introduction&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;learnopengl&lt;/a&gt;的前两章节：&lt;code&gt;Introduction&lt;/code&gt;和&lt;code&gt;Getting started&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;(optional)如果觉得阅读步骤2中的英文资料吃力，可以阅读其&lt;a href=&quot;https://learnopengl-cn.github.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;中文翻译版&lt;/a&gt;的&lt;code&gt;简介&lt;/code&gt;和&lt;code&gt;入门&lt;/code&gt;两章。&lt;/li&gt;
+&lt;li&gt;步骤2和3对应的源码仓库为&lt;a href=&quot;https://github.com/JoeyDeVries/LearnOpenGL&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/JoeyDeVries/LearnOpenGL&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;阅读Android官方网站关于&lt;a href=&quot;https://developer.android.com/guide/topics/graphics/opengl&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Android平台openGL的指南&lt;/a&gt;及其demo(java层demo，基于 Android framework API。Android平台支持两种方式的openGL编程–Android supports OpenGL both through its framework API and the Native Development Kit (NDK))，并熟悉和练习google官方的&lt;a href=&quot;https://github.com/googlesamples/android-ndk/tree/master/hello-gl2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;openGL ndk demo代码&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;Android平台openGL&lt;a href=&quot;http://www.learnopengles.com/android-lesson-one-getting-started/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;入门blog&lt;/a&gt;、&lt;a href=&quot;/OpenGL ES 2 for Android.pdf&quot;&gt;书籍&lt;/a&gt;和&lt;a href=&quot;https://github.com/learnopengles/Learn-OpenGLES-Tutorials&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo&lt;/a&gt;。其中demo分为java版本和ndk版本。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.songho.ca/opengl/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;openGL核心概念的专业性分析文章&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;学习完1-7，再回过头来，回到&lt;a href=&quot;https://www.opengl.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;openGL的官网&lt;/a&gt;。正所谓由简入繁，化繁为简。最终回到最本质最权威的起点，那就是读&lt;a href=&quot;https://www.khronos.org/registry/OpenGL/specs/gl/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;openGL的官方规范&lt;/a&gt;，选择你当前学习的版本，比如&lt;code&gt;glspec33.core.pdf&lt;/code&gt;进行深入研究和学习。当然这个阶段再辅以业内较经典的openGL专著一起学习更佳，可在京东或当当网上面搜寻。&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;openGL的名字如雷贯耳，不管是游戏开发程序员还是普通的应用开发工程师，都知道它的应用非常广泛。但学习
+    
+    </summary>
+    
+      <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
+    
+      <category term="OpenGL" scheme="https://cstsinghua.github.io/categories/Android/OpenGL/"/>
+    
+    
+      <category term="Android" scheme="https://cstsinghua.github.io/tags/Android/"/>
+    
+      <category term="NDK" scheme="https://cstsinghua.github.io/tags/NDK/"/>
+    
+      <category term="入门" scheme="https://cstsinghua.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="OpenGL" scheme="https://cstsinghua.github.io/tags/OpenGL/"/>
+    
+      <category term="OpenGL ES" scheme="https://cstsinghua.github.io/tags/OpenGL-ES/"/>
+    
+      <category term="2" scheme="https://cstsinghua.github.io/tags/2/"/>
+    
+      <category term="roadmap" scheme="https://cstsinghua.github.io/tags/roadmap/"/>
+    
+      <category term="学习路径" scheme="https://cstsinghua.github.io/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/"/>
+    
+  </entry>
   
   <entry>
     <title>NodeJS启动和加载分析</title>
