@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Android,NDK,入门,OpenGL,OpenGL ES,2,roadmap,学习路径">
+    <meta name="keywords" content="Android,NDK,入门,OpenGL,OpenGL ES,2,roadmap,学习路径,WebGL">
     <meta name="description" content="前言openGL的名字如雷贯耳，不管是游戏开发程序员还是普通的应用开发工程师，都知道它的应用非常广泛。但学习openGL是一项比较有难度的事情，主要是门槛比较高，涉及到一些数学知识(特别是线性代数的矩阵)、图形学的知识、一大堆专业术语、API的使用。
 因此，要想真正入门openGL和OpenGL ES，找到好的学习资料以及学习路线图，是非常有必要的。本文针对Android开发人员，提出一条较平缓">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 <meta property="og:site_name" content="Atypical programmer">
 <meta property="og:description" content="前言openGL的名字如雷贯耳，不管是游戏开发程序员还是普通的应用开发工程师，都知道它的应用非常广泛。但学习openGL是一项比较有难度的事情，主要是门槛比较高，涉及到一些数学知识(特别是线性代数的矩阵)、图形学的知识、一大堆专业术语、API的使用。
 因此，要想真正入门openGL和OpenGL ES，找到好的学习资料以及学习路线图，是非常有必要的。本文针对Android开发人员，提出一条较平缓">
-<meta property="og:updated_time" content="2018-07-12T03:55:47.000Z">
+<meta property="og:updated_time" content="2018-07-19T10:08:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL学习路径">
 <meta name="twitter:description" content="前言openGL的名字如雷贯耳，不管是游戏开发程序员还是普通的应用开发工程师，都知道它的应用非常广泛。但学习openGL是一项比较有难度的事情，主要是门槛比较高，涉及到一些数学知识(特别是线性代数的矩阵)、图形学的知识、一大堆专业术语、API的使用。
@@ -217,7 +217,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#学习路径"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习路径</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#学习路径"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习路径</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
         </nav>
     </aside>
 
@@ -254,10 +254,31 @@
 <li>阅读Android官方网站关于<a href="https://developer.android.com/guide/topics/graphics/opengl" target="_blank" rel="external">Android平台openGL的指南</a>及其demo(java层demo，基于 Android framework API。Android平台支持两种方式的openGL编程–Android supports OpenGL both through its framework API and the Native Development Kit (NDK))，并熟悉和练习google官方的<a href="https://github.com/googlesamples/android-ndk/tree/master/hello-gl2" target="_blank" rel="external">openGL ndk demo代码</a>。</li>
 <li>Android平台openGL<a href="http://www.learnopengles.com/android-lesson-one-getting-started/" target="_blank" rel="external">入门blog</a>、<a href="/OpenGL ES 2 for Android.pdf">书籍</a>和<a href="https://github.com/learnopengles/Learn-OpenGLES-Tutorials" target="_blank" rel="external">demo</a>。其中demo分为java版本和ndk版本。</li>
 <li><a href="http://www.songho.ca/opengl/" target="_blank" rel="external">openGL核心概念的专业性分析文章</a>。</li>
-<li>学习完1-7，再回过头来，回到<a href="https://www.opengl.org/" target="_blank" rel="external">openGL的官网</a>。正所谓由简入繁，化繁为简。最终回到最本质最权威的起点，那就是读<a href="https://www.khronos.org/registry/OpenGL/specs/gl/" target="_blank" rel="external">openGL的官方规范</a>，选择你当前学习的版本，比如<code>glspec33.core.pdf</code>进行深入研究和学习。当然这个阶段再辅以业内较经典的openGL专著一起学习更佳，可在京东或当当网上面搜寻。</li>
+<li>(optional)<a href="https://www.khronos.org/registry/webgl/" target="_blank" rel="external">WebGL</a>对比阅读，<strong>(<code>Note:WebGL 1.0基于OpenGL ES 2.0，WebGL 2.0基于OpenGL ES 3.0</code></strong>)。比较好的<a href="https://webglfundamentals.org/" target="_blank" rel="external">WebGL教程</a>及其<a href="https://github.com/greggman/webgl-fundamentals" target="_blank" rel="external">Github仓库</a>，这系列课程从新的角度来讲解WebGL，非常不错的资料，可以作为对照参考。</li>
+<li>学习完1-8，再回过头来，回到<a href="https://www.opengl.org/" target="_blank" rel="external">openGL的官网</a>。正所谓由简入繁，化繁为简。最终回到最本质最权威的起点，那就是读<a href="https://www.khronos.org/registry/OpenGL/specs/gl/" target="_blank" rel="external">openGL的官方规范</a>，选择你当前学习的版本，比如<code>glspec33.core.pdf</code>进行深入研究和学习。当然这个阶段再辅以业内较经典的openGL专著一起学习更佳，可在京东或当当网上面搜寻。</li>
 <li>实际动手编写demo甚至中小型游戏(当然，这个在前面学习的步骤也必不可少，实际动手比理论更重要，边学习变实践是最佳的学习途径)，掌握OpenGL在各平台下编写游戏的环境搭建、工具使用等配套知识和技能。更重要的是从实际工程的视角来运用OpenGL，这个阶段可以也可以对照当前市面上主流的游戏引擎(其图形引擎的底层基本上都使用OpenGL来实现)，了解将OpenGL抽象到更高层次，从而进一步提升游戏开发效率，也使得普通开发人员不需要深入学习和了解OpenGL即可进行游戏开发。</li>
 <li>参照开源的游戏引擎，自己动手，基于OpenGL开发游戏引擎的图形引擎模块(甚至整套引擎，包括物理系统、音频等其他引擎子模块)。</li>
 </ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://webglfundamentals.org/" target="_blank" rel="external">https://webglfundamentals.org/</a></li>
+<li><a href="https://www.opengl.org/" target="_blank" rel="external">https://www.opengl.org/</a></li>
+<li><a href="https://github.com/greggman/webgl-fundamentals" target="_blank" rel="external">https://github.com/greggman/webgl-fundamentals</a></li>
+<li><a href="https://github.com/greggman/webgl2-fundamentals" target="_blank" rel="external">https://github.com/greggman/webgl2-fundamentals</a></li>
+<li><a href="http://webgl2fundamentals.org/" target="_blank" rel="external">http://webgl2fundamentals.org/</a></li>
+<li><a href="http://www.songho.ca/opengl/index.html" target="_blank" rel="external">http://www.songho.ca/opengl/index.html</a></li>
+<li><a href="https://learnopengl-cn.github.io/" target="_blank" rel="external">https://learnopengl-cn.github.io/</a></li>
+<li><a href="http://learnopengl.com" target="_blank" rel="external">http://learnopengl.com</a></li>
+<li><a href="http://www.learnopengles.com/android-lesson-one-getting-started/" target="_blank" rel="external">http://www.learnopengles.com/android-lesson-one-getting-started/</a></li>
+<li><a href="https://github.com/learnopengles/Learn-OpenGLES-Tutorials" target="_blank" rel="external">https://github.com/learnopengles/Learn-OpenGLES-Tutorials</a></li>
+<li><a href="https://github.com/JoeyDeVries/LearnOpenGL" target="_blank" rel="external">https://github.com/JoeyDeVries/LearnOpenGL</a></li>
+<li><a href="https://www.khronos.org/" target="_blank" rel="external">https://www.khronos.org/</a></li>
+<li><a href="https://www.khronos.org/registry/" target="_blank" rel="external">https://www.khronos.org/registry/</a></li>
+<li><a href="https://www.khronos.org/registry/OpenGL/" target="_blank" rel="external">https://www.khronos.org/registry/OpenGL/</a></li>
+<li><a href="https://www.khronos.org/registry/OpenGL/index_es.php" target="_blank" rel="external">https://www.khronos.org/registry/OpenGL/index_es.php</a></li>
+<li><a href="https://www.khronos.org/registry/OpenGL/index_gl.php" target="_blank" rel="external">https://www.khronos.org/registry/OpenGL/index_gl.php</a></li>
+<li><a href="https://developer.android.com/guide/topics/graphics/opengl" target="_blank" rel="external">https://developer.android.com/guide/topics/graphics/opengl</a></li>
+<li><a href="https://github.com/googlesamples/android-ndk/tree/master/hello-gl2" target="_blank" rel="external">https://github.com/googlesamples/android-ndk/tree/master/hello-gl2</a></li>
+</ul>
 
         </div>
 
@@ -266,7 +287,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-07-12T03:55:47.000Z" itemprop="dateUpdated">2018-07-12 11:55:47</time>
+    最后更新时间：<time datetime="2018-07-19T10:08:13.000Z" itemprop="dateUpdated">2018-07-19 18:08:13</time>
 </span><br>
 
 
@@ -290,7 +311,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2/">2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL-ES/">OpenGL ES</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/roadmap/">roadmap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/入门/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习路径/">学习路径</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2/">2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL-ES/">OpenGL ES</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebGL/">WebGL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/roadmap/">roadmap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/入门/">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习路径/">学习路径</a></li></ul>
 
 
             
@@ -345,14 +366,7 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/07/19/Appium启动和日志分析/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Appium启动和日志分析</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
