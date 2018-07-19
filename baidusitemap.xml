@@ -4,6 +4,49 @@
 
     
   <url>
+    <loc>https://cstsinghua.github.io/2018/07/19/Appium%E5%90%AF%E5%8A%A8%E5%92%8C%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2018-07-19T10:34:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>Appium启动和日志分析</title>
+        <pubTime>2018-07-19T10:34:24.000Z</pubTime>
+        
+        <tag>NodeJS</tag>
+         
+        <tag>启动</tag>
+         
+        <tag>源码分析</tag>
+         
+        <tag>load</tag>
+         
+        <tag>bootstrap</tag>
+         
+        <tag>implementation</tag>
+         
+        <tag>under the hood</tag>
+         
+        <tag>Appium</tag>
+         
+        <tag>source analysis</tag>
+         
+        <tag>日志分析</tag>
+         
+        <tag>log analysis</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://cstsinghua.github.io/categories/Android/"/>
+          
+             
+              <breadCrumb title="Test" url="https://cstsinghua.github.io/categories/Android/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://cstsinghua.github.io/2018/07/12/openGL%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</loc>
     <lastmod>2018-07-19T10:08:13.000Z</lastmod>
     <data>
