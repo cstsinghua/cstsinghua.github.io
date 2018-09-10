@@ -1238,9 +1238,9 @@ x64.release
       <category term="tools" scheme="https://cstsinghua.github.io/categories/Android/tools/"/>
     
     
-      <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
-    
       <category term="命令" scheme="https://cstsinghua.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
     
       <category term="adb" scheme="https://cstsinghua.github.io/tags/adb/"/>
     
@@ -1358,13 +1358,13 @@ x64.release
     
       <category term="JNI" scheme="https://cstsinghua.github.io/tags/JNI/"/>
     
-      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
-    
       <category term="cmake" scheme="https://cstsinghua.github.io/tags/cmake/"/>
     
       <category term="ndk-build" scheme="https://cstsinghua.github.io/tags/ndk-build/"/>
     
       <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
+    
+      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
     
   </entry>
   
@@ -1752,9 +1752,9 @@ x64.release
     
       <category term="Android" scheme="https://cstsinghua.github.io/tags/Android/"/>
     
-      <category term="逆向" scheme="https://cstsinghua.github.io/tags/%E9%80%86%E5%90%91/"/>
-    
       <category term="apktool" scheme="https://cstsinghua.github.io/tags/apktool/"/>
+    
+      <category term="逆向" scheme="https://cstsinghua.github.io/tags/%E9%80%86%E5%90%91/"/>
     
       <category term="AndroidManifest.xml" scheme="https://cstsinghua.github.io/tags/AndroidManifest-xml/"/>
     
@@ -2146,9 +2146,9 @@ Aborting commit due to empty commit message.
       <category term="npm" scheme="https://cstsinghua.github.io/categories/NodeJS/npm/"/>
     
     
-      <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
-    
       <category term="NodeJS" scheme="https://cstsinghua.github.io/tags/NodeJS/"/>
+    
+      <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
     
       <category term="npm" scheme="https://cstsinghua.github.io/tags/npm/"/>
     
@@ -2268,9 +2268,9 @@ Aborting commit due to empty commit message.
       <category term="Tools使用" scheme="https://cstsinghua.github.io/categories/Java/Tools%E4%BD%BF%E7%94%A8/"/>
     
     
-      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
-    
       <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
+    
+      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
       <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
     
@@ -2496,9 +2496,9 @@ Aborting commit due to empty commit message.
       <category term="Tools" scheme="https://cstsinghua.github.io/categories/Android/Tools/"/>
     
     
-      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
-    
       <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
+    
+      <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
@@ -5902,13 +5902,13 @@ userId：使用这个共享UID的所有APK运行时所在的进程的UID。
       <category term="Android" scheme="https://cstsinghua.github.io/categories/Android/"/>
     
     
-      <category term="apktool" scheme="https://cstsinghua.github.io/tags/apktool/"/>
-    
       <category term="动态调试" scheme="https://cstsinghua.github.io/tags/%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/"/>
     
       <category term="smali" scheme="https://cstsinghua.github.io/tags/smali/"/>
     
       <category term="backsmali" scheme="https://cstsinghua.github.io/tags/backsmali/"/>
+    
+      <category term="apktool" scheme="https://cstsinghua.github.io/tags/apktool/"/>
     
       <category term="smali Debugging" scheme="https://cstsinghua.github.io/tags/smali-Debugging/"/>
     

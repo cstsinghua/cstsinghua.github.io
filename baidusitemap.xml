@@ -138,9 +138,9 @@
         
         <tag>Android</tag>
          
-        <tag>逆向</tag>
-         
         <tag>apktool</tag>
+         
+        <tag>逆向</tag>
          
         <tag>AndroidManifest.xml</tag>
          
@@ -425,9 +425,9 @@
         <title>Android studio常用快捷键</title>
         <pubTime>2016-07-13T10:07:19.000Z</pubTime>
         
-        <tag>快捷键</tag>
-         
         <tag>Android studio</tag>
+         
+        <tag>快捷键</tag>
          
          
            
@@ -450,9 +450,9 @@
         <title>adb原理简介及常用命令介绍</title>
         <pubTime>2018-01-08T08:18:23.000Z</pubTime>
         
-        <tag>常用</tag>
-         
         <tag>命令</tag>
+         
+        <tag>常用</tag>
          
         <tag>adb</tag>
          
@@ -487,13 +487,13 @@
          
         <tag>JNI</tag>
          
-        <tag>Android studio</tag>
-         
         <tag>cmake</tag>
          
         <tag>ndk-build</tag>
          
         <tag>Eclipse</tag>
+         
+        <tag>Android studio</tag>
          
          
            
@@ -582,13 +582,13 @@
         <title>Android studio动态调试</title>
         <pubTime>2016-06-13T07:25:56.000Z</pubTime>
         
-        <tag>apktool</tag>
-         
         <tag>动态调试</tag>
          
         <tag>smali</tag>
          
         <tag>backsmali</tag>
+         
+        <tag>apktool</tag>
          
         <tag>smali Debugging</tag>
          
@@ -992,9 +992,9 @@
         <title>npm常用命令</title>
         <pubTime>2016-11-04T03:53:47.000Z</pubTime>
         
-        <tag>常用</tag>
-         
         <tag>NodeJS</tag>
+         
+        <tag>常用</tag>
          
         <tag>npm</tag>
          
@@ -1019,9 +1019,9 @@
         <title>Eclipse常用快捷键</title>
         <pubTime>2016-07-14T09:30:18.000Z</pubTime>
         
-        <tag>快捷键</tag>
-         
         <tag>Eclipse</tag>
+         
+        <tag>快捷键</tag>
          
         <tag>常用</tag>
          

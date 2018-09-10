@@ -3688,6 +3688,13 @@ pre .javascript .function {
   width: 100%;
   height: 100%;
 }
+.post-toc-shrink {
+  height: 0;
+  overflow-y: hidden;
+}
+.post-toc-expand {
+  height: auto;
+}
 .post-article .post-content {
   padding-top: 20px;
 }
