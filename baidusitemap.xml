@@ -19,13 +19,13 @@
          
         <tag>v8 embedded in Android APP</tag>
          
-        <tag>Linux</tag>
-         
-        <tag>depot_tools</tag>
-         
         <tag>编译</tag>
          
         <tag>嵌入</tag>
+         
+        <tag>depot_tools</tag>
+         
+        <tag>Linux</tag>
          
         <tag>错误</tag>
          
@@ -56,25 +56,25 @@
         
         <tag>NodeJS</tag>
          
+        <tag>Appium</tag>
+         
         <tag>启动</tag>
          
+        <tag>日志分析</tag>
+         
         <tag>源码分析</tag>
+         
+        <tag>source analysis</tag>
          
         <tag>load</tag>
          
         <tag>bootstrap</tag>
          
+        <tag>log analysis</tag>
+         
         <tag>implementation</tag>
          
         <tag>under the hood</tag>
-         
-        <tag>Appium</tag>
-         
-        <tag>source analysis</tag>
-         
-        <tag>日志分析</tag>
-         
-        <tag>log analysis</tag>
          
          
            
@@ -181,27 +181,27 @@
         
         <tag>NodeJS</tag>
          
-        <tag>require</tag>
-         
-        <tag>module system</tag>
-         
         <tag>启动</tag>
          
-        <tag>加载</tag>
-         
         <tag>源码分析</tag>
-         
-        <tag>source    analysis</tag>
          
         <tag>load</tag>
          
         <tag>bootstrap</tag>
          
-        <tag>实现</tag>
-         
         <tag>implementation</tag>
          
         <tag>under the hood</tag>
+         
+        <tag>require</tag>
+         
+        <tag>module system</tag>
+         
+        <tag>加载</tag>
+         
+        <tag>source    analysis</tag>
+         
+        <tag>实现</tag>
          
          
            
@@ -234,13 +234,13 @@
          
         <tag>v8 embedded in Android APP</tag>
          
-        <tag>构建</tag>
+        <tag>depot_tools</tag>
          
         <tag>Linux</tag>
          
-        <tag>no webview</tag>
+        <tag>构建</tag>
          
-        <tag>depot_tools</tag>
+        <tag>no webview</tag>
          
         <tag>VS</tag>
          
@@ -343,6 +343,8 @@
         
         <tag>build</tag>
          
+        <tag>Linux</tag>
+         
         <tag>spidermonkey</tag>
          
         <tag>构建</tag>
@@ -352,8 +354,6 @@
         <tag>embed spidermonkey</tag>
          
         <tag>Firefox</tag>
-         
-        <tag>Linux</tag>
          
         <tag>ubuntu</tag>
          
@@ -425,9 +425,9 @@
         <title>Android studio常用快捷键</title>
         <pubTime>2016-07-13T10:07:19.000Z</pubTime>
         
-        <tag>Android studio</tag>
-         
         <tag>快捷键</tag>
+         
+        <tag>Android studio</tag>
          
          
            
@@ -487,13 +487,13 @@
          
         <tag>JNI</tag>
          
+        <tag>Android studio</tag>
+         
         <tag>cmake</tag>
          
         <tag>ndk-build</tag>
          
         <tag>Eclipse</tag>
-         
-        <tag>Android studio</tag>
          
          
            
@@ -1019,9 +1019,9 @@
         <title>Eclipse常用快捷键</title>
         <pubTime>2016-07-14T09:30:18.000Z</pubTime>
         
-        <tag>Eclipse</tag>
-         
         <tag>快捷键</tag>
+         
+        <tag>Eclipse</tag>
          
         <tag>常用</tag>
          

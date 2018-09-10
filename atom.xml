@@ -103,25 +103,25 @@
     
       <category term="NodeJS" scheme="https://cstsinghua.github.io/tags/NodeJS/"/>
     
+      <category term="Appium" scheme="https://cstsinghua.github.io/tags/Appium/"/>
+    
       <category term="启动" scheme="https://cstsinghua.github.io/tags/%E5%90%AF%E5%8A%A8/"/>
     
+      <category term="日志分析" scheme="https://cstsinghua.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
       <category term="源码分析" scheme="https://cstsinghua.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    
+      <category term="source analysis" scheme="https://cstsinghua.github.io/tags/source-analysis/"/>
     
       <category term="load" scheme="https://cstsinghua.github.io/tags/load/"/>
     
       <category term="bootstrap" scheme="https://cstsinghua.github.io/tags/bootstrap/"/>
     
+      <category term="log analysis" scheme="https://cstsinghua.github.io/tags/log-analysis/"/>
+    
       <category term="implementation" scheme="https://cstsinghua.github.io/tags/implementation/"/>
     
       <category term="under the hood" scheme="https://cstsinghua.github.io/tags/under-the-hood/"/>
-    
-      <category term="Appium" scheme="https://cstsinghua.github.io/tags/Appium/"/>
-    
-      <category term="source analysis" scheme="https://cstsinghua.github.io/tags/source-analysis/"/>
-    
-      <category term="日志分析" scheme="https://cstsinghua.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
-    
-      <category term="log analysis" scheme="https://cstsinghua.github.io/tags/log-analysis/"/>
     
   </entry>
   
@@ -278,27 +278,27 @@
     
       <category term="NodeJS" scheme="https://cstsinghua.github.io/tags/NodeJS/"/>
     
-      <category term="require" scheme="https://cstsinghua.github.io/tags/require/"/>
-    
-      <category term="module system" scheme="https://cstsinghua.github.io/tags/module-system/"/>
-    
       <category term="启动" scheme="https://cstsinghua.github.io/tags/%E5%90%AF%E5%8A%A8/"/>
     
-      <category term="加载" scheme="https://cstsinghua.github.io/tags/%E5%8A%A0%E8%BD%BD/"/>
-    
       <category term="源码分析" scheme="https://cstsinghua.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    
-      <category term="source    analysis" scheme="https://cstsinghua.github.io/tags/source-analysis/"/>
     
       <category term="load" scheme="https://cstsinghua.github.io/tags/load/"/>
     
       <category term="bootstrap" scheme="https://cstsinghua.github.io/tags/bootstrap/"/>
     
-      <category term="实现" scheme="https://cstsinghua.github.io/tags/%E5%AE%9E%E7%8E%B0/"/>
-    
       <category term="implementation" scheme="https://cstsinghua.github.io/tags/implementation/"/>
     
       <category term="under the hood" scheme="https://cstsinghua.github.io/tags/under-the-hood/"/>
+    
+      <category term="require" scheme="https://cstsinghua.github.io/tags/require/"/>
+    
+      <category term="module system" scheme="https://cstsinghua.github.io/tags/module-system/"/>
+    
+      <category term="加载" scheme="https://cstsinghua.github.io/tags/%E5%8A%A0%E8%BD%BD/"/>
+    
+      <category term="source    analysis" scheme="https://cstsinghua.github.io/tags/source-analysis/"/>
+    
+      <category term="实现" scheme="https://cstsinghua.github.io/tags/%E5%AE%9E%E7%8E%B0/"/>
     
   </entry>
   
@@ -675,6 +675,8 @@ make: *** [default] Error 2
     
       <category term="build" scheme="https://cstsinghua.github.io/tags/build/"/>
     
+      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
+    
       <category term="spidermonkey" scheme="https://cstsinghua.github.io/tags/spidermonkey/"/>
     
       <category term="构建" scheme="https://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
@@ -684,8 +686,6 @@ make: *** [default] Error 2
       <category term="embed spidermonkey" scheme="https://cstsinghua.github.io/tags/embed-spidermonkey/"/>
     
       <category term="Firefox" scheme="https://cstsinghua.github.io/tags/Firefox/"/>
-    
-      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
     
       <category term="ubuntu" scheme="https://cstsinghua.github.io/tags/ubuntu/"/>
     
@@ -782,13 +782,13 @@ ninja: build stopped: subcommand failed.
     
       <category term="v8 embedded in Android APP" scheme="https://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
     
-      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
-    
-      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
-    
       <category term="编译" scheme="https://cstsinghua.github.io/tags/%E7%BC%96%E8%AF%91/"/>
     
       <category term="嵌入" scheme="https://cstsinghua.github.io/tags/%E5%B5%8C%E5%85%A5/"/>
+    
+      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
+    
+      <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
     
       <category term="错误" scheme="https://cstsinghua.github.io/tags/%E9%94%99%E8%AF%AF/"/>
     
@@ -1015,13 +1015,13 @@ x64.release
     
       <category term="v8 embedded in Android APP" scheme="https://cstsinghua.github.io/tags/v8-embedded-in-Android-APP/"/>
     
-      <category term="构建" scheme="https://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
     
       <category term="Linux" scheme="https://cstsinghua.github.io/tags/Linux/"/>
     
-      <category term="no webview" scheme="https://cstsinghua.github.io/tags/no-webview/"/>
+      <category term="构建" scheme="https://cstsinghua.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
     
-      <category term="depot_tools" scheme="https://cstsinghua.github.io/tags/depot-tools/"/>
+      <category term="no webview" scheme="https://cstsinghua.github.io/tags/no-webview/"/>
     
       <category term="VS" scheme="https://cstsinghua.github.io/tags/VS/"/>
     
@@ -1358,13 +1358,13 @@ x64.release
     
       <category term="JNI" scheme="https://cstsinghua.github.io/tags/JNI/"/>
     
+      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
+    
       <category term="cmake" scheme="https://cstsinghua.github.io/tags/cmake/"/>
     
       <category term="ndk-build" scheme="https://cstsinghua.github.io/tags/ndk-build/"/>
     
       <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
-    
-      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
     
   </entry>
   
@@ -2268,9 +2268,9 @@ Aborting commit due to empty commit message.
       <category term="Tools使用" scheme="https://cstsinghua.github.io/categories/Java/Tools%E4%BD%BF%E7%94%A8/"/>
     
     
-      <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
-    
       <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    
+      <category term="Eclipse" scheme="https://cstsinghua.github.io/tags/Eclipse/"/>
     
       <category term="常用" scheme="https://cstsinghua.github.io/tags/%E5%B8%B8%E7%94%A8/"/>
     
@@ -2496,9 +2496,9 @@ Aborting commit due to empty commit message.
       <category term="Tools" scheme="https://cstsinghua.github.io/categories/Android/Tools/"/>
     
     
-      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
-    
       <category term="快捷键" scheme="https://cstsinghua.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    
+      <category term="Android studio" scheme="https://cstsinghua.github.io/tags/Android-studio/"/>
     
   </entry>
   
